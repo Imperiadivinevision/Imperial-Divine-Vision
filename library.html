@@ -2,20 +2,31 @@
 <head>
     <title>Library | Imperial Divine Vision</title>
     <style>
-        /* THE ROYAL BRANDING */
+        /* ROYAL BRANDING */
         .royal-branding { position: fixed; bottom: 20px; right: 20px; width: 120px; z-index: 1000; pointer-events: none; }
         
-        /* Reflective background with soft pinks, oranges, and beige */
-        body { font-family: 'Georgia', serif; background: linear-gradient(135deg, #FFDAB9 0%, #FFC0CB 50%, #F5F5DC 100%); min-height: 100vh; margin: 0; }
+        /* Reflective, soft, imperial background */
+        body { font-family: 'Georgia', serif; background: linear-gradient(135deg, #FFDAB9 0%, #FFC0CB 50%, #F5F5DC 100%); min-height: 100vh; margin: 0; color: #2c3e50; }
         
         nav { background-color: #2c3e50; padding: 10px; }
         nav a { color: #f1c40f; text-decoration: none; }
         
         .watermark { position: fixed; top: 10px; right: 10px; opacity: 0.3; }
         
+        /* The Imperial Welcome Section */
+        .welcome-section { 
+            text-align: center; 
+            padding: 40px 20px; 
+            background: rgba(255, 255, 255, 0.6); 
+            border-bottom: 3px double #b8860b; 
+            margin-bottom: 30px; 
+        }
+        
+        .welcome-section h1 { font-style: italic; color: #8b0000; }
+        
         /* Grid and Item Styling */
         .library-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px; }
-        .library-item { display: flex; align-items: center; gap: 20px; border: 1px solid #ccc; padding: 15px; background-color: white; border-radius: 10px; text-align: left; }
+        .library-item { display: flex; align-items: center; gap: 20px; border: 1px solid #d2b48c; padding: 20px; background-color: rgba(255, 255, 255, 0.8); border-radius: 15px; text-align: left; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
     </style>
 </head>
 
@@ -35,17 +46,25 @@
     </header>
 
     <main>
-        <h1>The Royal Library</h1>
+        <!-- The Emotional, Flowering Welcome -->
+        <section class="welcome-section">
+            <h1>Welcome to the Royal Library</h1>
+            <p>Step into the sanctuary of our legacy. This is where our story breathes and our spirits are held in ink and light.</p>
+            <p>Within these halls, you will find the soul of our kingdom. Each portrait holds a memory, and each description tells the tale of the hearts that weave our divine vision together.</p>
+        </section>
         
         <div class="library-grid">
             
             <!-- PASTE NEW CHARACTERS BELOW THIS LINE -->
             
             <div class="library-item">
-                <img src="kingaram.png" alt="King Aram" width="200">
+                <a href="kingharem.png" target="_blank">
+                    <img src="kingharem.png" alt="King" width="200">
+                </a>
                 <div>
-                    <h3>King Aram</h3>
-                    <p>Description of the character or book goes here.</p>
+                    <h3>King</h3>
+                    <p><strong>Description:</strong> The sovereign heart of our story, guiding the kingdom with grace and strength.</p>
+                    <p><strong>Comment:</strong> A testament to the power of love and divine guidance.</p>
                 </div>
             </div>
 
@@ -55,8 +74,7 @@
     </main>
 
     <footer>
-        <p>Imperial Divine Vision | contact Us: <a href="mailto:imperialdivinevision@gmail.com">imperialdivinevision@gmail.com</a></p>
-        <p>Your Empire's Official Foundation.</p>
+        <p style="text-align: center; padding-top: 20px;">Imperial Divine Vision | Your Empire's Official Foundation.</p>
     </footer>
 
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
