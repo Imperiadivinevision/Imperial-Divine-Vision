@@ -1,51 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>VIP Creative Area - Creator Access</title>
+    <title>Creator's Imperial Monitoring Station</title>
     <style>
-        body {
-            font-family: 'Georgia', serif;
-            margin: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #50C878, #00A86B, #007BA7, #005F73);
-            background-size: 400% 400%;
-            animation: flowBackground 15s ease infinite;
-            color: #fdfdfd;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        @keyframes flowBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .container { background: rgba(0,0,0,0.6); padding: 40px; border-radius: 20px; text-align: center; max-width: 600px; width: 100%; }
-        textarea { width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        button { background: #FFD700; color: #000; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; }
+        body { font-family: 'Georgia', serif; margin: 0; padding: 20px; background-color: #1a1a1a; color: #fff; }
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        
+        /* The Monitor Styles */
+        .monitor { padding: 20px; border-radius: 15px; cursor: pointer; transition: transform 0.3s; border: 2px solid #FFD700; }
+        .monitor:hover { transform: scale(1.05); }
+        .m-lib { background-color: #E3F2FD; color: #000; } /* Baby Blue */
+        .m-com { background-color: #FCE4EC; color: #000; } /* Baby Pink */
+        .m-vip { background-color: #E8F5E9; color: #000; } /* Baby Green */
+        .m-cre { background-color: #FFF3E0; color: #000; } /* Baby Orange */
+
+        .chat-input { width: 100%; margin-top: 10px; padding: 10px; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-    <!-- This is your direct access gate -->
-    <div class="container" id="vipArea">
-        <h1>Welcome, Creator</h1>
-        <p>You have full administrative control over this sanctuary.</p>
-        
-        <textarea id="chatBox" rows="5" placeholder="Manage content here..."></textarea><br>
-        <button onclick="sendMessage()">Send Message</button>
-        <button onclick="deleteContent()" style="background: #ff4d4d;">Delete Content</button>
+    <h1>Imperial Monitoring Station 📹</h1>
+    <div class="dashboard">
+        <!-- Clicking these acts as your "Camera" access -->
+        <div class="monitor m-lib" onclick="alert('Opening Library Camera...')">
+            <h2>Library Monitor</h2>
+            <textarea class="chat-input" placeholder="View messages 💬"></textarea>
+        </div>
+
+        <div class="monitor m-com" onclick="alert('Opening Community Camera...')">
+            <h2>Community Monitor</h2>
+            <textarea class="chat-input" placeholder="Live chat activity... ✨"></textarea>
+        </div>
+
+        <div class="monitor m-vip" onclick="alert('Opening VIP Camera...')">
+            <h2>VIP Monitor</h2>
+            <textarea class="chat-input" placeholder="Private VIP logs... 👑"></textarea>
+        </div>
     </div>
 
     <script>
-        function sendMessage() {
-            alert("Message broadcasted to the Empire.");
-        }
-        function deleteContent() {
-            document.getElementById('chatBox').value = "";
-            alert("Content deleted.");
-        }
+        // Emoji Support is built into all textareas automatically by the browser!
+        // Your users can right-click any textarea and select "Emoji" or use their keyboard.
     </script>
 </body>
 </html>
