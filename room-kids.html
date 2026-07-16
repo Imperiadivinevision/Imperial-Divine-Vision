@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Young Guardians: The Living Capital</title>
+    <style>
+        :root { --main-bg: #e3f2fd; --royal-purple: #4a148c; --grace-blue: #00796b; }
+        body { font-family: 'Georgia', serif; background-color: var(--main-bg); text-align: center; }
+        .nav-bar { background: var(--royal-purple); color: #fff; padding: 15px; }
+        .grace-box { background: var(--grace-blue); color: white; padding: 10px; margin: 10px; border-radius: 5px; font-weight: bold; }
+        .control-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 40px; }
+        .card { background: white; padding: 20px; border-radius: 15px; border: 3px solid #1a237e; cursor: pointer; }
+          /* THE ROYAL BRANDING (Added for all rooms) */
+        .royal-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            z-index: 1000;
+            pointer-events: none;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <span>Logged in as: <span id="user-role">ADMIN</span></span>
+        <div class="grace-box">CHRONICLES OF GRACE: Active (Tracking Kindness)</div>
+    </div>
+
+    <h1>Imperial Governance Center</h1>
+    <p>Queen Rosanna's Decree: "To rule with integrity, honesty, and the fear of God above all."</p>
+
+    <div class="control-panel">
+        <div class="card" onclick="setRole('ADMIN')">🛡️ ADMIN: Reality Control</div>
+        <div class="card" onclick="setRole('QUEEN')">👑 QUEEN: Royal Duties & Governance</div>
+        <div class="card" onclick="setRole('COUNCIL')">📜 IMPERIAL COUNCIL: Destiny Helper</div>
+    </div>
+
+    <script>
+        function setRole(role) {
+            document.getElementById('user-role').innerText = role;
+            if(role === 'QUEEN') {
+                alert("Queen Rosanna, your decree is recorded in the Eternal Archives. The Kingdom now prioritizes Grace alongside Gold.");
+            }
+        }
+    </script>
+
+     <img src="6541.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+</body>
+</html>
+

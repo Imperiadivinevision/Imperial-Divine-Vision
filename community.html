@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Verification - Imperial Divine Vision</title>
+    <style>
+          /* THE ROYAL BRANDING (Added for all rooms) */
+        .royal-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+</head>
+<body>
+    <h1>Welcome to the Kingdom Chat</h1>
+    <p>Please enter your birth year so we can guide you to the right room:</p>
+    
+    <form id="ageGateForm">
+        <label for="birthYear">Enter your birth year:</label>
+        <input type="number" id="birthYear" required>
+        <button type="button" onclick="checkAge()">Enter Kingdom</button>
+    </form>
+    <p>Are you a parent or guardian? <a href="parent-login.html">Click here to log in to the Guardian Portal.</a></p>
+
+    <script>
+        function checkAge() {
+            var year = document.getElementById("birthYear").value;
+            var age = 2026 - year;
+            
+            if (age < 13) {
+                alert("Welcome to the Young Guardians room!");
+                window.location.href = "room-kids.html";
+            } else if (age >= 13 && age < 18) {
+                alert("Welcome to the Youth Kingdom room!");
+                window.location.href = "room-youth.html";
+            } else {
+                alert("Welcome to the Royal Assembly!");
+                window.location.href = "room-adult.html";
+            }
+        }
+    </script>
+
+ <img src="6541.png" class="royal-branding" alt="Imperial Divine Vision Seal">       
+</body>
+</html>
+

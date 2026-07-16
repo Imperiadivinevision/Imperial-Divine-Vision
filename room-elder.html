@@ -1,0 +1,97 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Sage's Quarter - Imperial Empire</title>
+    <style>
+        /* Shared Imperial Styles with Intentionality */
+        body { 
+            background: linear-gradient(135deg, #FFD1DC, #FDFD96, #AEC6CF); 
+            background-size: 400% 400%;
+            animation: flow 20s infinite alternate;
+            color: #d4af37; 
+            font-family: 'Georgia', serif; 
+            margin: 0; padding: 20px; 
+        }
+        @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        
+        .imperial-box { border: 3px solid #d4af37; padding: 30px; background: rgba(26, 26, 46, 0.9); border-radius: 50px 50px 0 0; }
+        
+        /* Divine Aura Effect */
+        .aura-gold { box-shadow: 0 0 20px #FFD700; border: 1px solid #FFD700; }
+        
+        /* Sacred Layout */
+        .sacred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* ========================================= */
+        /* THE ROYAL BRANDING (Copy this to all rooms) */
+        /* ========================================= */
+        .royal-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            z-index: 1000;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. The Throne Room (Admin Control) -->
+    <div id="adminPanel" class="imperial-box">
+        <h1>Sage's Quarter: Command Center</h1>
+        <button onclick="issueRoyalDecree()">Issue Royal Decree</button>
+        <button onclick="toggleTimeLock()">Toggle Celestial Time-Lock</button>
+    </div>
+
+    <!-- 2. The Wall of Heroes -->
+    <div id="wallOfHeroes" class="imperial-box">
+        <h2>Wall of Eternal Legacy</h2>
+        <div id="heroGallery"> <!-- Dynamic Heroes appear here --> </div>
+    </div>
+
+    <!-- 3. Sage's Tools -->
+    <div class="sacred-grid">
+        <div class="imperial-box">
+            <h3>Truth-Seeking Archive</h3>
+            <p>Study the lore of the Empire and report back to the Throne.</p>
+        </div>
+        <div class="imperial-box">
+            <h3>Tribunal Court</h3>
+            <p>Provide judgment on current affairs.</p>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- THE ROYAL SEAL IMAGE (Copy this to all rooms) -->
+    <!-- ========================================= -->
+    <img src="6541.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+
+    <script>
+        // Divine Aura Engine
+        function applyAura(role) {
+            if (role === 'Queen' || role === 'King') {
+                console.log("Applying Golden Radiance...");
+                document.body.classList.add('aura-gold');
+            }
+        }
+
+        // 12-Hour Celestial Clock
+        function getImperialTime() {
+            let hour = new Date().getHours() % 12;
+            return hour < 6 ? "Day" : "Night";
+        }
+
+        // Admin Override
+        function toggleTimeLock() {
+            alert("Celestial Clock Locked/Unlocked by Royal Decree.");
+        }
+
+        // Execution
+        applyAura('Queen'); // Example for your account
+    </script>
+</body>
+</html>
+

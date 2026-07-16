@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imperial Kingdom Hub</title>
+    <style>
+         /* THE ROYAL BRANDING (Added for all rooms) */
+        .royal-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Shared Imperial Styles */
+        body { background: #0f0f1a; color: #d4af37; font-family: 'Georgia', serif; margin: 0; padding: 20px; }
+        .imperial-box { border: 2px solid #d4af37; padding: 20px; margin: 20px auto; background: #1a1a2e; border-radius: 8px; }
+        .btn-royal { background: #d4af37; color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
+        .tax-banner { color: #cc0000; font-size: 0.9em; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. The Consent Gateway (Must be agreed to enter) -->
+    <div id="legalGateway" class="imperial-box">
+        <h2>The Imperial Compact</h2>
+        <p>By entering, you agree to: No cursing, harassment, and full respect for all citizens.</p>
+        <label><input type="checkbox" id="agreeCheckbox"> I swear my allegiance.</label>
+        <button class="btn-royal" onclick="verifyAgreement()">Enter the Kingdom</button>
+    </div>
+
+    <!-- 2. The Royal Atelier (Customization) -->
+    <div id="mainHub" class="imperial-box" style="display:none;">
+        <h1>The Royal Atelier</h1>
+        <label>Hair: <select id="hair"><option>Regal Braid</option><option>Flowing Waves</option></select></label>
+        <label>Color: <input type="color" id="fabricColor"></label>
+        
+        <hr>
+
+        <!-- 3. Marketplace & Hospital Access -->
+        <h2>Marketplace & Hospital</h2>
+        <p class="tax-banner">Current Royal Tax: 15% (5% for Divine Masters)</p>
+        <button class="btn-royal" onclick="alert('Entering Market...')">Visit Market</button>
+        <button class="btn-royal" onclick="alert('Entering Hospital...')">Visit Hospital</button>
+
+        <hr>
+
+        <!-- 4. Royal Boutique (VIP) -->
+        <div class="vip-boutique">
+            <h3>Royal Boutique: Exclusive Attire</h3>
+            <div class="item-card">
+                <h4>Imperial Gown of the Sun</h4>
+                <button class="btn-royal" onclick="purchaseVIP()">Acquire (50,000 Gold)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin Access for you and your partner
+        const isAdmin = true; // Set to true for your accounts
+
+        function verifyAgreement() {
+            if(document.getElementById('agreeCheckbox').checked) {
+                document.getElementById('legalGateway').style.display = 'none';
+                document.getElementById('mainHub').style.display = 'block';
+            } else {
+                alert("You must agree to the Compact!");
+            }
+        }
+
+        function purchaseVIP() {
+            alert("Transaction processed. 15% Royal Tax deducted to the Treasury.");
+        }
+    </script>
+   
+    <img src="6541.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+</body>
+</html>
+
+

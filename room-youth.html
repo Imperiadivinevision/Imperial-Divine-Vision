@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Youth Kingdom: Alpha Empire Proving Grounds</title>
+    <style>
+         /* THE ROYAL BRANDING (Added for all rooms) */
+        .royal-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            z-index: 1000;
+            pointer-events: none;
+          }
+        :root { --youth-bg: #263238; --royal-gold: #ffd700; --growth-green: #388e3c; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--youth-bg); color: white; text-align: center; }
+        .hero-banner { background: #1b262c; padding: 30px; border-bottom: 5px solid var(--royal-gold); }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 30px; }
+        .card { background: #37474f; padding: 20px; border-radius: 10px; border: 2px solid var(--royal-gold); cursor: pointer; }
+        .echo-box { background: #1a237e; border: 2px dashed var(--royal-gold); padding: 20px; margin: 20px; border-radius: 10px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="hero-banner">
+        <h1>Alpha Empire: Proving Grounds</h1>
+        <p>Architects of the Future: Rule, Grow, and Protect.</p>
+    </div>
+
+    <!-- My Creative Addition: Echoes of the Ancestors -->
+    <div class="echo-box" onclick="playEcho()">
+        <p>✨ Touch an Ancient Statue to hear the Echoes of the Ancestors...</p>
+    </div>
+
+    <div class="grid">
+        <div class="card" onclick="alert('Feature Lock: Skin and Features are permanent. Customize your gear and hair freely!')">👤 Character Workshop</div>
+        <div class="card" onclick="performKindAct()">🤝 Help a Traveler (Rare Grace-Triggered Missions)</div>
+        <div class="card" onclick="manageLand()">🏰 Feudal Registry (Manage Village & Titles)</div>
+    </div>
+
+    <script>
+        function playEcho() {
+            alert("The statue glows: 'True leadership is not found in the crown you wear, but in the people you serve with honesty.' — Wisdom of the Crown");
+        }
+        function performKindAct() {
+            if(Math.random() > 0.7) alert("SURPRISE: Your kindness has been rewarded with a Secret Map!");
+            else alert("You helped a traveler. Your heart is light.");
+        }
+        function manageLand() {
+            alert("Feudal Registry: Manage your citizens, food stocks, and prosperity.");
+        }
+    
+    </script>
+    
+    <img src="6541.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+</body>
+</html>
+
