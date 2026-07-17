@@ -5,25 +5,28 @@
     <title>The Royal Library | Imperial Divine Vision</title>
     <style>
         body { margin: 0; padding: 20px; background: #0a0a0a; color: #d4af37; font-family: 'Cinzel', serif; text-align: center; }
+        .book-portal { margin: 40px auto; padding: 20px; border: 2px solid #d4af37; width: 80%; max-width: 400px; cursor: pointer; border-radius: 10px; }
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 20px; }
-        
-        .card { 
-            border: 1px solid #d4af37; padding: 15px; border-radius: 8px; 
-            background: rgba(255, 255, 255, 0.03); cursor: pointer; transition: 0.5s; 
-        }
-        /* The Glow Effect */
+        .card { border: 1px solid #d4af37; padding: 15px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); cursor: pointer; transition: 0.5s; }
         .card.active { box-shadow: 0 0 20px #d4af37, 0 0 40px #ffb7c5; transform: scale(1.05); }
-        
         .card img { width: 100%; border-radius: 4px; }
         .details { display: none; margin-top: 10px; font-size: 0.9rem; color: #fff; }
         .card.active .details { display: block; }
+        h1 { border-bottom: 2px solid #d4af37; padding-bottom: 15px; }
     </style>
 </head>
 <body>
     <h1>Welcome to the Royal Library</h1>
 
+    <div class="book-portal">
+        <a href="book.html" style="color: #d4af37; text-decoration: none;">
+            <h3>Open the Imperial Chronicles</h3>
+            <p>The Book of our Legacy</p>
+        </a>
+    </div>
+
     <div class="gallery">
-        <!-- Example Character Card -->
+        <!-- King Benson -->
         <div class="card" onclick="this.classList.toggle('active')">
             <img src="king_benson.png" alt="King Benson">
             <h3>King Benson</h3>
@@ -33,19 +36,18 @@
             </div>
         </div>
 
+        <!-- Queen Rosanna -->
         <div class="card" onclick="this.classList.toggle('active')">
-            <img src="rosanna.png" alt="Queen Rosanna">
-            <h3>Queen Rosanna</h3>
+            <img src="king-queen.png" alt="Royal Couple">
+            <h3>King Benson & Queen Rosanna</h3>
             <div class="details">
                 <p><strong>Origin:</strong> The Royal Palace</p>
-                <p><strong>Description:</strong> Our lead character and queen, whose spirit weaves our divine vision.</p>
+                <p><strong>Description:</strong> The heart of the empire, bound by love and divine duty.</p>
             </div>
         </div>
-        <!-- You can repeat this pattern for all other registered characters -->
     </div>
 
     <script>
-        // This adds the glow and reveal functionality
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 card.classList.toggle('active');
