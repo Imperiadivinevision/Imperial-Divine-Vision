@@ -5,42 +5,52 @@
     <title>The Royal Library | Imperial Divine Vision</title>
     <style>
         body { background: #0a0a0a; color: #d4af37; font-family: 'Cinzel', serif; text-align: center; padding: 20px; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; padding: 20px; }
-        .card { border: 2px solid #d4af37; padding: 20px; border-radius: 15px; background: #1a1a2e; cursor: pointer; transition: 0.5s; }
-        .card.active { box-shadow: 0 0 30px #d4af37; transform: scale(1.05); border-color: #ffb7c5; }
-        .card img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
-        .details { display: none; margin-top: 15px; color: #fff; line-height: 1.6; text-align: left; }
+        h1, h2 { border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-top: 40px; }
+        
+        /* Book Portal */
+        .book-portal { margin: 40px auto; padding: 30px; border: 3px solid #d4af37; width: 80%; max-width: 500px; cursor: pointer; border-radius: 20px; background: #1a1a2e; }
+        
+        /* Gallery Layout */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; padding: 20px; }
+        .card { border: 2px solid #d4af37; padding: 15px; border-radius: 15px; background: #1a1a2e; cursor: pointer; transition: 0.5s; }
+        .card:hover, .card.active { box-shadow: 0 0 30px #d4af37; transform: scale(1.02); border-color: #ffb7c5; }
+        
+        /* Forces all images to be the same size */
+        .card img { width: 100%; height: 350px; object-fit: cover; border-radius: 10px; }
+        
+        .details { display: none; margin-top: 15px; color: #fff; text-align: left; line-height: 1.5; }
         .card.active .details { display: block; }
     </style>
 </head>
 <body>
+
     <h1>Welcome to the Royal Library</h1>
+
+    <div class="book-portal" onclick="window.location.href='book.html'">
+        <h3>Open the Imperial Chronicles</h3>
+        <p>Click to enter the Book of Legacy</p>
+    </div>
+
+    <!-- PALACE CHARACTERS -->
+    <h2>Palace Characters</h2>
     <div class="gallery">
-        <!-- King & Queen -->
         <div class="card" onclick="this.classList.toggle('active')">
-            <img src="king-queen.png" alt="King & Queen">
-            <h3>King Benson & Queen Rosanna</h3>
-            <div class="details"><p><strong>Job:</strong> Sovereign Rulers</p><p>Description: The heart of our story.</p></div>
-        </div>
-        <!-- Jirmak (Changed to match your file: jirmak.png) -->
-        <div class="card" onclick="this.classList.toggle('active')">
-            <img src="jirmak.png" alt="Jirmak">
+            <img src="Jirmak.png" alt="Jirmak">
             <h3>Jirmak</h3>
-            <div class="details"><p><strong>Job:</strong> Guardian</p><p>Description: A guardian of the ancient ways.</p></div>
+            <div class="details"><p><strong>Job:</strong> Guardian</p></div>
         </div>
-        <!-- Rika (Changed to match your file: Rika.png) -->
         <div class="card" onclick="this.classList.toggle('active')">
-            <img src="Rika.png" alt="Rika">
-            <h3>Rika</h3>
-            <div class="details"><p><strong>Job:</strong> Imperial Bearer</p><p>Description: Bearer of the imperial light.</p></div>
+            <img src="king_benson.png" alt="King Benson">
+            <h3>King Benson</h3>
+            <div class="details"><p><strong>Job:</strong> Sovereign</p></div>
         </div>
-        <!-- Tiju (Changed to match your file: Tiju_vip.png) -->
         <div class="card" onclick="this.classList.toggle('active')">
-            <img src="Tiju_vip.png" alt="Tiju">
-            <h3>Tiju</h3>
-            <div class="details"><p><strong>Job:</strong> Royal Historian</p><p>Description: A soul bound to the kingdom's history.</p></div>
+            <img src="king_harem.png" alt="King Harem">
+            <h3>King Harem</h3>
+            <div class="details"><p><strong>Job:</strong> Imperial Royal</p></div>
         </div>
     </div>
+
 </body>
 </html>
 
