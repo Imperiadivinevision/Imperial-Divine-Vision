@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Imperial Divine Vision</title>
     <style>
-        /* Unified Imperial Background */
+        /* Imperial Reflective Theme */
         body {
-            font-family: 'Georgia', serif;
             margin: 0;
+            padding: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364, #5D1010);
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e, #0a0a0a);
             background-size: 400% 400%;
             animation: flowBackground 20s ease infinite;
             color: #fdfdfd;
+            font-family: 'Cinzel', serif; /* Replace with your Royal Script font */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,42 +25,43 @@
             100% { background-position: 0% 50%; }
         }
 
-        nav ul { list-style-type: none; padding: 0; display: flex; gap: 20px; }
-        nav a { color: #FFD700; text-decoration: none; font-weight: bold; }
+        nav {
+            margin: 20px 0;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: #d4af37; /* Royal Gold */
+        }
 
-        .royal-branding {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 120px;
-            z-index: 1000;
-            pointer-events: none;
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffb7c5; /* Shifting to Pinkish Gold */
+        }
+
+        header {
+            margin-top: 50px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <header style="text-align: center; padding: 20px;">
-        <nav>
-            <ul>
-                <li><a href="index.html">home</a></li>
-                <li><a href="library.html">library</a></li>
-                <li><a href="official-seal.png">our official seal</a></li>
-                <li><a href="community.html">community chat</a></li>
-                <li><a href="vip.html">VIP creative Area</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="library.html">Library</a>
+        <a href="official-seal.html">Our Official Seal</a>
+        <a href="community.html">Community Chat</a>
+        <a href="vip.html">VIP Creative Area</a>
+    </nav>
+
+    <header>
         <h1>Welcome to the tale of the Song of Rosanna and the Evil King</h1>
     </header>
-
-    <!-- Side-by-side Portrait Gallery -->
-    <div style="display: flex; justify-content: center; gap: 40px; padding: 40px; width: 100%; max-width: 1200px;">
-        <img src="king-queen.png" style="width: 45%; border: 2px solid #FFD700; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <img src="kingqueenmother.png" style="width: 45%; border: 2px solid #FFD700; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-    </div>
-
-    <!-- Official Foundation Seal -->
-    <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 
 </body>
 </html>
