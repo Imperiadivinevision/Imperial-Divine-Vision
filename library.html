@@ -2,54 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Royal Library</title>
+    <title>The Royal Library | Imperial Divine Vision</title>
     <style>
         body { background: #0a0a0a; color: #d4af37; font-family: 'Cinzel', serif; text-align: center; padding: 20px; }
-        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
         
-        /* This is the "Card" container that holds the image and description */
-        .card { 
-            border: 2px solid #d4af37; padding: 20px; width: 300px; 
-            cursor: pointer; transition: 0.5s; background: #1a1a2e; border-radius: 15px; 
-        }
-        
-        /* This creates the glow effect when you click */
-        .card.active { box-shadow: 0 0 30px #d4af37; transform: scale(1.05); }
-        
+        /* Book Portal Styling */
+        .book-portal { margin: 40px auto; padding: 30px; border: 3px solid #d4af37; width: 80%; max-width: 500px; cursor: pointer; border-radius: 20px; background: #1a1a2e; }
+        .chapter-list { margin-top: 15px; font-size: 0.9rem; color: #fff; }
+
+        /* Gallery Styling */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; padding: 20px; }
+        .card { border: 2px solid #d4af37; padding: 20px; border-radius: 15px; background: #1a1a2e; cursor: pointer; transition: 0.5s; }
+        .card:hover, .card.active { box-shadow: 0 0 30px #d4af37; transform: scale(1.05); }
         .card img { width: 100%; border-radius: 10px; }
-        
-        /* This hides the text until you click */
-        .details { display: none; margin-top: 15px; color: #fff; line-height: 1.6; }
+        .details { display: none; margin-top: 15px; color: #fff; line-height: 1.6; text-align: left; }
         .card.active .details { display: block; }
     </style>
 </head>
 <body>
     <h1>Welcome to the Royal Library</h1>
-    <div class="gallery">
-        <!-- Card 1 -->
-        <div class="card" onclick="this.classList.toggle('active')">
-            <img src="king_benson.png" alt="King Benson">
-            <h3>King Benson</h3>
-            <div class="details">
-                <p>The sovereign heart of our story, guiding the kingdom with grace and strength.</p>
-            </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="card" onclick="this.classList.toggle('active')">
-            <img src="rosanna.png" alt="Queen Rosanna">
-            <h3>Queen Rosanna</h3>
-            <div class="details">
-                <p>The Queen who weaves our divine vision.</p>
-            </div>
+
+    <!-- Book Portal with Chapter Links -->
+    <div class="book-portal" onclick="this.querySelector('.chapter-list').style.display='block'">
+        <h3>Open the Imperial Chronicles</h3>
+        <p>Read Chapters 1 - 10</p>
+        <div class="chapter-list" style="display:none;">
+            <p><a href="chapter1.html" style="color:#d4af37;">Chapter 1</a> | <a href="chapter2.html" style="color:#d4af37;">Chapter 2</a> ... <a href="chapter10.html" style="color:#d4af37;">Chapter 10</a></p>
+            <p><em>(Click here to reveal payment access)</em></p>
         </div>
     </div>
 
+    <div class="gallery">
+        <!-- King & Queen Card -->
+        <div class="card" onclick="this.classList.toggle('active')">
+            <img src="king-queen.png" alt="King & Queen">
+            <h3>King Benson & Queen Rosanna</h3>
+            <div class="details">
+                <p><strong>Job:</strong> Sovereign Rulers</p>
+                <p><strong>Description:</strong> The heart of our story, bound by love and divine duty.</p>
+            </div>
+        </div>
+
+        <!-- Jirmak Card -->
+        <div class="card" onclick="this.classList.toggle('active')">
+            <img src="jirmak.png" alt="Jirmak">
+            <h3>Jirmak</h3>
+            <div class="details">
+                <p><strong>Job:</strong> Guardian</p>
+                <p><strong>Description:</strong> A guardian of the ancient ways.</p>
+            </div>
+        </div>
+        
+        <!-- Continue adding all other characters following this pattern -->
+    </div>
+
     <script>
-        // This script handles the glow and showing the text
         document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-                card.classList.toggle('active');
-            });
+            card.addEventListener('click', () => { card.classList.toggle('active'); });
         });
     </script>
 </body>
