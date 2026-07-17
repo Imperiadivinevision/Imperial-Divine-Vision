@@ -4,70 +4,41 @@
     <meta charset="UTF-8">
     <title>Imperial Divine Vision</title>
     <style>
-        /* Imperial Reflective Theme */
-        body {
-            margin: 0;
+        body { 
+            margin: 0; 
             padding: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e, #0a0a0a);
-            background-size: 400% 400%;
-            animation: flowBackground 20s ease infinite;
-            color: #d4af37; /* Gold text */
-            font-family: 'Cinzel', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e); 
+            color: #d4af37; 
+            font-family: 'Cinzel', serif; 
+            text-align: center; 
         }
-
-        @keyframes flowBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        nav { padding: 30px; }
+        nav a { margin: 15px; color: #d4af37; text-decoration: none; font-size: 1.5rem; transition: 0.3s; }
+        nav a:hover { color: #ffb7c5; }
+        .hero-image { 
+            width: 80%; 
+            max-width: 600px; 
+            border: 5px solid #d4af37; 
+            margin-top: 20px; 
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); 
+            border-radius: 10px;
         }
-
-        nav {
-            margin: 40px 0;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-        }
-
-        nav a {
-            margin: 0 20px;
-            text-decoration: none;
-            color: #d4af37;
-            transition: 0.5s;
-        }
-
-        nav a:hover {
-            color: #ffb7c5; /* Pinkish Gold shift */
-            text-shadow: 0 0 10px #ffb7c5;
-        }
-
-        header {
-            margin-top: 100px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px #000;
-        }
+        h1 { margin-top: 50px; text-shadow: 2px 2px 4px #000; padding: 0 20px; }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="index.html">Home</a>
         <a href="library.html">Library</a>
-        <a href="official-seal.html">Our Official Seal</a>
+        <a href="seal.html">Our Official Seal</a>
         <a href="community.html">Community Chat</a>
         <a href="vip.html">VIP Creative Area</a>
     </nav>
-
     <header>
         <h1>Welcome to the tale of the Song of Rosanna and the Evil King</h1>
+        <!-- Updated to use the correct file name: king-queen.png -->
+        <img src="king-queen.png" alt="King Benson and Queen Rosanna" class="hero-image">
     </header>
-
 </body>
 </html>
 
