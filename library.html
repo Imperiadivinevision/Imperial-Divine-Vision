@@ -2,52 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Royal Library | Imperial Divine Vision</title>
+    <title>The Royal Library</title>
     <style>
-        body { margin: 0; padding: 20px; background: #0a0a0a; color: #d4af37; font-family: 'Cinzel', serif; text-align: center; }
-        .book-portal { margin: 40px auto; padding: 20px; border: 2px solid #d4af37; width: 80%; max-width: 400px; cursor: pointer; border-radius: 10px; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 20px; }
-        .card { border: 1px solid #d4af37; padding: 15px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); cursor: pointer; transition: 0.5s; }
-        .card.active { box-shadow: 0 0 20px #d4af37, 0 0 40px #ffb7c5; transform: scale(1.05); }
-        .card img { width: 100%; border-radius: 4px; }
-        .details { display: none; margin-top: 10px; font-size: 0.9rem; color: #fff; }
+        body { background: #0a0a0a; color: #d4af37; font-family: 'Cinzel', serif; text-align: center; padding: 20px; }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+        
+        /* This is the "Card" container that holds the image and description */
+        .card { 
+            border: 2px solid #d4af37; padding: 20px; width: 300px; 
+            cursor: pointer; transition: 0.5s; background: #1a1a2e; border-radius: 15px; 
+        }
+        
+        /* This creates the glow effect when you click */
+        .card.active { box-shadow: 0 0 30px #d4af37; transform: scale(1.05); }
+        
+        .card img { width: 100%; border-radius: 10px; }
+        
+        /* This hides the text until you click */
+        .details { display: none; margin-top: 15px; color: #fff; line-height: 1.6; }
         .card.active .details { display: block; }
-        h1 { border-bottom: 2px solid #d4af37; padding-bottom: 15px; }
     </style>
 </head>
 <body>
     <h1>Welcome to the Royal Library</h1>
-
-    <div class="book-portal">
-        <a href="book.html" style="color: #d4af37; text-decoration: none;">
-            <h3>Open the Imperial Chronicles</h3>
-            <p>The Book of our Legacy</p>
-        </a>
-    </div>
-
     <div class="gallery">
-        <!-- King Benson -->
+        <!-- Card 1 -->
         <div class="card" onclick="this.classList.toggle('active')">
             <img src="king_benson.png" alt="King Benson">
             <h3>King Benson</h3>
             <div class="details">
-                <p><strong>Origin:</strong> The Imperial Throne</p>
-                <p><strong>Description:</strong> The sovereign heart of our story, guiding the kingdom with grace and strength.</p>
+                <p>The sovereign heart of our story, guiding the kingdom with grace and strength.</p>
             </div>
         </div>
-
-        <!-- Queen Rosanna -->
+        <!-- Card 2 -->
         <div class="card" onclick="this.classList.toggle('active')">
-            <img src="king-queen.png" alt="Royal Couple">
-            <h3>King Benson & Queen Rosanna</h3>
+            <img src="rosanna.png" alt="Queen Rosanna">
+            <h3>Queen Rosanna</h3>
             <div class="details">
-                <p><strong>Origin:</strong> The Royal Palace</p>
-                <p><strong>Description:</strong> The heart of the empire, bound by love and divine duty.</p>
+                <p>The Queen who weaves our divine vision.</p>
             </div>
         </div>
     </div>
 
     <script>
+        // This script handles the glow and showing the text
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 card.classList.toggle('active');
