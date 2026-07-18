@@ -8,10 +8,8 @@
         body { background: #0a0a0a; color: #d4af37; font-family: 'Cinzel', serif; text-align: center; padding: 20px; }
         h1, h2 { border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-top: 40px; animation: fadeIn 2s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .book-portal { margin: 40px auto; padding: 30px; border: 3px solid #d4af37; width: 80%; max-width: 500px; cursor: pointer; border-radius: 20px; background: #1a1a2e; transition: transform 0.3s; }
-        .book-portal:hover { transform: scale(1.05); }
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; padding: 20px; }
-        .card { border: 2px solid; padding: 15px; border-radius: 15px; background: #1a1a2e; cursor: pointer; transition: 0.5s; animation: glow 3s infinite; }
+        .card { border: 2px solid; padding: 15px; border-radius: 15px; background: #1a1a2e; animation: glow 3s infinite; }
         .palace { color: #ffd700; border-color: #ffd700; }
         .priest { color: #4169e1; border-color: #4169e1; }
         .minister { color: #dc143c; border-color: #dc143c; }
@@ -23,23 +21,24 @@
 
     <h1 style="animation: fadeIn 3s;">Welcome to the Royal Library</h1>
 
-    <div class="book-portal" onclick="window.location.href='book.html'">
-        <h3>Open the Imperial Chronicles</h3>
-    </div>
-
-    <h2>Palace Characters</h2>
+    <h2>Imperial Family</h2>
     <div class="gallery">
         <div class="card palace"><img src="king_benson.png" alt="King Benson"><h3>King Benson</h3></div>
         <div class="card palace"><img src="king-queen.png" alt="Rosanna"><h3>Rosanna</h3></div>
         <div class="card palace"><img src="yuri.png" alt="Yuri"><h3>Yuri</h3></div>
+        <div class="card palace"><img src="tiju.png" alt="Tiju"><h3>Tiju</h3></div>
+        <div class="card palace"><img src="weka.png" alt="Weka"><h3>Weka</h3></div>
         <div class="card palace"><img src="benson_rosanna_mom.png" alt="Imperial Grand Consort"><h3>Imperial Grand Consort</h3></div>
-        <div class="card palace"><img src="tiju_weka_rika_vip.png" alt="Imperial Family"><h3>Imperial Family</h3></div>
+        <div class="card palace"><img src="benson_mom.png" alt="Benson Mom"><h3>Benson Mom</h3></div>
+        <div class="card palace"><img src="past_king.png" alt="Past King"><h3>Past King</h3></div>
     </div>
 
     <h2>Priest & Prophet Characters</h2>
     <div class="gallery">
         <div class="card priest"><img src="prophet_kafura.png" alt="Prophet"><h3>Prophet Kafura</h3></div>
         <div class="card priest"><img src="high_priest.png" alt="High Priest"><h3>High Priest</h3></div>
+        <div class="card priest"><img src="priest.png" alt="Priest"><h3>Priest</h3></div>
+        <div class="card priest"><img src="servant.png" alt="Servant"><h3>Servant</h3></div>
         <div class="card priest"><img src="elara.png" alt="Elara"><h3>Elara</h3></div>
         <div class="card priest"><img src="resekeluge.png" alt="Razi Kelochi"><h3>Razi Kelochi</h3></div>
     </div>
@@ -47,15 +46,20 @@
     <h2>Minister Characters</h2>
     <div class="gallery">
         <div class="card minister"><img src="prime_minister.png" alt="Prime Minister"><h3>Prime Minister</h3></div>
-        <div class="card minister"><img src="pm_second_daughter.png" alt="PM Daughter"><h3>PM Second Daughter</h3></div>
+        <div class="card minister"><img src="pm_wife.png" alt="Prime Minister Wife"><h3>Prime Minister Wife</h3></div>
+        <div class="card minister"><img src="pm_second_daughter.png" alt="PM Second Daughter"><h3>PM Second Daughter</h3></div>
+        <div class="card minister"><img src="minister_revenue.png" alt="Minister of Revenue"><h3>Minister of Revenue</h3></div>
+        <div class="card minister"><img src="minister_treasure.png" alt="Minister of Treasure"><h3>Minister of Treasure</h3></div>
+        <div class="card minister"><img src="minister_education.png" alt="Minister of Education"><h3>Minister of Education</h3></div>
+        <div class="card minister"><img src="minister_tailor.png" alt="Minister of Tailor"><h3>Minister of Tailor</h3></div>
         <div class="card minister"><img src="commander.png" alt="Commander"><h3>Commander</h3></div>
-        <div class="card minister"><img src="imperial_guard.png" alt="Guard"><h3>Imperial Guard</h3></div>
+        <div class="card minister"><img src="imperial_guard.png" alt="Imperial Guard"><h3>Imperial Guard</h3></div>
     </div>
 
     <h2>Villager Characters</h2>
     <div class="gallery">
         <div class="card villager"><img src="villager.png" alt="Villager"><h3>Villager</h3></div>
-        <div class="card villager"><img src="villager_vip_2.png" alt="Villager"><h3>Villager VIP</h3></div>
+        <div class="card villager"><img src="villager_vip.png" alt="Villager VIP"><h3>Villager VIP</h3></div>
     </div>
 
 </body>
