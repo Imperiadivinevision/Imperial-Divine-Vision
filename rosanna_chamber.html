@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chamber of Rosanna | The Archives</title>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0a0a0a; color: #d4af37; font-family: 'UnifrakturMaguntia', cursive; text-align: center; padding: 50px; }
+        h1 { font-size: 3em; text-shadow: 2px 2px 5px #000; }
+        
+        .book-container { perspective: 1000px; width: 300px; margin: 50px auto; cursor: pointer; }
+        .book { width: 100%; height: 400px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; }
+        .book:hover { transform: rotateY(180deg); }
+        .page { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 2px solid #d4af37; display: flex; align-items: center; justify-content: center; background: #1a1a2e; border-radius: 10px; }
+        .back { transform: rotateY(180deg); }
+        
+        .nav-btn { background: #d4af37; color: #0a0a0a; border: none; padding: 15px 30px; font-size: 1.2em; cursor: pointer; border-radius: 5px; margin-top: 20px; text-decoration: none; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>Rosanna and the Evil King</h1>
+    
+    <div class="book-container">
+        <div class="book">
+            <div class="page front"><h2>Front Cover</h2></div>
+            <div class="page back"><h2>Chapter 1: The Beginning</h2></div>
+        </div>
+    </div>
+
+    <a href="library.html" class="nav-btn">Return to Library</a>
+</body>
+</html>
+
