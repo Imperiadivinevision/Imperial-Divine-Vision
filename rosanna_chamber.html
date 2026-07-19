@@ -3,27 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Chamber of Rosanna | The Archives</title>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
         body { background: #0a0a0a; color: #d4af37; font-family: 'UnifrakturMaguntia', cursive; text-align: center; padding: 50px; }
         h1 { font-size: 3em; text-shadow: 2px 2px 5px #000; }
         
         .book-container { perspective: 1000px; width: 300px; margin: 50px auto; cursor: pointer; }
-        .book { width: 100%; height: 400px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; }
-        .book:hover { transform: rotateY(180deg); }
-        .page { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 2px solid #d4af37; display: flex; align-items: center; justify-content: center; background: #1a1a2e; border-radius: 10px; }
-        .back { transform: rotateY(180deg); }
+        .book { width: 100%; height: 500px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; }
         
+        .page { 
+            position: absolute; width: 100%; height: 100%; padding: 40px; 
+            background: #1a1a2e; border: 2px solid #d4af37; box-sizing: border-box;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: #d4af37; border-radius: 10px;
+        }
+
         .nav-btn { background: #d4af37; color: #0a0a0a; border: none; padding: 15px 30px; font-size: 1.2em; cursor: pointer; border-radius: 5px; margin-top: 20px; text-decoration: none; display: inline-block; }
     </style>
 </head>
 <body>
+
     <h1>Rosanna and the Evil King</h1>
-    
+
     <div class="book-container">
         <div class="book">
-            <div class="page front"><h2>Front Cover</h2></div>
-            <div class="page back"><h2>Chapter 1: The Beginning</h2></div>
+            <!-- Page 1: Read (Introduction) -->
+            <div class="page text">
+                <p>
+                    <h2 style="text-align: center;">Introduction: The Village of Hikmid</h2>
+                    Rosana was a village girl born from a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid, two miles from the sea. Hikmid had been colonized by a very powerful, rich empire called Boparl. The people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom; they were permitted to do whatever they wanted as long as they respected the law.
+                    <br><br>
+                    Boparl consisted of seven states: Kahli, Gorma, Tunera, Farisa, Hjortigar, Hakma, and the capital region. These six states were governed by the King’s most trusted ministers, while the King Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar. Tumar was located in the center of the empire, a beautiful city where money flowed, businesses thrived, and gold miners searched for riches. Hikmid was within the state of Farisa, to the south of the capital.
+                    <br><br>
+                    Rosanna’s father, Tarma, was a righteous man, the son of a fisherman named Irsha and a housekeeper named Luisa. Rosanna’s mother, Jirmak, was abandoned by her parents at the doorstep of a pleasure house. She was found by Kapoor, the owner of the pleasure house, who was charmed by Jirmak's beauty. Kapoor adopted Jirmak and raised her as her own daughter, training her in the art of dance and music. Kapoor harbored a secret hope that Jirmak would marry a rich man and move to a mansion in the capital, providing for Kapoor in her old age. As Jirmak grew, her beauty became legendary. Though many suitors proposed, Kapoor rejected them all, harboring greater plans for her daughter’s future.
+                </p>
+            </div>
+
+            <!-- Page 2: Visual -->
+            <div class="page visual">
+                <img src="jirmak_abandoned.png" alt="Jirmak abandoned" style="width:100%;">
+            </div>
         </div>
     </div>
 
