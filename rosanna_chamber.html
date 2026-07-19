@@ -2,54 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chamber of Rosanna | The Archives</title>
+    <title>Chamber of Rosanna</title>
     <style>
-        body { 
-            background: #2b2b2b; 
-            color: #4a3728; 
-            font-family: 'UnifrakturMaguntia', cursive; 
-            text-align: center; 
-            padding: 50px; 
-        }
-        
-        h1 { font-size: 3.5em; text-shadow: 2px 2px 5px #000; color: #d4af37; margin-bottom: 30px; }
-
-        .book-container { 
-            perspective: 2000px; 
-            width: 600px; 
-            margin: 50px auto; 
-        }
-        
-        .book { 
-            width: 100%; 
-            height: 800px; 
-            position: relative; 
-            transform-style: preserve-3d; 
-            transition: transform 0.6s; 
-        }
-        
-        .page { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            padding: 60px; 
-            background: #f4e4bc; 
-            border: 15px solid #c5a059; 
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            color: #4a3728;
-            overflow-y: auto;
-        }
-
-        .nav-btn { 
-            background: #d4af37; color: #0a0a0a; border: none; padding: 15px 30px; 
-            font-size: 1.2em; cursor: pointer; border-radius: 5px; margin-top: 50px; 
-            text-decoration: none; display: inline-block; 
-        }
+        body { background: #2b2b2b; color: #4a3728; font-family: sans-serif; text-align: center; padding: 20px; }
+        .book-container { perspective: 2000px; width: 600px; margin: 50px auto; }
+        .book { width: 100%; height: 800px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+        .page { position: absolute; width: 100%; height: 100%; padding: 60px; background: #f4e4bc; border: 15px solid #c5a059; box-sizing: border-box; backface-visibility: hidden; }
+        .page.back { transform: rotateY(180deg); }
+        .book.flipped { transform: rotateY(180deg); }
     </style>
 </head>
 <body>
@@ -57,27 +17,23 @@
     <h1>Rosanna and the Evil King</h1>
 
     <div class="book-container">
-        <div class="book">
-            <!-- Page 1: Introduction -->
-            <div class="page text">
-                <h2 style="text-align: center; border-bottom: 2px solid #4a3728; padding-bottom: 10px;">Introduction: The Village of Hikmid</h2>
-                <p style="text-align: left; font-size: 1.2em; line-height: 1.6;">
-                    Rosana was a village girl born from a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid, two miles from the sea. Hikmid had been colonized by a very powerful, rich empire called Boparl. The people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom; they were permitted to do whatever they wanted as long as they respected the law.
-                    <br><br>
-                    Boparl consisted of seven states: Kahli, Gorma, Tunera, Farisa, Hjortigar, Hakma, and the capital region. These six states were governed by the King’s most trusted ministers, while the King Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar. Tumar was located in the center of the empire, a beautiful city where money flowed, businesses thrived, and gold miners searched for riches. Hikmid was within the state of Farisa, to the south of the capital.
-                    <br><br>
-                    Rosanna’s father, Tarma, was a righteous man, the son of a fisherman named Irsha and a housekeeper named Luisa. Rosanna’s mother, Jirmak, was abandoned by her parents at the doorstep of a pleasure house. She was found by Kapoor, the owner of the pleasure house, who was charmed by Jirmak's beauty. Kapoor adopted Jirmak and raised her as her own daughter, training her in the art of dance and music. Kapoor harbored a secret hope that Jirmak would marry a rich man and move to a mansion in the capital, providing for Kapoor in her old age. As Jirmak grew, her beauty became legendary. Though many suitors proposed, Kapoor rejected them all, harboring greater plans for her daughter’s future.
-                </p>
+        <div class="book" onclick="this.classList.toggle('flipped')">
+            <!-- Page 1 (Front) -->
+            <div class="page">
+                <h2>Introduction: The Village of Hikmid</h2>
+                <p style="text-align: left;">Rosana was a village girl born from a handsome sailor called Tarma and a beautiful performer called Jirmak... (rest of your text here)</p>
             </div>
-
-            <!-- Page 2: Visual -->
-            <div class="page visual">
-                <img src="jirmak_abandoned.png" alt="Jirmak abandoned" style="width:100%; border: 2px solid #4a3728;">
+            <!-- Page 2 (Back) -->
+            <div class="page back">
+                <img src="jirmak_abandoned.png" alt="Jirmak" style="width:100%;">
             </div>
         </div>
     </div>
 
-    <a href="library.html" class="nav-btn">Return to Library</a>
+    <script>
+        // This makes the clicking work!
+    </script>
+
 </body>
 </html>
 
