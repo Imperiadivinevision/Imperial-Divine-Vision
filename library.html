@@ -3,72 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <title>The Archives | Imperial Divine Vision</title>
-    <!-- Importing the elegant, handwritten-style font -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Beautiful calligraphic font -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
+        /* Reflective background animation */
+        @keyframes bgShift {
+            0% { background: #0a0a0a; }
+            33% { background: #1a1005; }
+            66% { background: #1a051a; }
+            100% { background: #1a0505; }
+        }
+        
+        body { 
+            background: #0a0a0a; 
+            color: #d4af37; 
+            font-family: 'UnifrakturMaguntia', cursive; 
+            text-align: center; 
+            padding: 20px;
+            animation: bgShift 20s infinite alternate;
+        }
+
+        /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glow { 
             0% { box-shadow: 0 0 10px currentColor; } 
             50% { box-shadow: 0 0 25px currentColor; } 
             100% { box-shadow: 0 0 10px currentColor; } 
         }
-        
-        body { 
-            background: #0a0a0a; 
-            color: #d4af37; 
-            font-family: 'Great Vibes', cursive; /* Applied your preferred handwriting style */
-            text-align: center; 
-            padding: 20px; 
-        }
-        
-        h1, h2 { padding-bottom: 10px; margin-top: 40px; animation: fadeIn 2s ease-out; }
+
+        h1, h2 { padding-bottom: 10px; margin-top: 40px; animation: fadeIn 2s ease-out; font-size: 3em; text-shadow: 2px 2px 5px #000; }
         
         #oracle-bar { color: #ffffff; font-style: italic; margin-bottom: 30px; animation: fadeIn 5s; cursor: help; }
         
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; padding: 20px; }
         
         .card { 
-            border: 3px solid; 
-            padding: 15px; 
-            border-radius: 15px; 
-            background: #1a1a2e; 
+            border: 3px solid; padding: 15px; border-radius: 15px; 
             animation: glow 3s infinite ease-in-out; 
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
         }
         
-        /* Reflective shimmer effect */
-        .card::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(to bottom right, rgba(255,255,255,0) 40%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 60%);
-            animation: shimmer 5s infinite;
-        }
-        @keyframes shimmer { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(50%, 50%) rotate(360deg); } }
-
-        .card:hover { transform: scale(1.05); }
+        .card:hover { transform: scale(1.05); border-color: #fff; }
         
-        /* Precise Color Coding */
-        .palace { color: #ffd700; border-color: #ffd700; }
-        .priest { color: #800080; border-color: #800080; }
-        .minister { color: #dc143c; border-color: #dc143c; }
-        .villager { color: #daa520; border-color: #daa520; }
+        /* Sparkle backgrounds */
+        .palace { background: linear-gradient(135deg, #ffd70033, #1a1a2e); border-color: #ffd700; color: #ffd700; }
+        .priest { background: linear-gradient(135deg, #80008033, #1a1a2e); border-color: #800080; color: #d8bfd8; }
+        .minister { background: linear-gradient(135deg, #dc143c33, #1a1a2e); border-color: #dc143c; color: #ffcccc; }
+        .villager { background: linear-gradient(135deg, #ffffff22, #1a1a2e); border-color: #ffffff; color: #ffffff; }
         
         .card img { width: 100%; height: 350px; object-fit: cover; border-radius: 10px; }
-        h3 { font-size: 1.8em; margin-top: 15px; }
     </style>
 </head>
 <body>
-    <h1>The Archives of the Divine Vision</h1>
-    <div id="oracle-bar">"Where the whispers of the past ignite the fires of the future."</div>
+    <!-- Sound Effect Trigger -->
+    <audio id="clickSound" src="magic_chime.mp3"></audio>
+
+    <h1 style="animation: fadeIn 2s;">The Archives of the Divine Vision</h1>
     
-    <!-- Gallery Structure Remains Consistent -->
-    <h2 class="palace">The Imperial Dynasty</h2>
-    <div class="gallery">
-        <div class="card palace"><img src="king_benson.png" alt="King Benson"><h3>King Benson</h3></div>
-        <!-- (Other cards follow the same pattern) -->
+    <div id="oracle-bar">
+        "Where the whispers of the past ignite the fires of the future."
     </div>
-    <!-- Add other sections here -->
+
+    <h2 class="palace" style="animation: fadeIn 2.5s;">The Imperial Dynasty</h2>
+    <div class="gallery">
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="king_benson.png" alt="King Benson"><h3>King Benson</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="rosanna.png" alt="Queen Rosanna"><h3>Queen Rosanna</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="yuri.png" alt="Yuri"><h3>Yuri</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="tiju.png" alt="Tiju"><h3>Tiju</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="Weka.png" alt="Weka"><h3>Weka</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="benson_rosanna_mom.png" alt="Imperial Grand Consort"><h3>Imperial Grand Consort</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="benson_mom.png" alt="Imperial Family"><h3>Imperial Family</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="past_king.png" alt="Past King"><h3>Past King</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="Jirmak.png" alt="Jirmak"><h3>Jirmak the Queen birth mother</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="Rika.png" alt="Rika"><h3>Rika</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="yuri_benson_rosanna.png" alt="Imperial Family"><h3>Imperial Family</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="past_king_yuri.png" alt="Imperial Marriage"><h3>Imperial Marriage</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="mother.png" alt="Imperial Grand Consort vesta"><h3>King Benson birth mother</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="king_harem.png" alt="battle of the throne"><h3>battle of the throne</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="past_king_harem.png" alt="old rivalry"><h3>old rivalry</h3></div>
+        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="imperial_wedding.png" alt="Imperial Wedding"><h3>Imperial Wedding</h3></div>
+    </div>
+
+    <h2 class="priest" style="animation: fadeIn 3s;">The Sacred Order of the Light</h2>
+    <div class="gallery">
+        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="prophet_kafura.png" alt="Prophet"><h3>Prophet Kafura</h3></div>
+        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="high_priest.png" alt="High Priest"><h3>High Priest</h3></div>
+        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="priest.png" alt="Priest"><h3>Priest</h3></div>
+        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="servant.png" alt="Servant"><h3>Servant</h3></div>
+        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="elara.png" alt="Elara"><h3>Elara</h3></div>
+        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="resekeluge.png" alt="Razi Kelochi"><h3>Razi Kelochi</h3></div>
+    </div>
+
+    <h2 class="minister" style="animation: fadeIn 3.5s;">The High Council of State</h2>
+    <div class="gallery">
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="prime_minister.png" alt="Prime Minister"><h3>Prime Minister</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="pm_wife.png" alt="Prime Minister Wife"><h3>Prime Minister Wife</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="pm_second_daughter.png" alt="PM Second Daughter"><h3>PM Second Daughter</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_revenue.png" alt="Minister of Revenue"><h3>Minister of Revenue</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_treasure.png" alt="Minister of Treasure"><h3>Minister of Treasure</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_education.png" alt="Minister of Education"><h3>Minister of Education</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_tailor.png" alt="Minister of Tailor"><h3>Minister of Tailor</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="commander.png" alt="Commander"><h3>Commander</h3></div>
+        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="imperial_guard.png" alt="Imperial Guard"><h3>Imperial Guard</h3></div>
+    </div>
+
+    <h2 class="villager" style="animation: fadeIn 4s;">The People of the Realm</h2>
+    <div class="gallery">
+        <div class="card villager" onclick="document.getElementById('clickSound').play()"><img src="villager.png" alt="Villager"><h3>Villager</h3></div>
+        <div class="card villager" onclick="document.getElementById('clickSound').play()"><img src="villager_vip.png" alt="Villager VIP"><h3>Villager VIP</h3></div>
+    </div>
 </body>
 </html>
 
