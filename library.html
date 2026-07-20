@@ -193,6 +193,13 @@
             text-transform: uppercase;
             font-family: 'Cinzel', serif;
         }
+        .card p.card-subtitle {
+            font-size: 10px;
+            color: #d4af37;
+            margin: 5px 0 0 0;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
 
         /* Expanded Modal Popup */
         .modal {
@@ -236,11 +243,17 @@
         }
         .modal-content h2 {
             color: #111111;
-            margin: 0 0 15px 0;
+            margin: 0 0 5px 0;
             font-size: 22px;
             letter-spacing: 1px;
             text-transform: uppercase;
             font-family: 'Cinzel', serif;
+        }
+        .modal-content p.modal-desc {
+            color: #c5a059;
+            font-style: italic;
+            font-size: 13px;
+            margin: 0 0 15px 0;
         }
         .close-btn {
             background: linear-gradient(to bottom, #163d2b, #06192e);
@@ -282,75 +295,83 @@
 <div class="section-container">
     <div class="section-title">👑 Imperial Palace Characters</div>
     <div class="card-grid">
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_benson.png', 'King Benson')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_benson.png', 'King Benson', 'Ruler of the Imperial')">
             <img src="king_benson.png" alt="King Benson">
             <h3>King Benson</h3>
+            <p class="card-subtitle">Ruler of the Imperial</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rosanna.png', 'Queen Rosanna')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rosanna.png', 'Queen Rosanna', 'Ruler of the Empire')">
             <img src="rosanna.png" alt="Queen Rosanna">
             <h3>Queen Rosanna</h3>
+            <p class="card-subtitle">Ruler of the Empire</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak', 'Mother of Queen Rosanna')">
             <img src="Jirmak.png" alt="Jirmak">
             <h3>Jirmak</h3>
+            <p class="card-subtitle">Mother of Queen Rosanna</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Rika.png', 'Rika')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Rika.png', 'Rika', 'Concubine')">
             <img src="Rika.png" alt="Rika">
             <h3>Rika</h3>
+            <p class="card-subtitle">Concubine</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Weka.png', 'Weka')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Weka.png', 'Weka', 'Imperial Consort')">
             <img src="Weka.png" alt="Weka">
             <h3>Weka</h3>
+            <p class="card-subtitle">Imperial Consort</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri.png', 'Yuri')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri.png', 'Yuri', 'Imperial Grand Queen, Past King\'s Legal Wife')">
             <img src="yuri.png" alt="Yuri">
             <h3>Yuri</h3>
+            <p class="card-subtitle">Imperial Grand Queen, Past King's Legal Wife</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tiju.png', 'Tiju')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tiju.png', 'Tiju', 'Concubine')">
             <img src="tiju.png" alt="Tiju">
             <h3>Tiju</h3>
+            <p class="card-subtitle">Concubine</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('mother.png', 'Mother')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('mother.png', 'Mother', 'King Benson Birth Mother, Imperial Grand Consort')">
             <img src="mother.png" alt="Mother">
             <h3>Mother</h3>
+            <p class="card-subtitle">King Benson Birth Mother, Imperial Grand Consort</p>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom', 'Benson Mom')">
             <img src="benson_mom.png" alt="Benson Mom">
             <h3>Benson Mom</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_rosanna_mom.png', 'Benson Rosanna Mom')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_rosanna_mom.png', 'Benson & Rosanna Mom', 'Benson & Rosanna Mom')">
             <img src="benson_rosanna_mom.png" alt="Benson Rosanna Mom">
             <h3>Benson & Rosanna Mom</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king-queen.png', 'King and Queen')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king-queen.png', 'King and Queen', 'King and Queen')">
             <img src="king-queen.png" alt="King and Queen">
             <h3>King and Queen</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_harem.png', 'King Harem')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_harem.png', 'King Harem', 'King Harem')">
             <img src="king_harem.png" alt="King Harem">
             <h3>King Harem</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingqueenmother.png', 'King Queen Mother')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingqueenmother.png', 'King Queen Mother', 'King Queen Mother')">
             <img src="kingqueenmother.png" alt="King Queen Mother">
             <h3>King Queen Mother</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king.png', 'Past King')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king.png', 'Past King', 'Past King')">
             <img src="past_king.png" alt="Past King">
             <h3>Past King</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_harem.png', 'Past King Harem')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_harem.png', 'Past King Harem', 'Past King Harem')">
             <img src="past_king_harem.png" alt="Past King Harem">
             <h3>Past King Harem</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King and Yuri')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King & Yuri', 'Past King & Yuri')">
             <img src="past_king_yuri.png" alt="Past King and Yuri">
             <h3>Past King & Yuri</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rikaextra.png', 'Rika Extra')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rikaextra.png', 'Rika Extra', 'Rika Extra')">
             <img src="rikaextra.png" alt="Rika Extra">
             <h3>Rika Extra</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri_benson_rosanna.png', 'Yuri Benson Rosanna')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri_benson_rosanna.png', 'Yuri, Benson & Rosanna', 'Yuri, Benson & Rosanna')">
             <img src="yuri_benson_rosanna.png" alt="Yuri Benson Rosanna">
             <h3>Yuri, Benson & Rosanna</h3>
         </div>
@@ -361,27 +382,27 @@
 <div class="section-container">
     <div class="section-title">🔮 Priest Divine Eyes Characters</div>
     <div class="card-grid">
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('prophet_kafura.png', 'Prophet Kafura')">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('prophet_kafura.png', 'Prophet Kafura', 'Prophet Kafura')">
             <img src="prophet_kafura.png" alt="Prophet Kafura">
             <h3>Prophet Kafura</h3>
         </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('high_priest.png', 'High Priest')">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('high_priest.png', 'High Priest', 'High Priest')">
             <img src="high_priest.png" alt="High Priest">
             <h3>High Priest</h3>
         </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('priest.png', 'Priest')">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('priest.png', 'Priest', 'Priest')">
             <img src="priest.png" alt="Priest">
             <h3>Priest</h3>
         </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('servant.png', 'Servant')">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('servant.png', 'Servant', 'Servant')">
             <img src="servant.png" alt="Servant">
             <h3>Servant</h3>
         </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('resekeluge.png', 'Resekeluge')">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('resekeluge.png', 'Resekeluge', 'Resekeluge')">
             <img src="resekeluge.png" alt="Resekeluge">
             <h3>Resekeluge</h3>
         </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('elara.png', 'Elara')">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('elara.png', 'Elara', 'Elara')">
             <img src="elara.png" alt="Elara">
             <h3>Elara</h3>
         </div>
@@ -392,50 +413,51 @@
 <div class="section-container">
     <div class="section-title">📜 Ministers Section</div>
     <div class="card-grid">
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('prime_minister.png', 'Prime Minister')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('prime_minister.png', 'Prime Minister', 'Prime Minister')">
             <img src="prime_minister.png" alt="Prime Minister">
             <h3>Prime Minister</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('pm_wife.png', 'Prime Minister Wife')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('pm_wife.png', 'Prime Minister Wife', 'Prime Minister Wife')">
             <img src="pm_wife.png" alt="Prime Minister Wife">
             <h3>Prime Minister's Wife</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('pm_second_daughter.png', 'Prime Minister Second Daughter')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('pm_second_daughter.png', 'Prime Minister Second Daughter', 'Prime Minister Daughter')">
             <img src="pm_second_daughter.png" alt="Prime Minister Second Daughter">
             <h3>Prime Minister's Daughter</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_tailor.png', 'Minister of Tailor')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_tailor.png', 'Minister of Tailor', 'Minister of Tailor')">
             <img src="minister_tailor.png" alt="Minister of Tailor">
             <h3>Minister of Tailor</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_education.png', 'Minister of Education')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_education.png', 'Minister of Education', 'Minister of Education')">
             <img src="minister_education.png" alt="Minister of Education">
             <h3>Minister of Education</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_revenue.png', 'Minister of Revenue')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_revenue.png', 'Minister of Revenue', 'Minister of Revenue')">
             <img src="minister_revenue.png" alt="Minister of Revenue">
             <h3>Minister of Revenue</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('imperial_guard.png', 'Imperial Guard')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('imperial_guard.png', 'Imperial Guard', 'Imperial Guard')">
             <img src="imperial_guard.png" alt="Imperial Guard">
             <h3>Imperial Guard</h3>
         </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('commander.png', 'Imperial Commander')">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('commander.png', 'Imperial Commander', 'Imperial Commander')">
             <img src="commander.png" alt="Imperial Commander">
             <h3>Imperial Commander</h3>
         </div>
     </div>
 </div>
 
-<!-- SECTION 4: Villagers (Brown Card & White Glow) -->
+<!-- SECTION 4: Villagers (Brown Card )
+    <!-- SECTION 4: Villagers (Brown Card & White Glow) -->
 <div class="section-container">
     <div class="section-title">🌾 Villagers Section</div>
     <div class="card-grid">
-        <div class="card villager" onmouseover="setReflectiveGlow('rgba(255, 255, 255, 0.35)')" onclick="openModal('villager.png', 'Villager')">
+        <div class="card villager" onmouseover="setReflectiveGlow('rgba(255, 255, 255, 0.35)')" onclick="openModal('villager.png', 'Villager', 'Villager Scene I')">
             <img src="villager.png" alt="Villager">
             <h3>Villager Scene I</h3>
         </div>
-        <div class="card villager" onmouseover="setReflectiveGlow('rgba(255, 255, 255, 0.35)')" onclick="openModal('imperial_wedding.png', 'Imperial Wedding')">
+        <div class="card villager" onmouseover="setReflectiveGlow('rgba(255, 255, 255, 0.35)')" onclick="openModal('imperial_wedding.png', 'Imperial Wedding', 'Imperial Wedding')">
             <img src="imperial_wedding.png" alt="Imperial Wedding">
             <h3>Imperial Wedding</h3>
         </div>
@@ -446,6 +468,7 @@
 <div id="characterModal" class="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <h2 id="modalTitle">Character Title</h2>
+        <p id="modalDesc" class="modal-desc"></p>
         <img id="modalImage" src="" alt="Expanded View">
         <br>
         <button class="close-btn" onclick="closeModal()">Close Chamber</button>
@@ -457,12 +480,19 @@
         document.documentElement.style.setProperty('--bg-glow', colorValue);
     }
 
-    function openModal(imageSrc, title) {
+    function openModal(imageSrc, title, description = '') {
         document.getElementById('modalImage').src = imageSrc;
         document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalDesc').textContent = description;
         document.getElementById('characterModal').style.display = 'flex';
     }
 
     function closeModal() {
         document.getElementById('characterModal').style.display = 'none';
-  
+    }
+</script>
+
+</body>
+</html>
+
+
