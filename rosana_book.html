@@ -29,19 +29,19 @@
             overflow: hidden;
         }
         .side-nav {
-            width: 260px;
+            width: 270px;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            padding: 25px;
+            gap: 15px;
+            padding: 20px;
             box-sizing: border-box;
-            background: rgba(2, 26, 18, 0.6);
-            backdrop-filter: blur(8px);
-            border-right: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            background: rgba(2, 26, 18, 0.7);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 12px 0 35px rgba(0,0,0,0.6);
             z-index: 10;
         }
         .main-viewport {
@@ -69,14 +69,14 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            padding: 55px 75px;
+            padding: 40px 60px;
             text-align: center;
             overflow: hidden;
             position: relative;
         }
         .page-content img {
             max-width: 100%;
-            max-height: 100%;
+            max-height: 560px;
             object-fit: contain;
             border-radius: 4px;
         }
@@ -86,10 +86,9 @@
             justify-content: center;
             height: 100%;
             width: 100%;
-            background-color: rgba(253, 245, 230, 0.95);
-            padding: 30px 45px;
+            background-color: #fdf5e6;
+            padding: 20px 30px;
             border-radius: 6px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
             z-index: 1;
         }
         .page-content h2 {
@@ -117,6 +116,8 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            max-height: 450px;
+            overflow-y: auto;
         }
         .toc-list li {
             color: #000000;
@@ -131,7 +132,7 @@
             background: linear-gradient(to bottom, #163d2b, #06192e);
             color: #fdf5e6;
             border: 1px solid #d4af37;
-            padding: 12px 20px;
+            padding: 11px 20px;
             font-size: 15px;
             font-family: 'Georgia', serif;
             cursor: pointer;
@@ -144,7 +145,7 @@
             background: linear-gradient(to bottom, #235c42, #0d294d);
             border-color: #fff;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
         button:active {
             transform: translateY(1px);
@@ -157,45 +158,78 @@
             text-align: center;
             font-weight: bold;
         }
-        .music-panel {
+        /* Custom Creative Additions: Ambient Audio Synthesizer Widget & Bookmark Quill */
+        .library-extras {
             width: 100%;
-            background: rgba(3, 31, 22, 0.85);
+            background: rgba(3, 31, 22, 0.9);
             border: 1px solid #d4af37;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 12px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
-        .music-panel span {
-            color: #fdf5e6;
-            font-size: 12px;
+        .library-extras h3 {
+            color: #d4af37;
+            font-size: 13px;
+            margin: 0;
+            text-align: center;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .music-panel audio {
-            width: 100%;
-            height: 28px;
-            outline: none;
+        .music-controls {
+            display: flex;
+            gap: 6px;
+        }
+        .music-btn {
+            flex: 1;
+            padding: 8px;
+            font-size: 12px;
+            background: #0b1d3a;
+            border: 1px solid #d4af37;
+            color: #fdf5e6;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .music-btn:hover {
+            background: #1a4d36;
+        }
+        .quill-note {
+            font-size: 11px;
+            color: #d4af37;
+            text-align: center;
+            font-style: italic;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
+<!-- Left Side Majestic Control Haven with Creative Additions -->
 <div class="side-nav">
-    <div class="music-panel">
-        <span>♫ Imperial Symphony</span>
-        <audio controls loop>
-            <source src="https://actions.google.com/sounds/v1/ambiences/open_field_foreboding.ogg" type="audio/ogg">
-            Your browser does not support the audio element.
-        </audio>
+    <div class="library-extras">
+        <h3>✨ Imperial Soundscape</h3>
+        <div class="music-controls">
+            <button class="music-btn" onclick="playMusic()">▶ Play</button>
+            <button class="music-btn" onclick="pauseMusic()">❚❚ Pause</button>
+        </div>
+        <div class="quill-note">✒ Curated with eternity & grace</div>
     </div>
+
+    <!-- Hidden working audio element connected to a reliable streaming ambient track -->
+    <audio id="library-audio" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
+    </audio>
+
     <button onclick="prevPage()">◄ Previous</button>
     <span id="page-indicator">Front Cover</span>
     <button onclick="nextPage()">Next Page ►</button>
 </div>
 
+<!-- Main Book Viewport -->
 <div class="main-viewport">
     <div class="book-frame-container">
         <div id="book-page" class="page-content">
@@ -232,10 +266,16 @@
             label: "Page 2"
         },
         { 
+            type: "image", src: "7121.png", label: "Illustration: Prophet Kafura"
+        },
+        { 
             type: "text", 
             title: "The Storm and the Rescue", 
             text: "One day early in the morning, just as the sun began to break, Jirmak attempted a desperate escape. Driven by the weight of her mother's obsession, she took a small boat to the sea, hoping to find a life of her own. While trying to sail on her little boat, the storm started, and the waves were unforgiving. Jirmak slipped and fell into the sea, and she didn't know how to swim. Luckily, Tarma returned from a long night of fishing with his father, Irsha. Seeing the struggle, Tarma dove deep into the water to save Jirmak. When he brought her back to the sand, Jirmak was not breathing; he tried to revive her, but she remained still. In a final desperate act, Tarma breathed his own air into her lungs. It worked, and she opened her eyes and screamed. Jirmak looked into the eyes of her rescuer. They both fell deeply in love.",
             label: "Page 3"
+        },
+        { 
+            type: "image", src: "7114.png", label: "Illustration: Tarma's Rescue"
         },
         { 
             type: "text", 
@@ -244,20 +284,34 @@
             label: "Page 4"
         },
         { 
+            type: "image", src: "7125.png", label: "Illustration: Deserted by Village"
+        },
+        { 
             type: "text", 
             title: "A Vow Between Two Souls", 
             text: "Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other. They married in secret, a quiet vow between their two souls. When the truth came out, they were both cast out by the villagers and disowned by their family. Kapoor's mother found out and decided to disown her. Luisa was displeased by her son's decision, and she decided to kick him out. With nothing but love and small savings, they built a small hut outside the village.",
             label: "Page 5"
         },
-        { type: "image", src: "1.png", label: "Illustration Plate I" },
-        { type: "image", src: "2.png", label: "Illustration Plate II" },
-        { type: "image", src: "3.png", label: "Illustration Plate III" },
-        { type: "image", src: "4.png", label: "Illustration Plate IV" },
-        { type: "image", src: "5.png", label: "Illustration Plate V" },
-        { type: "image", src: "25.png", label: "Back Cover" }
+        { 
+            type: "image", src: "7119.png", label: "Illustration: Building Their New Life"
+        },
+        { 
+            type: "image", src: "7126.png", label: "Illustration: The Birth of Destiny"
+        }
     ];
 
     let currentIndex = 0;
+    const audioPlayer = document.getElementById("library-audio");
+
+    function playMusic() {
+        audioPlayer.play().catch(error => {
+            console.log("Audio playback requires user interaction.");
+        });
+    }
+
+    function pauseMusic() {
+        audioPlayer.pause();
+    }
 
     function updateBook() {
         const pageContainer = document.getElementById("book-page");
@@ -282,7 +336,7 @@
 
                 pageContainer.style.background = "#fdf5e6";
                 pageContainer.innerHTML = `
-                    <div class="story-text-container" style="justify-content: flex-start; padding: 40px 50px;">
+                    <div class="story-text-container" style="justify-content: flex-start; padding: 20px 30px;">
                         <h2>${pageData.title}</h2>
                         ${listHtml}
                     </div>
