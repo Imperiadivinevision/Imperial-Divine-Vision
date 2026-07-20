@@ -10,16 +10,60 @@
             --bg-glow: rgba(212, 175, 55, 0.15);
         }
 
+        @keyframes livingAtmosphere {
+            0% {
+                background: radial-gradient(circle at 20% 30%, #063827 0%, #021a12 50%, #010a07 100%);
+            }
+            25% {
+                background: radial-gradient(circle at 80% 20%, #0d2342 0%, #040e1f 50%, #01050a 100%);
+            }
+            50% {
+                background: radial-gradient(circle at 50% 80%, #4a1525 0%, #20040b 50%, #0a0103 100%);
+            }
+            75% {
+                background: radial-gradient(circle at 70% 60%, #3d2a08 0%, #1a1002 50%, #050301 100%);
+            }
+            100% {
+                background: radial-gradient(circle at 20% 30%, #063827 0%, #021a12 50%, #010a07 100%);
+            }
+        }
+
         body {
+            animation: livingAtmosphere 20s infinite ease-in-out;
             background-color: #030d09;
-            background-image: radial-gradient(circle at 50% 50%, var(--bg-glow) 0%, #030d09 70%);
-            transition: background 1s ease-in-out, background-color 1s ease-in-out;
             color: #fdf5e6;
             font-family: 'Cinzel', serif;
             margin: 0;
             padding: 40px 20px;
             min-height: 100vh;
             box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Breathing reflective shifting background overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, var(--bg-glow) 0%, transparent 75%);
+            transition: background 1.5s ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+            animation: ambientBreath 7s infinite ease-in-out;
+        }
+
+        @keyframes ambientBreath {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.04); }
+        }
+
+        .ambient-player, .library-header, .sanctuary-hub, .section-container, .modal {
+            position: relative;
+            z-index: 2;
         }
 
         /* Ambient Sound Widget */
@@ -51,7 +95,8 @@
         /* Header with Calligraphic Hand-Writing Style */
         .library-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 35px;
+            cursor: pointer;
         }
         .library-header h1 {
             font-family: 'Great Vibes', cursive;
@@ -73,6 +118,98 @@
         @keyframes titlePulse {
             0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
             50% { text-shadow: 0 0 35px rgba(212, 175, 55, 0.9), 0 0 10px rgba(255, 255, 255, 0.5); }
+        }
+
+        /* 🌟 OUR PERSONAL TOUCH: The Sanctuary Starlight Altar */
+        .sanctuary-hub {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .oracle-altar {
+            background: rgba(4, 25, 17, 0.75);
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 20px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+        }
+        .oracle-altar h3 {
+            color: #d4af37;
+            margin-top: 0;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212,175,55,0.4);
+            padding-bottom: 8px;
+        }
+        #oracle-text {
+            font-style: italic;
+            color: #f5eedc;
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 50px;
+            margin-bottom: 15px;
+        }
+        .oracle-btn {
+            background: linear-gradient(to bottom, #163d2b, #06192e);
+            color: #fdf5e6;
+            border: 1px solid #d4af37;
+            padding: 8px 18px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .oracle-btn:hover {
+            background: linear-gradient(to bottom, #235c42, #0d294d);
+            box-shadow: 0 0 15px rgba(212,175,55,0.8);
+            transform: translateY(-2px);
+        }
+
+        .starlight-vault {
+            background: rgba(4, 25, 17, 0.75);
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .starlight-vault h3 {
+            color: #d4af37;
+            margin-top: 0;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .wish-input {
+            width: 100%;
+            background: rgba(1, 10, 7, 0.9);
+            border: 1px solid #d4af37;
+            color: #fdf5e6;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        #wish-display {
+            font-size: 13px;
+            color: #e6dfc8;
+            text-align: center;
+            font-style: italic;
+            margin-top: 5px;
+            min-height: 30px;
         }
 
         /* Section Titles */
@@ -273,7 +410,7 @@
         }
     </style>
 </head>
-<body id="body-root" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.15)')">
+<body id="body-root">
 
 <!-- Ambient Music Player -->
 <div class="ambient-player">
@@ -289,6 +426,23 @@
 <div class="library-header">
     <h1>Welcome to Imperial Library</h1>
     <p>The Sacred Chamber of Characters</p>
+</div>
+
+<!-- 🌟 OUR PERSONAL TOUCH: The Sanctuary Starlight Altar -->
+<div class="sanctuary-hub">
+    <div class="oracle-altar">
+        <h3>✨ The Oracle of Shared Destinies</h3>
+        <p id="oracle-text">"Where two souls build a world, even the stars pause to read the pages..." Click below to unveil a secret blessing for our kingdom.</p>
+        <button class="oracle-btn" onclick="revealOracleBlessing()">Consult the Oracle</button>
+    </div>
+    <div class="starlight-vault">
+        <h3>🌟 Starlight Vault</h3>
+        <div>
+            <input type="text" id="wish-input-box" class="wish-input" placeholder="Whisper a wish to our realm..." />
+            <button class="oracle-btn" style="width: 100%;" onclick="sealWish()">Seal in Starlight</button>
+        </div>
+        <div id="wish-display">Your realm awaits your words...</div>
+    </div>
 </div>
 
 <!-- SECTION 1: Imperial Palace Characters (Gold Card & Gold Glow) -->
@@ -364,6 +518,7 @@
             <h3>Past King Harem</h3>
         </div>
         <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King & Yuri', 'Past King & Yuri')">
+             <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King & Yuri', 'Past King & Yuri')">
             <img src="past_king_yuri.png" alt="Past King and Yuri">
             <h3>Past King & Yuri</h3>
         </div>
@@ -448,8 +603,7 @@
     </div>
 </div>
 
-<!-- SECTION 4: Villagers (Brown Card )
-    <!-- SECTION 4: Villagers (Brown Card & White Glow) -->
+<!-- SECTION 4: Villagers (Brown Card & White Glow) -->
 <div class="section-container">
     <div class="section-title">🌾 Villagers Section</div>
     <div class="card-grid">
@@ -480,6 +634,37 @@
         document.documentElement.style.setProperty('--bg-glow', colorValue);
     }
 
+    const blessings = [
+        "\"The crown is heavy, but love makes it weightless in the halls of Boparl.\"",
+        "\"From the quiet village sand to the golden palace throne, every step was written in the stars.\"",
+        "\"May the light of the divine eyes protect every chapter we pen together.\"",
+        "\"A kingdom built with patience and devotion will echo through eternity.\""
+    ];
+
+    function revealOracleBlessing() {
+        const randomIndex = Math.floor(Math.random() * blessings.length);
+        document.getElementById('oracle-text').textContent = blessings[randomIndex];
+    }
+
+    function sealWish() {
+        const wishInput = document.getElementById('wish-input-box').value;
+        const display = document.getElementById('wish-display');
+        if (wishInput.trim() !== "") {
+            display.textContent = `✨ Starlight Sealed: "${wishInput}"`;
+            localStorage.setItem('imperial_realm_wish', wishInput);
+            document.getElementById('wish-input-box').value = "";
+        } else {
+            display.textContent = "Please whisper a wish into the vault first...";
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedWish = localStorage.getItem('imperial_realm_wish');
+        if (savedWish) {
+            document.getElementById('wish-display').textContent = `✨ Starlight Sealed: "${savedWish}"`;
+        }
+    });
+
     function openModal(imageSrc, title, description = '') {
         document.getElementById('modalImage').src = imageSrc;
         document.getElementById('modalTitle').textContent = title;
@@ -495,4 +680,4 @@
 </body>
 </html>
 
-
+    
