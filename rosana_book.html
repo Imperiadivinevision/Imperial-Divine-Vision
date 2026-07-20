@@ -16,6 +16,13 @@
 <body>
 
 <div id="book">
+    <!-- Front Cover -->
+    <div class="page"><img src="cover_image.png" alt="Front Cover"></div>
+    
+    <!-- Parchment Title Page -->
+    <div class="page"><img src="parchment_title_page.png" alt="Parchment Title Page"></div>
+
+    <!-- Story Pages -->
     <div class="page"><img src="1.png" alt="Page 1"></div>
     <div class="page"><img src="2.png" alt="Page 2"></div>
     <div class="page"><img src="3.png" alt="Page 3"></div>
@@ -40,7 +47,7 @@
     <div class="page"><img src="22.png" alt="Page 22"></div>
     <div class="page"><img src="23.png" alt="Page 23"></div>
     <div class="page"><img src="24.png" alt="Page 24"></div>
-    <div class="page"><img src="25.png" alt="Page 25"></div>
+    <div class="page"><img src="25.png" alt="Back Cover"></div>
 </div>
 
 <div id="counter">Loading book pages...</div>
@@ -54,7 +61,8 @@
             width: 1400,
             height: 800,
             autoCenter: true,
-            display: 'double'
+            gradients: true,
+            acceleration: true
         });
     });
 </script>
