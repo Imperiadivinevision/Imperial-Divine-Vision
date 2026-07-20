@@ -33,23 +33,56 @@
         }
         .page-wrapper {
             position: relative;
-            padding: 10px;
+            padding: 12px;
             background: linear-gradient(135deg, #d4af37 0%, #1a4d36 50%, #d4af37 100%);
-            border-radius: 6px;
+            border-radius: 8px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(11, 45, 58, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #fdf5e6; 
         }
-        .page-image {
-            display: block;
-            /* Widened rectangular proportions */
-            width: 850px;
-            height: 580px;
+        /* Rectangular shape styling for the viewer frame */
+        .page-content {
+            width: 820px;
+            height: 520px;
+            background-color: #fdf5e6;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 40px 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .page-content img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
             border-radius: 4px;
-            background-color: #fdf5e6;
+        }
+        .story-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        .page-content h2 {
+            color: #3b2314;
+            font-size: 22px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .page-content p {
+            color: #2c1e0f;
+            font-size: 17px;
+            line-height: 2.2; /* Beautiful double spacing */
+            margin: 0;
+            text-align: justify;
         }
         .nav-controls {
             margin-top: 20px;
@@ -88,7 +121,9 @@
 
 <div class="book-container">
     <div class="page-wrapper">
-        <img id="book-page" class="page-image" src="cover_image.png" alt="Book Page">
+        <div id="book-page" class="page-content">
+            <!-- Dynamic Content Renders Here -->
+        </div>
     </div>
     <div class="nav-controls">
         <button onclick="prevPage()">Previous</button>
@@ -98,41 +133,65 @@
 </div>
 
 <script>
-    const pages = [
-        "cover_image.png",
-        "parchment_title_page.png",
-        "1.png", "2.png", "3.png", "4.png", "5.png",
-        "6.png", "7.png", "8.png", "9.png", "10.png",
-        "11.png", "12.png", "13.png", "14.png", "15.png",
-        "16.png", "17.png", "18.png", "19.png", "20.png",
-        "21.png", "22.png", "23.png", "24.png", "25.png"
+    // Array containing covers as images and story text formatted cleanly with double spacing
+    const bookPages = [
+        { type: "image", src: "cover_image.png", label: "Front Cover" },
+        { type: "image", src: "parchment_title_page.png", label: "Title Page" },
+        { 
+            type: "text", 
+            title: "Introduction: The Village of Hikmid", 
+            text: "Rosanna was a village girl born to a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid. Hikmid was two miles from the sea. Hikmid had been colonized by a very powerful, rich empire called Boparl; the people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom. Hikmidians were allowed to do whatever they wanted as long as they respected the law.",
+            label: "Page 1"
+        },
+        { 
+            type: "text", 
+            title: "The Empire of Boparl", 
+            text: "Boparl consisted of seven states: Kahli, Gormas, Tunera, Farisa, Hjortigar, Hakma, and the capital region. The king's most trusted ministers governed these six states, while the king, Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar. Tumar was located in the center of all the empire; Tumar was a beautiful city where money flowed, businesses thrived, and gold miners searched for gold. Hikmid was within the state of Farisa. To the south of the capital, Rosanna's father, Tarma, was a righteous man, the son of a fisherman, Irsha, and a housekeeper named Luisa.",
+            label: "Page 2"
+        },
+        { 
+            type: "text", 
+            title: "The Storm and the Rescue", 
+            text: "One day early in the morning, just as the sun began to break, Jirmak attempted a desperate escape. Driven by the weight of her mother's obsession, she took a small boat to the sea, hoping to find a life of her own. While trying to sail on her little boat, the storm started, and the waves were unforgiving. Jirmak slipped and fell into the sea, and she didn't know how to swim. Luckily, Tarma returned from a long night of fishing with his father, Irsha. Seeing the struggle, Tarma dove deep into the water to save Jirmak. When he brought her back to the sand, Jirmak was not breathing; he tried to revive her, but she remained still. In a final desperate act, Tarma breathed his own air into her lungs. It worked, and she opened her eyes and screamed. Jirmak looked into the eyes of her rescuer. They both fell deeply in love.",
+            label: "Page 3"
+        },
+        { 
+            type: "text", 
+            title: "The Wall of Gold and Pride", 
+            text: "Jirmak started meeting in secret. Tarma and their love became deeper and deeper. Two years later, Tarma proposed to Jirmak. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride. Luisa, Tarma's mother, could not accept Jirmak's upbringing. She was greatly displeased and banned her son Tarma from seeing Jirmak. And Kapoor, Jirmak's mother, in her greed for wealth, banned Jirmak from seeing Tarma or going outside alone.",
+            label: "Page 4"
+        }
+        // You can add more text pages here easily following the same format!
     ];
 
     let currentIndex = 0;
 
     function updateBook() {
-        const imgElement = document.getElementById("book-page");
+        const pageContainer = document.getElementById("book-page");
         const indicator = document.getElementById("page-indicator");
         
-        imgElement.style.opacity = '0.3';
-        setTimeout(() => {
-            imgElement.src = pages[currentIndex];
-            imgElement.style.opacity = '1';
-        }, 120);
+        pageContainer.style.opacity = '0.3';
         
-        if (currentIndex === 0) {
-            indicator.textContent = "Front Cover";
-        } else if (currentIndex === 1) {
-            indicator.textContent = "Title Page";
-        } else if (currentIndex === pages.length - 1) {
-            indicator.textContent = "Back Cover";
-        } else {
-            indicator.textContent = "Page " + (currentIndex - 1) + " of " + (pages.length - 3);
-        }
+        setTimeout(() => {
+            const pageData = bookPages[currentIndex];
+            indicator.textContent = pageData.label;
+
+            if (pageData.type === "image") {
+                pageContainer.innerHTML = `<img src="${pageData.src}" alt="${pageData.label}">`;
+            } else {
+                pageContainer.innerHTML = `
+                    <div class="story-text-container">
+                        <h2>${pageData.title}</h2>
+                        <p>${pageData.text}</p>
+                    </div>
+                `;
+            }
+            pageContainer.style.opacity = '1';
+        }, 120);
     }
 
     function nextPage() {
-        if (currentIndex < pages.length - 1) {
+        if (currentIndex < bookPages.length - 1) {
             currentIndex++;
             updateBook();
         }
@@ -144,6 +203,9 @@
             updateBook();
         }
     }
+
+    // Initialize first page
+    updateBook();
 </script>
 
 </body>
