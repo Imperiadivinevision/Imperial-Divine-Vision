@@ -5,9 +5,9 @@
     <title>Rosana and the Evil King - Library Edition</title>
     <style>
         @keyframes emeraldGlow {
-            0% { background-color: #032b1f; }   /* Emerald Green */
-            50% { background-color: #0b1d3a; }  /* Emerald Blue */
-            100% { background-color: #032b1f; } /* Emerald Green */
+            0% { background-color: #032b1f; }
+            50% { background-color: #0b1d3a; }
+            100% { background-color: #032b1f; }
         }
         body {
             animation: emeraldGlow 12s infinite ease-in-out;
@@ -41,6 +41,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            /* Adds a clean paper backdrop so text images pop clearly */
+            background-color: #fdf5e6; 
         }
         .page-image {
             display: block;
@@ -48,7 +50,6 @@
             max-width: 90vw;
             object-fit: contain;
             border-radius: 4px;
-            background-color: #032b1f;
         }
         .nav-controls {
             margin-top: 15px;
