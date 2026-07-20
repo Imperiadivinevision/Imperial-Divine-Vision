@@ -2,121 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Archives | Imperial Divine Vision</title>
-    <!-- Beautiful calligraphic font -->
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <title>Rosana and the Evil King - Library Edition</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.js"></script>
     <style>
-        /* Reflective background animation */
-        @keyframes bgShift {
-            0% { background: #0a0a0a; }
-            33% { background: #1a1005; }
-            66% { background: #1a051a; }
-            100% { background: #1a0505; }
-        }
-        
-        body { 
-            background: #0a0a0a; 
-            color: #d4af37; 
-            font-family: 'UnifrakturMaguntia', cursive; 
-            text-align: center; 
-            padding: 20px;
-            animation: bgShift 20s infinite alternate;
-        }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 
-            0% { box-shadow: 0 0 10px currentColor; } 
-            50% { box-shadow: 0 0 25px currentColor; } 
-            100% { box-shadow: 0 0 10px currentColor; } 
-        }
-
-        h1, h2 { padding-bottom: 10px; margin-top: 40px; animation: fadeIn 2s ease-out; font-size: 3em; text-shadow: 2px 2px 5px #000; }
-        
-        #oracle-bar { color: #ffffff; font-style: italic; margin-bottom: 30px; animation: fadeIn 5s; cursor: help; }
-        
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; padding: 20px; }
-        
-        .card { 
-            border: 3px solid; padding: 15px; border-radius: 15px; 
-            animation: glow 3s infinite ease-in-out; 
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-        
-        .card:hover { transform: scale(1.05); border-color: #fff; }
-        
-        /* Sparkle backgrounds */
-        .palace { background: linear-gradient(135deg, #ffd70033, #1a1a2e); border-color: #ffd700; color: #ffd700; }
-        .priest { background: linear-gradient(135deg, #80008033, #1a1a2e); border-color: #800080; color: #d8bfd8; }
-        .minister { background: linear-gradient(135deg, #dc143c33, #1a1a2e); border-color: #dc143c; color: #ffcccc; }
-        .villager { background: linear-gradient(135deg, #ffffff22, #1a1a2e); border-color: #ffffff; color: #ffffff; }
-        
-        .card img { width: 100%; height: 350px; object-fit: cover; border-radius: 10px; }
+        body { background-color: #2c1e0f; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #book { width: 1400px; height: 800px; }
+        #book .page { width: 700px; height: 800px; background-color: #fdf5e6; border: 1px solid #d2b48c; padding: 40px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .page img { width: 100%; height: 100%; object-fit: contain; }
+        #counter { color: #fdf5e6; font-family: 'Georgia', serif; margin-top: 15px; font-size: 18px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
-    <!-- Sound Effect Trigger -->
-    <audio id="clickSound" src="magic_chime.mp3"></audio>
 
-    <h1 style="animation: fadeIn 2s;">The Archives of the Divine Vision</h1>
-    
-    <div id="oracle-bar">
-        "Where the whispers of the past ignite the fires of the future."
-    </div>
+<div id="book">
+    <!-- Page 1 -->
+    <div class="page"><img src="1.png" alt="Page 1"></div>
+    <!-- Page 2 -->
+    <div class="page"><img src="2.png" alt="Page 2"></div>
+    <!-- Page 3 -->
+    <div class="page"><img src="3.png" alt="Page 3"></div>
+    <!-- Page 4 -->
+    <div class="page"><img src="4.png" alt="Page 4"></div>
+    <!-- Page 5 -->
+    <div class="page"><img src="5.png" alt="Page 5"></div>
+    <!-- Page 6 -->
+    <div class="page"><img src="6.png" alt="Page 6"></div>
+    <!-- Page 7 -->
+    <div class="page"><img src="7.png" alt="Page 7"></div>
+    <!-- Page 8 -->
+    <div class="page"><img src="8.png" alt="Page 8"></div>
+    <!-- Page 9 -->
+    <div class="page"><img src="9.png" alt="Page 9"></div>
+    <!-- Page 10 -->
+    <div class="page"><img src="10.png" alt="Page 10"></div>
+    <!-- Page 11 -->
+    <div class="page"><img src="11.png" alt="Page 11"></div>
+    <!-- Page 12 -->
+    <div class="page"><img src="12.png" alt="Page 12"></div>
+    <!-- Page 13 -->
+    <div class="page"><img src="13.png" alt="Page 13"></div>
+    <!-- Page 14 -->
+    <div class="page"><img src="14.png" alt="Page 14"></div>
+    <!-- Page 15 -->
+    <div class="page"><img src="15.png" alt="Page 15"></div>
+    <!-- Page 16 -->
+    <div class="page"><img src="16.png" alt="Page 16"></div>
+    <!-- Page 17 -->
+    <div class="page"><img src="17.png" alt="Page 17"></div>
+    <!-- Page 18 -->
+    <div class="page"><img src="18.png" alt="Page 18"></div>
+    <!-- Page 19 -->
+    <div class="page"><img src="19.png" alt="Page 19"></div>
+    <!-- Page 20 -->
+    <div class="page"><img src="20.png" alt="Page 20"></div>
+    <!-- Page 21 -->
+    <div class="page"><img src="21.png" alt="Page 21"></div>
+    <!-- Page 22 -->
+    <div class="page"><img src="22.png" alt="Page 22"></div>
+    <!-- Page 23 -->
+    <div class="page"><img src="23.png" alt="Page 23"></div>
+    <!-- Page 24 -->
+    <div class="page"><img src="24.png" alt="Page 24"></div>
+    <!-- Page 25 -->
+    <div class="page"><img src="25.png" alt="Page 25"></div>
+</div>
 
-    <div style="margin: 40px 0;">
-        <a href="rosana_book.html" target="_blank" style="color: #d4af37; font-size: 1.5em; text-decoration: none; border: 2px solid #d4af37; padding: 15px 30px; border-radius: 10px; cursor: pointer; transition: 0.3s; display: inline-block;">Read Rosanna and the Evil King</a>
-    </div>
+<div id="counter">Verifying book pages...</div>
 
-    <h2 class="palace" style="animation: fadeIn 2.5s;">The Imperial Dynasty</h2>
-    <div class="gallery">
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="king_benson.png" alt="King Benson"><h3>King Benson</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="rosanna.png" alt="Queen Rosanna"><h3>Queen Rosanna</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="yuri.png" alt="Yuri"><h3>Yuri</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="tiju.png" alt="Tiju"><h3>Tiju</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="Weka.png" alt="Weka"><h3>Weka</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="benson_rosanna_mom.png" alt="Imperial Grand Consort"><h3>Imperial Grand Consort</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="benson_mom.png" alt="Imperial Family"><h3>Imperial Family</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="past_king.png" alt="Past King"><h3>Past King</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="Jirmak.png" alt="Jirmak"><h3>Jirmak the Queen birth mother</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="Rika.png" alt="Rika"><h3>Rika</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="yuri_benson_rosanna.png" alt="Imperial Family"><h3>Imperial Family</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="past_king_yuri.png" alt="Imperial Marriage"><h3>Imperial Marriage</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="mother.png" alt="Imperial Grand Consort vesta"><h3>King Benson birth mother</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="king_harem.png" alt="battle of the throne"><h3>battle of the throne</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="past_king_harem.png" alt="old rivalry"><h3>old rivalry</h3></div>
-        <div class="card palace" onclick="document.getElementById('clickSound').play()"><img src="imperial_wedding.png" alt="Imperial Wedding"><h3>Imperial Wedding</h3></div>
-    </div>
+<script>
+    $(document).ready(function() {
+        const totalPages = $("#book .page").length;
+        $("#counter").text("Verification Complete: " + totalPages + " pages loaded successfully in the book.");
 
-    <h2 class="priest" style="animation: fadeIn 3s;">The Sacred Order of the Light</h2>
-    <div class="gallery">
-        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="prophet_kafura.png" alt="Prophet"><h3>Prophet Kafura</h3></div>
-        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="high_priest.png" alt="High Priest"><h3>High Priest</h3></div>
-        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="priest.png" alt="Priest"><h3>Priest</h3></div>
-        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="servant.png" alt="Servant"><h3>Servant</h3></div>
-        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="elara.png" alt="Elara"><h3>Elara</h3></div>
-        <div class="card priest" onclick="document.getElementById('clickSound').play()"><img src="resekeluge.png" alt="Razi Kelochi"><h3>Razi Kelochi</h3></div>
-    </div>
-
-    <h2 class="minister" style="animation: fadeIn 3.5s;">The High Council of State</h2>
-    <div class="gallery">
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="prime_minister.png" alt="Prime Minister"><h3>Prime Minister</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="pm_wife.png" alt="Prime Minister Wife"><h3>Prime Minister Wife</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="pm_second_daughter.png" alt="PM Second Daughter"><h3>PM Second Daughter</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_revenue.png" alt="Minister of Revenue"><h3>Minister of Revenue</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_treasure.png" alt="Minister of Treasure"><h3>Minister of Treasure</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_education.png" alt="Minister of Education"><h3>Minister of Education</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="minister_tailor.png" alt="Minister of Tailor"><h3>Minister of Tailor</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="commander.png" alt="Commander"><h3>Commander</h3></div>
-        <div class="card minister" onclick="document.getElementById('clickSound').play()"><img src="imperial_guard.png" alt="Imperial Guard"><h3>Imperial Guard</h3></div>
-    </div>
-
-    <h2 class="villager" style="animation: fadeIn 4s;">The People of the Realm</h2>
-    <div class="gallery">
-        <div class="card villager" onclick="document.getElementById('clickSound').play()"><img src="villager.png" alt="Villager"><h3>Villager</h3></div>
-        <div class="card villager" onclick="document.getElementById('clickSound').play()"><img src="villeger_vip.png" alt="Villeger VIP"><h3>Villeger VIP</h3></div>
-    </div>
+        $("#book").turn({
+            width: 1400,
+            height: 800,
+            autoCenter: true,
+            display: 'double'
+        });
+    });
+</script>
 </body>
 </html>
 
