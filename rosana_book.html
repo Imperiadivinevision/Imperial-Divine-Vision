@@ -62,7 +62,6 @@
             width: 980px;
             height: 670px;
             background-color: #fdf5e6;
-            background-image: radial-gradient(circle, #fefae8 0%, #f7ebd0 100%);
             border: 5px solid #d4af37;
             border-radius: 10px;
             animation: pageGlow 4s infinite ease-in-out;
@@ -76,14 +75,6 @@
             overflow: hidden;
             position: relative;
         }
-        .page-content::before {
-            content: '';
-            position: absolute;
-            top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 1px solid rgba(139, 105, 20, 0.3);
-            pointer-events: none;
-            border-radius: 6px;
-        }
         .page-content img {
             max-width: 100%;
             max-height: 100%;
@@ -96,25 +87,28 @@
             justify-content: center;
             height: 100%;
             width: 100%;
+            background-color: rgba(253, 245, 230, 0.95);
+            padding: 30px 45px;
+            border-radius: 6px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
             z-index: 1;
         }
         .page-content h2 {
-            color: #2b1708;
-            font-size: 26px;
-            margin-bottom: 25px;
+            color: #111111;
+            font-size: 24px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
             text-transform: uppercase;
             border-bottom: 2px solid #d4af37;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
             display: inline-block;
         }
         .page-content p {
-            color: #050505;
-            font-size: 18px;
-            line-height: 2.4;
+            color: #000000;
+            font-size: 17px;
+            line-height: 2.3; /* Professional double spacing */
             margin: 0;
             text-align: justify;
-            text-indent: 30px;
         }
         button {
             width: 100%;
@@ -202,6 +196,7 @@
 </div>
 
 <script>
+    // Complete professional book structure with clean text templates and visual character illustration plates
     const bookPages = [
         { type: "image", src: "cover_image.png", label: "Front Cover" },
         { type: "image", src: "parchment_title_page.png", label: "Title Page" },
@@ -229,30 +224,17 @@
             text: "Jirmak started meeting in secret. Tarma and their love became deeper and deeper. Two years later, Tarma proposed to Jirmak. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride. Luisa, Tarma's mother, could not accept Jirmak's upbringing. She was greatly displeased and banned her son Tarma from seeing Jirmak. And Kapoor, Jirmak's mother, in her greed for wealth, banned Jirmak from seeing Tarma or going outside alone.",
             label: "Page 4"
         },
-        { type: "image", src: "1.png", label: "Page 5" },
-        { type: "image", src: "2.png", label: "Page 6" },
-        { type: "image", src: "3.png", label: "Page 7" },
-        { type: "image", src: "4.png", label: "Page 8" },
-        { type: "image", src: "5.png", label: "Page 9" },
-        { type: "image", src: "6.png", label: "Page 10" },
-        { type: "image", src: "7.png", label: "Page 11" },
-        { type: "image", src: "8.png", label: "Page 12" },
-        { type: "image", src: "9.png", label: "Page 13" },
-        { type: "image", src: "10.png", label: "Page 14" },
-        { type: "image", src: "11.png", label: "Page 15" },
-        { type: "image", src: "12.png", label: "Page 16" },
-        { type: "image", src: "13.png", label: "Page 17" },
-        { type: "image", src: "14.png", label: "Page 18" },
-        { type: "image", src: "15.png", label: "Page 19" },
-        { type: "image", src: "16.png", label: "Page 20" },
-        { type: "image", src: "17.png", label: "Page 21" },
-        { type: "image", src: "18.png", label: "Page 22" },
-        { type: "image", src: "19.png", label: "Page 23" },
-        { type: "image", src: "20.png", label: "Page 24" },
-        { type: "image", src: "21.png", label: "Page 25" },
-        { type: "image", src: "22.png", label: "Page 26" },
-        { type: "image", src: "23.png", label: "Page 27" },
-        { type: "image", src: "24.png", label: "Page 28" },
+        { 
+            type: "text", 
+            title: "A Vow Between Two Souls", 
+            text: "Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other. They married in secret, a quiet vow between their two souls. When the truth came out, they were both cast out by the villagers and disowned by their family. Kapoor's mother found out and decided to disown her. Luisa was displeased by her son's decision, and she decided to kick him out. With nothing but love and small savings, they built a small hut outside the village.",
+            label: "Page 5"
+        },
+        { type: "image", src: "1.png", label: "Character Illustration Plate I" },
+        { type: "image", src: "2.png", label: "Character Illustration Plate II" },
+        { type: "image", src: "3.png", label: "Character Illustration Plate III" },
+        { type: "image", src: "4.png", label: "Character Illustration Plate IV" },
+        { type: "image", src: "5.png", label: "Character Illustration Plate V" },
         { type: "image", src: "25.png", label: "Back Cover" }
     ];
 
@@ -270,8 +252,10 @@
             indicator.textContent = pageData.label;
 
             if (pageData.type === "image") {
+                pageContainer.style.background = "#fdf5e6";
                 pageContainer.innerHTML = `<img src="${pageData.src}" alt="${pageData.label}">`;
             } else {
+                pageContainer.style.background = "#fdf5e6";
                 pageContainer.innerHTML = `
                     <div class="story-text-container">
                         <h2>${pageData.title}</h2>
