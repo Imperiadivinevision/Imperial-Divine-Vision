@@ -4,6 +4,37 @@
     <meta charset="UTF-8">
     <title>Imperial Divine Vision</title>
     <style>
+            body {
+        margin: 0;
+        padding: 0;
+        background-color: #040a08;
+        background-image: url('garden_border_pattern.png');
+        background-repeat: repeat;
+        background-position: center;
+        background-size: 400px auto;
+        animation: breatheGarden 60s infinite alternate ease-in-out;
+        color: #d4af37;
+        font-family: 'Cinzel', serif;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    @keyframes breatheGarden {
+        0% {
+            background-size: 400px auto;
+            background-position: center center;
+        }
+        50% {
+            background-size: 410px auto;
+            background-position: center top;
+        }
+        100% {
+            background-size: 395px auto;
+            background-position: center bottom;
+        }
+    }
+
+
         body { 
             margin: 0; 
             padding: 0;
