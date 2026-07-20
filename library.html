@@ -61,16 +61,55 @@
             50% { opacity: 0.9; transform: scale(1.04); }
         }
 
-        .ambient-player, .library-header, .sanctuary-hub, .section-container, .modal {
+        .ambient-player, .library-header, .sanctuary-hub, .section-container, .modal, .view-section {
             position: relative;
             z-index: 2;
         }
 
-        /* Ambient Sound Widget */
+        /* View Switching Logic */
+        .view-section {
+            display: none;
+        }
+        .view-section.active {
+            display: block;
+        }
+
+        /* Navigation Gateway Button */
+        .gateway-container {
+            text-align: center;
+            margin: 30px 0 50px 0;
+        }
+        .gateway-btn {
+            background: linear-gradient(to bottom, #d4af37, #997a15);
+            color: #030d09;
+            border: 2px solid #fff;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .gateway-btn:hover {
+            background: linear-gradient(to bottom, #ffe066, #b38f1a);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 1);
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        /* Ambient Sound Widget - Positioned inline cleanly at top so it doesn't overlap cards */
+        .top-bar {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: flex-end;
+        }
         .ambient-player {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             background: rgba(3, 20, 14, 0.85);
             border: 1px solid #d4af37;
             padding: 10px 15px;
@@ -79,7 +118,6 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8);
-            z-index: 1000;
             backdrop-filter: blur(5px);
         }
         .ambient-player span {
@@ -96,7 +134,6 @@
         .library-header {
             text-align: center;
             margin-bottom: 35px;
-            cursor: pointer;
         }
         .library-header h1 {
             font-family: 'Great Vibes', cursive;
@@ -120,7 +157,7 @@
             50% { text-shadow: 0 0 35px rgba(212, 175, 55, 0.9), 0 0 10px rgba(255, 255, 255, 0.5); }
         }
 
-        /* 🌟 OUR PERSONAL TOUCH: The Sanctuary Starlight Altar */
+        /* Sanctuary Starlight Altar */
         .sanctuary-hub {
             max-width: 1200px;
             margin: 0 auto 40px auto;
@@ -271,7 +308,7 @@
             20% { transform: translateY(-2px) rotate(0.5deg); }
             40% { transform: translateY(2px) rotate(-0.5deg); }
             60% { transform: translateY(-1px) rotate(0.5deg); }
-            80% { transform: translateY(1px) rotate(-0.5deg); }
+            80% { transform: translateY(-1px) rotate(-0.5deg); }
         }
 
         .card.imperial {
@@ -412,84 +449,97 @@
 </head>
 <body id="body-root">
 
-<!-- Ambient Music Player -->
-<div class="ambient-player">
-    <span>♫ Imperial Symphony</span>
-    <audio controls loop autoplay>
-        <source src="magic_chime.mp3" type="audio/mpeg">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-</div>
-
-<!-- Header with Handwritten Calligraphy Title -->
-<div class="library-header">
-    <h1>Welcome to Imperial Library</h1>
-    <p>The Sacred Chamber of Characters</p>
-</div>
-
-<!-- 🌟 OUR PERSONAL TOUCH: The Sanctuary Starlight Altar -->
-<div class="sanctuary-hub">
-    <div class="oracle-altar">
-        <h3>✨ The Oracle of Shared Destinies</h3>
-        <p id="oracle-text">"Where two souls build a world, even the stars pause to read the pages..." Click below to unveil a secret blessing for our kingdom.</p>
-        <button class="oracle-btn" onclick="revealOracleBlessing()">Consult the Oracle</button>
-    </div>
-    <div class="starlight-vault">
-        <h3>🌟 Starlight Vault</h3>
-        <div>
-            <input type="text" id="wish-input-box" class="wish-input" placeholder="Whisper a wish to our realm..." />
-            <button class="oracle-btn" style="width: 100%;" onclick="sealWish()">Seal in Starlight</button>
-        </div>
-        <div id="wish-display">Your realm awaits your words...</div>
+<!-- Top Bar with Ambient Music Player -->
+<div class="top-bar">
+    <div class="ambient-player">
+        <span>♫ Imperial Symphony</span>
+        <audio controls loop autoplay>
+            <source src="magic_chime.mp3" type="audio/mpeg">
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 </div>
 
-<!-- SECTION 1: Imperial Palace Characters (Gold Card & Gold Glow) -->
-<div class="section-container">
-    <div class="section-title">👑 Imperial Palace Characters</div>
-    <div class="card-grid">
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_benson.png', 'King Benson', 'Ruler of the Imperial')">
-            <img src="king_benson.png" alt="King Benson">
-            <h3>King Benson</h3>
-            <p class="card-subtitle">Ruler of the Imperial</p>
+<!-- ================= VIEW 1: THE IMPERIAL LIBRARY ================= -->
+<div id="library-view" class="view-section active">
+    <!-- Header with Handwritten Calligraphy Title -->
+    <div class="library-header">
+        <h1>Welcome to Imperial Library</h1>
+        <p>The Sacred Chamber of Characters</p>
+    </div>
+
+    <!-- Navigation Gateway to Book Chambers -->
+    <div class="gateway-container">
+        <a href="rosana_book.html" class="gateway-btn">📖 Enter Book Chambers</a>
+    </div>
+
+    <!-- Sanctuary Starlight Altar -->
+    <div class="sanctuary-hub">
+        <div class="oracle-altar">
+            <h3>✨ The Oracle of Shared Destinies</h3>
+            <p id="oracle-text">"Where two souls build a world, even the stars pause to read the pages..." Click below to unveil a secret blessing for our kingdom.</p>
+            <button class="oracle-btn" onclick="revealOracleBlessing()">Consult the Oracle</button>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rosanna.png', 'Queen Rosanna', 'Ruler of the Empire')">
-            <img src="rosanna.png" alt="Queen Rosanna">
-            <h3>Queen Rosanna</h3>
-            <p class="card-subtitle">Ruler of the Empire</p>
+        <div class="starlight-vault">
+            <h3>🌟 Starlight Vault</h3>
+            <div>
+                <input type="text" id="wish-input-box" class="wish-input" placeholder="Whisper a wish to our realm..." />
+                <button class="oracle-btn" style="width: 100%;" onclick="sealWish()">Seal in Starlight</button>
+            </div>
+            <div id="wish-display">Your realm awaits your words...</div>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak', 'Mother of Queen Rosanna')">
-            <img src="Jirmak.png" alt="Jirmak">
-            <h3>Jirmak</h3>
-            <p class="card-subtitle">Mother of Queen Rosanna</p>
-        </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Rika.png', 'Rika', 'Concubine')">
-            <img src="Rika.png" alt="Rika">
-            <h3>Rika</h3>
-            <p class="card-subtitle">Concubine</p>
-        </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Weka.png', 'Weka', 'Imperial Consort')">
-            <img src="Weka.png" alt="Weka">
-            <h3>Weka</h3>
-            <p class="card-subtitle">Imperial Consort</p>
-        </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri.png', 'Yuri', 'Imperial Grand Queen, Past King\'s Legal Wife')">
-            <img src="yuri.png" alt="Yuri">
-            <h3>Yuri</h3>
-            <p class="card-subtitle">Imperial Grand Queen, Past King's Legal Wife</p>
-        </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tiju.png', 'Tiju', 'Concubine')">
-            <img src="tiju.png" alt="Tiju">
-            <h3>Tiju</h3>
-            <p class="card-subtitle">Concubine</p>
-        </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('mother.png', 'Mother', 'King Benson Birth Mother, Imperial Grand Consort')">
-            <img src="mother.png" alt="Mother">
-            <h3>Mother</h3>
-            <p class="card-subtitle">King Benson Birth Mother, Imperial Grand Consort</p>
-        </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom', 'Benson Mom')">
+    </div>
+
+    <!-- SECTION 1: Imperial Palace Characters (Gold Card & Gold Glow) -->
+    <div class="section-container">
+        <div class="section-title">👑 Imperial Palace Characters</div>
+        <div class="card-grid">
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_benson.png', 'King Benson', 'Ruler of the Imperial')">
+                <img src="king_benson.png" alt="King Benson">
+                <h3>King Benson</h3>
+                <p class="card-subtitle">Ruler of the Imperial</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rosanna.png', 'Queen Rosanna', 'Ruler of the Empire')">
+                <img src="rosanna.png" alt="Queen Rosanna">
+                <h3>Queen Rosanna</h3>
+                <p class="card-subtitle">Ruler of the Empire</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak', 'Mother of Queen Rosanna')">
+                <img src="Jirmak.png" alt="Jirmak">
+                <h3>Jirmak</h3>
+                <p class="card-subtitle">Mother of Queen Rosanna</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Rika.png', 'Rika', 'Concubine')">
+                <img src="Rika.png" alt="Rika">
+                <h3>Rika</h3>
+                <p class="card-subtitle">Concubine</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Weka.png', 'Weka', 'Imperial Consort')">
+                <img src="Weka.png" alt="Weka">
+                <h3>Weka</h3>
+                <p class="card-subtitle">Imperial Consort</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri.png', 'Yuri', 'Imperial Grand Queen, Past King\'s Legal Wife')">
+                <img src="yuri.png" alt="Yuri">
+                <h3>Yuri</h3>
+                <p class="card-subtitle">Imperial Grand Queen, Past King's Legal Wife</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tiju.png', 'Tiju', 'Concubine')">
+                <img src="tiju.png" alt="Tiju">
+                <h3>Tiju</h3>
+                <p class="card-subtitle">Concubine</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('mother.png', 'Mother', 'King Benson Birth Mother, Imperial Grand Consort')">
+                <img src="mother.png" alt="Mother">
+                <h3>Mother</h3>
+                <p class="card-subtitle">King Benson Birth Mother, Imperial Grand Consort</p>
+            </div>
+            <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom', 'Benson Mom')">
+                <img src="benson_mom.png" alt="Benson Mom">
+                <h3>Benson Mom</h3>
+            </div>
+                    <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom', 'Benson Mom')">
             <img src="benson_mom.png" alt="Benson Mom">
             <h3>Benson Mom</h3>
         </div>
@@ -518,7 +568,6 @@
             <h3>Past King Harem</h3>
         </div>
         <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King & Yuri', 'Past King & Yuri')">
-             <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King & Yuri', 'Past King & Yuri')">
             <img src="past_king_yuri.png" alt="Past King and Yuri">
             <h3>Past King & Yuri</h3>
         </div>
@@ -618,6 +667,11 @@
     </div>
 </div>
 
+<!-- Bottom Gateway Button to Book Chambers -->
+<div class="gateway-container" style="margin-top: 60px;">
+    <a href="rosana_book.html" class="gateway-btn">📖 Enter Book Chambers</a>
+</div>
+
 <!-- Modal Popup Box -->
 <div id="characterModal" class="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
@@ -680,4 +734,4 @@
 </body>
 </html>
 
-    
+
