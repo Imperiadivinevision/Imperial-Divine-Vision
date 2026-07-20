@@ -2,87 +2,376 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rosana and the Evil King - Library Edition</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.js"></script>
+    <title>The Song of Rosana and the Evil King - Imperial Library Edition</title>
     <style>
-        body { background-color: #2c1e0f; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        #book { width: 1400px; height: 800px; }
-        #book .page { width: 700px; height: 800px; background-color: #fdf5e6; border: 1px solid #d2b48c; padding: 40px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .page img { width: 100%; height: 100%; object-fit: contain; }
-        #counter { color: #fdf5e6; font-family: 'Georgia', serif; margin-top: 15px; font-size: 18px; letter-spacing: 1px; }
+        @keyframes royalAtmosphere {
+            0% { background: radial-gradient(circle at 50% 50%, #063827 0%, #021a12 60%, #010a07 100%); }
+            33% { background: radial-gradient(circle at 30% 70%, #0d2342 0%, #040e1f 60%, #01050a 100%); }
+            66% { background: radial-gradient(circle at 70% 30%, #1e1136 0%, #0b0514 60%, #030106 100%); }
+            100% { background: radial-gradient(circle at 50% 50%, #063827 0%, #021a12 60%, #010a07 100%); }
+        }
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(0.2deg); }
+        }
+        @keyframes pageGlow {
+            0%, 100% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.35); }
+            50% { box-shadow: 0 30px 70px rgba(0, 0, 0, 0.98), 0 0 50px rgba(212, 175, 55, 0.6); }
+        }
+        body {
+            animation: royalAtmosphere 20s infinite ease-in-out;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+        }
+        .side-nav {
+            width: 270px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(2, 26, 18, 0.7);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 12px 0 35px rgba(0,0,0,0.6);
+            z-index: 10;
+        }
+        .main-viewport {
+            flex: 1;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .book-frame-container {
+            animation: floatEffect 6s infinite ease-in-out;
+        }
+        .page-content {
+            width: 980px;
+            height: 670px;
+            background-color: #fdf5e6;
+            border: 5px solid #d4af37;
+            border-radius: 10px;
+            animation: pageGlow 4s infinite ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 40px 60px;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .page-content img {
+            max-width: 100%;
+            max-height: 560px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .story-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            background-color: #fdf5e6;
+            padding: 20px 30px;
+            border-radius: 6px;
+            z-index: 1;
+        }
+        .page-content h2 {
+            color: #111111;
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .page-content p {
+            color: #000000;
+            font-size: 17px;
+            line-height: 2.3;
+            margin: 0;
+            text-align: justify;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+        .toc-list li {
+            color: #000000;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 1px dotted rgba(212, 175, 55, 0.6);
+            padding-bottom: 4px;
+        }
+        button {
+            width: 100%;
+            background: linear-gradient(to bottom, #163d2b, #06192e);
+            color: #fdf5e6;
+            border: 1px solid #d4af37;
+            padding: 11px 20px;
+            font-size: 15px;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1.5px;
+        }
+        button:hover {
+            background: linear-gradient(to bottom, #235c42, #0d294d);
+            border-color: #fff;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+        #page-indicator {
+            color: #d4af37;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Custom Creative Additions: Ambient Audio Synthesizer Widget & Bookmark Quill */
+        .library-extras {
+            width: 100%;
+            background: rgba(3, 31, 22, 0.9);
+            border: 1px solid #d4af37;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        .library-extras h3 {
+            color: #d4af37;
+            font-size: 13px;
+            margin: 0;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .music-controls {
+            display: flex;
+            gap: 6px;
+        }
+        .music-btn {
+            flex: 1;
+            padding: 8px;
+            font-size: 12px;
+            background: #0b1d3a;
+            border: 1px solid #d4af37;
+            color: #fdf5e6;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .music-btn:hover {
+            background: #1a4d36;
+        }
+        .quill-note {
+            font-size: 11px;
+            color: #d4af37;
+            text-align: center;
+            font-style: italic;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
 
-<div id="book">
-    <!-- Page 1 -->
-    <div class="page"><img src="1.png" alt="Page 1"></div>
-    <!-- Page 2 -->
-    <div class="page"><img src="2.png" alt="Page 2"></div>
-    <!-- Page 3 -->
-    <div class="page"><img src="3.png" alt="Page 3"></div>
-    <!-- Page 4 -->
-    <div class="page"><img src="4.png" alt="Page 4"></div>
-    <!-- Page 5 -->
-    <div class="page"><img src="5.png" alt="Page 5"></div>
-    <!-- Page 6 -->
-    <div class="page"><img src="6.png" alt="Page 6"></div>
-    <!-- Page 7 -->
-    <div class="page"><img src="7.png" alt="Page 7"></div>
-    <!-- Page 8 -->
-    <div class="page"><img src="8.png" alt="Page 8"></div>
-    <!-- Page 9 -->
-    <div class="page"><img src="9.png" alt="Page 9"></div>
-    <!-- Page 10 -->
-    <div class="page"><img src="10.png" alt="Page 10"></div>
-    <!-- Page 11 -->
-    <div class="page"><img src="11.png" alt="Page 11"></div>
-    <!-- Page 12 -->
-    <div class="page"><img src="12.png" alt="Page 12"></div>
-    <!-- Page 13 -->
-    <div class="page"><img src="13.png" alt="Page 13"></div>
-    <!-- Page 14 -->
-    <div class="page"><img src="14.png" alt="Page 14"></div>
-    <!-- Page 15 -->
-    <div class="page"><img src="15.png" alt="Page 15"></div>
-    <!-- Page 16 -->
-    <div class="page"><img src="16.png" alt="Page 16"></div>
-    <!-- Page 17 -->
-    <div class="page"><img src="17.png" alt="Page 17"></div>
-    <!-- Page 18 -->
-    <div class="page"><img src="18.png" alt="Page 18"></div>
-    <!-- Page 19 -->
-    <div class="page"><img src="19.png" alt="Page 19"></div>
-    <!-- Page 20 -->
-    <div class="page"><img src="20.png" alt="Page 20"></div>
-    <!-- Page 21 -->
-    <div class="page"><img src="21.png" alt="Page 21"></div>
-    <!-- Page 22 -->
-    <div class="page"><img src="22.png" alt="Page 22"></div>
-    <!-- Page 23 -->
-    <div class="page"><img src="23.png" alt="Page 23"></div>
-    <!-- Page 24 -->
-    <div class="page"><img src="24.png" alt="Page 24"></div>
-    <!-- Page 25 -->
-    <div class="page"><img src="25.png" alt="Page 25"></div>
+<!-- Left Side Majestic Control Haven with Creative Additions -->
+<div class="side-nav">
+    <div class="library-extras">
+        <h3>✨ Imperial Soundscape</h3>
+        <div class="music-controls">
+            <button class="music-btn" onclick="playMusic()">▶ Play</button>
+            <button class="music-btn" onclick="pauseMusic()">❚❚ Pause</button>
+        </div>
+        <div class="quill-note">✒ Curated with eternity & grace</div>
+    </div>
+
+    <!-- Hidden working audio element connected to a reliable streaming ambient track -->
+    <audio id="library-audio" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
+    </audio>
+
+    <button onclick="prevPage()">◄ Previous</button>
+    <span id="page-indicator">Front Cover</span>
+    <button onclick="nextPage()">Next Page ►</button>
 </div>
 
-<div id="counter">Verifying book pages...</div>
+<!-- Main Book Viewport -->
+<div class="main-viewport">
+    <div class="book-frame-container">
+        <div id="book-page" class="page-content">
+        </div>
+    </div>
+</div>
 
 <script>
-    $(document).ready(function() {
-        const totalPages = $("#book .page").length;
-        $("#counter").text("Verification Complete: " + totalPages + " pages loaded successfully in the book.");
+    const bookPages = [
+        { type: "image", src: "cover_image.png", label: "Front Cover" },
+        { type: "image", src: "parchment_title_page.png", label: "Title Page" },
+        { 
+            type: "toc", 
+            title: "Table of Contents", 
+            items: [
+                "Introduction: The Village of Hikmid",
+                "The Empire of Boparl",
+                "The Storm and the Rescue",
+                "The Wall of Gold and Pride",
+                "A Vow Between Two Souls"
+            ],
+            label: "Table of Contents"
+        },
+        { 
+            type: "text", 
+            title: "Introduction: The Village of Hikmid", 
+            text: "Rosanna was a village girl born to a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid. Hikmid was two miles from the sea. Hikmid had been colonized by a very powerful, rich empire called Boparl; the people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom. Hikmidians were allowed to do whatever they wanted as long as they respected the law.",
+            label: "Page 1"
+        },
+        { 
+            type: "text", 
+            title: "The Empire of Boparl", 
+            text: "Boparl consisted of seven states: Kahli, Gormas, Tunera, Farisa, Hjortigar, Hakma, and the capital region. The king's most trusted ministers governed these six states, while the king, Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar. Tumar was located in the center of all the empire; Tumar was a beautiful city where money flowed, businesses thrived, and gold miners searched for gold. Hikmid was within the state of Farisa. To the south of the capital, Rosanna's father, Tarma, was a righteous man, the son of a fisherman, Irsha, and a housekeeper named Luisa.",
+            label: "Page 2"
+        },
+        { 
+            type: "image", src: "7121.png", label: "Illustration: Prophet Kafura"
+        },
+        { 
+            type: "text", 
+            title: "The Storm and the Rescue", 
+            text: "One day early in the morning, just as the sun began to break, Jirmak attempted a desperate escape. Driven by the weight of her mother's obsession, she took a small boat to the sea, hoping to find a life of her own. While trying to sail on her little boat, the storm started, and the waves were unforgiving. Jirmak slipped and fell into the sea, and she didn't know how to swim. Luckily, Tarma returned from a long night of fishing with his father, Irsha. Seeing the struggle, Tarma dove deep into the water to save Jirmak. When he brought her back to the sand, Jirmak was not breathing; he tried to revive her, but she remained still. In a final desperate act, Tarma breathed his own air into her lungs. It worked, and she opened her eyes and screamed. Jirmak looked into the eyes of her rescuer. They both fell deeply in love.",
+            label: "Page 3"
+        },
+        { 
+            type: "image", src: "7114.png", label: "Illustration: Tarma's Rescue"
+        },
+        { 
+            type: "text", 
+            title: "The Wall of Gold and Pride", 
+            text: "Jirmak started meeting in secret. Tarma and their love became deeper and deeper. Two years later, Tarma proposed to Jirmak. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride. Luisa, Tarma's mother, could not accept Jirmak's upbringing. She was greatly displeased and banned her son Tarma from seeing Jirmak. And Kapoor, Jirmak's mother, in her greed for wealth, banned Jirmak from seeing Tarma or going outside alone.",
+            label: "Page 4"
+        },
+        { 
+            type: "image", src: "7125.png", label: "Illustration: Deserted by Village"
+        },
+        { 
+            type: "text", 
+            title: "A Vow Between Two Souls", 
+            text: "Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other. They married in secret, a quiet vow between their two souls. When the truth came out, they were both cast out by the villagers and disowned by their family. Kapoor's mother found out and decided to disown her. Luisa was displeased by her son's decision, and she decided to kick him out. With nothing but love and small savings, they built a small hut outside the village.",
+            label: "Page 5"
+        },
+        { 
+            type: "image", src: "7119.png", label: "Illustration: Building Their New Life"
+        },
+        { 
+            type: "image", src: "7126.png", label: "Illustration: The Birth of Destiny"
+        }
+    ];
 
-        $("#book").turn({
-            width: 1400,
-            height: 800,
-            autoCenter: true,
-            display: 'double'
+    let currentIndex = 0;
+    const audioPlayer = document.getElementById("library-audio");
+
+    function playMusic() {
+        audioPlayer.play().catch(error => {
+            console.log("Audio playback requires user interaction.");
         });
-    });
+    }
+
+    function pauseMusic() {
+        audioPlayer.pause();
+    }
+
+    function updateBook() {
+        const pageContainer = document.getElementById("book-page");
+        const indicator = document.getElementById("page-indicator");
+        
+        pageContainer.style.opacity = '0';
+        pageContainer.style.transform = 'scale(0.98)';
+        
+        setTimeout(() => {
+            const pageData = bookPages[currentIndex];
+            indicator.textContent = pageData.label;
+
+            if (pageData.type === "image") {
+                pageContainer.style.background = "#fdf5e6";
+                pageContainer.innerHTML = `<img src="${pageData.src}" alt="${pageData.label}">`;
+            } else if (pageData.type === "toc") {
+                let listHtml = `<ul class="toc-list">`;
+                pageData.items.forEach(item => {
+                    listHtml += `<li>${item}</li>`;
+                });
+                listHtml += `</ul>`;
+
+                pageContainer.style.background = "#fdf5e6";
+                pageContainer.innerHTML = `
+                    <div class="story-text-container" style="justify-content: flex-start; padding: 20px 30px;">
+                        <h2>${pageData.title}</h2>
+                        ${listHtml}
+                    </div>
+                `;
+            } else {
+                pageContainer.style.background = "#fdf5e6";
+                pageContainer.innerHTML = `
+                    <div class="story-text-container">
+                        <h2>${pageData.title}</h2>
+                        <p>${pageData.text}</p>
+                    </div>
+                `;
+            }
+            pageContainer.style.opacity = '1';
+            pageContainer.style.transform = 'scale(1)';
+        }, 180);
+    }
+
+    function nextPage() {
+        if (currentIndex < bookPages.length - 1) {
+            currentIndex++;
+            updateBook();
+        }
+    }
+
+    function prevPage() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateBook();
+        }
+    }
+
+    updateBook();
 </script>
+
 </body>
 </html>
 
