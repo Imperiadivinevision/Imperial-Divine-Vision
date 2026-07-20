@@ -98,9 +98,8 @@
             gap: 20px;
         }
 
-        /* Glowing & Vibrating Cards with Dynamic Reflective Triggers */
+        /* Glowing & Vibrating Cards with Individual Matching Colors */
         .card {
-            background-color: rgba(6, 25, 18, 0.85);
             border-radius: 8px;
             padding: 12px;
             text-align: center;
@@ -110,28 +109,28 @@
         }
 
         @keyframes vibrateGold {
-            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(212, 175, 55, 0.8); }
             20% { transform: translateY(-2px) rotate(0.5deg); }
             40% { transform: translateY(2px) rotate(-0.5deg); }
             60% { transform: translateY(-1px) rotate(0.5deg); }
             80% { transform: translateY(1px) rotate(-0.5deg); }
         }
         @keyframes vibratePurple {
-            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(186, 85, 211, 0.6); }
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(186, 85, 211, 0.8); }
             20% { transform: translateY(-2px) rotate(0.5deg); }
             40% { transform: translateY(2px) rotate(-0.5deg); }
             60% { transform: translateY(-1px) rotate(0.5deg); }
             80% { transform: translateY(1px) rotate(-0.5deg); }
         }
         @keyframes vibrateRed {
-            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(220, 20, 60, 0.6); }
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(220, 20, 60, 0.8); }
             20% { transform: translateY(-2px) rotate(0.5deg); }
             40% { transform: translateY(2px) rotate(-0.5deg); }
             60% { transform: translateY(-1px) rotate(0.5deg); }
             80% { transform: translateY(1px) rotate(-0.5deg); }
         }
         @keyframes vibrateWhite {
-            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(245, 222, 179, 0.6); }
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); }
             20% { transform: translateY(-2px) rotate(0.5deg); }
             40% { transform: translateY(2px) rotate(-0.5deg); }
             60% { transform: translateY(-1px) rotate(0.5deg); }
@@ -139,6 +138,7 @@
         }
 
         .card.imperial {
+            background-color: #2b2510;
             border: 2px solid #d4af37;
             animation: vibrateGold 4s infinite ease-in-out;
         }
@@ -148,6 +148,7 @@
         }
 
         .card.priest {
+            background-color: #23122c;
             border: 2px solid #9370db;
             animation: vibratePurple 4s infinite ease-in-out;
         }
@@ -157,6 +158,7 @@
         }
 
         .card.minister {
+            background-color: #310c12;
             border: 2px solid #dc143c;
             animation: vibrateRed 4s infinite ease-in-out;
         }
@@ -166,11 +168,12 @@
         }
 
         .card.villager {
-            border: 2px solid #d2b48c;
+            background-color: #2c1d11;
+            border: 2px solid #ffffff;
             animation: vibrateWhite 4s infinite ease-in-out;
         }
         .card.villager:hover {
-            box-shadow: 0 0 35px rgba(245, 222, 179, 0.95);
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.95);
             transform: scale(1.05) translateY(-5px);
         }
 
@@ -275,7 +278,7 @@
     <p>The Sacred Chamber of Characters</p>
 </div>
 
-<!-- SECTION 1: Imperial Palace Characters (Gold Glow) -->
+<!-- SECTION 1: Imperial Palace Characters (Gold Card & Gold Glow) -->
 <div class="section-container">
     <div class="section-title">👑 Imperial Palace Characters</div>
     <div class="card-grid">
@@ -354,7 +357,7 @@
     </div>
 </div>
 
-<!-- SECTION 2: Priest Divine Eyes Characters (Purple Glow) -->
+<!-- SECTION 2: Priest Divine Eyes Characters (Purple Card & Purple Glow) -->
 <div class="section-container">
     <div class="section-title">🔮 Priest Divine Eyes Characters</div>
     <div class="card-grid">
@@ -385,7 +388,7 @@
     </div>
 </div>
 
-<!-- SECTION 3: Ministers (Red Glow) -->
+<!-- SECTION 3: Ministers (Red Card & Red Glow) -->
 <div class="section-container">
     <div class="section-title">📜 Ministers Section</div>
     <div class="card-grid">
@@ -424,15 +427,15 @@
     </div>
 </div>
 
-<!-- SECTION 4: Villagers (Brownish/Whitish Glow) -->
+<!-- SECTION 4: Villagers (Brown Card & White Glow) -->
 <div class="section-container">
     <div class="section-title">🌾 Villagers Section</div>
     <div class="card-grid">
-        <div class="card villager" onmouseover="setReflectiveGlow('rgba(210, 180, 140, 0.35)')" onclick="openModal('villager.png', 'Villager')">
+        <div class="card villager" onmouseover="setReflectiveGlow('rgba(255, 255, 255, 0.35)')" onclick="openModal('villager.png', 'Villager')">
             <img src="villager.png" alt="Villager">
             <h3>Villager Scene I</h3>
         </div>
-        <div class="card villager" onmouseover="setReflectiveGlow('rgba(210, 180, 140, 0.35)')" onclick="openModal('imperial_wedding.png', 'Imperial Wedding')">
+        <div class="card villager" onmouseover="setReflectiveGlow('rgba(255, 255, 255, 0.35)')" onclick="openModal('imperial_wedding.png', 'Imperial Wedding')">
             <img src="imperial_wedding.png" alt="Imperial Wedding">
             <h3>Imperial Wedding</h3>
         </div>
@@ -462,9 +465,4 @@
 
     function closeModal() {
         document.getElementById('characterModal').style.display = 'none';
-    }
-</script>
-
-</body>
-</html>
-
+  
