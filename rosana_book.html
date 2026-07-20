@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">A
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>The Song of Rosana and the Evil King - Imperial Library Edition</title>
@@ -28,7 +28,6 @@
             font-family: 'Georgia', serif;
             overflow: hidden;
         }
-        /* Regal Left Control Haven */
         .side-nav {
             width: 250px;
             height: 100vh;
@@ -110,7 +109,6 @@
             margin: 0;
             text-align: justify;
         }
-        /* Clean styling for Table of Contents list items */
         .toc-list {
             list-style: none;
             padding: 0;
@@ -118,11 +116,11 @@
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
         .toc-list li {
             color: #000000;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             letter-spacing: 1px;
             border-bottom: 1px dotted rgba(212, 175, 55, 0.6);
@@ -188,7 +186,6 @@
 </head>
 <body>
 
-<!-- Orchestral Ambient Library Theme -->
 <div class="music-player">
     <span>♫ Imperial Symphony</span>
     <audio controls loop autoplay>
@@ -197,24 +194,20 @@
     </audio>
 </div>
 
-<!-- Left Side Majestic Control Haven -->
 <div class="side-nav">
     <button onclick="prevPage()">◄ Previous</button>
     <span id="page-indicator">Front Cover</span>
     <button onclick="nextPage()">Next Page ►</button>
 </div>
 
-<!-- Main Book Viewport -->
 <div class="main-viewport">
     <div class="book-frame-container">
         <div id="book-page" class="page-content">
-            <!-- Dynamic Content Renders Here -->
         </div>
     </div>
 </div>
 
 <script>
-    // 100% Professional, Clean HTML Text Layouts for Every Page
     const bookPages = [
         { type: "image", src: "cover_image.png", label: "Front Cover" },
         { type: "image", src: "parchment_title_page.png", label: "Title Page" },
@@ -223,18 +216,10 @@
             title: "Table of Contents", 
             items: [
                 "Introduction: The Village of Hikmid",
-                "The Beginning: The Birth of Rosanna",
-                "Meeting of the Prophet",
-                "The Cost of the Prophecy",
-                "The Declaration of the Prophecy: Evil or Blessing?",
-                "The Beginning of Rosanna's Journey",
-                "The Secret",
-                "The Face of Destiny",
-                "The Accomplishment of the Prophecy",
-                "The Painful Road",
-                "The Conflict of the Concubines",
-                "The Bleeding of the New Land",
-                "The Empress Identity - The Lost Child"
+                "The Empire of Boparl",
+                "The Storm and the Rescue",
+                "The Wall of Gold and Pride",
+                "A Vow Between Two Souls"
             ],
             label: "Table of Contents"
         },
