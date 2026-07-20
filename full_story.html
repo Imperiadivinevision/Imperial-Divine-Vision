@@ -61,57 +61,69 @@
             background-color: #fdf5e6;
             border: 1px solid #c5a059;
             box-sizing: border-box;
-            padding: 50px;
-            overflow: hidden;
+            padding: 40px 50px;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            text-align: center;
+            text-align: left;
+        }
+
+        .page::-webkit-scrollbar {
+            width: 6px;
+        }
+        .page::-webkit-scrollbar-thumb {
+            background-color: #d4af37;
+            border-radius: 3px;
         }
 
         .page img {
             width: 100%;
-            height: 380px;
+            height: 280px;
             object-fit: contain;
             border: 2px solid #d4af37;
             border-radius: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: #010a07;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
             color: #997a15;
-            font-size: 48px;
-            margin-top: 20px;
+            font-size: 42px;
+            margin-top: 10px;
             margin-bottom: 10px;
+            text-align: center;
         }
 
         h2 {
             font-family: 'Cinzel', serif;
             color: #2b2510;
-            font-size: 24px;
-            margin-top: 15px;
-            margin-bottom: 15px;
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 12px;
             letter-spacing: 1px;
             border-bottom: 1px solid #d4af37;
             padding-bottom: 5px;
             width: 100%;
+            text-align: center;
         }
 
         p {
             font-family: 'Cinzel', serif;
             color: #3e2723;
-            font-size: 16px;
-            line-height: 1.8;
-            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-top: 5px;
+            margin-bottom: 10px;
             text-align: justify;
+            width: 100%;
         }
 
         .page-number {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             font-size: 12px;
             color: #8c7853;
             letter-spacing: 1px;
@@ -128,49 +140,173 @@
     <!-- Page 1: Cover / Title -->
     <div class="page">
         <h1>The Song of Rosana and the Evil King</h1>
-        <p style="text-align: center; font-style: italic; margin-top: 40px; font-size: 18px;">"In the sacred halls of memory and empire, the book awaits its readers..."</p>
-        <img src="rosanna.png" alt="Cover Image" style="margin-top: 30px;">
+        <p style="text-align: center; font-style: italic; margin-top: 20px; font-size: 16px;">"In the sacred halls of memory and empire, the book awaits its readers..."</p>
+        <img src="rosanna.png" alt="Cover Image" style="margin-top: 20px;">
         <div class="page-number">1</div>
     </div>
 
-    <!-- Page 2: Chapter I -->
+    <!-- Page 2: Introduction Part 1 -->
     <div class="page">
-        <h2>Chapter I: The Gathering Storm</h2>
-        <p>In the quiet sanctuary of the outer lands, where the rain falls and the rivers swell, the foundation of an empire was forged not in stone, but in steadfast devotion.</p>
-        <p>The world outside demanded separation, but the bond between souls refused to yield to gold or pride. Jirmak returned from the market with the prophet's words echoing in her mind like a warning from the stars.</p>
+        <h2>Introduction: The Origins</h2>
+        <p>Rosana is a village girl born from a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid, two miles far from the sea. Hikmid had been colonized by a very powerful rich empire called Boparl, where people were treated like war slaves yet allowed a strange kind of freedom: they could do whatever they wanted as long as they respected the law.</p>
+        <p>Boparl consisted of seven states: Kahli, Gorma, Tunera, Farisa, Hjortigar, Hakma, and the capital region. Governed by trusted ministers, the capital Tumar was a beautiful city where money flowed, businesses thrived, and gold miners searched for gold. Hikmid was within the state of Farisa to the south of the capital. Rosana's father Tarma was a righteous man, the son of a fisherman Irsha and housekeeper Luisa.</p>
         <div class="page-number">2</div>
     </div>
 
-    <!-- Page 3: Illustration Scene V -->
+    <!-- Page 3: Introduction Part 2 -->
     <div class="page">
-        <h2>Scene V: The Delicate Choice</h2>
-        <img src="5.png" alt="Scene V">
-        <p>A delicate moment captured in the kingdom, where every choice shaped the destiny of the realm.</p>
+        <h2>Introduction: Jirmak's Beginnings</h2>
+        <p>Rosana's mother, Jirmak, had a different beginning. Abandoned at the doorstep of a pleasure house, she was found by Kapoor, the prostitute building owner. Charmed by Jirmak's beauty, Kapoor adopted and raised her as a daughter, sending her to school and training her in the art of dance and music with the hope that Jirmak would marry a rich man and move to a mansion in the capital.</p>
+        <p>As Jirmak grew, her beauty became legendary, drawing crowds just to catch a glimpse of her. Though many suitors proposed, Kapoor rejected them all, harboring big plans for her daughter's future.</p>
         <div class="page-number">3</div>
     </div>
 
-    <!-- Page 4: Chapter II -->
+    <!-- Page 4: The Escape & Saving -->
     <div class="page">
-        <h2>Chapter II: The Vow of Sanctuary</h2>
-        <p>Far from the reach of the golden palace halls, hands that once knew only hardship built a home of wood and straw.</p>
-        <p>Every beam raised was a declaration of peace; every whispered promise, a shield against the dark. Here, the struggle was left behind, and a true sanctuary welcomed the dawn.</p>
+        <h2>The Escape & Rescue</h2>
+        <p>One day early in the morning, driven by the weight of her mother's obsession, Jirmak attempted a desperate escape on a small boat into the sea. A sudden storm started, and the unforgiving waves caused Jirmak to slip and fall into the sea, unable to swim.</p>
+        <p>Luckily, Tarma returning from a long night of fishing with his father Irsha saw the struggle and dove deep to save Jirmak. When brought back to the sand, she wasn't breathing. In a final desperate act, Tarma breathed his own air into her lungs. It worked, and she opened her eyes, locking starlit gazes with her rescuer as they fell deeply in love.</p>
         <div class="page-number">4</div>
     </div>
 
-    <!-- Page 5: Illustration Scene IX -->
+    <!-- Page 5: Secret Vows & Exile -->
     <div class="page">
-        <h2>Scene IX: Building An Empire</h2>
-        <img src="9.png" alt="Scene IX">
-        <p>Building a new life together outside the village, turning simple walls into an unbreakable fortress of love.</p>
+        <h2>Secret Vows & Exile</h2>
+        <p>Two years later, Tarma proposed. Jirmak joyfully accepted, but their happiness met a wall of gold and pride. Luisa, Tarma’s mother, disapproved of Jirmak's upbringing and banned Tarma from seeing her, while Kapoor banned Jirmak from seeing Tarma in her greed for wealth.</p>
+        <p>Facing a world that wanted to keep them apart, they married in secret. When discovered, they were cast out by villagers and disowned by their families. With nothing but love and small savings, they built a small hut outside the village.</p>
         <div class="page-number">5</div>
     </div>
 
-    <!-- Page 6: Chapter III & Ending -->
+    <!-- Page 6: The Birth of Rosana -->
     <div class="page">
-        <h2>Chapter III: The Legacy of the Divine Eyes</h2>
-        <p>Guided by whispers of the ancient prophets and protected by the watchful spirit of the kingdom, the path forward remained illuminated.</p>
-        <p>The crown may carry weight, but true victory belongs to those who guard their peace and honor the sacred bond written in the stars.</p>
+        <h2>The Beginning: The Birth of Rosana</h2>
+        <p>To provide, Tarma became a sailor navigating waves to trade merchandise in the capital. Jirmak stayed behind on solid ground, her near-drowning leaving her with a deep fear of the water. Instead, she leaned into her gifts as a renowned singer and dancer at a famous theater in a neighboring village.</p>
+        <p>Yet despite their stable life, their families kept their distance. One year later, Jirmak was approached in the bustling market by a powerful prophet named Kafura[span_0](start_span)[span_0](end_span).</p>
         <div class="page-number">6</div>
+    </div>
+
+    <!-- Page 7: The Meeting of the Prophet -->
+    <div class="page">
+        <h2>The Meeting of the Prophet</h2>
+        <p>Kafura looked deep into Jirmak's eyes and delivered a chilling revelation: "You will give birth to the most beautiful woman in the entire world. But greatness comes with a price. Your daughter will face trials of immense pain... yet she will rise as a powerful queen destined to deliver your people from the grip of the colonizers.[span_1](start_span)"[span_1](end_span)</p>
+        <p>Jirmak cried out in terror, begging to know how to save her child from suffering. Kafura replied that her path was written like Esther or Ruth, but he could help delay the prophecy, vowing to return the moment the child was born[span_2](start_span)[span_2](end_span).</p>
+        <div class="page-number">7</div>
+    </div>
+
+    <!-- Page 8: The Cost of the Prophecy -->
+    <div class="page">
+        <h2>The Cost of the Prophecy</h2>
+        <p>Jirmak ran home to share her pregnancy with Tarma, keeping the prophet's dark secret locked inside. As time passed, strange natural disasters plagued the land, and the sea grew furiously restless. Jirmak grew too weak to leave her bed, and villagers began pointing fingers at her womb, calling her unborn child an evil seed.</p>
+        <p>Tarma stopped working to protect her. One rainy morning, seized by sudden labor pains in the mud, villagers ignored her cries. Tarma ran for help on his knees, and his old friend Kurita and his wife rushed out to assist[span_3](start_span)[span_3](end_span).</p>
+        <div class="page-number">8</div>
+    </div>
+
+    <!-- Page 9: Scene V & The Birth -->
+    <div class="page">
+        <h2>Scene V: The Miracle Birth</h2>
+        <img src="5.png" alt="Scene V">
+        <p>Inside the humble hut with its single mat and flickering candle, Jirmak gathered her remaining strength. With a massive push, she gave birth to a gorgeous baby girl amidst blood loss and exhaustion[span_4](start_span)[span_4](end_span).</p>
+        <p>As the baby was wrapped in a knit blanket, the room turned cold. The baby had glowing skin, blue eyes, and hair like the sea—unlike anyone in the village[span_5](start_span)[span_5](end_span).</p>
+        <div class="page-number">9</div>
+    </div>
+
+    <!-- Page 10: The Declaration of the Prophecy -->
+    <div class="page">
+        <h2>The Declaration of the Prophecy</h2>
+        <p>Outside, Prophet Kafura arrived proclaiming the future of the child[span_6](start_span)[span_6](end_span). Though villagers called the child a demon and cursed seed, Kafura stood firm, declaring: "She will be a sword in God's hand to bring justice and save a nation. Queen, Empress Rosana.[span_7](start_span)"[span_7](end_span)</p>
+        <p>When villagers threatened them, Kafura summoned a powerful wind and water tornadoes from the sea to defend Rosana and her family, making the villagers pledge never to harm them[span_8](start_span)[span_8](end_span).</p>
+        <div class="page-number">10</div>
+    </div>
+
+    <!-- Page 11: The Secret Spell -->
+    <div class="page">
+        <h2>The Secret Spell</h2>
+        <p>Wanting a normal life for Rosana, Jirmak asked the prophet for help. Kafura cast a spell: he held Rosana to the sky as white thunder struck the water, turning her blue hair black, her blue eyes brown, and her glowing skin non-glowing[span_9](start_span)[span_9](end_span).</p>
+        <p>Kafura warned that the spell would break when she turned eight years old, when she dove deep into the sea to save the life of the evil seed of the land[span_10](start_span)[span_10](end_span).</p>
+        <div class="page-number">11</div>
+    </div>
+
+    <!-- Page 12: Scene IX & Growing Up -->
+    <div class="page">
+        <h2>Scene IX: Growing Up as a Princess</h2>
+        <img src="9.png" alt="Scene IX">
+        <p>Moving into the chief leader's house with servants, Rosanna grew up smart and fast-learning. Though raised like a princess, she was forbidden to leave without guards or her mother, sparking a fiery independent spirit[span_11](start_span)[span_11](end_span).</p>
+        <p>At night, she watched the sea from the rooftop. Every night, Jirmak and Tarma played their pipa and flute, singing the secret lullaby warning of her future journey across the sea[span_12](start_span)[span_12](end_span).</p>
+        <div class="page-number">12</div>
+    </div>
+
+    <!-- Page 13: The Face of Destiny -->
+    <div class="page">
+        <h2>The Face of Destiny</h2>
+        <p>On her eighth birthday, defying restrictions under her father's guidance during a village festival, Rosanna stepped outside for the very first time[span_13](start_span)[span_13](end_span).</p>
+        <p>While Tarma checked a medical prescription at the hospital, Rosanna spotted a boy drowning in the sea. Without hesitation, she jumped in to save him—only to discover he could swim and was just playing[span_14](start_span)[span_14](end_span). That boy was Crown Prince Ian.</p>
+        <div class="page-number">13</div>
+    </div>
+
+    <!-- Page 14: The Spell Breaks -->
+    <div class="page">
+        <h2>The Breaking of the Spell</h2>
+        <p>As Rosanna surfaced coughing, her true magical features broke through the prophet's spell: her sea-blue hair, brilliant eyes, and glowing skin returned instantly[span_15](start_span)[span_15](end_span).</p>
+        <p>Tarma found them, realizing with horror that destiny had claimed her. Back home, Jirmak broke down in tears, blaming Tarma and locking Rosanna away as tension peaked in the palace[span_16](start_span)[span_16](end_span).</p>
+        <div class="page-number">14</div>
+    </div>
+
+    <!-- Page 15: Scene XII & Journey to the Temple -->
+    <div class="page">
+        <h2>Scene XII: Journey to the Temple</h2>
+        <img src="12.png" alt="Scene XII">
+        <p>As the prophecy advanced, Prophet Kafura returned to take Rosanna to the sacred temple mountains for her training, leaving Jirmak heartbroken in tears[span_17](start_span)[span_17](end_span).</p>
+        <p>Arriving at the 12th chamber—the Servant Chambers—Rosanna faced harsh initiations from Resekelushi, the head priestess's daughter, but quickly defended her dignity and met her loyal friend Elara[span_18](start_span)[span_18](end_span).</p>
+        <div class="page-number">15</div>
+    </div>
+
+    <!-- Page 16: Scene XIII & Promotion -->
+    <div class="page">
+        <h2>Scene XIII: The Purple Lily</h2>
+        <img src="13.png" alt="Scene XIII">
+        <p>Demonstrating her royal lineage and exceptional mastery in sewing an ancient purple lily design, Rosanna stunned the head of the Eleventh Chamber and earned an immediate promotion[span_19](start_span)[span_19](end_span).</p>
+        <p>Prince Ian reappeared, playfully teasing her, giving her a rare necklace, and vowing to return from the capital to make her his queen[span_20](start_span)[span_20](end_span).</p>
+        <div class="page-number">16</div>
+    </div>
+
+    <!-- Page 17: The Painful Road -->
+    <div class="page">
+        <h2>The Painful Road & Tragedy</h2>
+        <p>Years passed as Rosanna grew into an 18-year-old woman in the temple. Meanwhile, imperial soldiers led a dark mission to capture the blue-haired girl, storming her village, burning houses, and leaving devastation in their wake[span_21](start_span)[span_21](end_span).</p>
+        <p>Tarma bravely fought the soldiers to protect Rosanna before being brutally struck down. Jirmak rushed to help, striking her head on a jagged rock and losing her sight[span_22](start_span)[span_22](end_span).</p>
+        <div class="page-number">17</div>
+    </div>
+
+    <!-- Page 18: Arrival in the Capital -->
+    <div class="page">
+        <h2>Arrival in the Capital</h2>
+        <p>Brought to the majestic capital in chains, an outraged Rosanna lunged at King Benson—only to discover that he was none other than Ian, her childhood friend from the lake and temple[span_23](start_span)[span_23](end_span).</p>
+        <p>King Benson showered her with luxury, but Rosanna burned with hatred for the destruction of her village and family, resisting his affections amidst the fierce jealousy of concubines Tiju and Rika[span_24](start_span)[span_24](end_span).</p>
+        <div class="page-number">18</div>
+    </div>
+
+    <!-- Page 19: Palace Intrigues -->
+    <div class="page">
+        <h2>Palace Intrigues & Poison</h2>
+        <p>Concubine Tiju and the Imperial Consort schemed relentlessly against Rosanna, planting a poison cup and cursed doll during a harem gathering to frame her[span_25](start_span)[span_25](end_span).</p>
+        <p>When the conspiracy collapsed under King Benson's furious investigation, Tiju was executed for burning the slave village, and Rika was banished to the cold palace[span_26](start_span)[span_26](end_span).</p>
+        <div class="page-number">19</div>
+    </div>
+
+    <!-- Page 20: The Royal Wedding -->
+    <div class="page">
+        <h2>The Royal Wedding & Covenant</h2>
+        <p>Beneath the moonlight with Prophet Kafura officiating, King Benson and Rosanna exchanged sacred vows, binding their souls as Emperor and Empress of Boparl[span_27](start_span)[span_27](end_span).</p>
+        <p>Standing side-by-side in golden imperial robes, Queen Rosanna and King Benson purged the corrupt ministers and united their people with compassion and justice[span_28](start_span)[span_28](end_span).</p>
+        <div class="page-number">20</div>
+    </div>
+
+    <!-- Page 21: Peace and New Life -->
+    <div class="page">
+        <h2>Peace and New Life</h2>
+        <p>With the harem dismissed and the corrupt imperial family neutralized, Queen Rosanna discovered she was carrying royal twins[span_29](start_span)[span_29](end_span).</p>
+        <p>Reunited with King Benson, Prophet Kafura, and her loving mother-in-law, Rosanna found healing and true victory, stepping into her next 25 years of joy and sovereign peace[span_30](start_span)[span_30](end_span).</p>
+        <div class="page-number">21</div>
     </div>
 </div>
 
