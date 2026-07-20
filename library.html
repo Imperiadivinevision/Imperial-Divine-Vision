@@ -2,374 +2,450 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Song of Rosana and the Evil King - Imperial Library Edition</title>
+    <title>The Song of Rosana and the Evil King - Imperial Library</title>
     <style>
-        @keyframes royalAtmosphere {
-            0% { background: radial-gradient(circle at 50% 50%, #063827 0%, #021a12 60%, #010a07 100%); }
-            33% { background: radial-gradient(circle at 30% 70%, #0d2342 0%, #040e1f 60%, #01050a 100%); }
-            66% { background: radial-gradient(circle at 70% 30%, #1e1136 0%, #0b0514 60%, #030106 100%); }
-            100% { background: radial-gradient(circle at 50% 50%, #063827 0%, #021a12 60%, #010a07 100%); }
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700&display=swap');
+
+        :root {
+            --bg-glow: rgba(212, 175, 55, 0.15);
         }
-        @keyframes floatEffect {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(0.2deg); }
-        }
-        @keyframes pageGlow {
-            0%, 100% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.35); }
-            50% { box-shadow: 0 30px 70px rgba(0, 0, 0, 0.98), 0 0 50px rgba(212, 175, 55, 0.6); }
-        }
+
         body {
-            animation: royalAtmosphere 20s infinite ease-in-out;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
+            background-color: #030d09;
+            background-image: radial-gradient(circle at 50% 50%, var(--bg-glow) 0%, #030d09 70%);
+            transition: background 1s ease-in-out, background-color 1s ease-in-out;
+            color: #fdf5e6;
+            font-family: 'Cinzel', serif;
             margin: 0;
-            font-family: 'Georgia', serif;
-            overflow: hidden;
-        }
-        .side-nav {
-            width: 270px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            padding: 20px;
-            box-sizing: border-box;
-            background: rgba(2, 26, 18, 0.7);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 12px 0 35px rgba(0,0,0,0.6);
-            z-index: 10;
-        }
-        .main-viewport {
-            flex: 1;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 20px;
+            padding: 40px 20px;
+            min-height: 100vh;
             box-sizing: border-box;
         }
-        .book-frame-container {
-            animation: floatEffect 6s infinite ease-in-out;
-        }
-        .page-content {
-            width: 980px;
-            height: 670px;
-            background-color: #fdf5e6;
-            border: 5px solid #d4af37;
-            border-radius: 10px;
-            animation: pageGlow 4s infinite ease-in-out;
+
+        /* Ambient Sound Widget */
+        .ambient-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(3, 20, 14, 0.85);
+            border: 1px solid #d4af37;
+            padding: 10px 15px;
+            border-radius: 8px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            box-sizing: border-box;
-            padding: 40px 60px;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .page-content img {
-            max-width: 100%;
-            max-height: 560px;
-            object-fit: contain;
-            border-radius: 4px;
-        }
-        .story-text-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            background-color: #fdf5e6;
-            padding: 20px 30px;
-            border-radius: 6px;
-            z-index: 1;
-        }
-        .page-content h2 {
-            color: #111111;
-            font-size: 24px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-        .page-content p {
-            color: #000000;
-            font-size: 17px;
-            line-height: 2.3;
-            margin: 0;
-            text-align: justify;
-        }
-        .toc-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
             gap: 10px;
-            max-height: 450px;
-            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
         }
-        .toc-list li {
-            color: #000000;
-            font-size: 15px;
-            font-weight: bold;
+        .ambient-player span {
+            font-size: 12px;
+            color: #d4af37;
             letter-spacing: 1px;
-            border-bottom: 1px dotted rgba(212, 175, 55, 0.6);
-            padding-bottom: 4px;
         }
-        button {
+        .ambient-player audio {
+            height: 25px;
+            outline: none;
+        }
+
+        /* Header with Calligraphic Hand-Writing Style */
+        .library-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .library-header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            color: #d4af37;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
+            animation: titlePulse 4s infinite ease-in-out;
+        }
+        .library-header p {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #c5a059;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+            50% { text-shadow: 0 0 35px rgba(212, 175, 55, 0.9), 0 0 10px rgba(255, 255, 255, 0.5); }
+        }
+
+        /* Section Titles */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+        }
+        .section-title {
+            color: #d4af37;
+            font-size: 20px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+        }
+
+        /* Card Grid Layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        /* Glowing & Vibrating Cards with Dynamic Reflective Triggers */
+        .card {
+            background-color: rgba(6, 25, 18, 0.85);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes vibrateGold {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+            20% { transform: translateY(-2px) rotate(0.5deg); }
+            40% { transform: translateY(2px) rotate(-0.5deg); }
+            60% { transform: translateY(-1px) rotate(0.5deg); }
+            80% { transform: translateY(1px) rotate(-0.5deg); }
+        }
+        @keyframes vibratePurple {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(186, 85, 211, 0.6); }
+            20% { transform: translateY(-2px) rotate(0.5deg); }
+            40% { transform: translateY(2px) rotate(-0.5deg); }
+            60% { transform: translateY(-1px) rotate(0.5deg); }
+            80% { transform: translateY(1px) rotate(-0.5deg); }
+        }
+        @keyframes vibrateRed {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(220, 20, 60, 0.6); }
+            20% { transform: translateY(-2px) rotate(0.5deg); }
+            40% { transform: translateY(2px) rotate(-0.5deg); }
+            60% { transform: translateY(-1px) rotate(0.5deg); }
+            80% { transform: translateY(1px) rotate(-0.5deg); }
+        }
+        @keyframes vibrateWhite {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(245, 222, 179, 0.6); }
+            20% { transform: translateY(-2px) rotate(0.5deg); }
+            40% { transform: translateY(2px) rotate(-0.5deg); }
+            60% { transform: translateY(-1px) rotate(0.5deg); }
+            80% { transform: translateY(1px) rotate(-0.5deg); }
+        }
+
+        .card.imperial {
+            border: 2px solid #d4af37;
+            animation: vibrateGold 4s infinite ease-in-out;
+        }
+        .card.imperial:hover {
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.95);
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .card.priest {
+            border: 2px solid #9370db;
+            animation: vibratePurple 4s infinite ease-in-out;
+        }
+        .card.priest:hover {
+            box-shadow: 0 0 35px rgba(186, 85, 211, 0.95);
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .card.minister {
+            border: 2px solid #dc143c;
+            animation: vibrateRed 4s infinite ease-in-out;
+        }
+        .card.minister:hover {
+            box-shadow: 0 0 35px rgba(255, 69, 0, 0.95);
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .card.villager {
+            border: 2px solid #d2b48c;
+            animation: vibrateWhite 4s infinite ease-in-out;
+        }
+        .card.villager:hover {
+            box-shadow: 0 0 35px rgba(245, 222, 179, 0.95);
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .card img {
             width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card h3 {
+            font-size: 13px;
+            color: #fdf5e6;
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Expanded Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(2, 10, 7, 0.9);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background-color: #fdf5e6;
+            border: 6px solid #d4af37;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
+            position: relative;
+            animation: expandModal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes expandModal {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 380px;
+            object-fit: contain;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 2px solid #d4af37;
+        }
+        .modal-content h2 {
+            color: #111111;
+            margin: 0 0 15px 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+        }
+        .close-btn {
             background: linear-gradient(to bottom, #163d2b, #06192e);
             color: #fdf5e6;
             border: 1px solid #d4af37;
-            padding: 11px 20px;
-            font-size: 15px;
-            font-family: 'Georgia', serif;
+            padding: 10px 25px;
+            font-size: 14px;
             cursor: pointer;
             border-radius: 6px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 1.5px;
-        }
-        button:hover {
-            background: linear-gradient(to bottom, #235c42, #0d294d);
-            border-color: #fff;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
-            transform: translateY(-2px);
-        }
-        button:active {
-            transform: translateY(1px);
-        }
-        #page-indicator {
-            color: #d4af37;
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
-            text-align: center;
-            font-weight: bold;
-        }
-        /* Custom Creative Additions: Ambient Audio Synthesizer Widget & Bookmark Quill */
-        .library-extras {
-            width: 100%;
-            background: rgba(3, 31, 22, 0.9);
-            border: 1px solid #d4af37;
-            padding: 12px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-        .library-extras h3 {
-            color: #d4af37;
-            font-size: 13px;
-            margin: 0;
-            text-align: center;
+            font-family: 'Cinzel', serif;
             letter-spacing: 1px;
-            text-transform: uppercase;
+            transition: all 0.2s;
         }
-        .music-controls {
-            display: flex;
-            gap: 6px;
-        }
-        .music-btn {
-            flex: 1;
-            padding: 8px;
-            font-size: 12px;
-            background: #0b1d3a;
-            border: 1px solid #d4af37;
-            color: #fdf5e6;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .music-btn:hover {
-            background: #1a4d36;
-        }
-        .quill-note {
-            font-size: 11px;
-            color: #d4af37;
-            text-align: center;
-            font-style: italic;
-            margin-top: 2px;
-            letter-spacing: 0.5px;
+        .close-btn:hover {
+            background: linear-gradient(to bottom, #235c42, #0d294d);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
     </style>
 </head>
-<body>
+<body id="body-root" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.15)')">
 
-<!-- Left Side Majestic Control Haven with Creative Additions -->
-<div class="side-nav">
-    <div class="library-extras">
-        <h3>✨ Imperial Soundscape</h3>
-        <div class="music-controls">
-            <button class="music-btn" onclick="playMusic()">▶ Play</button>
-            <button class="music-btn" onclick="pauseMusic()">❚❚ Pause</button>
-        </div>
-        <div class="quill-note">✒ Curated with eternity & grace</div>
-    </div>
-
-    <!-- Hidden working audio element connected to a reliable streaming ambient track -->
-    <audio id="library-audio" loop>
+<!-- Ambient Music Player -->
+<div class="ambient-player">
+    <span>♫ Imperial Symphony</span>
+    <audio controls loop autoplay>
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
-
-    <button onclick="prevPage()">◄ Previous</button>
-    <span id="page-indicator">Front Cover</span>
-    <button onclick="nextPage()">Next Page ►</button>
 </div>
 
-<!-- Main Book Viewport -->
-<div class="main-viewport">
-    <div class="book-frame-container">
-        <div id="book-page" class="page-content">
+<!-- Header with Handwritten Calligraphy Title -->
+<div class="library-header">
+    <h1>Welcome to Imperial Library</h1>
+    <p>The Sacred Chamber of Characters</p>
+</div>
+
+<!-- SECTION 1: Imperial Palace Characters (Gold Glow) -->
+<div class="section-container">
+    <div class="section-title">👑 Imperial Palace Characters</div>
+    <div class="card-grid">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingbenson.png', 'King Benson')">
+            <img src="kingbenson.png" alt="King Benson">
+            <h3>King Benson</h3>
         </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('queenrosannaprofile.png', 'Queen Rosanna')">
+            <img src="queenrosannaprofile.png" alt="Queen Rosanna">
+            <h3>Queen Rosanna</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingbensonmother.png', 'Mother')">
+            <img src="kingbensonmother.png" alt="Mother">
+            <h3>Mother</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri.png', 'Yuri')">
+            <img src="yuri.png" alt="Yuri">
+            <h3>Yuri</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tijuprofile.png', 'Tiju')">
+            <img src="tijuprofile.png" alt="Tiju">
+            <h3>Tiju</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rikaprofile.png', 'Rika')">
+            <img src="rikaprofile.png" alt="Rika">
+            <h3>Rika</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('weka.png', 'Weka')">
+            <img src="weka.png" alt="Weka">
+            <h3>Weka</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak')">
+            <img src="Jirmak.png" alt="Jirmak">
+            <h3>Jirmak</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king-queen.png', 'King and Queen')">
+            <img src="king-queen.png" alt="King and Queen">
+            <h3>King and Queen</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('pastkingprofile.png', 'Past King Profile')">
+            <img src="pastkingprofile.png" alt="Past King Profile">
+            <h3>Past King Profile</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('pastkngwithhiswife.png', 'Past King with His Wife')">
+            <img src="pastkngwithhiswife.png" alt="Past King with His Wife">
+            <h3>Past King with His Wife</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingharem.png', 'King Harem')">
+            <img src="kingharem.png" alt="King Harem">
+            <h3>King Harem</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingbensonandmother.png', 'King Benson and Mother')">
+            <img src="kingbensonandmother.png" alt="King Benson and Mother">
+            <h3>King Benson & Mother</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king benson1.png', 'King Benson 1')">
+            <img src="king benson1.png" alt="King Benson 1">
+            <h3>King Benson I</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingbensonextra.png', 'King Benson Extra')">
+            <img src="kingbensonextra.png" alt="King Benson Extra">
+            <h3>King Benson Extra</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingbensonqueenrikaandjijumom.png', 'King Benson Queen Rika and Jiju Mom')">
+            <img src="kingbensonqueenrikaandjijumom.png" alt="Royal Gathering">
+            <h3>Royal Gathering</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('pastkingandkingbmom.png', 'Past King and King B Mom')">
+            <img src="pastkingandkingbmom.png" alt="Past King and King B Mom">
+            <h3>Past King & King Mom</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('pastkingandyuri.png', 'Past King and Yuri')">
+            <img src="pastkingandyuri.png" alt="Past King and Yuri">
+            <h3>Past King & Yuri</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('pastkingextra.png', 'Past King Extra')">
+            <img src="pastkingextra.png" alt="Past King Extra">
+            <h3>Past King Extra</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('queenrosannaextra.png', 'Queen Rosanna Extra')">
+            <img src="queenrosannaextra.png" alt="Queen Rosanna Extra">
+            <h3>Queen Rosanna Extra</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rika.png', 'Rika')">
+            <img src="rika.png" alt="Rika">
+            <h3>Rika</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rikaextra.png', 'Rika Extra')">
+            <img src="rikaextra.png" alt="Rika Extra">
+            <h3>Rika Extra</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rosannaandJirmak.png', 'Rosanna and Jirmak')">
+            <img src="rosannaandJirmak.png" alt="Rosanna and Jirmak">
+            <h3>Rosanna & Jirmak</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rosannaandrika.png', 'Rosanna and Rika')">
+            <img src="rosannaandrika.png" alt="Rosanna and Rika">
+            <h3>Rosanna & Rika</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('teapartywithmomandrosana.png', 'Tea Party with Mom and Rosanna')">
+            <img src="teapartywithmomandrosana.png" alt="Tea Party">
+            <h3>Tea Party</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tijuwekakarka.png', 'Tiju Weka Rika')">
+            <img src="tijuwekakarka.png" alt="Tiju Weka Rika">
+            <h3>Tiju, Weka & Rika</h3>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: Priest Divine Eyes Characters (Purple Glow) -->
+<div class="section-container">
+    <div class="section-title">🔮 Priest Divine Eyes Characters</div>
+    <div class="card-grid">
+        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('7121.png', 'Prophet Kafura')">
+            <img src="7121.png" alt="Prophet Kafura">
+            <h3>Prophet Kafura</h3>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: Ministers (Red Glow) -->
+<div class="section-container">
+    <div class="section-title">📜 Ministers Section</div>
+    <div class="card-grid">
+        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('7120.png', 'Ministers Chamber')">
+            <img src="7120.png" alt="Ministers Chamber">
+            <h3>Imperial Ministers</h3>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 4: Villagers (Brownish/Whitish Glow) -->
+<div class="section-container">
+    <div class="section-title">🌾 Villagers Section</div>
+    <div class="card-grid">
+        <div class="card villager" onmouseover="setReflectiveGlow('rgba(210, 180, 140, 0.35)')" onclick="openModal('7125.png', 'Villagers Scene 1')">
+            <img src="7125.png" alt="Villagers Scene 1">
+            <h3>Hikmid Villagers I</h3>
+        </div>
+        <div class="card villager" onmouseover="setReflectiveGlow('rgba(210, 180, 140, 0.35)')" onclick="openModal('7119.png', 'Villagers Scene 2')">
+            <img src="7119.png" alt="Villagers Scene 2">
+            <h3>Hikmid Villagers II</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Popup Box -->
+<div id="characterModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h2 id="modalTitle">Character Title</h2>
+        <img id="modalImage" src="" alt="Expanded View">
+        <br>
+        <button class="close-btn" onclick="closeModal()">Close Chamber</button>
     </div>
 </div>
 
 <script>
-    const bookPages = [
-        { type: "image", src: "cover_image.png", label: "Front Cover" },
-        { type: "image", src: "parchment_title_page.png", label: "Title Page" },
-        { 
-            type: "toc", 
-            title: "Table of Contents", 
-            items: [
-                "Introduction: The Village of Hikmid",
-                "The Empire of Boparl",
-                "The Storm and the Rescue",
-                "The Wall of Gold and Pride",
-                "A Vow Between Two Souls"
-            ],
-            label: "Table of Contents"
-        },
-        { 
-            type: "text", 
-            title: "Introduction: The Village of Hikmid", 
-            text: "Rosanna was a village girl born to a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid. Hikmid was two miles from the sea. Hikmid had been colonized by a very powerful, rich empire called Boparl; the people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom. Hikmidians were allowed to do whatever they wanted as long as they respected the law.",
-            label: "Page 1"
-        },
-        { 
-            type: "text", 
-            title: "The Empire of Boparl", 
-            text: "Boparl consisted of seven states: Kahli, Gormas, Tunera, Farisa, Hjortigar, Hakma, and the capital region. The king's most trusted ministers governed these six states, while the king, Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar. Tumar was located in the center of all the empire; Tumar was a beautiful city where money flowed, businesses thrived, and gold miners searched for gold. Hikmid was within the state of Farisa. To the south of the capital, Rosanna's father, Tarma, was a righteous man, the son of a fisherman, Irsha, and a housekeeper named Luisa.",
-            label: "Page 2"
-        },
-        { 
-            type: "image", src: "7121.png", label: "Illustration: Prophet Kafura"
-        },
-        { 
-            type: "text", 
-            title: "The Storm and the Rescue", 
-            text: "One day early in the morning, just as the sun began to break, Jirmak attempted a desperate escape. Driven by the weight of her mother's obsession, she took a small boat to the sea, hoping to find a life of her own. While trying to sail on her little boat, the storm started, and the waves were unforgiving. Jirmak slipped and fell into the sea, and she didn't know how to swim. Luckily, Tarma returned from a long night of fishing with his father, Irsha. Seeing the struggle, Tarma dove deep into the water to save Jirmak. When he brought her back to the sand, Jirmak was not breathing; he tried to revive her, but she remained still. In a final desperate act, Tarma breathed his own air into her lungs. It worked, and she opened her eyes and screamed. Jirmak looked into the eyes of her rescuer. They both fell deeply in love.",
-            label: "Page 3"
-        },
-        { 
-            type: "image", src: "7114.png", label: "Illustration: Tarma's Rescue"
-        },
-        { 
-            type: "text", 
-            title: "The Wall of Gold and Pride", 
-            text: "Jirmak started meeting in secret. Tarma and their love became deeper and deeper. Two years later, Tarma proposed to Jirmak. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride. Luisa, Tarma's mother, could not accept Jirmak's upbringing. She was greatly displeased and banned her son Tarma from seeing Jirmak. And Kapoor, Jirmak's mother, in her greed for wealth, banned Jirmak from seeing Tarma or going outside alone.",
-            label: "Page 4"
-        },
-        { 
-            type: "image", src: "7125.png", label: "Illustration: Deserted by Village"
-        },
-        { 
-            type: "text", 
-            title: "A Vow Between Two Souls", 
-            text: "Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other. They married in secret, a quiet vow between their two souls. When the truth came out, they were both cast out by the villagers and disowned by their family. Kapoor's mother found out and decided to disown her. Luisa was displeased by her son's decision, and she decided to kick him out. With nothing but love and small savings, they built a small hut outside the village.",
-            label: "Page 5"
-        },
-        { 
-            type: "image", src: "7119.png", label: "Illustration: Building Their New Life"
-        },
-        { 
-            type: "image", src: "7126.png", label: "Illustration: The Birth of Destiny"
-        }
-    ];
-
-    let currentIndex = 0;
-    const audioPlayer = document.getElementById("library-audio");
-
-    function playMusic() {
-        audioPlayer.play().catch(error => {
-            console.log("Audio playback requires user interaction.");
-        });
+    function setReflectiveGlow(colorValue) {
+        document.documentElement.style.setProperty('--bg-glow', colorValue);
     }
 
-    function pauseMusic() {
-        audioPlayer.pause();
+    function openModal(imageSrc, title) {
+        document.getElementById('modalImage').src = imageSrc;
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('characterModal').style.display = 'flex';
     }
 
-    function updateBook() {
-        const pageContainer = document.getElementById("book-page");
-        const indicator = document.getElementById("page-indicator");
-        
-        pageContainer.style.opacity = '0';
-        pageContainer.style.transform = 'scale(0.98)';
-        
-        setTimeout(() => {
-            const pageData = bookPages[currentIndex];
-            indicator.textContent = pageData.label;
-
-            if (pageData.type === "image") {
-                pageContainer.style.background = "#fdf5e6";
-                pageContainer.innerHTML = `<img src="${pageData.src}" alt="${pageData.label}">`;
-            } else if (pageData.type === "toc") {
-                let listHtml = `<ul class="toc-list">`;
-                pageData.items.forEach(item => {
-                    listHtml += `<li>${item}</li>`;
-                });
-                listHtml += `</ul>`;
-
-                pageContainer.style.background = "#fdf5e6";
-                pageContainer.innerHTML = `
-                    <div class="story-text-container" style="justify-content: flex-start; padding: 20px 30px;">
-                        <h2>${pageData.title}</h2>
-                        ${listHtml}
-                    </div>
-                `;
-            } else {
-                pageContainer.style.background = "#fdf5e6";
-                pageContainer.innerHTML = `
-                    <div class="story-text-container">
-                        <h2>${pageData.title}</h2>
-                        <p>${pageData.text}</p>
-                    </div>
-                `;
-            }
-            pageContainer.style.opacity = '1';
-            pageContainer.style.transform = 'scale(1)';
-        }, 180);
+    function closeModal() {
+        document.getElementById('characterModal').style.display = 'none';
     }
-
-    function nextPage() {
-        if (currentIndex < bookPages.length - 1) {
-            currentIndex++;
-            updateBook();
-        }
-    }
-
-    function prevPage() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateBook();
-        }
-    }
-
-    updateBook();
 </script>
 
 </body>
