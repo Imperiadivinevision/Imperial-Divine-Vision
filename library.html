@@ -463,19 +463,27 @@
 
 <!-- ================= VIEW 1: THE IMPERIAL LIBRARY ================= -->
 <div id="library-view" class="view-section active">
-         <div style="text-align: center; margin: 40px auto; max-width: 450px;"><img src="cover_image.png" alt="Cover" style="width: 100%; border-radius: 12px; border: 4px solid #d4af37; box-shadow: 0 0 35px rgba(212, 175, 55, 0.7);"></div>
-
-
-    <!-- Header with Handwritten Calligraphy Title -->
-    <div class="library-header">
-        <h1>Welcome to Imperial Library</h1>
-        <p>The Sacred Chamber of Characters</p>
+           <!-- Imperial Library Book Cover Display -->
+    <div style="text-align: center; margin: 40px auto; max-width: 450px; position: relative;">
+        <!-- Left Side Floating Scroll Down Indicator -->
+        <div style="position: absolute; left: -90px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 1px; animation: bounceGlow 2s infinite ease-in-out;">
+            <span style="writing-mode: vertical-rl; text-transform: uppercase; margin-bottom: 8px;">Scroll Down</span>
+            <span style="font-size: 20px;">↓</span>
+        </div>
+        
+        <!-- Book Cover Image -->
+        <img src="cover_image.png" alt="Cover" style="width: 100%; border-radius: 12px; border: 4px solid #d4af37; box-shadow: 0 0 35px rgba(212, 175, 55, 0.7);">
     </div>
 
-    <!-- Navigation Gateway to Book Chambers -->
-    <div class="gateway-container">
-        <a href="rosana_book.html" class="gateway-btn">📖 Enter Book Chambers</a>
-    </div>
+    <!-- Smooth Bouncing Animation -->
+    <style>
+        @keyframes bounceGlow {
+            0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.6; text-shadow: 0 0 5px rgba(212,175,55,0.3); }
+            50% { transform: translateY(-50%) translateY(10px); opacity: 1; text-shadow: 0 0 15px rgba(212,175,55,0.9); }
+        }
+    </style>
+
+
 
     <!-- Sanctuary Starlight Altar -->
     <div class="sanctuary-hub">
