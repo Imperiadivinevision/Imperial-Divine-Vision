@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">A
 <head>
     <meta charset="UTF-8">
     <title>The Song of Rosana and the Evil King - Imperial Library Edition</title>
@@ -106,9 +106,27 @@
         .page-content p {
             color: #000000;
             font-size: 17px;
-            line-height: 2.3; /* Professional double spacing */
+            line-height: 2.3;
             margin: 0;
             text-align: justify;
+        }
+        /* Clean styling for Table of Contents list items */
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .toc-list li {
+            color: #000000;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 1px dotted rgba(212, 175, 55, 0.6);
+            padding-bottom: 4px;
         }
         button {
             width: 100%;
@@ -196,10 +214,30 @@
 </div>
 
 <script>
-    // Complete professional book structure with clean text templates and visual character illustration plates
+    // 100% Professional, Clean HTML Text Layouts for Every Page
     const bookPages = [
         { type: "image", src: "cover_image.png", label: "Front Cover" },
         { type: "image", src: "parchment_title_page.png", label: "Title Page" },
+        { 
+            type: "toc", 
+            title: "Table of Contents", 
+            items: [
+                "Introduction: The Village of Hikmid",
+                "The Beginning: The Birth of Rosanna",
+                "Meeting of the Prophet",
+                "The Cost of the Prophecy",
+                "The Declaration of the Prophecy: Evil or Blessing?",
+                "The Beginning of Rosanna's Journey",
+                "The Secret",
+                "The Face of Destiny",
+                "The Accomplishment of the Prophecy",
+                "The Painful Road",
+                "The Conflict of the Concubines",
+                "The Bleeding of the New Land",
+                "The Empress Identity - The Lost Child"
+            ],
+            label: "Table of Contents"
+        },
         { 
             type: "text", 
             title: "Introduction: The Village of Hikmid", 
@@ -229,13 +267,7 @@
             title: "A Vow Between Two Souls", 
             text: "Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other. They married in secret, a quiet vow between their two souls. When the truth came out, they were both cast out by the villagers and disowned by their family. Kapoor's mother found out and decided to disown her. Luisa was displeased by her son's decision, and she decided to kick him out. With nothing but love and small savings, they built a small hut outside the village.",
             label: "Page 5"
-        },
-        { type: "image", src: "1.png", label: "Character Illustration Plate I" },
-        { type: "image", src: "2.png", label: "Character Illustration Plate II" },
-        { type: "image", src: "3.png", label: "Character Illustration Plate III" },
-        { type: "image", src: "4.png", label: "Character Illustration Plate IV" },
-        { type: "image", src: "5.png", label: "Character Illustration Plate V" },
-        { type: "image", src: "25.png", label: "Back Cover" }
+        }
     ];
 
     let currentIndex = 0;
@@ -254,6 +286,20 @@
             if (pageData.type === "image") {
                 pageContainer.style.background = "#fdf5e6";
                 pageContainer.innerHTML = `<img src="${pageData.src}" alt="${pageData.label}">`;
+            } else if (pageData.type === "toc") {
+                let listHtml = `<ul class="toc-list">`;
+                pageData.items.forEach(item => {
+                    listHtml += `<li>${item}</li>`;
+                });
+                listHtml += `</ul>`;
+
+                pageContainer.style.background = "#fdf5e6";
+                pageContainer.innerHTML = `
+                    <div class="story-text-container" style="justify-content: flex-start; padding: 40px 50px;">
+                        <h2>${pageData.title}</h2>
+                        ${listHtml}
+                    </div>
+                `;
             } else {
                 pageContainer.style.background = "#fdf5e6";
                 pageContainer.innerHTML = `
