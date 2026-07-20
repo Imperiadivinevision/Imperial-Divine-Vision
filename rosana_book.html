@@ -61,7 +61,7 @@
             50% { opacity: 0.9; transform: scale(1.04); }
         }
 
-        .top-bar, .book-chamber-content, .illustrations-container {
+        .top-bar, .book-chamber-content, .illustrations-container, .script-chapter-container {
             position: relative;
             z-index: 2;
         }
@@ -126,7 +126,7 @@
         /* Book Chamber Main Title Box */
         .book-chamber-content {
             max-width: 900px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
             background: rgba(4, 25, 17, 0.85);
             border: 3px solid #d4af37;
             border-radius: 15px;
@@ -175,7 +175,7 @@
         /* Illustrations Gallery Section */
         .illustrations-container {
             max-width: 1100px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto 50px auto;
         }
         .section-title {
             color: #d4af37;
@@ -224,7 +224,45 @@
             font-family: 'Cinzel', serif;
         }
 
-        /* Modal Popup Box */
+        /* Book Script & Physical Pages Section */
+        .script-chapter-container {
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            background: rgba(8, 20, 15, 0.9);
+            border: 3px solid #d4af37;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .script-chapter-container h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 44px;
+            color: #d4af37;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        .script-chapter-container h3 {
+            font-size: 16px;
+            color: #e6dfc8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212,175,55,0.4);
+            padding-bottom: 8px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .script-chapter-container p {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            color: #f5eedc;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Modal Popup Box for Illustrations */
         .modal {
             display: none;
             position: fixed;
@@ -322,31 +360,45 @@
 <div class="illustrations-container">
     <div class="section-title">✨ Book Illustrations & Chapters</div>
     <div class="illustrations-grid">
-        <div class="illustration-card" onclick="openModal('5.png', 'Illustration 5', 'A delicate moment captured in the kingdom.')">
+        <div class="illustration-card" onclick="openModal('5.png', 'Page Scene V', 'A delicate moment captured in the kingdom.')">
             <img src="5.png" alt="Illustration 5">
             <h3>Page Scene V</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('8.png', 'Illustration 8', 'The tides of fate and devotion by the water.')">
+        <div class="illustration-card" onclick="openModal('8.png', 'Page Scene VIII', 'The tides of fate and devotion by the water.')">
             <img src="8.png" alt="Illustration 8">
             <h3>Page Scene VIII</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('9.png', 'Illustration 9', 'Building a new life together outside the village.')">
+        <div class="illustration-card" onclick="openModal('Page Scene IX', 'Page Scene IX', 'Building a new life together outside the village.')">
             <img src="9.png" alt="Illustration 9">
             <h3>Page Scene IX</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('12.png', 'Illustration 12', 'Guidance under the ancient skies and marketplace.')">
+        <div class="illustration-card" onclick="openModal('12.png', 'Page Scene XII', 'Guidance under the ancient skies and marketplace.')">
             <img src="12.png" alt="Illustration 12">
             <h3>Page Scene XII</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('13.png', 'Illustration 13', 'Storms and trials testing the bond of the realm.')">
+        <div class="illustration-card" onclick="openModal('13.png', 'Page Scene XIII', 'Storms and trials testing the bond of the realm.')">
             <img src="13.png" alt="Illustration 13">
             <h3>Page Scene XIII</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('7.png', 'Illustration', 'A sanctuary moment preserved in the sacred script.')">
-            <img src="7.png" alt="Illustration">
+        <div class="illustration-card" onclick="openModal('7.png', 'Page Sanctuary', 'A sanctuary moment preserved in the sacred script.')">
+            <img src="7.png" alt="Illustration 7">
             <h3>Page Sanctuary</h3>
         </div>
     </div>
+</div>
+
+<!-- Book Script & Physical Pages Integration Section -->
+<div class="script-chapter-container">
+    <h2>Script & Chronicles of the Realm</h2>
+    
+    <h3>Chapter I: The Gathering Storm</h3>
+    <p>In the quiet sanctuary of the outer lands, where the rain falls and the rivers swell, the foundation of an empire was forged not in stone, but in steadfast devotion. The world outside demanded separation, but the bond between souls refused to yield to gold or pride.</p>
+    
+    <h3>Chapter II: The Vow of Sanctuary</h3>
+    <p>Far from the reach of the golden palace halls, hands that once knew only hardship built a home of wood and straw. Every beam raised was a declaration of peace; every whispered promise, a shield against the dark. Here, the struggle was left behind, and a true sanctuary welcomed the dawn.</p>
+
+    <h3>Chapter III: The Legacy of the Divine Eyes</h3>
+    <p>Guided by whispers of the ancient prophets and protected by the watchful spirit of the kingdom, the path forward remained illuminated. The crown may carry weight, but true victory belongs to those who guard their peace and honor the sacred bond written in the stars.</p>
 </div>
 
 <!-- Modal Popup Box for Illustrations -->
