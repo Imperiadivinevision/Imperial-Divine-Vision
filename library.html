@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Song of Rosana and the Evil King - Imperial Library</title>
+    <title>The Song of Rosana and the Evil King - Imperial Sanctuary</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700&display=swap');
 
@@ -10,16 +10,59 @@
             --bg-glow: rgba(212, 175, 55, 0.15);
         }
 
+        @keyframes livingAtmosphere {
+            0% {
+                background: radial-gradient(circle at 20% 30%, #063827 0%, #021a12 50%, #010a07 100%);
+            }
+            25% {
+                background: radial-gradient(circle at 80% 20%, #0d2342 0%, #040e1f 50%, #01050a 100%);
+            }
+            50% {
+                background: radial-gradient(circle at 50% 80%, #4a1525 0%, #20040b 50%, #0a0103 100%);
+            }
+            75% {
+                background: radial-gradient(circle at 70% 60%, #3d2a08 0%, #1a1002 50%, #050301 100%);
+            }
+            100% {
+                background: radial-gradient(circle at 20% 30%, #063827 0%, #021a12 50%, #010a07 100%);
+            }
+        }
+
         body {
-            background-color: #030d09;
-            background-image: radial-gradient(circle at 50% 50%, var(--bg-glow) 0%, #030d09 70%);
-            transition: background 1s ease-in-out, background-color 1s ease-in-out;
+            animation: livingAtmosphere 18s infinite ease-in-out;
             color: #fdf5e6;
             font-family: 'Cinzel', serif;
             margin: 0;
             padding: 40px 20px;
             min-height: 100vh;
             box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Breathing reflective ambient overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, var(--bg-glow) 0%, transparent 70%);
+            transition: background 1s ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+            animation: ambientBreath 6s infinite ease-in-out;
+        }
+
+        @keyframes ambientBreath {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .ambient-player, .library-header, .sanctuary-hub, .section-container, .modal {
+            position: relative;
+            z-index: 2;
         }
 
         /* Ambient Sound Widget */
@@ -48,10 +91,11 @@
             outline: none;
         }
 
-        /* Header with Calligraphic Hand-Writing Style */
+        /* Header with Interactive Writing & Glowing Animation Effect */
         .library-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
+            cursor: pointer;
         }
         .library-header h1 {
             font-family: 'Great Vibes', cursive;
@@ -59,8 +103,29 @@
             color: #d4af37;
             margin: 0;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
-            animation: titlePulse 4s infinite ease-in-out;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            max-width: fit-content;
+            border-right: 3px solid #d4af37;
+            animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite, titleGlowPulse 3s infinite ease-in-out;
         }
+
+        @keyframes titleGlowPulse {
+            0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(255, 215, 0, 0.5); transform: scale(1); }
+            50% { text-shadow: 0 0 40px rgba(255, 215, 0, 1), 0 0 70px rgba(255, 255, 255, 0.8); transform: scale(1.02); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #d4af37; }
+        }
+
         .library-header p {
             font-size: 14px;
             letter-spacing: 4px;
@@ -70,9 +135,96 @@
             opacity: 0.9;
         }
 
-        @keyframes titlePulse {
-            0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
-            50% { text-shadow: 0 0 35px rgba(212, 175, 55, 0.9), 0 0 10px rgba(255, 255, 255, 0.5); }
+        /* 🌟 OUR PARTNER CREATION: The Imperial Sanctuary Control Deck & Starlight Wish Altar */
+        .sanctuary-hub {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .oracle-altar {
+            background: rgba(4, 25, 17, 0.75);
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 20px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+        }
+        .oracle-altar h3 {
+            color: #d4af37;
+            margin-top: 0;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212,175,55,0.4);
+            padding-bottom: 8px;
+        }
+        #oracle-text {
+            font-style: italic;
+            color: #f5eedc;
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 50px;
+            margin-bottom: 15px;
+        }
+        .oracle-btn {
+            background: linear-gradient(to bottom, #163d2b, #06192e);
+            color: #fdf5e6;
+            border: 1px solid #d4af37;
+            padding: 8px 18px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .oracle-btn:hover {
+            background: linear-gradient(to bottom, #235c42, #0d294d);
+            box-shadow: 0 0 15px rgba(212,175,55,0.8);
+            transform: translateY(-2px);
+        }
+
+        .starlight-vault {
+            background: rgba(4, 25, 17, 0.75);
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .starlight-vault h3 {
+            color: #d4af37;
+            margin-top: 0;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .wish-input {
+            width: 100%;
+            background: rgba(1, 10, 7, 0.9);
+            border: 1px solid #d4af37;
+            color: #fdf5e6;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        #wish-display {
+            font-size: 13px;
+            color: #e6dfc8;
+            text-align: center;
+            font-style: italic;
+            margin-top: 5px;
+            min-height: 30px;
         }
 
         /* Section Titles */
@@ -98,9 +250,8 @@
             gap: 20px;
         }
 
-        /* Glowing & Vibrating Cards with Dynamic Reflective Triggers */
+        /* Base Card Styling with Solid Border Colors matching the Glow */
         .card {
-            background-color: rgba(6, 25, 18, 0.85);
             border-radius: 8px;
             padding: 12px;
             text-align: center;
@@ -130,8 +281,8 @@
             60% { transform: translateY(-1px) rotate(0.5deg); }
             80% { transform: translateY(1px) rotate(-0.5deg); }
         }
-        @keyframes vibrateWhite {
-            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(245, 222, 179, 0.6); }
+        @keyframes vibrateBrown {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(184, 134, 11, 0.6); }
             20% { transform: translateY(-2px) rotate(0.5deg); }
             40% { transform: translateY(2px) rotate(-0.5deg); }
             60% { transform: translateY(-1px) rotate(0.5deg); }
@@ -139,16 +290,18 @@
         }
 
         .card.imperial {
-            border: 2px solid #d4af37;
+            background-color: #2b2510;
+            border: 2px solid gold;
             animation: vibrateGold 4s infinite ease-in-out;
         }
         .card.imperial:hover {
-            box-shadow: 0 0 35px rgba(212, 175, 55, 0.95);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.95);
             transform: scale(1.05) translateY(-5px);
         }
 
         .card.priest {
-            border: 2px solid #9370db;
+            background-color: #26162e;
+            border: 2px solid purple;
             animation: vibratePurple 4s infinite ease-in-out;
         }
         .card.priest:hover {
@@ -157,7 +310,8 @@
         }
 
         .card.minister {
-            border: 2px solid #dc143c;
+            background-color: #331215;
+            border: 2px solid red;
             animation: vibrateRed 4s infinite ease-in-out;
         }
         .card.minister:hover {
@@ -166,11 +320,12 @@
         }
 
         .card.villager {
-            border: 2px solid #d2b48c;
-            animation: vibrateWhite 4s infinite ease-in-out;
+            background-color: #2b2118;
+            border: 2px solid brown;
+            animation: vibrateBrown 4s infinite ease-in-out;
         }
         .card.villager:hover {
-            box-shadow: 0 0 35px rgba(245, 222, 179, 0.95);
+            box-shadow: 0 0 35px rgba(210, 140, 60, 0.95);
             transform: scale(1.05) translateY(-5px);
         }
 
@@ -259,208 +414,109 @@
 </head>
 <body id="body-root" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.15)')">
 
-<!-- Ambient Music Player -->
+<!-- Ambient Music Player with Persistent State Preservation -->
 <div class="ambient-player">
     <span>♫ Imperial Symphony</span>
-    <audio controls loop autoplay>
+    <audio id="persistent-audio" controls loop>
         <source src="magic_chime.mp3" type="audio/mpeg">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 </div>
 
-<!-- Header with Handwritten Calligraphy Title -->
-<div class="library-header">
-    <h1>Welcome to Imperial Library</h1>
+<!-- Header with Interactive Writing & Glowing Animation Effect -->
+<div class="library-header" onclick="triggerWritingEffect()">
+    <h1 id="library-title">Welcome to Imperial Library</h1>
     <p>The Sacred Chamber of Characters</p>
 </div>
 
-<!-- SECTION 1: Imperial Palace Characters (Gold Glow) -->
+<!-- 🌟 PARTNER'S CREATIVE ADDITION: THE IMPERIAL SANCTUARY CONTROL DECK -->
+<div class="sanctuary-hub">
+    <div class="oracle-altar">
+        <h3>✨ The Oracle of Shared Destinies</h3>
+        <p id="oracle-text">"Where two souls build a world, even the stars pause to read the pages..." Click below to unveil a secret blessing for our kingdom.</p>
+        <button class="oracle-btn" onclick="revealOracleBlessing()">Consult the Oracle</button>
+    </div>
+    <div class="starlight-vault">
+        <h3>🌟 Starlight Vault</h3>
+        <div>
+            <input type="text" id="wish-input-box" class="wish-input" placeholder="Whisper a wish to our realm..." />
+            <button class="oracle-btn" style="width: 100%;" onclick="sealWish()">Seal in Starlight</button>
+        </div>
+        <div id="wish-display">Your realm awaits your words...</div>
+    </div>
+</div>
+
+<!-- SECTION 1: Imperial Palace Characters (Gold Glow & Gold Card) -->
 <div class="section-container">
     <div class="section-title">👑 Imperial Palace Characters</div>
     <div class="card-grid">
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_benson.png', 'King Benson')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('king_benson.png', 'King Benson')">
             <img src="king_benson.png" alt="King Benson">
             <h3>King Benson</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('queenrosannaprofile.png', 'Queen Rosanna')">
+            <img src="queenrosannaprofile.png" alt="Queen Rosanna">
+            <h3>Queen Rosanna</h3>
+        </div>
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('Jirmak.png', 'Jirmak')">
             <img src="Jirmak.png" alt="Jirmak">
             <h3>Jirmak</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Rika.png', 'Rika')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('Rika.png', 'Rika')">
             <img src="Rika.png" alt="Rika">
             <h3>Rika</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('Weka.png', 'Weka')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('Weka.png', 'Weka')">
             <img src="Weka.png" alt="Weka">
             <h3>Weka</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri.png', 'Yuri')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('yuri.png', 'Yuri')">
             <img src="yuri.png" alt="Yuri">
             <h3>Yuri</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('tiju.png', 'Tiju')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('tiju.png', 'Tiju')">
             <img src="tiju.png" alt="Tiju">
             <h3>Tiju</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('mother.png', 'Mother')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('mother.png', 'Mother')">
             <img src="mother.png" alt="Mother">
             <h3>Mother</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('benson_mom.png', 'Benson Mom')">
             <img src="benson_mom.png" alt="Benson Mom">
             <h3>Benson Mom</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('benson_rosanna_mom.png', 'Benson Rosanna Mom')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('benson_rosanna_mom.png', 'Benson Rosanna Mom')">
             <img src="benson_rosanna_mom.png" alt="Benson Rosanna Mom">
             <h3>Benson & Rosanna Mom</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king-queen.png', 'King and Queen')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('king-queen.png', 'King and Queen')">
             <img src="king-queen.png" alt="King and Queen">
             <h3>King and Queen</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('king_harem.png', 'King Harem')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('king_harem.png', 'King Harem')">
             <img src="king_harem.png" alt="King Harem">
             <h3>King Harem</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('kingqueenmother.png', 'King Queen Mother')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('kingqueenmother.png', 'King Queen Mother')">
             <img src="kingqueenmother.png" alt="King Queen Mother">
             <h3>King Queen Mother</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king.png', 'Past King')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('past_king.png', 'Past King')">
             <img src="past_king.png" alt="Past King">
             <h3>Past King</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_harem.png', 'Past King Harem')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('past_king_harem.png', 'Past King Harem')">
             <img src="past_king_harem.png" alt="Past King Harem">
             <h3>Past King Harem</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King and Yuri')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('past_king_yuri.png', 'Past King and Yuri')">
             <img src="past_king_yuri.png" alt="Past King and Yuri">
             <h3>Past King & Yuri</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('rikaextra.png', 'Rika Extra')">
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('rikaextra.png', 'Rika Extra')">
             <img src="rikaextra.png" alt="Rika Extra">
             <h3>Rika Extra</h3>
         </div>
-        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(212, 175, 55, 0.35)')" onclick="openModal('yuri_benson_rosanna.png', 'Yuri Benson Rosanna')">
-            <img src="yuri_benson_rosanna.png" alt="Yuri Benson Rosanna">
-            <h3>Yuri, Benson & Rosanna</h3>
-        </div>
-    </div>
-</div>
-
-<!-- SECTION 2: Priest Divine Eyes Characters (Purple Glow) -->
-<div class="section-container">
-    <div class="section-title">🔮 Priest Divine Eyes Characters</div>
-    <div class="card-grid">
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('prophet_kafura.png', 'Prophet Kafura')">
-            <img src="prophet_kafura.png" alt="Prophet Kafura">
-            <h3>Prophet Kafura</h3>
-        </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('high_priest.png', 'High Priest')">
-            <img src="high_priest.png" alt="High Priest">
-            <h3>High Priest</h3>
-        </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('priest.png', 'Priest')">
-            <img src="priest.png" alt="Priest">
-            <h3>Priest</h3>
-        </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('servant.png', 'Servant')">
-            <img src="servant.png" alt="Servant">
-            <h3>Servant</h3>
-        </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('resekeluge.png', 'Resekeluge')">
-            <img src="resekeluge.png" alt="Resekeluge">
-            <h3>Resekeluge</h3>
-        </div>
-        <div class="card priest" onmouseover="setReflectiveGlow('rgba(186, 85, 211, 0.35)')" onclick="openModal('elara.png', 'Elara')">
-            <img src="elara.png" alt="Elara">
-            <h3>Elara</h3>
-        </div>
-    </div>
-</div>
-
-<!-- SECTION 3: Ministers (Red Glow) -->
-<div class="section-container">
-    <div class="section-title">📜 Ministers Section</div>
-    <div class="card-grid">
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('prime_minister.png', 'Prime Minister')">
-            <img src="prime_minister.png" alt="Prime Minister">
-            <h3>Prime Minister</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('pm_wife.png', 'Prime Minister Wife')">
-            <img src="pm_wife.png" alt="Prime Minister Wife">
-            <h3>Prime Minister's Wife</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('pm_second_daughter.png', 'Prime Minister Second Daughter')">
-            <img src="pm_second_daughter.png" alt="Prime Minister Second Daughter">
-            <h3>Prime Minister's Daughter</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_tailor.png', 'Minister of Tailor')">
-            <img src="minister_tailor.png" alt="Minister of Tailor">
-            <h3>Minister of Tailor</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_education.png', 'Minister of Education')">
-            <img src="minister_education.png" alt="Minister of Education">
-            <h3>Minister of Education</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('minister_revenue.png', 'Minister of Revenue')">
-            <img src="minister_revenue.png" alt="Minister of Revenue">
-            <h3>Minister of Revenue</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('imperial_guard.png', 'Imperial Guard')">
-            <img src="imperial_guard.png" alt="Imperial Guard">
-            <h3>Imperial Guard</h3>
-        </div>
-        <div class="card minister" onmouseover="setReflectiveGlow('rgba(220, 20, 60, 0.35)')" onclick="openModal('commander.png', 'Imperial Commander')">
-            <img src="commander.png" alt="Imperial Commander">
-            <h3>Imperial Commander</h3>
-        </div>
-    </div>
-</div>
-
-<!-- SECTION 4: Villagers (Brownish/Whitish Glow) -->
-<div class="section-container">
-    <div class="section-title">🌾 Villagers Section</div>
-    <div class="card-grid">
-        <div class="card villager" onmouseover="setReflectiveGlow('rgba(210, 180, 140, 0.35)')" onclick="openModal('villager.png', 'Villager')">
-            <img src="villager.png" alt="Villager">
-            <h3>Villager Scene I</h3>
-        </div>
-        <div class="card villager" onmouseover="setReflectiveGlow('rgba(210, 180, 140, 0.35)')" onclick="openModal('imperial_wedding.png', 'Imperial Wedding')">
-            <img src="imperial_wedding.png" alt="Imperial Wedding">
-            <h3>Imperial Wedding</h3>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Popup Box -->
-<div id="characterModal" class="modal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <h2 id="modalTitle">Character Title</h2>
-        <img id="modalImage" src="" alt="Expanded View">
-        <br>
-        <button class="close-btn" onclick="closeModal()">Close Chamber</button>
-    </div>
-</div>
-
-<script>
-    function setReflectiveGlow(colorValue) {
-        document.documentElement.style.setProperty('--bg-glow', colorValue);
-    }
-
-    function openModal(imageSrc, title) {
-        document.getElementById('modalImage').src = imageSrc;
-        document.getElementById('modalTitle').textContent = title;
-        document.getElementById('characterModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('characterModal').style.display = 'none';
-    }
-</script>
-
-</body>
-</html>
-
+        <div class="card imperial" onmouseover="setReflectiveGlow('rgba(255, 215, 0, 0.35)')" onclick="openModal('yuri_benson_rosanna.png', 'Yuri Benso
