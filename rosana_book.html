@@ -2,60 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rosana and the Evil King - Library Edition</title>
+    <title>The Song of Rosana and the Evil King - Imperial Library Edition</title>
     <style>
-        @keyframes emeraldGlow {
-            0% { background-color: #032b1f; }
-            50% { background-color: #0b1d3a; }
-            100% { background-color: #032b1f; }
+        @keyframes royalAtmosphere {
+            0% { background: radial-gradient(circle at 50% 50%, #063827 0%, #021a12 60%, #010a07 100%); }
+            33% { background: radial-gradient(circle at 30% 70%, #0d2342 0%, #040e1f 60%, #01050a 100%); }
+            66% { background: radial-gradient(circle at 70% 30%, #1e1136 0%, #0b0514 60%, #030106 100%); }
+            100% { background: radial-gradient(circle at 50% 50%, #063827 0%, #021a12 60%, #010a07 100%); }
+        }
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(0.2deg); }
+        }
+        @keyframes pageGlow {
+            0%, 100% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.35); }
+            50% { box-shadow: 0 30px 70px rgba(0, 0, 0, 0.98), 0 0 50px rgba(212, 175, 55, 0.6); }
         }
         body {
-            animation: emeraldGlow 12s infinite ease-in-out;
+            animation: royalAtmosphere 20s infinite ease-in-out;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             height: 100vh;
             margin: 0;
             font-family: 'Georgia', serif;
             overflow: hidden;
         }
-        .book-container {
-            width: 100%;
+        /* Regal Left Control Haven */
+        .side-nav {
+            width: 250px;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            position: relative;
+            align-items: center;
+            gap: 25px;
+            padding: 25px;
             box-sizing: border-box;
-            padding: 20px;
+            background: rgba(2, 26, 18, 0.6);
+            backdrop-filter: blur(8px);
+            border-right: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            z-index: 10;
         }
-        .page-wrapper {
-            position: relative;
-            padding: 12px;
-            background: linear-gradient(135deg, #d4af37 0%, #1a4d36 50%, #d4af37 100%);
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(11, 45, 58, 0.6);
+        .main-viewport {
+            flex: 1;
+            height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            background-color: #fdf5e6; 
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        /* Rectangular shape styling for the viewer frame */
+        .book-frame-container {
+            animation: floatEffect 6s infinite ease-in-out;
+        }
         .page-content {
-            width: 820px;
-            height: 520px;
+            width: 980px;
+            height: 670px;
             background-color: #fdf5e6;
-            border-radius: 4px;
+            background-image: radial-gradient(circle, #fefae8 0%, #f7ebd0 100%);
+            border: 5px solid #d4af37;
+            border-radius: 10px;
+            animation: pageGlow 4s infinite ease-in-out;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            padding: 40px 60px;
+            padding: 55px 75px;
             text-align: center;
             overflow: hidden;
+            position: relative;
+        }
+        /* Decorative corner flourishes inside the book frame */
+        .page-content::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(139, 105, 20, 0.3);
+            pointer-events: none;
+            border-radius: 6px;
         }
         .page-content img {
             max-width: 100%;
@@ -69,71 +97,112 @@
             justify-content: center;
             height: 100%;
             width: 100%;
+            z-index: 1;
         }
         .page-content h2 {
-            color: #3b2314;
-            font-size: 22px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            color: #2b1708;
+            font-size: 26px;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 12px;
+            display: inline-block;
         }
         .page-content p {
-            color: #2c1e0f;
-            font-size: 17px;
-            line-height: 2.2; /* Beautiful double spacing */
+            color: #050505;
+            font-size: 18px;
+            line-height: 2.4;
             margin: 0;
             text-align: justify;
-        }
-        .nav-controls {
-            margin-top: 20px;
-            display: flex;
-            gap: 30px;
-            align-items: center;
+            text-indent: 30px;
         }
         button {
-            background: linear-gradient(to bottom, #1a4d36, #0b1d3a);
+            width: 100%;
+            background: linear-gradient(to bottom, #163d2b, #06192e);
             color: #fdf5e6;
             border: 1px solid #d4af37;
-            padding: 10px 28px;
+            padding: 14px 20px;
             font-size: 16px;
             font-family: 'Georgia', serif;
             cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1.5px;
         }
         button:hover {
-            background: linear-gradient(to bottom, #2b6e51, #16325c);
+            background: linear-gradient(to bottom, #235c42, #0d294d);
             border-color: #fff;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+            transform: translateY(-3px);
+        }
+        button:active {
+            transform: translateY(1px);
         }
         #page-indicator {
             color: #d4af37;
-            font-size: 16px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            font-size: 15px;
+            letter-spacing: 2.5px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            text-align: center;
+            font-weight: bold;
+        }
+        .music-player {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            background: rgba(3, 31, 22, 0.85);
+            backdrop-filter: blur(5px);
+            border: 1px solid #d4af37;
+            padding: 10px 18px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            z-index: 10;
+        }
+        .music-player span {
+            color: #fdf5e6;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+        }
+        .music-player audio {
+            height: 30px;
+            outline: none;
+            filter: sepia(20%) hue-rotate(50deg);
         }
     </style>
 </head>
 <body>
 
-<div class="book-container">
-    <div class="page-wrapper">
+<!-- Orchestral Ambient Library Theme -->
+<div class="music-player">
+    <span>♫ Imperial Symphony</span>
+    <audio controls loop autoplay>
+        <source src="https://actions.google.com/sounds/v1/ambiences/open_field_foreboding.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<!-- Left Side Majestic Control Haven -->
+<div class="side-nav">
+    <button onclick="prevPage()">◄ Previous</button>
+    <span id="page-indicator">Front Cover</span>
+    <button onclick="nextPage()">Next Page ►</button>
+</div>
+
+<!-- Main Book Viewport -->
+<div class="main-viewport">
+    <div class="book-frame-container">
         <div id="book-page" class="page-content">
             <!-- Dynamic Content Renders Here -->
         </div>
     </div>
-    <div class="nav-controls">
-        <button onclick="prevPage()">Previous</button>
-        <span id="page-indicator">Front Cover</span>
-        <button onclick="nextPage()">Next Page</button>
-    </div>
 </div>
 
 <script>
-    // Array containing covers as images and story text formatted cleanly with double spacing
     const bookPages = [
         { type: "image", src: "cover_image.png", label: "Front Cover" },
         { type: "image", src: "parchment_title_page.png", label: "Title Page" },
@@ -161,7 +230,6 @@
             text: "Jirmak started meeting in secret. Tarma and their love became deeper and deeper. Two years later, Tarma proposed to Jirmak. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride. Luisa, Tarma's mother, could not accept Jirmak's upbringing. She was greatly displeased and banned her son Tarma from seeing Jirmak. And Kapoor, Jirmak's mother, in her greed for wealth, banned Jirmak from seeing Tarma or going outside alone.",
             label: "Page 4"
         }
-        // You can add more text pages here easily following the same format!
     ];
 
     let currentIndex = 0;
@@ -170,7 +238,8 @@
         const pageContainer = document.getElementById("book-page");
         const indicator = document.getElementById("page-indicator");
         
-        pageContainer.style.opacity = '0.3';
+        pageContainer.style.opacity = '0';
+        pageContainer.style.transform = 'scale(0.98)';
         
         setTimeout(() => {
             const pageData = bookPages[currentIndex];
@@ -187,7 +256,8 @@
                 `;
             }
             pageContainer.style.opacity = '1';
-        }, 120);
+            pageContainer.style.transform = 'scale(1)';
+        }, 180);
     }
 
     function nextPage() {
@@ -204,7 +274,6 @@
         }
     }
 
-    // Initialize first page
     updateBook();
 </script>
 
