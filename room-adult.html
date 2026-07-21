@@ -56,7 +56,6 @@
             border-radius: 10px;
         }
 
-        /* Royal Breathing / Floating Animation for Queen Rosana */
         @keyframes royalFloat {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-6px); }
@@ -162,13 +161,13 @@
 
     <div class="main-container">
         <div class="header-banner">
-            QUEEN ROSANA
+            QUEEN ROSANNA
         </div>
 
         <div class="atelier-grid">
-            <!-- Queen Rosana's Living Portrait -->
+            <!-- Queen Rosanna's Living Portrait -->
             <div class="portrait-section">
-                <img src="watermarked_img_13694216075338772645.png" class="royal-portrait-img" alt="Queen Rosana Portrait">
+                <img id="queenPortrait" src="watermarked_img_13694216075338772645.png" class="royal-portrait-img" alt="Queen Rosanna Portrait">
             </div>
 
             <!-- The Royal Atelier Controls -->
@@ -184,14 +183,17 @@
 
                 <div class="form-group">
                     <label>Royal Gown Theme:</label>
-                    <select class="form-control">
-                        <option>Imperial Blue & Gold Velvet</option>
+                    <select id="outfitSelect" class="form-control" onchange="changeOutfit()">
+                        <option value="watermarked_img_13694216075338772645.png">Imperial Blue & Gold Velvet</option>
+                        <option value="rosanna_vip.png">VIP Royal Attire</option>
+                        <option value="rosanna_rika_vip.png">Rosanna & Rika VIP Attire</option>
+                        <option value="rosanna.png">Classic Sovereign Look</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Character Name:</label>
-                    <input type="text" class="form-control" value="Queen Rosana" readonly>
+                    <input type="text" class="form-control" value="Queen Rosanna" readonly>
                 </div>
 
                 <div class="form-group">
@@ -218,6 +220,15 @@
     </div>
 
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+
+    <script>
+        function changeOutfit() {
+            const selectBox = document.getElementById('outfitSelect');
+            const selectedImage = selectBox.value;
+            const portraitImg = document.getElementById('queenPortrait');
+            portraitImg.src = selectedImage;
+        }
+    </script>
 
 </body>
 </html>
