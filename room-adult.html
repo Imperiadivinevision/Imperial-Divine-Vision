@@ -39,6 +39,7 @@
             display: none;
             flex: 1;
             flex-direction: column;
+            height: 100vh;
         }
         .screen.active {
             display: flex;
@@ -49,9 +50,9 @@
             padding: 40px;
             text-align: center;
             background: linear-gradient(to bottom, rgba(18,16,14,0.95), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80') center/cover;
-            flex: 1;
             justify-content: center;
             align-items: center;
+            overflow-y: auto;
         }
 
         .chamber-box {
@@ -60,6 +61,7 @@
             padding: 40px;
             max-width: 800px;
             border-radius: 6px;
+            margin: auto;
         }
 
         .chamber-box h1 {
@@ -83,12 +85,22 @@
             cursor: pointer;
             border-radius: 4px;
             transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .archetype-card h3 {
+            color: var(--gold);
+            margin-top: 0;
         }
 
         .archetype-card:hover, .archetype-card.selected {
             background: var(--gold);
             color: var(--bg-dark);
             transform: translateY(-4px);
+        }
+
+        .archetype-card:hover h3, .archetype-card.selected h3 {
+            color: var(--bg-dark);
         }
 
         /* --- STAGE 2: GAMEPLAY HUD & STAGE --- */
@@ -99,6 +111,7 @@
             padding: 15px 30px;
             background: var(--panel-bg);
             border-bottom: 2px solid var(--gold);
+            flex-shrink: 0;
         }
 
         .hud-stats {
@@ -116,6 +129,7 @@
             display: flex;
             flex: 1;
             position: relative;
+            overflow: hidden;
         }
 
         .visual-viewport {
@@ -246,7 +260,7 @@
         <div id="chamber-screen" class="screen active">
             <div class="chamber-box">
                 <h1>The Healing Chambers & Identity Selection</h1>
-                <p>Welcome to the threshold, traveler. Before you step foot into the Hunted State, choose your foundational path and customize your representation in the chambers.</p>
+                <p>Welcome to the threshold, traveler. Before you step foot into the Hunted State, choose your foundational path or invoke your Sovereign authority.</p>
                 
                 <div class="archetype-grid">
                     <div class="archetype-card selected" onclick="selectArchetype('Hunter', this)">
@@ -263,6 +277,9 @@
                     </div>
                 </div>
 
+                <!-- Royal Sovereign Override for Queen Rosana -->
+                <button class="choice-btn" style="text-align: center; font-weight: bold; background: #8b0000; color: var(--text-main); width: 100%; padding: 12px; margin-bottom: 10px; border-color: var(--gold);" onclick="enterRoyalRealm()">👑 Enter as Queen Rosana (Sovereign Administrator)</button>
+
                 <button class="choice-btn" style="text-align: center; font-weight: bold; background: var(--gold); color: var(--bg-dark); width: 100%; padding: 15px;" onclick="enterGameWorld()">Step Into the Realm & Begin Journey</button>
             </div>
         </div>
@@ -271,7 +288,7 @@
         <div id="game-screen" class="screen">
             <header>
                 <div class="hud-stats">
-                    <div class="stat-item">Role: <span id.role-hud>Hunter</span></div>
+                    <div class="stat-item">Role: <span id="role-hud">Hunter</span></div>
                     <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
                     <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
                     <div class="stat-item">Coins: <span id="coin-display">50</span> 🪙</div>
@@ -327,7 +344,21 @@
         function enterGameWorld() {
             document.getElementById('chamber-screen').classList.remove('active');
             document.getElementById('game-screen').classList.add('active');
+            document.getElementById('role-hud').innerText = selectedRole;
             document.getElementById('panel-header-title').innerText = 'Path of the ' + selectedRole;
+            updateHUD();
+        }
+
+        function enterRoyalRealm() {
+            selectedRole = 'Queen Rosana (Sovereign Administrator)';
+            document.getElementById('chamber-screen').classList.remove('active');
+            document.getElementById('game-screen').classList.add('active');
+            document.getElementById('role-hud').innerText = selectedRole;
+            document.getElementById('panel-header-title').innerText = 'Sovereign Realm Administration';
+            
+            coins = 1000;
+            health = 100;
+            document.getElementById('story-text').innerText = "All hail Queen Rosana. The chambers part effortlessly before your sovereign authority. As supreme administrator and ruler, your treasury is full, your lands are secure, and the realm bends to your vision.";
             updateHUD();
         }
 
