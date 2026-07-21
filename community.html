@@ -57,19 +57,17 @@
             const currentYear = new Date().getFullYear();
             const age = currentYear - year;
 
-            // Creator / Administrator Master Bypass
-            if (year === 2000 || age >= 100 || age < 0) {
+            // Creator / Administrator Master Bypass & Adult Routing
+            if (year === 2000 || age >= 30) {
                 window.location.href = 'room-adult.html';
                 return;
             }
 
-            // Age-based routing logic for the chambers
+            // Age-based routing logic matching your exact files
             if (age >= 8 && age <= 13) {
                 window.location.href = 'room-youth.html';
-            } else if (age >= 14 && age <= 19) {
-                window.location.href = 'room-young-adult.html';
-            } else if (age >= 20) {
-                window.location.href = 'room-adult.html';
+            } else if (age >= 14 && age <= 29) {
+                window.location.href = 'room-elder.html';
             } else {
                 window.location.href = 'room-kids.html';
             }
