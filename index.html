@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imperial Divine Vision</title>
+    <title>Imperial Divine Vision | Sanctuary of the Sovereign</title>
     <style>
         body {
             margin: 0;
@@ -34,30 +34,94 @@
             }
         }
 
-        nav { padding: 30px; }
-        nav a { margin: 15px; color: #d4af37; text-decoration: none; font-size: 1.5rem; transition: 0.3s; }
-        nav a:hover { color: #ffb7c5; }
-        
-        .hero-image { 
-            width: 80%; 
-            max-width: 600px; 
-            border: 5px solid #d4af37; 
-            margin-top: 20px; 
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); 
-            border-radius: 10px;
+        /* Solid High-Contrast Navigation Bar */
+        nav { 
+            padding: 20px; 
+            background: rgba(4, 10, 8, 0.95);
+            border-bottom: 2px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        h1 { margin-top: 50px; text-shadow: 2px 2px 4px #000; padding: 0 20px; }
+        nav a { 
+            margin: 0 15px; 
+            color: #f5f2eb; 
+            text-decoration: none; 
+            font-size: 1.2rem; 
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            transition: 0.3s; 
+        }
+        nav a:hover { 
+            color: #d4af37; 
+            text-shadow: 0 0 10px #d4af37;
+        }
 
-        /* Cinematic Tour & Audio Styles */
+        /* Royal Proclamation Banner */
+        .proclamation-banner {
+            max-width: 750px;
+            margin: 35px auto 10px auto;
+            padding: 20px 30px;
+            background: rgba(18, 16, 14, 0.92);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .proclamation-banner h1 {
+            color: #d4af37;
+            margin: 0 0 10px 0;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .proclamation-banner p {
+            color: #f5f2eb;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        /* Quick Jump / Scroll Down Action Button */
+        .jump-btn {
+            display: inline-block;
+            background: rgba(28, 24, 20, 0.95);
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 12px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 20px 0 10px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .jump-btn:hover {
+            background: #d4af37;
+            color: #12100e;
+            box-shadow: 0 0 20px #d4af37;
+            transform: translateY(-2px);
+        }
+
+        /* Cinematic Tour & Audio Container */
         .cinematic-container {
             max-width: 650px;
             width: 90%;
-            margin: 30px auto;
-            background: rgba(28, 24, 20, 0.94);
+            margin: 40px auto;
+            background: rgba(28, 24, 20, 0.95);
             border: 2px solid #d4af37;
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
         }
 
         .cinematic-display {
@@ -106,9 +170,13 @@
             box-shadow: 0 0 15px #d4af37;
         }
 
-        @keyframes bounceGlow {
-            0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.6; text-shadow: 0 0 5px rgba(212,175,55,0.3); }
-            50% { transform: translateY(-50%) translateY(10px); opacity: 1; text-shadow: 0 0 15px rgba(212,175,55,0.9); }
+        /* Sovereign Blessing Footer */
+        .royal-footer {
+            margin: 50px auto 30px auto;
+            color: #b3a896;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -127,24 +195,28 @@
         <a href="vip.html">VIP Creative Area</a>
     </nav>
 
-    <!-- Imperial Homepage Elite Glow Header -->
-    <div style="text-align: center; margin: 20px auto; position: relative;">
-        <!-- Left Side Floating Scroll Down Indicator -->
-        <div style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; animation: bounceGlow 2s infinite ease-in-out;">
-            <span style="writing-mode: vertical-lr; text-orientation: mixed; text-transform: uppercase; margin-bottom: 10px;">Scroll Down</span>
-            <span style="font-size: 22px;">↓</span>
+    <!-- Imperial Homepage Elite Header -->
+    <div style="text-align: center; margin: 30px auto;">
+        <!-- Breathtaking Framed Homepage Masterpiece -->
+        <div style="display: inline-block; padding: 12px; background: rgba(4, 25, 17, 0.9); border: 3px solid #d4af37; border-radius: 16px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); backdrop-filter: blur(8px);">
+            <img src="cover_image.png" alt="Homepage Sanctuary" style="max-width: 480px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.5); display: block;">
+        </div>
+
+        <!-- Uplifting Sovereign Proclamation Banner -->
+        <div class="proclamation-banner">
+            <h1>Sanctuary & Eternal Peace</h1>
+            <p>"The struggle is behind me, and my home is a sanctuary where love provides everything I need. I am the Guardian of my peace, and I welcome the joy I have earned."</p>
         </div>
         
-        <!-- Breathtaking Framed Homepage Masterpiece -->
-        <div style="display: inline-block; padding: 12px; background: rgba(4, 25, 17, 0.85); border: 3px solid #d4af37; border-radius: 16px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); backdrop-filter: blur(8px);">
-            <img src="cover_image.png" alt="Homepage Sanctuary" style="max-width: 480px; width: 100%; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.5); display: block;">
+        <div>
+            <a href="#tour-section" class="jump-btn">↓ Explore Realm Video Tour ↓</a>
         </div>
     </div>
 
     <!-- Sequential Cinematic Tour Section -->
-    <div class="cinematic-container">
-        <h2 style="color: #d4af37; margin-top: 0; font-size: 1.4rem; letter-spacing: 2px;">Sanctuary & Realm Tour</h2>
-        <p style="color: #b3a896; font-size: 0.9rem;">Witness the sacred grounds, the grotto, and the eternal peace of our domain.</p>
+    <div id="tour-section" class="cinematic-container">
+        <h2 style="color: #d4af37; margin-top: 0; font-size: 1.4rem; letter-spacing: 2px;">The Grand Imperial Journey</h2>
+        <p style="color: #b3a896; font-size: 0.9rem;">Witness the sacred prayer rooms, the palace halls, and the eternal grace of our domain.</p>
         
         <div class="cinematic-display">
             <video id="sequence-video" class="cinematic-video" autoplay muted playsinline>
@@ -154,6 +226,10 @@
 
         <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Realm Music & Ambiance</button>
         <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
+    </div>
+
+    <div class="royal-footer">
+        Imperial Divine Vision &copy; 2026 &bull; Built in Grace, Protected in Peace
     </div>
 
     <script>
@@ -179,19 +255,15 @@
             videoElement.load();
             videoElement.play().catch(e => console.log("Autoplay waiting for interaction"));
             
-            // Move to the next video, loop back to the beginning when finished
             currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
         }
 
-        // Automatically play the next video in order when the current one ends
         videoElement.onended = playNextVideo;
 
-        // Initialize on load
         window.onload = () => {
             playNextVideo();
         };
 
-        // Audio toggle handler
         let isPlaying = false;
         function toggleAudio() {
             const audio = document.getElementById('royal-audio');
