@@ -433,6 +433,17 @@
             transform: translateX(4px);
         }
 
+        #game-screen {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            z-index: 3;
+            position: relative;
+        }
+        #game-screen.active {
+            display: flex;
+        }
+
         #oversight-screen {
             display: none;
             flex-direction: column;
@@ -580,25 +591,8 @@
                     <div class="stat-item">Sovereign: <span id="role-hud">Queen Rosana</span></div>
                     <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
                     <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
-                    <div class="stat-item">Treasury: <span id="coin-display">1000</span> 🪙</div>
-                </div>
-                <div>
-                    <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToGateway()">Return to Gateway</button>
-                </div>
-            </header>
-                    <!-- STAGE 2: LIVE GAMEPLAY STAGE -->
-        <div id="game-screen" class="screen">
-            <header>
-                <div class="hud-stats">
-                    <div class="stat-item">Sovereign: <span id="role-hud">Queen Rosana</span></div>
-                    <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
-                    <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
-                    <div class="stat-item">Treasury: <span id="coin-display">1000</span> 🪙</div>
-                </div>
-                <div>
-                    <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToGateway()">Return to Gateway</button>
-                </div>
-            </header>
+                    <div class="stat-item">Treasury: <span id="coin-display">1000</span> 🪙<
+</header>
 
             <div class="stage">
                 <div class="visual-viewport" id="game-viewport-bg" style="background: url('rosanna-vip.png') center/cover;">
@@ -658,6 +652,7 @@
     <script>
         function createParticles() {
             const field = document.getElementById('particle-field');
+            if (!field) return;
             const particleCount = 20;
 
             for (let i = 0; i < particleCount; i++) {
@@ -684,8 +679,10 @@
 
         function playSound() {
             const audio = document.getElementById('royal-audio');
-            audio.volume = 0.5;
-            audio.play().catch(e => console.log("Audio waiting for interaction"));
+            if (audio) {
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log("Audio waiting for interaction"));
+            }
         }
 
         const queenWardrobe = [
@@ -758,7 +755,7 @@
             document.getElementById('wardrobe-subtitle').innerText = "Click any outfit to style Queen Rosana:";
             populateWardrobe(queenWardrobe);
             
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('gateway-screen').classList.remove('active');
             document.getElementById('creator-screen').classList.add('active');
         }
 
@@ -770,13 +767,13 @@
             document.getElementById('wardrobe-subtitle').innerText = "Select your traveler attire:";
             populateWardrobe(memberWardrobe);
             
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('gateway-screen').classList.remove('active');
             document.getElementById('creator-screen').classList.add('active');
         }
 
         function openOversightHub() {
             playSound();
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('gateway-screen').classList.remove('active');
             document.getElementById('oversight-screen').classList.add('active');
         }
 
@@ -787,6 +784,7 @@
 
         function populateWardrobe(list) {
             const container = document.getElementById('wardrobe-list');
+            if (!container) return;
             container.innerHTML = '';
             list.forEach((item, index) => {
                 const div = document.createElement('div');
@@ -798,7 +796,8 @@
             if(list.length > 0) {
                 characterConfig.outfitName = list[0].name;
                 characterConfig.outfitImg = list[0].file;
-                document.getElementById('preview-image').src = list[0].file;
+                const previewImg = document.getElementById('preview-image');
+                if (previewImg) previewImg.src = list[0].file;
             }
             updateSummary();
         }
@@ -833,7 +832,8 @@
             itemElement.classList.add('selected');
             characterConfig.outfitName = name;
             characterConfig.outfitImg = imgUrl;
-            document.getElementById('preview-image').src = imgUrl;
+            const previewImg = document.getElementById('preview-image');
+            if (previewImg) previewImg.src = imgUrl;
             updateSummary();
         }
 
@@ -850,12 +850,14 @@
 
         function updateSummary() {
             const title = currentMode === 'queen' ? 'Queen Rosana' : 'Member Character';
-            document.getElementById('character-summary-text').innerText = 
-                `${title} | Tone: ${characterConfig.skinTone} | Hair: ${characterConfig.hair} | Outfit: ${characterConfig.outfitName}`;
+            const summaryText = document.getElementById('character-summary-text');
+            if (summaryText) {
+                summaryText.innerText = `${title} | Tone: ${characterConfig.skinTone} | Hair: ${characterConfig.hair} | Outfit: ${characterConfig.outfitName}`;
+            }
         }
 
         function enterGameWorld() {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('creator-screen').classList.remove('active');
             document.getElementById('game-screen').classList.add('active');
             
             const roleName = currentMode === 'queen' ? 'Queen Rosana' : 'Member Traveler';
@@ -907,6 +909,3 @@
 </body>
 </html>
 
-
-
-            
