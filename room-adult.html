@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: The Hunted State (Adult Room)</title>
+    <title>Imperial Capital: Character Creator & Sovereign Style</title>
     <style>
         :root {
             --bg-dark: #12100e;
-            --panel-bg: rgba(28, 24, 20, 0.85);
+            --panel-bg: rgba(28, 24, 20, 0.92);
             --gold: #d4af37;
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
             --text-muted: #b3a896;
-            --danger: #8b0000;
+            --accent-blue: #3b82f6;
+            --accent-pink: #ec4899;
         }
 
         body {
@@ -45,65 +46,172 @@
             display: flex;
         }
 
-        /* --- STAGE 1: CHARACTER CREATION / CHAMBERS --- */
-        #chamber-screen {
-            padding: 40px;
+        /* --- CHARACTER CREATION / STYLING SUITE --- */
+        #creator-screen {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            background: linear-gradient(to bottom, rgba(18,16,14,0.9), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80') center/cover;
+            position: relative;
+        }
+
+        /* Side Controls Panels */
+        .control-sidebar {
+            width: 320px;
+            background: var(--panel-bg);
+            border-right: 2px solid var(--gold);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 20px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .control-sidebar.right {
+            border-right: none;
+            border-left: 2px solid var(--gold);
+        }
+
+        .panel-section-title {
+            color: var(--gold);
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Option Buttons & Swatches */
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .option-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .option-btn {
+            background: #181410;
+            color: var(--text-main);
+            border: 1px solid var(--gold);
+            padding: 8px;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(18,16,14,0.95), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80') center/cover;
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .option-btn:hover, .option-btn.selected {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        /* Skin Tone Palette */
+        .skin-palette {
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .skin-swatch {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .skin-swatch:hover, .skin-swatch.selected {
+            transform: scale(1.15);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* Center Character Stage Viewport */
+        .character-viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow-y: auto;
+            position: relative;
+            padding: 20px;
         }
 
-        .chamber-box {
+        .character-stage-card {
             background: var(--panel-bg);
             border: 2px solid var(--gold);
-            padding: 40px;
-            max-width: 800px;
-            border-radius: 6px;
-            margin: auto;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        .chamber-box h1 {
+        .character-preview-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .creator-header {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--panel-bg);
+            border: 2px solid var(--gold);
+            padding: 10px 30px;
+            border-radius: 4px;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .creator-header h1 {
             color: var(--gold);
-            margin-top: 0;
-            font-size: 2rem;
+            margin: 0;
+            font-size: 1.5rem;
             letter-spacing: 2px;
         }
 
-        .archetype-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .archetype-card {
-            background: #181410;
-            border: 1px solid var(--gold);
-            padding: 20px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-
-        .archetype-card h3 {
-            color: var(--gold);
-            margin-top: 0;
-        }
-
-        .archetype-card:hover, .archetype-card.selected {
+        /* Confirm Sovereign Action Button */
+        .confirm-btn {
             background: var(--gold);
             color: var(--bg-dark);
-            transform: translateY(-4px);
+            border: 2px solid var(--gold);
+            padding: 14px 28px;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
-        .archetype-card:hover h3, .archetype-card.selected h3 {
-            color: var(--bg-dark);
+        .confirm-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 15px var(--gold);
         }
 
-        /* --- STAGE 2: GAMEPLAY HUD & STAGE --- */
+        /* --- STAGE 2: LIVE GAMEPLAY HUD & STAGE --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -202,99 +310,97 @@
             color: var(--bg-dark);
             transform: translateX(4px);
         }
-
-        /* Cash App Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .modal-content {
-            background: var(--panel-bg);
-            border: 2px solid var(--gold);
-            padding: 30px;
-            width: 450px;
-            text-align: center;
-            border-radius: 5px;
-        }
-
-        .modal-content h3 {
-            color: var(--gold);
-            margin-top: 0;
-        }
-
-        .cashapp-btn {
-            background: #00D632;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-top: 15px;
-            width: 100%;
-        }
-
-        .close-modal {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--text-muted);
-            padding: 8px 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- STAGE 1: THE SANCTUARY CHAMBERS & CHARACTER SETUP -->
-        <div id="chamber-screen" class="screen active">
-            <div class="chamber-box">
-                <h1>The Healing Chambers & Identity Selection</h1>
-                <p>Welcome to the threshold, traveler. Before you step foot into the Hunted State, choose your foundational path or invoke your Sovereign authority.</p>
-                
-                <div class="archetype-grid">
-                    <div class="archetype-card selected" onclick="selectArchetype('Hunter', this)">
-                        <h3>The Hunter</h3>
-                        <p>Bedouin & Diverse Tier 0 survival gear. Built for tracking and wilderness resilience.</p>
-                    </div>
-                    <div class="archetype-card" onclick="selectArchetype('Priestess', this)">
-                        <h3>The Priestess</h3>
-                        <p>Han & East Asian spiritual vestments. Grounded in devotion and sacred staff work.</p>
-                    </div>
-                    <div class="archetype-card" onclick="selectArchetype('Minister', this)">
-                        <h3>The Minister</h3>
-                        <p>Black profile & Frock coat attire. Focused on public leadership and the written record.</p>
-                    </div>
+        <!-- STAGE 1: CHARACTER CREATION & SOVEREIGN STYLING SUITE -->
+        <div id="creator-screen" class="screen active">
+            
+            <div class="creator-header">
+                <h1>Style Your Sovereign</h1>
+            </div>
+
+            <!-- Left Customization Sidebar -->
+            <div class="control-sidebar">
+                <div class="panel-section-title">Body Type</div>
+                <div class="option-grid-3">
+                    <button class="option-btn selected" onclick="setBodyType('Sovereign', this)">Classic</button>
+                    <button class="option-btn" onclick="setBodyType('Athletic', this)">Athletic</button>
+                    <button class="option-btn" onclick="setBodyType('Regal', this)">Regal</button>
                 </div>
 
-                <!-- Royal Sovereign Override for Queen Rosana -->
-                <button class="choice-btn" style="text-align: center; font-weight: bold; background: #8b0000; color: var(--text-main); width: 100%; padding: 12px; margin-bottom: 10px; border-color: var(--gold);" onclick="enterRoyalRealm()">👑 Enter as Queen Rosana (Sovereign Administrator)</button>
+                <div class="panel-section-title" style="margin-top: 15px;">Skin Tone</div>
+                <div class="skin-palette">
+                    <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkinTone('Deep Warm', this)" title="Deep Warm"></div>
+                    <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
+                    <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkinTone('Golden Tan', this)" title="Golden Tan"></div>
+                    <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkinTone('Olive', this)" title="Olive"></div>
+                    <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
+                </div>
 
-                <button class="choice-btn" style="text-align: center; font-weight: bold; background: var(--gold); color: var(--bg-dark); width: 100%; padding: 15px;" onclick="enterGameWorld()">Step Into the Realm & Begin Journey</button>
+                <div class="panel-section-title" style="margin-top: 15px;">Hairstyle</div>
+                <div class="option-grid">
+                    <button class="option-btn selected" onclick="setHair('Braid Upo', this)">Braid-Updo</button>
+                    <button class="option-btn" onclick="setHair('Extensions', this)">Braid Extensions</button>
+                    <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
+                    <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
+                </div>
+
+                <div class="panel-section-title" style="margin-top: 15px;">Primary Palette</div>
+                <div class="option-grid">
+                    <button class="option-btn selected" style="border-color: var(--accent-blue);" onclick="setColorTheme('Blue & Gold', this)">Imperial Blue</button>
+                    <button class="option-btn" style="border-color: var(--accent-pink);" onclick="setColorTheme('Pink & Rose', this)">Royal Rose</button>
+                </div>
             </div>
+
+            <!-- Center Viewport & Character Preview -->
+            <div class="character-viewport">
+                <div class="character-stage-card">
+                    <img id="preview-image" class="character-preview-img" src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80" alt="Sovereign Character Preview">
+                    <p id="character-summary-text" style="font-size: 0.95krem; color: var(--text-muted); margin-bottom: 15px;">
+                        Customizing: Deep Warm Tone | Braid-Updo | Imperial Blue Palette
+                    </p>
+                    <button class="confirm-btn" onclick="enterGameWorld()">Confirm Character & Enter Realm</button>
+                </div>
+            </div>
+
+            <!-- Right Customization Sidebar (Regalia & Accessories) -->
+            <div class="control-sidebar right">
+                <div class="panel-section-title">Regalia Style</div>
+                <div class="option-grid" style="grid-template-columns: 1fr;">
+                    <button class="option-btn selected" onclick="setRegalia('Solar Eclipse', this)">Solar Eclipse Vestments</button>
+                    <button class="option-btn" onclick="setRegalia('Deep Velvet', this)">Deep Velvet Robes</button>
+                    <button class="option-btn" onclick="setRegalia('Divine Vision', this)">Divine Vision Raiment</button>
+                </div>
+
+                <div class="panel-section-title" style="margin-top: 15px;">Accessory Type</div>
+                <div class="option-grid">
+                    <button class="option-btn selected" onclick="setAccessory('Crown', this)">Imperial Crown</button>
+                    <button class="option-btn" onclick="setAccessory('Circlet', this)">Gold Circlet</button>
+                    <button class="option-btn" onclick="setAccessory('Veil', this)">Ceremonial Veil</button>
+                    <button class="option-btn" onclick="setAccessory('Vellet', this)">Vellet Band</button>
+                </div>
+
+                <div class="panel-section-title" style="margin-top: 15px;">Sovereign Status</div>
+                <button class="option-btn" style="background: #8b0000; border-color: var(--gold); width: 100%; padding: 12px; font-weight: bold;" onclick="loadQueenPreset()">👑 Load Queen Rosana Preset</button>
+            </div>
+
         </div>
 
         <!-- STAGE 2: LIVE GAMEPLAY & SURVIVAL STAGE -->
         <div id="game-screen" class="screen">
             <header>
                 <div class="hud-stats">
-                    <div class="stat-item">Role: <span id="role-hud">Hunter</span></div>
+                    <div class="stat-item">Sovereign: <span id="role-hud">Queen Rosana</span></div>
                     <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
                     <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
-                    <div class="stat-item">Coins: <span id="coin-display">50</span> 🪙</div>
+                    <div class="stat-item">Coins: <span id="coin-display">1000</span> 🪙</div>
                 </div>
                 <div>
-                    <button class="choice-btn" style="padding: 6px 12px;" onclick="openCashApp()">Imperial Divine Vision</button>
+                    <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToCreator()">Modify Appearance</button>
                 </div>
             </header>
 
@@ -302,16 +408,16 @@
                 <div class="visual-viewport">
                     <div class="visual-overlay"></div>
                     <div class="scene-description" id="story-text">
-                        You emerge from the changing chambers into the edge of the deep forest canopy under the rich afternoon golden hour. The path splits before you. Your supplies are low, and shadows stretch across ancient roots.
+                        You step forth into the Imperial Capital tailored in your customized sovereign regalia. The deep forest canopy parts under the rich afternoon golden hour, awaiting your decree.
                     </div>
                 </div>
 
                 <div class="action-panel">
-                    <div class="panel-title" id="panel-header-title">Path of the Hunter</div>
+                    <div class="panel-title" id="panel-header-title">Sovereign Administration</div>
                     <div class="choices-container" id="choices-box">
-                        <button class="choice-btn" onclick="makeChoice('track')">1. Track game deeper into the thickets (Costs Time)</button>
-                        <button class="choice-btn" onclick="makeChoice('explore')">2. Admire forest flowers & scenery (High Time Risk)</button>
-                        <button class="choice-btn" onclick="makeChoice('village')">3. Ride down to Village Market (Trade & Supplies)</button>
+                        <button class="choice-btn" onclick="makeChoice('track')">1. Inspect the deep forest thickets & borders</button>
+                        <button class="choice-btn" onclick="makeChoice('explore')">2. Admire sanctuary gardens & flora</button>
+                        <button class="choice-btn" onclick="makeChoice('village')">3. Visit the Village Market & Treasury</button>
                     </div>
                 </div>
             </div>
@@ -319,47 +425,92 @@
 
     </div>
 
-    <!-- Imperial Divine Vision Cash App Modal -->
-    <div class="modal" id="cashapp-modal">
-        <div class="modal-content">
-            <h3>Imperial Divine Vision Portal</h3>
-            <p>Replenish your resources instantly to sustain your journey, acquire land, or pay your estate taxes.</p>
-            <button class="cashapp-btn" onclick="buyCoins()">Top Up 100 Coins ($4.99)</button>
-            <button class="close-modal" onclick="closeCashApp()">Return to Realm</button>
-        </div>
-    </div>
-
     <script>
-        let selectedRole = 'Hunter';
+        // Character Customization State
+        let characterConfig = {
+            bodyType: 'Sovereign',
+            skinTone: 'Deep Warm',
+            hair: 'Braid-Updo',
+            colorTheme: 'Blue & Gold',
+            regalia: 'Solar Eclipse',
+            accessory: 'Crown'
+        };
+
         let daylightHour = 12;
         let health = 100;
-        let coins = 50;
+        let coins = 1000;
 
-        function selectArchetype(role, element) {
-            document.querySelectorAll('.archetype-card').forEach(card => card.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedRole = role;
+        function setBodyType(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.bodyType = val;
+            updateSummary();
+        }
+
+        function setSkinTone(val, swatch) {
+            document.querySelectorAll('.skin-swatch').forEach(s => s.classList.remove('selected'));
+            swatch.classList.add('selected');
+            characterConfig.skinTone = val;
+            updateSummary();
+        }
+
+        function setHair(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.hair = val;
+            updateSummary();
+        }
+
+        function setColorTheme(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.colorTheme = val;
+            updateSummary();
+        }
+
+        function setRegalia(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.regalia = val;
+            updateSummary();
+        }
+
+        function setAccessory(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.accessory = val;
+            updateSummary();
+        }
+
+        function updateButtonGroup(clickedBtn) {
+            clickedBtn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            clickedBtn.classList.add('selected');
+        }
+
+        function updateSummary() {
+            document.getElementById('character-summary-text').innerText = 
+                `Customizing: ${characterConfig.skinTone} Tone | ${characterConfig.hair} | ${characterConfig.regalia} (${characterConfig.colorTheme})`;
+        }
+
+        function loadQueenPreset() {
+            characterConfig = {
+                bodyType: 'Regal',
+                skinTone: 'Deep Warm',
+                hair: 'Braid-Updo',
+                colorTheme: 'Blue & Gold',
+                regalia: 'Solar Eclipse',
+                accessory: 'Crown'
+            };
+            updateSummary();
+            alert("Queen Rosana Sovereign configuration loaded successfully.");
         }
 
         function enterGameWorld() {
-            document.getElementById('chamber-screen').classList.remove('active');
+            document.getElementById('creator-screen').classList.remove('active');
             document.getElementById('game-screen').classList.add('active');
-            document.getElementById('role-hud').innerText = selectedRole;
-            document.getElementById('panel-header-title').innerText = 'Path of the ' + selectedRole;
+            document.getElementById('role-hud').innerText = characterConfig.regalia + ' Sovereign';
+            document.getElementById('story-text').innerText = `You step forth into the Imperial Capital wearing your custom ${characterConfig.hair} and ${characterConfig.regalia} attire. The realm bends to your chosen vision.`;
             updateHUD();
         }
 
-        function enterRoyalRealm() {
-            selectedRole = 'Queen Rosana (Sovereign Administrator)';
-            document.getElementById('chamber-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.add('active');
-            document.getElementById('role-hud').innerText = selectedRole;
-            document.getElementById('panel-header-title').innerText = 'Sovereign Realm Administration';
-            
-            coins = 1000;
-            health = 100;
-            document.getElementById('story-text').innerText = "All hail Queen Rosana. The chambers part effortlessly before your sovereign authority. As supreme administrator and ruler, your treasury is full, your lands are secure, and the realm bends to your vision.";
-            updateHUD();
+        function returnToCreator() {
+            document.getElementById('game-screen').classList.remove('active');
+            document.getElementById('creator-screen').classList.add('active');
         }
 
         function updateHUD() {
@@ -373,81 +524,12 @@
 
         function makeChoice(action) {
             const textBox = document.getElementById('story-text');
-            const choicesBox = document.getElementById('choices-box');
 
             if (action === 'track') {
                 daylightHour += 2;
-                if (daylightHour >= 19) { triggerNightfall(); return; }
-                textBox.innerText = "You track game through dense brush as the chosen " + selectedRole.toLowerCase() + ", spending valuable daylight. Provisions secured, but weariness sets in.";
-                coins += 15;
+                textBox.innerText = "You inspect the deep borders of the Hunted State in your sovereign vestments, securing peace across the provinces.";
+                coins += 25;
             } 
             else if (action === 'explore') {
-                daylightHour += 4;
-                if (daylightHour >= 19) { triggerNightfall(); return; }
-                textBox.innerText = "You lose yourself admiring the breathtaking flora, canopy views, and sanctuary flowers. Hours slip away unheeded as night approaches.";
-            } 
-            else if (action === 'village') {
-                textBox.innerText = "You guide your path down to the village market, trade securely, and check your estate tax balances.";
-                coins -= 10;
-                health = Math.min(100, health + 10);
-            }
-            updateHUD();
-        }
-
-        function triggerNightfall() {
-            const textBox = document.getElementById('story-text');
-            const choicesBox = document.getElementById('choices-box');
-            
-            health -= 40;
-            textBox.innerText = "Night has fallen over the deep forest! Without provisions secured before dark, hunger gnaws at your life force. Your health is plummeting rapidly!";
-            
-            choicesBox.innerHTML = `
-                <button class="choice-btn" onclick="openCashApp()" style="border-color: var(--danger);">Emergency: Use Imperial Cash App</button>
-                <button class="choice-btn" onclick="resetDay()">Rest and Try Again (-20 Coins)</button>
-            `;
-            updateHUD();
-        }
-
-        function resetDay() {
-            if (coins >= 20) {
-                coins -= 20;
-                health = 80;
-                daylightHour = 8;
-                document.getElementById('story-text').innerText = "A new dawn breaks over the Imperial Capital. Past mistakes are behind you; your journey resumes.";
-                resetChoices();
-            } else {
-                alert("Not enough coins! You must use the Imperial Divine Vision portal.");
-            }
-            updateHUD();
-        }
-
-        function resetChoices() {
-            document.getElementById('choices-box').innerHTML = `
-                <button class="choice-btn" onclick="makeChoice('track')">1. Track game deeper into the thickets (Costs Time)</button>
-                <button class="choice-btn" onclick="makeChoice('explore')">2. Admire forest flowers & scenery (High Time Risk)</button>
-                <button class="choice-btn" onclick="makeChoice('village')">3. Ride down to Village Market (Trade & Supplies)</button>
-            `;
-        }
-
-        function openCashApp() {
-            document.getElementById('cashapp-modal').style.display = 'flex';
-        }
-
-        function closeCashApp() {
-            document.getElementById('cashapp-modal').style.display = 'none';
-        }
-
-        function buyCoins() {
-            coins += 100;
-            health = 100;
-            updateHUD();
-            closeCashApp();
-            alert("Transaction successful via Imperial Divine Vision. Coins and vitality restored!");
-            daylightHour = 10;
-            resetChoices();
-            document.getElementById('story-text').innerText = "Refreshed and fully supplied, you step out from the chambers, ready to govern your land and face the forest once more.";
-        }
-    </script>
-</body>
-</html>
-
+                daylightHour += 3;
+                textBox.innerText = "You wander through 
