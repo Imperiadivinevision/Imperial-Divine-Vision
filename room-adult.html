@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: Queen Rosana's Realm</title>
+    <title>Imperial Capital: Sovereign Chamber</title>
     <style>
         :root {
             --bg-dark: #12100e;
@@ -22,132 +22,19 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Georgia', serif;
-            overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            flex: 1;
             max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
             border-left: 2px solid var(--gold);
             border-right: 2px solid var(--gold);
-            position: relative;
-        }
-
-        @keyframes panBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .particle-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--gold);
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.9; }
-            100% { transform: translateY(105vh) translateX(50px) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes sovereignBreath {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-
-        .screen {
-            display: none;
-            flex: 1;
-            flex-direction: column;
-            min-height: 100vh;
-            z-index: 3;
-            position: relative;
-        }
-        .screen.active {
-            display: flex;
-        }
-
-        #gateway-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, rgba(18,16,14,0.8), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80');
-            background-size: 200% 200%;
-            animation: panBackground 25s ease infinite;
-            gap: 20px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .gateway-card {
-            background: var(--panel-bg);
-            border: 2px solid var(--gold);
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .gateway-card h1 {
-            color: var(--gold);
-            margin-top: 0;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-        }
-
-        .gateway-btn {
-            background: #181410;
-            color: var(--text-main);
-            border: 1px solid var(--gold);
-            padding: 12px 20px;
-            font-family: 'Georgia', serif;
-            font-size: 1.05rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 12px;
-            border-radius: 4px;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .gateway-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            font-weight: bold;
-            box-shadow: 0 0 15px var(--gold);
-        }
-
-        #creator-screen {
-            display: none;
-            flex-direction: row;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, rgba(18,16,14,0.7), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80');
-            background-size: 200% 200%;
-            animation: panBackground 25s ease infinite;
-            position: relative;
-        }
-        #creator-screen.active {
-            display: flex;
         }
 
         .control-sidebar {
@@ -159,7 +46,6 @@
             padding: 20px;
             gap: 15px;
             overflow-y: auto;
-            z-index: 10;
             max-height: 100vh;
         }
 
@@ -229,6 +115,8 @@
             border-radius: 4px;
             transition: all 0.2s;
             text-align: left;
+            color: var(--text-main);
+            text-decoration: none;
         }
 
         .wardrobe-item:hover, .wardrobe-item.selected {
@@ -272,8 +160,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
             padding: 20px;
+            background: #0b0907;
         }
 
         .character-stage-card {
@@ -291,26 +179,13 @@
             width: 100%;
             height: 320px;
             object-fit: contain;
-            background: #0b0907;
+            background: #12100e;
             border: 1px solid var(--gold);
             border-radius: 4px;
             margin-bottom: 12px;
-            animation: sovereignBreath 6s ease-in-out infinite;
         }
 
-        .creator-header {
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .creator-header h1 {
-            color: var(--gold);
-            margin: 0;
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-        }
-
-        .confirm-btn {
+        .confirm-btn, .back-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
@@ -325,170 +200,15 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
             margin-top: 10px;
+            text-decoration: display block;
+            text-align: center;
+            display: block;
+            box-sizing: border-box;
         }
 
-        .confirm-btn:hover {
+        .confirm-btn:hover, .back-btn:hover {
             background: var(--gold-hover);
             box-shadow: 0 0 15px var(--gold);
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: var(--panel-bg);
-            border-bottom: 2px solid var(--gold);
-            flex-shrink: 0;
-        }
-
-        .hud-stats {
-            display: flex;
-            gap: 25px;
-            font-size: 1.1rem;
-        }
-
-        .stat-item span {
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        .stage {
-            display: flex;
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            min-height: calc(100vh - 70px);
-        }
-
-        .visual-viewport {
-            flex: 2;
-            position: relative;
-            background: url('rosanna-vip.png') center/cover;
-            animation: panBackground 20s ease infinite;
-            display: flex;
-            align-items: flex-end;
-            padding: 30px;
-        }
-
-        .visual-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, rgba(18,16,14,0.9), transparent 50%);
-        }
-
-        .scene-description {
-            position: relative;
-            z-index: 2;
-            background: var(--panel-bg);
-            padding: 20px;
-            border: 1px solid var(--gold);
-            border-radius: 4px;
-            max-width: 800px;
-            line-height: 1.6;
-        }
-
-        .action-panel {
-            flex: 1;
-            background: #181410;
-            border-left: 1px solid var(--gold);
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .panel-title {
-            color: var(--gold);
-            font-size: 1.3rem;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .choices-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-        }
-
-        button.choice-btn {
-            background: var(--panel-bg);
-            color: var(--text-main);
-            border: 1px solid var(--gold);
-            padding: 12px 18px;
-            text-align: left;
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 3px;
-        }
-
-        button.choice-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            transform: translateX(4px);
-        }
-
-        #game-screen {
-            display: none;
-            flex-direction: column;
-            min-height: 100vh;
-            z-index: 3;
-            position: relative;
-        }
-        #game-screen.active {
-            display: flex;
-        }
-
-        #oversight-screen {
-            display: none;
-            flex-direction: column;
-            min-height: 100vh;
-            background: var(--bg-dark);
-            z-index: 3;
-            position: relative;
-        }
-        #oversight-screen.active {
-            display: flex;
-        }
-        .oversight-body {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
-        .chat-log-panel {
-            flex: 2;
-            background: var(--panel-bg);
-            border-right: 2px solid var(--gold);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
-        }
-        .prophetic-vision-panel {
-            flex: 1;
-            background: #181410;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            border-left: 1px solid var(--gold);
-        }
-        .chat-msg {
-            background: #181410;
-            border: 1px solid var(--gold);
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-size: 0.95rem;
-        }
-        .chat-msg span {
-            color: var(--gold);
-            font-weight: bold;
         }
     </style>
 </head>
@@ -496,320 +216,92 @@
 
     <div class="container">
         
-        <div class="particle-container" id="particle-field"></div>
+        <!-- Left Customization Sidebar -->
+        <div class="control-sidebar">
+            <div class="panel-section-title">Sovereign Focus</div>
+            <div class="option-grid">
+                <button class="option-btn selected" onclick="setSovereign('Queen Rosana', 'rosanna-vip.png', this)">Queen Rosana</button>
+                <button class="option-btn" onclick="setSovereign('King Benson', 'king-benson.png', this)">King Benson</button>
+            </div>
 
-        <!-- FOREST & BIRDS AMBIENT AUDIO PLAYER -->
-        <audio id="royal-audio" loop>
-            <source src="https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg" type="audio/ogg">
-        </audio>
+            <div class="panel-section-title" style="margin-top: 10px;">Skin Tone</div>
+            <div class="skin-palette">
+                <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkinTone('Deep Warm', this)" title="Deep Warm"></div>
+                <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
+                <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkinTone('Golden Tan', this)" title="Golden Tan"></div>
+                <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkinTone('Olive', this)" title="Olive"></div>
+                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
+            </div>
 
-        <!-- GATEWAY SCREEN: SELECT YOUR PATH & ENABLE AUDIO -->
-        <div id="gateway-screen" class="screen active">
-            <div class="gateway-card">
-                <h1>Imperial Realm Gateway</h1>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Enter the sanctuary and immerse yourself in the forest and birdsong:</p>
-                <button class="gateway-btn" onclick="startAsQueen()">1. Queen Rosana's Sovereign Realm</button>
-                <button class="gateway-btn" onclick="startAsMemberCreator()">2. Member Character Creator</button>
-                <button class="gateway-btn" onclick="openOversightHub()">3. Prophetic Oversight & Member Chat Hub</button>
+            <div class="panel-section-title" style="margin-top: 10px;">Hairstyle</div>
+            <div class="option-grid">
+                <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
+                <button class="option-btn" onclick="setHair('Extensions', this)">Extensions</button>
+                <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
+                <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
             </div>
         </div>
 
-        <!-- STAGE 1: CHARACTER CREATION SUITE -->
-        <div id="creator-screen" class="screen">
+        <!-- Center Viewport & Character Preview -->
+        <div class="character-viewport">
+            <div style="margin-bottom: 15px; text-align: center;">
+                <h1 style="color: var(--gold); margin: 0; font-size: 1.4rem; letter-spacing: 2px;">Style Your Sovereign</h1>
+            </div>
+            <div class="character-stage-card">
+                <img id="preview-image" class="character-preview-img" src="rosanna-vip.png" alt="Preview">
+                <p id="character-summary-text" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+                    Queen Rosana | Deep Warm | Braid-Updo
+                </p>
+                <a href="gateway.html" class="back-btn">Return to Gateway</a>
+            </div>
+        </div>
+
+        <!-- Right Customization Sidebar (Wardrobe) -->
+        <div class="control-sidebar right">
+            <div class="panel-section-title">Imperial Wardrobe</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 8px 0;">Click any outfit to style:</p>
             
-            <!-- Left Customization Sidebar -->
-            <div class="control-sidebar">
-                <div class="panel-section-title">Body Type</div>
-                <div class="option-grid-3">
-                    <button class="option-btn selected" onclick="setBodyType('Classic', this)">Classic</button>
-                    <button class="option-btn" onclick="setBodyType('Athletic', this)">Athletic</button>
-                    <button class="option-btn" onclick="setBodyType('Regal', this)">Regal</button>
+            <div class="wardrobe-grid" id="wardrobe-list">
+                <div class="wardrobe-item selected" onclick="setOutfit('Rosana VIP', 'rosanna-vip.png', this)">
+                    <img src="rosanna-vip.png" class="wardrobe-thumbnail"><span>Rosana VIP</span>
                 </div>
-
-                <div class="panel-section-title" style="margin-top: 10px;">Skin Tone</div>
-                <div class="skin-palette">
-                    <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkinTone('Deep Warm', this)" title="Deep Warm"></div>
-                    <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
-                    <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkinTone('Golden Tan', this)" title="Golden Tan"></div>
-                    <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkinTone('Olive', this)" title="Olive"></div>
-                    <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
+                <div class="wardrobe-item" onclick="setOutfit('Dress Master', 'dress.png', this)">
+                    <img src="dress.png" class="wardrobe-thumbnail"><span>Dress Master</span>
                 </div>
-
-                <div class="panel-section-title" style="margin-top: 10px;">Hairstyle</div>
-                <div class="option-grid">
-                    <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
-                    <button class="option-btn" onclick="setHair('Extensions', this)">Braid Extensions</button>
-                    <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
-                    <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
+                <div class="wardrobe-item" onclick="setOutfit('Robe 1', 'Robe-1.png', this)">
+                    <img src="Robe-1.png" class="wardrobe-thumbnail"><span>Robe 1</span>
                 </div>
-
-                <div class="panel-section-title" style="margin-top: 10px;">Primary Palette</div>
-                <div class="option-grid">
-                    <button class="option-btn selected" style="border-color: var(--accent-blue);" onclick="setColorTheme('Imperial Blue', this)">Imperial Blue</button>
-                    <button class="option-btn" style="border-color: var(--accent-pink);" onclick="setColorTheme('Royal Rose', this)">Royal Rose</button>
+                <div class="wardrobe-item" onclick="setOutfit('Robe 2', 'Robe-2.png', this)">
+                    <img src="Robe-2.png" class="wardrobe-thumbnail"><span>Robe 2</span>
                 </div>
             </div>
 
-            <!-- Center Viewport & Character Preview -->
-            <div class="character-viewport">
-                <div class="creator-header">
-                    <h1 id="creator-title">Style Your Sovereign: Queen Rosana</h1>
-                </div>
-                <div class="character-stage-card">
-                    <img id="preview-image" class="character-preview-img" src="rosanna-vip.png" alt="Preview">
-                    <p id="character-summary-text" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
-                        Customizing: Deep Warm | Braid-Updo | Rosana VIP
-                    </p>
-                    <button class="confirm-btn" onclick="enterGameWorld()">Confirm Character & Enter Realm</button>
-                </div>
-            </div>
-
-            <!-- Right Customization Sidebar (Wardrobe) -->
-            <div class="control-sidebar right">
-                <div class="panel-section-title" id="wardrobe-section-title">Imperial Wardrobe</div>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 8px 0;" id="wardrobe-subtitle">Click any outfit to style Queen Rosana:</p>
-                
-                <div class="wardrobe-grid" id="wardrobe-list"></div>
-
-                <div class="panel-section-title" style="margin-top: 10px;">Accessory Type</div>
-                <div class="option-grid">
-                    <button class="option-btn selected" onclick="setAccessory('Imperial Crown', this)">Crown</button>
-                    <button class="option-btn" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
-                    <button class="option-btn" onclick="setAccessory('Ceremonial Veil', this)">Veil</button>
-                    <button class="option-btn" onclick="setAccessory('Vellet Band', this)">Vellet</button>
-                </div>
-                
-                <button class="choice-btn" style="margin-top: 15px; text-align: center;" onclick="returnToGateway()">Return to Gateway</button>
-            </div>
-
-        </div>
-
-        <!-- STAGE 2: LIVE GAMEPLAY STAGE -->
-        <div id="game-screen" class="screen">
-            <header>
-                <div class="hud-stats">
-                    <div class="stat-item">Sovereign: <span id="role-hud">Queen Rosana</span></div>
-                    <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
-                    <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
-                    <div class="stat-item">Treasury: <span id="coin-display">1000</span> 🪙<
-/span> 🪙</div>
-                </div>
-                <div>
-                    <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToGateway()">Return to Gateway</button>
-                </div>
-            </header>
-
-            <div class="stage">
-                <div class="visual-viewport" id="game-viewport-bg" style="background: url('rosanna-vip.png') center/cover;">
-                    <div class="visual-overlay"></div>
-                    <div class="scene-description" id="story-text">
-                        You step forth into the Imperial Capital. The realm bends to your sovereign vision.
-                    </div>
-                </div>
-
-                <div class="action-panel">
-                    <div class="panel-title" id="panel-header-title">Sovereign Administration</div>
-                    <div class="choices-container" id="choices-box">
-                        <button class="choice-btn" onclick="makeChoice('track')">1. Inspect the deep forest thickets & borders</button>
-                        <button class="choice-btn" onclick="makeChoice('explore')">2. Admire sanctuary gardens & flora</button>
-                        <button class="choice-btn" onclick="makeChoice('village')">3. Visit the Village Market & Treasury</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- STAGE 3: PROPHETIC OVERSIGHT & MEMBER CHAT HUB -->
-        <div id="oversight-screen" class="screen">
-            <header>
-                <div class="hud-stats">
-                    <div class="stat-item">Hub: <span>Prophetic Oversight & Member Chat</span></div>
-                </div>
-                <div>
-                    <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToGateway()">Return to Gateway</button>
-                </div>
-            </header>
-            <div class="oversight-body">
-                <div class="chat-log-panel">
-                    <div class="panel-title">Member Live Realm Chat</div>
-                    <div id="chat-messages-box" style="display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex: 1;">
-                        <div class="chat-msg"><span>Traveler Elian:</span> Entering the Eastern Thickets now. The canopy is breathtaking!</div>
-                        <div class="chat-msg"><span>Traveler Lyra:</span> Trading surplus provisions at the Village Market under Queen Rosana's protection.</div>
-                    </div>
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
-                        <input type="text" id="member-chat-input" placeholder="Broadcast a message to members..." style="flex:1; background:#181410; border:1px solid var(--gold); color:var(--text-main); padding:10px; font-family:'Georgia',serif; border-radius:3px;">
-                        <button class="choice-btn" onclick="sendMemberChat()">Broadcast</button>
-                    </div>
-                </div>
-                <div class="prophetic-vision-panel">
-                    <div class="panel-title">Prophetic Sight (Ahead)</div>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-                        As the prophet and guardian of the realm, your vision sees beyond the horizon.
-                    </p>
-                    <div style="background: var(--panel-bg); border: 1px solid var(--gold); padding: 15px; border-radius: 4px; font-size: 0.9rem; line-height: 1.5;">
-                        🔮 <strong>Vision Forecast:</strong> A peaceful trade caravan approaches from Erie at dusk. Sanctuary reserves are fully secure.
-                    </div>
-                </div>
+            <div class="panel-section-title" style="margin-top: 10px;">Accessory Type</div>
+            <div class="option-grid">
+                <button class="option-btn selected" onclick="setAccessory('Imperial Crown', this)">Crown</button>
+                <button class="option-btn" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
+                <button class="option-btn" onclick="setAccessory('Ceremonial Veil', this)">Veil</button>
+                <button class="option-btn" onclick="setAccessory('Vellet Band', this)">Vellet</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        function createParticles() {
-            const field = document.getElementById('particle-field');
-            if (!field) return;
-            const particleCount = 20;
-
-            for (let i = 0; i < particleCount; i++) {
-                const p = document.createElement('div');
-                p.classList.add('particle');
-                
-                const size = Math.random() * 6 + 4;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.top = -20 + 'px';
-                
-                const duration = Math.random() * 5 + 4;
-                const delay = Math.random() * 5;
-                p.style.animationDuration = duration + 's';
-                p.style.animationDelay = delay + 's';
-                
-                field.appendChild(p);
-            }
-        }
-        window.onload = function() {
-            createParticles();
-        };
-
-        function playSound() {
-            const audio = document.getElementById('royal-audio');
-            if (audio) {
-                audio.volume = 0.5;
-                audio.play().catch(e => console.log("Audio waiting for interaction"));
-            }
-        }
-
-        const queenWardrobe = [
-            { name: 'Rosana VIP', file: 'rosanna-vip.png' },
-            { name: 'Dress Master', file: 'dress.png' },
-            { name: 'Robe 1', file: 'Robe-1.png' },
-            { name: 'Robe 2', file: 'Robe-2.png' },
-            { name: 'Robe 3', file: 'Robe-3.png' },
-            { name: 'Robe 4', file: 'Robe-4.png' },
-            { name: 'Rosana Outfit 6', file: 'rosanna-outfit-6.png' },
-            { name: 'Rosana Outfit 7', file: 'rosanna-outfit-7.png' },
-            { name: 'Rosana Outfit 8', file: 'rosanna-outfit-8.png' },
-            { name: 'Rosana Outfit 10', file: 'rosanna-outfit-10.png' },
-            { name: 'Rosana Outfit 11', file: 'rosanna-outfit-11.png' },
-            { name: 'Rosana Outfit 12', file: 'rosanna-outfit-12.png' },
-            { name: 'Rosana Outfit 13', file: 'rosanna-outfit-13.png' },
-            { name: 'Rosana Outfit 14', file: 'rosanna-outfit-14.png' },
-            { name: 'Rosana Outfit 17', file: 'rosanna-outfit-17.png' },
-            { name: 'Rosana Outfit 18', file: 'rosanna-outfit-18.png' },
-            { name: 'Rosana Outfit 21', file: 'rosanna-outfit-21.png' },
-            { name: 'Rosana Outfit 50', file: 'rosanna-outfit-50.png' },
-            { name: 'Rosana Outfit 51', file: 'rosanna-outfit-51.png' },
-            { name: 'Rosana Outfit 52', file: 'rosanna-outfit-52.png' },
-            { name: 'Rosana Outfit 55', file: 'rosanna-outfit-55.png' },
-            { name: 'Rosana Outfit 56', file: 'rosanna-outfit-56.png' },
-            { name: 'Rosana Outfit 57', file: 'rosanna-outfit-57.png' },
-            { name: 'Rosana Outfit 58', file: 'rosanna-outfit-58.png' },
-            { name: 'Rosana Outfit 59', file: 'rosanna-outfit-59.png' },
-            { name: 'Rosana Tea Outfit', file: 'rosanna-tea-1.png' },
-            { name: 'Rosana Outfit 60', file: 'rosanna-outfit-60.png' },
-            { name: 'Rosana Outfit 61', file: 'rosanna-outfit-61.png' },
-            { name: 'Rosana Outfit 63', file: 'rosanna-outfit-63.png' },
-            { name: 'Rosana Outfit 65', file: 'rosanna-outfit-65.png' },
-            { name: 'Rosana Outfit 69', file: 'rosanna-outfit-69.png' },
-            { name: 'Rosana Outfit 70', file: 'rosanna-outfit-70.png' },
-            { name: 'Rosana Outfit 71', file: 'rosanna-outfit-71.png' },
-            { name: 'Rosana Outfit 72', file: 'rosanna-outfit-72.png' },
-            { name: 'Rosana Outfit 78', file: 'rosanna-outfit-78.png' },
-            { name: 'Rosana Outfit 80', file: 'rosanna-outfit-80.png' },
-            { name: 'Rosana Outfit 90', file: 'rosanna-outfit-90.png' },
-            { name: 'Rosana Outfit 97', file: 'rosanna-outfit-97.png' }
-        ];
-
-        const memberWardrobe = [
-            { name: 'Traveler Tunic', file: 'rosanna-outfit-6.png' },
-            { name: 'Sanctuary Robe', file: 'Robe-1.png' },
-            { name: 'Garden Attire', file: 'rosanna-tea-1.png' }
-        ];
-
-        let currentMode = 'queen';
+        let currentSovereign = 'Queen Rosana';
         let characterConfig = {
-            bodyType: 'Classic',
             skinTone: 'Deep Warm',
             hair: 'Braid-Updo',
-            colorTheme: 'Imperial Blue',
             outfitName: 'Rosana VIP',
-            outfitImg: 'rosanna-vip.png',
-            accessory: 'Imperial Crown'
+            outfitImg: 'rosanna-vip.png'
         };
 
-        let daylightHour = 12;
-        let health = 100;
-        let coins = 1000;
-
-        function startAsQueen() {
-            playSound();
-            currentMode = 'queen';
-            document.getElementById('creator-title').innerText = "Style Your Sovereign: Queen Rosana";
-            document.getElementById('wardrobe-section-title').innerText = "Imperial Wardrobe";
-            document.getElementById('wardrobe-subtitle').innerText = "Click any outfit to style Queen Rosana:";
-            populateWardrobe(queenWardrobe);
-            
-            document.getElementById('gateway-screen').classList.remove('active');
-            document.getElementById('creator-screen').classList.add('active');
-        }
-
-        function startAsMemberCreator() {
-            playSound();
-            currentMode = 'member';
-            document.getElementById('creator-title').innerText = "Create Your Member Character";
-            document.getElementById('wardrobe-section-title').innerText = "Member Wardrobe";
-            document.getElementById('wardrobe-subtitle').innerText = "Select your traveler attire:";
-            populateWardrobe(memberWardrobe);
-            
-            document.getElementById('gateway-screen').classList.remove('active');
-            document.getElementById('creator-screen').classList.add('active');
-        }
-
-        function openOversightHub() {
-            playSound();
-            document.getElementById('gateway-screen').classList.remove('active');
-            document.getElementById('oversight-screen').classList.add('active');
-        }
-
-        function returnToGateway() {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('gateway-screen').classList.add('active');
-        }
-
-        function populateWardrobe(list) {
-            const container = document.getElementById('wardrobe-list');
-            if (!container) return;
-            container.innerHTML = '';
-            list.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = `wardrobe-item ${index === 0 ? 'selected' : ''}`;
-                div.onclick = () => setOutfit(item.name, item.file, div);
-                div.innerHTML = `<img src="${item.file}" class="wardrobe-thumbnail"><span>${item.name}</span>`;
-                container.appendChild(div);
-            });
-            if(list.length > 0) {
-                characterConfig.outfitName = list[0].name;
-                characterConfig.outfitImg = list[0].file;
-                const previewImg = document.getElementById('preview-image');
-                if (previewImg) previewImg.src = list[0].file;
-            }
-            updateSummary();
-        }
-
-        function setBodyType(val, btn) {
+        function setSovereign(name, img, btn) {
             updateButtonGroup(btn);
-            characterConfig.bodyType = val;
+            currentSovereign = name;
+            characterConfig.outfitImg = img;
+            characterConfig.outfitName = name;
+            document.getElementById('preview-image').src = img;
             updateSummary();
         }
 
@@ -826,89 +318,27 @@
             updateSummary();
         }
 
-        function setColorTheme(val, btn) {
-            updateButtonGroup(btn);
-            characterConfig.colorTheme = val;
-            updateSummary();
-        }
-
         function setOutfit(name, imgUrl, itemElement) {
             document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
             itemElement.classList.add('selected');
             characterConfig.outfitName = name;
             characterConfig.outfitImg = imgUrl;
-            const previewImg = document.getElementById('preview-image');
-            if (previewImg) previewImg.src = imgUrl;
+            document.getElementById('preview-image').src = imgUrl;
             updateSummary();
         }
 
         function setAccessory(val, btn) {
             updateButtonGroup(btn);
-            characterConfig.accessory = val;
-            updateSummary();
         }
 
         function updateButtonGroup(clickedBtn) {
-            clickedBtn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            clickedBtn.parentElement.querySelectorAll('.option-btn, .skin-swatch').forEach(b => b.classList.remove('selected'));
             clickedBtn.classList.add('selected');
         }
 
         function updateSummary() {
-            const title = currentMode === 'queen' ? 'Queen Rosana' : 'Member Character';
-            const summaryText = document.getElementById('character-summary-text');
-            if (summaryText) {
-                summaryText.innerText = `${title} | Tone: ${characterConfig.skinTone} | Hair: ${characterConfig.hair} | Outfit: ${characterConfig.outfitName}`;
-            }
-        }
-
-        function enterGameWorld() {
-            document.getElementById('creator-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.add('active');
-            
-            const roleName = currentMode === 'queen' ? 'Queen Rosana' : 'Member Traveler';
-            document.getElementById('role-hud').innerText = `${roleName} (${characterConfig.outfitName})`;
-            document.getElementById('game-viewport-bg').style.background = `url('${characterConfig.outfitImg}') center/cover`;
-            
-            document.getElementById('story-text').innerText = `You step forth into the Imperial Capital wearing your ${characterConfig.outfitName}. The realm bends to your presence.`;
-            updateHUD();
-        }
-
-        function updateHUD() {
-            document.getElementById('coin-display').innerText = coins;
-            document.getElementById('health-display').innerText = health + '%';
-            
-            let timeStr = daylightHour >= 12 ? (daylightHour === 12 ? '12:00 PM' : (daylightHour - 12) + ':00 PM') : daylightHour + ':00 AM';
-            if (daylightHour >= 19) timeStr = 'Nightfall (Danger)';
-            document.getElementById('time-display').innerText = timeStr;
-        }
-
-        function makeChoice(action) {
-            const textBox = document.getElementById('story-text');
-            if (action === 'track') {
-                daylightHour += 2;
-                textBox.innerText = "You inspect the deep borders of the realm, ensuring complete security and harmony.";
-                coins += 25;
-            } else if (action === 'explore') {
-                daylightHour += 3;
-                textBox.innerText = "You wander through the breathtaking sanctuary gardens and floral trails.";
-            } else if (action === 'village') {
-                textBox.innerText = "You visit the Village Market. Citizens and merchants bow in deep respect.";
-                coins -= 10;
-                health = Math.min(100, health + 10);
-            }
-            updateHUD();
-        }
-
-        function sendMemberChat() {
-            const input = document.getElementById('member-chat-input');
-            if(!input.value.trim()) return;
-            const box = document.getElementById('chat-messages-box');
-            const msg = document.createElement('div');
-            msg.className = 'chat-msg';
-            msg.innerHTML = `<span>Queen Rosana (Prophet):</span> ${input.value}`;
-            box.appendChild(msg);
-            input.value = '';
-            box.scrollTop = box.scrollHeight;
+            document.getElementById('character-summary-text').innerText = 
+                `${currentSovereign} | ${characterConfig.skinTone} | ${characterConfig.hair} | ${characterConfig.outfitName}`;
         }
     </script>
 </body>
