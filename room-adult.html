@@ -2,400 +2,473 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imperial Divine Vision | Sanctuary of the Sovereign</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Capital: Sovereign Chamber</title>
     <style>
+        :root {
+            --bg-dark: #12100e;
+            --panel-bg: rgba(28, 24, 20, 0.95);
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-main: #f5f2eb;
+            --text-muted: #b3a896;
+            --accent-glow: rgba(212, 175, 55, 0.4);
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #040a08;
-            background-repeat: repeat;
-            background-position: center;
-            background-size: 400px auto;
-            background-image: url('garden_border_pattern.png');
-            animation: breatheGarden 60s infinite alternate ease-in-out;
-            color: #d4af37;
-            font-family: 'Cinzel', serif;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        @keyframes breatheGarden {
-            0% {
-                background-size: 400px auto;
-                background-position: center center;
-            }
-            50% {
-                background-size: 410px auto;
-                background-position: center top;
-            }
-            100% {
-                background-size: 395px auto;
-                background-position: center bottom;
-            }
-        }
-
-        /* Solid High-Contrast Navigation Bar with Dropdown Support */
-        nav { 
-            padding: 15px 20px; 
-            background: rgba(4, 10, 8, 0.95);
-            border-bottom: 2px solid #d4af37;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+
+        .chamber-background {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18,16,14,0.5), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .control-sidebar {
+            width: 320px;
+            background: var(--panel-bg);
+            border-right: 2px solid var(--gold);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.8);
+        }
+
+        .control-sidebar.right {
+            border-right: none;
+            border-left: 2px solid var(--gold);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.8);
+        }
+
+        .panel-section-title {
+            color: var(--gold);
+            font-size: 1.05rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .option-btn {
+            background: #181410;
+            color: var(--text-main);
+            border: 1px solid var(--gold);
+            padding: 8px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .option-btn:hover, .option-btn.selected {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Custom Character Likeness Studio Box */
+        .likeness-studio-box {
+            background: rgba(14, 25, 20, 0.9);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: auto;
+            text-align: left;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .likeness-studio-box h4 {
+            color: var(--gold);
+            margin: 0 0 6px 0;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .likeness-studio-box p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin: 0 0 10px 0;
+            font-style: italic;
+        }
+
+        .likeness-input {
+            width: 100%;
+            background: #12100e;
+            border: 1px solid var(--gold);
+            color: var(--text-main);
+            padding: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 0.85rem;
+            border-radius: 3px;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+        }
+
+        .likeness-input:focus {
+            outline: none;
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        .wardrobe-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .wardrobe-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .wardrobe-grid::-webkit-scrollbar-track {
+            background: #181410;
+        }
+        .wardrobe-grid::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .wardrobe-item {
+            background: #181410;
+            border: 1px solid var(--gold);
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            text-align: left;
+            color: var(--text-main);
+        }
+
+        .wardrobe-item:hover, .wardrobe-item.selected {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: bold;
+            transform: translateX(3px);
+        }
+
+        .skin-palette {
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+        }
+
+        .skin-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .skin-swatch:hover, .skin-swatch.selected {
+            transform: scale(1.15);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        .character-viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 25px;
-        }
-
-        nav a, .dropbtn { 
-            color: #f5f2eb; 
-            text-decoration: none; 
-            font-size: 1.2rem; 
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-            background: none;
-            border: none;
-            font-family: 'Cinzel', serif;
-            cursor: pointer;
-            padding: 10px 5px;
-            transition: 0.3s; 
-        }
-
-        nav a:hover, .dropdown:hover .dropbtn { 
-            color: #d4af37; 
-            text-shadow: 0 0 10px #d4af37;
-        }
-
-        /* Dropdown Container */
-        .dropdown {
             position: relative;
-            display: inline-block;
+            z-index: 5;
+            padding: 20px;
         }
 
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(12, 22, 18, 0.98);
-            min-width: 210px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
-            border: 2px solid #d4af37;
+        .stage-banner {
+            background: var(--panel-bg);
+            border: 2px solid var(--gold);
+            padding: 12px 25px;
             border-radius: 6px;
-            z-index: 1001;
-            text-align: left;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .dropdown-content a {
-            color: #f5f2eb;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            transition: 0.2s;
-        }
-
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-content a:hover {
-            background: #d4af37;
-            color: #12100e;
-            padding-left: 20px;
-        }
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Fixed Left-Side Window Scroll Indicator Button */
-        @keyframes bounceGlow {
-            0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.7; text-shadow: 0 0 5px rgba(212,175,55,0.4); }
-            50% { transform: translateY(-50%) translateY(8px); opacity: 1; text-shadow: 0 0 15px rgba(212,175,55,0.9); }
-        }
-
-        .side-scroll-btn {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(18, 16, 14, 0.95);
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 18px 12px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border-radius: 8px;
-            text-decoration: none;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-            animation: bounceGlow 2s infinite ease-in-out;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            z-index: 999;
-        }
-
-        .side-scroll-btn:hover {
-            background: #d4af37;
-            color: #12100e;
-            box-shadow: 0 0 30px #d4af37;
-        }
-
-        /* Royal Proclamation Banner */
-        .proclamation-banner {
-            max-width: 750px;
-            margin: 35px auto 20px auto;
-            padding: 20px 30px;
-            background: rgba(18, 16, 14, 0.92);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .proclamation-banner h1 {
-            color: #d4af37;
-            margin: 0 0 10px 0;
-            font-size: 1.6rem;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px #000;
-        }
-
-        .proclamation-banner p {
-            color: #f5f2eb;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
-            font-style: italic;
-            letter-spacing: 0.5px;
-        }
-
-        /* Book Trailer Scene Preview Box */
-        .trailer-scene-box {
-            max-width: 650px;
-            width: 90%;
-            margin: 30px auto;
-            background: rgba(12, 22, 18, 0.94);
-            border: 2px solid #d4af37;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            margin-bottom: 12px;
             text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 520px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .trailer-scene-box h3 {
-            color: #d4af37;
-            margin-top: 0;
+        .stage-banner h1 {
+            color: var(--gold);
+            margin: 0;
             font-size: 1.3rem;
             letter-spacing: 2px;
         }
 
-        .trailer-scene-box p {
-            color: #e2d9c5;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .jump-btn {
-            display: inline-block;
-            background: rgba(28, 24, 20, 0.95);
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 12px 25px;
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 30px;
-            text-decoration: none;
-            margin: 10px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .jump-btn:hover {
-            background: #d4af37;
-            color: #12100e;
-            box-shadow: 0 0 20px #d4af37;
-            transform: translateY(-2px);
-        }
-
-        /* Cinematic Tour & Audio Container */
-        .cinematic-container {
-            max-width: 650px;
-            width: 90%;
-            margin: 40px auto;
-            background: rgba(28, 24, 20, 0.95);
-            border: 2px solid #d4af37;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
-        }
-
-        .cinematic-display {
-            width: 100%;
-            height: 320px;
-            background: #0b0907;
-            border: 2px solid #d4af37;
-            border-radius: 6px;
-            margin: 15px 0;
-            overflow: hidden;
+        .audio-player-box {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
         }
 
-        .cinematic-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .royal-btn {
+        .audio-btn {
             background: #181410;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            padding: 12px 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 6px 14px;
+            font-family: 'Georgia', serif;
+            font-size: 0.8rem;
             cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            border-radius: 4px;
+            border-radius: 3px;
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-decoration: none;
-            display: block;
-            box-sizing: border-box;
-            text-align: center;
         }
 
-        .royal-btn:hover {
-            background: #d4af37;
-            color: #12100e;
+        .audio-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
             font-weight: bold;
-            box-shadow: 0 0 15px #d4af37;
+            box-shadow: 0 0 12px var(--gold);
         }
 
-        .royal-footer {
-            margin: 50px auto 30px auto;
-            color: #b3a896;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            font-style: italic;
+        .character-stage-display {
+            position: relative;
+            max-width: 520px;
+            width: 100%;
+            height: 480px;
+            background: rgba(11, 9, 7, 0.95);
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 25px rgba(212, 175, 55, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .character-preview-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #0b0907;
+        }
+
+        .stage-footer {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .back-btn {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: 2px solid var(--gold);
+            padding: 12px 25px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .back-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 20px var(--gold);
         }
     </style>
 </head>
 <body>
 
-    <!-- Background music audio source -->
+    <div class="chamber-background"></div>
+
     <audio id="royal-audio" loop>
         <source src="https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg" type="audio/ogg">
     </audio>
 
-    <nav>
-        <!-- Home Dropdown Menu -->
-        <div class="dropdown">
-            <button class="dropbtn">Home ▾</button>
-            <div class="dropdown-content">
-                <a href="index.html">🏠 Sanctuary Home</a>
-                <a href="#tour-section">🎬 Watch Book Trailer</a>
-                <a href="room-adult.html">✨ Make a Wish (Sovereign Chamber)</a>
+    <div class="container">
+        
+        <!-- Left Sidebar: Sovereign Focus, Appearance & Character Likeness Studio -->
+        <div class="control-sidebar">
+            <div class="panel-section-title">Sovereign Focus</div>
+            <div class="option-grid">
+                <button class="option-btn selected" onclick="switchSovereign('queen', this)">Queen Rosana</button>
+                <button class="option-btn" onclick="switchSovereign('king', this)">King Benson</button>
+            </div>
+
+            <div class="panel-section-title" style="margin-top: 10px;">Skin Tone</div>
+            <div class="skin-palette">
+                <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkinTone('Deep Warm', this)" title="Deep Warm"></div>
+                <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
+                <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkinTone('Golden Tan', this)" title="Golden Tan"></div>
+                <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkinTone('Olive', this)" title="Olive"></div>
+                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
+            </div>
+
+            <div class="panel-section-title" style="margin-top: 10px;">Hairstyle</div>
+            <div class="option-grid">
+                <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
+                <button class="option-btn" onclick="setHair('Extensions', this)">Extensions</button>
+                <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
+                <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
+            </div>
+
+            <!-- Create Your Own Character in Your Likeness Studio -->
+            <div class="likeness-studio-box">
+                <h4>✨ Create Your Likeness</h4>
+                <p>Design a member character in your own image for the realm.</p>
+                <input type="text" id="custom-name-input" class="likeness-input" placeholder="Enter Character Name...">
+                <button class="option-btn" style="width: 100%;" onclick="saveCharacterLikeness()">Save My Likeness</button>
             </div>
         </div>
-        <a href="library.html">Library</a>
-        <a href="seal.html">Our Official Seal</a>
-        <a href="community.html">Community Chat</a>
-        <a href="vip.html">VIP Creative Area</a>
-    </nav>
 
-    <!-- Floating Left-Side Window Scroll Indicator Button -->
-    <a href="#tour-section" class="side-scroll-btn">↓ Explore Realm Tour</a>
+        <!-- Center Stage Viewport with Living Cinematic Video Player -->
+        <div class="character-viewport">
+            <div class="stage-banner">
+                <h1>Throne Chamber</h1>
+                <div class="audio-player-box">
+                    <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Sound</button>
+                </div>
+            </div>
+            
+            <div class="character-stage-display">
+                <video id="preview-video" class="character-preview-video" autoplay loop muted playsinline>
+                    <source src="rosanna-3-CINEMATIC.mp4" type="video/mp4">
+                    Your browser does not support video.
+                </video>
+            </div>
 
-    <!-- Imperial Homepage Elite Header -->
-    <div style="text-align: center; margin: 30px auto;">
-        
-        <!-- Breathtaking Framed Homepage Masterpiece -->
-        <div style="display: inline-block; padding: 12px; background: rgba(4, 25, 17, 0.9); border: 3px solid #d4af37; border-radius: 16px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); backdrop-filter: blur(8px); max-width: 480px; width: 90%;">
-            <img src="cover_image.png" alt="Homepage Sanctuary" style="width: 100%; height: auto; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.5); display: block;">
+            <div class="stage-footer">
+                <p id="character-summary-text" style="font-size: 0.95rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+                    Queen Rosana | Deep Warm | Braid-Updo | Rosanna Cinematic 3
+                </p>
+                <a href="index.html" class="back-btn">Return to Sanctuary Home</a>
+            </div>
         </div>
 
-        <!-- Uplifting Sovereign Proclamation Banner -->
-        <div class="proclamation-banner">
-            <h1>Sanctuary & Eternal Peace</h1>
-            <p>"The struggle is behind me, and my home is a sanctuary where love provides everything I need. I am the Guardian of my peace, and I welcome the joy I have earned."</p>
+        <!-- Right Sidebar: Dedicated Wardrobe & Corrected Accessories -->
+        <div class="control-sidebar right">
+            <div class="panel-section-title" id="wardrobe-title">Queen's Wardrobe</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 8px 0;" id="wardrobe-subtitle">Select cinematic attire:</p>
+            
+            <div class="wardrobe-grid" id="wardrobe-list"></div>
+
+            <div class="panel-section-title" style="margin-top: 10px;">Accessory Type</div>
+            <div class="option-grid">
+                <button class="option-btn selected" onclick="setAccessory('Imperial Crown', this)">Crown</button>
+                <button class="option-btn" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
+                <button class="option-btn" onclick="setAccessory('Ceremonial Veil', this)">Veil</button>
+                <button class="option-btn" onclick="setAccessory('Velvet Band', this)">Velvet</button>
+            </div>
         </div>
 
-        <!-- Featured Book Trailer Scene Preview -->
-        <div class="trailer-scene-box">
-            <h3>📖 Scene Preview: The Song of Rosanna</h3>
-            <p>"Amidst trials and shifting kingdoms, a love was forged from the beginning—pure, unyielding, and destined to outlast any darkness. Step into the living pages of the book before it becomes a cinematic legend."</p>
-            <a href="#tour-section" class="jump-btn">↓ Watch the Realm & Book Trailer ↓</a>
-        </div>
-    </div>
-
-    <!-- Sequential Cinematic Tour Section -->
-    <div id="tour-section" class="cinematic-container">
-        <h2 style="color: #d4af37; margin-top: 0; font-size: 1.4rem; letter-spacing: 2px;">The Grand Imperial Journey</h2>
-        <p style="color: #b3a896; font-size: 0.9rem;">Witness the sacred prayer rooms, the palace halls, and the eternal grace of our domain.</p>
-        
-        <div class="cinematic-display">
-            <video id="sequence-video" class="cinematic-video" autoplay muted playsinline>
-                Your browser does not support video.
-            </video>
-        </div>
-
-        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Realm Music & Ambiance</button>
-        <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
-    </div>
-
-    <div class="royal-footer">
-        Imperial Divine Vision &copy; 2026 &bull; Built in Grace, Protected in Peace
     </div>
 
     <script>
-        // Your organized sequence playlist array
-        const cinematicPlaylist = [
-            "prayer-room-1.mp4",
-            "prayer-room-2.mp4",
-            "prayer-room-3.mp4",
-            "prayer-room-5.mp4",
-            "imperial-palace.mp4",
-            "imperial-palace-hallway.mp4",
-            "imperial-palace-guess-room.mp4",
-            "imperial-dinner-room.mp4",
-            "king-queen-bed-room.mp4"
+        // Queen Rosana's complete cinematic wardrobe
+        const queenWardrobe = [
+            { name: 'Rosana Cinematic 3', file: 'rosanna-3-CINEMATIC.mp4' },
+            { name: 'Rosana Cinematic 1', file: 'rosanna-1-CINEMATIC.mp4' },
+            { name: 'Imperial White', file: 'rosanna-imperial-white-CINEMATIC.mp4' },
+            { name: 'Imperial Read', file: 'rosanna-imperial-read-CINEMATIC.mp4' },
+            { name: 'Blue Red Royal', file: 'rosanna-blue-red-CINEMATIC.mp4' },
+            { name: 'Relax Green', file: 'rosanna-relax-green-CINEMATIC.mp4' },
+            { name: 'Pink Glamour', file: 'rosanna-pink-3-CINEMATIC.mp4' },
+            { name: 'Pink Cinematic', file: 'rosanna-pink-CINEMATIC.mp4' },
+            { name: 'Pink Cinematic 1', file: 'rosanna-pink-CINEMATIC-1.mp4' },
+            { name: 'Green Cinematic', file: 'rosanna-green-CINEMATIC.mp4' },
+            { name: 'Best Sovereign', file: 'rosanna-best-CINEMATIC.mp4' },
+            { name: 'Throne Presence', file: 'queen-throne-CINEMATIC-1.mp4' }
         ];
 
-        let currentIndex = 0;
-        const videoElement = document.getElementById("sequence-video");
+        // King Benson's complete cinematic wardrobe
+        const kingWardrobe = [
+            { name: 'King White Armor', file: 'king-benson-white-CINEMATIC.mp4' },
+            { name: 'King Imperial Armor', file: 'king-benson-imperial-CINEMATIC.mp4' },
+            { name: 'Throne & Armor Duo', file: 'king-queen-throne-armor-CINEMAT.mp4' },
+            { name: 'Royal Purple Duo', file: 'king-queen-royal-purple-CINEMATIC-5.mp4' },
+            { name: 'White Sovereign Duo', file: 'king-queen-white-CINEMATIC-4.mp4' },
+            { name: 'Purple Harmony Duo', file: 'king-queen-purple-CINEMATIC-2.mp4' },
+            { name: 'Pink Court Duo', file: 'king-queen-pink-CINEMATIC-1.mp4' },
+            { name: 'Moving Carriage', file: 'king-queen-moving-carriage-cINEMATIC.mp4' },
+            { name: 'Imperial Bedroom', file: 'imperial-bedroom-CINEMATIC.mp4' }
+        ];
 
-        function playNextVideo() {
-            if (cinematicPlaylist.length === 0) return;
-            videoElement.src = cinematicPlaylist[currentIndex];
-            videoElement.load();
-            videoElement.play().catch(e => console.log("Autoplay waiting for interaction"));
+        let currentRole = 'queen';
+        let characterConfig = {
+            skinTone: 'Deep Warm',
+            hair: 'Braid-Updo',
+            accessory: 'Imperial Crown',
+            outfitName: 'Rosanna Cinematic 3',
+            outfitVideo: 'rosanna-3-CINEMATIC.mp4',
+            customName: ''
+        };
+
+        function populateWardrobe() {
+            const container = document.getElementById('wardrobe-list');
+            const titleElem = document.getElementById('wardrobe-title');
+            if (!container) return;
+            container.innerHTML = '';
             
-            currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
+            let list = currentRole === 'queen' ? queenWardrobe : kingWardrobe;
+            titleElem.innerText = currentRole === 'queen' ? "Queen's Wardrobe" : "King's Wardrobe";
+
+            list.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `wardrobe-item ${index === 0 ? 'selected' : ''}`;
+                div.onclick = () => setOutfit(item.name, item.file, div);
+                div.innerHTML = `<span>👑 ${item.name}</span>`;
+                container.appendChild(div);
+            });
         }
 
-        videoElement.onended = playNextVideo;
-
-        window.onload = () => {
-            playNextVideo();
-        };
+        window.onload = populateWardrobe;
 
         let isPlaying = false;
         function toggleAudio() {
@@ -404,15 +477,84 @@
             if (!audio) return;
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🎵 Play Realm Music & Ambiance";
+                btn.innerText = "🎵 Play Sound";
                 isPlaying = false;
             } else {
-                audio.volume = 0.6;
+                audio.volume = 0.5;
                 audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Realm Music";
+                    btn.innerText = "🔇 Pause Sound";
                     isPlaying = true;
-                }).catch(e => console.log("Audio play waiting for user interaction"));
+                }).catch(e => console.log("Audio play blocked"));
             }
+        }
+
+        function switchSovereign(role, btn) {
+            updateButtonGroup(btn);
+            currentRole = role;
+            populateWardrobe();
+
+            let list = role === 'queen' ? queenWardrobe : kingWardrobe;
+            if(list.length > 0) {
+                setOutfit(list[0].name, list[0].file, document.querySelector('.wardrobe-item'));
+            }
+        }
+
+        function setSkinTone(val, swatch) {
+            document.querySelectorAll('.skin-swatch').forEach(s => s.classList.remove('selected'));
+            swatch.classList.add('selected');
+            characterConfig.skinTone = val;
+            updateSummary();
+        }
+
+        function setHair(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.hair = val;
+            updateSummary();
+        }
+
+        function setOutfit(name, videoFile, itemElement) {
+            document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
+            if(itemElement) itemElement.classList.add('selected');
+            
+            characterConfig.outfitName = name;
+            characterConfig.outfitVideo = videoFile;
+            
+            const videoElem = document.getElementById('preview-video');
+            videoElem.src = videoFile;
+            videoElem.load();
+            videoElem.play().catch(e => console.log("Autoplay waiting for interaction"));
+            
+            updateSummary();
+        }
+
+        function setAccessory(val, btn) {
+            updateButtonGroup(btn);
+            characterConfig.accessory = val;
+            updateSummary();
+        }
+
+        function saveCharacterLikeness() {
+            const nameInput = document.getElementById('custom-name-input').value.trim();
+            if(nameInput) {
+                characterConfig.customName = nameInput;
+                alert(`✨ Sovereign Likeness Saved! Welcome to the realm, ${nameInput}. Your custom character details have been recorded.`);
+            } else {
+                alert("Please enter a character name to save your likeness.");
+            }
+            updateSummary();
+        }
+
+        function updateButtonGroup(clickedBtn) {
+            clicked
+        function updateButtonGroup(clickedBtn) {
+            clickedBtn.parentElement.querySelectorAll('.option-btn, .skin-swatch').forEach(b => b.classList.remove('selected'));
+            clickedBtn.classList.add('selected');
+        }
+
+        function updateSummary() {
+            let baseName = characterConfig.customName ? `Likeness: ${characterConfig.customName}` : (currentRole === 'queen' ? 'Queen Rosana' : 'King Benson');
+            document.getElementById('character-summary-text').innerText = 
+                `${baseName} | ${characterConfig.skinTone} | ${characterConfig.hair} | ${characterConfig.accessory} | ${characterConfig.outfitName}`;
         }
     </script>
 </body>
