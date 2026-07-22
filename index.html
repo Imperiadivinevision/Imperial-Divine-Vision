@@ -356,7 +356,7 @@
             </video>
         </div>
 
-        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Realm Music & Ambiance</button>
+        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Realm Music & Ambiance</button>
         <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
     </div>
 
@@ -404,16 +404,15 @@
             
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🎵 Play Realm Music & Ambiance";
+                btn.innerText = "Play Realm Music & Ambiance";
                 isPlaying = false;
             } else {
                 audio.volume = 0.6;
                 audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Realm Music";
+                    btn.innerText = "Pause Realm Music";
                     isPlaying = true;
                 }).catch(error => {
                     console.log("Audio playback prevented:", error);
-                    alert("Please click anywhere on the page first, then click the music button!");
                 });
             }
         }
