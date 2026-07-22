@@ -497,9 +497,9 @@
             <div class="gateway-card">
                 <h1>Imperial Realm Gateway</h1>
                 <p style="color: var(--text-muted); font-size: 0.95rem;">Enter the sanctuary and immerse yourself in the forest and birdsong:</p>
-                <button class="gateway-btn" onclick="playAudioAndStart(startAsQueen)">1. Queen Rosana's Sovereign Realm</button>
-                <button class="gateway-btn" onclick="playAudioAndStart(startAsMemberCreator)">2. Member Character Creator</button>
-                <button class="gateway-btn" onclick="playAudioAndStart(openOversightHub)">3. Prophetic Oversight & Member Chat Hub</button>
+                <button class="gateway-btn" onclick="startAsQueen()">1. Queen Rosana's Sovereign Realm</button>
+                <button class="gateway-btn" onclick="startAsMemberCreator()">2. Member Character Creator</button>
+                <button class="gateway-btn" onclick="openOversightHub()">3. Prophetic Oversight & Member Chat Hub</button>
             </div>
         </div>
 
@@ -584,11 +584,9 @@
                 </div>
                 <div>
                     <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToGateway()">Return to Gateway</button>
-                
-            </div>
-        </div>
-
-        <!-- STAGE 2: LIVE GAMEPLAY STAGE -->
+                </div>
+            </header>
+                    <!-- STAGE 2: LIVE GAMEPLAY STAGE -->
         <div id="game-screen" class="screen">
             <header>
                 <div class="hud-stats">
@@ -684,11 +682,10 @@
             createParticles();
         };
 
-        function playAudioAndStart(callbackFunction) {
+        function playSound() {
             const audio = document.getElementById('royal-audio');
             audio.volume = 0.5;
-            audio.play().catch(e => console.log("Audio playback initiated"));
-            callbackFunction();
+            audio.play().catch(e => console.log("Audio waiting for interaction"));
         }
 
         const queenWardrobe = [
@@ -754,6 +751,7 @@
         let coins = 1000;
 
         function startAsQueen() {
+            playSound();
             currentMode = 'queen';
             document.getElementById('creator-title').innerText = "Style Your Sovereign: Queen Rosana";
             document.getElementById('wardrobe-section-title').innerText = "Imperial Wardrobe";
@@ -765,6 +763,7 @@
         }
 
         function startAsMemberCreator() {
+            playSound();
             currentMode = 'member';
             document.getElementById('creator-title').innerText = "Create Your Member Character";
             document.getElementById('wardrobe-section-title').innerText = "Member Wardrobe";
@@ -776,6 +775,7 @@
         }
 
         function openOversightHub() {
+            playSound();
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('oversight-screen').classList.add('active');
         }
@@ -907,3 +907,6 @@
 </body>
 </html>
 
+
+
+            
