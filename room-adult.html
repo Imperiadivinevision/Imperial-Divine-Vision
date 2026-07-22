@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: Character Creator & Sovereign Style</title>
+    <title>Imperial Capital: Queen Rosana Living Realm</title>
     <style>
         :root {
             --bg-dark: #12100e;
@@ -33,20 +33,60 @@
             margin: 0 auto;
             border-left: 2px solid var(--gold);
             border-right: 2px solid var(--gold);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Screen Controller */
+        /* --- LIVING ANIMATION EFFECTS (Falling petals & sparkles) --- */
+        .particle-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(105vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Subtle breathing / floating animation for character preview so it's never static */
+        @keyframes sovereignBreath {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
         .screen {
             display: none;
             flex: 1;
             flex-direction: column;
             height: 100vh;
+            z-index: 3;
+            position: relative;
         }
         .screen.active {
             display: flex;
         }
 
-        /* --- CHARACTER CREATION / STYLING SUITE --- */
         #creator-screen {
             display: flex;
             flex-direction: row;
@@ -55,15 +95,14 @@
             position: relative;
         }
 
-        /* Side Controls Panels */
         .control-sidebar {
-            width: 320px;
+            width: 340px;
             background: var(--panel-bg);
             border-right: 2px solid var(--gold);
             display: flex;
             flex-direction: column;
             padding: 20px;
-            gap: 20px;
+            gap: 15px;
             overflow-y: auto;
             z-index: 10;
         }
@@ -83,7 +122,6 @@
             letter-spacing: 1px;
         }
 
-        /* Option Buttons & Swatches */
         .option-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -103,7 +141,7 @@
             padding: 8px;
             text-align: center;
             font-family: 'Georgia', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s ease;
             border-radius: 4px;
@@ -115,7 +153,42 @@
             font-weight: bold;
         }
 
-        /* Skin Tone Palette */
+        .wardrobe-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .wardrobe-item {
+            background: #181410;
+            border: 1px solid var(--gold);
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .wardrobe-item:hover, .wardrobe-item.selected {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        .wardrobe-thumbnail {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            border: 1px solid var(--gold);
+            border-radius: 3px;
+        }
+
         .skin-palette {
             display: flex;
             gap: 8px;
@@ -137,7 +210,6 @@
             box-shadow: 0 0 10px var(--gold);
         }
 
-        /* Center Character Stage Viewport */
         .character-viewport {
             flex: 1;
             display: flex;
@@ -161,11 +233,12 @@
 
         .character-preview-img {
             width: 100%;
-            height: 420px;
+            height: 380px;
             object-fit: cover;
             border: 1px solid var(--gold);
             border-radius: 4px;
             margin-bottom: 15px;
+            animation: sovereignBreath 6s ease-in-out infinite;
         }
 
         .creator-header {
@@ -188,14 +261,13 @@
             letter-spacing: 2px;
         }
 
-        /* Confirm Sovereign Action Button */
         .confirm-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
-            padding: 14px 28px;
+            padding: 12px 28px;
             font-family: 'Georgia', serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
@@ -211,7 +283,6 @@
             box-shadow: 0 0 15px var(--gold);
         }
 
-        /* --- STAGE 2: LIVE GAMEPLAY HUD & STAGE --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -243,7 +314,7 @@
         .visual-viewport {
             flex: 2;
             position: relative;
-            background: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80') center/cover;
+            background: url('rosanna-vip.png') center/cover;
             display: flex;
             align-items: flex-end;
             padding: 30px;
@@ -316,23 +387,26 @@
 
     <div class="container">
         
+        <!-- LIVING PARTICLE EFFECT LAYER (Falling golden petals & sparkles) -->
+        <div class="particle-container" id="particle-field"></div>
+
         <!-- STAGE 1: CHARACTER CREATION & SOVEREIGN STYLING SUITE -->
         <div id="creator-screen" class="screen active">
             
             <div class="creator-header">
-                <h1>Style Your Sovereign</h1>
+                <h1>Style Your Sovereign: Queen Rosana</h1>
             </div>
 
             <!-- Left Customization Sidebar -->
             <div class="control-sidebar">
                 <div class="panel-section-title">Body Type</div>
                 <div class="option-grid-3">
-                    <button class="option-btn selected" onclick="setBodyType('Sovereign', this)">Classic</button>
+                    <button class="option-btn selected" onclick="setBodyType('Classic', this)">Classic</button>
                     <button class="option-btn" onclick="setBodyType('Athletic', this)">Athletic</button>
                     <button class="option-btn" onclick="setBodyType('Regal', this)">Regal</button>
                 </div>
 
-                <div class="panel-section-title" style="margin-top: 15px;">Skin Tone</div>
+                <div class="panel-section-title" style="margin-top: 10px;">Skin Tone</div>
                 <div class="skin-palette">
                     <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkinTone('Deep Warm', this)" title="Deep Warm"></div>
                     <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
@@ -341,195 +415,375 @@
                     <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
                 </div>
 
-                <div class="panel-section-title" style="margin-top: 15px;">Hairstyle</div>
+                <div class="panel-section-title" style="margin-top: 10px;">Hairstyle</div>
                 <div class="option-grid">
-                    <button class="option-btn selected" onclick="setHair('Braid Upo', this)">Braid-Updo</button>
+                    <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
                     <button class="option-btn" onclick="setHair('Extensions', this)">Braid Extensions</button>
                     <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
                     <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
                 </div>
 
-                <div class="panel-section-title" style="margin-top: 15px;">Primary Palette</div>
+                <div class="panel-section-title" style="margin-top: 10px;">Primary Palette</div>
                 <div class="option-grid">
-                    <button class="option-btn selected" style="border-color: var(--accent-blue);" onclick="setColorTheme('Blue & Gold', this)">Imperial Blue</button>
-                    <button class="option-btn" style="border-color: var(--accent-pink);" onclick="setColorTheme('Pink & Rose', this)">Royal Rose</button>
+                    <button class="option-btn selected" style="border-color: var(--accent-blue);" onclick="setColorTheme('Imperial Blue', this)">Imperial Blue</button>
+                    <button class="option-btn" style="border-color: var(--accent-pink);" onclick="setColorTheme('Royal Rose', this)">Royal Rose</button>
                 </div>
             </div>
 
             <!-- Center Viewport & Character Preview -->
             <div class="character-viewport">
                 <div class="character-stage-card">
-                    <img id="preview-image" class="character-preview-img" src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1200&q=80" alt="Sovereign Character Preview">
-                    <p id="character-summary-text" style="font-size: 0.95krem; color: var(--text-muted); margin-bottom: 15px;">
-                        Customizing: Deep Warm Tone | Braid-Updo | Imperial Blue Palette
+                    <img id="preview-image" class="character-preview-img" src="rosanna-vip.png" alt="Queen Rosana Preview">
+                    <p id="character-summary-text" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
+                        Customizing: Deep Warm | Braid-Updo | rosanna-vip
                     </p>
                     <button class="confirm-btn" onclick="enterGameWorld()">Confirm Character & Enter Realm</button>
                 </div>
             </div>
 
-            <!-- Right Customization Sidebar (Regalia & Accessories) -->
+            <!-- Right Customization Sidebar (Complete Wardrobe) -->
             <div class="control-sidebar right">
-                <div class="panel-section-title">Regalia Style</div>
-                <div class="option-grid" style="grid-template-columns: 1fr;">
-                    <button class="option-btn selected" onclick="setRegalia('Solar Eclipse', this)">Solar Eclipse Vestments</button>
-                    <button class="option-btn" onclick="setRegalia('Deep Velvet', this)">Deep Velvet Robes</button>
-                    <button class="option-btn" onclick="setRegalia('Divine Vision', this)">Divine Vision Raiment</button>
-                </div>
-
-                <div class="panel-section-title" style="margin-top: 15px;">Accessory Type</div>
-                <div class="option-grid">
-                    <button class="option-btn selected" onclick="setAccessory('Crown', this)">Imperial Crown</button>
-                    <button class="option-btn" onclick="setAccessory('Circlet', this)">Gold Circlet</button>
-                    <button class="option-btn" onclick="setAccessory('Veil', this)">Ceremonial Veil</button>
-                    <button class="option-btn" onclick="setAccessory('Vellet', this)">Vellet Band</button>
-                </div>
-
-                <div class="panel-section-title" style="margin-top: 15px;">Sovereign Status</div>
-                <button class="option-btn" style="background: #8b0000; border-color: var(--gold); width: 100%; padding: 12px; font-weight: bold;" onclick="loadQueenPreset()">👑 Load Queen Rosana Preset</button>
+                <div class="panel-section-title">Imperial Wardrobe</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 8px 0;">Click any outfit to style Queen Rosana:</p>
+                
+                <div class="wardrobe-grid" id="wardrobe-list">
+                    <div class="wardrobe-item selected" onclick="setOutfit('Rosana VIP', 'rosanna-vip.png', this)">
+                        <img src="rosanna-vip.png" class="wardrobe-thumbnail">
+                        <span>rosanna-vip.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Dress Master', 'dress.png', this)">
+                        <img src="dress.png" class="wardrobe-thumbnail">
+                        <span>dress.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Robe 1', 'Robe-1.png', this)">
+                        <img src="Robe-1.png" class="wardrobe-thumbnail">
+                        <span>Robe-1.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Robe 2', 'Robe-2.png', this)">
+                        <img src="Robe-2.png" class="wardrobe-thumbnail">
+                        <span>Robe-2.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Robe 3', 'Robe-3.png', this)">
+                        <img src="Robe-3.png" class="wardrobe-thumbnail">
+                        <span>Robe-3.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Robe 4', 'Robe-4.png', this)">
+                        <img src="Robe-4.png" class="wardrobe-thumbnail">
+                        <span>Robe-4.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 6', 'rosanna-outfit-6.png', this)">
+                        <img src="rosanna-outfit-6.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-6.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 7', 'rosanna-outfit-7.png', this)">
+                        <img src="rosanna-outfit-7.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-7.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 8', 'rosanna-outfit-8.png', this)">
+                        <img src="rosanna-outfit-8.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-8.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 10', 'rosanna-outfit-10.png', this)">
+                        <img src="rosanna-outfit-10.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-10.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 11', 'rosanna-outfit-11.png', this)">
+                        <img src="rosanna-outfit-11.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-11.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 12', 'rosanna-outfit-12.png', this)">
+                        <img src="rosanna-outfit-12.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-12.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 13', 'rosanna-outfit-13.png', this)">
+                        <img src="rosanna-outfit-13.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-13.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 14', 'rosanna-outfit-14.png', this)">
+                        <img src="rosanna-outfit-14.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-14.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 17', 'rosanna-outfit-17.png', this)">
+                        <img src="rosanna-outfit-17.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-17.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 18', 'rosanna-outfit-18.png', this)">
+                        <img src="rosanna-outfit-18.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-18.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 21', 'rosanna-outfit-21.png', this)">
+                        <img src="rosanna-outfit-21.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-21.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 50', 'rosanna-outfit-50.png', this)">
+                        <img src="rosanna-outfit-50.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-50.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 51', 'rosanna-outfit-51.png', this)">
+                        <img src="rosanna-outfit-51.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-51.png</span>
+                    </div>
+                    <div class="wardrobe-item" onclick="setOutfit('Outfit 52', 'rosanna-outfit-52.png', this)">
+                        <img src="rosanna-outfit-52.png" class="wardrobe-thumbnail">
+                        <span>rosanna-outfit-52.png</s
+                              <div class="wardrobe-item" onclick="setOutfit('Outfit 55', 'rosanna-outfit-55.png', this)">
+                <img src="rosanna-outfit-55.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-55.png</span>
             </div>
-
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 56', 'rosanna-outfit-56.png', this)">
+                <img src="rosanna-outfit-56.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-56.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 57', 'rosanna-outfit-57.png', this)">
+                <img src="rosanna-outfit-57.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-57.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 58', 'rosanna-outfit-58.png', this)">
+                <img src="rosanna-outfit-58.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-58.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 59', 'rosanna-outfit-59.png', this)">
+                <img src="rosanna-outfit-59.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-59.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Tea Outfit', 'rosanna-tea-1.png', this)">
+                <img src="rosanna-tea-1.png" class="wardrobe-thumbnail">
+                <span>rosanna-tea-1.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 60', 'rosanna-outfit-60.png', this)">
+                <img src="rosanna-outfit-60.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-60.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 61', 'rosanna-outfit-61.png', this)">
+                <img src="rosanna-outfit-61.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-61.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 63', 'rosanna-outfit-63.png', this)">
+                <img src="rosanna-outfit-63.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-63.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 65', 'rosanna-outfit-65.png', this)">
+                <img src="rosanna-outfit-65.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-65.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 69', 'rosanna-outfit-69.png', this)">
+                <img src="rosanna-outfit-69.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-69.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 70', 'rosanna-outfit-70.png', this)">
+                <img src="rosanna-outfit-70.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-70.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 71', 'rosanna-outfit-71.png', this)">
+                <img src="rosanna-outfit-71.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-71.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 72', 'rosanna-outfit-72.png', this)">
+                <img src="rosanna-outfit-72.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-72.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 78', 'rosanna-outfit-78.png', this)">
+                <img src="rosanna-outfit-78.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-78.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 80', 'rosanna-outfit-80.png', this)">
+                <img src="rosanna-outfit-80.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-80.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 90', 'rosanna-outfit-90.png', this)">
+                <img src="rosanna-outfit-90.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-90.png</span>
+            </div>
+            <div class="wardrobe-item" onclick="setOutfit('Outfit 97', 'rosanna-outfit-97.png', this)">
+                <img src="rosanna-outfit-97.png" class="wardrobe-thumbnail">
+                <span>rosanna-outfit-97.png</span>
+            </div>
         </div>
 
-        <!-- STAGE 2: LIVE GAMEPLAY & SURVIVAL STAGE -->
-        <div id="game-screen" class="screen">
-            <header>
-                <div class="hud-stats">
-                    <div class="stat-item">Sovereign: <span id="role-hud">Queen Rosana</span></div>
-                    <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
-                    <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
-                    <div class="stat-item">Coins: <span id="coin-display">1000</span> 🪙</div>
-                </div>
-                <div>
-                    <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToCreator()">Modify Appearance</button>
-                </div>
-            </header>
-
-            <div class="stage">
-                <div class="visual-viewport">
-                    <div class="visual-overlay"></div>
-                    <div class="scene-description" id="story-text">
-                        You step forth into the Imperial Capital tailored in your customized sovereign regalia. The deep forest canopy parts under the rich afternoon golden hour, awaiting your decree.
-                    </div>
-                </div>
-
-                <div class="action-panel">
-                    <div class="panel-title" id="panel-header-title">Sovereign Administration</div>
-                    <div class="choices-container" id="choices-box">
-                        <button class="choice-btn" onclick="makeChoice('track')">1. Inspect the deep forest thickets & borders</button>
-                        <button class="choice-btn" onclick="makeChoice('explore')">2. Admire sanctuary gardens & flora</button>
-                        <button class="choice-btn" onclick="makeChoice('village')">3. Visit the Village Market & Treasury</button>
-                    </div>
-                </div>
-            </div>
+        <div class="panel-section-title" style="margin-top: 10px;">Accessory Type</div>
+        <div class="option-grid">
+            <button class="option-btn selected" onclick="setAccessory('Imperial Crown', this)">Crown</button>
+            <button class="option-btn" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
+            <button class="option-btn" onclick="setAccessory('Ceremonial Veil', this)">Veil</button>
+            <button class="option-btn" onclick="setAccessory('Vellet Band', this)">Vellet</button>
         </div>
-
     </div>
 
-    <script>
-        // Character Customization State
-        let characterConfig = {
-            bodyType: 'Sovereign',
-            skinTone: 'Deep Warm',
-            hair: 'Braid-Updo',
-            colorTheme: 'Blue & Gold',
-            regalia: 'Solar Eclipse',
-            accessory: 'Crown'
-        };
+</div>
 
-        let daylightHour = 12;
-        let health = 100;
-        let coins = 1000;
+<!-- STAGE 2: LIVE GAMEPLAY & SURVIVAL STAGE -->
+<div id="game-screen" class="screen">
+    <header>
+        <div class="hud-stats">
+            <div class="stat-item">Sovereign: <span id="role-hud">Queen Rosana</span></div>
+            <div class="stat-item">Daylight: <span id="time-display">12:00 PM</span></div>
+            <div class="stat-item">Life / Health: <span id="health-display">100%</span></div>
+            <div class="stat-item">Treasury: <span id="coin-display">1000</span> 🪙</div>
+        </div>
+        <div>
+            <button class="choice-btn" style="padding: 6px 12px;" onclick="returnToCreator()">Modify Appearance & Wardrobe</button>
+        </div>
+    </header>
 
-        function setBodyType(val, btn) {
-            updateButtonGroup(btn);
-            characterConfig.bodyType = val;
-            updateSummary();
-        }
+    <div class="stage">
+        <div class="visual-viewport" id="game-viewport-bg" style="background: url('rosanna-vip.png') center/cover;">
+            <div class="visual-overlay"></div>
+            <div class="scene-description" id="story-text">
+                Queen Rosana steps forth into the Imperial Capital wearing her custom regalia. The realm bends to your chosen vision and administrative authority.
+            </div>
+        </div>
 
-        function setSkinTone(val, swatch) {
-            document.querySelectorAll('.skin-swatch').forEach(s => s.classList.remove('selected'));
-            swatch.classList.add('selected');
-            characterConfig.skinTone = val;
-            updateSummary();
-        }
+        <div class="action-panel">
+            <div class="panel-title" id="panel-header-title">Sovereign Administration</div>
+            <div class="choices-container" id="choices-box">
+                <button class="choice-btn" onclick="makeChoice('track')">1. Inspect the deep forest thickets & borders</button>
+                <button class="choice-btn" onclick="makeChoice('explore')">2. Admire sanctuary gardens & flora</button>
+                <button class="choice-btn" onclick="makeChoice('village')">3. Visit the Village Market & Treasury</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        function setHair(val, btn) {
-            updateButtonGroup(btn);
-            characterConfig.hair = val;
-            updateSummary();
-        }
+</div>
 
-        function setColorTheme(val, btn) {
-            updateButtonGroup(btn);
-            characterConfig.colorTheme = val;
-            updateSummary();
-        }
+<script>
+// Automatic Living Particle Generator (Creates falling golden magic/petals)
+function createParticles() {
+    const field = document.getElementById('particle-field');
+    const particleCount = 20;
 
-        function setRegalia(val, btn) {
-            updateButtonGroup(btn);
-            characterConfig.regalia = val;
-            updateSummary();
-        }
+    for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        
+        const size = Math.random() * 6 + 4;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.top = -20 + 'px';
+        
+        const duration = Math.random() * 5 + 4;
+        const delay = Math.random() * 5;
+        p.style.animationDuration = duration + 's';
+        p.style.animationDelay = delay + 's';
+        
+        field.appendChild(p);
+    }
+}
+window.onload = createParticles;
 
-        function setAccessory(val, btn) {
-            updateButtonGroup(btn);
-            characterConfig.accessory = val;
-            updateSummary();
-        }
+let characterConfig = {
+    bodyType: 'Classic',
+    skinTone: 'Deep Warm',
+    hair: 'Braid-Updo',
+    colorTheme: 'Imperial Blue',
+    outfitName: 'Rosana VIP',
+    outfitImg: 'rosanna-vip.png',
+    accessory: 'Imperial Crown'
+};
 
-        function updateButtonGroup(clickedBtn) {
-            clickedBtn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-            clickedBtn.classList.add('selected');
-        }
+let daylightHour = 12;
+let health = 100;
+let coins = 1000;
 
-        function updateSummary() {
-            document.getElementById('character-summary-text').innerText = 
-                `Customizing: ${characterConfig.skinTone} Tone | ${characterConfig.hair} | ${characterConfig.regalia} (${characterConfig.colorTheme})`;
-        }
+function setBodyType(val, btn) {
+    updateButtonGroup(btn);
+    characterConfig.bodyType = val;
+    updateSummary();
+}
 
-        function loadQueenPreset() {
-            characterConfig = {
-                bodyType: 'Regal',
-                skinTone: 'Deep Warm',
-                hair: 'Braid-Updo',
-                colorTheme: 'Blue & Gold',
-                regalia: 'Solar Eclipse',
-                accessory: 'Crown'
-            };
-            updateSummary();
-            alert("Queen Rosana Sovereign configuration loaded successfully.");
-        }
+function setSkinTone(val, swatch) {
+    document.querySelectorAll('.skin-swatch').forEach(s => s.classList.remove('selected'));
+    swatch.classList.add('selected');
+    characterConfig.skinTone = val;
+    updateSummary();
+}
 
-        function enterGameWorld() {
-            document.getElementById('creator-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.add('active');
-            document.getElementById('role-hud').innerText = characterConfig.regalia + ' Sovereign';
-            document.getElementById('story-text').innerText = `You step forth into the Imperial Capital wearing your custom ${characterConfig.hair} and ${characterConfig.regalia} attire. The realm bends to your chosen vision.`;
-            updateHUD();
-        }
+function setHair(val, btn) {
+    updateButtonGroup(btn);
+    characterConfig.hair = val;
+    updateSummary();
+}
 
-        function returnToCreator() {
-            document.getElementById('game-screen').classList.remove('active');
-            document.getElementById('creator-screen').classList.add('active');
-        }
+function setColorTheme(val, btn) {
+    updateButtonGroup(btn);
+    characterConfig.colorTheme = val;
+    updateSummary();
+}
 
-        function updateHUD() {
-            document.getElementById('coin-display').innerText = coins;
-            document.getElementById('health-display').innerText = health + '%';
-            
-            let timeStr = daylightHour >= 12 ? (daylightHour === 12 ? '12:00 PM' : (daylightHour - 12) + ':00 PM') : daylightHour + ':00 AM';
-            if (daylightHour >= 19) timeStr = 'Nightfall (Danger)';
-            document.getElementById('time-display').innerText = timeStr;
-        }
+function setOutfit(name, imgUrl, itemElement) {
+    document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
+    itemElement.classList.add('selected');
+    characterConfig.outfitName = name;
+    characterConfig.outfitImg = imgUrl;
+    
+    document.getElementById('preview-image').src = imgUrl;
+    updateSummary();
+}
 
-        function makeChoice(action) {
-            const textBox = document.getElementById('story-text');
+function setAccessory(val, btn) {
+    updateButtonGroup(btn);
+    characterConfig.accessory = val;
+    updateSummary();
+}
 
-            if (action === 'track') {
-                daylightHour += 2;
-                textBox.innerText = "You inspect the deep borders of the Hunted State in your sovereign vestments, securing peace across the provinces.";
-                coins += 25;
-            } 
-            else if (action === 'explore') {
-                daylightHour += 3;
-                textBox.innerText = "You wander through 
+function updateButtonGroup(clickedBtn) {
+    clickedBtn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    clickedBtn.classList.add('selected');
+}
+
+function updateSummary() {
+    document.getElementById('character-summary-text').innerText = 
+        `Customizing: ${characterConfig.skinTone} | ${characterConfig.hair} | ${characterConfig.outfitName}`;
+}
+
+function enterGameWorld() {
+    document.getElementById('creator-screen').classList.remove('active');
+    document.getElementById('game-screen').classList.add('active');
+    document.getElementById('role-hud').innerText = 'Queen Rosana (' + characterConfig.outfitName + ')';
+    
+    document.getElementById('game-viewport-bg').style.background = `url('${characterConfig.outfitImg}') center/cover`;
+    
+    document.getElementById('story-text').innerText = `All hail Queen Rosana. You step forth into the Imperial Capital wearing your ${characterConfig.outfitName} and ${characterConfig.hair}. The realm bends to your sovereign vision.`;
+    updateHUD();
+}
+
+function returnToCreator() {
+    document.getElementById('game-screen').classList.remove('active');
+    document.getElementById('creator-screen').classList.add('active');
+}
+
+function updateHUD() {
+    document.getElementById('coin-display').innerText = coins;
+    document.getElementById('health-display').innerText = health + '%';
+    
+    let timeStr = daylightHour >= 12 ? (daylightHour === 12 ? '12:00 PM' : (daylightHour - 12) + ':00 PM') : daylightHour + ':00 AM';
+    if (daylightHour >= 19) timeStr = 'Nightfall (Danger)';
+    document.getElementById('time-display').innerText = timeStr;
+}
+
+function makeChoice(action) {
+    const textBox = document.getElementById('story-text');
+
+    if (action === 'track') {
+        daylightHour += 2;
+        textBox.innerText = "You inspect the deep borders of the Hunted State in your sovereign vestments, securing peace across the provinces.";
+        coins += 25;
+    } 
+    else if (action === 'explore') {
+        daylightHour += 3;
+        textBox.innerText = "You wander through the breathtaking canopy and sanctuary gardens, reflecting on your path and administrative duties.";
+    } 
+    else if (action === 'village') {
+        textBox.innerText = "You enter the Village Market. Merchants bow before your chosen style and trade securely under your protection.";
+        coins -= 10;
+        health = Math.min(100, health + 10);
+    }
+    updateHUD();
+}
+</script>
+</body>
+</html>
+
+
+
