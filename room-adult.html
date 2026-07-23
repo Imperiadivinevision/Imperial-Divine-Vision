@@ -99,7 +99,6 @@
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
-        /* Custom Character Likeness Studio Box */
         .likeness-studio-box {
             background: rgba(14, 25, 20, 0.9);
             border: 1px solid var(--gold);
@@ -329,7 +328,7 @@
     <div class="chamber-background"></div>
 
     <audio id="royal-audio" loop>
-        <source src="https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg" type="audio/ogg">
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
     </audio>
 
     <div class="container">
@@ -371,22 +370,22 @@
         <!-- Center Stage Viewport with Living Cinematic Video Player -->
         <div class="character-viewport">
             <div class="stage-banner">
-                <h1>Throne Chamber</h1>
+                <h1>Adult Chamber Wardrobe</h1>
                 <div class="audio-player-box">
-                    <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Sound</button>
+                    <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Rosanna Galary</button>
                 </div>
             </div>
             
             <div class="character-stage-display">
                 <video id="preview-video" class="character-preview-video" autoplay loop muted playsinline>
-                    <source src="rosanna-3-CINEMATIC.mp4" type="video/mp4">
+                    <source src="rosanna-imperial-white-CINEMATIC.mp4" type="video/mp4">
                     Your browser does not support video.
                 </video>
             </div>
 
             <div class="stage-footer">
                 <p id="character-summary-text" style="font-size: 0.95rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
-                    Queen Rosana | Deep Warm | Braid-Updo | Rosanna Cinematic 3
+                    Queen Rosana | Deep Warm | Braid-Updo | Imperial White Cinematic
                 </p>
                 <a href="index.html" class="back-btn">Return to Sanctuary Home</a>
             </div>
@@ -411,33 +410,98 @@
     </div>
 
     <script>
-        // Queen Rosana's complete cinematic wardrobe
+        // Queen Rosana's complete wardrobe with top-priority cinematics first
         const queenWardrobe = [
-            { name: 'Rosana Cinematic 3', file: 'rosanna-3-CINEMATIC.mp4' },
-            { name: 'Rosana Cinematic 1', file: 'rosanna-1-CINEMATIC.mp4' },
-            { name: 'Imperial White', file: 'rosanna-imperial-white-CINEMATIC.mp4' },
-            { name: 'Imperial Read', file: 'rosanna-imperial-read-CINEMATIC.mp4' },
-            { name: 'Blue Red Royal', file: 'rosanna-blue-red-CINEMATIC.mp4' },
-            { name: 'Relax Green', file: 'rosanna-relax-green-CINEMATIC.mp4' },
-            { name: 'Pink Glamour', file: 'rosanna-pink-3-CINEMATIC.mp4' },
-            { name: 'Pink Cinematic', file: 'rosanna-pink-CINEMATIC.mp4' },
+            { name: 'Imperial White Cinematic', file: 'rosanna-imperial-white-CINEMATIC.mp4' },
+            { name: 'Pink 3 Cinematic', file: 'rosanna-pink-3-CINEMATIC.mp4' },
             { name: 'Pink Cinematic 1', file: 'rosanna-pink-CINEMATIC-1.mp4' },
+            { name: 'Pink Cinematic', file: 'rosanna-pink-CINEMATIC.mp4' },
+            { name: 'Purple Cinematic', file: 'rosanna-purple-CINEMATIC.mp4' },
+            { name: 'Relax Green Cinematic', file: 'rosanna-relax-green-CINEMATIC.mp4' },
+            { name: 'White 2 Cinematic', file: 'rosanna-white-2-CINEMATIC.mp4' },
+            { name: 'White Cinematic', file: 'rosanna-white-CINEMATIC.mp4' },
+            { name: 'Imperial Outfit Cinematic', file: 'rosanna-imperial-outfit-CINEMATIC.mp4' },
+            { name: 'Imperial Read Cinematic', file: 'rosanna-imperial-read-CINEMATIC.mp4' },
+            { name: 'Rosana Cinematic 1', file: 'rosanna-1-CINEMATIC.mp4' },
+            { name: 'Rosana Cinematic 3', file: 'rosanna-3-CINEMATIC.mp4' },
+            { name: 'Best Sovereign Cinematic', file: 'rosanna-best-CINEMATIC.mp4' },
+            { name: 'Blue Red Cinematic', file: 'rosanna-blue-red-CINEMATIC.mp4' },
             { name: 'Green Cinematic', file: 'rosanna-green-CINEMATIC.mp4' },
-            { name: 'Best Sovereign', file: 'rosanna-best-CINEMATIC.mp4' },
-            { name: 'Throne Presence', file: 'queen-throne-CINEMATIC-1.mp4' }
+            { name: 'Imperial Outfit Alt Cinematic', file: 'rosanna-imperial-outfit-CINEMATIC-1.mp4' },
+            { name: 'Throne Presence Cinematic', file: 'queen-throne-CINEMATIC-1.mp4' },
+            { name: 'Outfit 6', file: 'rosanna-outfit-6.png' },
+            { name: 'Outfit 7', file: 'rosanna-outfit-7.png' },
+            { name: 'Outfit 8', file: 'rosanna-outfit-8.png' },
+            { name: 'Outfit 10', file: 'rosanna-outfit-10.png' },
+            { name: 'Outfit 10-1', file: 'rosanna-outfit-10-1.png' },
+            { name: 'Outfit 10-2', file: 'rosanna-outfit-10-2.png' },
+            { name: 'Outfit 11', file: 'rosanna-outfit-11.png' },
+            { name: 'Outfit 12', file: 'rosanna-outfit-12.png' },
+            { name: 'Outfit 13', file: 'rosanna-outfit-13.png' },
+            { name: 'Outfit 14', file: 'rosanna-outfit-14.png' },
+            { name: 'Outfit 17', file: 'rosanna-outfit-17.png' },
+            { name: 'Outfit 18', file: 'rosanna-outfit-18.png' },
+            { name: 'Outfit 21', file: 'rosanna-outfit-21.png' },
+            { name: 'Outfit 50', file: 'rosanna-outfit-50.png' },
+            { name: 'Outfit 51', file: 'rosanna-outfit-51.png' },
+            { name: 'Outfit 52', file: 'rosanna-outfit-52.png' },
+            { name: 'Outfit 55', file: 'rosanna-outfit-55.png' },
+            { name: 'Outfit 56', file: 'rosanna-outfit-56.png' },
+            { name: 'Outfit 57', file: 'rosanna-outfit-57.png' },
+            { name: 'Outfit 58', file: 'rosanna-outfit-58.png' },
+            { name: 'Outfit 59', file: 'rosanna-outfit-59.png' },
+            { name: 'Outfit 60', file: 'rosanna-outfit-60.png' },
+            { name: 'Outfit 61', file: 'rosanna-outfit-61.png' },
+            { name: 'Outfit 63', file: 'rosanna-outfit-63.png' },
+            { name: 'Outfit 65', file: 'rosanna-outfit-65.png' },
+            { name: 'Outfit 69', file: 'rosanna-outfit-69.png' },
+            { name: 'Outfit 70', file: 'rosanna-outfit-70.png' },
+            { name: 'Outfit 71', file: 'rosanna-outfit-71.png' },
+            { name: 'Outfit 72', file: 'rosanna-outfit-72.png' },
+            { name: 'Outfit 78', file: 'rosanna-outfit-78.png' },
+            { name: 'Outfit 80', file: 'rosanna-outfit-80.png' },
+            { name: 'Outfit 90', file: 'rosanna-outfit-90.png' },
+            { name: 'Outfit 97', file: 'rosanna-outfit-97.png' },
+            { name: 'Dress', file: 'dress.png' },
+            { name: 'Robe 1', file: 'Robe-1.png' },
+            { name: 'Robe 2', file: 'Robe-2.png' },
+            { name: 'Robe 3', file: 'Robe-3.png' },
+            { name: 'Robe 4', file: 'Robe-4.png' },
+            { name: 'Rosanna VIP', file: 'rosanna_vip.png' },
+            { name: 'Rosanna Tea', file: 'rosanna-tea-1.png' }
         ];
 
-        // King Benson's complete cinematic wardrobe
+        // King Benson's complete wardrobe with top-priority cinematics first
         const kingWardrobe = [
-            { name: 'King White Armor', file: 'king-benson-white-CINEMATIC.mp4' },
-            { name: 'King Imperial Armor', file: 'king-benson-imperial-CINEMATIC.mp4' },
-            { name: 'Throne & Armor Duo', file: 'king-queen-throne-armor-CINEMAT.mp4' },
+            { name: 'King Imperial Cinematic', file: 'king-benson-imperial-CINEMATIC.mp4' },
+            { name: 'King White Cinematic', file: 'king-benson-white-CINEMATIC.mp4' },
+            { name: 'Pink Cinematic Duo', file: 'king-queen-pink-CINEMATIC-1.mp4' },
+            { name: 'Purple Cinematic Duo', file: 'king-queen-purple-CINEMATIC-2.mp4' },
             { name: 'Royal Purple Duo', file: 'king-queen-royal-purple-CINEMATIC-5.mp4' },
-            { name: 'White Sovereign Duo', file: 'king-queen-white-CINEMATIC-4.mp4' },
-            { name: 'Purple Harmony Duo', file: 'king-queen-purple-CINEMATIC-2.mp4' },
-            { name: 'Pink Court Duo', file: 'king-queen-pink-CINEMATIC-1.mp4' },
-            { name: 'Moving Carriage', file: 'king-queen-moving-carriage-cINEMATIC.mp4' },
-            { name: 'Imperial Bedroom', file: 'imperial-bedroom-CINEMATIC.mp4' }
+            { name: 'Throne Armor Duo', file: 'king-queen-throne-armor-CINEMATIC.mp4' },
+            { name: 'Throne Armor Duo Alt', file: 'king-queen-throne-armor-CINEMATIC-1.mp4' },
+            { name: 'White Cinematic Duo', file: 'king-queen-white-CINEMATIC-4.mp4' },
+            { name: 'King Outfit 1', file: 'king-benson-outfit-1.png' },
+            { name: 'King Outfit 2', file: 'king-benson-outfit-2.png' },
+            { name: 'King Outfit 2 (Alt)', file: 'king-benson-outfit-2 (1).png' },
+            { name: 'King Outfit 6', file: 'king-benson-outfit-6.png' },
+            { name: 'King Outfit 6 (Alt)', file: 'king-benson-outfit-6 (1).png' },
+            { name: 'King Outfit 7', file: 'king-benson-outfit-7.png' },
+            { name: 'King Outfit 7 (Alt)', file: 'king-benson-outfit-7-1.png' },
+            { name: 'King Outfit 9', file: 'king-benson-outfit-9.png' },
+            { name: 'King Outfit 9 (Alt)', file: 'king-benson-outfit-9-1.png' },
+            { name: 'King Outfit 10', file: 'king-benson-outfit-10.png' },
+            { name: 'King Outfit 10 (Alt)', file: 'king-benson-outfit-10 (1).png' },
+            { name: 'King Outfit 12', file: 'king-benson-outfit-12.png' },
+            { name: 'King Outfit 15', file: 'king-benson-outfit-15.png' },
+            { name: 'King Outfit 15 (Alt)', file: ‘
+            { name: 'King Outfit 15', file: 'king-benson-outfit-15.png' },
+            { name: 'King Outfit 15 (Alt)', file: 'king-benson-outfit-15 (1).png' },
+            { name: 'Benson Outfit 1', file: 'benson-outfit-1.png' },
+            { name: 'Benson Outfit Main', file: 'benson-outfit.png' },
+            { name: 'King Benson 11', file: 'king-benson-11.png' },
+            { name: 'Hunting Clothes', file: 'king-benson-hunting-clothes-meduim.png' },
+            { name: 'On Horse', file: 'king-benson-on-horse.png' }
         ];
 
         let currentRole = 'queen';
@@ -445,8 +509,8 @@
             skinTone: 'Deep Warm',
             hair: 'Braid-Updo',
             accessory: 'Imperial Crown',
-            outfitName: 'Rosanna Cinematic 3',
-            outfitVideo: 'rosanna-3-CINEMATIC.mp4',
+            outfitName: 'Imperial White Cinematic',
+            outfitVideo: 'rosanna-imperial-white-CINEMATIC.mp4',
             customName: ''
         };
 
@@ -477,12 +541,12 @@
             if (!audio) return;
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🎵 Play Sound";
+                btn.innerText = "🎵 Play Rosanna Galary";
                 isPlaying = false;
             } else {
-                audio.volume = 0.5;
+                audio.volume = 1.0;
                 audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Sound";
+                    btn.innerText = "🔇 Pause Rosanna Galary";
                     isPlaying = true;
                 }).catch(e => console.log("Audio play blocked"));
             }
@@ -545,16 +609,16 @@
         }
 
         function updateButtonGroup(clickedBtn) {
-            clicked
-        function updateButtonGroup(clickedBtn) {
-            clickedBtn.parentElement.querySelectorAll('.option-btn, .skin-swatch').forEach(b => b.classList.remove('selected'));
+            const parent = clickedBtn.parentElement;
+            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
             clickedBtn.classList.add('selected');
         }
 
         function updateSummary() {
-            let baseName = characterConfig.customName ? `Likeness: ${characterConfig.customName}` : (currentRole === 'queen' ? 'Queen Rosana' : 'King Benson');
-            document.getElementById('character-summary-text').innerText = 
-                `${baseName} | ${characterConfig.skinTone} | ${characterConfig.hair} | ${characterConfig.accessory} | ${characterConfig.outfitName}`;
+            const summaryElem = document.getElementById('character-summary-text');
+            if(!summaryElem) return;
+            let nameDisplay = characterConfig.customName ? characterConfig.customName : (currentRole === 'queen' ? 'Queen Rosana' : 'King Benson');
+            summaryElem.innerText = `${nameDisplay} | ${characterConfig.skinTone} | ${characterConfig.hair} | ${characterConfig.outfitName}`;
         }
     </script>
 </body>
