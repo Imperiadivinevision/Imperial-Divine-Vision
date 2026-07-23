@@ -261,14 +261,6 @@
             object-fit: cover;
         }
 
-        /* Native Audio Player styling to show play button and track timer numbers */
-        .royal-audio-player {
-            width: 100%;
-            margin-top: 15px;
-            outline: none;
-            filter: sepia(50%) hue-rotate(35deg) saturate(200%);
-        }
-
         .royal-btn {
             background: #181410;
             color: #d4af37;
@@ -306,6 +298,11 @@
     </style>
 </head>
 <body>
+
+    <!-- Background Audio Element -->
+    <audio id="royal-audio" loop preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
+    </audio>
 
     <nav>
         <!-- Home Dropdown Menu -->
@@ -359,12 +356,9 @@
             </video>
         </div>
 
-        <!-- Native Audio Player with built-in play controls and time duration numbers -->
-        <audio class="royal-audio-player" controls loop preload="auto">
-            <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
-            Your browser does not support the audio element.
-        </audio>
-
+        <!-- Royal Music Play Button with timer functionality -->
+        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Realm Music & Ambiance</button>
+        
         <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
     </div>
 
@@ -465,6 +459,27 @@
         window.onload = () => {
             playNextVideo();
         };
+
+        let isPlaying = false;
+        function toggleAudio() {
+            const audio = document.getElementById('royal-audio');
+            const btn = document.getElementById('audio-toggle-btn');
+            if (!audio) return;
+            
+            if (isPlaying) {
+                audio.pause();
+                btn.innerText = "🎵 Play Realm Music & Ambiance";
+                isPlaying = false;
+            } else {
+                audio.volume = 0.6;
+                audio.play().then(() => {
+                    btn.innerText = "🔇 Pause Realm Music";
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log("Audio playback prevented:", error);
+                });
+            }
+        }
     </script>
 </body>
 </html>
