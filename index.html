@@ -8,229 +8,22 @@
             margin: 0;
             padding: 0;
             background-color: #040a08;
-            background-repeat: repeat;
-            background-position: center;
-            background-size: 400px auto;
             background-image: url('garden_border_pattern.png');
-            animation: breatheGarden 60s infinite alternate ease-in-out;
             color: #d4af37;
             font-family: 'Cinzel', serif;
             text-align: center;
-            overflow-x: hidden;
         }
-
-        @keyframes breatheGarden {
-            0% {
-                background-size: 400px auto;
-                background-position: center center;
-            }
-            50% {
-                background-size: 410px auto;
-                background-position: center top;
-            }
-            100% {
-                background-size: 395px auto;
-                background-position: center bottom;
-            }
-        }
-
-        /* Solid High-Contrast Navigation Bar with Dropdown Support */
         nav { 
             padding: 15px 20px; 
             background: rgba(4, 10, 8, 0.95);
             border-bottom: 2px solid #d4af37;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
         }
-
-        nav a, .dropbtn { 
+        nav a { 
             color: #f5f2eb; 
             text-decoration: none; 
-            font-size: 1.2rem; 
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-            background: none;
-            border: none;
-            font-family: 'Cinzel', serif;
-            cursor: pointer;
-            padding: 10px 5px;
-            transition: 0.3s; 
+            margin: 0 15px; 
+            font-weight: bold; 
         }
-
-        nav a:hover, .dropdown:hover .dropbtn { 
-            color: #d4af37; 
-            text-shadow: 0 0 10px #d4af37;
-        }
-
-        /* Dropdown Container */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: rgba(12, 22, 18, 0.98);
-            min-width: 210px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
-            border: 2px solid #d4af37;
-            border-radius: 6px;
-            z-index: 1001;
-            text-align: left;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .dropdown-content a {
-            color: #f5f2eb;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            transition: 0.2s;
-        }
-
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-content a:hover {
-            background: #d4af37;
-            color: #12100e;
-            padding-left: 20px;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Fixed Left-Side Window Scroll Indicator Button */
-        @keyframes bounceGlow {
-            0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.7; text-shadow: 0 0 5px rgba(212,175,55,0.4); }
-            50% { transform: translateY(-50%) translateY(8px); opacity: 1; text-shadow: 0 0 15px rgba(212,175,55,0.9); }
-        }
-
-        .side-scroll-btn {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(18, 16, 14, 0.95);
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 18px 12px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border-radius: 8px;
-            text-decoration: none;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-            animation: bounceGlow 2s infinite ease-in-out;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            z-index: 999;
-        }
-
-        .side-scroll-btn:hover {
-            background: #d4af37;
-            color: #12100e;
-            box-shadow: 0 0 30px #d4af37;
-        }
-
-        /* Royal Proclamation Banner */
-        .proclamation-banner {
-            max-width: 750px;
-            margin: 35px auto 20px auto;
-            padding: 20px 30px;
-            background: rgba(18, 16, 14, 0.92);
-            border: 2px solid #d4af37;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .proclamation-banner h1 {
-            color: #d4af37;
-            margin: 0 0 10px 0;
-            font-size: 1.6rem;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px #000;
-        }
-
-        .proclamation-banner p {
-            color: #f5f2eb;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
-            font-style: italic;
-            letter-spacing: 0.5px;
-        }
-
-        /* Book Trailer Scene Preview Box */
-        .trailer-scene-box {
-            max-width: 650px;
-            width: 90%;
-            margin: 30px auto;
-            background: rgba(12, 22, 18, 0.94);
-            border: 2px solid #d4af37;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            text-align: center;
-        }
-
-        .trailer-scene-box h3 {
-            color: #d4af37;
-            margin-top: 0;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-        }
-
-        .trailer-scene-box p {
-            color: #e2d9c5;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .jump-btn {
-            display: inline-block;
-            background: rgba(28, 24, 20, 0.95);
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 12px 25px;
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 30px;
-            text-decoration: none;
-            margin: 10px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .jump-btn:hover {
-            background: #d4af37;
-            color: #12100e;
-            box-shadow: 0 0 20px #d4af37;
-            transform: translateY(-2px);
-        }
-
-        /* Cinematic Tour & Audio Container */
         .cinematic-container {
             max-width: 650px;
             width: 90%;
@@ -239,27 +32,14 @@
             border: 2px solid #d4af37;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
         }
-
-        .cinematic-display {
-            width: 100%;
-            background: #0b0907;
-            border: 2px solid #d4af37;
-            border-radius: 6px;
-            margin: 15px 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .cinematic-video {
             width: 100%;
             max-height: 350px;
-            outline: none;
+            background: #0b0907;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
         }
-
         .royal-btn {
             background: #181410;
             color: #d4af37;
@@ -271,141 +51,74 @@
             width: 100%;
             margin-top: 15px;
             border-radius: 4px;
-            transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
             text-decoration: none;
             display: block;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .royal-btn:hover {
-            background: #d4af37;
-            color: #12100e;
-            font-weight: bold;
-            box-shadow: 0 0 15px #d4af37;
-        }
-
-        .royal-footer {
-            margin: 50px auto 30px auto;
-            color: #b3a896;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Audio Element set to maximum volume (1.0) -->
+    <!-- Background Audio Element -->
     <audio id="royal-audio" loop preload="auto">
         <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
     </audio>
 
     <nav>
-        <!-- Home Dropdown Menu -->
-        <div class="dropdown">
-            <button class="dropbtn">Home ▾</button>
-            <div class="dropdown-content">
-                <a href="index.html">🏠 Sanctuary Home</a>
-                <a href="#tour-section">🎬 Watch Book Trailer</a>
-                <a href="room-adult.html">✨ Make a Wish (Sovereign Chamber)</a>
-            </div>
-        </div>
+        <a href="index.html">🏠 Sanctuary Home</a>
         <a href="library.html">Library</a>
         <a href="seal.html">Our Official Seal</a>
-        <a href="community.html">Community Chat</a>
-        <a href="vip.html">VIP Creative Area</a>
     </nav>
 
-    <!-- Floating Left-Side Window Scroll Indicator Button -->
-    <a href="#tour-section" class="side-scroll-btn">↓ Explore Realm Tour</a>
-
-    <!-- Imperial Homepage Elite Header -->
-    <div style="text-align: center; margin: 30px auto;">
+    <div class="cinematic-container">
+        <h2 style="color: #d4af37; margin-top: 0;">The Grand Imperial Journey</h2>
         
-        <!-- Breathtaking Framed Homepage Masterpiece -->
-        <div style="display: inline-block; padding: 12px; background: rgba(4, 25, 17, 0.9); border: 3px solid #d4af37; border-radius: 16px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); backdrop-filter: blur(8px); max-width: 480px; width: 90%;">
-            <img src="cover_image.png" alt="Homepage Sanctuary" style="width: 100%; height: auto; border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.5); display: block;">
-        </div>
+        <!-- Video Player with explicit source -->
+        <video id="sequence-video" class="cinematic-video" controls playsinline>
+            Your browser does not support video.
+        </video>
 
-        <!-- Uplifting Sovereign Proclamation Banner -->
-        <div class="proclamation-banner">
-            <h1>Sanctuary & Eternal Peace</h1>
-            <p>"The struggle is behind me, and my home is a sanctuary where love provides everything I need. I am the Guardian of my peace, and I welcome the joy I have earned."</p>
-        </div>
-
-        <!-- Featured Book Trailer Scene Preview -->
-        <div class="trailer-scene-box">
-            <h3>📖 Scene Preview: The Song of Rosanna</h3>
-            <p>"Amidst trials and shifting kingdoms, a love was forged from the beginning—pure, unyielding, and destined to outlast any darkness. Step into the living pages of the book before it becomes a cinematic legend."</p>
-            <a href="#tour-section" class="jump-btn">↓ Watch the Realm & Book Trailer ↓</a>
-        </div>
-    </div>
-
-    <!-- Sequential Cinematic Tour Section -->
-    <div id="tour-section" class="cinematic-container">
-        <h2 style="color: #d4af37; margin-top: 0; font-size: 1.4rem; letter-spacing: 2px;">The Grand Imperial Journey</h2>
-        <p style="color: #b3a896; font-size: 0.9rem;">Witness the precise sequence of our grand realm tour and royal cinematics.</p>
-        
-        <div class="cinematic-display">
-            <!-- Native controls enabled with your full GitHub hosted playlist -->
-            <video id="sequence-video" class="cinematic-video" controls autoplay muted playsinline>
-                Your browser does not support video.
-            </video>
-        </div>
-
-        <!-- Royal Music Play Button with Volume Icon -->
         <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🔊 Play Realm Music & Ambiance</button>
-        
-        <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
-    </div>
-
-    <div class="royal-footer">
-        Imperial Divine Vision &copy; 2026 &bull; Built in Grace, Protected in Peace
     </div>
 
     <script>
-        // Full sequence playlist pointing directly to your GitHub raw repository URLs so GitHub Pages streams them instantly:
-        const baseUrl = "https://raw.githubusercontent.com/ImperialDivineVision/Imperial-Divine-Vision/main/";
-        
+        // Direct relative filenames from your repository
         const cinematicPlaylist = [
-            baseUrl + "palace-tour-1.mp4",
-            baseUrl + "palace-tour-2.mp4",
-            baseUrl + "palace-tour-4.mp4",
-            baseUrl + "palace-tour-3.mp4",
-            baseUrl + "palace-tour-1.mp4",
-            baseUrl + "palace-tour-7.mp4",
-            baseUrl + "palace-tour-8.mp4",
-            baseUrl + "palace-tour-7.mp4",
-            baseUrl + "palace-tour-1.mp4",
-            baseUrl + "palace-tour-9.mp4",
-            baseUrl + "palace-tour-6.mp4",
-            baseUrl + "palace-tour-10.mp4",
-            baseUrl + "real-palace-structure-1.mp4",
-            baseUrl + "real-palace-structure-2.mp4",
-            baseUrl + "real-palace-structure-3.mp4",
-            baseUrl + "real-palace-structure-4.mp4",
-            baseUrl + "real-palace-structure-5.mp4",
-            baseUrl + "real-palace-structure-6.mp4",
-            baseUrl + "real-palace-structure-7.mp4",
-            baseUrl + "real-palace-structure-8.mp4",
-            baseUrl + "palace-tour-6.mp4",
-            baseUrl + "prayer-room-1.mp4",
-            baseUrl + "prayer-room-2.mp4",
-            baseUrl + "prayer-room-3.mp4",
-            baseUrl + "prayer-room-5.mp4",
-            baseUrl + "imperial-palace.mp4",
-            baseUrl + "imperial-palace-hallway.mp4",
-            baseUrl + "imperial-palace-guess-room.mp4",
-            baseUrl + "imperial-dinner-room.mp4",
-            baseUrl + "imperial-bedroom-CINEMATIC.mp4",
-            baseUrl + "king-queen-bed-room.mp4",
-            baseUrl + "king-benson-imperial-CINEMATIC.mp4",
-            baseUrl + "rosanna-imperial-outfit-CINEMATIC.mp4",
-            baseUrl + "king-queen-moving-carriage-CINEMATIC.mp4",
-            baseUrl + "king-queen-throne-armor-CINEMATIC.mp4"
+            "palace-tour-1.mp4",
+            "palace-tour-2.mp4",
+            "palace-tour-4.mp4",
+            "palace-tour-3.mp4",
+            "palace-tour-1.mp4",
+            "palace-tour-7.mp4",
+            "palace-tour-8.mp4",
+            "palace-tour-7.mp4",
+            "palace-tour-1.mp4",
+            "palace-tour-9.mp4",
+            "palace-tour-6.mp4",
+            "palace-tour-10.mp4",
+            "real-palace-structure-1.mp4",
+            "real-palace-structure-2.mp4",
+            "real-palace-structure-3.mp4",
+            "real-palace-structure-4.mp4",
+            "real-palace-structure-5.mp4",
+            "real-palace-structure-6.mp4",
+            "real-palace-structure-7.mp4",
+            "real-palace-structure-8.mp4",
+            "palace-tour-6.mp4",
+            "prayer-room-1.mp4",
+            "prayer-room-2.mp4",
+            "prayer-room-3.mp4",
+            "prayer-room-5.mp4",
+            "imperial-palace.mp4",
+            "imperial-palace-hallway.mp4",
+            "imperial-palace-guess-room.mp4",
+            "imperial-dinner-room.mp4",
+            "imperial-bedroom-CINEMATIC.mp4",
+            "king-queen-bed-room.mp4",
+            "king-benson-imperial-CINEMATIC.mp4",
+            "rosanna-imperial-outfit-CINEMATIC.mp4",
+            "king-queen-moving-carriage-CINEMATIC.mp4",
+            "king-queen-throne-armor-CINEMATIC.mp4"
         ];
 
         let currentIndex = 0;
@@ -415,8 +128,7 @@
             if (cinematicPlaylist.length === 0) return;
             videoElement.src = cinematicPlaylist[currentIndex];
             videoElement.load();
-            videoElement.play().catch(e => console.log("Autoplay waiting for interaction"));
-            
+            videoElement.play().catch(e => console.log("Playback waiting for user interaction"));
             currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
         }
 
@@ -442,7 +154,7 @@
                     btn.innerText = "🔇 Pause Realm Music";
                     isPlaying = true;
                 }).catch(error => {
-                    console.log("Audio playback prevented:", error);
+                    console.log("Audio prevented:", error);
                 });
             }
         }
