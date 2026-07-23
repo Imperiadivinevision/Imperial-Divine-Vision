@@ -244,7 +244,6 @@
 
         .cinematic-display {
             width: 100%;
-            height: 320px;
             background: #0b0907;
             border: 2px solid #d4af37;
             border-radius: 6px;
@@ -257,8 +256,8 @@
 
         .cinematic-video {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-height: 350px;
+            outline: none;
         }
 
         .royal-btn {
@@ -351,8 +350,8 @@
         <p style="color: #b3a896; font-size: 0.9rem;">Witness the precise sequence of our grand realm tour and royal cinematics.</p>
         
         <div class="cinematic-display">
-            <!-- Videos play smoothly and silently in sequence -->
-            <video id="sequence-video" class="cinematic-video" autoplay muted playsinline>
+            <!-- Added controls so the browser's native player handles local files smoothly -->
+            <video id="sequence-video" class="cinematic-video" controls autoplay muted playsinline>
                 Your browser does not support video.
             </video>
         </div>
@@ -416,7 +415,6 @@
             videoElement.load();
             videoElement.play().catch(e => console.log("Autoplay waiting for interaction"));
             
-            // Loops continuously through your exact ordered playlist
             currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
         }
 
@@ -437,7 +435,6 @@
                 btn.innerText = "🎵 Play Realm Music & Ambiance";
                 isPlaying = false;
             } else {
-                // Boosted audio volume to maximum (1.0) so it plays loudly and clearly in the background
                 audio.volume = 1.0;
                 audio.play().then(() => {
                     btn.innerText = "🔇 Pause Realm Music";
