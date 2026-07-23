@@ -12,10 +12,73 @@
             background-position: center;
             background-size: 400px auto;
             background-image: url('garden_border_pattern.png');
+            animation: breatheGarden 60s infinite alternate ease-in-out;
             color: #d4af37;
             font-family: 'Cinzel', serif;
             text-align: center;
         }
+
+        @keyframes breatheGarden {
+            0% {
+                background-size: 400px auto;
+                background-position: center center;
+            }
+            50% {
+                background-size: 415px auto;
+                background-position: center top;
+            }
+            100% {
+                background-size: 390px auto;
+                background-position: center bottom;
+            }
+        }
+
+        /* Floating Royal Music Beacon on the Left Edge */
+        .royal-music-beacon {
+            position: fixed;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(18, 16, 14, 0.95);
+            border: 2px solid #d4af37;
+            padding: 20px 12px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: pulseBeacon 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseBeacon {
+            0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.4); }
+            50% { box-shadow: 0 0 30px rgba(212,175,55,0.9); }
+        }
+
+        .beacon-btn {
+            background: #d4af37;
+            color: #12100e;
+            border: none;
+            padding: 12px 10px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            text-transform: uppercase;
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .beacon-btn:hover {
+            background: #f5f2eb;
+            box-shadow: 0 0 15px #d4af37;
+        }
+
         nav { 
             padding: 15px 20px; 
             background: rgba(4, 10, 8, 0.95);
@@ -27,6 +90,7 @@
             justify-content: center;
             align-items: center;
             gap: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
         }
         nav a { 
             color: #f5f2eb; 
@@ -37,6 +101,7 @@
         }
         nav a:hover {
             color: #d4af37;
+            text-shadow: 0 0 10px #d4af37;
         }
         .chamber-container {
             max-width: 750px;
@@ -47,7 +112,14 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+            animation: fadeInChamber 1.5s ease-out;
         }
+
+        @keyframes fadeInChamber {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .cinematic-video {
             width: 100%;
             max-height: 400px;
@@ -56,9 +128,10 @@
             border-radius: 6px;
             margin: 20px 0;
             outline: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
         .playlist-box {
-            max-height: 200px;
+            max-height: 220px;
             overflow-y: auto;
             background: rgba(12, 22, 18, 0.95);
             border: 1px solid #d4af37;
@@ -68,17 +141,18 @@
             text-align: left;
         }
         .playlist-item {
-            padding: 8px 12px;
+            padding: 10px 14px;
             color: #f5f2eb;
             cursor: pointer;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: 0.2s;
         }
         .playlist-item:hover, .playlist-item.active {
             background: #d4af37;
             color: #12100e;
             font-weight: bold;
+            padding-left: 18px;
         }
         .royal-btn {
             background: #181410;
@@ -95,11 +169,13 @@
             text-decoration: none;
             display: block;
             box-sizing: border-box;
+            transition: 0.3s;
         }
         .royal-btn:hover {
             background: #d4af37;
             color: #12100e;
             font-weight: bold;
+            box-shadow: 0 0 15px #d4af37;
         }
     </style>
 </head>
@@ -109,6 +185,12 @@
     <audio id="royal-audio" loop preload="auto">
         <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
     </audio>
+
+    <!-- Floating Left-Edge Living Music Beacon -->
+    <div class="royal-music-beacon">
+        <span style="font-size: 1.2rem;" id="music-icon">🎵</span>
+        <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Ambiance</button>
+    </div>
 
     <nav>
         <a href="index.html">🏠 Sanctuary Home</a>
@@ -129,11 +211,9 @@
 
         <!-- Clickable Playlist Selector -->
         <div id="playlist-container" class="playlist-box">
-            <!-- Videos will be populated here -->
+            <!-- Videos populated dynamically -->
         </div>
 
-        <!-- Royal Music Toggle -->
-        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🔊 Play Realm Music & Ambiance</button>
         <a href="index.html" class="royal-btn">Return to Sanctuary Home</a>
     </div>
 
@@ -179,6 +259,7 @@
             let item = document.createElement("div");
             item.className = "playlist-item";
             item.innerText = (index + 1) + ". " + filename;
+            if (index === 0) item.classList.add('active');
             item.onclick = () => {
                 document.querySelectorAll('.playlist-item').forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
@@ -193,16 +274,19 @@
         function toggleAudio() {
             const audio = document.getElementById('royal-audio');
             const btn = document.getElementById('audio-toggle-btn');
+            const icon = document.getElementById('music-icon');
             if (!audio) return;
             
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🔊 Play Realm Music & Ambiance";
+                btn.innerText = "Play Ambiance";
+                icon.innerText = "🎵";
                 isPlaying = false;
             } else {
                 audio.volume = 1.0;
                 audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Realm Music";
+                    btn.innerText = "Pause Music";
+                    icon.innerText = "🎶";
                     isPlaying = true;
                 }).catch(error => {
                     console.log("Audio prevented:", error);
