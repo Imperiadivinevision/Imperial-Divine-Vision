@@ -299,7 +299,7 @@
 </head>
 <body>
 
-    <!-- Background Audio Element -->
+    <!-- Background Audio Element set to maximum volume (1.0) -->
     <audio id="royal-audio" loop preload="auto">
         <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
     </audio>
@@ -348,15 +348,16 @@
     <!-- Sequential Cinematic Tour Section -->
     <div id="tour-section" class="cinematic-container">
         <h2 style="color: #d4af37; margin-top: 0; font-size: 1.4rem; letter-spacing: 2px;">The Grand Imperial Journey</h2>
-        <p style="color: #b3a896; font-size: 0.9rem;">Witness the sacred prayer rooms, gardens, bath & tea sanctum, and palace structures.</p>
+        <p style="color: #b3a896; font-size: 0.9rem;">Witness the precise sequence of our grand realm tour and royal cinematics.</p>
         
         <div class="cinematic-display">
+            <!-- Videos play smoothly and silently in sequence -->
             <video id="sequence-video" class="cinematic-video" autoplay muted playsinline>
                 Your browser does not support video.
             </video>
         </div>
 
-        <!-- Royal Music Play Button with timer functionality -->
+        <!-- Royal Music Play Button (Max Volume Boosted) -->
         <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Realm Music & Ambiance</button>
         
         <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
@@ -367,27 +368,20 @@
     </div>
 
     <script>
-        // The complete master cinematic playlist incorporating every single realm, room, and creation file:
+        // Exact sequence playlist ordered precisely to your specification
         const cinematicPlaylist = [
-            // Gardens & Outdoor Walkways
-            "garden-walk-stairs.mp4",
-            "forest-garden.mp4",
-            
-            // Training & Specialized Areas
-            "training-area.mp4",
-            
-            // Bath & Tea Sanctum Areas
-            "bath-area.mp4",
-            "bathtub.mp4",
-            "rosanna-tea-INEMATIC.mp4",
-            
-            // Prayer Rooms
-            "prayer-room-1.mp4",
-            "prayer-room-2.mp4",
-            "prayer-room-3.mp4",
-            "prayer-room-5.mp4",
-            
-            // Palace Structures & Tours
+            "palace-tour-1.mp4",
+            "palace-tour-2.mp4",
+            "palace-tour-4.mp4",
+            "palace-tour-3.mp4",
+            "palace-tour-1.mp4",
+            "palace-tour-7.mp4",
+            "palace-tour-8.mp4",
+            "palace-tour-7.mp4",
+            "palace-tour-1.mp4",
+            "palace-tour-9.mp4",
+            "palace-tour-6.mp4",
+            "palace-tour-10.mp4",
             "real-palace-structure-1.mp4",
             "real-palace-structure-2.mp4",
             "real-palace-structure-3.mp4",
@@ -396,49 +390,21 @@
             "real-palace-structure-6.mp4",
             "real-palace-structure-7.mp4",
             "real-palace-structure-8.mp4",
-            "palace-structure-1.mp4",
-            "palace-tour-1.mp4",
-            "palace-tour-2.mp4",
-            "palace-tour-3.mp4",
-            "palace-tour-4.mp4",
             "palace-tour-6.mp4",
-            "palace-tour-7.mp4",
-            "palace-tour-8.mp4",
-            "palace-tour-9.mp4",
-            "palace-tour-10.mp4",
+            "prayer-room-1.mp4",
+            "prayer-room-2.mp4",
+            "prayer-room-3.mp4",
+            "prayer-room-5.mp4",
             "imperial-palace.mp4",
             "imperial-palace-hallway.mp4",
             "imperial-palace-guess-room.mp4",
             "imperial-dinner-room.mp4",
-            
-            // Sovereign Rooms & Bedchambers
             "imperial-bedroom-CINEMATIC.mp4",
             "king-queen-bed-room.mp4",
-            
-            // Character & Duo Cinematics
-            "rosanna-1-CINEMATIC.mp4",
-            "rosanna-3-CINEMATIC.mp4",
-            "rosanna-best-CINEMATIC.mp4",
-            "rosanna-blue-red-CINEMATIC.mp4",
-            "rosanna-green-CINEMATIC.mp4",
-            "rosanna-imperial-outfit-CINEMATIC.mp4",
-            "rosanna-imperial-read-CINEMATIC.mp4",
-            "rosanna-imperial-white-CINEMATIC.mp4",
-            "rosanna-pink-3-CINEMATIC.mp4",
-            "rosanna-pink-CINEMATIC-1.mp4",
-            "rosanna-pink-CINEMATIC.mp4",
-            "rosanna-purple-CINEMATIC.mp4",
-            "rosanna-relax-green-CINEMATIC.mp4",
-            "rosanna-white-2-CINEMATIC.mp4",
-            "rosanna-white-CINEMATIC.mp4",
             "king-benson-imperial-CINEMATIC.mp4",
-            "king-benson-white-CINEMATIC.mp4",
+            "rosanna-imperial-outfit-CINEMATIC.mp4",
             "king-queen-moving-carriage-CINEMATIC.mp4",
-            "king-queen-pink-CINEMATIC-1.mp4",
-            "king-queen-royal-purple-CINEMATIC-5.mp4",
-            "king-queen-throne-armor-CINEMATIC.mp4",
-            "king-queen-white-CINEMATIC-4.mp4",
-            "queen-throne-CINEMATIC-1.mp4"
+            "king-queen-throne-armor-CINEMATIC.mp4"
         ];
 
         let currentIndex = 0;
@@ -450,7 +416,7 @@
             videoElement.load();
             videoElement.play().catch(e => console.log("Autoplay waiting for interaction"));
             
-            // Automatically loop to the next video so the trailer never stops
+            // Loops continuously through your exact ordered playlist
             currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
         }
 
@@ -471,7 +437,8 @@
                 btn.innerText = "🎵 Play Realm Music & Ambiance";
                 isPlaying = false;
             } else {
-                audio.volume = 0.6;
+                // Boosted audio volume to maximum (1.0) so it plays loudly and clearly in the background
+                audio.volume = 1.0;
                 audio.play().then(() => {
                     btn.innerText = "🔇 Pause Realm Music";
                     isPlaying = true;
