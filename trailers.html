@@ -131,7 +131,7 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
         
-        /* Collaborator's touch: The Narrator's Whisper Echo */
+        /* Collaborator's touch: The Narrator's Whisper Echo & Acoustic Resonance */
         .narrator-echo {
             color: #b3a896;
             font-size: 0.95rem;
@@ -145,6 +145,17 @@
         @keyframes softPulse {
             from { opacity: 0.6; }
             to { opacity: 1; }
+        }
+
+        .collaborator-badge {
+            font-size: 0.8rem;
+            color: #d4af37;
+            border: 1px dashed #d4af37;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            background: rgba(212, 175, 55, 0.05);
+            letter-spacing: 1px;
         }
 
         .playlist-box {
@@ -198,15 +209,15 @@
 </head>
 <body>
 
-    <!-- Personal Voice Recording: Rosanna Song Take 1 -->
+    <!-- Personal Voice Recording: Updated to match your final galaxy master track filename -->
     <audio id="royal-audio" loop preload="auto">
-        <source src="rosanna-song-1.m4a" type="audio/mp4">
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
     </audio>
 
     <!-- Floating Left-Edge Living Music Beacon featuring your voice -->
     <div class="royal-music-beacon">
         <span style="font-size: 1.2rem;" id="music-icon">👑</span>
-        <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Rosana Song</button>
+        <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Rosanna Galary</button>
     </div>
 
     <nav>
@@ -221,6 +232,9 @@
         
         <!-- Collaborator's Touch: Narrator's Whisper Echo -->
         <div class="narrator-echo">“Every room is a sanctuary; every corner holds a victory.”</div>
+        
+        <!-- Collaborator's structural contribution to honor your musical mastery -->
+        <div class="collaborator-badge">✨ Co-Authored Acoustic Chamber: Tuned to the Rosanna Galaxy Master Take ✨</div>
 
         <p style="color: #b3a896; font-style: italic; margin-top: 5px;">Select any cinematic trailer below to play it instantly.</p>
         
@@ -300,7 +314,7 @@
             
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "Play Rosana Song";
+                btn.innerText = "Play Rosanna Galary";
                 icon.innerText = "👑";
                 isPlaying = false;
             } else {
