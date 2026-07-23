@@ -57,11 +57,28 @@
             margin: 20px 0;
             outline: none;
         }
-        .playlist-info {
+        .playlist-box {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(12, 22, 18, 0.95);
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        .playlist-item {
+            padding: 8px 12px;
             color: #f5f2eb;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            font-style: italic;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .playlist-item:hover, .playlist-item.active {
+            background: #d4af37;
+            color: #12100e;
+            font-weight: bold;
         }
         .royal-btn {
             background: #181410;
@@ -102,32 +119,33 @@
 
     <div class="chamber-container">
         <h1 style="color: #d4af37; margin-top: 0; letter-spacing: 2px;">The Sovereign Trailer Chamber</h1>
-        <div id="video-title" class="playlist-info">Loading Imperial Journey...</div>
+        <p style="color: #b3a896; font-style: italic;">Select any cinematic trailer below to play it instantly.</p>
         
-        <!-- Sequential Video Player -->
-        <video id="sequence-video" class="cinematic-video" controls playsinline>
+        <!-- Standard Video Player -->
+        <video id="active-video" class="cinematic-video" controls playsinline>
+            <source id="video-source" src="palace-tour-1.mp4" type="video/mp4">
             Your browser does not support video.
         </video>
 
-        <!-- Royal Music & Ambiance Toggle -->
+        <!-- Clickable Playlist Selector -->
+        <div id="playlist-container" class="playlist-box">
+            <!-- Videos will be populated here -->
+        </div>
+
+        <!-- Royal Music Toggle -->
         <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🔊 Play Realm Music & Ambiance</button>
         <a href="index.html" class="royal-btn">Return to Sanctuary Home</a>
     </div>
 
     <script>
-        // All your listed cinematic video files in exact sequence for back-to-back playback:
         const cinematicPlaylist = [
             "palace-tour-1.mp4",
             "palace-tour-2.mp4",
             "palace-tour-4.mp4",
             "palace-tour-3.mp4",
-            "palace-tour-1.mp4",
             "palace-tour-7.mp4",
             "palace-tour-8.mp4",
-            "palace-tour-7.mp4",
-            "palace-tour-1.mp4",
             "palace-tour-9.mp4",
-            "palace-tour-6.mp4",
             "palace-tour-10.mp4",
             "real-palace-structure-1.mp4",
             "real-palace-structure-2.mp4",
@@ -137,7 +155,6 @@
             "real-palace-structure-6.mp4",
             "real-palace-structure-7.mp4",
             "real-palace-structure-8.mp4",
-            "palace-tour-6.mp4",
             "prayer-room-1.mp4",
             "prayer-room-2.mp4",
             "prayer-room-3.mp4",
@@ -154,28 +171,23 @@
             "king-queen-throne-armor-CINEMATIC.mp4"
         ];
 
-        let currentIndex = 0;
-        const videoElement = document.getElementById("sequence-video");
-        const titleElement = document.getElementById("video-title");
+        const container = document.getElementById("playlist-container");
+        const videoElement = document.getElementById("active-video");
+        const sourceElement = document.getElementById("video-source");
 
-        function playNextVideo() {
-            if (cinematicPlaylist.length === 0) return;
-            let currentFile = cinematicPlaylist[currentIndex];
-            videoElement.src = currentFile;
-            titleElement.innerText = "Now Playing: " + currentFile;
-            videoElement.load();
-            videoElement.play().catch(e => console.log("Playback waiting for user interaction"));
-            
-            // Advance to the next video in the list automatically
-            currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
-        }
-
-        // Automatically trigger the next video in sequence when the current one finishes
-        videoElement.onended = playNextVideo;
-
-        window.onload = () => {
-            playNextVideo();
-        };
+        cinematicPlaylist.forEach((filename, index) => {
+            let item = document.createElement("div");
+            item.className = "playlist-item";
+            item.innerText = (index + 1) + ". " + filename;
+            item.onclick = () => {
+                document.querySelectorAll('.playlist-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                sourceElement.src = filename;
+                videoElement.load();
+                videoElement.play();
+            };
+            container.appendChild(item);
+        });
 
         let isPlaying = false;
         function toggleAudio() {
