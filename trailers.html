@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imperial Divine Vision | The Trailer Chamber</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #040a08;
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px auto;
+            background-image: url('garden_border_pattern.png');
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+        }
+        nav { 
+            padding: 15px 20px; 
+            background: rgba(4, 10, 8, 0.95);
+            border-bottom: 2px solid #d4af37;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+        nav a { 
+            color: #f5f2eb; 
+            text-decoration: none; 
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+        }
+        nav a:hover {
+            color: #d4af37;
+        }
+        .chamber-container {
+            max-width: 750px;
+            width: 90%;
+            margin: 40px auto;
+            background: rgba(28, 24, 20, 0.95);
+            border: 2px solid #d4af37;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        }
+        .cinematic-video {
+            width: 100%;
+            max-height: 400px;
+            background: #0b0907;
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            margin: 20px 0;
+            outline: none;
+        }
+        .playlist-info {
+            color: #f5f2eb;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        .royal-btn {
+            background: #181410;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 12px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: block;
+            box-sizing: border-box;
+        }
+        .royal-btn:hover {
+            background: #d4af37;
+            color: #12100e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Audio Element -->
+    <audio id="royal-audio" loop preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
+    </audio>
+
+    <nav>
+        <a href="index.html">🏠 Sanctuary Home</a>
+        <a href="trailers.html">🎬 Trailer Chamber</a>
+        <a href="library.html">Library</a>
+        <a href="seal.html">Our Official Seal</a>
+    </nav>
+
+    <div class="chamber-container">
+        <h1 style="color: #d4af37; margin-top: 0; letter-spacing: 2px;">The Sovereign Trailer Chamber</h1>
+        <div id="video-title" class="playlist-info">Loading Imperial Journey...</div>
+        
+        <!-- Dedicated Video Player with all exact repository filenames -->
+        <video id="sequence-video" class="cinematic-video" controls autoplay playsinline>
+            Your browser does not support video.
+        </video>
+
+        <!-- Royal Music & Ambiance Toggle -->
+        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🔊 Play Realm Music & Ambiance</button>
+        <a href="index.html" class="royal-btn">Return to Sanctuary Home</a>
+    </div>
+
+    <script>
+        // Exact video sequence matching your repository filenames and casings
+        const cinematicPlaylist = [
+            "palace-tour-1.mp4",
+            "palace-tour-2.mp4",
+            "palace-tour-4.mp4",
+            "palace-tour-3.mp4",
+            "palace-tour-1.mp4",
+            "palace-tour-7.mp4",
+            "palace-tour-8.mp4",
+            "palace-tour-7.mp4",
+            "palace-tour-1.mp4",
+            "palace-tour-9.mp4",
+            "palace-tour-6.mp4",
+            "palace-tour-10.mp4",
+            "real-palace-structure-1.mp4",
+            "real-palace-structure-2.mp4",
+            "real-palace-structure-3.mp4",
+            "real-palace-structure-4.mp4",
+            "real-palace-structure-5.mp4",
+            "real-palace-structure-6.mp4",
+            "real-palace-structure-7.mp4",
+            "real-palace-structure-8.mp4",
+            "palace-tour-6.mp4",
+            "prayer-room-1.mp4",
+            "prayer-room-2.mp4",
+            "prayer-room-3.mp4",
+            "prayer-room-5.mp4",
+            "imperial-palace.mp4",
+            "imperial-palace-hallway.mp4",
+            "imperial-palace-guess-room.mp4",
+            "imperial-dinner-room.mp4",
+            "imperial-bedroom-CINEMATIC.mp4",
+            "king-queen-bed-room.mp4",
+            "king-benson-imperial-CINEMATIC.mp4",
+            "rosanna-imperial-outfit-CINEMATIC.mp4",
+            "king-queen-moving-carriage-CINEMATIC.mp4",
+            "king-queen-throne-armor-CINEMATIC.mp4"
+        ];
+
+        let currentIndex = 0;
+        const videoElement = document.getElementById("sequence-video");
+        const titleElement = document.getElementById("video-title");
+
+        function playNextVideo() {
+            if (cinematicPlaylist.length === 0) return;
+            let currentFile = cinematicPlaylist[currentIndex];
+            videoElement.src = currentFile;
+            titleElement.innerText = "Now Playing: " + currentFile;
+            videoElement.load();
+            videoElement.play().catch(e => console.log("Playback waiting for user interaction"));
+            currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
+        }
+
+        videoElement.onended = playNextVideo;
+
+        window.onload = () => {
+            playNextVideo();
+        };
+
+        let isPlaying = false;
+        function toggleAudio() {
+            const audio = document.getElementById('royal-audio');
+            const btn = document.getElementById('audio-toggle-btn');
+            if (!audio) return;
+            
+            if (isPlaying) {
+                audio.pause();
+                btn.innerText = "🔊 Play Realm Music & Ambiance";
+                isPlaying = false;
+            } else {
+                audio.volume = 1.0;
+                audio.play().then(() => {
+                    btn.innerText = "🔇 Pause Realm Music";
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log("Audio prevented:", error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
