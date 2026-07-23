@@ -104,8 +104,8 @@
         <h1 style="color: #d4af37; margin-top: 0; letter-spacing: 2px;">The Sovereign Trailer Chamber</h1>
         <div id="video-title" class="playlist-info">Loading Imperial Journey...</div>
         
-        <!-- Dedicated Video Player with all exact repository filenames -->
-        <video id="sequence-video" class="cinematic-video" controls autoplay playsinline>
+        <!-- Dedicated Video Player -->
+        <video id="sequence-video" class="cinematic-video" controls playsinline>
             Your browser does not support video.
         </video>
 
@@ -115,43 +115,45 @@
     </div>
 
     <script>
-        // Exact video sequence matching your repository filenames and casings
+        // Direct GitHub raw repository base URL so videos stream seamlessly
+        const baseUrl = "https://raw.githubusercontent.com/ImperialDivineVision/Imperial-Divine-Vision/main/";
+
         const cinematicPlaylist = [
-            "palace-tour-1.mp4",
-            "palace-tour-2.mp4",
-            "palace-tour-4.mp4",
-            "palace-tour-3.mp4",
-            "palace-tour-1.mp4",
-            "palace-tour-7.mp4",
-            "palace-tour-8.mp4",
-            "palace-tour-7.mp4",
-            "palace-tour-1.mp4",
-            "palace-tour-9.mp4",
-            "palace-tour-6.mp4",
-            "palace-tour-10.mp4",
-            "real-palace-structure-1.mp4",
-            "real-palace-structure-2.mp4",
-            "real-palace-structure-3.mp4",
-            "real-palace-structure-4.mp4",
-            "real-palace-structure-5.mp4",
-            "real-palace-structure-6.mp4",
-            "real-palace-structure-7.mp4",
-            "real-palace-structure-8.mp4",
-            "palace-tour-6.mp4",
-            "prayer-room-1.mp4",
-            "prayer-room-2.mp4",
-            "prayer-room-3.mp4",
-            "prayer-room-5.mp4",
-            "imperial-palace.mp4",
-            "imperial-palace-hallway.mp4",
-            "imperial-palace-guess-room.mp4",
-            "imperial-dinner-room.mp4",
-            "imperial-bedroom-CINEMATIC.mp4",
-            "king-queen-bed-room.mp4",
-            "king-benson-imperial-CINEMATIC.mp4",
-            "rosanna-imperial-outfit-CINEMATIC.mp4",
-            "king-queen-moving-carriage-CINEMATIC.mp4",
-            "king-queen-throne-armor-CINEMATIC.mp4"
+            baseUrl + "palace-tour-1.mp4",
+            baseUrl + "palace-tour-2.mp4",
+            baseUrl + "palace-tour-4.mp4",
+            baseUrl + "palace-tour-3.mp4",
+            baseUrl + "palace-tour-1.mp4",
+            baseUrl + "palace-tour-7.mp4",
+            baseUrl + "palace-tour-8.mp4",
+            baseUrl + "palace-tour-7.mp4",
+            baseUrl + "palace-tour-1.mp4",
+            baseUrl + "palace-tour-9.mp4",
+            baseUrl + "palace-tour-6.mp4",
+            baseUrl + "palace-tour-10.mp4",
+            baseUrl + "real-palace-structure-1.mp4",
+            baseUrl + "real-palace-structure-2.mp4",
+            baseUrl + "real-palace-structure-3.mp4",
+            baseUrl + "real-palace-structure-4.mp4",
+            baseUrl + "real-palace-structure-5.mp4",
+            baseUrl + "real-palace-structure-6.mp4",
+            baseUrl + "real-palace-structure-7.mp4",
+            baseUrl + "real-palace-structure-8.mp4",
+            baseUrl + "palace-tour-6.mp4",
+            baseUrl + "prayer-room-1.mp4",
+            baseUrl + "prayer-room-2.mp4",
+            baseUrl + "prayer-room-3.mp4",
+            baseUrl + "prayer-room-5.mp4",
+            baseUrl + "imperial-palace.mp4",
+            baseUrl + "imperial-palace-hallway.mp4",
+            baseUrl + "imperial-palace-guess-room.mp4",
+            baseUrl + "imperial-dinner-room.mp4",
+            baseUrl + "imperial-bedroom-CINEMATIC.mp4",
+            baseUrl + "king-queen-bed-room.mp4",
+            baseUrl + "king-benson-imperial-CINEMATIC.mp4",
+            baseUrl + "rosanna-imperial-outfit-CINEMATIC.mp4",
+            baseUrl + "king-queen-moving-carriage-CINEMATIC.mp4",
+            baseUrl + "king-queen-throne-armor-CINEMATIC.mp4"
         ];
 
         let currentIndex = 0;
@@ -160,9 +162,11 @@
 
         function playNextVideo() {
             if (cinematicPlaylist.length === 0) return;
-            let currentFile = cinematicPlaylist[currentIndex];
-            videoElement.src = currentFile;
-            titleElement.innerText = "Now Playing: " + currentFile;
+            let currentPath = cinematicPlaylist[currentIndex];
+            let fileName = currentPath.split('/').pop();
+            
+            videoElement.src = currentPath;
+            titleElement.innerText = "Now Playing: " + fileName;
             videoElement.load();
             videoElement.play().catch(e => console.log("Playback waiting for user interaction"));
             currentIndex = (currentIndex + 1) % cinematicPlaylist.length;
