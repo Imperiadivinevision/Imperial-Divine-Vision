@@ -350,14 +350,14 @@
         <p style="color: #b3a896; font-size: 0.9rem;">Witness the precise sequence of our grand realm tour and royal cinematics.</p>
         
         <div class="cinematic-display">
-            <!-- Native controls enabled with exact lowercase filenames and CINEMATIC tags preserved -->
+            <!-- Native controls enabled with your full playlist -->
             <video id="sequence-video" class="cinematic-video" controls autoplay muted playsinline>
                 Your browser does not support video.
             </video>
         </div>
 
-        <!-- Royal Music Play Button (Max Volume Boosted) -->
-        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Realm Music & Ambiance</button>
+        <!-- Royal Music Play Button with Volume Icon -->
+        <button class="royal-btn" onclick="toggleAudio()" id="audio-toggle-btn">🔊 Play Realm Music & Ambiance</button>
         
         <a href="room-adult.html" class="royal-btn">Enter Sovereign Chamber</a>
     </div>
@@ -367,7 +367,7 @@
     </div>
 
     <script>
-        // Exact sequence playlist ordered precisely to your specification with exact lowercase and CINEMATIC casings
+        // Full sequence playlist containing all your exact files in your precise order:
         const cinematicPlaylist = [
             "palace-tour-1.mp4",
             "palace-tour-2.mp4",
@@ -432,7 +432,7 @@
             
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🎵 Play Realm Music & Ambiance";
+                btn.innerText = "🔊 Play Realm Music & Ambiance";
                 isPlaying = false;
             } else {
                 audio.volume = 1.0;
