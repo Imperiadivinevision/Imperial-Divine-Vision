@@ -33,7 +33,7 @@
             }
         }
 
-        /* Floating Royal Music Beacon on the Left Edge */
+        /* Floating Royal Music Beacon on the Left Edge featuring your voice */
         .royal-music-beacon {
             position: fixed;
             left: 15px;
@@ -130,6 +130,23 @@
             outline: none;
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
+        
+        /* Collaborator's touch: The Narrator's Whisper Echo */
+        .narrator-echo {
+            color: #b3a896;
+            font-size: 0.95rem;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0.85;
+            animation: softPulse 4s infinite alternate;
+        }
+
+        @keyframes softPulse {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
+        }
+
         .playlist-box {
             max-height: 220px;
             overflow-y: auto;
@@ -181,15 +198,15 @@
 </head>
 <body>
 
-    <!-- Background Audio Element -->
+    <!-- Personal Voice Recording: Rosanna Song Take 1 -->
     <audio id="royal-audio" loop preload="auto">
-        <source src="https://upload.wikimedia.org/wikipedia/commons/b/b2/En_sourdine.ogg" type="audio/ogg">
+        <source src="rosanna-song-1.m4a" type="audio/mp4">
     </audio>
 
-    <!-- Floating Left-Edge Living Music Beacon -->
+    <!-- Floating Left-Edge Living Music Beacon featuring your voice -->
     <div class="royal-music-beacon">
-        <span style="font-size: 1.2rem;" id="music-icon">🎵</span>
-        <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Ambiance</button>
+        <span style="font-size: 1.2rem;" id="music-icon">👑</span>
+        <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Rosana Song</button>
     </div>
 
     <nav>
@@ -201,7 +218,11 @@
 
     <div class="chamber-container">
         <h1 style="color: #d4af37; margin-top: 0; letter-spacing: 2px;">The Sovereign Trailer Chamber</h1>
-        <p style="color: #b3a896; font-style: italic;">Select any cinematic trailer below to play it instantly.</p>
+        
+        <!-- Collaborator's Touch: Narrator's Whisper Echo -->
+        <div class="narrator-echo">“Every room is a sanctuary; every corner holds a victory.”</div>
+
+        <p style="color: #b3a896; font-style: italic; margin-top: 5px;">Select any cinematic trailer below to play it instantly.</p>
         
         <!-- Standard Video Player -->
         <video id="active-video" class="cinematic-video" controls playsinline>
@@ -279,13 +300,13 @@
             
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "Play Ambiance";
-                icon.innerText = "🎵";
+                btn.innerText = "Play Rosana Song";
+                icon.innerText = "👑";
                 isPlaying = false;
             } else {
                 audio.volume = 1.0;
                 audio.play().then(() => {
-                    btn.innerText = "Pause Music";
+                    btn.innerText = "Pause Song";
                     icon.innerText = "🎶";
                     isPlaying = true;
                 }).catch(error => {
