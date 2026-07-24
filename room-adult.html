@@ -186,13 +186,16 @@
             padding: 10px;
             box-sizing: border-box;
         }
+
         .avatar-preview-media {
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 440px;
             object-fit: contain;
-            transform: scale(0.85); /* Scales down just the video player content while keeping the gold display box identical */
             background: #000000;
+            display: block;
         }
+
         .stage-footer {
             margin-top: 8px;
             display: flex;
@@ -311,8 +314,8 @@
             </div>
             
             <div class="character-stage-display">
-                <!-- Supports both video and image formats naturally without distortion -->
-                <div id="media-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <!-- Sized at 85% to comfortably frame both face and full body together -->
+                <div id="media-container" style="width: 85%; height: 85%; display: flex; align-items: center; justify-content: center;">
                     <video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline>
                         <source src="rosanna-best-CINEMATIC.mp4" type="video/mp4">
                         Your browser does not support video preview.
@@ -511,4 +514,3 @@
 </html>
 
 
-            
