@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: Advanced Character Creation Engine</title>
+    <title>Imperial Capital: Likeness Creation Studio</title>
     <style>
         :root {
-            --bg-dark: #12100e;
-            --panel-bg: rgba(28, 24, 20, 0.98);
+            --bg-dark: #0c0b0a;
+            --panel-bg: rgba(22, 19, 16, 0.95);
             --gold: #d4af37;
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
+            --text-muted: #9e9382;
         }
 
         body {
@@ -25,64 +26,90 @@
             overflow: hidden;
         }
 
+        /* Top Bar mimicking RPG game menus */
+        .game-top-bar {
+            height: 40px;
+            background: #14110e;
+            border-bottom: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .game-top-bar span.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
         .container {
             display: flex;
             flex: 1;
-            height: 100vh;
+            height: calc(100vh - 40px);
             width: 100%;
-            padding: 10px;
-            gap: 10px;
             box-sizing: border-box;
         }
 
-        /* Sidebar for Controls */
+        /* Right Side Selector Grid (RPG Style) */
         .control-sidebar {
-            width: 340px;
+            width: 380px;
             background: var(--panel-bg);
-            border: 2px solid var(--gold);
-            border-radius: 8px;
+            border-left: 2px solid var(--gold);
             display: flex;
             flex-direction: column;
-            padding: 12px;
-            gap: 8px;
+            padding: 15px;
+            gap: 12px;
             overflow-y: auto;
+            box-sizing: border-box;
         }
 
-        .panel-section-title {
+        .panel-title {
             color: var(--gold);
-            font-size: 0.8rem;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 3px;
-            margin-top: 6px;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 5px;
+            margin-top: 5px;
         }
 
         .option-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
         }
 
-        .option-btn {
-            background: #181410;
-            color: var(--text-main);
-            border: 1px solid var(--gold);
-            padding: 6px;
+        .option-card {
+            background: #1b1713;
+            border: 1px solid #3a3227;
+            border-radius: 4px;
+            padding: 8px;
             text-align: center;
             font-size: 0.75rem;
             cursor: pointer;
-            border-radius: 4px;
+            color: var(--text-muted);
             transition: all 0.2s;
         }
 
-        .option-btn:hover, .option-btn.selected {
-            background: var(--gold);
-            color: var(--bg-dark);
+        .option-card:hover, .option-card.selected {
+            border-color: var(--gold);
+            color: var(--text-main);
+            background: #26201a;
+        }
+
+        .option-card.selected {
+            box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.4);
             font-weight: bold;
         }
 
-        /* Main Viewport for Character Display */
+        /* Main Character Preview Stage */
         .character-viewport {
             flex: 1;
             display: flex;
@@ -90,179 +117,169 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background: #000;
-            border: 3px solid var(--gold);
-            border-radius: 8px;
+            background: radial-gradient(circle at center, #241e17 0%, #0c0b0a 80%);
         }
 
-        .avatar-canvas {
+        /* Simulated 3D Character Model Container */
+        .character-model-wrapper {
             position: relative;
-            width: 300px;
-            height: 500px; /* Taller canvas for full body */
-            background: #1a1612;
-            border: 2px solid var(--gold);
-            border-radius: 6px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* Full-Body SVG Character Figure (Simplified for Code) */
-        .character-figure {
-            position: relative;
-            width: 160px;
-            height: 450px;
+            width: 260px;
+            height: 480px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
         }
 
-        /* Head Area */
-        .avatar-head {
+        /* Character Body Parts Styled like Game Assets */
+        .model-head {
             width: 60px;
-            height: 70px;
+            height: 75px;
             border-radius: 30px 30px 25px 25px;
             position: absolute;
             top: 20px;
-            z-index: 10;
-            transition: background-color 0.3s ease;
-        }
-
-        .avatar-hair-style {
-            position: absolute;
-            top: 5px;
-            width: 70px;
-            height: 40px;
-            background-color: #2b1d11;
-            border-radius: 35px 35px 15px 15px;
-            z-index: 11;
-            transition: all 0.3s ease;
-        }
-
-        /* Body Area (Torso & Limbs) */
-        .avatar-torso {
-            width: 80px;
-            height: 120px;
-            border-radius: 20px 20px 10px 10px;
-            position: absolute;
-            top: 85px;
             z-index: 5;
             transition: background-color 0.3s ease;
         }
 
-        .avatar-arms {
-            width: 120px;
+        .model-hair {
+            position: absolute;
+            top: 8px;
+            width: 72px;
+            height: 45px;
+            background-color: #2b1d11;
+            border-radius: 36px 36px 15px 15px;
+            z-index: 6;
+            transition: all 0.3s ease;
+        }
+
+        .model-torso {
+            width: 90px;
             height: 110px;
-            border-radius: 10px;
+            border-radius: 15px;
             position: absolute;
             top: 90px;
-            z-index: 4; /* Behind torso */
+            z-index: 3;
             transition: background-color 0.3s ease;
         }
 
-        /* The Key Attire: Leggings & Crop Top */
-        .avatar-leggings {
-            width: 70px;
-            height: 180px;
-            border-radius: 10px;
-            position: absolute;
-            top: 200px;
-            z-index: 6; /* Covers legs and lower torso */
-            transition: background-color 0.3s ease;
-            background-color: #333; /* Default color for the garment */
-        }
-
-        .avatar-crop-top {
-            width: 74px;
-            height: 50px;
-            border-radius: 10px;
+        /* Activewear: Crop Top and Leggings */
+        .model-crop-top {
+            width: 94px;
+            height: 55px;
+            background-color: #2a3b5c; /* Blue activewear matching theme */
+            border-radius: 12px;
             position: absolute;
             top: 90px;
-            z-index: 7; /* Covers upper torso */
-            transition: background-color 0.3s ease;
-             background-color: #333; /* Default color for the garment */
+            z-index: 4;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        .action-btn {
+        .model-arms {
+            width: 170px;
+            height: 40px;
+            background-color: inherit;
+            position: absolute;
+            top: 95px;
+            z-index: 2;
+            border-radius: 20px;
+        }
+
+        .model-legs {
+            width: 76px;
+            height: 190px;
+            background-color: #242433; /* Dark purple/blue leggings */
+            border-radius: 10px;
+            position: absolute;
+            top: 195px;
+            z-index: 3;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.4);
+        }
+
+        .action-footer {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .game-btn {
             background: var(--gold);
             color: var(--bg-dark);
-            border: 2px solid var(--gold);
-            padding: 8px 16px;
+            border: none;
+            padding: 10px 24px;
+            font-family: 'Georgia', serif;
             font-weight: bold;
+            font-size: 0.85rem;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 3px;
             text-transform: uppercase;
+            letter-spacing: 1px;
             text-decoration: none;
-            margin-top: 15px;
-            font-size: 0.8rem;
+            transition: background 0.2s;
         }
 
-        .action-btn:hover {
+        .game-btn:hover {
             background: var(--gold-hover);
-            box-shadow: 0 0 10px var(--gold);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Game Navigation Bar -->
+    <div class="game-top-bar">
+        <span>L1 / R1: Rotate</span>
+        <span>Abilities</span>
+        <span>Skills</span>
+        <span class="active">Appearance</span>
+    </div>
+
     <div class="container">
-        <!-- Creator Control Panel -->
-        <div class="control-sidebar">
-            <div class="panel-section-title">1. Base Form & Gender</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('base', 'female', this)">Woman</button>
-                <button class="option-btn" onclick="setTrait('base', 'male', this)">Man</button>
+        <!-- Main Character Preview Viewport -->
+        <div class="character-viewport">
+            <div class="character-model-wrapper">
+                <div id="model-hair" class="model-hair"></div>
+                <div id="model-head" class="model-head"></div>
+                <div id="model-arms" class="model-arms"></div>
+                <div id="model-torso" class="model-torso"></div>
+                <div id="model-crop-top" class="model-crop-top"></div>
+                <div id="model-legs" class="model-legs"></div>
             </div>
 
-            <div class="panel-section-title">2. Skin Tone</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('skin', '#5c3824', this)">Deep Warm</button>
-                <button class="option-btn" onclick="setTrait('skin', '#8d5524', this)">Rich Brown</button>
-                <button class="option-btn" onclick="setTrait('skin', '#c68642', this)">Golden Tan</button>
-                <button class="option-btn" onclick="setTrait('skin', '#f5d0b1', this)">Fair</button>
-            </div>
-
-            <div class="panel-section-title">3. Hairstyle</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('hair', 'Braid-Updo', this)">Braid-Updo</button>
-                <button class="option-btn" onclick="setTrait('hair', 'Extensions', this)">Extensions</button>
-                <button class="option-btn" onclick="setTrait('hair', 'Natural Curls', this)">Natural Curls</button>
-                <button class="option-btn" onclick="setTrait('hair', 'Royal Waves', this)">Royal Waves</button>
-            </div>
-
-            <div class="panel-section-title">4. Body Build</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('body', '80px', this)">Regal / Standard</button>
-                <button class="option-btn" onclick="setTrait('body', '100px', this)">Athletic Build</button>
-            </div>
-
-            <div class="panel-section-title">5. Attire & Robes</div>
-            <div class="option-grid" style="grid-template-columns: 1fr;">
-                <button class="option-btn selected" onclick="setTrait('outfit', 'Activewear', this)">Leggings & Crop Top</button>
+            <div class="action-footer">
+                <a href="gateway.html" class="game-btn">Save & Enter Realm</a>
             </div>
         </div>
 
-        <!-- Live Game Creator Stage: FULL BODY -->
-        <div class="character-viewport">
-            <h2 style="color: var(--gold); position: absolute; top: 15px; margin: 0; font-size: 1.1rem;">Likeness Creation Studio</h2>
-            
-            <div class="avatar-canvas">
-                <div class="character-figure">
-                    <!-- The Character Figure Parts -->
-                    <div id="avatar-hair" class="avatar-hair-style"></div>
-                    <div id="avatar-head" class="avatar-head"></div>
-                    <div id="avatar-arms" class="avatar-arms"></div>
-                    <div id="avatar-torso" class="avatar-torso"></div>
-                    
-                    <!-- The Attire Layer (Leggings & Crop Top) -->
-                    <div id="avatar-leggings" class="avatar-leggings"></div>
-                    <div id="avatar-crop-top" class="avatar-crop-top"></div>
-                </div>
+        <!-- Right Side RPG Customization Grid -->
+        <div class="control-sidebar">
+            <div class="panel-title">Character Model</div>
+            <div class="option-grid">
+                <div class="option-card selected" onclick="setTrait('base', 'female', this)">Woman</div>
+                <div class="option-card" onclick="setTrait('base', 'male', this)">Man</div>
             </div>
 
-            <a href="gateway.html" class="action-btn">Save & Enter Realm</a>
+            <div class="panel-title">Skin Tone</div>
+            <div class="option-grid">
+                <div class="option-card selected" onclick="setTrait('skin', '#5c3824', this)" style="background: #5c3824; color: #fff;">Deep Warm</div>
+                <div class="option-card" onclick="setTrait('skin', '#8d5524', this)" style="background: #8d5524; color: #fff;">Rich Brown</div>
+                <div class="option-card" onclick="setTrait('skin', '#c68642', this)" style="background: #c68642; color: #fff;">Golden Tan</div>
+                <div class="option-card" onclick="setTrait('skin', '#f5d0b1', this)" style="background: #f5d0b1; color: #333;">Fair</div>
+            </div>
+
+            <div class="panel-title">Hairstyle</div>
+            <div class="option-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="option-card selected" onclick="setTrait('hair', 'Braid-Updo', this)">Braid-Updo</div>
+                <div class="option-card" onclick="setTrait('hair', 'Extensions', this)">Extensions</div>
+                <div class="option-card" onclick="setTrait('hair', 'Natural Curls', this)">Natural Curls</div>
+                <div class="option-card" onclick="setTrait('hair', 'Royal Waves', this)">Royal Waves</div>
+            </div>
+
+            <div class="panel-title">Attire (Activewear)</div>
+            <div class="option-grid" style="grid-template-columns: 1fr;">
+                <div class="option-card selected">Crop Top & Leggings</div>
+            </div>
         </div>
     </div>
 
@@ -270,62 +287,40 @@
         let characterBuild = {
             base: 'female',
             skin: '#5c3824',
-            hair: 'Braid-Updo',
-            body: '80px',
-            outfit: 'Activewear'
+            hair: 'Braid-Updo'
         };
 
-        function setTrait(category, value, btn) {
-            const parent = btn.parentElement;
-            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+        function setTrait(category, value, card) {
+            const parent = card.parentElement;
+            parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
             
             characterBuild[category] = value;
-            updateAvatarDisplay();
+            updateDisplay();
         }
 
-        function updateAvatarDisplay() {
-            // Apply skin tone to all exposed body parts
-            document.getElementById('avatar-head').style.backgroundColor = characterBuild.skin;
-            document.getElementById('avatar-arms').style.backgroundColor = characterBuild.skin;
-            document.getElementById('avatar-torso').style.backgroundColor = characterBuild.skin;
+        function updateDisplay() {
+            document.getElementById('model-head').style.backgroundColor = characterBuild.skin;
+            document.getElementById('model-arms').style.backgroundColor = characterBuild.skin;
+            document.getElementById('model-torso').style.backgroundColor = characterBuild.skin;
             
-            // Apply body build changes (chest width)
-            document.getElementById('avatar-torso').style.width = characterBuild.body;
-            document.getElementById('avatar-crop-top').style.width = (parseInt(characterBuild.body) + 10) + 'px';
-
-            // --- Garment Color Logic ---
-            // The activewear garment itself doesn't change color, but the skin beneath it shows through.
-            // Let's make the leggings and top semi-transparent to let the skin tone influence them,
-            // or we can give the garment itself a neutral color. We'll use a dark charcoal gray (like real activewear).
-            // The important thing is that the player sees their full character figure.
-            
-            document.getElementById('avatar-leggings').style.backgroundColor = '#333'; // Dark charcoal
-            document.getElementById('avatar-crop-top').style.backgroundColor = '#333'; 
-            
-            // Adjust hair visual hints based on selection
-            const hairElem = document.getElementById('avatar-hair');
+            const hairElem = document.getElementById('model-hair');
             if (characterBuild.hair === 'Braid-Updo') {
-                hairElem.style.borderRadius = '35px 35px 15px 15px';
-                hairElem.style.height = '40px';
-                hairElem.style.width = '66px';
+                hairElem.style.borderRadius = '36px 36px 15px 15px';
+                hairElem.style.height = '45px';
             } else if (characterBuild.hair === 'Extensions') {
-                hairElem.style.borderRadius = '35px 35px 25px 25px';
-                hairElem.style.height = '60px';
-                hairElem.style.width = '64px';
+                hairElem.style.borderRadius = '36px 36px 25px 25px';
+                hairElem.style.height = '65px';
             } else if (characterBuild.hair === 'Natural Curls') {
                 hairElem.style.borderRadius = '50%';
-                hairElem.style.height = '48px';
-                hairElem.style.width = '68px';
+                hairElem.style.height = '50px';
             } else {
                 hairElem.style.borderRadius = '20px 20px 15px 15px';
-                hairElem.style.height = '35px';
-                hairElem.style.width = '64px';
+                hairElem.style.height = '38px';
             }
         }
 
-        // Initialize display
-        updateAvatarDisplay();
+        updateDisplay();
     </script>
 </body>
 </html>
