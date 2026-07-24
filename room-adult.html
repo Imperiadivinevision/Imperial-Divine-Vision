@@ -30,7 +30,7 @@
         .container {
             display: flex;
             flex: 1;
-            height: calc(100vh - 20px);
+            height: 100vh;
             width: 100%;
             position: relative;
             box-sizing: border-box;
@@ -48,18 +48,19 @@
         }
 
         .control-sidebar {
-            width: 300px;
+            width: 280px;
             background: var(--panel-bg);
             border: 2px solid var(--gold);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
-            padding: 15px;
-            gap: 12px;
+            padding: 12px;
+            gap: 10px;
             overflow-y: auto;
             z-index: 10;
             box-shadow: 0 5px 25px rgba(0,0,0,0.8);
-            max-height: 100%;
+            max-height: calc(100vh - 20px);
+            box-sizing: border-box;
         }
 
         .control-sidebar::-webkit-scrollbar {
@@ -72,9 +73,9 @@
 
         .panel-section-title {
             color: var(--gold);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             border-bottom: 1px solid var(--gold);
-            padding-bottom: 4px;
+            padding-bottom: 3px;
             margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -83,17 +84,17 @@
         .option-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
+            gap: 5px;
         }
 
         .option-btn {
             background: #181410;
             color: var(--text-main);
             border: 1px solid var(--gold);
-            padding: 6px;
+            padding: 5px;
             text-align: center;
             font-family: 'Georgia', serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 4px;
@@ -103,31 +104,30 @@
             background: var(--gold);
             color: var(--bg-dark);
             font-weight: bold;
-            box-shadow: 0 0 10px var(--accent-glow);
+            box-shadow: 0 0 8px var(--accent-glow);
         }
 
         .likeness-studio-box {
             background: rgba(14, 25, 20, 0.95);
             border: 1px solid var(--gold);
             border-radius: 6px;
-            padding: 10px;
-            margin-top: 5px;
+            padding: 8px;
             text-align: left;
         }
 
         .likeness-studio-box h4 {
             color: var(--gold);
-            margin: 0 0 4px 0;
-            font-size: 0.85rem;
+            margin: 0 0 3px 0;
+            font-size: 0.8rem;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         .likeness-studio-box p {
             color: var(--text-muted);
-            font-size: 0.75rem;
-            line-height: 1.3;
-            margin: 0 0 8px 0;
+            font-size: 0.7rem;
+            line-height: 1.2;
+            margin: 0 0 6px 0;
             font-style: italic;
         }
 
@@ -136,19 +136,19 @@
             background: #12100e;
             border: 1px solid var(--gold);
             color: var(--text-main);
-            padding: 6px;
+            padding: 5px;
             font-family: 'Georgia', serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             border-radius: 3px;
             box-sizing: border-box;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .wardrobe-grid {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            max-height: 280px;
+            gap: 5px;
+            max-height: 320px;
             overflow-y: auto;
             padding-right: 4px;
         }
@@ -164,34 +164,33 @@
         .wardrobe-item {
             background: #181410;
             border: 1px solid var(--gold);
-            padding: 8px 10px;
+            padding: 6px 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
             border-radius: 4px;
             transition: all 0.2s;
             text-align: left;
             color: var(--text-main);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .wardrobe-item:hover, .wardrobe-item.selected {
             background: var(--gold);
             color: var(--bg-dark);
             font-weight: bold;
-            transform: translateX(2px);
         }
 
         .skin-palette {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             justify-content: space-between;
         }
 
         .skin-swatch {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             border: 2px solid var(--gold);
             cursor: pointer;
@@ -211,21 +210,21 @@
             align-items: center;
             position: relative;
             z-index: 5;
-            padding: 10px;
+            padding: 5px;
         }
 
         .stage-banner {
             background: var(--panel-bg);
             border: 2px solid var(--gold);
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 6px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 480px;
+            max-width: 440px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -233,7 +232,7 @@
         .stage-banner h1 {
             color: var(--gold);
             margin: 0;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             letter-spacing: 1px;
         }
 
@@ -241,12 +240,11 @@
             background: #181410;
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 5px 10px;
+            padding: 4px 8px;
             font-family: 'Georgia', serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
             border-radius: 3px;
-            transition: all 0.3s;
             text-transform: uppercase;
         }
 
@@ -258,10 +256,10 @@
 
         .character-stage-display {
             position: relative;
-            max-width: 480px;
+            max-width: 440px;
             width: 100%;
-            height: 420px;
-            background: rgba(11, 9, 7, 0.95);
+            height: 440px;
+            background: rgba(11, 9, 7, 0.98);
             border: 3px solid var(--gold);
             border-radius: 8px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.9);
@@ -271,30 +269,31 @@
             overflow: hidden;
         }
 
+        /* FIXED: object-fit: contain ensures entire outfit, head, and crown are fully visible without zooming in too close */
         .character-preview-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             background: #0b0907;
         }
 
         .stage-footer {
-            margin-top: 10px;
+            margin-top: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
         }
 
         .back-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
-            padding: 10px 20px;
+            padding: 8px 15px;
             font-family: 'Georgia', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
@@ -323,7 +322,7 @@
 
     <div class="container">
         
-        <!-- Left Sidebar: Sovereign Focus, Appearance & Character Likeness Studio -->
+        <!-- Left Sidebar -->
         <div class="control-sidebar">
             <div class="panel-section-title">Sovereign Focus</div>
             <div class="option-grid">
@@ -348,7 +347,6 @@
                 <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
             </div>
 
-            <!-- Create Your Likeness Studio Box (Fully Visible & Positioned) -->
             <div class="likeness-studio-box">
                 <h4>✨ Create Your Likeness</h4>
                 <p>Design a member character in your own image for the realm.</p>
@@ -372,21 +370,21 @@
             </div>
 
             <div class="stage-footer">
-                <p id="character-summary-text" style="font-size: 0.85rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+                <p id="character-summary-text" style="font-size: 0.8rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
                     Queen Rosana | Deep Warm | Braid-Updo | Imperial White Cinematic
                 </p>
                 <a href="index.html" class="back-btn">Return to Sanctuary Home</a>
             </div>
         </div>
 
-        <!-- Right Sidebar: Wardrobe & Accessories -->
+        <!-- Right Sidebar -->
         <div class="control-sidebar right">
             <div class="panel-section-title" id="wardrobe-title">Queen's Wardrobe</div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0 0 6px 0;">Select cinematic attire:</p>
+            <p style="font-size: 0.7rem; color: var(--text-muted); margin: 0 0 4px 0;">Select cinematic attire:</p>
             
             <div class="wardrobe-grid" id="wardrobe-list"></div>
 
-            <div class="panel-section-title" style="margin-top: 10px;">Accessory Type</div>
+            <div class="panel-section-title" style="margin-top: 8px;">Accessory Type</div>
             <div class="option-grid">
                 <button class="option-btn selected" onclick="setAccessory('Imperial Crown', this)">Crown</button>
                 <button class="option-btn" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
@@ -497,21 +495,6 @@
             titleElem.innerText = currentRole === 'queen' ? "Queen's Wardrobe" : "King's Wardrobe";
 
             list.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = `wardrobe-item ${index === 0 ? 'selected' : ''}`;
-                div.onclick = () => setOutfit(item.name, item.file, div);
-                div.innerHTML = `<span>👑 ${item.name}</span>`;
-                container.appendChild(div);
-        function populateWardrobe() {
-            const container = document.getElementById('wardrobe-list');
-            const titleElem = document.getElementById('wardrobe-title');
-            if (!container) return;
-            container.innerHTML = '';
-            
-            let list = currentRole === 'queen' ? queenWardrobe : kingWardrobe;
-            titleElem.innerText = currentRole === 'queen' ? "Queen's Wardrobe" : "King's Wardrobe";
-
-            list.forEach((item, index) => {
                 let div = document.createElement('div');
                 div.className = `wardrobe-item ${index === 0 ? 'selected' : ''}`;
                 div.onclick = () => setOutfit(item.name, item.file, div);
@@ -523,7 +506,7 @@
         window.onload = populateWardrobe;
 
         let isPlaying = false;
-        function toggleAudio() {
+                function toggleAudio() {
             const audio = document.getElementById('royal-audio');
             const btn = document.getElementById('audio-toggle-btn');
             if (!audio) return;
