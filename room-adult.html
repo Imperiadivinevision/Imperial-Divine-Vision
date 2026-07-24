@@ -168,7 +168,8 @@
             font-size: 1.05rem;
             letter-spacing: 1px;
         }
-                .character-stage-display {
+
+        .character-stage-display {
             position: relative;
             max-width: 480px;
             width: 100%;
@@ -189,7 +190,7 @@
         .avatar-preview-media {
             width: 100%;
             height: auto;
-            max-height: 460px;
+            max-height: 440px;
             object-fit: contain;
             background: #000000;
             display: block;
@@ -313,7 +314,7 @@
             </div>
             
             <div class="character-stage-display">
-                <!-- Supports both video and image formats perfectly -->
+                <!-- Supports both video and image formats naturally without distortion -->
                 <div id="media-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                     <video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline>
                         <source src="rosanna-best-CINEMATIC.mp4" type="video/mp4">
@@ -465,8 +466,8 @@
         }
 
         function setOutfit(name, file, type, itemElement) {
-            document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
-                        if(itemElement) itemElement.classList.add('selected');
+                        document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
+            if(itemElement) itemElement.classList.add('selected');
             
             characterConfig.outfitName = name;
             characterConfig.outfitFile = file;
@@ -476,7 +477,7 @@
             if (type === 'video') {
                 mediaContainer.innerHTML = `<video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline><source src="${file}" type="video/mp4"></video>`;
             } else {
-                mediaContainer.innerHTML = `<img src="${file}" class="avatar-preview-media" alt="${name}" style="object-fit: contain;">`;
+                mediaContainer.innerHTML = `<img src="${file}" class="avatar-preview-media" alt="${name}">`;
             }
             
             updateSummary();
