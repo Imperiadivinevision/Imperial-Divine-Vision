@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Capital: Path Selection Chamber</title>
+    <style>
+        :root {
+            --bg-dark: #12100e;
+            --panel-bg: rgba(28, 24, 20, 0.98);
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-main: #f5f2eb;
+            --text-muted: #b3a896;
+            --accent-glow: rgba(212, 175, 55, 0.4);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Georgia', serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            padding: 15px;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chamber-background {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18,16,14,0.6), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .path-panel {
+            width: 460px;
+            max-height: 90vh;
+            background: var(--panel-bg);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+            z-index: 10;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.9);
+            box-sizing: border-box;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        .path-panel::-webkit-scrollbar {
+            width: 5px;
+        }
+        .path-panel::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .path-panel h2 {
+            color: var(--gold);
+            margin: 0 0 3px 0;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .path-panel p {
+            color: var(--text-muted);
+-           font-size: 0.8rem;
+            line-height: 1.3;
+            margin: 0 0 5px 0;
+            font-style: italic;
+        }
+
+        .path-card {
+            background: #181410;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .path-card:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .path-card:hover h3, .path-card:hover p {
+            color: var(--bg-dark);
+        }
+
+        .path-card h3 {
+            color: var(--gold);
+            margin: 0 0 3px 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .path-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.75rem;
+            font-style: normal;
+        }
+
+        .treasury-display {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 2px;
+        }
+
+        .treasury-display h4 {
+            color: var(--gold);
+            margin: 0 0 2px 0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .treasury-display p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--text-main);
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chamber-background"></div>
+
+    <div class="container">
+        <div class="path-panel">
+            <h2 id="player-title">Choose Your Destiny</h2>
+            <p>Select your path in the Sovereign Realm to begin your ascension.</p>
+
+            <div class="treasury-display">
+                <h4>Active Treasury</h4>
+                <p>🪙 5,000 Gold Coins</p>
+            </div>
+
+            <div class="path-card" onclick="selectPath('adventurer')">
+                <h3>⚔️ The Adventurer Path</h3>
+                <p>Specialize in combat as a Sword Master, Arrow Master, or Assassin. Test your reflexes in the falling skill-drop trials.</p>
+            </div>
+
+            <div class="path-card" onclick="selectPath('priest')">
+                <h3>🕊️ The Priesthood & Spiritual Path</h3>
+                <p>Begin as a humble temple servant. Earn virtue, complete duties, and rank up toward Divine Priest or Prophet.</p>
+            </div>
+
+            <div class="path-card" onclick="selectPath('wanderer')">
+                <h3>🗺️ The Wanderer & Intelligence Path</h3>
+                <p>Explore the markets, villages, and scenic views. Build an information-gathering guild, uncover capital secrets, and sell intel to other players.</p>
+            </div>
+
+            <div class="path-card" onclick="selectPath('mystic')">
+                <h3>🧪 The Mystic & Alchemist Path (Game Master Special)</h3>
+                <p>Roam the hidden wilderness to craft rare potions, unlock ancient runes, and trade magical secrets across the realm.</p>
+            </div>
+
+            <div class="path-card" onclick="selectPath('guild')">
+                <h3>🏛️ The Guild & Merchant Path</h3>
+                <p>Head directly to the Guild Hall to register, accept high-value quests, and trade within the capital.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const savedName = localStorage.getItem('player_character_name');
+            if(savedName) {
+                document.getElementById('player-title').innerText = `${savedName}: Choose Your Destiny`;
+            }
+        };
+
+        function selectPath(pathType) {
+            if(pathType === 'adventurer') {
+                alert("You have chosen the Adventurer Path! Preparing the Sword Master skill-drop trials...");
+            } else if(pathType === 'priest') {
+                alert("You have chosen the Priesthood Path! Entering the Temple Grounds as a temple servant...");
+            } else if(pathType === 'wanderer') {
+                alert("You have chosen the Wanderer Path! Step into the open world, explore the markets, and establish your secret intelligence guild...");
+            } else if(pathType === 'mystic') {
+                alert("You have chosen the Mystic Alchemist Path! Unlocking the secrets of rare brews and hidden runes...");
+            } else if(pathType === 'guild') {
+                alert("Heading to the Guild Hall! Registering with the Guild Master...");
+            }
+        }
+    </script>
+</body>
+</html>
+
