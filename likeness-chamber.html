@@ -110,35 +110,35 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        /* Character Figure Styling */
+        /* Fixed Character Stacking Structure */
         .character-figure {
             position: relative;
             width: 140px;
-            height: 280px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
         }
 
         .avatar-head {
-            width: 65px;
-            height: 80px;
-            border-radius: 35px 35px 30px 30px;
+            width: 60px;
+            height: 70px;
+            border-radius: 30px 30px 25px 25px;
             background-color: #5c3824;
             position: absolute;
-            top: 10px;
+            top: 40px;
             z-index: 3;
             transition: background-color 0.3s ease;
-            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.3);
         }
 
         .avatar-hair-style {
             position: absolute;
-            top: -5px;
-            width: 75px;
-            height: 45px;
+            top: 30px;
+            width: 70px;
+            height: 40px;
             background-color: #2b1d11;
-            border-radius: 35px 35px 10px 10px;
+            border-radius: 35px 35px 15px 15px;
             z-index: 4;
             transition: all 0.3s ease;
         }
@@ -147,9 +147,9 @@
             width: 110px;
             height: 150px;
             background-color: var(--gold);
-            border-radius: 50px 50px 20px 20px;
+            border-radius: 20px 20px 15px 15px;
             position: absolute;
-            top: 85px;
+            top: 105px;
             z-index: 2;
             transition: all 0.3s ease;
             box-shadow: inset 0 10px 20px rgba(0,0,0,0.4);
@@ -158,9 +158,9 @@
             justify-content: center;
             text-align: center;
             color: #12100e;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: bold;
-            padding-top: 40px;
+            padding-top: 50px;
             box-sizing: border-box;
         }
 
@@ -264,20 +264,23 @@
             document.getElementById('avatar-body').style.width = characterBuild.body;
             document.getElementById('avatar-body').innerText = characterBuild.outfit;
             
-            // Adjust hair visual hints based on selection
             const hairElem = document.getElementById('avatar-hair');
             if (characterBuild.hair === 'Braid-Updo') {
-                hairElem.style.borderRadius = '35px 35px 10px 10px';
-                hairElem.style.height = '45px';
+                hairElem.style.borderRadius = '35px 35px 15px 15px';
+                hairElem.style.height = '40px';
+                hairElem.style.width = '66px';
             } else if (characterBuild.hair === 'Extensions') {
                 hairElem.style.borderRadius = '35px 35px 25px 25px';
                 hairElem.style.height = '60px';
+                hairElem.style.width = '64px';
             } else if (characterBuild.hair === 'Natural Curls') {
                 hairElem.style.borderRadius = '50%';
-                hairElem.style.height = '50px';
+                hairElem.style.height = '48px';
+                hairElem.style.width = '68px';
             } else {
                 hairElem.style.borderRadius = '20px 20px 15px 15px';
-                hairElem.style.height = '40px';
+                hairElem.style.height = '35px';
+                hairElem.style.width = '64px';
             }
         }
     </script>
