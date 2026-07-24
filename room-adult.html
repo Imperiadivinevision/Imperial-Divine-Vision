@@ -12,6 +12,7 @@
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
             --text-muted: #9e9382;
+            --ambient-glow: rgba(212, 175, 55, 0.15);
         }
 
         body {
@@ -24,6 +25,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background 1.5s ease;
         }
 
         .game-top-bar {
@@ -37,6 +39,7 @@
             font-size: 0.8rem;
             letter-spacing: 1px;
             color: var(--text-muted);
+            z-index: 10;
         }
 
         .game-top-bar .nav-links {
@@ -59,9 +62,10 @@
             height: calc(100vh - 40px);
             width: 100%;
             box-sizing: border-box;
+            position: relative;
         }
 
-        /* Central Proportional Full-Size Media Display (Cinematics on top, Pictures on bottom) */
+        /* Central Breathing, Reflective, Vertical Cinematic Viewport */
         .character-viewport {
             flex: 1;
             display: flex;
@@ -69,44 +73,71 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background: radial-gradient(circle at center, #241e17 0%, #0c0b0a 80%);
-            padding: 20px;
+            background: radial-gradient(circle at center, var(--ambient-glow) 0%, #0c0b0a 85%);
+            padding: 15px;
             box-sizing: border-box;
+            overflow: hidden;
+            transition: background 1.5s ease;
+        }
+
+        /* Subtle breathing & floating motion animation for the frame */
+        @keyframes imperialBreathe {
+            0% { transform: translateY(0) scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px var(--ambient-glow); }
+            50% { transform: translateY(-4px) scale(1.002); box-shadow: 0 25px 50px rgba(0,0,0,0.9), 0 0 35px var(--ambient-glow); }
+            100% { transform: translateY(0) scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px var(--ambient-glow); }
         }
 
         .media-frame {
             width: 100%;
-            max-width: 700px;
-            height: 72vh;
+            max-width: 580px; /* Made slightly narrower for a gorgeous vertical aspect ratio */
+            height: 82vh; /* Extended vertical height so the floor and dress bottom show completely */
             border: 2px solid var(--gold);
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
             background: #000;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: imperialBreathe 6s ease-in-out infinite;
+            transition: border-color 1.5s ease;
+        }
+
+        /* Ambient background reflection/glow aura behind the frame */
+        .media-frame::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            background: radial-gradient(circle, var(--ambient-glow) 0%, transparent 70%);
+            z-index: 1;
+            opacity: 0.8;
+            pointer-events: none;
+            transition: background 1.5s ease;
         }
 
         .avatar-preview-media {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Kept strictly proportional and natural to avoid feature distortion */
+            object-fit: cover; /* Ensures full vertical coverage showing the floor and dress details */
             object-position: center center;
             display: block;
-            pointer-events: none; /* Prevents users from manually tampering with image features */
+            position: relative;
+            z-index: 2;
+            pointer-events: none; /* Locks features to maintain natural proportions */
+            transition: filter 0.8s ease;
         }
 
         .media-caption {
             margin-top: 10px;
             color: var(--gold);
             font-size: 0.9rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            z-index: 10;
         }
 
-        /* Right Sidebar for Profiles, Wardrobe, and Likeness Link */
+        /* Control Sidebar */
         .control-sidebar {
             width: 420px;
             background: var(--panel-bg);
@@ -117,6 +148,7 @@
             gap: 15px;
             overflow-y: auto;
             box-sizing: border-box;
+            z-index: 10;
         }
 
         .panel-title {
@@ -144,14 +176,14 @@
             font-size: 0.75rem;
             cursor: pointer;
             color: var(--text-muted);
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
 
         .option-card:hover, .option-card.selected {
             border-color: var(--gold);
             color: var(--text-main);
             background: #26201a;
-            box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.4);
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.4), 0 0 8px rgba(212, 175, 55, 0.3);
             font-weight: bold;
         }
 
@@ -159,7 +191,7 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            max-height: 280px;
+            max-height: 320px;
             overflow-y: auto;
             padding-right: 4px;
         }
@@ -168,12 +200,12 @@
             background: #1b1713;
             border: 1px solid #3a3227;
             border-radius: 4px;
-            padding: 8px 10px;
+            padding: 9px 12px;
             text-align: left;
             font-size: 0.8rem;
             cursor: pointer;
             color: var(--text-muted);
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -183,6 +215,7 @@
             border-color: var(--gold);
             color: var(--text-main);
             background: #26201a;
+            padding-left: 16px;
         }
 
         .action-footer {
@@ -206,12 +239,13 @@
             letter-spacing: 1px;
             text-decoration: none;
             text-align: center;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
         }
 
         .game-btn:hover {
             background: var(--gold-hover);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -226,10 +260,9 @@
     </div>
 
     <div class="container">
-        <!-- Central Viewport: Cinematics on top, Pictures below -->
-        <div class="character-viewport">
+        <!-- Central Vertical Breathing Cinematic Viewport -->
+        <div class="character-viewport" id="viewport-bg">
             <div class="media-frame" id="media-container">
-                <!-- Media dynamically switches between video and image with natural proportional locking -->
                 <video id="media-video" class="avatar-preview-media" autoplay loop muted controls style="display: block;">
                     <source id="video-source" src="king-benson-imperial-CINEMATIC.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -249,9 +282,7 @@
             </div>
 
             <div class="panel-title">Wardrobe Chamber (Cinematics First)</div>
-            <div class="wardrobe-list" id="wardrobe-list">
-                <!-- Dynamically populated wardrobe items prioritizing cinematics on top -->
-            </div>
+            <div class="wardrobe-list" id="wardrobe-list"></div>
 
             <div class="action-footer">
                 <a href="character-select.html" class="game-btn">Choose Your Character & Play</a>
@@ -261,7 +292,6 @@
     </div>
 
     <script>
-        // Master Asset List based on exact folder items (Cinematics prioritized on top, Pictures below)
         const assets = {
             king: [
                 { name: "king-benson-imperial-CINEMATIC.mp4", type: "video" },
@@ -333,6 +363,7 @@
             document.querySelectorAll('.control-sidebar .option-grid .option-card').forEach(c => c.classList.remove('selected'));
             event.target.classList.add('selected');
             loadWardrobeList();
+            updateAmbientAura(assets[profile][0].name);
         }
 
         function loadWardrobeList() {
@@ -342,28 +373,29 @@
             const items = assets[currentProfile];
             if (!items || items.length === 0) return;
 
-            selectMedia(items[0].name, items[0].type, null);
+            selectMedia(items[0].name, items[0].type);
 
             items.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = 'wardrobe-item' + (index === 0 ? ' selected' : '');
                 div.textContent = item.name;
-                div.onclick = (e) => {
+                div.onclick = () => {
                     document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
                     div.classList.add('selected');
-                    selectMedia(item.name, item.type, div);
+                    selectMedia(item.name, item.type);
                 };
                 listContainer.appendChild(div);
             });
         }
 
-        function selectMedia(fileName, fileType, element) {
+        function selectMedia(fileName, fileType) {
             const videoElem = document.getElementById('media-video');
             const sourceElem = document.getElementById('video-source');
             const imageElem = document.getElementById('media-image');
             const captionElem = document.getElementById('media-caption');
 
             captionElem.textContent = fileName;
+            updateAmbientAura(fileName);
 
             if (fileType === 'video') {
                 videoElem.style.display = 'block';
@@ -375,6 +407,21 @@
                 imageElem.style.display = 'block';
                 imageElem.src = fileName;
             }
+        }
+
+        /* Dynamic Reflective Aura: Changes background glow tone based on the active outfit's theme */
+        function updateAmbientAura(name) {
+            let glowColor = "rgba(212, 175, 55, 0.15)"; // Default Imperial Gold
+            if (name.includes('pink') || name.includes('red')) {
+                glowColor = "rgba(219, 112, 147, 0.22)"; // Royal Rose/Pink
+            } else if (name.includes('purple') || name.includes('royal-purple')) {
+                glowColor = "rgba(138, 43, 226, 0.22)"; // Sovereign Purple
+            } else if (name.includes('green')) {
+                glowColor = "rgba(46, 139, 87, 0.22)"; // Forest Green
+            } else if (name.includes('white')) {
+                glowColor = "rgba(240, 248, 255, 0.22)"; // Pearl White
+            }
+            document.documentElement.style.setProperty('--ambient-glow', glowColor);
         }
 
         loadWardrobeList();
