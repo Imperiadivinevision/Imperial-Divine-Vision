@@ -26,7 +26,6 @@
             overflow: hidden;
         }
 
-        /* Top Bar mimicking RPG game menus */
         .game-top-bar {
             height: 40px;
             background: #14110e;
@@ -57,7 +56,6 @@
             box-sizing: border-box;
         }
 
-        /* Right Side Selector Grid (RPG Style) */
         .control-sidebar {
             width: 380px;
             background: var(--panel-bg);
@@ -109,7 +107,6 @@
             font-weight: bold;
         }
 
-        /* Main Character Preview Stage */
         .character-viewport {
             flex: 1;
             display: flex;
@@ -120,85 +117,82 @@
             background: radial-gradient(circle at center, #241e17 0%, #0c0b0a 80%);
         }
 
-        /* Simulated 3D Character Model Container */
         .character-model-wrapper {
             position: relative;
-            width: 260px;
-            height: 480px;
+            width: 320px;
+            height: 520px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.9));
         }
 
-        /* Character Body Parts Styled like Game Assets */
         .model-head {
-            width: 60px;
-            height: 75px;
-            border-radius: 30px 30px 25px 25px;
+            width: 58px;
+            height: 70px;
+            border-radius: 29px 29px 25px 25px;
             position: absolute;
-            top: 20px;
+            top: 25px;
             z-index: 5;
             transition: background-color 0.3s ease;
         }
 
         .model-hair {
             position: absolute;
-            top: 8px;
-            width: 72px;
-            height: 45px;
+            top: 12px;
+            width: 68px;
+            height: 42px;
             background-color: #2b1d11;
-            border-radius: 36px 36px 15px 15px;
+            border-radius: 34px 34px 15px 15px;
             z-index: 6;
             transition: all 0.3s ease;
         }
 
         .model-torso {
-            width: 90px;
-            height: 110px;
-            border-radius: 15px;
+            width: 86px;
+            height: 100px;
+            border-radius: 25px 25px 15px 15px;
             position: absolute;
-            top: 90px;
+            top: 92px;
             z-index: 3;
             transition: background-color 0.3s ease;
         }
 
-        /* Activewear: Crop Top and Leggings */
         .model-crop-top {
-            width: 94px;
-            height: 55px;
-            background-color: #2a3b5c; /* Blue activewear matching theme */
-            border-radius: 12px;
+            width: 90px;
+            height: 52px;
+            background-color: #2a3b5c;
+            border-radius: 15px 15px 10px 10px;
             position: absolute;
-            top: 90px;
+            top: 92px;
             z-index: 4;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
         }
 
         .model-arms {
-            width: 170px;
-            height: 40px;
+            width: 220px;
+            height: 35px;
             background-color: inherit;
             position: absolute;
-            top: 95px;
+            top: 98px;
             z-index: 2;
-            border-radius: 20px;
+            border-radius: 18px;
         }
 
         .model-legs {
-            width: 76px;
-            height: 190px;
-            background-color: #242433; /* Dark purple/blue leggings */
-            border-radius: 10px;
+            width: 72px;
+            height: 180px;
+            background-color: #242433;
+            border-radius: 12px 12px 20px 20px;
             position: absolute;
-            top: 195px;
+            top: 190px;
             z-index: 3;
-            box-shadow: inset 0 5px 10px rgba(0,0,0,0.4);
+            box-shadow: inset 0 6px 12px rgba(0,0,0,0.5);
         }
 
         .action-footer {
             position: absolute;
-            bottom: 20px;
+            bottom: 25px;
             display: flex;
             gap: 15px;
         }
@@ -207,7 +201,7 @@
             background: var(--gold);
             color: var(--bg-dark);
             border: none;
-            padding: 10px 24px;
+            padding: 10px 28px;
             font-family: 'Georgia', serif;
             font-weight: bold;
             font-size: 0.85rem;
@@ -221,13 +215,12 @@
 
         .game-btn:hover {
             background: var(--gold-hover);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Game Navigation Bar -->
     <div class="game-top-bar">
         <span>L1 / R1: Rotate</span>
         <span>Abilities</span>
@@ -248,7 +241,7 @@
             </div>
 
             <div class="action-footer">
-                <a href="gateway.html" class="game-btn">Save & Enter Realm</a>
+                <a href="room-adult.html" class="game-btn">Save & Return to Chamber</a>
             </div>
         </div>
 
@@ -306,17 +299,17 @@
             
             const hairElem = document.getElementById('model-hair');
             if (characterBuild.hair === 'Braid-Updo') {
-                hairElem.style.borderRadius = '36px 36px 15px 15px';
-                hairElem.style.height = '45px';
+                hairElem.style.borderRadius = '34px 34px 15px 15px';
+                hairElem.style.height = '42px';
             } else if (characterBuild.hair === 'Extensions') {
-                hairElem.style.borderRadius = '36px 36px 25px 25px';
-                hairElem.style.height = '65px';
+                hairElem.style.borderRadius = '34px 34px 24px 24px';
+                hairElem.style.height = '60px';
             } else if (characterBuild.hair === 'Natural Curls') {
                 hairElem.style.borderRadius = '50%';
-                hairElem.style.height = '50px';
+                hairElem.style.height = '46px';
             } else {
                 hairElem.style.borderRadius = '20px 20px 15px 15px';
-                hairElem.style.height = '38px';
+                hairElem.style.height = '35px';
             }
         }
 
