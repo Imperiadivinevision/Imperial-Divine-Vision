@@ -186,15 +186,13 @@
             padding: 10px;
             box-sizing: border-box;
         }
-
         .avatar-preview-media {
-            width: auto;
-            height: auto;
-            max-height: none;
-            object-fit: none;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: scale(0.85); /* Scales down just the video player content while keeping the gold display box identical */
             background: #000000;
         }
-
         .stage-footer {
             margin-top: 8px;
             display: flex;
