@@ -117,77 +117,90 @@
             background: radial-gradient(circle at center, #241e17 0%, #0c0b0a 80%);
         }
 
+        /* Fluid, Organic Character Styling */
         .character-model-wrapper {
             position: relative;
-            width: 320px;
+            width: 300px;
             height: 520px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.9));
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
         }
 
         .model-head {
-            width: 58px;
-            height: 70px;
-            border-radius: 29px 29px 25px 25px;
+            width: 70px;
+            height: 85px;
+            border-radius: 50% 50% 45% 45%;
             position: absolute;
-            top: 25px;
+            top: 30px;
             z-index: 5;
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2);
             transition: background-color 0.3s ease;
         }
 
         .model-hair {
             position: absolute;
-            top: 12px;
-            width: 68px;
-            height: 42px;
+            top: 15px;
+            width: 86px;
+            height: 60px;
             background-color: #2b1d11;
-            border-radius: 34px 34px 15px 15px;
+            border-radius: 50% 50% 30% 30%;
             z-index: 6;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
             transition: all 0.3s ease;
         }
 
-        .model-torso {
-            width: 86px;
-            height: 100px;
-            border-radius: 25px 25px 15px 15px;
+        .model-neck {
+            width: 26px;
+            height: 25px;
             position: absolute;
-            top: 92px;
+            top: 105px;
+            z-index: 4;
+            transition: background-color 0.3s ease;
+        }
+
+        .model-torso {
+            width: 100px;
+            height: 120px;
+            border-radius: 40px 40px 20px 20px;
+            position: absolute;
+            top: 120px;
             z-index: 3;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.25);
             transition: background-color 0.3s ease;
         }
 
         .model-crop-top {
-            width: 90px;
-            height: 52px;
-            background-color: #2a3b5c;
-            border-radius: 15px 15px 10px 10px;
+            width: 104px;
+            height: 65px;
+            background: linear-gradient(135deg, #32466e 0%, #1e2b44 100%);
+            border-radius: 30px 30px 15px 15px;
             position: absolute;
-            top: 92px;
+            top: 122px;
             z-index: 4;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         .model-arms {
-            width: 220px;
-            height: 35px;
-            background-color: inherit;
+            width: 170px;
+            height: 28px;
             position: absolute;
-            top: 98px;
+            top: 132px;
             z-index: 2;
-            border-radius: 18px;
+            border-radius: 20px;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.2);
         }
 
         .model-legs {
-            width: 72px;
-            height: 180px;
-            background-color: #242433;
-            border-radius: 12px 12px 20px 20px;
+            width: 84px;
+            height: 190px;
+            background: linear-gradient(90deg, #1d1d29 0%, #2f2f42 50%, #1d1d29 100%);
+            border-radius: 20px 20px 25px 25px;
             position: absolute;
-            top: 190px;
+            top: 235px;
             z-index: 3;
-            box-shadow: inset 0 6px 12px rgba(0,0,0,0.5);
+            box-shadow: inset 0 8px 16px rgba(0,0,0,0.5);
         }
 
         .action-footer {
@@ -234,6 +247,7 @@
             <div class="character-model-wrapper">
                 <div id="model-hair" class="model-hair"></div>
                 <div id="model-head" class="model-head"></div>
+                <div id="model-neck" class="model-neck"></div>
                 <div id="model-arms" class="model-arms"></div>
                 <div id="model-torso" class="model-torso"></div>
                 <div id="model-crop-top" class="model-crop-top"></div>
@@ -294,22 +308,27 @@
 
         function updateDisplay() {
             document.getElementById('model-head').style.backgroundColor = characterBuild.skin;
+            document.getElementById('model-neck').style.backgroundColor = characterBuild.skin;
             document.getElementById('model-arms').style.backgroundColor = characterBuild.skin;
             document.getElementById('model-torso').style.backgroundColor = characterBuild.skin;
             
             const hairElem = document.getElementById('model-hair');
             if (characterBuild.hair === 'Braid-Updo') {
-                hairElem.style.borderRadius = '34px 34px 15px 15px';
-                hairElem.style.height = '42px';
-            } else if (characterBuild.hair === 'Extensions') {
-                hairElem.style.borderRadius = '34px 34px 24px 24px';
+                hairElem.style.borderRadius = '50% 50% 30% 30%';
                 hairElem.style.height = '60px';
+                hairElem.style.width = '86px';
+            } else if (characterBuild.hair === 'Extensions') {
+                hairElem.style.borderRadius = '40% 40% 45% 45%';
+                hairElem.style.height = '85px';
+                hairElem.style.width = '88px';
             } else if (characterBuild.hair === 'Natural Curls') {
                 hairElem.style.borderRadius = '50%';
-                hairElem.style.height = '46px';
+                hairElem.style.height = '75px';
+                hairElem.style.width = '94px';
             } else {
-                hairElem.style.borderRadius = '20px 20px 15px 15px';
-                hairElem.style.height = '35px';
+                hairElem.style.borderRadius = '35% 35% 25% 25%';
+                hairElem.style.height = '50px';
+                hairElem.style.width = '84px';
             }
         }
 
