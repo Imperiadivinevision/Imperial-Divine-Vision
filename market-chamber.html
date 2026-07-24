@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Capital: Market & Potion Chamber</title>
+    <style>
+        :root {
+            --bg-dark: #12100e;
+            --panel-bg: rgba(28, 24, 20, 0.98);
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-main: #f5f2eb;
+            --text-muted: #b3a896;
+            --accent-glow: rgba(212, 175, 55, 0.4);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Georgia', serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            padding: 15px;
+            gap: 15px;
+        }
+
+        .chamber-background {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18,16,14,0.6), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .market-sidebar {
+            width: 320px;
+            background: var(--panel-bg);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            gap: 12px;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+            box-sizing: border-box;
+        }
+
+        .market-sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .market-sidebar::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .panel-section-title {
+            color: var(--gold);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .market-viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 5;
+            padding: 5px;
+        }
+
+        .stage-banner {
+            background: var(--panel-bg);
+            border: 2px solid var(--gold);
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .stage-banner h1 {
+            color: var(--gold);
+            margin: 0;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .potion-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .potion-card {
+            background: #181410;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .potion-card:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .potion-card:hover h4, .potion-card:hover p {
+            color: var(--bg-dark);
+        }
+
+        .potion-card h4 {
+            color: var(--gold);
+            margin: 0 0 3px 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .potion-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.75rem;
+        }
+
+        .market-display-board {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: rgba(11, 9, 7, 0.95);
+            border: 3px solid var(--gold);
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        .royal-privilege-box {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .royal-privilege-box h4 {
+            color: var(--gold);
+            margin: 0 0 4px 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .royal-privilege-box p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        .action-btn {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: 2px solid var(--gold);
+            padding: 8px 12px;
+            font-family: 'Georgia', serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        .back-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chamber-background"></div>
+
+    <div class="container">
+        
+        <!-- Left Sidebar: Potion Crafting & Merchant Stalls -->
+        <div class="market-sidebar">
+            <div class="panel-section-title">Imperial Potion Tiers</div>
+            <div class="potion-grid">
+                <div class="potion-card" onclick="acquirePotion('Clear Liquid (Tiny Healing)')">
+                    <h4>💧 Clear Liquid</h4>
+                    <p>Tiny healing for minor scrapes.</p>
+                </div>
+                <div class="potion-card" onclick="acquirePotion('Light Blue (Small Healing)')">
+                    <h4>📘 Light Blue Elixir</h4>
+                    <p>Small healing for mild recovery.</p>
+                </div>
+                <div class="potion-card" onclick="acquirePotion('Emerald Blue (Medium Healing)')">
+                    <h4>💠 Emerald Blue Elixir</h4>
+                    <p>Medium healing for battle wounds.</p>
+                </div>
+                <div class="potion-card" onclick="acquirePotion('Purple (Above-Medium Healing)')">
+                    <h4>🔮 Purple Elixir</h4>
+                    <p>Above-medium recovery for serious injuries.</p>
+                </div>
+                <div class="potion-card" onclick="acquirePotion('Gold (High Healing)')">
+                    <h4>🪙 Gold Elixir</h4>
+                    <p>Powerful restoration for heavy combat.</p>
+                </div>
+                <div class="potion-card" onclick="acquirePotion('Glowing Gold (Imperial Full Recovery)')">
+                    <h4>✨ Glowing Gold Elixir (Imperial Exclusive)</h4>
+                    <p>Full recovery of stats, heart, and energy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Stage: Market & Exchange -->
+        <div class="market-viewport">
+            <div class="stage-banner">
+                <h1>Imperial Market & Trading Chamber</h1>
+                <span id="player-status" style="font-size: 0.8rem; color: var(--gold); font-weight: bold;">Queen & Administrator Status Active</span>
+            </div>
+            
+            <div class="market-display-board">
+                <div class="royal-privilege-box">
+                    <h4>👑 Sovereign Royal Privilege</h4>
+                    <p>As Queen and Administrator, you hold unconditional free access to all market items, potion brewing materials, estate deeds, and VIP luxury furnishings with zero taxation or fees.</p>
+                </div>
+
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 10px;">
+                    <h3 style="color: var(--gold); margin: 0; font-size: 1.2rem;">Welcome to the Capital Marketplace</h3>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 400px; margin: 0;">
+                        Manage your hunted meat, gathered herbs, and fabric stock. Trade with citizens, collect imperial tax revenue, or visit your landed estates.
+                    </p>
+                    <button class="action-btn" style="max-width: 250px; margin-top: 10px;" onclick="openTaxVault()">Inspect Imperial Tax Vault</button>
+                    <a href="path-chamber.html" class="back-link">Return to Path Selection</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        window.onload = function() {
+            const savedName = localStorage.getItem('player_character_name');
+            if(savedName) {
+                document.getElementById('player-status').innerText = `${savedName} (Royal Administrator)`;
+            }
+        };
+
+        function acquirePotion(potionName) {
+            alert(`👑 Royal Privilege Applied: ${potionName} has been added to your inventory for free, Your Majesty!`);
+        }
+
+        function openTaxVault() {
+            alert(`🏛️ Imperial Tax Vault: The realm's commerce is thriving! Tax revenue collected from citizen trades is fully secured.`);
+        }
+    </script>
+</body>
+</html>
+
