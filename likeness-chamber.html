@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: Likeness & Character Chamber</title>
+    <title>Imperial Capital: Character Creation Engine</title>
     <style>
         :root {
             --bg-dark: #12100e;
@@ -12,7 +12,6 @@
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
             --text-muted: #b3a896;
-            --accent-glow: rgba(212, 175, 55, 0.4);
         }
 
         body {
@@ -32,51 +31,30 @@
             flex: 1;
             height: 100vh;
             width: 100%;
-            position: relative;
-            box-sizing: border-box;
             padding: 10px;
             gap: 10px;
-        }
-
-        .chamber-background {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(18,16,14,0.5), var(--bg-dark)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
+            box-sizing: border-box;
         }
 
         .control-sidebar {
-            width: 300px;
+            width: 340px;
             background: var(--panel-bg);
             border: 2px solid var(--gold);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             padding: 12px;
-            gap: 10px;
+            gap: 8px;
             overflow-y: auto;
-            z-index: 10;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
-            max-height: calc(100vh - 20px);
             box-sizing: border-box;
-        }
-
-        .control-sidebar::-webkit-scrollbar {
-            width: 5px;
-        }
-        .control-sidebar::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 3px;
         }
 
         .panel-section-title {
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border-bottom: 1px solid var(--gold);
             padding-bottom: 3px;
-            margin-bottom: 4px;
+            margin-top: 6px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -84,7 +62,7 @@
         .option-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
+            gap: 4px;
         }
 
         .option-btn {
@@ -93,40 +71,16 @@
             border: 1px solid var(--gold);
             padding: 6px;
             text-align: center;
-            font-family: 'Georgia', serif;
             font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             border-radius: 4px;
+            transition: all 0.2s;
         }
 
         .option-btn:hover, .option-btn.selected {
             background: var(--gold);
             color: var(--bg-dark);
             font-weight: bold;
-            box-shadow: 0 0 8px var(--accent-glow);
-        }
-
-        .currency-box {
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid var(--gold);
-            border-radius: 6px;
-            padding: 8px;
-            text-align: center;
-        }
-
-        .currency-box h4 {
-            color: var(--gold);
-            margin: 0 0 2px 0;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        .currency-box p {
-            margin: 0;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--text-main);
         }
 
         .character-viewport {
@@ -136,275 +90,123 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index: 5;
-            padding: 5px;
-        }
-
-        .stage-banner {
-            background: var(--panel-bg);
-            border: 2px solid var(--gold);
-            padding: 8px 15px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 440px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .stage-banner h1 {
-            color: var(--gold);
-            margin: 0;
-            font-size: 1.05rem;
-            letter-spacing: 1px;
-        }
-
-        .character-stage-display {
-            position: relative;
-            max-width: 440px;
-            width: 100%;
-            height: 440px;
-            background: rgba(11, 9, 7, 0.98);
+            background: #000;
             border: 3px solid var(--gold);
             border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
         }
 
-        .avatar-preview-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #0b0907;
+        .avatar-canvas {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .stage-footer {
-            margin-top: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            width: 100%;
-            max-width: 440px;
+        .avatar-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: opacity 0.3s ease;
         }
 
         .action-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
-            padding: 10px 15px;
-            font-family: 'Georgia', serif;
-            font-size: 0.9rem;
+            padding: 10px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
-            width: 100%;
             text-transform: uppercase;
-            letter-spacing: 1px;
             text-align: center;
             text-decoration: none;
-            box-sizing: border-box;
-            transition: all 0.3s;
-        }
-
-        .action-btn:hover {
-            background: var(--gold-hover);
-            box-shadow: 0 0 15px var(--gold);
-        }
-
-        .skin-palette {
-            display: flex;
-            gap: 5px;
-            justify-content: space-between;
-        }
-
-        .skin-swatch {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .skin-swatch:hover, .skin-swatch.selected {
-            transform: scale(1.15);
-            box-shadow: 0 0 8px var(--gold);
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="chamber-background"></div>
-
     <div class="container">
-        
-        <!-- Left Sidebar: Customization Controls -->
+        <!-- Creator Control Panel -->
         <div class="control-sidebar">
-            <div class="panel-section-title">Base Form</div>
+            <div class="panel-section-title">1. Base Form & Gender</div>
             <div class="option-grid">
-                <button class="option-btn selected" id="form-female" onclick="setGender('female', this)">Female Form</button>
-                <button class="option-btn" id="form-male" onclick="setGender('male', this)">Male Form</button>
+                <button class="option-btn selected" onclick="setTrait('base', 'female', this)">Woman</button>
+                <button class="option-btn" onclick="setTrait('base', 'male', this)">Man</button>
             </div>
 
-            <div class="panel-section-title">Skin Tone</div>
-            <div class="skin-palette">
-                <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkin('Deep Warm', this)" title="Deep Warm"></div>
-                <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkin('Rich Brown', this)" title="Rich Brown"></div>
-                <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkin('Golden Tan', this)" title="Golden Tan"></div>
-                <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkin('Olive', this)" title="Olive"></div>
-                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkin('Fair', this)" title="Fair"></div>
-            </div>
-
-            <div class="panel-section-title">Hairstyle</div>
+            <div class="panel-section-title">2. Skin Tone</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
-                <button class="option-btn" onclick="setHair('Extensions', this)">Extensions</button>
-                <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
-                <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
+                <button class="option-btn selected" onclick="setTrait('skin', 'deep', this)">Deep Warm</button>
+                <button class="option-btn" onclick="setTrait('skin', 'rich', this)">Rich Brown</button>
+                <button class="option-btn" onclick="setTrait('skin', 'golden', this)">Golden Tan</button>
+                <button class="option-btn" onclick="setTrait('skin', 'fair', this)">Fair</button>
             </div>
 
-            <div class="panel-section-title">Body & Build</div>
+            <div class="panel-section-title">3. Hairstyle</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="setBody('Royal Regalia', this)">Royal Regalia</button>
-                <button class="option-btn" onclick="setBody('Athletic Build', this)">Athletic Build</button>
+                <button class="option-btn selected" onclick="setTrait('hair', 'braids', this)">Braid-Updo</button>
+                <button class="option-btn" onclick="setTrait('hair', 'extensions', this)">Extensions</button>
+                <button class="option-btn" onclick="setTrait('hair', 'curls', this)">Natural Curls</button>
+                <button class="option-btn" onclick="setTrait('hair', 'waves', this)">Royal Waves</button>
             </div>
 
-            <div class="panel-section-title">VIP Cultural Attire</div>
+            <div class="panel-section-title">4. Body Build</div>
             <div class="option-grid">
-                <button class="option-btn" onclick="setAttire('Imperial Abaya ($1 VIP)', this)">Imperial Abaya</button>
-                <button class="option-btn selected" onclick="setAttire('Standard Sovereign', this)">Sovereign Robes</button>
+                <button class="option-btn selected" onclick="setTrait('body', 'regal', this)">Regal / Standard</button>
+                <button class="option-btn" onclick="setTrait('body', 'athletic', this)">Athletic Build</button>
             </div>
 
-            <div class="currency-box">
-                <h4>Starting Realm Bonus</h4>
-                <p>🪙 5,000 Gold Coins</p>
+            <div class="panel-section-title">5. Attire & Robes</div>
+            <div class="option-grid" style="grid-template-columns: 1fr;">
+                <button class="option-btn selected" onclick="setTrait('outfit', 'robes', this)">Sovereign Robes</button>
+                <button class="option-btn" onclick="setTrait('outfit', 'abaya', this)">Imperial Abaya</button>
             </div>
         </div>
 
-        <!-- Center Stage Viewport -->
+        <!-- Live Game Creator Stage -->
         <div class="character-viewport">
-            <div class="stage-banner">
-                <h1>Likeness Studio Chamber</h1>
-                <span id="player-greeting" style="font-size: 0.8rem; color: var(--gold); font-weight: bold;">Welcome, Sovereign</span>
-            </div>
+            <h2 style="color: var(--gold); position: absolute; top: 15px; margin: 0; font-size: 1.1rem;">Likeness Creation Studio</h2>
             
-            <div class="character-stage-display">
-                <img id="avatar-preview" class="avatar-preview-img" src="rosanna-outfit-6.png" alt="Character Likeness Preview">
+            <div class="avatar-canvas" id="avatar-builder">
+                <div id="layer-base" class="avatar-layer" style="background-color: #5c3824; border-radius: 4px;"></div>
+                <div id="layer-body" class="avatar-layer"></div>
+                <div id="layer-outfit" class="avatar-layer"></div>
+                <div id="layer-hair" class="avatar-layer"></div>
             </div>
 
-            <div class="stage-footer">
-                <p id="likeness-summary" style="font-size: 0.8rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
-                    Female | Deep Warm | Braid-Updo | Sovereign Robes
-                </p>
-                <button class="action-btn" onclick="confirmLikenessAndEnterRealm()">Confirm Likeness & Enter Realm</button>
-            </div>
+            <a href="gateway.html" class="action-btn" style="position: absolute; bottom: 15px;">Save & Enter Realm</a>
         </div>
-
-        <!-- Right Sidebar: Feature adjustments -->
-        <div class="control-sidebar">
-            <div class="panel-section-title">Facial Features</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setFeature('Sovereign Eyes', this)">Sovereign Eyes</button>
-                <button class="option-btn" onclick="setFeature('Noble Gaze', this)">Noble Gaze</button>
-            </div>
-
-            <div class="panel-section-title">Starting Accessories</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
-                <button class="option-btn" onclick="setAccessory('Royal Crown', this)">Crown</button>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        // Grab player name passed from the Adult Chamber
-        window.onload = function() {
-            const savedName = localStorage.getItem('player_character_name');
-            if(savedName) {
-                document.getElementById('player-greeting').innerText = `Welcome, ${savedName}`;
-            }
+        let characterBuild = {
+            base: 'female',
+            skin: 'deep',
+            hair: 'braids',
+            body: 'regal',
+            outfit: 'robes'
         };
 
-        let likenessConfig = {
-            gender: 'Female',
-            skin: 'Deep Warm',
-            hair: 'Braid-Updo',
-            body: 'Royal Regalia',
-            attire: 'Sovereign Robes',
-            feature: 'Sovereign Eyes',
-            accessory: 'Gold Circlet'
-        };
-
-        function setGender(type, btn) {
-            document.getElementById('form-female').classList.remove('selected');
-            document.getElementById('form-male').classList.remove('selected');
-            btn.classList.add('selected');
-            likenessConfig.gender = type === 'female' ? 'Female' : 'Male';
-            document.getElementById('avatar-preview').src = type === 'female' ? 'rosanna-outfit-6.png' : 'king-benson-outfit-1.png';
-            updateSummary();
-        }
-
-        function setSkin(val, swatch) {
-            document.querySelectorAll('.skin-swatch').forEach(s => s.classList.remove('selected'));
-            swatch.classList.add('selected');
-            likenessConfig.skin = val;
-            updateSummary();
-        }
-
-        function setHair(val, btn) {
-            updateButtonGroup(btn);
-            likenessConfig.hair = val;
-            updateSummary();
-        }
-
-        function setBody(val, btn) {
-            updateButtonGroup(btn);
-            likenessConfig.body = val;
-            updateSummary();
-        }
-
-        function setAttire(val, btn) {
-            updateButtonGroup(btn);
-            likenessConfig.attire = val;
-            updateSummary();
-        }
-
-        function setFeature(val, btn) {
-            updateButtonGroup(btn);
-            likenessConfig.feature = val;
-            updateSummary();
-        }
-
-        function setAccessory(val, btn) {
-            updateButtonGroup(btn);
-            likenessConfig.accessory = val;
-            updateSummary();
-        }
-
-        function updateButtonGroup(clickedBtn) {
-            const parent = clickedBtn.parentElement;
+        function setTrait(category, value, btn) {
+            const parent = btn.parentElement;
             parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-            clickedBtn.classList.add('selected');
+            btn.classList.add('selected');
+            characterBuild[category] = value;
+            updateAvatarDisplay();
         }
 
-        function updateSummary() {
-            const summaryElem = document.getElementById('likeness-summary');
-            summaryElem.innerText = `${likenessConfig.gender} | ${likenessConfig.skin} | ${likenessConfig.hair} | ${likenessConfig.attire}`;
-        }
-
-        function confirmLikenessAndEnterRealm() {
-            const name = localStorage.getItem('player_character_name') || 'Sovereign';
-            alert(`✨ Likeness Confirmed! Welcome to the Sovereign Realm, ${name}. Your starting bonus of 5,000 gold coins has been deposited into your treasury!`);
-            // Here is where we will link to the next chamber (Path Selection Chamber / Guild Hall) when you're ready!
+        function updateAvatarDisplay() {
+            const baseLayer = document.getElementById('layer-base');
+            if (characterBuild.skin === 'deep') baseLayer.style.backgroundColor = '#5c3824';
+            else if (characterBuild.skin === 'rich') baseLayer.style.backgroundColor = '#8d5524';
+            else if (characterBuild.skin === 'golden') baseLayer.style.backgroundColor = '#c68642';
+            else if (characterBuild.skin === 'fair') baseLayer.style.backgroundColor = '#f5d0b1';
         }
     </script>
 </body>
