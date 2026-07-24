@@ -269,7 +269,6 @@
             overflow: hidden;
         }
 
-        /* FIXED: object-fit: contain ensures entire outfit, head, and crown are fully visible without zooming in too close */
         .character-preview-video {
             width: 100%;
             height: 100%;
@@ -347,11 +346,12 @@
                 <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
             </div>
 
+            <!-- Updated Likeness Studio Box linking to likeness-chamber.html -->
             <div class="likeness-studio-box">
                 <h4>✨ Create Your Likeness</h4>
                 <p>Design a member character in your own image for the realm.</p>
                 <input type="text" id="custom-name-input" class="likeness-input" placeholder="Enter Character Name...">
-                <button class="option-btn" style="width: 100%;" onclick="saveCharacterLikeness()">Save My Likeness</button>
+                <button class="option-btn" style="width: 100%;" onclick="goToLikenessChamber()">Save & Enter Chamber</button>
             </div>
         </div>
 
@@ -359,7 +359,7 @@
         <div class="character-viewport">
             <div class="stage-banner">
                 <h1>Adult Chamber Wardrobe</h1>
-                <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Gallery</button>
+                <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Rosanna Gallery</button>
             </div>
             
             <div class="character-stage-display">
@@ -506,18 +506,19 @@
         window.onload = populateWardrobe;
 
         let isPlaying = false;
-                function toggleAudio() {
+        function toggleAudio() {
+                 function toggleAudio() {
             const audio = document.getElementById('royal-audio');
             const btn = document.getElementById('audio-toggle-btn');
             if (!audio) return;
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🎵 Play Gallery";
+                btn.innerText = "🎵 Play Rosanna Gallery";
                 isPlaying = false;
             } else {
                 audio.volume = 1.0;
                 audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Gallery";
+                    btn.innerText = "🔇 Pause Rosanna Gallery";
                     isPlaying = true;
                 }).catch(e => console.log("Audio play blocked"));
             }
@@ -571,15 +572,14 @@
             updateSummary();
         }
 
-        function saveCharacterLikeness() {
+        function goToLikenessChamber() {
             const nameInput = document.getElementById('custom-name-input').value.trim();
             if(nameInput) {
-                characterConfig.customName = nameInput;
-                alert(`✨ Sovereign Likeness Saved! Welcome to the realm, ${nameInput}. Your custom character details have been recorded.`);
+                localStorage.setItem('player_character_name', nameInput);
+                window.location.href = 'likeness-chamber.html';
             } else {
-                alert("Please enter a character name to save your likeness.");
+                alert("Please enter a character name to begin your journey.");
             }
-            updateSummary();
         }
 
         function updateButtonGroup(clickedBtn) {
@@ -598,4 +598,4 @@
 </body>
 </html>
 
-
+   
