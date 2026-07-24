@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: Character Creation Engine</title>
+    <title>Imperial Capital: Advanced Character Creation Engine</title>
     <style>
         :root {
             --bg-dark: #12100e;
@@ -11,7 +11,6 @@
             --gold: #d4af37;
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
-            --text-muted: #b3a896;
         }
 
         body {
@@ -36,6 +35,7 @@
             box-sizing: border-box;
         }
 
+        /* Sidebar for Controls */
         .control-sidebar {
             width: 340px;
             background: var(--panel-bg);
@@ -46,7 +46,6 @@
             padding: 12px;
             gap: 8px;
             overflow-y: auto;
-            box-sizing: border-box;
         }
 
         .panel-section-title {
@@ -83,6 +82,7 @@
             font-weight: bold;
         }
 
+        /* Main Viewport for Character Display */
         .character-viewport {
             flex: 1;
             display: flex;
@@ -93,75 +93,96 @@
             background: #000;
             border: 3px solid var(--gold);
             border-radius: 8px;
-            overflow: hidden;
         }
 
         .avatar-canvas {
             position: relative;
-            width: 260px;
-            height: 380px;
+            width: 300px;
+            height: 500px; /* Taller canvas for full body */
             background: #1a1612;
             border: 2px solid var(--gold);
             border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        /* Fixed Character Stacking Structure */
+        /* Full-Body SVG Character Figure (Simplified for Code) */
         .character-figure {
             position: relative;
-            width: 140px;
-            height: 300px;
+            width: 160px;
+            height: 450px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
         }
 
+        /* Head Area */
         .avatar-head {
             width: 60px;
             height: 70px;
             border-radius: 30px 30px 25px 25px;
-            background-color: #5c3824;
             position: absolute;
-            top: 40px;
-            z-index: 3;
+            top: 20px;
+            z-index: 10;
             transition: background-color 0.3s ease;
         }
 
         .avatar-hair-style {
             position: absolute;
-            top: 30px;
+            top: 5px;
             width: 70px;
             height: 40px;
             background-color: #2b1d11;
             border-radius: 35px 35px 15px 15px;
-            z-index: 4;
+            z-index: 11;
             transition: all 0.3s ease;
         }
 
-        .avatar-body {
-            width: 110px;
-            height: 150px;
-            background-color: var(--gold);
-            border-radius: 20px 20px 15px 15px;
+        /* Body Area (Torso & Limbs) */
+        .avatar-torso {
+            width: 80px;
+            height: 120px;
+            border-radius: 20px 20px 10px 10px;
             position: absolute;
-            top: 105px;
-            z-index: 2;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 10px 20px rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #12100e;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding-top: 50px;
-            box-sizing: border-box;
+            top: 85px;
+            z-index: 5;
+            transition: background-color 0.3s ease;
+        }
+
+        .avatar-arms {
+            width: 120px;
+            height: 110px;
+            border-radius: 10px;
+            position: absolute;
+            top: 90px;
+            z-index: 4; /* Behind torso */
+            transition: background-color 0.3s ease;
+        }
+
+        /* The Key Attire: Leggings & Crop Top */
+        .avatar-leggings {
+            width: 70px;
+            height: 180px;
+            border-radius: 10px;
+            position: absolute;
+            top: 200px;
+            z-index: 6; /* Covers legs and lower torso */
+            transition: background-color 0.3s ease;
+            background-color: #333; /* Default color for the garment */
+        }
+
+        .avatar-crop-top {
+            width: 74px;
+            height: 50px;
+            border-radius: 10px;
+            position: absolute;
+            top: 90px;
+            z-index: 7; /* Covers upper torso */
+            transition: background-color 0.3s ease;
+             background-color: #333; /* Default color for the garment */
         }
 
         .action-btn {
@@ -173,7 +194,6 @@
             cursor: pointer;
             border-radius: 4px;
             text-transform: uppercase;
-            text-align: center;
             text-decoration: none;
             margin-top: 15px;
             font-size: 0.8rem;
@@ -214,26 +234,31 @@
 
             <div class="panel-section-title">4. Body Build</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('body', '110px', this)">Regal / Standard</button>
-                <button class="option-btn" onclick="setTrait('body', '130px', this)">Athletic Build</button>
+                <button class="option-btn selected" onclick="setTrait('body', '80px', this)">Regal / Standard</button>
+                <button class="option-btn" onclick="setTrait('body', '100px', this)">Athletic Build</button>
             </div>
 
             <div class="panel-section-title">5. Attire & Robes</div>
             <div class="option-grid" style="grid-template-columns: 1fr;">
-                <button class="option-btn selected" onclick="setTrait('outfit', 'Sovereign Robes', this)">Sovereign Robes</button>
-                <button class="option-btn" onclick="setTrait('outfit', 'Imperial Abaya', this)">Imperial Abaya</button>
+                <button class="option-btn selected" onclick="setTrait('outfit', 'Activewear', this)">Leggings & Crop Top</button>
             </div>
         </div>
 
-        <!-- Live Game Creator Stage -->
+        <!-- Live Game Creator Stage: FULL BODY -->
         <div class="character-viewport">
             <h2 style="color: var(--gold); position: absolute; top: 15px; margin: 0; font-size: 1.1rem;">Likeness Creation Studio</h2>
             
             <div class="avatar-canvas">
                 <div class="character-figure">
+                    <!-- The Character Figure Parts -->
                     <div id="avatar-hair" class="avatar-hair-style"></div>
                     <div id="avatar-head" class="avatar-head"></div>
-                    <div id="avatar-body" class="avatar-body">Sovereign Robes</div>
+                    <div id="avatar-arms" class="avatar-arms"></div>
+                    <div id="avatar-torso" class="avatar-torso"></div>
+                    
+                    <!-- The Attire Layer (Leggings & Crop Top) -->
+                    <div id="avatar-leggings" class="avatar-leggings"></div>
+                    <div id="avatar-crop-top" class="avatar-crop-top"></div>
                 </div>
             </div>
 
@@ -246,8 +271,8 @@
             base: 'female',
             skin: '#5c3824',
             hair: 'Braid-Updo',
-            body: '110px',
-            outfit: 'Sovereign Robes'
+            body: '80px',
+            outfit: 'Activewear'
         };
 
         function setTrait(category, value, btn) {
@@ -260,10 +285,25 @@
         }
 
         function updateAvatarDisplay() {
+            // Apply skin tone to all exposed body parts
             document.getElementById('avatar-head').style.backgroundColor = characterBuild.skin;
-            document.getElementById('avatar-body').style.width = characterBuild.body;
-            document.getElementById('avatar-body').innerText = characterBuild.outfit;
+            document.getElementById('avatar-arms').style.backgroundColor = characterBuild.skin;
+            document.getElementById('avatar-torso').style.backgroundColor = characterBuild.skin;
             
+            // Apply body build changes (chest width)
+            document.getElementById('avatar-torso').style.width = characterBuild.body;
+            document.getElementById('avatar-crop-top').style.width = (parseInt(characterBuild.body) + 10) + 'px';
+
+            // --- Garment Color Logic ---
+            // The activewear garment itself doesn't change color, but the skin beneath it shows through.
+            // Let's make the leggings and top semi-transparent to let the skin tone influence them,
+            // or we can give the garment itself a neutral color. We'll use a dark charcoal gray (like real activewear).
+            // The important thing is that the player sees their full character figure.
+            
+            document.getElementById('avatar-leggings').style.backgroundColor = '#333'; // Dark charcoal
+            document.getElementById('avatar-crop-top').style.backgroundColor = '#333'; 
+            
+            // Adjust hair visual hints based on selection
             const hairElem = document.getElementById('avatar-hair');
             if (characterBuild.hair === 'Braid-Updo') {
                 hairElem.style.borderRadius = '35px 35px 15px 15px';
@@ -283,6 +323,9 @@
                 hairElem.style.width = '64px';
             }
         }
+
+        // Initialize display
+        updateAvatarDisplay();
     </script>
 </body>
 </html>
