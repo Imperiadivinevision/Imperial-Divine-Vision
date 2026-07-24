@@ -98,34 +98,90 @@
 
         .avatar-canvas {
             position: relative;
-            width: 300px;
-            height: 450px;
+            width: 260px;
+            height: 380px;
+            background: #1a1612;
+            border: 2px solid var(--gold);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* Character Figure Styling */
+        .character-figure {
+            position: relative;
+            width: 140px;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-head {
+            width: 65px;
+            height: 80px;
+            border-radius: 35px 35px 30px 30px;
+            background-color: #5c3824;
+            position: absolute;
+            top: 10px;
+            z-index: 3;
+            transition: background-color 0.3s ease;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.3);
+        }
+
+        .avatar-hair-style {
+            position: absolute;
+            top: -5px;
+            width: 75px;
+            height: 45px;
+            background-color: #2b1d11;
+            border-radius: 35px 35px 10px 10px;
+            z-index: 4;
+            transition: all 0.3s ease;
+        }
+
+        .avatar-body {
+            width: 110px;
+            height: 150px;
+            background-color: var(--gold);
+            border-radius: 50px 50px 20px 20px;
+            position: absolute;
+            top: 85px;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .avatar-layer {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            transition: opacity 0.3s ease;
+            text-align: center;
+            color: #12100e;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding-top: 40px;
+            box-sizing: border-box;
         }
 
         .action-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
-            padding: 10px;
+            padding: 8px 16px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
             text-transform: uppercase;
             text-align: center;
             text-decoration: none;
-            margin-top: 10px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+        }
+
+        .action-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 10px var(--gold);
         }
     </style>
 </head>
@@ -142,30 +198,30 @@
 
             <div class="panel-section-title">2. Skin Tone</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('skin', 'deep', this)">Deep Warm</button>
-                <button class="option-btn" onclick="setTrait('skin', 'rich', this)">Rich Brown</button>
-                <button class="option-btn" onclick="setTrait('skin', 'golden', this)">Golden Tan</button>
-                <button class="option-btn" onclick="setTrait('skin', 'fair', this)">Fair</button>
+                <button class="option-btn selected" onclick="setTrait('skin', '#5c3824', this)">Deep Warm</button>
+                <button class="option-btn" onclick="setTrait('skin', '#8d5524', this)">Rich Brown</button>
+                <button class="option-btn" onclick="setTrait('skin', '#c68642', this)">Golden Tan</button>
+                <button class="option-btn" onclick="setTrait('skin', '#f5d0b1', this)">Fair</button>
             </div>
 
             <div class="panel-section-title">3. Hairstyle</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('hair', 'braids', this)">Braid-Updo</button>
-                <button class="option-btn" onclick="setTrait('hair', 'extensions', this)">Extensions</button>
-                <button class="option-btn" onclick="setTrait('hair', 'curls', this)">Natural Curls</button>
-                <button class="option-btn" onclick="setTrait('hair', 'waves', this)">Royal Waves</button>
+                <button class="option-btn selected" onclick="setTrait('hair', 'Braid-Updo', this)">Braid-Updo</button>
+                <button class="option-btn" onclick="setTrait('hair', 'Extensions', this)">Extensions</button>
+                <button class="option-btn" onclick="setTrait('hair', 'Natural Curls', this)">Natural Curls</button>
+                <button class="option-btn" onclick="setTrait('hair', 'Royal Waves', this)">Royal Waves</button>
             </div>
 
             <div class="panel-section-title">4. Body Build</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="setTrait('body', 'regal', this)">Regal / Standard</button>
-                <button class="option-btn" onclick="setTrait('body', 'athletic', this)">Athletic Build</button>
+                <button class="option-btn selected" onclick="setTrait('body', '110px', this)">Regal / Standard</button>
+                <button class="option-btn" onclick="setTrait('body', '130px', this)">Athletic Build</button>
             </div>
 
             <div class="panel-section-title">5. Attire & Robes</div>
             <div class="option-grid" style="grid-template-columns: 1fr;">
-                <button class="option-btn selected" onclick="setTrait('outfit', 'robes', this)">Sovereign Robes</button>
-                <button class="option-btn" onclick="setTrait('outfit', 'abaya', this)">Imperial Abaya</button>
+                <button class="option-btn selected" onclick="setTrait('outfit', 'Sovereign Robes', this)">Sovereign Robes</button>
+                <button class="option-btn" onclick="setTrait('outfit', 'Imperial Abaya', this)">Imperial Abaya</button>
             </div>
         </div>
 
@@ -173,40 +229,56 @@
         <div class="character-viewport">
             <h2 style="color: var(--gold); position: absolute; top: 15px; margin: 0; font-size: 1.1rem;">Likeness Creation Studio</h2>
             
-            <div class="avatar-canvas" id="avatar-builder">
-                <div id="layer-base" class="avatar-layer" style="background-color: #5c3824; border-radius: 4px;"></div>
-                <div id="layer-body" class="avatar-layer"></div>
-                <div id="layer-outfit" class="avatar-layer"></div>
-                <div id="layer-hair" class="avatar-layer"></div>
+            <div class="avatar-canvas">
+                <div class="character-figure">
+                    <div id="avatar-hair" class="avatar-hair-style"></div>
+                    <div id="avatar-head" class="avatar-head"></div>
+                    <div id="avatar-body" class="avatar-body">Sovereign Robes</div>
+                </div>
             </div>
 
-            <a href="gateway.html" class="action-btn" style="position: absolute; bottom: 15px;">Save & Enter Realm</a>
+            <a href="gateway.html" class="action-btn">Save & Enter Realm</a>
         </div>
     </div>
 
     <script>
         let characterBuild = {
             base: 'female',
-            skin: 'deep',
-            hair: 'braids',
-            body: 'regal',
-            outfit: 'robes'
+            skin: '#5c3824',
+            hair: 'Braid-Updo',
+            body: '110px',
+            outfit: 'Sovereign Robes'
         };
 
         function setTrait(category, value, btn) {
             const parent = btn.parentElement;
             parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
+            
             characterBuild[category] = value;
             updateAvatarDisplay();
         }
 
         function updateAvatarDisplay() {
-            const baseLayer = document.getElementById('layer-base');
-            if (characterBuild.skin === 'deep') baseLayer.style.backgroundColor = '#5c3824';
-            else if (characterBuild.skin === 'rich') baseLayer.style.backgroundColor = '#8d5524';
-            else if (characterBuild.skin === 'golden') baseLayer.style.backgroundColor = '#c68642';
-            else if (characterBuild.skin === 'fair') baseLayer.style.backgroundColor = '#f5d0b1';
+            document.getElementById('avatar-head').style.backgroundColor = characterBuild.skin;
+            document.getElementById('avatar-body').style.width = characterBuild.body;
+            document.getElementById('avatar-body').innerText = characterBuild.outfit;
+            
+            // Adjust hair visual hints based on selection
+            const hairElem = document.getElementById('avatar-hair');
+            if (characterBuild.hair === 'Braid-Updo') {
+                hairElem.style.borderRadius = '35px 35px 10px 10px';
+                hairElem.style.height = '45px';
+            } else if (characterBuild.hair === 'Extensions') {
+                hairElem.style.borderRadius = '35px 35px 25px 25px';
+                hairElem.style.height = '60px';
+            } else if (characterBuild.hair === 'Natural Curls') {
+                hairElem.style.borderRadius = '50%';
+                hairElem.style.height = '50px';
+            } else {
+                hairElem.style.borderRadius = '20px 20px 15px 15px';
+                hairElem.style.height = '40px';
+            }
         }
     </script>
 </body>
