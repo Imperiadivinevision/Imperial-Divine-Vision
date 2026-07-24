@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Capital: Sovereign Chamber</title>
+    <title>Imperial Capital: Adult Room & Wardrobe Chamber</title>
     <style>
         :root {
             --bg-dark: #12100e;
@@ -48,14 +48,14 @@
         }
 
         .control-sidebar {
-            width: 280px;
+            width: 330px;
             background: var(--panel-bg);
             border: 2px solid var(--gold);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             padding: 12px;
-            gap: 10px;
+            gap: 8px;
             overflow-y: auto;
             z-index: 10;
             box-shadow: 0 5px 25px rgba(0,0,0,0.8);
@@ -73,9 +73,10 @@
 
         .panel-section-title {
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border-bottom: 1px solid var(--gold);
             padding-bottom: 3px;
+            margin-top: 4px;
             margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -83,8 +84,8 @@
 
         .option-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
         }
 
         .option-btn {
@@ -94,7 +95,7 @@
             padding: 5px;
             text-align: center;
             font-family: 'Georgia', serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 4px;
@@ -107,99 +108,31 @@
             box-shadow: 0 0 8px var(--accent-glow);
         }
 
-        .likeness-studio-box {
-            background: rgba(14, 25, 20, 0.95);
-            border: 1px solid var(--gold);
-            border-radius: 6px;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .likeness-studio-box h4 {
-            color: var(--gold);
-            margin: 0 0 3px 0;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .likeness-studio-box p {
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            line-height: 1.2;
-            margin: 0 0 6px 0;
-            font-style: italic;
-        }
-
-        .likeness-input {
-            width: 100%;
-            background: #12100e;
-            border: 1px solid var(--gold);
-            color: var(--text-main);
-            padding: 5px;
-            font-family: 'Georgia', serif;
-            font-size: 0.75rem;
-            border-radius: 3px;
-            box-sizing: border-box;
-            margin-bottom: 5px;
-        }
-
-        .wardrobe-grid {
+        .wardrobe-list {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            max-height: 320px;
+            gap: 4px;
+            max-height: 200px;
             overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .wardrobe-grid::-webkit-scrollbar {
-            width: 5px;
-        }
-        .wardrobe-grid::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 3px;
         }
 
         .wardrobe-item {
             background: #181410;
             border: 1px solid var(--gold);
-            padding: 6px 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            padding: 6px;
+            color: var(--text-main);
+            font-size: 0.7rem;
             cursor: pointer;
             border-radius: 4px;
-            transition: all 0.2s;
             text-align: left;
-            color: var(--text-main);
-            font-size: 0.8rem;
+            transition: all 0.2s;
+            word-break: break-all;
         }
 
         .wardrobe-item:hover, .wardrobe-item.selected {
             background: var(--gold);
             color: var(--bg-dark);
             font-weight: bold;
-        }
-
-        .skin-palette {
-            display: flex;
-            gap: 5px;
-            justify-content: space-between;
-        }
-
-        .skin-swatch {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .skin-swatch:hover, .skin-swatch.selected {
-            transform: scale(1.15);
-            box-shadow: 0 0 8px var(--gold);
         }
 
         .character-viewport {
@@ -224,7 +157,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 440px;
+            max-width: 480px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -236,27 +169,9 @@
             letter-spacing: 1px;
         }
 
-        .audio-btn {
-            background: #181410;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 4px 8px;
-            font-family: 'Georgia', serif;
-            font-size: 0.7rem;
-            cursor: pointer;
-            border-radius: 3px;
-            text-transform: uppercase;
-        }
-
-        .audio-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            font-weight: bold;
-        }
-
         .character-stage-display {
             position: relative;
-            max-width: 440px;
+            max-width: 480px;
             width: 100%;
             height: 440px;
             background: rgba(11, 9, 7, 0.98);
@@ -269,10 +184,10 @@
             overflow: hidden;
         }
 
-        .character-preview-video {
+        .avatar-preview-media {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: contain; /* Preserves full original proportions, full body, and face without cropping */
             background: #0b0907;
         }
 
@@ -283,31 +198,68 @@
             align-items: center;
             gap: 6px;
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
         }
 
-        .back-btn {
+        .action-input-group {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .action-input {
+            flex: 1;
+            background: #181410;
+            border: 2px solid var(--gold);
+            color: var(--text-main);
+            padding: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .action-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
-            padding: 8px 15px;
+            padding: 8px 12px;
             font-family: 'Georgia', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
-            width: 100%;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-align: center;
-            text-decoration: none;
-            box-sizing: border-box;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
-        .back-btn:hover {
+        .action-btn:hover {
             background: var(--gold-hover);
             box-shadow: 0 0 15px var(--gold);
+        }
+
+        .skin-palette {
+            display: flex;
+            gap: 5px;
+            justify-content: space-between;
+        }
+
+        .skin-swatch {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .skin-swatch:hover, .skin-swatch.selected {
+            transform: scale(1.15);
+            box-shadow: 0 0 8px var(--gold);
         }
     </style>
 </head>
@@ -315,18 +267,20 @@
 
     <div class="chamber-background"></div>
 
-    <audio id="royal-audio" loop>
-        <source src="rosanna-music-galary.m4a" type="audio/mp4">
-    </audio>
-
     <div class="container">
         
-        <!-- Left Sidebar -->
+        <!-- Left Sidebar: Wardrobe & Sovereign Selector -->
         <div class="control-sidebar">
-            <div class="panel-section-title">Sovereign Focus</div>
-            <div class="option-grid">
-                <button class="option-btn selected" id="btn-queen" onclick="switchSovereign('queen', this)">Queen Rosana</button>
-                <button class="option-btn" id="btn-king" onclick="switchSovereign('king', this)">King Benson</button>
+            <div class="panel-section-title">Sovereign Profile</div>
+            <div class="option-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <button class="option-btn selected" id="btn-queen" onclick="switchCategory('queen', this)">Queen</button>
+                <button class="option-btn" id="btn-king" onclick="switchCategory('king', this)">King</button>
+                <button class="option-btn" id="btn-both" onclick="switchCategory('both', this)">Together</button>
+            </div>
+
+            <div class="panel-section-title">Wardrobe Chamber</div>
+            <div id="wardrobe-container" class="wardrobe-list">
+                <!-- Dynamically populated wardrobe items -->
             </div>
 
             <div class="panel-section-title">Skin Tone</div>
@@ -335,206 +289,161 @@
                 <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
                 <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkinTone('Golden Tan', this)" title="Golden Tan"></div>
                 <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkinTone('Olive', this)" title="Olive"></div>
-                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
+                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinFair" title="Fair"></div>
             </div>
 
             <div class="panel-section-title">Hairstyle</div>
-            <div class="option-grid">
+            <div class="option-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
                 <button class="option-btn" onclick="setHair('Extensions', this)">Extensions</button>
                 <button class="option-btn" onclick="setHair('Natural Curls', this)">Natural Curls</button>
                 <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
-            </div>
-
-            <!-- Updated Likeness Studio Box linking to likeness-chamber.html -->
-            <div class="likeness-studio-box">
-                <h4>✨ Create Your Likeness</h4>
-                <p>Design a member character in your own image for the realm.</p>
-                <input type="text" id="custom-name-input" class="likeness-input" placeholder="Enter Character Name...">
-                <button class="option-btn" style="width: 100%;" onclick="goToLikenessChamber()">Save & Enter Chamber</button>
             </div>
         </div>
 
         <!-- Center Stage Viewport -->
         <div class="character-viewport">
             <div class="stage-banner">
-                <h1>Adult Chamber Wardrobe</h1>
-                <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Rosanna Gallery</button>
+                <h1 id="chamber-title">Adult Chamber & Gallery</h1>
+                <a href="gateway.html" class="action-btn" style="font-size: 0.7rem; padding: 4px 8px;">🏠 Gateway</a>
             </div>
             
             <div class="character-stage-display">
-                <video id="preview-video" class="character-preview-video" autoplay loop muted playsinline>
-                    <source src="rosanna-imperial-white-CINEMATIC.mp4" type="video/mp4">
-                    Your browser does not support video.
-                </video>
+                <!-- Supports both video and image formats perfectly -->
+                <div id="media-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline>
+                        <source src="rosanna-best-CINEMATIC.mp4" type="video/mp4">
+                        Your browser does not support video preview.
+                    </video>
+                </div>
             </div>
 
             <div class="stage-footer">
                 <p id="character-summary-text" style="font-size: 0.8rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
-                    Queen Rosana | Deep Warm | Braid-Updo | Imperial White Cinematic
+                    Queen Rosana | Deep Warm | Braid-Updo | rosanna-best-CINEMATIC.mp4
                 </p>
-                <a href="index.html" class="back-btn">Return to Sanctuary Home</a>
+                <div class="action-input-group">
+                    <input type="text" id="custom-name-input" class="action-input" placeholder="Enter character name...">
+                    <a href="likeness-chamber.html" class="action-btn" onclick="saveCharacterName()">Create Likeness</a>
+                </div>
             </div>
         </div>
 
-        <!-- Right Sidebar -->
-        <div class="control-sidebar right">
-            <div class="panel-section-title" id="wardrobe-title">Queen's Wardrobe</div>
-            <p style="font-size: 0.7rem; color: var(--text-muted); margin: 0 0 4px 0;">Select cinematic attire:</p>
-            
-            <div class="wardrobe-grid" id="wardrobe-list"></div>
+        <!-- Right Sidebar: Accessories & Status -->
+        <div class="control-sidebar">
+            <div class="panel-section-title">Royal Crown & Jewels</div>
+            <div class="option-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <button class="option-btn selected" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
+                <button class="option-btn" onclick="setAccessory('Diamond Tiara', this)">Tiara</button>
+                <button class="option-btn" onclick="setAccessory('Emerald Necklace', this)">Necklace</button>
+                <button class="option-btn" onclick="setAccessory('Royal Scepter', this)">Scepter</button>
+            </div>
 
-            <div class="panel-section-title" style="margin-top: 8px;">Accessory Type</div>
-            <div class="option-grid">
-                <button class="option-btn selected" onclick="setAccessory('Imperial Crown', this)">Crown</button>
-                <button class="option-btn" onclick="setAccessory('Gold Circlet', this)">Circlet</button>
-                <button class="option-btn" onclick="setAccessory('Ceremonial Veil', this)">Veil</button>
-                <button class="option-btn" onclick="setAccessory('Velvet Band', this)">Velvet</button>
+            <div class="panel-section-title">Chamber Status</div>
+            <div style="background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold); border-radius: 6px; padding: 10px; text-align: center;">
+                <h4 style="color: var(--gold); margin: 0 0 4px 0; font-size: 0.8rem;">Sovereign Vault</h4>
+                <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">All King & Queen repository assets linked.</p>
             </div>
         </div>
 
     </div>
 
     <script>
+        let currentCategory = 'queen';
+
         const queenWardrobe = [
-            { name: 'Imperial White Cinematic', file: 'rosanna-imperial-white-CINEMATIC.mp4' },
-            { name: 'Pink 3 Cinematic', file: 'rosanna-pink-3-CINEMATIC.mp4' },
-            { name: 'Pink Cinematic 1', file: 'rosanna-pink-CINEMATIC-1.mp4' },
-            { name: 'Pink Cinematic', file: 'rosanna-pink-CINEMATIC.mp4' },
-            { name: 'Purple Cinematic', file: 'rosanna-purple-CINEMATIC.mp4' },
-            { name: 'Relax Green Cinematic', file: 'rosanna-relax-green-CINEMATIC.mp4' },
-            { name: 'White 2 Cinematic', file: 'rosanna-white-2-CINEMATIC.mp4' },
-            { name: 'White Cinematic', file: 'rosanna-white-CINEMATIC.mp4' },
-            { name: 'Imperial Outfit Cinematic', file: 'rosanna-imperial-outfit-CINEMATIC.mp4' },
-            { name: 'Imperial Read Cinematic', file: 'rosanna-imperial-read-CINEMATIC.mp4' },
-            { name: 'Rosana Cinematic 1', file: 'rosanna-1-CINEMATIC.mp4' },
-            { name: 'Rosana Cinematic 3', file: 'rosanna-3-CINEMATIC.mp4' },
-            { name: 'Best Sovereign Cinematic', file: 'rosanna-best-CINEMATIC.mp4' },
-            { name: 'Blue Red Cinematic', file: 'rosanna-blue-red-CINEMATIC.mp4' },
-            { name: 'Green Cinematic', file: 'rosanna-green-CINEMATIC.mp4' },
-            { name: 'Throne Presence Cinematic', file: 'queen-throne-CINEMATIC-1.mp4' },
-            { name: 'Outfit 6', file: 'rosanna-outfit-6.png' },
-            { name: 'Outfit 7', file: 'rosanna-outfit-7.png' },
-            { name: 'Outfit 8', file: 'rosanna-outfit-8.png' },
-            { name: 'Outfit 10', file: 'rosanna-outfit-10.png' },
-            { name: 'Outfit 11', file: 'rosanna-outfit-11.png' },
-            { name: 'Outfit 12', file: 'rosanna-outfit-12.png' },
-            { name: 'Outfit 13', file: 'rosanna-outfit-13.png' },
-            { name: 'Outfit 14', file: 'rosanna-outfit-14.png' },
-            { name: 'Outfit 17', file: 'rosanna-outfit-17.png' },
-            { name: 'Outfit 18', file: 'rosanna-outfit-18.png' },
-            { name: 'Outfit 21', file: 'rosanna-outfit-21.png' },
-            { name: 'Outfit 50', file: 'rosanna-outfit-50.png' },
-            { name: 'Outfit 51', file: 'rosanna-outfit-51.png' },
-            { name: 'Outfit 52', file: 'rosanna-outfit-52.png' },
-            { name: 'Outfit 55', file: 'rosanna-outfit-55.png' },
-            { name: 'Outfit 56', file: 'rosanna-outfit-56.png' },
-            { name: 'Outfit 57', file: 'rosanna-outfit-57.png' },
-            { name: 'Outfit 58', file: 'rosanna-outfit-58.png' },
-            { name: 'Outfit 59', file: 'rosanna-outfit-59.png' },
-            { name: 'Outfit 60', file: 'rosanna-outfit-60.png' },
-            { name: 'Outfit 61', file: 'rosanna-outfit-61.png' },
-            { name: 'Outfit 63', file: 'rosanna-outfit-63.png' },
-            { name: 'Outfit 65', file: 'rosanna-outfit-65.png' },
-            { name: 'Outfit 69', file: 'rosanna-outfit-69.png' },
-            { name: 'Outfit 70', file: 'rosanna-outfit-70.png' },
-            { name: 'Outfit 71', file: 'rosanna-outfit-71.png' },
-            { name: 'Outfit 72', file: 'rosanna-outfit-72.png' },
-            { name: 'Outfit 78', file: 'rosanna-outfit-78.png' },
-            { name: 'Outfit 80', file: 'rosanna-outfit-80.png' },
-            { name: 'Outfit 90', file: 'rosanna-outfit-90.png' },
-            { name: 'Outfit 97', file: 'rosanna-outfit-97.png' },
-            { name: 'Dress', file: 'dress.png' },
-            { name: 'Robe 1', file: 'Robe-1.png' },
-            { name: 'Robe 2', file: 'Robe-2.png' },
-            { name: 'Robe 3', file: 'Robe-3.png' },
-            { name: 'Robe 4', file: 'Robe-4.png' },
-            { name: 'Rosanna VIP', file: 'rosanna_vip.png' },
-            { name: 'Rosanna Tea', file: 'rosanna-tea-1.png' }
+            { name: "rosanna-best-CINEMATIC.mp4", file: "rosanna-best-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-1-CINEMATIC.mp4", file: "rosanna-1-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-3-CINEMATIC.mp4", file: "rosanna-3-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-blue-red-CINEMATIC.mp4", file: "rosanna-blue-red-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-green-CINEMATIC.mp4", file: "rosanna-green-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-imperial-outfit-CINEMATIC-1.mp4", file: "rosanna-imperial-outfit-CINEMATIC-1.mp4", type: "video" },
+            { name: "rosanna-imperial-outfit-CINEMATIC.mp4", file: "rosanna-imperial-outfit-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-imperial-read-CINEMATIC.mp4", file: "rosanna-imperial-read-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-imperial-white-CINEMATIC.mp4", file: "rosanna-imperial-white-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-pink-3-CINEMATIC.mp4", file: "rosanna-pink-3-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-pink-CINEMATIC-1.mp4", file: "rosanna-pink-CINEMATIC-1.mp4", type: "video" },
+            { name: "rosanna-pink-CINEMATIC.mp4", file: "rosanna-pink-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-purple-CINEMATIC.mp4", file: "rosanna-purple-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-relax-green-CINEMATIC.mp4", file: "rosanna-relax-green-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-white-2-CINEMATIC.mp4", file: "rosanna-white-2-CINEMATIC.mp4", type: "video" },
+            { name: "rosanna-white-CINEMATIC.mp4", file: "rosanna-white-CINEMATIC.mp4", type: "video" },
+            { name: "queen-throne-CINEMATIC-1.mp4", file: "queen-throne-CINEMATIC-1.mp4", type: "video" }
         ];
 
         const kingWardrobe = [
-            { name: 'King Imperial Cinematic', file: 'king-benson-imperial-CINEMATIC.mp4' },
-            { name: 'King White Cinematic', file: 'king-benson-white-CINEMATIC.mp4' },
-            { name: 'Pink Cinematic Duo', file: 'king-queen-pink-CINEMATIC-1.mp4' },
-            { name: 'Purple Cinematic Duo', file: 'king-queen-purple-CINEMATIC-2.mp4' },
-            { name: 'Royal Purple Duo', file: 'king-queen-royal-purple-CINEMATIC-5.mp4' },
-            { name: 'Throne Armor Duo', file: 'king-queen-throne-armor-CINEMATIC.mp4' },
-            { name: 'White Cinematic Duo', file: 'king-queen-white-CINEMATIC-4.mp4' },
-            { name: 'King Outfit 1', file: 'king-benson-outfit-1.png' },
-            { name: 'King Outfit 2', file: 'king-benson-outfit-2.png' },
-            { name: 'King Outfit 6', file: 'king-benson-outfit-6.png' },
-            { name: 'King Outfit 7', file: 'king-benson-outfit-7.png' },
-            { name: 'King Outfit 9', file: 'king-benson-outfit-9.png' },
-            { name: 'King Outfit 10', file: 'king-benson-outfit-10.png' },
-            { name: 'King Outfit 12', file: 'king-benson-outfit-12.png' },
-            { name: 'King Outfit 15', file: 'king-benson-outfit-15.png' },
-            { name: 'Benson Outfit Main', file: 'benson-outfit.png' },
-            { name: 'King Benson 11', file: 'king-benson-11.png' },
-            { name: 'Hunting Clothes', file: 'king-benson-hunting-clothes-meduim.png' },
-            { name: 'On Horse', file: 'king-benson-on-horse.png' }
+            { name: "king-benson-imperial-CINEMATIC.mp4", file: "king-benson-imperial-CINEMATIC.mp4", type: "video" },
+            { name: "king-benson-white-CINEMATIC.mp4", file: "king-benson-white-CINEMATIC.mp4", type: "video" },
+            { name: "king-benson-11.png", file: "king-benson-11.png", type: "image" },
+            { name: "king-benson-hunting-clothes-medium.png", file: "king-benson-hunting-clothes-medium.png", type: "image" },
+            { name: "king-benson-on-horse.png", file: "king-benson-on-horse.png", type: "image" },
+            { name: "king-benson-outfit-1.png", file: "king-benson-outfit-1.png", type: "image" },
+            { name: "king-benson-outfit-1 (1).png", file: "king-benson-outfit-1 (1).png", type: "image" },
+            { name: "king-benson-outfit-2.png", file: "king-benson-outfit-2.png", type: "image" },
+            { name: "king-benson-outfit-2 (1).png", file: "king-benson-outfit-2 (1).png", type: "image" },
+            { name: "king-benson-outfit-6.png", file: "king-benson-outfit-6.png", type: "image" },
+            { name: "king-benson-outfit-6 (1).png", file: "king-benson-outfit-6 (1).png", type: "image" },
+            { name: "king-benson-outfit-7.png", file: "king-benson-outfit-7.png", type: "image" },
+            { name: "king-benson-outfit-7-1.png", file: "king-benson-outfit-7-1.png", type: "image" },
+            { name: "king-benson-outfit-9.png", file: "king-benson-outfit-9.png", type: "image" },
+            { name: "king-benson-outfit-9-1.png", file: "king-benson-outfit-9-1.png", type: "image" },
+            { name: "king-benson-outfit-10.png", file: "king-benson-outfit-10.png", type: "image" },
+            { name: "king-benson-outfit-10 (1).png", file: "king-benson-outfit-10 (1).png", type: "image" },
+            { name: "king-benson-outfit-12.png", file: "king-benson-outfit-12.png", type: "image" },
+            { name: "king-benson-outfit-15.png", file: "king-benson-outfit-15.png", type: "image" },
+            { name: "king-benson-outfit-15 (1).png", file: "king-benson-outfit-15 (1).png", type: "image" }
         ];
 
-        let currentRole = 'queen';
-        let characterConfig = {
-            skinTone: 'Deep Warm',
-            hair: 'Braid-Updo',
-            accessory: 'Imperial Crown',
-            outfitName: 'Imperial White Cinematic',
-            outfitVideo: 'rosanna-imperial-white-CINEMATIC.mp4',
-            customName: ''
+        const bothWardrobe = [
+            { name: "king-queen-pink-CINEMATIC-1.mp4", file: "king-queen-pink-CINEMATIC-1.mp4", type: "video" },
+            { name: "king-queen-purple-CINEMATIC-2.mp4", file: "king-queen-purple-CINEMATIC-2.mp4", type: "video" },
+            { name: "king-queen-royal-purple-CINEMATIC-5.mp4", file: "king-queen-royal-purple-CINEMATIC-5.mp4", type: "video" },
+            { name: "king-queen-throne-armor-CINEMATIC-1.mp4", file: "king-queen-throne-armor-CINEMATIC-1.mp4", type: "video" },
+            { name: "king-queen-throne-armor-CINEMATIC.mp4", file: "king-queen-throne-armor-CINEMATIC.mp4", type: "video" },
+            { name: "king-queen-white-CINEMATIC-4.mp4", file: "king-queen-white-CINEMATIC-4.mp4", type: "video" },
+            { name: "king-benson-queen-rosana-hop-horse.png", file: "king-benson-queen-rosana-hop-horse.png", type: "image" }
+        ];
+
+        window.onload = function() {
+            populateWardrobe();
+            updateSummary();
         };
 
         function populateWardrobe() {
-            const container = document.getElementById('wardrobe-list');
-            const titleElem = document.getElementById('wardrobe-title');
-            if (!container) return;
+            const container = document.getElementById('wardrobe-container');
             container.innerHTML = '';
+            let list = currentCategory === 'queen' ? queenWardrobe : (currentCategory === 'king' ? kingWardrobe : bothWardrobe);
             
-            let list = currentRole === 'queen' ? queenWardrobe : kingWardrobe;
-            titleElem.innerText = currentRole === 'queen' ? "Queen's Wardrobe" : "King's Wardrobe";
-
             list.forEach((item, index) => {
-                let div = document.createElement('div');
+                const div = document.createElement('div');
                 div.className = `wardrobe-item ${index === 0 ? 'selected' : ''}`;
-                div.onclick = () => setOutfit(item.name, item.file, div);
-                div.innerHTML = `<span>👑 ${item.name}</span>`;
+                div.innerText = item.name;
+                div.onclick = () => setOutfit(item.name, item.file, item.type, div);
                 container.appendChild(div);
             });
         }
 
-        window.onload = populateWardrobe;
+        let characterConfig = {
+            customName: '',
+            skinTone: 'Deep Warm',
+            hair: 'Braid-Updo',
+            outfitName: 'rosanna-best-CINEMATIC.mp4',
+            outfitFile: 'rosanna-best-CINEMATIC.mp4',
+            accessory: 'Gold Circlet'
+        };
 
-        let isPlaying = false;
-        function toggleAudio() {
-                 function toggleAudio() {
-            const audio = document.getElementById('royal-audio');
-            const btn = document.getElementById('audio-toggle-btn');
-            if (!audio) return;
-            if (isPlaying) {
-                audio.pause();
-                btn.innerText = "🎵 Play Rosanna Gallery";
-                isPlaying = false;
-            } else {
-                audio.volume = 1.0;
-                audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Rosanna Gallery";
-                    isPlaying = true;
-                }).catch(e => console.log("Audio play blocked"));
-            }
-        }
-
-        function switchSovereign(role, btn) {
+        function switchCategory(category, btn) {
             document.getElementById('btn-queen').classList.remove('selected');
             document.getElementById('btn-king').classList.remove('selected');
+            document.getElementById('btn-both').classList.remove('selected');
             btn.classList.add('selected');
             
-            currentRole = role;
+            currentCategory = category;
             populateWardrobe();
 
-            let list = role === 'queen' ? queenWardrobe : kingWardrobe;
+            let list = category === 'queen' ? queenWardrobe : (category === 'king' ? kingWardrobe : bothWardrobe);
             if(list.length > 0) {
-                setOutfit(list[0].name, list[0].file, document.querySelector('.wardrobe-item'));
+                setOutfit(list[0].name, list[0].file, list[0].type, document.querySelector('.wardrobe-item'));
             }
         }
 
@@ -551,17 +460,20 @@
             updateSummary();
         }
 
-        function setOutfit(name, videoFile, itemElement) {
+        function setOutfit(name, file, type, itemElement) {
             document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
-            if(itemElement) itemElement.classList.add('selected');
+                        if(itemElement) itemElement.classList.add('selected');
             
             characterConfig.outfitName = name;
-            characterConfig.outfitVideo = videoFile;
+            characterConfig.outfitFile = file;
             
-            const videoElem = document.getElementById('preview-video');
-            videoElem.src = videoFile;
-            videoElem.load();
-            videoElem.play().catch(e => console.log("Autoplay waiting for interaction"));
+            const mediaContainer = document.getElementById('media-container');
+            
+            if (type === 'video') {
+                mediaContainer.innerHTML = `<video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline><source src="${file}" type="video/mp4">Your browser does not support video preview.</video>`;
+            } else {
+                mediaContainer.innerHTML = `<img src="${file}" class="avatar-preview-media" alt="${name}" style="object-fit: contain;">`;
+            }
             
             updateSummary();
         }
@@ -572,13 +484,10 @@
             updateSummary();
         }
 
-        function goToLikenessChamber() {
+        function saveCharacterName() {
             const nameInput = document.getElementById('custom-name-input').value.trim();
             if(nameInput) {
                 localStorage.setItem('player_character_name', nameInput);
-                window.location.href = 'likeness-chamber.html';
-            } else {
-                alert("Please enter a character name to begin your journey.");
             }
         }
 
@@ -591,11 +500,12 @@
         function updateSummary() {
             const summaryElem = document.getElementById('character-summary-text');
             if(!summaryElem) return;
-            let nameDisplay = characterConfig.customName ? characterConfig.customName : (currentRole === 'queen' ? 'Queen Rosana' : 'King Benson');
+            let roleLabel = currentCategory === 'queen' ? 'Queen Rosana' : (currentCategory === 'king' ? 'King Benson' : 'King & Queen');
+            let nameDisplay = characterConfig.customName ? characterConfig.customName : roleLabel;
             summaryElem.innerText = `${nameDisplay} | ${characterConfig.skinTone} | ${characterConfig.hair} | ${characterConfig.outfitName}`;
         }
     </script>
 </body>
 </html>
 
-   
+
