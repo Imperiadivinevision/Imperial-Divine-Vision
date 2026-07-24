@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-dark: #12100e;
-            --panel-bg: rgba(28, 24, 20, 0.95);
+            --panel-bg: rgba(28, 24, 20, 0.98);
             --gold: #d4af37;
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
@@ -21,7 +21,7 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Georgia', serif;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -30,9 +30,12 @@
         .container {
             display: flex;
             flex: 1;
-            height: 100vh;
+            height: calc(100vh - 20px);
             width: 100%;
             position: relative;
+            box-sizing: border-box;
+            padding: 10px;
+            gap: 10px;
         }
 
         .chamber-background {
@@ -45,30 +48,34 @@
         }
 
         .control-sidebar {
-            width: 320px;
+            width: 300px;
             background: var(--panel-bg);
-            border-right: 2px solid var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            gap: 15px;
+            padding: 15px;
+            gap: 12px;
             overflow-y: auto;
             z-index: 10;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.8);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+            max-height: 100%;
         }
 
-        .control-sidebar.right {
-            border-right: none;
-            border-left: 2px solid var(--gold);
-            box-shadow: -5px 0 25px rgba(0,0,0,0.8);
+        .control-sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .control-sidebar::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
         }
 
         .panel-section-title {
             color: var(--gold);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             border-bottom: 1px solid var(--gold);
-            padding-bottom: 6px;
-            margin-bottom: 8px;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -76,17 +83,17 @@
         .option-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 6px;
         }
 
         .option-btn {
             background: #181410;
             color: var(--text-main);
             border: 1px solid var(--gold);
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             font-family: 'Georgia', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 4px;
@@ -100,28 +107,27 @@
         }
 
         .likeness-studio-box {
-            background: rgba(14, 25, 20, 0.9);
+            background: rgba(14, 25, 20, 0.95);
             border: 1px solid var(--gold);
             border-radius: 6px;
-            padding: 12px;
-            margin-top: auto;
+            padding: 10px;
+            margin-top: 5px;
             text-align: left;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
 
         .likeness-studio-box h4 {
             color: var(--gold);
-            margin: 0 0 6px 0;
-            font-size: 0.95rem;
+            margin: 0 0 4px 0;
+            font-size: 0.85rem;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         .likeness-studio-box p {
             color: var(--text-muted);
-            font-size: 0.8rem;
-            line-height: 1.4;
-            margin: 0 0 10px 0;
+            font-size: 0.75rem;
+            line-height: 1.3;
+            margin: 0 0 8px 0;
             font-style: italic;
         }
 
@@ -130,33 +136,25 @@
             background: #12100e;
             border: 1px solid var(--gold);
             color: var(--text-main);
-            padding: 8px;
+            padding: 6px;
             font-family: 'Georgia', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border-radius: 3px;
             box-sizing: border-box;
-            margin-bottom: 8px;
-        }
-
-        .likeness-input:focus {
-            outline: none;
-            box-shadow: 0 0 8px var(--gold);
+            margin-bottom: 6px;
         }
 
         .wardrobe-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 420px;
+            gap: 6px;
+            max-height: 280px;
             overflow-y: auto;
             padding-right: 4px;
         }
 
         .wardrobe-grid::-webkit-scrollbar {
-            width: 6px;
-        }
-        .wardrobe-grid::-webkit-scrollbar-track {
-            background: #181410;
+            width: 5px;
         }
         .wardrobe-grid::-webkit-scrollbar-thumb {
             background: var(--gold);
@@ -166,33 +164,34 @@
         .wardrobe-item {
             background: #181410;
             border: 1px solid var(--gold);
-            padding: 10px 12px;
+            padding: 8px 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             border-radius: 4px;
             transition: all 0.2s;
             text-align: left;
             color: var(--text-main);
+            font-size: 0.85rem;
         }
 
         .wardrobe-item:hover, .wardrobe-item.selected {
             background: var(--gold);
             color: var(--bg-dark);
             font-weight: bold;
-            transform: translateX(3px);
+            transform: translateX(2px);
         }
 
         .skin-palette {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             justify-content: space-between;
         }
 
         .skin-swatch {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: 2px solid var(--gold);
             cursor: pointer;
@@ -201,7 +200,7 @@
 
         .skin-swatch:hover, .skin-swatch.selected {
             transform: scale(1.15);
-            box-shadow: 0 0 10px var(--gold);
+            box-shadow: 0 0 8px var(--gold);
         }
 
         .character-viewport {
@@ -212,21 +211,21 @@
             align-items: center;
             position: relative;
             z-index: 5;
-            padding: 20px;
+            padding: 10px;
         }
 
         .stage-banner {
             background: var(--panel-bg);
             border: 2px solid var(--gold);
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 6px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 520px;
+            max-width: 480px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -234,48 +233,39 @@
         .stage-banner h1 {
             color: var(--gold);
             margin: 0;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-        }
-
-        .audio-player-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
         }
 
         .audio-btn {
             background: #181410;
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 6px 14px;
+            padding: 5px 10px;
             font-family: 'Georgia', serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             border-radius: 3px;
             transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .audio-btn:hover {
             background: var(--gold);
             color: var(--bg-dark);
             font-weight: bold;
-            box-shadow: 0 0 12px var(--gold);
         }
 
         .character-stage-display {
             position: relative;
-            max-width: 520px;
+            max-width: 480px;
             width: 100%;
-            height: 480px;
+            height: 420px;
             background: rgba(11, 9, 7, 0.95);
             border: 3px solid var(--gold);
-            border-radius: 10px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 25px rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
@@ -289,37 +279,37 @@
         }
 
         .stage-footer {
-            margin-top: 15px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
         }
 
         .back-btn {
             background: var(--gold);
             color: var(--bg-dark);
             border: 2px solid var(--gold);
-            padding: 12px 25px;
+            padding: 10px 20px;
             font-family: 'Georgia', serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
             width: 100%;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
             text-align: center;
             text-decoration: none;
             box-sizing: border-box;
+            transition: all 0.3s;
         }
 
         .back-btn:hover {
             background: var(--gold-hover);
-            box-shadow: 0 0 20px var(--gold);
+            box-shadow: 0 0 15px var(--gold);
         }
     </style>
 </head>
@@ -337,11 +327,11 @@
         <div class="control-sidebar">
             <div class="panel-section-title">Sovereign Focus</div>
             <div class="option-grid">
-                <button class="option-btn selected" onclick="switchSovereign('queen', this)">Queen Rosana</button>
-                <button class="option-btn" onclick="switchSovereign('king', this)">King Benson</button>
+                <button class="option-btn selected" id="btn-queen" onclick="switchSovereign('queen', this)">Queen Rosana</button>
+                <button class="option-btn" id="btn-king" onclick="switchSovereign('king', this)">King Benson</button>
             </div>
 
-            <div class="panel-section-title" style="margin-top: 10px;">Skin Tone</div>
+            <div class="panel-section-title">Skin Tone</div>
             <div class="skin-palette">
                 <div class="skin-swatch selected" style="background-color: #5c3824;" onclick="setSkinTone('Deep Warm', this)" title="Deep Warm"></div>
                 <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
@@ -350,7 +340,7 @@
                 <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
             </div>
 
-            <div class="panel-section-title" style="margin-top: 10px;">Hairstyle</div>
+            <div class="panel-section-title">Hairstyle</div>
             <div class="option-grid">
                 <button class="option-btn selected" onclick="setHair('Braid-Updo', this)">Braid-Updo</button>
                 <button class="option-btn" onclick="setHair('Extensions', this)">Extensions</button>
@@ -358,7 +348,7 @@
                 <button class="option-btn" onclick="setHair('Royal Waves', this)">Royal Waves</button>
             </div>
 
-            <!-- Create Your Own Character in Your Likeness Studio -->
+            <!-- Create Your Likeness Studio Box (Fully Visible & Positioned) -->
             <div class="likeness-studio-box">
                 <h4>✨ Create Your Likeness</h4>
                 <p>Design a member character in your own image for the realm.</p>
@@ -367,13 +357,11 @@
             </div>
         </div>
 
-        <!-- Center Stage Viewport with Living Cinematic Video Player -->
+        <!-- Center Stage Viewport -->
         <div class="character-viewport">
             <div class="stage-banner">
                 <h1>Adult Chamber Wardrobe</h1>
-                <div class="audio-player-box">
-                    <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Rosanna Galary</button>
-                </div>
+                <button class="audio-btn" onclick="toggleAudio()" id="audio-toggle-btn">🎵 Play Gallery</button>
             </div>
             
             <div class="character-stage-display">
@@ -384,17 +372,17 @@
             </div>
 
             <div class="stage-footer">
-                <p id="character-summary-text" style="font-size: 0.95rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
+                <p id="character-summary-text" style="font-size: 0.85rem; color: var(--gold); margin: 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">
                     Queen Rosana | Deep Warm | Braid-Updo | Imperial White Cinematic
                 </p>
                 <a href="index.html" class="back-btn">Return to Sanctuary Home</a>
             </div>
         </div>
 
-        <!-- Right Sidebar: Dedicated Wardrobe & Corrected Accessories -->
+        <!-- Right Sidebar: Wardrobe & Accessories -->
         <div class="control-sidebar right">
             <div class="panel-section-title" id="wardrobe-title">Queen's Wardrobe</div>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 8px 0;" id="wardrobe-subtitle">Select cinematic attire:</p>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0 0 6px 0;">Select cinematic attire:</p>
             
             <div class="wardrobe-grid" id="wardrobe-list"></div>
 
@@ -410,7 +398,6 @@
     </div>
 
     <script>
-        // Queen Rosana's complete wardrobe with top-priority cinematics first
         const queenWardrobe = [
             { name: 'Imperial White Cinematic', file: 'rosanna-imperial-white-CINEMATIC.mp4' },
             { name: 'Pink 3 Cinematic', file: 'rosanna-pink-3-CINEMATIC.mp4' },
@@ -427,14 +414,11 @@
             { name: 'Best Sovereign Cinematic', file: 'rosanna-best-CINEMATIC.mp4' },
             { name: 'Blue Red Cinematic', file: 'rosanna-blue-red-CINEMATIC.mp4' },
             { name: 'Green Cinematic', file: 'rosanna-green-CINEMATIC.mp4' },
-            { name: 'Imperial Outfit Alt Cinematic', file: 'rosanna-imperial-outfit-CINEMATIC-1.mp4' },
             { name: 'Throne Presence Cinematic', file: 'queen-throne-CINEMATIC-1.mp4' },
             { name: 'Outfit 6', file: 'rosanna-outfit-6.png' },
             { name: 'Outfit 7', file: 'rosanna-outfit-7.png' },
             { name: 'Outfit 8', file: 'rosanna-outfit-8.png' },
             { name: 'Outfit 10', file: 'rosanna-outfit-10.png' },
-            { name: 'Outfit 10-1', file: 'rosanna-outfit-10-1.png' },
-            { name: 'Outfit 10-2', file: 'rosanna-outfit-10-2.png' },
             { name: 'Outfit 11', file: 'rosanna-outfit-11.png' },
             { name: 'Outfit 12', file: 'rosanna-outfit-12.png' },
             { name: 'Outfit 13', file: 'rosanna-outfit-13.png' },
@@ -471,7 +455,6 @@
             { name: 'Rosanna Tea', file: 'rosanna-tea-1.png' }
         ];
 
-        // King Benson's complete wardrobe with top-priority cinematics first
         const kingWardrobe = [
             { name: 'King Imperial Cinematic', file: 'king-benson-imperial-CINEMATIC.mp4' },
             { name: 'King White Cinematic', file: 'king-benson-white-CINEMATIC.mp4' },
@@ -479,25 +462,15 @@
             { name: 'Purple Cinematic Duo', file: 'king-queen-purple-CINEMATIC-2.mp4' },
             { name: 'Royal Purple Duo', file: 'king-queen-royal-purple-CINEMATIC-5.mp4' },
             { name: 'Throne Armor Duo', file: 'king-queen-throne-armor-CINEMATIC.mp4' },
-            { name: 'Throne Armor Duo Alt', file: 'king-queen-throne-armor-CINEMATIC-1.mp4' },
             { name: 'White Cinematic Duo', file: 'king-queen-white-CINEMATIC-4.mp4' },
             { name: 'King Outfit 1', file: 'king-benson-outfit-1.png' },
             { name: 'King Outfit 2', file: 'king-benson-outfit-2.png' },
-            { name: 'King Outfit 2 (Alt)', file: 'king-benson-outfit-2 (1).png' },
             { name: 'King Outfit 6', file: 'king-benson-outfit-6.png' },
-            { name: 'King Outfit 6 (Alt)', file: 'king-benson-outfit-6 (1).png' },
             { name: 'King Outfit 7', file: 'king-benson-outfit-7.png' },
-            { name: 'King Outfit 7 (Alt)', file: 'king-benson-outfit-7-1.png' },
             { name: 'King Outfit 9', file: 'king-benson-outfit-9.png' },
-            { name: 'King Outfit 9 (Alt)', file: 'king-benson-outfit-9-1.png' },
             { name: 'King Outfit 10', file: 'king-benson-outfit-10.png' },
-            { name: 'King Outfit 10 (Alt)', file: 'king-benson-outfit-10 (1).png' },
             { name: 'King Outfit 12', file: 'king-benson-outfit-12.png' },
             { name: 'King Outfit 15', file: 'king-benson-outfit-15.png' },
-            { name: 'King Outfit 15 (Alt)', file: ‘
-            { name: 'King Outfit 15', file: 'king-benson-outfit-15.png' },
-            { name: 'King Outfit 15 (Alt)', file: 'king-benson-outfit-15 (1).png' },
-            { name: 'Benson Outfit 1', file: 'benson-outfit-1.png' },
             { name: 'Benson Outfit Main', file: 'benson-outfit.png' },
             { name: 'King Benson 11', file: 'king-benson-11.png' },
             { name: 'Hunting Clothes', file: 'king-benson-hunting-clothes-meduim.png' },
@@ -529,6 +502,21 @@
                 div.onclick = () => setOutfit(item.name, item.file, div);
                 div.innerHTML = `<span>👑 ${item.name}</span>`;
                 container.appendChild(div);
+        function populateWardrobe() {
+            const container = document.getElementById('wardrobe-list');
+            const titleElem = document.getElementById('wardrobe-title');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            let list = currentRole === 'queen' ? queenWardrobe : kingWardrobe;
+            titleElem.innerText = currentRole === 'queen' ? "Queen's Wardrobe" : "King's Wardrobe";
+
+            list.forEach((item, index) => {
+                let div = document.createElement('div');
+                div.className = `wardrobe-item ${index === 0 ? 'selected' : ''}`;
+                div.onclick = () => setOutfit(item.name, item.file, div);
+                div.innerHTML = `<span>👑 ${item.name}</span>`;
+                container.appendChild(div);
             });
         }
 
@@ -541,19 +529,22 @@
             if (!audio) return;
             if (isPlaying) {
                 audio.pause();
-                btn.innerText = "🎵 Play Rosanna Galary";
+                btn.innerText = "🎵 Play Gallery";
                 isPlaying = false;
             } else {
                 audio.volume = 1.0;
                 audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Rosanna Galary";
+                    btn.innerText = "🔇 Pause Gallery";
                     isPlaying = true;
                 }).catch(e => console.log("Audio play blocked"));
             }
         }
 
         function switchSovereign(role, btn) {
-            updateButtonGroup(btn);
+            document.getElementById('btn-queen').classList.remove('selected');
+            document.getElementById('btn-king').classList.remove('selected');
+            btn.classList.add('selected');
+            
             currentRole = role;
             populateWardrobe();
 
@@ -623,4 +614,5 @@
     </script>
 </body>
 </html>
+
 
