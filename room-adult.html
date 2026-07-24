@@ -187,7 +187,7 @@
         .avatar-preview-media {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Preserves full original proportions, full body, and face without cropping */
+            object-fit: fill; /* Streams raw video frames without distorting features, eyes, or proportions */
             background: #0b0907;
         }
 
@@ -289,7 +289,7 @@
                 <div class="skin-swatch" style="background-color: #8d5524;" onclick="setSkinTone('Rich Brown', this)" title="Rich Brown"></div>
                 <div class="skin-swatch" style="background-color: #c68642;" onclick="setSkinTone('Golden Tan', this)" title="Golden Tan"></div>
                 <div class="skin-swatch" style="background-color: #e0ac69;" onclick="setSkinTone('Olive', this)" title="Olive"></div>
-                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinFair" title="Fair"></div>
+                <div class="skin-swatch" style="background-color: #f5d0b1;" onclick="setSkinTone('Fair', this)" title="Fair"></div>
             </div>
 
             <div class="panel-section-title">Hairstyle</div>
@@ -342,7 +342,7 @@
             <div class="panel-section-title">Chamber Status</div>
             <div style="background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold); border-radius: 6px; padding: 10px; text-align: center;">
                 <h4 style="color: var(--gold); margin: 0 0 4px 0; font-size: 0.8rem;">Sovereign Vault</h4>
-                <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">All King & Queen repository assets linked.</p>
+                <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">All original cinematic files & likeness linked.</p>
             </div>
         </div>
 
@@ -470,7 +470,7 @@
             const mediaContainer = document.getElementById('media-container');
             
             if (type === 'video') {
-                mediaContainer.innerHTML = `<video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline><source src="${file}" type="video/mp4">Your browser does not support video preview.</video>`;
+                mediaContainer.innerHTML = `<video id="preview-video" class="avatar-preview-media" autoplay loop muted playsinline><source src="${file}" type="video/mp4"></video>`;
             } else {
                 mediaContainer.innerHTML = `<img src="${file}" class="avatar-preview-media" alt="${name}" style="object-fit: contain;">`;
             }
@@ -509,3 +509,4 @@
 </html>
 
 
+            
