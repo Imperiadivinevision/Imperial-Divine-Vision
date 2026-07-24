@@ -12,7 +12,7 @@
             --gold-hover: #f3e5ab;
             --text-main: #f5f2eb;
             --text-muted: #9e9382;
-            --ambient-glow: rgba(212, 175, 55, 0.15);
+            --ambient-glow: rgba(212, 175, 55, 0.2);
         }
 
         body {
@@ -65,7 +65,7 @@
             position: relative;
         }
 
-        /* Central Breathing, Reflective, Vertical Cinematic Viewport */
+        /* Breathing & Flowing Cinematic Viewport */
         .character-viewport {
             flex: 1;
             display: flex;
@@ -77,20 +77,25 @@
             padding: 15px;
             box-sizing: border-box;
             overflow: hidden;
-            transition: background 1.5s ease;
+            animation: backgroundBreathe 8s ease-in-out infinite alternate;
         }
 
-        /* Subtle breathing & floating motion animation for the frame */
-        @keyframes imperialBreathe {
-            0% { transform: translateY(0) scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px var(--ambient-glow); }
-            50% { transform: translateY(-4px) scale(1.002); box-shadow: 0 25px 50px rgba(0,0,0,0.9), 0 0 35px var(--ambient-glow); }
-            100% { transform: translateY(0) scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px var(--ambient-glow); }
+        @keyframes backgroundBreathe {
+            0% { background: radial-gradient(circle at 40% 40%, var(--ambient-glow) 0%, #0c0b0a 80%); }
+            50% { background: radial-gradient(circle at 60% 60%, var(--ambient-glow) 20%, #0c0b0a 90%); }
+            100% { background: radial-gradient(circle at 40% 60%, var(--ambient-glow) 10%, #0c0b0a 85%); }
+        }
+
+        @keyframes frameFloat {
+            0% { transform: translateY(0); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px var(--ambient-glow); }
+            50% { transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 40px var(--ambient-glow); }
+            100% { transform: translateY(0); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px var(--ambient-glow); }
         }
 
         .media-frame {
             width: 100%;
-            max-width: 580px; /* Made slightly narrower for a gorgeous vertical aspect ratio */
-            height: 82vh; /* Extended vertical height so the floor and dress bottom show completely */
+            max-width: 540px;
+            height: 82vh;
             border: 2px solid var(--gold);
             border-radius: 8px;
             overflow: hidden;
@@ -99,32 +104,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: imperialBreathe 6s ease-in-out infinite;
-            transition: border-color 1.5s ease;
+            animation: frameFloat 6s ease-in-out infinite;
         }
 
-        /* Ambient background reflection/glow aura behind the frame */
-        .media-frame::before {
-            content: '';
-            position: absolute;
-            inset: -15px;
-            background: radial-gradient(circle, var(--ambient-glow) 0%, transparent 70%);
-            z-index: 1;
-            opacity: 0.8;
-            pointer-events: none;
-            transition: background 1.5s ease;
-        }
-
+        /* Fully Un-zoomed & Proportional: Shows head to toe completely */
         .avatar-preview-media {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures full vertical coverage showing the floor and dress details */
+            object-fit: contain; 
             object-position: center center;
             display: block;
             position: relative;
             z-index: 2;
-            pointer-events: none; /* Locks features to maintain natural proportions */
-            transition: filter 0.8s ease;
+            pointer-events: none;
         }
 
         .media-caption {
@@ -260,8 +252,8 @@
     </div>
 
     <div class="container">
-        <!-- Central Vertical Breathing Cinematic Viewport -->
-        <div class="character-viewport" id="viewport-bg">
+        <!-- Central Breathing Vertical Viewport (Fully Un-zoomed) -->
+        <div class="character-viewport">
             <div class="media-frame" id="media-container">
                 <video id="media-video" class="avatar-preview-media" autoplay loop muted controls style="display: block;">
                     <source id="video-source" src="king-benson-imperial-CINEMATIC.mp4" type="video/mp4">
@@ -339,20 +331,15 @@
                 { name: "queen-throne-CINEMATIC-1.mp4", type: "video" }
             ],
             together: [
-                { name: "king-queen-moving-carriage-CINEMATIC-1.mp4", type: "video" },
-                { name: "king-queen-moving-carriage-CINEMATIC.mp4", type: "video" },
+                { name: "king-queen-moving-carriage-cINEMATIC.mp4", type: "video" },
                 { name: "king-queen-pink-CINEMATIC-1.mp4", type: "video" },
                 { name: "king-queen-purple-CINEMATIC-2.mp4", type: "video" },
                 { name: "king-queen-royal-purple-CINEMATIC-5.mp4", type: "video" },
                 { name: "king-queen-story-of-love-cinematic.mp4", type: "video" },
-                { name: "king-queen-throne-armor-CINEMATIC-1.mp4", type: "video" },
                 { name: "king-queen-throne-armor-CINEMATIC.mp4", type: "video" },
                 { name: "king-queen-white-CINEMATIC-4.mp4", type: "video" },
                 { name: "imperial-royal-wedding-cinematic.mp4", type: "video" },
                 { name: "imperial-palace.mp4", type: "video" },
-                { name: "imperial-palace-hallway.mp4", type: "video" },
-                { name: "imperial-palace-guess-room.mp4", type: "video" },
-                { name: "imperial-bedroom.mp4", type: "video" }
             ]
         };
 
@@ -409,17 +396,16 @@
             }
         }
 
-        /* Dynamic Reflective Aura: Changes background glow tone based on the active outfit's theme */
         function updateAmbientAura(name) {
-            let glowColor = "rgba(212, 175, 55, 0.15)"; // Default Imperial Gold
+            let glowColor = "rgba(212, 175, 55, 0.2)";
             if (name.includes('pink') || name.includes('red')) {
-                glowColor = "rgba(219, 112, 147, 0.22)"; // Royal Rose/Pink
+                glowColor = "rgba(219, 112, 147, 0.25)";
             } else if (name.includes('purple') || name.includes('royal-purple')) {
-                glowColor = "rgba(138, 43, 226, 0.22)"; // Sovereign Purple
+                glowColor = "rgba(138, 43, 226, 0.25)";
             } else if (name.includes('green')) {
-                glowColor = "rgba(46, 139, 87, 0.22)"; // Forest Green
+                glowColor = "rgba(46, 139, 87, 0.25)";
             } else if (name.includes('white')) {
-                glowColor = "rgba(240, 248, 255, 0.22)"; // Pearl White
+                glowColor = "rgba(240, 248, 255, 0.25)";
             }
             document.documentElement.style.setProperty('--ambient-glow', glowColor);
         }
