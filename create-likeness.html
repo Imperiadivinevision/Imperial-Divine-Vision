@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision: Likeness Chamber</title>
+    <title>Imperial Divine Vision: Likeness Chamber & Guild Master Portal</title>
     <style>
         :root {
             --bg-dark: #0c0b0a;
@@ -116,6 +116,51 @@
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
         }
 
+        .top-bar-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .admin-access-btn {
+            background: linear-gradient(135deg, rgba(178, 34, 34, 0.4), rgba(212, 175, 55, 0.2));
+            border: 1px solid var(--red-accent);
+            color: #ff8080;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .admin-access-btn:hover {
+            background: var(--red-accent);
+            color: #fff;
+            box-shadow: 0 0 12px rgba(178, 34, 34, 0.8);
+        }
+
+        .sanctuary-btn {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(212, 175, 55, 0.2));
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .sanctuary-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
+        }
+
         .wardrobe-nav-btn {
             background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(212, 175, 55, 0.1));
             border: 1px solid var(--gold);
@@ -140,6 +185,195 @@
             transform: translateY(-1px);
         }
 
+        /* Guild Master Sanctuary Modal */
+        .sanctuary-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(12, 11, 10, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sanctuary-content {
+            background: linear-gradient(135deg, #180e22, #161310, #220e14);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 40px rgba(138, 43, 226, 0.5);
+            text-align: center;
+        }
+
+        .sanctuary-title {
+            color: var(--gold);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+        }
+
+        .sanctuary-text {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 25px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 20px 0;
+        }
+
+        .close-modal-btn {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 25px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
+        }
+
+        /* Floating Player Chatbot Widget */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            font-family: 'Georgia', serif;
+        }
+
+        .chatbot-toggle {
+            background: linear-gradient(135deg, var(--purple-imperial), var(--gold));
+            color: var(--text-main);
+            border: 2px solid var(--gold);
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8), 0 0 15px rgba(138, 43, 226, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.9);
+        }
+
+        .chatbot-window {
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            width: 340px;
+            height: 440px;
+            background: rgba(22, 19, 16, 0.96);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(138, 43, 226, 0.5);
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(90deg, #180e22, #221424);
+            padding: 12px;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-bubble {
+            padding: 8px 12px;
+            border-radius: 6px;
+            max-width: 85%;
+            line-height: 1.4;
+        }
+
+        .chat-bubble.bot {
+            background: rgba(138, 43, 226, 0.2);
+            border: 1px solid rgba(138, 43, 226, 0.4);
+            align-self: flex-start;
+            color: var(--text-main);
+        }
+
+        .chat-bubble.user {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            align-self: flex-end;
+            color: var(--gold-hover);
+        }
+
+        .chat-bubble.quest {
+            background: rgba(178, 34, 34, 0.25);
+            border: 1px solid rgba(178, 34, 34, 0.6);
+            align-self: flex-start;
+            color: #ffcccc;
+            font-style: italic;
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px;
+            background: #14110e;
+        }
+
+        .chatbot-input-area input {
+            flex: 1;
+            background: #0c0b0a;
+            border: 1px solid #4a3f31;
+            color: var(--text-main);
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 0.85rem;
+        }
+
+        .chatbot-input-area button {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: none;
+            padding: 8px 12px;
+            margin-left: 6px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
         /* Main Spacious Layout */
         .main-container {
             max-width: 1400px;
@@ -153,7 +387,6 @@
             z-index: 2;
         }
 
-        /* Featured Active Viewport Section with Glowing Imperial Frame */
         .featured-section {
             display: flex;
             gap: 30px;
@@ -164,13 +397,6 @@
             padding: 30px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px rgba(138, 43, 226, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.15);
             align-items: center;
-            animation: frameGlowPulse 5s ease-in-out infinite alternate;
-        }
-
-        @keyframes frameGlowPulse {
-            0% { border-color: #d4af37; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 25px rgba(138, 43, 226, 0.3); }
-            50% { border-color: #8a2be2; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(212, 175, 55, 0.4); }
-            100% { border-color: #b22222; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(138, 43, 226, 0.35); }
         }
 
         .featured-viewport {
@@ -185,7 +411,6 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            box-shadow: inset 0 0 25px rgba(138, 43, 226, 0.4);
         }
 
         .avatar-preview-media {
@@ -194,14 +419,6 @@
             object-fit: contain;
             object-position: center center;
             display: block;
-            filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.4));
-            animation: cardGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes cardGlow {
-            0% { filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.4)); }
-            50% { filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.5)); }
-            100% { filter: drop-shadow(0 0 8px rgba(178, 34, 34, 0.4)); }
         }
 
         .featured-details {
@@ -217,7 +434,6 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: bold;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 12px rgba(138, 43, 226, 0.6);
             margin: 0;
         }
 
@@ -225,7 +441,6 @@
             color: var(--text-muted);
             font-size: 1.1rem;
             font-style: italic;
-            letter-spacing: 1px;
         }
 
         .outfit-section {
@@ -260,13 +475,7 @@
             font-size: 0.85rem;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
             font-family: 'Georgia', serif;
-        }
-
-        .outfit-btn:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
         }
 
         .outfit-btn.active {
@@ -274,7 +483,6 @@
             color: var(--bg-dark);
             font-weight: bold;
             border-color: var(--gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
         }
 
         .outfit-btn.vip {
@@ -285,8 +493,6 @@
         .outfit-btn.vip.active {
             background: var(--vip-color);
             color: var(--bg-dark);
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
         }
 
         .vip-banner {
@@ -303,7 +509,6 @@
             font-size: 0.9rem;
             color: var(--vip-color);
             font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
         }
 
         .cashapp-btn {
@@ -317,14 +522,6 @@
             border-radius: 4px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(0,214,50,0.5);
-            transition: transform 0.2s ease;
-        }
-
-        .cashapp-btn:hover {
-            transform: scale(1.03);
-            background: #00b82b;
-            box-shadow: 0 0 20px rgba(0,214,50,0.8);
         }
 
         .action-buttons {
@@ -346,16 +543,8 @@
             letter-spacing: 1px;
             text-decoration: none;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .game-btn:hover {
-            background: var(--gold-hover);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
-            transform: translateY(-1px);
-        }
-
-        /* Spacious Imperial Character Directory Grid with Purple/Gold Glow Cards */
         .directory-section {
             display: flex;
             flex-direction: column;
@@ -376,7 +565,6 @@
             padding: 12px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -385,7 +573,6 @@
         .character-card:hover, .character-card.selected {
             border-color: var(--gold);
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.7), 0 0 20px rgba(138, 43, 226, 0.5);
             background: rgba(31, 26, 20, 0.95);
         }
 
@@ -401,7 +588,6 @@
             color: var(--text-main);
             font-size: 0.95rem;
             font-weight: bold;
-            letter-spacing: 1px;
         }
 
         .card-role {
@@ -413,18 +599,49 @@
 </head>
 <body>
 
-    <!-- Sparkling, Breathing, Reflective Background Layers -->
     <div class="ambient-background"></div>
     <div class="sparkle-overlay"></div>
 
+    <!-- Guild Master Sanctuary Modal -->
+    <div id="sanctuary-modal" class="sanctuary-modal">
+        <div class="sanctuary-content">
+            <div class="sanctuary-title">✦ Guild Master's Sanctuary & Oath ✦</div>
+            <div class="sanctuary-text">
+                "I have arrived in my season of rest. The struggle is behind me, and my chambers are a sanctuary where love and high standards provide everything we need. As Guild Master, I am the Guardian of this peace, and I welcome the glory we have earned."
+            </div>
+            <button class="close-modal-btn" onclick="playSelectSound(); toggleSanctuaryModal()">Return to Chambers</button>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
     <div class="game-top-bar">
         <div class="nav-links">
             <a href="gateway.html">Imperial Gateway</a>
             <span class="active">Likeness Chamber</span>
         </div>
-        <div>
+        <div class="top-bar-right">
+            <a href="admin-dashboard.html" class="admin-access-btn" target="_blank">🛡️ Admin Access</a>
+            <button class="sanctuary-btn" onclick="playSelectSound(); toggleSanctuaryModal()">✦ Guild Master Oath</button>
             <a href="room-adult.html" class="wardrobe-nav-btn">✦ Sovereign Wardrobe</a>
         </div>
+    </div>
+
+    <!-- Floating Player Chatbot & Quest Portal Widget -->
+    <div class="chatbot-widget">
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <span>✦ Imperial Guide & Admin Portal</span>
+                <span style="cursor:pointer;" onclick="toggleChatbot()">✕</span>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="chat-bubble bot">Welcome to the Imperial Palace! Type a message to report an issue to admins, ask a question, or check your assigned quests.</div>
+            </div>
+            <div class="chatbot-input-area">
+                <input type="text" id="chat-input" placeholder="Message admins or ask for quests..." onkeypress="handleChatKey(event)">
+                <button onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" onclick="toggleChatbot()">💬 Admin & Player Portal</button>
     </div>
 
     <div class="main-container">
@@ -455,7 +672,7 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="game-btn" onclick="playSelectSound(); startStoryPath()">Begin Story Path</button>
+                    <button class="game-btn" onclick="playSelectSound(); logPlayerChoice(); startStoryPath()">Begin Story Path</button>
                     <a href="gateway.html" class="game-btn" onclick="playSelectSound()" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Return to Gateway</a>
                 </div>
             </div>
@@ -471,28 +688,90 @@
     </div>
 
     <script>
-        // Web Audio API click sound for character/outfit selections
+        // Web Audio API click sound
         function playSelectSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
-
                 oscillator.type = 'sine'; 
-                oscillator.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5 note chime
+                oscillator.frequency.setValueAtTime(587.33, audioCtx.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08); 
-
                 gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime); 
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-
                 oscillator.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
-
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.08);
-            } catch (e) {
-                // Audio context fallback if blocked by browser policy
-            }
+            } catch (e) {}
+        }
+
+        function toggleSanctuaryModal() {
+            const modal = document.getElementById('sanctuary-modal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // Chatbot UI Toggle & Messaging/Quest Logic
+        function toggleChatbot() {
+            const win = document.getElementById('chatbot-window');
+            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const msgContainer = document.getElementById('chatbot-messages');
+            
+            // Append Player Message (Report / Inquiry)
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-bubble user';
+            userBubble.textContent = text;
+            msgContainer.appendChild(userBubble);
+            input.value = '';
+
+            // Save message to admin transmission log in localStorage
+            let adminMessages = JSON.parse(localStorage.getItem('imperial_admin_reports') || '[]');
+            adminMessages.push({ sender: 'Player', text: text, timestamp: new Date().toISOString() });
+            localStorage.setItem('imperial_admin_reports', JSON.stringify(adminMessages));
+
+            // Bot / Admin Automated Response & Quest Check
+            setTimeout(() => {
+                const botBubble = document.createElement('div');
+                botBubble.className = 'chat-bubble bot';
+                
+                const lower = text.toLowerCase();
+                if (lower.includes('quest') || lower.includes('task')) {
+                    botBubble.className = 'chat-bubble quest';
+                    botBubble.textContent = "✦ Guild Master Quest Assigned: Examine the corrupted court ministers and secure your chosen path before walking into the throne room.";
+                } else if (lower.includes('report') || lower.includes('issue') || lower.includes('bug')) {
+                    botBubble.textContent = "Your report has been successfully transmitted directly to the Admin Dashboard for review. Thank you for keeping the empire safe!";
+                } else {
+                    botBubble.textContent = "Your message has been logged for admin review. The Guild Master and administrators will evaluate your progress shortly!";
+                }
+                
+                msgContainer.appendChild(botBubble);
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+            }, 600);
+        }
+
+        // Admin Security Logger: Tracks player character & outfit selections
+        function logPlayerChoice() {
+            const playerSession = {
+                character: selectedCharacter.name,
+                role: selectedCharacter.role,
+                outfit: selectedCharacter.outfits[selectedOutfitIndex].name,
+                timestamp: new Date().toISOString()
+            };
+            
+            let logs = JSON.parse(localStorage.getItem('imperial_player_logs') || '[]');
+            logs.push(playerSession);
+            localStorage.setItem('imperial_player_logs', JSON.stringify(logs));
         }
 
         const characters = [
