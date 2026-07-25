@@ -511,6 +511,14 @@
             font-weight: bold;
         }
 
+        .vip-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         .cashapp-btn {
             background: #00D632;
             color: #fff;
@@ -522,6 +530,32 @@
             border-radius: 4px;
             text-decoration: none;
             display: inline-block;
+        }
+
+        .guild-key-btn {
+            background: var(--purple-imperial);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 10px 16px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .guild-key-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        .unlocked-badge {
+            display: none;
+            color: #00D632;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-shadow: 0 0 8px rgba(0, 214, 50, 0.6);
         }
 
         .action-buttons {
@@ -668,7 +702,11 @@
 
                 <div id="vip-banner" class="vip-banner">
                     <p>✦ VIP Exclusive Style ($1.45) ✦</p>
-                    <a id="cashapp-link" href="https://cash.app/$tegrakij22/1.45" target="_blank" class="cashapp-btn">Unlock via Cash App ($tegrakij22)</a>
+                    <div class="vip-controls">
+                        <a id="cashapp-link" href="https://cash.app/$tegrakij22/1.45" target="_blank" class="cashapp-btn">Pay via Cash App ($1.45)</a>
+                        <button class="guild-key-btn" onclick="useGuildMasterKey()">🔑 Enter Guild Key</button>
+                        <span id="unlocked-badge" class="unlocked-badge">✓ Unlocked by Guild Master</span>
+                    </div>
                 </div>
 
                 <div class="action-buttons">
@@ -711,6 +749,23 @@
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
+        // Guild Master Bypass Key Logic
+        function useGuildMasterKey() {
+            const secretCode = prompt("Enter Guild Master Access Code:");
+            if (secretCode === "SOVEREIGN1.45" || secretCode === "Tegra" || secretCode === "GuildMaster") {
+                playSelectSound();
+                alert("✦ Access Granted! Guild Master bypass activated. Enjoy wearing this style freely.");
+                document.getElementById('cashapp-link').style.display = 'none';
+                document.querySelector('.guild-key-btn').style.display = 'none';
+                document.getElementById('unlocked-badge').style.display = 'inline-block';
+                
+                // Save unlock state locally
+                localStorage.setItem('vip_unlocked_' + selectedCharacter.id + '_' + selectedOutfitIndex, 'true');
+            } else if (secretCode !== null) {
+                alert("Incorrect code. Only the Guild Master holds the master key.");
+            }
+        }
+
         // Chatbot UI Toggle & Messaging/Quest Logic
         function toggleChatbot() {
             const win = document.getElementById('chatbot-window');
@@ -728,19 +783,16 @@
 
             const msgContainer = document.getElementById('chatbot-messages');
             
-            // Append Player Message (Report / Inquiry)
             const userBubble = document.createElement('div');
             userBubble.className = 'chat-bubble user';
             userBubble.textContent = text;
             msgContainer.appendChild(userBubble);
             input.value = '';
 
-            // Save message to admin transmission log in localStorage
             let adminMessages = JSON.parse(localStorage.getItem('imperial_admin_reports') || '[]');
             adminMessages.push({ sender: 'Player', text: text, timestamp: new Date().toISOString() });
             localStorage.setItem('imperial_admin_reports', JSON.stringify(adminMessages));
 
-            // Bot / Admin Automated Response & Quest Check
             setTimeout(() => {
                 const botBubble = document.createElement('div');
                 botBubble.className = 'chat-bubble bot';
@@ -782,7 +834,7 @@
                 path: "sovereign-path.html",
                 outfits: [
                     { name: "Sovereign Robe", file: "Queen-rosanna-perfect-gown-CINEMATIC.mp4", vip: false },
-                    { name: "Imperial Purple", file: "rosanna-purple-cinematic.mp4", vip: false },
+                    { name: "Imperial Purple", file: "rosanna-formal-event-CINEMATIC.mp4", vip: false },
                     { name: "Imperial Green", file: "rosanna-green-CINEMATIC-1.mp4", vip: false },
                     { name: "Pink Cinematic (VIP)", file: "rosanna-pink-CINEMATIC.mp4", vip: true }
                 ]
@@ -1035,9 +1087,21 @@
             document.getElementById('char-role').textContent = selectedCharacter.role;
 
             const vipBanner = document.getElementById('vip-banner');
+            const isUnlocked = localStorage.getItem('vip_unlocked_' + selectedCharacter.id + '_' + selectedOutfitIndex) === 'true';
+
             if (outfit.vip) {
                 vipBanner.style.display = 'block';
                 document.getElementById('cashapp-link').href = `https://cash.app/$tegrakij22/1.45`;
+                
+                if (isUnlocked) {
+                    document.getElementById('cashapp-link').style.display = 'none';
+                    document.querySelector('.guild-key-btn').style.display = 'none';
+                    document.getElementById('unlocked-badge').style.display = 'inline-block';
+                } else {
+                    document.getElementById('cashapp-link').style.display = 'inline-block';
+                    document.querySelector('.guild-key-btn').style.display = 'inline-block';
+                    document.getElementById('unlocked-badge').style.display = 'none';
+                }
             } else {
                 vipBanner.style.display = 'none';
             }
