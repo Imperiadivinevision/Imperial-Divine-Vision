@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Divine Vision: Likeness & Character Chamber</title>
+    <style>
+        :root {
+            --bg-dark: #0c0b0a;
+            --panel-bg: rgba(22, 19, 16, 0.95);
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-main: #f5f2eb;
+            --text-muted: #9e9382;
+            --ambient-glow: rgba(212, 175, 55, 0.25);
+            --vip-color: #ffcc00;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Georgia', serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: background 1.5s ease;
+        }
+
+        /* Top Bar & Navigation */
+        .game-top-bar {
+            height: 48px;
+            background: linear-gradient(90deg, #14110e 0%, #1f1a14 50%, #14110e 100%);
+            border-bottom: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .game-top-bar .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .game-top-bar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .game-top-bar a:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        }
+
+        .game-top-bar span.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .wardrobe-nav-btn {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.2);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wardrobe-nav-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark) !important;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.8);
+            transform: translateY(-1px);
+        }
+
+        /* Main Workspace Layout */
+        .container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 48px);
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Central Breathing Cinematic Viewport */
+        .character-viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at center, var(--ambient-glow) 0%, #0c0b0a 85%);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .media-frame {
+            width: 100%;
+            max-width: 480px;
+            height: 66vh;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px var(--ambient-glow);
+        }
+
+        .avatar-preview-media {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .character-info-overlay {
+            margin-top: 12px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .character-name-title {
+            color: var(--gold);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .character-role-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* Right Sidebar: Character Directory & Outfit Selector */
+        .control-sidebar {
+            width: 460px;
+            background: var(--panel-bg);
+            border-left: 2px solid var(--gold);
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            gap: 12px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .panel-title {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .character-card {
+            background: #1b1713;
+            border: 1px solid #3a3227;
+            border-radius: 5px;
+            padding: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .character-card:hover, .character-card.selected {
+            border-color: var(--gold);
+            background: #26201a;
+            box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.4), 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .card-thumb {
+            width: 100%;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .card-name {
+            color: var(--text-main);
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        /* Outfit Selector Section */
+        .outfit-section {
+            background: #14110e;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .outfit-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .outfit-btn {
+            flex: 1;
+            background: #221d17;
+            border: 1px solid #4a3f31;
+            color: var(--text-main);
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .outfit-btn:hover {
+            border-color: var(--gold);
+        }
+
+        .outfit-btn.active {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: bold;
+            border-color: var(--gold);
+        }
+
+        .outfit-btn.vip {
+            border-color: var(--vip-color);
+            color: var(--vip-color);
+        }
+
+        .outfit-btn.vip.active {
+            background: var(--vip-color);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        /* VIP Lock Banner */
+        .vip-banner {
+            display: none;
+            background: linear-gradient(135deg, rgba(255, 204, 0, 0.2), rgba(212, 175, 55, 0.05));
+            border: 1px dashed var(--vip-color);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.2); }
+            100% { box-shadow: 0 0 15px rgba(255, 204, 0, 0.6); }
+        }
+
+        .vip-banner p {
+            margin: 0 0 8px 0;
+            font-size: 0.8rem;
+            color: var(--vip-color);
+            font-weight: bold;
+        }
+
+        .cashapp-btn {
+            background: #00D632;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,214,50,0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .cashapp-btn:hover {
+            transform: scale(1.03);
+            background: #00b82b;
+        }
+
+        .action-footer {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .game-btn {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .game-btn:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-top-bar">
+        <div class="nav-links">
+            <a href="gateway.html">Imperial Gateway</a>
+            <span class="active">Likeness Chamber</span>
+        </div>
+        <div>
+            <a href="room-adult.html" class="wardrobe-nav-btn">✦ Sovereign Wardrobe</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Central Live Cinematic Viewport -->
+        <div class="character-viewport">
+            <div class="media-frame">
+                <video id="live-cinematic" class="avatar-preview-media" autoplay loop muted playsinline>
+                    <source id="cinematic-source" src="rosanna-best-CINEMATIC.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="character-info-overlay">
+                <div id="char-name" class="character-name-title">Queen Rosanna</div>
+                <div id="char-role" class="character-role-desc">The Imperial Queen | Sovereign Path</div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar: Character Directory & VIP Outfits -->
+        <div class="control-sidebar">
+            <div class="panel-title">Imperial Character Directory</div>
+            <div class="character-grid" id="character-grid">
+                <!-- Populated dynamically -->
+            </div>
+
+            <div class="outfit-section">
+                <div class="panel-title" style="border: none; padding: 0; font-size: 0.75rem;" id="outfit-label">Select Style / Attire</div>
+                <div class="outfit-buttons" id="outfit-buttons">
+                    <!-- Dynamic Outfit buttons -->
+                </div>
+            </div>
+
+            <!-- VIP Unlock Section ($1.45 via Cash App $tegrakij22) -->
+            <div id="vip-banner" class="vip-banner">
+                <p>✦ VIP Exclusive Style ($1.45) ✦</p>
+                <a id="cashapp-link" href="https://cash.app/$tegrakij22/1.45" target="_blank" class="cashapp-btn">Unlock via Cash App ($tegrakij22)</a>
+            </div>
+
+            <div class="action-footer">
+                <button class="game-btn" onclick="startStoryPath()">Begin Story Path</button>
+                <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Return to Gateway</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const characters = [
+            {
+                id: "rosanna",
+                name: "Queen Rosanna",
+                role: "The Imperial Queen (Hero Path)",
+                path: "sovereign-path.html",
+                outfits: [
+                    { name: "Sovereign Robe", file: "rosanna-best-CINEMATIC.mp4", vip: false },
+                    { name: "Imperial Purple", file: "rosanna-purple-CINEMATIC.mp4", vip: false },
+                    { name: "Imperial Green", file: "rosanna-green-CINEMATIC.mp4", vip: false },
+                    { name: "Pink Cinematic (VIP)", file: "rosanna-pink-CINEMATIC.mp4", vip: true }
+                ]
+            },
+            {
+                id: "benson",
+                name: "King Benson",
+                role: "Sovereign Provider & King (Hero Path)",
+                path: "sovereign-path.html",
+                outfits: [
+                    { name: "Imperial King", file: "king-benson-imperial-CINEMATIC.mp4", vip: false },
+                    { name: "Sword Guardian", file: "king-benson-sword-cinematic.mp4", vip: false },
+                    { name: "Wave Cinematic (VIP)", file: "king-benson-wave-CINEMATIC.mp4", vip: true }
+                ]
+            },
+            {
+                id: "weka",
+                name: "Consort Weka",
+                role: "Keeper of the Temple",
+                path: "temple-path.html",
+                outfits: [
+                    { name: "Style 1", file: "imperial-consort-weka-1-cinematic.mp4", vip: false },
+                    { name: "Style 2", file: "imperial-consort-weka-2-CINEMATIC.mp4", vip: false },
+                    { name: "VIP Style 3", file: "imperial-consort-weka-3-cinematic.mp4", vip: true }
+                ]
+            },
+            {
+                id: "resekelishi",
+                name: "Resekelishi",
+                role: "Temple Villain Path (Survive & Scheme)",
+                path: "villain-redemption-path.html",
+                outfits: [
+                    { name: "Style 1", file: "resekelishi-villain-CINEMATIC.mp4", vip: false },
+                    { name: "Style 4", file: "resekelishi-villian-4-cinematic.mp4", vip: false },
+                    { name: "VIP Style 5", file: "resekelishi-villian-5-cinematic.png", vip: true }
+                ]
+            },
+            {
+                id: "rika",
+                name: "Concurine Rika",
+                role: "Imperial Console",
+                path: "empire-path.html",
+                outfits: [
+                    { name: "Style 1", file: "concubine-rika-1-cinematic.mp4", vip: false },
+                    { name: "Style 2", file: "comcubine-rika-2-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "tiju",
+                name: "Concubine Tiju",
+                role: "Guardian of the Gate",
+                path: "gate-path.html",
+                outfits: [
+                    { name: "Style 1", file: "comcubine-tiju-1-cinematic.mp4", vip: false },
+                    { name: "Style 2", file: "comcubine-tiju-2-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "highpriest",
+                name: "High Priest",
+                role: "Temple Authority",
+                path: "temple-path.html",
+                outfits: [
+                    { name: "Style 1", file: "high-priest-1-cinematic.mp4", vip: false },
+                    { name: "Style 2", file: "high-priest-2-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "commander",
+                name: "Imperial Commander",
+                role: "Military & Defense",
+                path: "sovereign-path.html",
+                outfits: [
+                    { name: "Commander Attire", file: "imperial-commander-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "guard",
+                name: "Imperial Guard",
+                role: "Palace Protection",
+                path: "sovereign-path.html",
+                outfits: [
+                    { name: "Guard Uniform", file: "imperial-guard-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "versta",
+                name: "Grand Consort Versta",
+                role: "Inner Court",
+                path: "empire-path.html",
+                outfits: [
+                    { name: "Versta Attire", file: "imperial-grand-consort-versta-2-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "treasury",
+                name: "Minister of Treasury",
+                role: "Imperial Wealth",
+                path: "empire-path.html",
+                outfits: [
+                    { name: "Treasury Robes", file: "minister-treasure-cinematic.mp4", vip: false }
+                ]
+            },
+            {
+                id: "prophet",
+                name: "Prophet Kafura",
+                role: "Divine Visionary",
+                path: "temple-path.html",
+                outfits: [
+                    { name: "Prophet Robes", file: "prophet-kafura-1-cinematic.mp4", vip: false }
+                ]
+            }
+        ];
+
+        let selectedCharacter = characters[0];
+        let selectedOutfitIndex = 0;
+
+        function buildCharacterGrid() {
+            const grid = document.getElementById('character-grid');
+            grid.innerHTML = '';
+
+            characters.forEach((char, index) => {
+                const card = document.createElement('div');
+                card.className = 'character-card' + (index === 0 ? ' selected' : '');
+                
+                // Use first outfit file for thumbnail preview
+                const thumbFile = char.outfits[0].file;
+                const isVideo = thumbFile.endsWith('.mp4');
+
+                card.innerHTML = `
+                    ${isVideo ? `<video class="card-thumb" autoplay loop muted src="${thumbFile}"></video>` : `<img class="card-thumb" src="${thumbFile}">`}
+                    <div class="card-name">${char.name}</div>
+                `;
+                card.onclick = () => {
+                    document.querySelectorAll('.character-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selectCharacter(char);
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        function selectCharacter(char) {
+            selectedCharacter = char;
+            selectedOutfitIndex = 0;
+            updateDisplay();
+            buildOutfitButtons();
+        }
+
+        function buildOutfitButtons() {
+            const container = document.getElementById('outfit-buttons');
+            container.innerHTML = '';
+
+            selectedCharacter.outfits.forEach((outfit, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'outfit-btn' + (outfit.vip ? ' vip' : '') + (idx === selectedOutfitIndex ? ' active' : '');
+                  btn.textContent = outfit.name;
+                btn.onclick = () => {
+                    selectedOutfitIndex = idx;
+                    document.querySelectorAll('.outfit-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateDisplay();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function updateDisplay() {
+            const outfit = selectedCharacter.outfits[selectedOutfitIndex];
+            const mediaFrame = document.querySelector('.media-frame');
+            
+            // Handle video vs image files (.mp4 vs .png)
+            if (outfit.file.endsWith('.mp4')) {
+                mediaFrame.innerHTML = `
+                    <video id="live-cinematic" class="avatar-preview-media" autoplay loop muted playsinline>
+                        <source src="${outfit.file}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+            } else {
+                mediaFrame.innerHTML = `
+                    <img class="avatar-preview-media" src="${outfit.file}" alt="${selectedCharacter.name}">
+                `;
+            }
+
+            document.getElementById('char-name').textContent = selectedCharacter.name;
+            document.getElementById('char-role').textContent = selectedCharacter.role;
+
+            // Show/Hide VIP Banner & Link to Imperial Divine Vision Cash App ($tegrakij22)
+            const vipBanner = document.getElementById('vip-banner');
+            if (outfit.vip) {
+                vipBanner.style.display = 'block';
+                document.getElementById('cashapp-link').href = `https://cash.app/$tegrakij22/1.45`;
+            } else {
+                vipBanner.style.display = 'none';
+            }
+        }
+
+        function startStoryPath() {
+            window.location.href = selectedCharacter.path;
+        }
+
+        // Initialize Chamber on load
+        buildCharacterGrid();
+        buildOutfitButtons();
+        updateDisplay();
+    </script>
+</body>
+</html>
+
