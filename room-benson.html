@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imperial Divine Vision | King Benson: Prince Ian's Sovereign Chamber</title>
+    <title>Imperial Divine Vision | King Benson: The Sovereign Path - Stage One</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @keyframes cosmicBreath {
@@ -150,7 +150,6 @@
             display: block;
         }
 
-        /* Stats HUD */
         .stats-hud {
             display: flex;
             justify-content: center;
@@ -198,18 +197,21 @@
 
         .video-wrapper {
             width: 100%;
-            max-height: 420px;
+            height: 500px; /* Expanded height so nothing is cropped */
             border-radius: 12px;
             overflow: hidden;
             border: 2px solid var(--gold-deep);
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .video-wrapper video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: contain; /* Ensures the full picture is visible with no cropping */
             display: block;
         }
 
@@ -273,18 +275,6 @@
             filter: drop-shadow(0 0 10px var(--gold));
         }
 
-        .click-sparkle {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: var(--gold);
-            box-shadow: 0 0 15px var(--gold), 0 0 25px var(--gemini-cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: sparkleAnimation 0.8s ease-out forwards;
-            z-index: 10005;
-        }
-
         .royal-btn {
             background: linear-gradient(135deg, var(--gold-deep), #8b7322);
             border: 1px solid var(--gold);
@@ -318,7 +308,7 @@
         }
     </style>
 </head>
-<body onclick="initAudioEngineAndSparkles(event)">
+<body>
 
     <script>
         for (let i = 0; i < 20; i++) {
@@ -359,7 +349,8 @@
         <div class="chapter-title" id="scene-heading">✦ Stage I: The Birth of Prince Ian ✦</div>
         
         <div class="video-wrapper">
-            <video id="scene-video" autoplay loop muted playsinline>
+            <!-- Unmuted so your original video audio and music play natively -->
+            <video id="scene-video" autoplay loop playsinline>
                 <source src="the-birth-of-prince-ian.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -370,9 +361,9 @@
         </div>
 
         <div class="choices-area" id="choices-box">
-            <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('baby-reaction', 'smile')">1. Greet the gentle morning light with a sweet, radiant baby smile.</button>
-            <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('baby-reaction', 'cry')">2. Let out a soft, spirited cry, announcing your vibrant arrival to the palace.</button>
-            <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('baby-reaction', 'calm')">3. Rest quietly with calm, observant eyes, taking in every detail of the room.</button>
+            <button class="choice-btn" onclick="handleChoice('baby-reaction', 'smile')">1. Greet the gentle morning light with a sweet, radiant baby smile.</button>
+            <button class="choice-btn" onclick="handleChoice('baby-reaction', 'cry')">2. Let out a soft, spirited cry, announcing your vibrant arrival to the palace.</button>
+            <button class="choice-btn" onclick="handleChoice('baby-reaction', 'calm')">3. Rest quietly with calm, observant eyes, taking in every detail of the room.</button>
         </div>
 
         <div style="margin-top: 10px; text-align: center; border-top: 1px solid rgba(212,175,55,0.3); padding-top: 15px;">
@@ -393,99 +384,12 @@
     </div>
 
     <script>
-        let audioCtx;
-        let audioInitialized = false;
         let stats = { mother: 50, father: 50, pride: 50 };
 
         function updateHUD() {
             document.getElementById('hud-mother').innerText = `Mother's Affection: ${stats.mother}%`;
             document.getElementById('hud-father').innerText = `Father's Affection: ${stats.father}%`;
             document.getElementById('hud-pride').innerText = `Conqueror's Pride: ${stats.pride}%`;
-        }
-
-        function initAudioEngineAndSparkles(event) {
-            createSparkles(event.clientX, event.clientY);
-            playMagicClickSound();
-
-            if (audioInitialized) return;
-            audioInitialized = true;
-
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                playViolinAmbience();
-            } catch (e) {}
-        }
-
-        function playMagicClickSound() {
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(440.00, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.45);
-            } catch (e) {}
-        }
-
-        function playViolinAmbience() {
-            const chordNotes = [220.00, 277.18, 329.63, 440.00]; 
-            let noteIndex = 0;
-
-            function playNextNote() {
-                if (!audioCtx) return;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(chordNotes[noteIndex], audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 2.0);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 6.0);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 6.5);
-                noteIndex = (noteIndex + 1) % chordNotes.length;
-                setTimeout(playNextNote, 5000);
-            }
-            playNextNote();
-        }
-
-        function createSparkles(x, y) {
-            for (let i = 0; i < 8; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'click-sparkle';
-                sparkle.style.left = x + 'px';
-                sparkle.style.top = y + 'px';
-                const angle = Math.random() * Math.PI * 2;
-                const distance = 30 + Math.random() * 50;
-                sparkle.style.setProperty('--dest-x', (Math.cos(angle) * distance) + 'px');
-                sparkle.style.setProperty('--dest-y', (Math.sin(angle) * distance) + 'px');
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 800);
-            }
-        }
-
-        function playSelectSupportSound() {
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine'; 
-                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1); 
-                gain.gain.setValueAtTime(0.1, audioCtx.currentTime); 
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.1);
-            } catch (e) {}
         }
 
         // Interactive Game Progression Engine
@@ -508,7 +412,6 @@
                 }
                 updateHUD();
 
-                // Advance to Scene 2: Prince Ian Beginning 2 Cinematic
                 setTimeout(() => {
                     heading.innerText = "✦ Scene II: The Attendants & The Watchful Sister ✦";
                     videoElem.src = "prince-ian-beganing-2-cinematic.mp4";
@@ -516,8 +419,8 @@
                     videoElem.play();
                     display.innerText = "[Narrative: Your young sister peers over the edge of the bed with wide, curious eyes, eager to welcome her baby brother into the royal household.]";
                     choices.innerHTML = `
-                        <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('sister-interaction', 'reach')">1. Reach out tiny fingers toward your sister to welcome her.</button>
-                        <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('sister-interaction', 'stare')">2. Stare up with bright, intelligent eyes as she giggles with delight.</button>
+                        <button class="choice-btn" onclick="handleChoice('sister-interaction', 'reach')">1. Reach out tiny fingers toward your sister to welcome her.</button>
+                        <button class="choice-btn" onclick="handleChoice('sister-interaction', 'stare')">2. Stare up with bright, intelligent eyes as she giggles with delight.</button>
                     `;
                 }, 1200);
 
@@ -531,7 +434,6 @@
                 }
                 updateHUD();
 
-                // Advance to Scene 3: The Birth of Prince Ian 3
                 setTimeout(() => {
                     heading.innerText = "✦ Scene III: The Conqueror Approaches ✦";
                     videoElem.src = "the-birth-of-prince-ian-3-cinematic.mp4";
@@ -539,8 +441,8 @@
                     videoElem.play();
                     display.innerText = "[Narrative: The heavy velvet draperies part. The mighty conqueror father steps into the chamber, adorned in royal purple and gold, casting his powerful gaze over the newborn.]";
                     choices.innerHTML = `
-                        <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('king-entrance', 'smile-king')">1. Smile brightly at the conqueror, welcoming his fierce gaze.</button>
-                        <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('king-entrance', 'brave-stare')">2. Meet your father's intense eyes with unwavering, brave calm.</button>
+                        <button class="choice-btn" onclick="handleChoice('king-entrance', 'smile-king')">1. Smile brightly at the conqueror, welcoming his fierce gaze.</button>
+                        <button class="choice-btn" onclick="handleChoice('king-entrance', 'brave-stare')">2. Meet your father's intense eyes with unwavering, brave calm.</button>
                     `;
                 }, 1200);
 
@@ -555,7 +457,6 @@
                 }
                 updateHUD();
 
-                // Advance to Scene 4: The Birth of Prince Ian 4
                 setTimeout(() => {
                     heading.innerText = "✦ Scene IV: The Royal Blessing & Inspection ✦";
                     videoElem.src = "the-birth-of-prince-ian-4-cinematic.mp4";
@@ -563,8 +464,8 @@
                     videoElem.play();
                     display.innerText = "[Narrative: The midwife carefully presents you as the king steps closer to the bedside, resting his hand upon the golden covers as he prepares for the naming ceremony.]";
                     choices.innerHTML = `
-                        <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('naming-prep', 'giggle')">1. Let out a joyful baby giggle as your father reaches down.</button>
-                        <button class="choice-btn" onclick="playSelectSupportSound(); handleChoice('naming-prep', 'grasp')">2. Grasp firmly onto the edge of the royal sash.</button>
+                        <button class="choice-btn" onclick="handleChoice('naming-prep', 'giggle')">1. Let out a joyful baby giggle as your father reaches down.</button>
+                        <button class="choice-btn" onclick="handleChoice('naming-prep', 'grasp')">2. Grasp firmly onto the edge of the royal sash.</button>
                     `;
                 }, 1200);
 
@@ -576,7 +477,6 @@
                 }
                 updateHUD();
 
-                // Advance to Scene 5: Prince Ian Naming Ceremony
                 setTimeout(() => {
                     heading.innerText = "✦ Scene V: The Naming of Prince Ian ✦";
                     videoElem.src = "prince-ian-naming-birth-of-prince-5-cinematic.mp4";
