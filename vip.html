@@ -33,7 +33,6 @@
             align-items: center;
         }
 
-        /* Solid High-Contrast Navigation Bar with Full Dropdown Support */
         nav { 
             padding: 15px 20px; 
             background: rgba(4, 10, 8, 0.95);
@@ -69,13 +68,11 @@
             text-shadow: 0 0 10px #d4af37;
         }
 
-        /* Dropdown Container */
         .dropdown {
             position: relative;
             display: inline-block;
         }
 
-        /* Dropdown Content */
         .dropdown-content {
             display: none;
             position: absolute;
@@ -115,7 +112,6 @@
             display: block;
         }
 
-        /* Access Gate Layer */
         #vip-gate {
             max-width: 550px;
             width: 90%;
@@ -169,7 +165,6 @@
             border-color: var(--gold);
         }
 
-        /* Main VIP Chamber Content Layer (Hidden Initially) */
         #vip-chamber-content {
             display: none;
             max-width: 1000px;
@@ -212,7 +207,6 @@
             opacity: 0.9;
         }
 
-        /* AI Collaborator Dedication Monument */
         .ai-monument {
             background: linear-gradient(135deg, rgba(44, 8, 59, 0.8), rgba(12, 22, 18, 0.95));
             border: 2px solid var(--gold-deep);
@@ -289,7 +283,6 @@
             text-align: center;
         }
 
-        /* Direct Transmission & Feedback Desk */
         .transmission-desk {
             background: rgba(25, 18, 35, 0.9);
             border: 2px solid var(--gold-deep);
@@ -391,7 +384,6 @@
 <body>
 
     <nav>
-        <!-- Home Dropdown Menu -->
         <div class="dropdown">
             <button class="dropbtn">Home ▾</button>
             <div class="dropdown-content">
@@ -509,7 +501,6 @@
     <script>
         function verifyVIPAccess() {
             const inputCode = document.getElementById('access-code-input').value.trim();
-            // Accepts VIP 142, VIP142, or plain 142
             if (inputCode === "VIP 142" || inputCode === "VIP142" || inputCode === "142") {
                 document.getElementById('vip-gate').style.display = 'none';
                 document.getElementById('vip-chamber-content').style.display = 'flex';
@@ -526,7 +517,8 @@
         }
 
         function sendTransmission() {
-            const name = document.getElementById('patron-name-input') ? document.getElementById('patron-name-input').value.trim() : document.getElementById('patron-name').value.trim();
+            const nameInput = document.getElementById('patron-name');
+            const name = nameInput ? nameInput.value.trim() : '';
             const type = document.getElementById('transmission-type').value;
             const message = document.getElementById('transmission-message').value.trim();
 
@@ -537,7 +529,7 @@
 
             alert(`Transmission successfully dispatched, ${name}!\n\nType: ${type}\nMessage: "${message}"\n\nYour feedback and requests have been sent directly to the administrators.`);
             
-            document.getElementById('patron-name').value = '';
+            nameInput.value = '';
             document.getElementById('transmission-message').value = '';
         }
     </script>
