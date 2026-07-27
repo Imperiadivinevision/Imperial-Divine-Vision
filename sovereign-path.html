@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queen Rosanna: Sovereign Path - Stage One (Market Journey)</title>
+    <title>Queen Rosanna: Sovereign Path - Stage One (Complete HUD & Choice Rewind)</title>
     <style>
         :root {
             --bg-dark: #050407;
@@ -13,7 +13,8 @@
             --gold-glow: rgba(212, 175, 55, 0.6);
             --text-main: #f5f2eb;
             --royal-purple: #320a3f;
-            --mystic-blue: #0b1d28;
+            --health-red: #cc3333;
+            --health-green: #33cc66;
         }
 
         body {
@@ -34,11 +35,11 @@
             background: var(--panel-bg);
             border: 3px solid var(--gold-deep);
             border-radius: 16px;
-            padding: 35px;
+            padding: 30px;
             box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 50px rgba(212, 175, 55, 0.35);
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 18px;
             text-align: center;
             margin-bottom: 30px;
             position: relative;
@@ -60,17 +61,48 @@
         .hud-bar {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             color: var(--gold);
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.9rem;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 12px;
-            margin-top: 10px;
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .hud-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .health-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .health-bar-bg {
+            width: 100px;
+            height: 12px;
+            background: #221d17;
+            border: 1px solid var(--gold-deep);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--health-green);
+            transition: width 0.4s ease, background-color 0.4s ease;
         }
 
         .chapter-title {
             color: var(--gold);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-shadow: 0 0 12px var(--gold-glow);
@@ -78,7 +110,7 @@
 
         .video-player-box {
             width: 100%;
-            max-height: 440px;
+            max-height: 400px;
             background: #000;
             border-radius: 10px;
             border: 2px solid var(--gold-deep);
@@ -92,18 +124,18 @@
         video, img {
             width: 100%;
             height: auto;
-            max-height: 440px;
+            max-height: 400px;
             object-fit: contain;
         }
 
         .story-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1.05rem;
+            line-height: 1.7;
             color: var(--text-main);
             text-align: left;
             font-style: italic;
             background: rgba(11, 29, 40, 0.4);
-            padding: 15px 20px;
+            padding: 14px 18px;
             border-radius: 8px;
             border-left: 3px solid var(--gold-deep);
         }
@@ -111,7 +143,7 @@
         .dialogue-prompt {
             background: rgba(50, 10, 63, 0.35);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 15px 20px;
+            padding: 14px 18px;
             border-radius: 8px;
             font-style: italic;
             color: var(--gold);
@@ -121,19 +153,18 @@
         .choices-area {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 5px;
+            gap: 10px;
         }
 
         .choice-btn {
             background: linear-gradient(135deg, #18121f, #221a2c);
             border: 1px solid var(--gold-deep);
             color: var(--text-main);
-            padding: 14px 20px;
+            padding: 12px 18px;
             border-radius: 8px;
             cursor: pointer;
             font-family: 'Cinzel', 'Georgia', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             text-align: left;
             transition: all 0.35s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
@@ -144,6 +175,29 @@
             color: #050407;
             box-shadow: 0 0 25px var(--gold-glow);
             transform: translateY(-2px);
+        }
+
+        .rewind-panel {
+            background: rgba(138, 43, 226, 0.15);
+            border: 1px dashed var(--gold-deep);
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .audio-bar {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-deep);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--gold);
         }
 
         .gallery-section {
@@ -176,20 +230,43 @@
         }
     </style>
 </head>
-<body>
+<body onclick="initBackgroundMusic()">
 
     <div class="story-container">
-        <div class="dev-watermark">✦ Architect Signature: Core Logic v1.45 ✦</div>
+        <div class="dev-watermark">✦ Core Logic v1.45 ✦</div>
         
+        <!-- Enhanced HUD Bar with Health, Coins, Affection, and Incoming Call Timer -->
         <div class="hud-bar">
-            <span>Stage One: Market Encounter & Beginnings</span>
-            <span>Coins: <span id="coin-count">0</span> | Prince Ian Affection: <span id="affection-count">0</span></span>
+            <div class="hud-group">
+                <div class="health-container">
+                    <span>Health:</span>
+                    <div class="health-bar-bg">
+                        <div id="health-fill" class="health-bar-fill"></div>
+                    </div>
+                    <span id="health-text">100%</span>
+                </div>
+            </div>
+            <div class="hud-group">
+                <span>Coins: <span id="coin-count">50</span></span>
+                <span>Affection: <span id="affection-count">0</span></span>
+                <span style="color: #ff9999;">Call In: <span id="timer-count">03:00</span></span>
+            </div>
+        </div>
+
+        <div class="audio-bar">
+            <span>🎵 Sovereign Soundscape Active</span>
+            <span id="audio-status" style="font-style: italic;">Click anywhere to enable background melody</span>
+        </div>
+
+        <!-- Choice Rewind Mechanic using Earned Coins -->
+        <div class="rewind-panel">
+            <span>🔄 Want to change a previous choice? Spend 20 Coins to Rewind!</span>
+            <button class="choice-btn" style="padding: 6px 12px; font-size: 0.8rem; margin:0;" onclick="playSelectSound(); rewindChoice()">Rewind Choice (-20 Coins)</button>
         </div>
 
         <div class="chapter-title" id="scene-title">✦ The Busy Market & Early Merchant Profits ✦</div>
         
         <div class="video-player-box" id="media-container">
-            <!-- Updated to point directly to the market encounter and merchant profit scene -->
             <video id="cinematic-video" controls autoplay>
                 <source src="vip-galaries-4.png" type="video/mp4">
                 Your browser does not support the video tag.
@@ -197,16 +274,16 @@
         </div>
 
         <div class="story-text" id="story-narrative">
-            [Developer's Note: The bustling market echoes with the sounds of trade. Here, amidst the lively stalls, Rosanna calculates her early merchant profits and looks toward the path of destiny.]
+            [Developer's Note: The bustling market echoes with trade. Suddenly, a strange scent drifts through the stalls—something smoky and pungent catches the air, hinting at hidden perils before the phone call summons you.]
         </div>
 
         <div class="dialogue-prompt" id="character-dialogue">
-            Narrator: "The marketplace yields its treasures, but a starlit call beckons beyond the stalls. Will you follow the trade route or wander into the night?"
+            Narrator: "The marketplace yields its profits, but the air grows thick with smoke. Will you investigate the source or hasten toward the starlit path?"
         </div>
 
         <div class="choices-area" id="choices-container">
-            <button class="choice-btn" onclick="chooseWanderPath()">1. Leave the market stalls and wander into the starlit night (+100 Coins reward!)</button>
-            <button class="choice-btn" onclick="chooseSafePath()">2. Conclude trading and return home safely with profits.</button>
+            <button class="choice-btn" onclick="playSelectSound(); chooseWanderPath()">1. Investigate the smoky scent and head into the starlit night (+100 Coins reward!)</button>
+            <button class="choice-btn" onclick="playSelectSound(); chooseSafePath()">2. Ignore the smoke and secure profits at home safely.</button>
         </div>
     </div>
 
@@ -215,23 +292,144 @@
         <h2 style="color: var(--gold); text-align: center; margin-top: 0; text-shadow: 0 0 10px var(--gold-glow);">✦ Stage One Personal Collection & Sovereign Archive ✦</h2>
         <p style="font-style: italic; text-align: center; color: var(--gold);">Use your hard-earned coins to unlock memories, or utilize real-world support to instantly expand your developer archive!</p>
         
-        <div class="gallery-grid" id="gallery-items-grid">
-            <!-- Dynamically populated items -->
-        </div>
+        <div class="gallery-grid" id="gallery-items-grid"></div>
 
         <div style="text-align: center; margin-top: 15px;">
-            <button class="choice-btn" style="display:inline-block; text-align:center;" onclick="buyCoinsWithRealMoney()">💳 Top-Up Developer Coins ($1.00 Real Money = 1,000 Coins)</button>
+            <button class="choice-btn" style="display:inline-block; text-align:center;" onclick="playSelectSound(); buyCoinsWithRealMoney()">💳 Top-Up Developer Coins ($1.00 Real Money = 1,000 Coins)</button>
         </div>
 
         <div style="text-align: center; margin-top: 25px;">
-            <button class="choice-btn" style="display:inline-block; text-align:center; background: linear-gradient(135deg, #320a3f, #4b0082);" onclick="proceedToStageTwo()">✦ Advance to Stage Two: The Sacred Temple ✦</button>
+            <button class="choice-btn" style="display:inline-block; text-align:center; background: linear-gradient(135deg, #320a3f, #4b0082);" onclick="playSelectSound(); proceedToStageTwo()">✦ Advance to Stage Two: The Sacred Temple ✦</button>
         </div>
     </div>
 
     <script>
-        let playerCoins = 0;
+        let playerCoins = 50;
         let playerAffection = 0;
+        let playerHealth = 100;
+        let timeLeft = 180; // 3 minutes before phone call
+        let lastState = null; // Store last state for coin rewind
         let ownedPictures = [];
+        let musicStarted = false;
+        let audioCtx;
+
+        // Countdown timer before the phone call
+        setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                document.getElementById('timer-count').innerText = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+            } else {
+                document.getElementById('timer-count').innerText = "RING!";
+                // Event when phone calls
+                if (!window.phoneCalled) {
+                    window.phoneCalled = true;
+                    alert("Ring, ring! Your phone is calling with an urgent message from the estate!");
+                }
+            }
+        }, 1000);
+
+        function updateHUD() {
+            document.getElementById('coin-count').innerText = playerCoins;
+            document.getElementById('affection-count').innerText = playerAffection;
+            document.getElementById('health-text').innerText = playerHealth + "%";
+            
+            const fill = document.getElementById('health-fill');
+            fill.style.width = playerHealth + "%";
+            if (playerHealth > 60) {
+                fill.style.background = "var(--health-green)";
+            } else if (playerHealth > 30) {
+                fill.style.background = "#cc9933";
+            } else {
+                fill.style.background = "var(--health-red)";
+            }
+        }
+
+        function saveStateForRewind(title, narrative, dialogue, choicesHTML) {
+            lastState = {
+                title: title,
+                narrative: narrative,
+                dialogue: dialogue,
+                choicesHTML: choicesHTML,
+                coins: playerCoins,
+                health: playerHealth
+            };
+        }
+
+        function rewindChoice() {
+            if (!lastState) {
+                alert("No previous choice to rewind yet!");
+                return;
+            }
+            if (playerCoins >= 20) {
+                playerCoins -= 20;
+                playerHealth = lastState.health;
+                updateHUD();
+
+                document.getElementById('scene-title').innerText = lastState.title;
+                document.getElementById('story-narrative').innerText = lastState.narrative;
+                document.getElementById('character-dialogue').innerText = lastState.dialogue;
+                document.getElementById('choices-container').innerHTML = lastState.choicesHTML;
+                alert("Choice successfully rewound using 20 coins!");
+            } else {
+                alert("Not enough coins to rewind! You need at least 20 coins.");
+            }
+        }
+
+        function initBackgroundMusic() {
+            if (musicStarted) return;
+            musicStarted = true;
+
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                document.getElementById('audio-status').textContent = "Playing sovereign soundscape...";
+                
+                const chordNotes = [293.66, 369.99, 440, 554.37];
+                let noteIndex = 0;
+
+                function playNextNote() {
+                    if (!audioCtx) return;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(chordNotes[noteIndex], audioCtx.currentTime);
+                    
+                    gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 4);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 4.5);
+
+                    noteIndex = (noteIndex + 1) % chordNotes.length;
+                    setTimeout(playNextNote, 3500);
+                }
+
+                playNextNote();
+            } catch (e) {}
+        }
+
+        function playSelectSound() {
+            try {
+                const ctx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+                oscillator.type = 'sine'; 
+                oscillator.frequency.setValueAtTime(587.33, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08); 
+                gainNode.gain.setValueAtTime(0.1, ctx.currentTime); 
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.08);
+            } catch (e) {}
+        }
 
         const stageOnePictures = [
             { id: 1, name: "Extra Time with Prince Ian", cost: 250, file: "extra-time-with-prince-ian.gif" },
@@ -239,25 +437,28 @@
             { id: 3, name: "Part 1 Recap Animation", cost: 400, file: "part-1-recaps-ANIMATION.gif" }
         ];
 
-        function updateHUD() {
-            document.getElementById('coin-count').innerText = playerCoins;
-            document.getElementById('affection-count').innerText = playerAffection;
-        }
-
         function chooseWanderPath() {
-            playerCoins += 100; // Developer reward for adventurous pathing
+            saveStateForRewind(
+                "✦ The Busy Market & Early Merchant Profits ✦",
+                document.getElementById('story-narrative').innerText,
+                document.getElementById('character-dialogue').innerText,
+                document.getElementById('choices-container').innerHTML
+            );
+
+            playerCoins += 100;
+            playerHealth = Math.min(100, playerHealth + 10);
             updateHUD();
 
             const mediaContainer = document.getElementById('media-container');
             document.getElementById('scene-title').innerText = "✦ Ocean Encounter & Prince Ian ✦";
             mediaContainer.innerHTML = `<video controls autoplay><source src="God-calling-accomplish-cinematic.mp4" type="video/mp4"></video>`;
             
-            document.getElementById('story-narrative').innerText = "[Developer's Note: Leaving the market behind, Rosanna reaches the edge of the sea. Here, beneath starlight and water, the first true bond is sparked.]";
-            document.getElementById('character-dialogue').innerText = "Prince Ian: 'You came... the stars told me someone would.'";
+            document.getElementById('story-narrative').innerText = "[Developer's Note: Following the smoky scent through the market, Rosanna reaches the edge of the sea. Prince Ian is waiting beneath the starlight.]";
+            document.getElementById('character-dialogue').innerText = "Prince Ian: 'You followed the smoke and stars... I knew you would arrive.'";
             
             document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="spendMoreTimeWithIan()">1. Hover in starlight: Spend extra time with Prince Ian (+50 Affection)</button>
-                <button class="choice-btn" onclick="openGalleryAndRecap()">2. Conclude Stage One & Open Sovereign Archive</button>
+                <button class="choice-btn" onclick="playSelectSound(); spendMoreTimeWithIan()">1. Hover in starlight: Spend extra time with Prince Ian (+50 Affection)</button>
+                <button class="choice-btn" onclick="playSelectSound(); openGalleryAndRecap()">2. Conclude Stage One & Open Sovereign Archive</button>
             `;
         }
 
@@ -269,24 +470,34 @@
             document.getElementById('scene-title').innerText = "✦ Deepening Bond Under Starlight ✦";
             mediaContainer.innerHTML = `<video controls autoplay><source src="extra-time-with-prince-ian-2.mp4" type="video/mp4"></video>`;
             
-            document.getElementById('story-narrative').innerText = "[Developer's Note: Time slows down when two destinies touch. A silent understanding passes between them before the journey home begins.]";
+            document.getElementById('story-narrative').innerText = "[Developer's Note: Time slows down when two destinies touch. A silent understanding passes between them before the phone call rings.]";
             document.getElementById('character-dialogue').innerText = "Prince Ian: 'I will remember this night across all seasons.'";
 
             document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
+                <button class="choice-btn" onclick="playSelectSound(); openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
             `;
         }
 
         function chooseSafePath() {
+            saveStateForRewind(
+                "✦ The Busy Market & Early Merchant Profits ✦",
+                document.getElementById('story-narrative').innerText,
+                document.getElementById('character-dialogue').innerText,
+                document.getElementById('choices-container').innerHTML
+            );
+
+            playerHealth = Math.max(10, playerHealth - 15); // Smoke takes a slight toll if ignored
+            updateHUD();
+
             const mediaContainer = document.getElementById('media-container');
             document.getElementById('scene-title').innerText = "✦ Safe Return Home with Profits ✦";
             mediaContainer.innerHTML = `<video controls autoplay><source src="rosanna-safe-return-home.mp4" type="video/mp4"></video>`;
             
-            document.getElementById('story-narrative').innerText = "[Developer's Note: The market profits are secured, and Rosanna returns to the warmth of home, wrapped safely in family security.]";
-            document.getElementById('character-dialogue').innerText = "Jirmak: 'A successful day of trade, little one. Rest well.'";
+            document.getElementById('story-narrative').innerText = "[Developer's Note: Ignoring the strange smoke, Rosanna secures her profits and returns to the safety of home, waiting for the impending phone call.]";
+            document.getElementById('character-dialogue').innerText = "Jirmak: 'A successful trade day, little one. Rest before the phone rings.'";
             
             document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
+                <button class="choice-btn" onclick="playSelectSound(); openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
             `;
         }
 
@@ -304,7 +515,7 @@
                 item.innerHTML = `
                     <div style="font-size:0.9rem; color:var(--gold); margin-bottom:6px; font-weight:bold;">${pic.name}</div>
                     <div style="font-size:0.85rem; margin-bottom:10px; color:#b3a896;">Cost: ${pic.cost} Coins</div>
-                    <button class="choice-btn" style="font-size:0.85rem; padding:8px; text-align:center;" onclick="buyPicture(${pic.id})">Unlock to Archive</button>
+                    <button class="choice-btn" style="font-size:0.85rem; padding:8px; text-align:center;" onclick="playSelectSound(); buyPicture(${pic.id})">Unlock to Archive</button>
                 `;
                 grid.appendChild(item);
             });
@@ -335,6 +546,8 @@
         function proceedToStageTwo() {
             alert("Stage One successfully compiled! Transitioning directly to Stage Two: The Sacred Temple.");
         }
+
+        updateHUD();
     </script>
 </body>
 </html>
