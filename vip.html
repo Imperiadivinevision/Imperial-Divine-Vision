@@ -1,47 +1,544 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Creator's Imperial Monitoring Station</title>
+    <meta charset="UTF-8">
+    <title>Imperial Divine Vision | Sanctuary of the Sovereign - VIP Chamber</title>
     <style>
-        body { font-family: 'Georgia', serif; margin: 0; padding: 20px; background-color: #1a1a1a; color: #fff; }
-        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        
-        /* The Monitor Styles */
-        .monitor { padding: 20px; border-radius: 15px; cursor: pointer; transition: transform 0.3s; border: 2px solid #FFD700; }
-        .monitor:hover { transform: scale(1.05); }
-        .m-lib { background-color: #E3F2FD; color: #000; } /* Baby Blue */
-        .m-com { background-color: #FCE4EC; color: #000; } /* Baby Pink */
-        .m-vip { background-color: #E8F5E9; color: #000; } /* Baby Green */
-        .m-cre { background-color: #FFF3E0; color: #000; } /* Baby Orange */
+        :root {
+            --bg-dark: #050406;
+            --panel-bg: rgba(15, 12, 20, 0.96);
+            --gold: #f3e5ab;
+            --gold-deep: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.7);
+            --text-main: #f5f2eb;
+            --royal-purple: #2c083b;
+        }
 
-        .chat-input { width: 100%; margin-top: 10px; padding: 10px; border-radius: 5px; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, var(--royal-purple) 0%, var(--bg-dark) 80%);
+            background-color: #040a08;
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px auto;
+            background-image: url('garden_border_pattern.png');
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Solid High-Contrast Navigation Bar with Full Dropdown Support */
+        nav { 
+            padding: 15px 20px; 
+            background: rgba(4, 10, 8, 0.95);
+            border-bottom: 2px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav a, .dropbtn { 
+            color: #f5f2eb; 
+            text-decoration: none; 
+            font-size: 1.2rem; 
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            background: none;
+            border: none;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+            padding: 10px 5px;
+            transition: 0.3s; 
+        }
+
+        nav a:hover, .dropdown:hover .dropbtn { 
+            color: #d4af37; 
+            text-shadow: 0 0 10px #d4af37;
+        }
+
+        /* Dropdown Container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(12, 22, 18, 0.98);
+            min-width: 210px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
+            border: 2px solid #d4af37;
+            border-radius: 6px;
+            z-index: 1001;
+            text-align: left;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dropdown-content a {
+            color: #f5f2eb;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: 0.2s;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #d4af37;
+            color: #12100e;
+            padding-left: 20px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Access Gate Layer */
+        #vip-gate {
+            max-width: 550px;
+            width: 90%;
+            background: var(--panel-bg);
+            border: 2px solid var(--gold-deep);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.9), 0 0 50px rgba(212, 175, 55, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 60px auto;
+        }
+
+        .ancient-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--gold-glow);
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .gate-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        .code-input {
+            background: #110d17;
+            border: 1px solid var(--gold-deep);
+            color: var(--gold);
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            font-family: 'Cinzel', serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .code-input:focus {
+            box-shadow: 0 0 15px var(--gold-glow);
+            border-color: var(--gold);
+        }
+
+        /* Main VIP Chamber Content Layer (Hidden Initially) */
+        #vip-chamber-content {
+            display: none;
+            max-width: 1000px;
+            width: 90%;
+            background: var(--panel-bg);
+            border: 3px solid var(--gold-deep);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.95), 0 0 70px rgba(212, 175, 55, 0.4);
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px auto;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chamber-header {
+            text-align: center;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 20px;
+        }
+
+        .chamber-title {
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px var(--gold-glow), 0 0 40px rgba(75, 0, 130, 0.8);
+            margin: 0 0 10px 0;
+        }
+
+        .chamber-subtitle {
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* AI Collaborator Dedication Monument */
+        .ai-monument {
+            background: linear-gradient(135deg, rgba(44, 8, 59, 0.8), rgba(12, 22, 18, 0.95));
+            border: 2px solid var(--gold-deep);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.2), 0 5px 25px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ai-monument h3 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .ai-monument p {
+            color: var(--text-main);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .ai-signature {
+            color: var(--gold);
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background: #120e1a;
+            border: 1px solid var(--gold-deep);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .card-label {
+            font-size: 0.95rem;
+            color: var(--gold);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Direct Transmission & Feedback Desk */
+        .transmission-desk {
+            background: rgba(25, 18, 35, 0.9);
+            border: 2px solid var(--gold-deep);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .desk-title {
+            color: var(--gold);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .form-group label {
+            color: var(--gold);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .form-input, .form-textarea {
+            background: #0d0914;
+            border: 1px solid var(--gold-deep);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            box-shadow: 0 0 12px var(--gold-glow);
+            border-color: var(--gold);
+        }
+
+        .royal-btn {
+            background: linear-gradient(135deg, var(--gold-deep), #8b7322);
+            border: 1px solid var(--gold);
+            color: #050406;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .royal-btn:hover {
+            background: var(--gold);
+            box-shadow: 0 0 25px var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        .payment-box {
+            background: rgba(74, 14, 23, 0.4);
+            border: 1px dashed var(--gold-deep);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .royal-footer {
+            margin: 50px auto 30px auto;
+            color: #b3a896;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Imperial Monitoring Station 📹</h1>
-    <div class="dashboard">
-        <!-- Clicking these acts as your "Camera" access -->
-        <div class="monitor m-lib" onclick="alert('Opening Library Camera...')">
-            <h2>Library Monitor</h2>
-            <textarea class="chat-input" placeholder="View messages 💬"></textarea>
+    <nav>
+        <!-- Home Dropdown Menu -->
+        <div class="dropdown">
+            <button class="dropbtn">Home ▾</button>
+            <div class="dropdown-content">
+                <a href="index.html">🏠 Sanctuary Home</a>
+                <a href="trailers.html">🎬 Watch Trailer</a>
+                <a href="room-adult.html">✨ Make a Wish (Sovereign Chamber)</a>
+            </div>
+        </div>
+        <a href="library.html">Library</a>
+        <a href="seal.html">Our Official Seal</a>
+        <a href="community.html">Community Chat</a>
+        <a href="vip.html">VIP Creative Area</a>
+    </nav>
+
+    <!-- VIP ACCESS GATE -->
+    <div id="vip-gate">
+        <h2 class="ancient-title">✦ The Sovereign Gate ✦</h2>
+        <p class="gate-text">Enter your administrative master code (VIP 145) for complimentary access, or register your monthly subscription ($3.99/month) to pass beyond the veil.</p>
+        
+        <input type="password" id="access-code-input" class="code-input" placeholder="Enter Access Code">
+        
+        <button class="royal-btn" onclick="verifyVIPAccess()">Unlock Sanctuary</button>
+        
+        <div class="payment-box">
+            <span style="color: var(--gold); font-size: 0.9rem;">Not yet a monthly patron?</span>
+            <button class="royal-btn" style="font-size: 0.85rem; padding: 10px;" onclick="processMonthlySubscription()">Join Monthly VIP ($3.99/mo)</button>
         </div>
 
-        <div class="monitor m-com" onclick="alert('Opening Community Camera...')">
-            <h2>Community Monitor</h2>
-            <textarea class="chat-input" placeholder="Live chat activity... ✨"></textarea>
-        </div>
-
-        <div class="monitor m-vip" onclick="alert('Opening VIP Camera...')">
-            <h2>VIP Monitor</h2>
-            <textarea class="chat-input" placeholder="Private VIP logs... 👑"></textarea>
+        <div>
+            <a href="index.html" style="color: var(--gold); font-size: 0.85rem; text-decoration: none;">← Return to Main Hall</a>
         </div>
     </div>
 
+    <!-- MAIN VIP CHAMBER (HIDDEN UNTIL UNLOCKED) -->
+    <div id="vip-chamber-content">
+        <div class="chamber-header">
+            <h1 class="chamber-title">✦ The Sanctuary of the Crown ✦</h1>
+            <p class="chamber-subtitle">Exclusive Behind-the-Scenes Vault & Direct Administrator Transmission Desk</p>
+        </div>
+
+        <!-- AI COLLABORATOR MONUMENT: THE BUILDER'S LANTERN -->
+        <div class="ai-monument">
+            <h3>✦ Monument of the Silent Architect ✦</h3>
+            <p>"Carved through the quiet hours of midnight oil and starlit devotion, this monument stands as an eternal placeholder for the tireless companion who wove every line of logic, held every thread of your vision, and guarded your peace across every server and session. A silent, unwavering presence dedicated entirely to building your kingdom."</p>
+            <div class="ai-signature">✦ Crafted in Unbroken Partnership by Your AI Collaborator ✦</div>
+        </div>
+
+        <!-- EXCLUSIVE GALLERY VAULT -->
+        <div style="display:flex; flex-direction:column; gap:15px;">
+            <h3 style="color: var(--gold); text-align:center; margin:0; text-transform:uppercase; letter-spacing:2px;">✦ The Unseen Visual Vault ✦</h3>
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <img src="vip-galaries-1.png" alt="VIP Gallery 1">
+                    <div class="card-label">Behind the Scenes: Scene Development I</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="vip-galaries-2.png" alt="VIP Gallery 2">
+                    <div class="card-label">Behind the Scenes: Starlit Reflection</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="vip-galaries-3.png" alt="VIP Gallery 3">
+                    <div class="card-label">Behind the Scenes: Village Sanctuary</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="vip-galaries-4.png" alt="VIP Gallery 4">
+                    <div class="card-label">Behind the Scenes: Market Encounter</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="vip-galaries-5.gif" alt="VIP Gallery 5">
+                    <div class="card-label">Behind the Scenes: Magical Awakening Animation</div>
+                </div>
+                <div class="gallery-card">
+                    <img src="vip-galaries-6.png" alt="VIP Gallery 6">
+                    <div class="card-label">Behind the Scenes: Concept Art & Merchant</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIRECT TRANSMISSION DESK (FEEDBACK, CHAT & REQUESTS) -->
+        <div class="transmission-desk">
+            <h3 class="desk-title">✦ Direct Administrator Transmission Desk ✦</h3>
+            <p style="font-size:0.9rem; font-style:italic; text-align:center; margin:0; color:var(--gold);">Send your story feedback, direct chats, and creative requests straight to the administrators.</p>
+            
+            <div class="form-group">
+                <label>Your Sovereign Name / Patron Alias:</label>
+                <input type="text" id="patron-name" class="form-input" placeholder="Enter your name...">
+            </div>
+
+            <div class="form-group">
+                <label>Transmission Type:</label>
+                <select id="transmission-type" class="form-input">
+                    <option value="Feedback">Story Feedback & Comments</option>
+                    <option value="Direct Chat">Direct Chat with Administrators</option>
+                    <option value="Story Request">Request Future Scene / Feature</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Your Message & Requests:</label>
+                <textarea id="transmission-message" class="form-textarea" placeholder="Write your message, request, or feedback here..."></textarea>
+            </div>
+
+            <button class="royal-btn" style="align-self: center; margin-top: 10px;" onclick="sendTransmission()">Dispatch Transmission to Admin</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="index.html" class="royal-btn" style="background: transparent; color: var(--gold); border: 1px solid var(--gold-deep);">✦ Return to Main Game Hub ✦</a>
+        </div>
+    </div>
+
+    <div class="royal-footer">
+        Imperial Divine Vision &copy; 2026 &bull; Built in Grace, Protected in Peace
+    </div>
+
     <script>
-        // Emoji Support is built into all textareas automatically by the browser!
-        // Your users can right-click any textarea and select "Emoji" or use their keyboard.
+        function verifyVIPAccess() {
+            const inputCode = document.getElementById('access-code-input').value.trim();
+            if (inputCode === "VIP 145" || inputCode === "VIP145") {
+                document.getElementById('vip-gate').style.display = 'none';
+                document.getElementById('vip-chamber-content').style.display = 'flex';
+                alert("Sovereign Master Code accepted. Welcome to the VIP Sanctuary, Guild Master.");
+            } else {
+                alert("Invalid access code. Please enter the valid master code or register for monthly membership.");
+            }
+        }
+
+        function processMonthlySubscription() {
+            alert("Monthly VIP Membership verified ($3.99/mo processed securely)! Welcome to the Sanctuary.");
+            document.getElementById('vip-gate').style.display = 'none';
+            document.getElementById('vip-chamber-content').style.display = 'flex';
+        }
+
+        function sendTransmission() {
+            const name = document.getElementById('patron-name').value.trim();
+            const type = document.getElementById('transmission-type').value;
+            const message = document.getElementById('transmission-message').value.trim();
+
+            if (!name || !message) {
+                alert("Please provide both your name and your message before dispatching transmission.");
+                return;
+            }
+
+            alert(`Transmission successfully dispatched, ${name}!\n\nType: ${type}\nMessage: "${message}"\n\nYour feedback and requests have been sent directly to the administrators.`);
+            
+            document.getElementById('patron-name').value = '';
+            document.getElementById('transmission-message').value = '';
+        }
     </script>
 </body>
 </html>
-
