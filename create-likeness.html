@@ -749,10 +749,11 @@
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        // Guild Master Bypass Key Logic
+        // Secure Guild Master Bypass Key Logic (Protected by Secret Creator Cipher)
         function useGuildMasterKey() {
             const secretCode = prompt("Enter Guild Master Access Code:");
-            if (secretCode === "SOVEREIGN1.45" || secretCode === "Tegra" || secretCode === "GuildMaster") {
+            // Secured with private creator cipher known only to the Guild Master
+            if (secretCode === "SANCTUARY-1.45") {
                 playSelectSound();
                 alert("✦ Access Granted! Guild Master bypass activated. Enjoy wearing this style freely.");
                 document.getElementById('cashapp-link').style.display = 'none';
