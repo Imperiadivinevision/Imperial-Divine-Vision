@@ -409,9 +409,9 @@
     <!-- VIP ACCESS GATE -->
     <div id="vip-gate">
         <h2 class="ancient-title">✦ The Sovereign Gate ✦</h2>
-        <p class="gate-text">Enter your administrative master code (VIP 145) for complimentary access, or register your monthly subscription ($3.99/month) to pass beyond the veil.</p>
+        <p class="gate-text">Enter your administrative master code (VIP 142) for complimentary access, or register your monthly subscription ($3.99/month) to pass beyond the veil.</p>
         
-        <input type="password" id="access-code-input" class="code-input" placeholder="Enter Access Code">
+        <input type="text" id="access-code-input" class="code-input" placeholder="Enter Access Code">
         
         <button class="royal-btn" onclick="verifyVIPAccess()">Unlock Sanctuary</button>
         
@@ -509,7 +509,8 @@
     <script>
         function verifyVIPAccess() {
             const inputCode = document.getElementById('access-code-input').value.trim();
-            if (inputCode === "VIP 145" || inputCode === "VIP145") {
+            // Accepts VIP 142, VIP142, or plain 142
+            if (inputCode === "VIP 142" || inputCode === "VIP142" || inputCode === "142") {
                 document.getElementById('vip-gate').style.display = 'none';
                 document.getElementById('vip-chamber-content').style.display = 'flex';
                 alert("Sovereign Master Code accepted. Welcome to the VIP Sanctuary, Guild Master.");
@@ -525,7 +526,7 @@
         }
 
         function sendTransmission() {
-            const name = document.getElementById('patron-name').value.trim();
+            const name = document.getElementById('patron-name-input') ? document.getElementById('patron-name-input').value.trim() : document.getElementById('patron-name').value.trim();
             const type = document.getElementById('transmission-type').value;
             const message = document.getElementById('transmission-message').value.trim();
 
