@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen Rosanna: Sovereign Path - Stage One (Developer's Edition)</title>
+    <style>
+        :root {
+            --bg-dark: #050407;
+            --panel-bg: rgba(14, 11, 18, 0.97);
+            --gold: #f3e5ab;
+            --gold-deep: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.6);
+            --text-main: #f5f2eb;
+            --royal-purple: #320a3f;
+            --mystic-blue: #0b1d28;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: radial-gradient(circle at center, var(--royal-purple) 0%, var(--bg-dark) 85%);
+            color: var(--text-main);
+            font-family: 'Cinzel', 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .story-container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--panel-bg);
+            border: 3px solid var(--gold-deep);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 50px rgba(212, 175, 55, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* Developer's Signature Watermark Seal */
+        .dev-watermark {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 0.75rem;
+            color: var(--gold-deep);
+            font-style: italic;
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.4);
+            padding-bottom: 2px;
+        }
+
+        .hud-bar {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 12px;
+            margin-top: 10px;
+        }
+
+        .chapter-title {
+            color: var(--gold);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        .video-player-box {
+            width: 100%;
+            max-height: 440px;
+            background: #000;
+            border-radius: 10px;
+            border: 2px solid var(--gold-deep);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
+        }
+
+        video, img {
+            width: 100%;
+            height: auto;
+            max-height: 440px;
+            object-fit: contain;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            text-align: left;
+            font-style: italic;
+            background: rgba(11, 29, 40, 0.4);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold-deep);
+        }
+
+        .dialogue-prompt {
+            background: rgba(50, 10, 63, 0.35);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--gold);
+            text-align: left;
+        }
+
+        .choices-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .choice-btn {
+            background: linear-gradient(135deg, #18121f, #221a2c);
+            border: 1px solid var(--gold-deep);
+            color: var(--text-main);
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', 'Georgia', serif;
+            font-size: 1rem;
+            text-align: left;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .choice-btn:hover {
+            background: var(--gold-deep);
+            color: #050407;
+            box-shadow: 0 0 25px var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Gallery and Shop Section */
+        .gallery-section {
+            max-width: 900px;
+            width: 100%;
+            background: var(--panel-bg);
+            border: 3px solid var(--gold-deep);
+            border-radius: 16px;
+            padding: 35px;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 50px rgba(212, 175, 55, 0.35);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .gallery-item {
+            background: #14101c;
+            border: 1px solid var(--gold-deep);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="story-container">
+        <div class="dev-watermark">✦ Architect Signature: Core Logic v1.45 ✦</div>
+        
+        <div class="hud-bar">
+            <span>Stage One: Childhood & Prophecy</span>
+            <span>Coins: <span id="coin-count">0</span> | Prince Ian Affection: <span id="affection-count">0</span></span>
+        </div>
+
+        <div class="chapter-title" id="scene-title">✦ The Starlit Awakening & The First Vow ✦</div>
+        
+        <div class="video-player-box" id="media-container">
+            <video id="cinematic-video" controls autoplay>
+                <source src="save-return-home-rosanna-cinematic.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="story-text" id="story-narrative">
+            [Developer's Note: Beneath the quiet slumber of the village, a deeper code awakens. The stars themselves align to trace Rosanna's destiny. Every choice here forms a permanent bridge in the architecture of her soul.]
+        </div>
+
+        <div class="dialogue-prompt" id="character-dialogue">
+            Narrator: "The night whispers of a crown yet to be forged. Will you stay within the veil of safety, or step into the vast, beautiful unknown?"
+        </div>
+
+        <div class="choices-area" id="choices-container">
+            <button class="choice-btn" onclick="chooseWanderPath()">1. Step into the night: Embrace the cosmic unknown (+100 Coins reward!)</button>
+            <button class="choice-btn" onclick="chooseSafePath()">2. Remain sheltered: Follow the safe, quiet path of routine.</button>
+        </div>
+    </div>
+
+    <!-- Collection Folder & Shop Gallery -->
+    <div class="gallery-section" id="collection-gallery">
+        <h2 style="color: var(--gold); text-align: center; margin-top: 0; text-shadow: 0 0 10px var(--gold-glow);">✦ Stage One Personal Collection & Sovereign Archive ✦</h2>
+        <p style="font-style: italic; text-align: center; color: var(--gold);">Use your hard-earned coins to unlock memories, or utilize real-world support to instantly expand your developer archive!</p>
+        
+        <div class="gallery-grid" id="gallery-items-grid">
+            <!-- Dynamically populated items -->
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <button class="choice-btn" style="display:inline-block; text-align:center;" onclick="buyCoinsWithRealMoney()">💳 Top-Up Developer Coins ($1.00 Real Money = 1,000 Coins)</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <button class="choice-btn" style="display:inline-block; text-align:center; background: linear-gradient(135deg, #320a3f, #4b0082);" onclick="proceedToStageTwo()">✦ Advance to Stage Two: The Sacred Temple ✦</button>
+        </div>
+    </div>
+
+    <script>
+        let playerCoins = 0;
+        let playerAffection = 0;
+        let ownedPictures = [];
+
+        const stageOnePictures = [
+            { id: 1, name: "Extra Time with Prince Ian", cost: 250, file: "extra-time-with-prince-ian.gif" },
+            { id: 2, name: "Rosanna Safe Return Home", cost: 200, file: "rosanna-safe-return-home.mp4" },
+            { id: 3, name: "Part 1 Recap Animation", cost: 400, file: "part-1-recaps-ANIMATION.gif" }
+        ];
+
+        function updateHUD() {
+            document.getElementById('coin-count').innerText = playerCoins;
+            document.getElementById('affection-count').innerText = playerAffection;
+        }
+
+        function chooseWanderPath() {
+            playerCoins += 100; // Developer reward for adventurous pathing
+            updateHUD();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Ocean Encounter & Prince Ian ✦";
+            mediaContainer.innerHTML = `<video controls autoplay><source src="God-calling-accomplish-cinematic.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Developer's Note: By breaking routine, Rosanna reaches the edge of the sea. Here, beneath starlight and water, the first true bond is sparked.]";
+            document.getElementById('character-dialogue').innerText = "Prince Ian: 'You came... the stars told me someone would.'"
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="spendMoreTimeWithIan()">1. Hover in starlight: Spend extra time with Prince Ian (+50 Affection)</button>
+                <button class="choice-btn" onclick="openGalleryAndRecap()">2. Conclude Stage One & Open Sovereign Archive</button>
+            `;
+        }
+
+        function spendMoreTimeWithIan() {
+            playerAffection += 50;
+            updateHUD();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Deepening Bond Under Starlight ✦";
+            mediaContainer.innerHTML = `<video controls autoplay><source src="extra-time-with-prince-ian-2.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Developer's Note: Time slows down when two destinies touch. A silent understanding passes between them before the journey home begins.]";
+            document.getElementById('character-dialogue').innerText = "Prince Ian: 'I will remember this night across all seasons.'";
+
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
+            `;
+        }
+
+        function chooseSafePath() {
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Safe Return Home ✦";
+            mediaContainer.innerHTML = `<video controls autoplay><source src="rosanna-safe-return-home.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Developer's Note: Safety offers rest, but destiny waits for no one. Rosanna returns to warmth, wrapped safely in the arms of her family.]";
+            document.getElementById('character-dialogue').innerText = "Jirmak: 'Rest well, little one. Tomorrow brings new light.'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
+            `;
+        }
+
+        function openGalleryAndRecap() {
+            document.querySelector('.story-container').style.display = 'none';
+            const gallerySection = document.getElementById('collection-gallery');
+            gallerySection.style.display = 'flex';
+
+            const grid = document.getElementById('gallery-items-grid');
+            grid.innerHTML = '';
+
+            stageOnePictures.forEach(pic => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <div style="font-size:0.9rem; color:var(--gold); margin-bottom:6px; font-weight:bold;">${pic.name}</div>
+                    <div style="font-size:0.85rem; margin-bottom:10px; color:#b3a896;">Cost: ${pic.cost} Coins</div>
+                    <button class="choice-btn" style="font-size:0.85rem; padding:8px; text-align:center;" onclick="buyPicture(${pic.id})">Unlock to Archive</button>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function buyPicture(id) {
+            const pic = stageOnePictures.find(p => p.id === id);
+            if (ownedPictures.includes(id)) {
+                alert("This archival memory is already secured in your personal folder!");
+                return;
+            }
+            if (playerCoins >= pic.cost) {
+                playerCoins -= pic.cost;
+                ownedPictures.push(id);
+                updateHUD();
+                alert(`Successfully secured "${pic.name}" in your permanent archive!`);
+            } else {
+                alert("Insufficient coins! Top up your account or make bolder exploratory choices to earn more currency.");
+            }
+        }
+
+        function buyCoinsWithRealMoney() {
+            playerCoins += 1000;
+            updateHUD();
+            alert("Developer Transaction Secure ($1.00)! 1,000 Coins added to your account and forwarded to the studio.");
+        }
+
+        function proceedToStageTwo() {
+            alert("Stage One successfully compiled! Transitioning directly to Stage Two: The Sacred Temple.");
+        }
+    </script>
+</body>
+</html>
