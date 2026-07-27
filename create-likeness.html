@@ -752,7 +752,6 @@
         // Secure Guild Master Bypass Key Logic (Protected by Secret Creator Cipher)
         function useGuildMasterKey() {
             const secretCode = prompt("Enter Guild Master Access Code:");
-            // Secured with private creator cipher known only to the Guild Master
             if (secretCode === "SANCTUARY-1.45") {
                 playSelectSound();
                 alert("✦ Access Granted! Guild Master bypass activated. Enjoy wearing this style freely.");
@@ -760,7 +759,6 @@
                 document.querySelector('.guild-key-btn').style.display = 'none';
                 document.getElementById('unlocked-badge').style.display = 'inline-block';
                 
-                // Save unlock state locally
                 localStorage.setItem('vip_unlocked_' + selectedCharacter.id + '_' + selectedOutfitIndex, 'true');
             } else if (secretCode !== null) {
                 alert("Incorrect code. Only the Guild Master holds the master key.");
@@ -832,7 +830,7 @@
                 id: "rosanna",
                 name: "Queen Rosanna",
                 role: "The Imperial Queen (Hero Path)",
-                path: "sovereign-path.html",
+                path: "room-adult.html",
                 outfits: [
                     { name: "Sovereign Robe", file: "Queen-rosanna-perfect-gown-CINEMATIC.mp4", vip: false },
                     { name: "Imperial Purple", file: "rosanna-formal-event-CINEMATIC.mp4", vip: false },
@@ -842,10 +840,11 @@
             },
             {
                 id: "benson",
-                name: "King Benson",
-                role: "Sovereign Provider & King (Hero Path)",
-                path: "sovereign-path.html",
+                name: "King Benson / Prince Ian",
+                role: "Sovereign Provider & King (Standalone Chamber)",
+                path: "room-benson.html",
                 outfits: [
+                    { name: "Stage I Birth Chamber", file: "the-birth-of-prince-ian.mp4", vip: false },
                     { name: "Imperial King", file: "king-benson-imperial-CINEMATIC.mp4", vip: false },
                     { name: "Sword Guardian", file: "king-benson-sword-cinematic.mp4", vip: false },
                     { name: "Wave Cinematic (VIP)", file: "king-benson-wave-CINEMATIC.mp4", vip: true }
@@ -886,8 +885,7 @@
                 path: "empire-path.html",
                 outfits: [
                     { name: "Dynasty Attire 1", file: "prime-minister-wife-imperial-CINEMATIC.mp4", vip: false },
-                    { name: "Dynasty Attire 1", file: "prime-minister-wife-imperial-2-cinematic.mp4", vip: false }
-                    
+                    { name: "Dynasty Attire 2", file: "prime-minister-wife-imperial-2-cinematic.mp4", vip: false }
                 ]
             },
             {
@@ -898,7 +896,7 @@
                 outfits: [
                     { name: "Royal Attire 1", file: "prime-minister-second-daughter-1-cinematic.mp4", vip: false },
                     { name: "Royal Attire 2", file: "prime-minister-second-daughter-2-video-cinematic.mp4", vip: false },
-                     { name: "Royal Attire 2", file: "prime-minister-second-daughter-3-CINEMATIC.mp4", vip: true }
+                    { name: "Royal Attire 3", file: "prime-minister-second-daughter-3-CINEMATIC.mp4", vip: true }
                 ]
             },
             {
@@ -925,7 +923,7 @@
             {
                 id: "tiju",
                 name: "Concubine Tiju",
-                role: "Short-Tempered Sai Branch Niece",
+                role: "Short-Tempered Side Branch Niece",
                 path: "gate-path.html",
                 outfits: [
                     { name: "Style 1", file: "comcubine-tiju-1-cinematic.mp4", vip: false },
@@ -961,7 +959,7 @@
             },
             {
                 id: "tailor",
-                name: "Minister of Teller",
+                name: "Minister of Tailor",
                 role: "Royal Records & Administration",
                 path: "empire-path.html",
                 outfits: [
