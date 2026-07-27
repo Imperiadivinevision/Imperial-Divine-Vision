@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queen Rosanna: Sovereign Path - Stage One (Developer's Edition)</title>
+    <title>Queen Rosanna: Sovereign Path - Stage One (Market Journey)</title>
     <style>
         :root {
             --bg-dark: #050407;
@@ -44,7 +44,6 @@
             position: relative;
         }
 
-        /* Developer's Signature Watermark Seal */
         .dev-watermark {
             position: absolute;
             top: 15px;
@@ -147,7 +146,6 @@
             transform: translateY(-2px);
         }
 
-        /* Gallery and Shop Section */
         .gallery-section {
             max-width: 900px;
             width: 100%;
@@ -184,30 +182,31 @@
         <div class="dev-watermark">✦ Architect Signature: Core Logic v1.45 ✦</div>
         
         <div class="hud-bar">
-            <span>Stage One: Childhood & Prophecy</span>
+            <span>Stage One: Market Encounter & Beginnings</span>
             <span>Coins: <span id="coin-count">0</span> | Prince Ian Affection: <span id="affection-count">0</span></span>
         </div>
 
-        <div class="chapter-title" id="scene-title">✦ The Starlit Awakening & The First Vow ✦</div>
+        <div class="chapter-title" id="scene-title">✦ The Busy Market & Early Merchant Profits ✦</div>
         
         <div class="video-player-box" id="media-container">
+            <!-- Updated to point directly to the market encounter and merchant profit scene -->
             <video id="cinematic-video" controls autoplay>
-                <source src="save-return-home-rosanna-cinematic.mp4" type="video/mp4">
+                <source src="vip-galaries-4.png" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
 
         <div class="story-text" id="story-narrative">
-            [Developer's Note: Beneath the quiet slumber of the village, a deeper code awakens. The stars themselves align to trace Rosanna's destiny. Every choice here forms a permanent bridge in the architecture of her soul.]
+            [Developer's Note: The bustling market echoes with the sounds of trade. Here, amidst the lively stalls, Rosanna calculates her early merchant profits and looks toward the path of destiny.]
         </div>
 
         <div class="dialogue-prompt" id="character-dialogue">
-            Narrator: "The night whispers of a crown yet to be forged. Will you stay within the veil of safety, or step into the vast, beautiful unknown?"
+            Narrator: "The marketplace yields its treasures, but a starlit call beckons beyond the stalls. Will you follow the trade route or wander into the night?"
         </div>
 
         <div class="choices-area" id="choices-container">
-            <button class="choice-btn" onclick="chooseWanderPath()">1. Step into the night: Embrace the cosmic unknown (+100 Coins reward!)</button>
-            <button class="choice-btn" onclick="chooseSafePath()">2. Remain sheltered: Follow the safe, quiet path of routine.</button>
+            <button class="choice-btn" onclick="chooseWanderPath()">1. Leave the market stalls and wander into the starlit night (+100 Coins reward!)</button>
+            <button class="choice-btn" onclick="chooseSafePath()">2. Conclude trading and return home safely with profits.</button>
         </div>
     </div>
 
@@ -253,8 +252,8 @@
             document.getElementById('scene-title').innerText = "✦ Ocean Encounter & Prince Ian ✦";
             mediaContainer.innerHTML = `<video controls autoplay><source src="God-calling-accomplish-cinematic.mp4" type="video/mp4"></video>`;
             
-            document.getElementById('story-narrative').innerText = "[Developer's Note: By breaking routine, Rosanna reaches the edge of the sea. Here, beneath starlight and water, the first true bond is sparked.]";
-            document.getElementById('character-dialogue').innerText = "Prince Ian: 'You came... the stars told me someone would.'"
+            document.getElementById('story-narrative').innerText = "[Developer's Note: Leaving the market behind, Rosanna reaches the edge of the sea. Here, beneath starlight and water, the first true bond is sparked.]";
+            document.getElementById('character-dialogue').innerText = "Prince Ian: 'You came... the stars told me someone would.'";
             
             document.getElementById('choices-container').innerHTML = `
                 <button class="choice-btn" onclick="spendMoreTimeWithIan()">1. Hover in starlight: Spend extra time with Prince Ian (+50 Affection)</button>
@@ -280,11 +279,11 @@
 
         function chooseSafePath() {
             const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Safe Return Home ✦";
+            document.getElementById('scene-title').innerText = "✦ Safe Return Home with Profits ✦";
             mediaContainer.innerHTML = `<video controls autoplay><source src="rosanna-safe-return-home.mp4" type="video/mp4"></video>`;
             
-            document.getElementById('story-narrative').innerText = "[Developer's Note: Safety offers rest, but destiny waits for no one. Rosanna returns to warmth, wrapped safely in the arms of her family.]";
-            document.getElementById('character-dialogue').innerText = "Jirmak: 'Rest well, little one. Tomorrow brings new light.'";
+            document.getElementById('story-narrative').innerText = "[Developer's Note: The market profits are secured, and Rosanna returns to the warmth of home, wrapped safely in family security.]";
+            document.getElementById('character-dialogue').innerText = "Jirmak: 'A successful day of trade, little one. Rest well.'";
             
             document.getElementById('choices-container').innerHTML = `
                 <button class="choice-btn" onclick="openGalleryAndRecap()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
