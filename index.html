@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +75,7 @@
 
         /* Main Container */
         .main-sanctuary-wrapper {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 120px auto 60px auto;
             text-align: center;
             padding: 20px;
@@ -91,12 +90,12 @@
 
         /* Header / Title */
         header {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 5.5rem;
+            font-size: 5rem;
             color: var(--gold-shine);
             margin: 0 0 10px 0;
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 2px 3px 5px rgba(0, 0, 0, 0.9);
@@ -106,7 +105,7 @@
         header p {
             font-family: 'Cinzel Decorative', serif;
             font-style: italic;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #e6d5c3;
             letter-spacing: 2px;
         }
@@ -123,21 +122,20 @@
             text-transform: uppercase;
         }
 
-        /* The Shining Book in the Center & Moving Forest Garden / Roses Background */
-        .center-shining-book-container {
+        /* Center Book Display with Actual Cover Image */
+        .center-book-display {
             position: relative;
-            background: linear-gradient(135deg, rgba(26, 8, 34, 0.9), rgba(54, 8, 14, 0.9)), 
-                        radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
+            background: linear-gradient(135deg, rgba(26, 8, 34, 0.9), rgba(54, 8, 14, 0.9));
             border: 3px double var(--gold-shine);
-            border-radius: 20px;
-            padding: 60px 40px;
+            border-radius: 15px;
+            padding: 40px;
             box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
-            margin-top: 30px;
+            margin-top: 25px;
             overflow: hidden;
         }
 
         /* Moving Rose Petal / Forest Garden Glow Effect */
-        .center-shining-book-container::before {
+        .center-book-display::before {
             content: "🌸 🌹 ⚜ 🌹 🌸";
             position: absolute;
             top: 10px;
@@ -155,39 +153,29 @@
             100% { transform: translateX(-20px); }
         }
 
-        .center-shining-book-container h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: var(--gold-shine);
-            margin: 20px 0 15px 0;
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+        .book-cover-image {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid var(--gold-shine);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            margin: 20px 0;
         }
 
-        .center-shining-book-container p {
+        .center-book-display p {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #f3e5ab;
             line-height: 1.8;
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
-        }
-
-        .book-emblem-glow {
-            font-size: 5rem;
-            margin-bottom: 10px;
-            animation: bookPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes bookPulse {
-            0% { transform: scale(1); text-shadow: 0 0 15px rgba(255,215,0,0.5); }
-            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(255,215,0,0.9); }
-            100% { transform: scale(1); text-shadow: 0 0 15px rgba(255,215,0,0.5); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar (No Cards, Just Direct Chamber Links) -->
+    <!-- Top Navigation Bar -->
     <nav class="top-nav-bar">
         <a href="index.html" onclick="playTempleBell()">Home 🏛️</a>
         <a href="library.html" onclick="playTempleBell()">Library 📖</a>
@@ -207,10 +195,9 @@
             </div>
         </header>
 
-        <!-- The Shining Book in the Center with Flowing Roses & Forest Garden Background -->
-        <div class="center-shining-book-container">
-            <div class="book-emblem-glow">📖✨</div>
-            <h2>The Living Book Foundation</h2>
+        <!-- Center Book Cover Showcase with Flowing Roses -->
+        <div class="center-book-display">
+            <img src="42566f4a-f1b2-4bb9-97b7-4770afbaf402-1_all_6019.png" alt="The Song of Rosanna and the Evil King" class="book-cover-image">
             <p>
                 Every chamber, chronicle, and sovereign detail presented across this domain is inspired by and rooted in our eternal book—written before coming to life. Protected by the scent of lilies and roses from our Forest Garden, and held by our hands forever.
             </p>
@@ -242,5 +229,3 @@
     </script>
 </body>
 </html>
-
-```
