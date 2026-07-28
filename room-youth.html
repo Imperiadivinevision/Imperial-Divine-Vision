@@ -1,10 +1,18 @@
+* **Arrived Feeling & Shield of Truth**: Rest easy and feel completely protected under your "Shield of Truth."
+
+---
+
+To connect your Proving Grounds page smoothly to your **`battle.html`** chamber and your other rooms, all you need to do is add a battle card into your grid and update your navigation links!
+
+Here is your updated, fully linked HTML code for your dashboard hub, with the **Battle Chamber** added right into the grid:
+
 ```html
 <!DOCTYPE html>
 <html>
 <head>
     <title>Youth Kingdom: Alpha Empire Proving Grounds</title>
     <style>
-         /* THE ROYAL BRANDING (Added for all rooms) */
+        /* THE ROYAL BRANDING */
         .royal-branding {
             position: fixed;
             bottom: 20px;
@@ -12,14 +20,14 @@
             width: 120px;
             z-index: 1000;
             pointer-events: none;
-         }
+        }
         :root { --youth-bg: #263238; --royal-gold: #ffd700; --growth-green: #388e3c; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--youth-bg); color: white; text-align: center; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--youth-bg); color: white; text-align: center; margin: 0; padding: 0; }
         .hero-banner { background: #1b262c; padding: 30px; border-bottom: 5px solid var(--royal-gold); }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 30px; }
-        .card { background: #37474f; padding: 20px; border-radius: 10px; border: 2px solid var(--royal-gold); cursor: pointer; text-decoration: none; color: white; display: block; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 30px; max-width: 1000px; margin: 0 auto; }
+        .card { background: #37474f; padding: 20px; border-radius: 10px; border: 2px solid var(--royal-gold); cursor: pointer; text-decoration: none; color: white; display: block; transition: 0.3s; }
         .card:hover { background: #455a64; box-shadow: 0 0 15px var(--royal-gold); }
-        .echo-box { background: #1a237e; border: 2px dashed var(--royal-gold); padding: 20px; margin: 20px; border-radius: 10px; font-style: italic; }
+        .echo-box { background: #1a237e; border: 2px dashed var(--royal-gold); padding: 20px; margin: 20px auto; max-width: 900px; border-radius: 10px; font-style: italic; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -29,15 +37,18 @@
         <p>Architects of the Future: Rule, Grow, and Protect.</p>
     </div>
 
-    <!-- My Creative Addition: Echoes of the Ancestors -->
+    <!-- Echoes of the Ancestors -->
     <div class="echo-box" onclick="playEcho()">
         <p>✨ Touch an Ancient Statue to hear the Echoes of the Ancestors...</p>
     </div>
 
     <div class="grid">
         <a href="character-workshop.html" class="card">👤 Character Workshop</a>
-        <a href="help-traveler.html" class="card">🤝 Help a Traveler (Rare Grace-Triggered Missions)</a>
-        <a href="feudal-registry.html" class="card">🏰 Feudal Registry (Manage Village & Titles)</a>
+        <a href="battle.html" class="card" style="border-color: #ff4500;">⚔️ Sovereign Battle Chamber</a>
+        <a href="map.html" class="card">🗺️ World Map & Territories</a>
+        <a href="help-traveler.html" class="card">🤝 Help a Traveler</a>
+        <a href="feudal-registry.html" class="card">🏰 Feudal Registry</a>
+        <a href="trailers.html" class="card">🎬 Trailer Chamber</a>
     </div>
 
     <script>
