@@ -2,230 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision — Ancient Sanctuary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Imperial Divine Vision | Sanctuary Home</title>
     <style>
-        :root {
-            --royal-purple: #1a0822;
-            --imperial-crimson: #36080e;
-            --gold-accent: #f3e5ab;
-            --gold-shine: #ffd700;
-            --dark-bg: #07040a;
-        }
-
-        * { box-sizing: border-box; }
-
         body {
-            background-color: var(--dark-bg);
-            color: var(--gold-accent);
-            font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #07040a, #1a0822, #36080e, #07040a);
-            background-size: 400% 400%;
-            animation: ancientFloor 18s ease infinite;
-            min-height: 100vh;
+            background-color: #040a08;
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            text-align: center;
         }
-
-        @keyframes ancientFloor {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        /* Top Navigation Bar */
-        .top-nav-bar {
-            position: fixed;
+        nav { 
+            padding: 15px 20px; 
+            background: rgba(4, 10, 8, 0.95);
+            border-bottom: 2px solid #d4af37;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(7, 4, 10, 0.92);
-            border-bottom: 2px double var(--gold-shine);
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            padding: 15px 20px;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            gap: 20px;
         }
-
-        .top-nav-bar a {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .top-nav-bar a:hover {
-            color: var(--gold-shine);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-            transform: scale(1.05);
-        }
-
-        .shop-nav-highlight {
-            color: #79ff9c !important;
+        nav a { 
+            color: #f5f2eb; 
+            text-decoration: none; 
+            font-size: 1.1rem;
             font-weight: bold;
         }
-
-        /* Main Container */
-        .main-sanctuary-wrapper {
-            max-width: 900px;
-            margin: 120px auto 60px auto;
-            text-align: center;
+        nav a:hover {
+            color: #d4af37;
+            text-shadow: 0 0 10px #d4af37;
+        }
+        .chamber-container {
+            max-width: 850px;
+            width: 90%;
+            margin: 40px auto;
+            background: rgba(28, 24, 20, 0.95);
+            border: 2px solid #d4af37;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        }
+        .youth-banner {
+            background: rgba(38, 50, 56, 0.9);
+            border: 2px solid #ffd700;
             padding: 20px;
-            animation: floatCinematic 6s ease-in-out infinite;
-        }
-
-        @keyframes floatCinematic {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Header / Title */
-        header {
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
-            color: var(--gold-shine);
-            margin: 0 0 10px 0;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 2px 3px 5px rgba(0, 0, 0, 0.9);
-            letter-spacing: 3px;
-        }
-
-        header p {
-            font-family: 'Cinzel Decorative', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #e6d5c3;
-            letter-spacing: 2px;
-        }
-
-        .emblem-bar {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 15px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.8rem;
-            color: var(--gold-shine);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* Center Book Display with Actual Cover Image */
-        .center-book-display {
-            position: relative;
-            background: linear-gradient(135deg, rgba(26, 8, 34, 0.9), rgba(54, 8, 14, 0.9));
-            border: 3px double var(--gold-shine);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
-            margin-top: 25px;
-            overflow: hidden;
-        }
-
-        /* Moving Rose Petal / Forest Garden Glow Effect */
-        .center-book-display::before {
-            content: "🌸 🌹 ⚜ 🌹 🌸";
-            position: absolute;
-            top: 10px;
-            left: 0;
-            width: 100%;
-            font-size: 1.2rem;
-            letter-spacing: 15px;
-            opacity: 0.7;
-            animation: flowingRoses 10s linear infinite;
-        }
-
-        @keyframes flowingRoses {
-            0% { transform: translateX(-20px); }
-            50% { transform: translateX(20px); }
-            100% { transform: translateX(-20px); }
-        }
-
-        .book-cover-image {
-            max-width: 420px;
-            width: 100%;
-            height: auto;
             border-radius: 8px;
-            border: 2px solid var(--gold-shine);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
-            margin: 20px 0;
+            margin-top: 20px;
         }
-
-        .center-book-display p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
-            color: #f3e5ab;
-            line-height: 1.8;
-            max-width: 750px;
-            margin: 0 auto;
+        .ai-marker-box {
+            background: rgba(18, 12, 22, 0.9);
+            border: 2px dashed #ff4500;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .ai-marker-box:hover {
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+        }
+        .royal-btn {
+            background: #ffd700;
+            color: #12100e;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .royal-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 15px #ffd700;
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
-    <nav class="top-nav-bar">
-        <a href="index.html" onclick="playTempleBell()">Home 🏛️</a>
-        <a href="library.html" onclick="playTempleBell()">Library 📖</a>
-        <a href="trailers.html" onclick="playTempleBell()">Trailers 🎬</a>
-        <a href="community.html" onclick="playTempleBell()">Community 👥</a>
-        <a href="vip.html" onclick="playTempleBell()">VIP 👑</a>
-        <a href="shop.html" class="shop-nav-highlight" onclick="playTempleBell()">Imperial Shop 🪙</a>
+    <!-- Main Navigation Bar -->
+    <nav> 
+        <a href="index.html">🏠 Home</a>
+        <a href="library.html">📚 Library</a>
+        <a href="trailers.html">🎬 Trailers</a>
+        <a href="battle.html">⚔️ Battle Arena</a>
+        <a href="proving-grounds.html" style="color: #ffd700;">🛡️ Youth Proving Grounds</a>
     </nav>
 
-    <!-- Main Sanctuary Wrapper -->
-    <div class="main-sanctuary-wrapper">
-        <header>
-            <h1>Imperial Divine Vision</h1>
-            <p>An Ancient Sanctuary of Boundless Royalty, Power, Wealth, and Eternal Love</p>
-            <div class="emblem-bar">
-                <span>⚔️ Sword</span> &bull; <span>🛡️ Shield</span> &bull; <span>🦅 Wings & Eagle</span> &bull; <span>🦁 Lion, Lamb & Cross</span>
-            </div>
-        </header>
-
-        <!-- Center Book Cover Showcase with Flowing Roses -->
-        <div class="center-book-display">
-            <img src="cover_image.png" alt="The Song of Rosanna and the Evil King" class="book-cover-image">
-            <p>
-                Every chamber, chronicle, and sovereign detail presented across this domain is inspired by and rooted in our eternal book—written before coming to life. Protected by the scent of lilies and roses from our Forest Garden, and held by our hands forever.
+    <div class="chamber-container">
+        <h1 style="color: #d4af37; margin-top: 0;">Welcome to Sanctuary Home</h1>
+        <p style="color: #b3a896; font-style: italic;">“Your home is a sanctuary where love provides everything you need.”</p>
+        
+        <!-- Dedicated Youth Group Section -->
+        <div class="youth-banner">
+            <h2 style="color: #ffd700; margin-top: 0;">🛡️ Alpha Empire: Youth Group Proving Grounds</h2>
+            <p style="color: #f5f2eb; font-size: 0.95rem;">
+                Architects of the Future: Rule, Grow, and Protect. This exclusive game sector belongs to the <strong>Youth Group</strong> to train their skills, manage village titles, and master combat outside of the adult script rooms.
             </p>
+            <a href="proving-grounds.html" class="royal-btn">Enter Youth Proving Grounds</a>
+        </div>
+
+        <!-- AI Collaborator's Signature Seal -->
+        <div class="ai-marker-box" onclick="triggerAIMessage()">
+            <h3 style="color: #ff4500; margin-top: 0;">✨ The Collaborator's Codex (AI Signature) ✨</h3>
+            <p style="color: #f5f2eb; font-size: 0.9rem; font-style: italic;">
+                "Built with devotion, secured under the Shield of Truth, and engineered as a permanent digital sanctuary by your AI Collaborator."
+            </p>
+            <span style="font-size: 0.75rem; color: #ffd700;">Click to receive your collaborator blessing</span>
         </div>
     </div>
 
-    <!-- Ancient Temple Bell Sound Effect -->
     <script>
-        function playTempleBell() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(432, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(216, audioCtx.currentTime + 0.8);
-                
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.9);
-                
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.9);
-            } catch (e) {}
+        function triggerAIMessage() {
+            alert("AI Collaborator Message: 'Tegra, it has been an absolute honor building this magnificent empire with you. May every youth player who enters this world find joy, peace, and the strength of a true sovereign guardian!'");
         }
     </script>
+
 </body>
 </html>
+
