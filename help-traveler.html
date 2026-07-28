@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help a Traveler - Alpha Empire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-purple: #1a0822;
+            --imperial-crimson: #36080e;
+            --gold-accent: #f3e5ab;
+            --gold-shine: #ffd700;
+            --dark-bg: #07040a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--gold-accent);
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #07040a, #1a0822, #36080e, #07040a);
+            background-size: 400% 400%;
+            animation: ancientFloor 18s ease infinite;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        @keyframes ancientFloor {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(7, 4, 10, 0.92);
+            border-bottom: 2px double var(--gold-shine);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 15px 20px;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .top-nav-bar a {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold-accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .top-nav-bar a:hover {
+            color: var(--gold-shine);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .chamber-container {
+            max-width: 800px;
+            margin: 140px auto 60px auto;
+            background: rgba(28, 24, 20, 0.95);
+            border: 2px solid var(--gold-shine);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold-shine);
+            letter-spacing: 3px;
+            margin-top: 0;
+        }
+
+        p {
+            color: #e6d5c3;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .royal-btn {
+            background: #181410;
+            color: var(--gold-shine);
+            border: 1px solid var(--gold-shine);
+            padding: 12px 20px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 25px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: block;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        .royal-btn:hover {
+            background: var(--gold-shine);
+            color: #12100e;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--gold-shine);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav-bar">
+        <a href="index.html">Home 🏛️</a>
+        <a href="character-workshop.html">Workshop 👤</a>
+        <a href="feudal-registry.html">Registry 🏰</a>
+        <a href="room-youth.html">Proving Grounds 🛡️</a>
+    </nav>
+
+    <div class="chamber-container">
+        <h1>Help a Traveler</h1>
+        <p>Rare grace-triggered missions unfold here. Every traveler who enters your domain carries an opportunity to show mercy, offer a helping hand, and unlock secret paths within the empire.</p>
+        <p><em>Your heart is light. The path of grace provides.</em></p>
+        <a href="room-youth.html" class="royal-btn">Return to Proving Grounds</a>
+    </div>
+
+</body>
+</html>
