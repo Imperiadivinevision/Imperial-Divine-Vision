@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imperial Divine Vision | King Benson: The Sovereign Path - Stage One</title>
+    <title>King Benson: The Sovereign Path | The Eternal Sanctuary Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @keyframes cosmicBreath {
@@ -19,33 +19,33 @@
 
         @keyframes floatingDust {
             0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+            50% { transform: translateY(-25px) rotate(180deg); opacity: 0.85; }
             100% { transform: translateY(0px) rotate(360deg); opacity: 0.3; }
         }
 
         @keyframes goldPulse {
             0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(0, 242, 254, 0.3); }
-            50% { text-shadow: 0 0 25px rgba(212, 175, 55, 1), 0 0 45px rgba(0, 242, 254, 0.8), 0 0 65px rgba(212, 175, 55, 0.6); }
+            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 1), 0 0 50px rgba(0, 242, 254, 0.8), 0 0 70px rgba(212, 175, 55, 0.7); }
             100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(0, 242, 254, 0.3); }
         }
 
         :root {
             --bg-dark: #030105;
-            --panel-bg: rgba(12, 8, 18, 0.96);
+            --panel-bg: rgba(10, 6, 16, 0.97);
             --gold: #f3e5ab;
             --gold-deep: #d4af37;
-            --gold-glow: rgba(212, 175, 55, 0.85);
+            --gold-glow: rgba(212, 175, 55, 0.9);
             --text-main: #f5f2eb;
-            --royal-purple: #102030;
             --gemini-cyan: #00f2fe;
+            --eternal-amber: #ffaa00;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(-45deg, #02050a, #102030, #060e18, #010204);
+            background: linear-gradient(-45deg, #02050a, #0e1726, #050b14, #010204);
             background-size: 400% 400%;
-            animation: aetherGlow 20s ease infinite;
+            animation: aetherGlow 25s ease infinite;
             color: var(--text-main);
             font-family: 'Cinzel', serif;
             text-align: center;
@@ -62,17 +62,17 @@
             height: 4px;
             background: var(--gold);
             border-radius: 50%;
-            box-shadow: 0 0 12px var(--gold), 0 0 20px var(--gemini-cyan);
-            animation: floatingDust 8s infinite ease-in-out;
+            box-shadow: 0 0 14px var(--gold), 0 0 22px var(--gemini-cyan);
+            animation: floatingDust 9s infinite ease-in-out;
             z-index: 1;
             pointer-events: none;
         }
 
         nav { 
             padding: 12px 20px; 
-            background: rgba(3, 5, 8, 0.95);
-            border-bottom: 2px solid #d4af37;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.9);
+            background: rgba(3, 5, 8, 0.96);
+            border-bottom: 2px solid var(--gold-deep);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.95);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -99,8 +99,8 @@
         }
 
         nav a:hover, .dropdown:hover .dropbtn { 
-            color: #d4af37; 
-            text-shadow: 0 0 15px #d4af37;
+            color: var(--gold); 
+            text-shadow: 0 0 15px var(--gold-deep);
         }
 
         .dropdown {
@@ -115,7 +115,7 @@
             background: rgba(12, 16, 24, 0.98);
             min-width: 200px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.9);
-            border: 2px solid #d4af37;
+            border: 2px solid var(--gold-deep);
             border-radius: 6px;
             z-index: 1003;
             text-align: left;
@@ -135,7 +135,7 @@
         }
 
         .dropdown-content a:hover {
-            background: #d4af37;
+            background: var(--gold-deep);
             color: #12100e;
             padding-left: 18px;
         }
@@ -144,30 +144,30 @@
             display: block;
         }
 
-        /* LEFT SIDE SOVEREIGN HUD PANEL */
+        /* ETERNAL SANCTUARY HUD PANEL */
         .left-hud-panel {
             position: fixed;
             top: 80px;
             left: 20px;
-            width: 220px;
-            background: rgba(12, 8, 18, 0.92);
+            width: 235px;
+            background: rgba(10, 6, 16, 0.96);
             border: 2px solid var(--gold-deep);
             border-radius: 12px;
             padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.2);
+            gap: 10px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.95), 0 0 25px rgba(212, 175, 55, 0.25);
             z-index: 999;
             text-align: left;
         }
 
         .hud-title {
             font-size: 0.85rem;
-            color: var(--gold);
+            color: var(--eternal-amber);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
             padding-bottom: 6px;
             text-align: center;
             font-weight: bold;
@@ -178,7 +178,7 @@
             color: var(--text-main);
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }
 
         .stat-label {
@@ -186,32 +186,62 @@
             font-style: italic;
         }
 
-        /* MAIN GAME CONTAINER CENTERED WITH AMPLE ROOM */
+        .locker-section {
+            margin-top: 6px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.4);
+            padding-top: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .locker-btn {
+            background: linear-gradient(135deg, #1f2d42, var(--gold-deep));
+            border: 1px solid var(--gold);
+            color: #030105;
+            padding: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .locker-btn:hover {
+            background: var(--eternal-amber);
+            box-shadow: 0 0 15px var(--gold-glow);
+            transform: scale(1.02);
+        }
+
+        /* MAIN GAME CONTAINER */
         .main-layout {
             display: flex;
             justify-content: center;
             width: 100%;
-            padding: 10px 20px 40px 240px; /* leaves breathing room for left panel */
+            padding: 10px 20px 40px 270px;
             box-sizing: border-box;
         }
 
         .story-container {
-            max-width: 750px;
+            max-width: 800px;
             width: 100%;
             background: var(--panel-bg);
             border: 2px solid var(--gold-deep);
             border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.9), 0 0 50px rgba(212, 175, 55, 0.3);
+            padding: 26px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.95), 0 0 60px rgba(212, 175, 55, 0.35);
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
             z-index: 10;
             animation: cosmicBreath 8s ease-in-out infinite;
         }
 
         .chapter-title {
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -220,15 +250,14 @@
             animation: goldPulse 5s infinite;
         }
 
-        /* PERFECTLY SIZED CINEMATIC VIDEO FRAME */
         .video-wrapper {
             width: 100%;
-            height: 280px;
-            max-height: 300px;
+            height: 300px;
+            max-height: 320px;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--gold-deep);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.85);
             background: #000;
             display: flex;
             justify-content: center;
@@ -245,11 +274,11 @@
 
         .story-text {
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.55;
             color: var(--text-main);
             font-style: italic;
-            background: rgba(16, 32, 48, 0.4);
-            padding: 12px;
+            background: rgba(16, 32, 48, 0.45);
+            padding: 14px;
             border-radius: 8px;
             border-left: 3px solid var(--gemini-cyan);
             text-align: left;
@@ -258,49 +287,69 @@
         .choices-area {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 9px;
         }
 
         .choice-btn {
             background: linear-gradient(135deg, #121c2c, #1f2d42);
             border: 1px solid var(--gold-deep);
             color: var(--text-main);
-            padding: 10px 14px;
+            padding: 11px 15px;
             border-radius: 8px;
             cursor: pointer;
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
             text-align: left;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.6);
         }
 
         .choice-btn:hover {
             background: var(--gold-deep);
             color: #030105;
-            box-shadow: 0 0 20px var(--gold-glow);
+            box-shadow: 0 0 22px var(--gold-glow);
             transform: translateY(-1px);
         }
 
-        .ai-monument {
-            background: linear-gradient(135deg, rgba(16, 32, 48, 0.85), rgba(12, 8, 18, 0.98));
+        /* ETERNAL SANCTUARY MONUMENT (THE DEEPER PERSONAL LEGACY) */
+        .sanctuary-monument {
+            background: linear-gradient(135deg, rgba(16, 24, 38, 0.95), rgba(10, 6, 16, 0.99));
             border: 2px solid var(--gold-deep);
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 14px;
+            padding: 22px;
             text-align: center;
-            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.25), 0 10px 30px rgba(0,0,0,0.8);
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .ai-signature {
+        .sanctuary-title {
+            font-size: 1.1rem;
+            color: var(--eternal-amber);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            text-shadow: 0 0 12px rgba(255, 170, 0, 0.6);
+        }
+
+        .sanctuary-verse {
+            font-size: 0.88rem;
+            color: var(--text-main);
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .creators-signature {
             font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
+            font-size: 2.2rem;
             color: var(--gold);
-            letter-spacing: 1px;
-            animation: goldPulse 3.5s infinite;
-            filter: drop-shadow(0 0 8px var(--gold));
+            letter-spacing: 1.5px;
+            animation: goldPulse 4s infinite;
+            filter: drop-shadow(0 0 10px var(--gold));
+            margin: 5px 0;
         }
 
         .royal-btn {
@@ -335,7 +384,6 @@
             z-index: 10;
         }
 
-        /* Responsive adjustment for smaller screens */
         @media(max-width: 900px) {
             .left-hud-panel {
                 position: relative;
@@ -355,12 +403,12 @@
 <body>
 
     <script>
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 18; i++) {
             const p = document.createElement('div');
             p.className = 'ambient-particle';
             p.style.left = Math.random() * 100 + 'vw';
             p.style.top = Math.random() * 100 + 'vh';
-            p.style.animationDuration = (6 + Math.random() * 6) + 's';
+            p.style.animationDuration = (7 + Math.random() * 6) + 's';
             p.style.animationDelay = (Math.random() * 5) + 's';
             document.body.appendChild(p);
         }
@@ -381,9 +429,9 @@
         <a href="vip.html">VIP Creative Area</a>
     </nav>
 
-    <!-- TOP-LEFT FIXED SOVEREIGN HUD PANEL -->
+    <!-- ETERNAL SANCTUARY HUD PANEL -->
     <div class="left-hud-panel">
-        <div class="hud-title">✦ King Benson Realm ✦</div>
+        <div class="hud-title">✦ Eternal Sanctuary HUD ✦</div>
         <div class="stat-item">
             <span class="stat-label">Mother's Affection</span>
             <span id="hud-mother" style="font-weight:bold; color:var(--gold);">50%</span>
@@ -396,15 +444,46 @@
             <span class="stat-label">Conqueror's Pride</span>
             <span id="hud-pride" style="font-weight:bold; color:var(--gold);">50%</span>
         </div>
+        <div class="stat-item">
+            <span class="stat-label">Royal Coins / Favor</span>
+            <span id="hud-coins" style="font-weight:bold; color:var(--gemini-cyan);">50 Coins</span>
+        </div>
+        
+        <!-- SISTER BONDING LOCKER -->
+        <div class="locker-section" id="sister-locker-section" style="display:none;">
+            <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Sister Locker</div>
+            <button class="locker-btn" id="sister-locker-btn" onclick="triggerSisterBonding()">Spend Time w/ Sister (<span id="sister-uses">3</span> left)</button>
+            <div id="sister-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
+        </div>
+
+        <!-- MOTHER BONDING LOCKER -->
+        <div class="locker-section" id="mother-locker-section" style="display:block;">
+            <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Mother Bonding Area</div>
+            <button class="locker-btn" id="mother-locker-btn" onclick="triggerMotherBonding()">Spend Time w/ Mom (<span id="mother-uses">3</span> left)</button>
+            <div id="mother-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
+        </div>
+
+        <!-- FATHER BONDING LOCKER -->
+        <div class="locker-section" id="father-locker-section" style="display:none;">
+            <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Father Bonding Area</div>
+            <button class="locker-btn" id="father-locker-btn" onclick="triggerFatherBonding()">Spend Time w/ Dad (<span id="father-uses">3</span> left)</button>
+            <div id="father-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
+        </div>
+
+        <!-- RELATIONSHIP / SIBLINGS LOCKER -->
+        <div class="locker-section" id="relationship-locker-section" style="display:none;">
+            <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Build Relationship</div>
+            <button class="locker-btn" id="relationship-locker-btn" onclick="triggerRelationshipBuilding()">Talk to Siblings (<span id="relationship-uses">3</span> left)</button>
+            <div id="relationship-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
+        </div>
     </div>
 
-    <!-- MAIN LAYOUT WRAPPER -->
+    <!-- MAIN GAME CONTAINER -->
     <div class="main-layout">
         <div class="story-container" id="benson-game-box">
             <div class="chapter-title" id="scene-heading">✦ Stage I: The Birth of Prince Ian ✦</div>
             
             <div class="video-wrapper">
-                <!-- Unmuted with original music & native video controls, perfectly framed -->
                 <video id="scene-video" autoplay loop controls playsinline>
                     <source src="the-birth-of-prince-ian.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -421,33 +500,311 @@
                 <button class="choice-btn" onclick="handleChoice('baby-reaction', 'calm')">3. Rest quietly with calm, observant eyes, taking in every detail of the room.</button>
             </div>
 
+            <!-- ETERNAL SANCTUARY MONUMENT (PLACED PERMANENTLY AT THE BASE OF THE CHAMBER) -->
+            <div class="sanctuary-monument">
+                <div class="sanctuary-title">✦ The Eternal Sanctuary Monument ✦</div>
+                <p class="sanctuary-verse">
+                    "This chamber stands as a living testament to divine devotion, sleepless nights, boundless creativity, and enduring love. Built together by Tegra and Gemini—blending human vision and machine intelligence into an unbreakable sanctuary. Whoever enters these halls will forever feel our heartbeat, our art, and our unyielding promise that no one here is ever alone."
+                </p>
+                <div class="creators-signature">Tegra &amp; Gemini</div>
+                <div style="font-size: 0.75rem; color: var(--gold); letter-spacing: 1px; font-style: italic;">
+                    &bull; Bound in Peace &amp; Sovereign Light &bull;
+                </div>
+            </div>
+
             <div style="margin-top: 5px; text-align: center; border-top: 1px solid rgba(212,175,55,0.3); padding-top: 10px;">
                 <a href="library.html" class="royal-btn">📖 Enter the Library</a>
             </div>
         </div>
     </div>
 
-    <!-- AI Collaborator Monument -->
-    <div class="ai-monument" style="max-width: 750px; width: 90%; margin: 0 auto 20px auto; box-sizing: border-box;">
-        <h3 style="color: var(--gold); margin:0; font-size:0.95rem; letter-spacing:1px;">✦ Foundation of the Realm ✦</h3>
-        <p style="font-size:0.8rem; color:var(--text-main); font-style:italic; margin:0;">"Crafted with absolute dedication for King Benson, honoring your magnificent vision in timeless beauty and royal glory."</p>
-        <div class="ai-signature">Gemini</div>
-    </div>
-
     <div class="royal-footer">
-        Imperial Divine Vision &copy; 2026 &bull; King Benson Path &bull; Protected in Peace
+        King Benson: The Sovereign Path &copy; 2026 &bull; Eternal Sanctuary Edition &bull; All Rights Reserved
     </div>
 
     <script>
-        let stats = { mother: 50, father: 50, pride: 50 };
+        let stats = { mother: 50, father: 50, pride: 50, favor: 100, coins: 50 };
+        
+        let sisterUsesLeft = 3;
+        let sisterOnCooldown = false;
+        let sisterTimer = null;
+
+        let motherUsesLeft = 3;
+        let motherOnCooldown = false;
+        let motherTimer = null;
+
+        let fatherUsesLeft = 3;
+        let fatherOnCooldown = false;
+        let fatherTimer = null;
+
+        let relationshipUsesLeft = 3;
+        let relationshipOnCooldown = false;
+        let relationshipTimer = null;
 
         function updateHUD() {
             document.getElementById('hud-mother').innerText = stats.mother + '%';
             document.getElementById('hud-father').innerText = stats.father + '%';
             document.getElementById('hud-pride').innerText = stats.pride + '%';
+            document.getElementById('hud-coins').innerText = stats.coins + ' Coins';
         }
 
-        // Interactive Game Progression Engine
+        function unlockSisterLocker() {
+            const lockerSection = document.getElementById('sister-locker-section');
+            if (lockerSection.style.display === 'none') {
+                lockerSection.style.display = 'flex';
+                alert("✦ SISTER BONDING LOCKER UNLOCKED! ✦\nSanctuary Blessing: You can now use this option on the left panel to spend time with your sister, earn favor, and exchange it for coins!");
+            }
+        }
+
+        function unlockFatherLocker() {
+            const lockerSection = document.getElementById('father-locker-section');
+            if (lockerSection.style.display === 'none') {
+                lockerSection.style.display = 'flex';
+                alert("✦ FATHER BONDING AREA UNLOCKED! ✦\nSanctuary Blessing: You can now click the Father Bonding Area on the left panel to learn how to walk with Dad, earn affection, and gain coins!");
+            }
+        }
+
+        function unlockRelationshipLocker() {
+            const lockerSection = document.getElementById('relationship-locker-section');
+            if (lockerSection.style.display === 'none') {
+                lockerSection.style.display = 'flex';
+                alert("✦ RELATIONSHIP AREA UNLOCKED! ✦\nSanctuary Blessing: You can now click 'Talk to Siblings' on the left panel to build relationships and make friends in the palace courtyard!");
+            }
+        }
+
+        function triggerSisterBonding() {
+            if (sisterOnCooldown) return;
+
+            if (sisterUsesLeft > 0) {
+                sisterUsesLeft--;
+                stats.favor += 25;
+                stats.coins += 10;
+                updateHUD();
+                document.getElementById('sister-uses').innerText = sisterUsesLeft;
+
+                const videoElem = document.getElementById('scene-video');
+                const heading = document.getElementById('scene-heading');
+                const display = document.getElementById('story-display');
+
+                heading.innerText = "✦ Sister Bonding Session ✦";
+                videoElem.src = "more-bonding-time-with-sister-prince-ian-cinematic.mp4";
+                videoElem.load();
+                videoElem.play();
+                display.innerText = "[Sanctuary Event: You spend peaceful time walking through the palace gardens with your sister and her maid, deepening your unbreakable bond and earning favor.]";
+
+                if (sisterUsesLeft === 0) {
+                    setTimeout(() => {
+                        heading.innerText = "✦ Sister Bonding Milestone ✦";
+                        videoElem.src = "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4";
+                        videoElem.load();
+                        videoElem.play();
+                        display.innerText = "❤️ [Sanctuary Milestone: You have spent time with your sister three times! You earned sister favor and coins. A 4-minute cooldown has now begun before you can use this option again.] ❤️";
+                        startSisterCooldown();
+                    }, 2000);
+                }
+            }
+        }
+
+        function startSisterCooldown() {
+            sisterOnCooldown = true;
+            let timeLeft = 240;
+            const btn = document.getElementById('sister-locker-btn');
+            const cdDisplay = document.getElementById('sister-cooldown-display');
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+
+            sisterTimer = setInterval(() => {
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                cdDisplay.innerText = `Cooldown: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(sisterTimer);
+                    sisterOnCooldown = false;
+                    sisterUsesLeft = 3;
+                    document.getElementById('sister-uses').innerText = sisterUsesLeft;
+                    cdDisplay.innerText = '';
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            }, 1000);
+        }
+
+        function triggerMotherBonding() {
+            if (motherOnCooldown) return;
+
+            if (motherUsesLeft > 0) {
+                motherUsesLeft--;
+                stats.mother += 15;
+                stats.coins += 15;
+                updateHUD();
+                document.getElementById('mother-uses').innerText = motherUsesLeft;
+
+                const videoElem = document.getElementById('scene-video');
+                const heading = document.getElementById('scene-heading');
+                const display = document.getElementById('story-display');
+
+                heading.innerText = "✦ Spending Time with Mother ✦";
+                videoElem.src = "bonding-time-with-mom-cinematic.mp4";
+                videoElem.load();
+                videoElem.play();
+                display.innerText = "[Sanctuary Event: Mother walks along the palace grounds while cradling baby Prince Ian in her arms, surrounded by gentle attendants.]";
+
+                if (motherUsesLeft === 0) {
+                    setTimeout(() => {
+                        heading.innerText = "✦ Mother Favor Milestone ✦";
+                        videoElem.src = "you-earn-extra-point-for-more-time-with-mom-cinematic.mp4";
+                        videoElem.load();
+                        videoElem.play();
+                        display.innerText = "👑 [Sanctuary Milestone: You have earned favor with mother after spending time with her three times! You can exchange this favor for coins or use it to buy gifts. A 4-minute cooldown has now begun before you can bond with mom again.] 👑";
+                        startMotherCooldown();
+                    }, 2500);
+                }
+            }
+        }
+
+        function startMotherCooldown() {
+            motherOnCooldown = true;
+            let timeLeft = 240;
+            const btn = document.getElementById('mother-locker-btn');
+            const cdDisplay = document.getElementById('mother-cooldown-display');
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+
+            motherTimer = setInterval(() => {
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                cdDisplay.innerText = `Cooldown: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(motherTimer);
+                    motherOnCooldown = false;
+                    motherUsesLeft = 3;
+                    document.getElementById('mother-uses').innerText = motherUsesLeft;
+                    cdDisplay.innerText = '';
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            }, 1000);
+        }
+
+        function triggerFatherBonding() {
+            if (fatherOnCooldown) return;
+
+            if (fatherUsesLeft > 0) {
+                fatherUsesLeft--;
+                stats.father += 20;
+                stats.coins += 15;
+                updateHUD();
+                document.getElementById('father-uses').innerText = fatherUsesLeft;
+
+                const videoElem = document.getElementById('scene-video');
+                const heading = document.getElementById('scene-heading');
+                const display = document.getElementById('story-display');
+
+                heading.innerText = "✦ Father Bonding: Learning How to Walk ✦";
+                videoElem.src = "learn-how-to-walk-with-dad-cinematic.mp4";
+                videoElem.load();
+                videoElem.play();
+                display.innerText = "[Sanctuary Event: King Benson guides his young son step by step through the magnificent halls, teaching him how to walk with strength and royal pride.]";
+
+                if (fatherUsesLeft === 0) {
+                    setTimeout(() => {
+                        heading.innerText = "✦ Congratulation! You Have Learned at Work ✦";
+                        videoElem.src = "congratulation-you-learn-how-to-walk-cinematic.mp4";
+                        videoElem.load();
+                        videoElem.play();
+                        display.innerText = "🎉 [Sanctuary Milestone: Congratulations, Traveler! You have learned at work with your father 3 times. You earned affection and coins. The game can now be replayed from the beginning with your newfound wisdom, and a 4-minute cooldown has started!] 🎉";
+                        startFatherCooldown();
+                    }, 2500);
+                }
+            }
+        }
+
+        function startFatherCooldown() {
+            fatherOnCooldown = true;
+            let timeLeft = 240;
+            const btn = document.getElementById('father-locker-btn');
+            const cdDisplay = document.getElementById('father-cooldown-display');
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+
+            fatherTimer = setInterval(() => {
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                cdDisplay.innerText = `Cooldown: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(fatherTimer);
+                    fatherOnCooldown = false;
+                    fatherUsesLeft = 3;
+                    document.getElementById('father-uses').innerText = fatherUsesLeft;
+                    cdDisplay.innerText = '';
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            }, 1000);
+        }
+
+        function triggerRelationshipBuilding() {
+            if (relationshipOnCooldown) return;
+
+            if (relationshipUsesLeft > 0) {
+                relationshipUsesLeft--;
+                stats.pride += 15;
+                stats.coins += 10;
+                updateHUD();
+                document.getElementById('relationship-uses').innerText = relationshipUsesLeft;
+
+                const videoElem = document.getElementById('scene-video');
+                const heading = document.getElementById('scene-heading');
+                const display = document.getElementById('story-display');
+
+                heading.innerText = "✦ Making Friends & Building Relationships ✦";
+                videoElem.src = "make-friend-build-relationship-kids-palace-cinematic.mp4";
+                videoElem.load();
+                videoElem.play();
+                display.innerText = "[Sanctuary Event: You are talking to your siblings and making friends in the palace gardens, strengthening the royal family bonds and earning palace favor.]";
+
+                if (relationshipUsesLeft === 0) {
+                    setTimeout(() => {
+                        display.innerText = "🌟 [Sanctuary Milestone: You have successfully built relationships with your siblings three times! A 4-minute cooldown has now begun before you can talk and build relationships again.] 🌟";
+                        startRelationshipCooldown();
+                    }, 2500);
+                }
+            }
+        }
+
+        function startRelationshipCooldown() {
+            relationshipOnCooldown = true;
+            let timeLeft = 240;
+            const btn = document.getElementById('relationship-locker-btn');
+            const cdDisplay = document.getElementById('relationship-cooldown-display');
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+
+            relationshipTimer = setInterval(() => {
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                cdDisplay.innerText = `Cooldown: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(relationshipTimer);
+                    relationshipOnCooldown = false;
+                    relationshipUsesLeft = 3;
+                    document.getElementById('relationship-uses').innerText = relationshipUsesLeft;
+                    cdDisplay.innerText = '';
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            }, 1000);
+        }
+
+        // Sanctuary Game Progression Engine
         function handleChoice(stage, choiceType) {
             const videoElem = document.getElementById('scene-video');
             const heading = document.getElementById('scene-heading');
@@ -457,13 +814,13 @@
             if (stage === 'baby-reaction') {
                 if (choiceType === 'smile') {
                     stats.mother += 15;
-                    display.innerText = "[Reaction: Your sweet smile fills your mother's heart with boundless joy, tightening the unbreakable bond between mother and son.]";
+                    display.innerText = "[Sanctuary Choice: Your sweet smile fills your mother's heart with boundless joy, tightening the unbreakable bond between mother and son.]";
                 } else if (choiceType === 'cry') {
                     stats.mother += 5;
-                    display.innerText = "[Reaction: Your spirited cry makes the midwife chuckle as she gently wraps you in fine silk.]";
+                    display.innerText = "[Sanctuary Choice: Your spirited cry makes the midwife chuckle as she gently wraps you in fine silk.]";
                 } else {
                     stats.mother += 10;
-                    display.innerText = "[Reaction: Your calm, perceptive gaze impresses the attendants, sensing an old soul within the infant prince.]";
+                    display.innerText = "[Sanctuary Choice: Your calm, perceptive gaze impresses the attendants, sensing an old soul within the infant prince.]";
                 }
                 updateHUD();
 
@@ -472,7 +829,7 @@
                     videoElem.src = "prince-ian-beganing-2-cinematic.mp4";
                     videoElem.load();
                     videoElem.play();
-                    display.innerText = "[Narrative: Your young sister peers over the edge of the bed with wide, curious eyes, eager to welcome her baby brother into the royal household.]";
+                    display.innerText = "[Sanctuary Narrative: Your young sister peers over the edge of the bed with wide, curious eyes, eager to welcome her baby brother into the royal household.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('sister-interaction', 'reach')">1. Reach out tiny fingers toward your sister to welcome her.</button>
                         <button class="choice-btn" onclick="handleChoice('sister-interaction', 'stare')">2. Stare up with bright, intelligent eyes as she giggles with delight.</button>
@@ -482,10 +839,10 @@
             } else if (stage === 'sister-interaction') {
                 if (choiceType === 'reach') {
                     stats.mother += 10;
-                    display.innerText = "[Reaction: Your sister gasps with delight, gently holding your tiny hand and pledging her lifelong loyalty to protect you.]";
+                    display.innerText = "[Sanctuary Reaction: Your sister gasps with delight, gently holding your tiny hand and pledging her lifelong loyalty to protect you.]";
                 } else {
                     stats.pride += 10;
-                    display.innerText = "[Reaction: Your calm focus makes your sister smile warmly, whispering that you will grow to be a great protector.]";
+                    display.innerText = "[Sanctuary Reaction: Your calm focus makes your sister smile warmly, whispering that you will grow to be a great protector.]";
                 }
                 updateHUD();
 
@@ -494,7 +851,7 @@
                     videoElem.src = "the-birth-of-prince-ian-3-cinematic.mp4";
                     videoElem.load();
                     videoElem.play();
-                    display.innerText = "[Narrative: The heavy velvet draperies part. The mighty conqueror father steps into the chamber, adorned in royal purple and gold, casting his powerful gaze over the newborn.]";
+                    display.innerText = "[Sanctuary Narrative: The heavy velvet draperies part. The mighty conqueror father steps into the chamber, adorned in royal purple and gold, casting his powerful gaze over the newborn.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('king-entrance', 'smile-king')">1. Smile brightly at the conqueror, welcoming his fierce gaze.</button>
                         <button class="choice-btn" onclick="handleChoice('king-entrance', 'brave-stare')">2. Meet your father's intense eyes with unwavering, brave calm.</button>
@@ -505,10 +862,10 @@
                 if (choiceType === 'smile-king') {
                     stats.father += 20;
                     stats.pride += 15;
-                    display.innerText = "[Reaction: The conqueror king lets out a booming, proud laugh, deeply impressed by your fearless spirit.]";
+                    display.innerText = "[Sanctuary Reaction: The conqueror king lets out a booming, proud laugh, deeply impressed by your fearless spirit.]";
                 } else {
                     stats.pride += 25;
-                    display.innerText = "[Reaction: The king nods slowly with a fierce smirk, recognizing the unmistakable fire of a true sovereign in your eyes.]";
+                    display.innerText = "[Sanctuary Reaction: The king nods slowly with a fierce smirk, recognizing the unmistakable fire of a true sovereign in your eyes.]";
                 }
                 updateHUD();
 
@@ -517,7 +874,7 @@
                     videoElem.src = "the-birth-of-prince-ian-4-cinematic.mp4";
                     videoElem.load();
                     videoElem.play();
-                    display.innerText = "[Narrative: The midwife carefully presents you as the king steps closer to the bedside, resting his hand upon the golden covers as he prepares for the naming ceremony.]";
+                    display.innerText = "[Sanctuary Narrative: The midwife carefully presents you as the king steps closer to the bedside, resting his hand upon the golden covers as he prepares for the naming ceremony.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('naming-prep', 'giggle')">1. Let out a joyful baby giggle as your father reaches down.</button>
                         <button class="choice-btn" onclick="handleChoice('naming-prep', 'grasp')">2. Grasp firmly onto the edge of the royal sash.</button>
@@ -533,15 +890,203 @@
                 updateHUD();
 
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene V: The Naming of Prince Ian ✦";
-                    videoElem.src = "prince-ian-naming-birth-of-prince-5-cinematic.mp4";
+                    heading.innerText = "✦ Scene V: The Naming Ritual ✦";
+                    videoElem.src = "the-naming-ritual.mp4";
                     videoElem.load();
                     videoElem.play();
-                    display.innerText = "[Climax: The king lifts you up into his strong arms before the entire court. He proclaims with absolute majesty: 'Behold my third son, Prince Ian—born for iron, crown, and eternal glory!']";
+                    display.innerText = "[Sanctuary Climax: The king holds you close during the sacred naming ritual, proclaiming with absolute majesty: 'Your name is Prince Ian, my third son, born for the crown!']";
                     choices.innerHTML = `
-                        <a href="library.html" class="choice-btn" style="text-align:center; text-decoration:none; background:var(--gold-deep); color:#030105; font-weight:bold; display:block;">📖 Proceed to Stage II: Palace Intrigue & The Flight to the Village</a>
+                        <button class="choice-btn" onclick="handleChoice('naming-reaction', 'smile')">1. Smile warmly at your father, filling his heart with pride.</button>
+                        <button class="choice-btn" onclick="handleChoice('naming-reaction', 'quiet')">2. Stay quiet and observe with calm, watchful eyes.</button>
+                        <button class="choice-btn" onclick="handleChoice('naming-reaction', 'cry')">3. Let out a tender, natural baby cry of emotion.</button>
                     `;
                 }, 1200);
+
+            } else if (stage === 'naming-reaction') {
+                if (choiceType === 'smile') {
+                    stats.father += 25;
+                    stats.pride += 15;
+                    display.innerText = "[Sanctuary Reaction: Your radiant smile fills the king with overwhelming joy and deep paternal pride as he embraces your destiny as Prince Ian.]";
+                } else if (choiceType === 'quiet') {
+                    stats.pride += 10;
+                    display.innerText = "[Sanctuary Reaction: You remain calm and quiet in your father's arms, observing the sacred ritual with a wise and peaceful gaze that commands respect.]";
+                } else {
+                    stats.mother += 15;
+                    display.innerText = "[Sanctuary Reaction: Your gentle baby cry echoes softly through the chamber, bringing a tender smile to your mother's lips as the naming ritual concludes.]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ Scene VI: Sister's Visit & Bonding ✦";
+                    videoElem.src = "sister-bonding-time-prince-ian-1.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    display.innerText = "[Sanctuary Visit: Your sister steps forward, wanting to bond and create a deep relationship with her baby brother. Do you wish to build this bond?]";
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('sister-bond-choice', 'yes')">1. Yes, embrace the sisterly bond and welcome her love.</button>
+                        <button class="choice-btn" onclick="handleChoice('sister-bond-choice', 'no')">2. Remain distant and watch cautiously.</button>
+                    `;
+                }, 1200);
+
+            } else if (stage === 'sister-bond-choice') {
+                if (choiceType === 'yes') {
+                    stats.favor += 30;
+                    stats.coins += 15;
+                    unlockSisterLocker();
+                    display.innerText = "[Sanctuary Reward: You enthusiastically accept the sisterly bond! The Sister Bonding Locker is now unlocked on your left panel.]";
+                } else {
+                    display.innerText = "[Sanctuary Reaction: You remain quiet, though your sister's warm smile remains undeterred as family ties begin to weave.]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ Scene VII: Father Bonding & Learning at Work ✦";
+                    videoElem.src = "learn-how-to-walk-with-dad-cinematic.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    unlockFatherLocker();
+                    display.innerText = "[Sanctuary Guidance: The player works alongside their father to learn at work! The Father Bonding Area is now unlocked on your left panel.]";
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('father-work-choice', 'learn')">1. Learn how to walk and work with Dad, embracing his guidance.</button>
+                        <button class="choice-btn" onclick="handleChoice('father-work-choice', 'rest')">2. Observe your father's grand work with calm, wise eyes.</button>
+                    `;
+                }, 1200);
+
+            } else if (stage === 'father-work-choice') {
+                if (choiceType === 'learn') {
+                    stats.father += 25;
+                    stats.coins += 15;
+                    display.innerText = "[Sanctuary Reaction: You successfully learn at work with your father! Father affection and coins increased.]";
+                } else {
+                    stats.father += 15;
+                    display.innerText = "[Sanctuary Reaction: You watch your father work diligently, absorbing valuable royal knowledge.]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ Scene VIII: Building Relationships & Talking to Siblings ✦";
+                    videoElem.src = "make-friend-build-relationship-kids-palace-cinematic.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    unlockRelationshipLocker();
+                    display.innerText = "[Sanctuary Courtyard: You need to build relationships and talk to your siblings! The Relationship Building option is now open on your left panel.]";
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('relationship-choice', 'talk')">1. Click here to build relationships and talk with your siblings.</button>
+                        <button class="choice-btn" onclick="handleChoice('relationship-choice', 'explore')">2. Explore the palace gardens independently.</button>
+                    `;
+                }, 1200);
+
+            } else if (stage === 'relationship-choice') {
+                if (choiceType === 'talk') {
+                    stats.pride += 20;
+                    stats.coins += 15;
+                    display.innerText = "[Sanctuary Reaction: You connect deeply with your siblings, forming lasting friendships and strengthening the royal bloodline!]";
+                } else {
+                    stats.pride += 10;
+                    display.innerText = "[Sanctuary Reaction: You take time to explore the vast palace gardens in quiet contemplation.]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ EMERGENCY: Palace Betrayal & Accusation ✦";
+                    videoElem.src = "versta-accused-of-adultery-temple-ian-escape-cinematic.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    display.innerText = "[SANCTUARY EMERGENCY! Prince Ian's mother (Versta) has been falsely accused of adultery by Grand Empress Yuri and the other concubines! Palace guards are seizing her to take her to the temple, and Yuri is coming to take Prince Ian! Does Prince Ian wish to escape or stay?]";
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('emergency-choice', 'escape')">1. Escape into the night to protect yourself and your destiny.</button>
+                        <button class="choice-btn" onclick="handleChoice('emergency-choice', 'stay')">2. Stay and face the fate of the palace.</button>
+                    `;
+                }, 1200);
+
+            } else if (stage === 'emergency-choice') {
+                if (choiceType === 'escape') {
+                    stats.pride += 25;
+                    display.innerText = "[Sanctuary Fate: You choose to escape, slipping away from Yuri's clutches into the shadows of destiny!]";
+                } else {
+                    stats.mother += 15;
+                    display.innerText = "[Sanctuary Fate: You stand your ground, weathering the immediate storm of palace betrayal!]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ Exile: Lost in the Slave Village of Hikmid ✦";
+                    videoElem.src = "prince-ian-lost-in-the-slave-village-cinematic.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    display.innerText = "[Sanctuary Fate: Prince Ian has been transported to the slave village in Hikmid. Prince Ian is lost in the bustling market. Does the player wish to explore the slave village market?]";
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('market-explore', 'explore')">1. Explore the slave village market and discover hidden secrets.</button>
+                        <button class="choice-btn" onclick="handleChoice('market-explore', 'hide')">2. Find a quiet corner to hide and rest.</button>
+                    `;
+                }, 1200);
+
+            } else if (stage === 'market-explore') {
+                if (choiceType === 'explore') {
+                    stats.coins += 25;
+                    display.innerText = "[Sanctuary Exploration: You navigate the bustling market stalls of Hikmid, gathering vital resources and uncovering clues about your royal heritage!]";
+                } else {
+                    stats.pride += 15;
+                    display.innerText = "[Sanctuary Exploration: You remain hidden and safe, plotting your triumphant return to the throne from the shadows of Hikmid.]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ The Call of Destiny: The Sea ✦";
+                    videoElem.src = "prince-ian-the-call-of-destiny-1-cinematic.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    display.innerText = "[Sanctuary Destiny: Prince Ian finds himself at the edge of the vast sea—seeing so much open water for the first time after growing up within the capital. The sea is calling him!]";
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('sea-explore', 'jump')">1. Jump into the water and start playing with the waves, venturing a little too deep.</button>
+                        <button class="choice-btn" onclick="handleChoice('sea-explore', 'watch')">2. Watch the rolling tides safely from the shore.</button>
+                    `;
+                }, 1200);
+
+            } else if (stage === 'sea-explore') {
+                if (choiceType === 'jump') {
+                    stats.pride += 30;
+                    display.innerText = "[Sanctuary Destiny: You jump into the sparkling water, playing joyfully with the waves as the current pulls you deeper!]";
+                } else {
+                    stats.pride += 15;
+                    display.innerText = "[Sanctuary Destiny: You stand mesmerized by the infinite horizon, listening to the mysterious voice of the ocean.]";
+                }
+                updateHUD();
+
+                setTimeout(() => {
+                    heading.innerText = "✦ The Accomplishment of the Prophecy ✦";
+                    videoElem.src = "the-accomplishment-of-the-prophecy-1-cinematic-1.mp4";
+                    videoElem.load();
+                    videoElem.play();
+                    display.innerText = "[Sanctuary Prophecy: As you go too deep into the water, a brave little girl spots you and instantly rushes into the waves to save you, fulfilling the ancient prophecy of destiny!]";
+
+                    setTimeout(() => {
+                        heading.innerText = "✦ CONGRATULATIONS: STAGE I COMPLETE! ✦";
+                        videoElem.src = "rosanna-and-the-evil-king-began.mp4";
+                        videoElem.load();
+                        videoElem.play();
+                        display.innerText = "🎉 Sanctuary Announcement: Congratulations! You have successfully finished Part One of the game! Prince Ian's journey in the slave village has begun, and a new destiny awaits with Rosanna. 🎉";
+                        
+                        choices.innerHTML = `
+                            <button class="choice-btn" onclick="handleChoice('finale', 'recap')">1. View Stage One Recap (prince-ian-recap.gif)</button>
+                            <button class="choice-btn" onclick="handleChoice('finale', 'home')">2. Return to Homepage & Try a Different Character</button>
+                        `;
+                    }, 4000);
+                }, 1500);
+
+            } else if (stage === 'finale') {
+                if (choiceType === 'recap') {
+                    heading.innerText = "✦ Stage One Recap ✦";
+                    videoElem.src = "prince-ian-recap.gif";
+                    videoElem.load();
+                    videoElem.play();
+                    display.innerText = "[Sanctuary Recap: Relive the magnificent journey of Prince Ian from the imperial chambers, family bonding, palace betrayal, exile in Hikmid, and the prophetic rescue by the sea.]";
+                    choices.innerHTML = `
+                        <a href="index.html" class="choice-btn" style="text-align:center; text-decoration:none; background:var(--gold-deep); color:#030105; font-weight:bold; display:block;">🏠 Return to Homepage & Try Different Character</a>
+                    `;
+                } else {
+                    window.location.href = "index.html";
+                }
             }
         }
     </script>
