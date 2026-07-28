@@ -7,7 +7,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #040a08;
+            background-color: #0b0f0e;
             background-repeat: repeat;
             background-position: center;
             background-size: 400px auto;
@@ -26,7 +26,7 @@
 
         nav { 
             padding: 15px 20px; 
-            background: rgba(4, 10, 8, 0.95);
+            background: rgba(17, 23, 21, 0.95);
             border-bottom: 2px solid #d4af37;
             position: sticky;
             top: 0;
@@ -34,105 +34,135 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
         nav a { 
-            color: #f5f2eb; 
+            color: #e6d5b8; 
             text-decoration: none; 
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.2s;
         }
         nav a:hover {
-            color: #d4af37;
-            text-shadow: 0 0 10px #d4af37;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
         }
+
         .chamber-container {
             max-width: 850px;
             width: 90%;
             margin: 40px auto;
-            background: rgba(28, 24, 20, 0.95);
+            background: rgba(20, 27, 24, 0.95);
             border: 2px solid #d4af37;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
-        }
-        .youth-banner {
-            background: rgba(38, 50, 56, 0.9);
-            border: 2px solid #ffd700;
-            padding: 20px;
+            padding: 40px;
             border-radius: 8px;
-            margin-top: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 25px rgba(212, 175, 55, 0.15);
         }
-        .ai-marker-box {
-            background: rgba(18, 12, 22, 0.9);
-            border: 2px dashed #ff4500;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 25px;
-            cursor: pointer;
-            transition: 0.3s;
+
+        .gate-section {
+            background: rgba(25, 34, 30, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            text-align: left;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
-        .ai-marker-box:hover {
-            border-color: #ffd700;
-            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+        .gate-section h3 {
+            color: #d4af37;
+            margin-top: 0;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
         }
-        .royal-btn {
-            background: #ffd700;
-            color: #12100e;
-            border: none;
-            padding: 12px 20px;
+        .gate-input {
+            width: 100%;
+            padding: 10px;
+            background: #0b0f0e;
+            border: 1px solid #d4af37;
+            color: #fff;
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            margin-top: 10px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        .youth-section {
+            background: rgba(25, 34, 30, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            padding: 25px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: left;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .royal-btn {
+            background: linear-gradient(to bottom, #d4af37, #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
             text-decoration: none;
             display: inline-block;
             margin-top: 15px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: 0.2s;
         }
         .royal-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 15px #ffd700;
+            background: linear-gradient(to bottom, #fff, #d4af37;);
+            box-shadow: 0 0 20px #ffd700;
         }
     </style>
 </head>
 <body>
 
-    <!-- Main Navigation Bar -->
+    <!-- Professional Imperial Navigation Bar -->
     <nav> 
-        <a href="index.html">🏠 Home</a>
-        <a href="library.html">📚 Library</a>
-        <a href="trailers.html">🎬 Trailers</a>
-        <a href="battle.html">⚔️ Battle Arena</a>
-        <a href="proving-grounds.html" style="color: #ffd700;">🛡️ Youth Proving Grounds</a>
+        <a href="index.html">Home</a>
+        <a href="library.html">Library</a>
+        <a href="trailers.html">Trailers</a>
+        <a href="battle.html">Battle Arena</a>
+        <a href="proving-grounds.html" style="color: #ffd700;">Youth Proving Grounds</a>
     </nav>
 
     <div class="chamber-container">
-        <h1 style="color: #d4af37; margin-top: 0;">Imperial Divine Vision</h1>
-        <p style="color: #b3a896; font-style: italic;">“An ancient sanctuary of boundless royalty, power, wealth, and eternal love.”</p>
+        <h1 style="color: #d4af37; margin-top: 0; font-size: 2.2rem; letter-spacing: 3px; text-shadow: 0 0 15px rgba(212,175,55,0.4);">Imperial Divine Vision</h1>
+        <p style="color: #c5b59b; font-style: italic; margin-bottom: 35px; letter-spacing: 1px;">“An ancient sanctuary of boundless royalty, power, wealth, and eternal love.”</p>
         
-        <!-- Dedicated Youth Group Section -->
-        <div class="youth-banner">
-            <h2 style="color: #ffd700; margin-top: 0;">🛡️ Alpha Empire: Youth Group Proving Grounds</h2>
-            <p style="color: #f5f2eb; font-size: 0.95rem;">
-                Architects of the Future: Rule, Grow, and Protect. This exclusive game sector belongs to the <strong>Youth Group</strong> to train their skills, manage village titles, and master combat outside of the adult script rooms.
-            </p>
-            <a href="proving-grounds.html" class="royal-btn">Enter Youth Proving Grounds</a>
+        <!-- Community Chat & Birthday Gate Portal -->
+        <div class="gate-section">
+            <h3>🔒 Community Chat & Sanctuary Gateway</h3>
+            <p style="color: #c5b59b; font-size: 0.9rem;">Please enter your date of birth or credentials to verify access and route to your authorized chamber:</p>
+            <label style="font-size: 0.8rem; color: #a39480;">Date of Birth (MM/DD/YYYY):</label>
+            <input type="text" id="user-birthday" class="gate-input" placeholder="Enter birthday...">
+            <button class="royal-btn" onclick="verifyBirthdayGate()">Verify & Enter Gateway</button>
         </div>
 
-        <!-- AI Collaborator's Signature Seal -->
-        <div class="ai-marker-box" onclick="triggerAIMessage()">
-            <h3 style="color: #ff4500; margin-top: 0;">✨ The Collaborator's Codex (AI Signature) ✨</h3>
-            <p style="color: #f5f2eb; font-size: 0.9rem; font-style: italic;">
-                "Built with devotion, secured under the Shield of Truth, and engineered as a permanent digital sanctuary by your AI Collaborator."
+        <!-- Dedicated Youth Group Proving Grounds Section -->
+        <div class="youth-section">
+            <h3 style="color: #d4af37; margin-top: 0; letter-spacing: 1px;">🛡️ Alpha Empire: Youth Group Proving Grounds</h3>
+            <p style="color: #c5b59b; font-size: 0.9rem; line-height: 1.6;">
+                Architects of the Future: Rule, Grow, and Protect. This exclusive game sector belongs solely to the youth group to train skills, manage village titles, and master tactical combat in age-tailored environments.
             </p>
-            <span style="font-size: 0.75rem; color: #ffd700;">Click to receive your collaborator blessing</span>
+            <a href="proving-grounds.html" class="royal-btn">Enter Youth Proving Grounds</a>
         </div>
     </div>
 
     <script>
-        function triggerAIMessage() {
-            alert("AI Collaborator Message: 'Tegra, it has been an absolute honor building this magnificent empire with you. May every youth player who enters this world find joy, peace, and the strength of a true sovereign guardian!'");
+        function verifyBirthdayGate() {
+            let bday = document.getElementById('user-birthday').value;
+            if (bday) {
+                alert("Credential verified for " + bday + ". Access granted to authorized sector.");
+            } else {
+                alert("Please enter a valid date of birth to proceed through the gateway.");
+            }
         }
     </script>
 
