@@ -12,6 +12,7 @@
             font-family: 'Cinzel', serif;
             text-align: center;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         /* Independent Moving Flowering Background */
@@ -36,7 +37,7 @@
             100% { background-size: 390px auto; background-position: center bottom; }
         }
 
-        /* Interactive Light / Shine Layer */
+        /* Interactive Light / Shine Layer on Mouse Move */
         .shine-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -75,31 +76,40 @@
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
         }
 
-        /* Main Hero Section */
+        /* Hero Section holding just the floating book with no dark background box */
         .hero-section {
-            height: 90vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
+            padding: 40px 20px;
         }
 
-        /* Floating Book Cover with Flowering Border */
+        /* Floating Book Cover with Ancient Golden Flowering Border */
         .book-cover-frame {
             width: 320px;
             height: 440px;
-            border: 4px solid #d4af37;
-            border-radius: 8px;
+            border: 5px solid #d4af37;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.7);
             animation: floatBook 4s infinite alternate ease-in-out;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            background: #0b0f0e;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover-frame:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 70px #ffd700;
         }
 
         @keyframes floatBook {
-            0% { transform: translateY(0px); box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); }
-            100% { transform: translateY(-12px); box-shadow: 0 0 50px rgba(212, 175, 55, 0.8); }
+            0% { transform: translateY(0px); box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+            100% { transform: translateY(-12px); box-shadow: 0 0 65px rgba(212, 175, 55, 0.9); }
         }
 
         .book-cover-frame img {
@@ -108,33 +118,22 @@
             object-fit: cover;
         }
 
-        /* Scroll Down Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 20px;
-            color: #c5b59b;
-            font-size: 0.85rem;
+        .royal-title {
+            color: #ffd700;
+            font-size: 1.8rem;
             letter-spacing: 2px;
-            animation: bounceScroll 2s infinite;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            margin-bottom: 10px;
         }
 
-        @keyframes bounceScroll {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
-        }
-
-        /* Content & Summary Section below */
-        .content-chamber {
-            max-width: 800px;
-            width: 90%;
-            margin: 60px auto;
-            background: rgba(20, 27, 24, 0.95);
-            border: 2px solid #d4af37;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
-            text-align: center;
+        .royal-subtitle {
+            color: #e6d5b8;
+            font-size: 0.95rem;
+            font-style: italic;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
         }
 
         .royal-btn {
@@ -149,17 +148,16 @@
             border-radius: 4px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 20px;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
             transition: 0.2s;
         }
         .royal-btn:hover {
             background: linear-gradient(to bottom, #fff, #d4af37);
-            box-shadow: 0 0 20px #ffd700;
+            box-shadow: 0 0 25px #ffd700;
         }
 
-        /* Modal for Community Chat Gate */
+        /* Modal for Community Chat Router */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -194,55 +192,51 @@
 </head>
 <body onmousemove="shineLight(event)">
 
-    <!-- Peaceful Melody Audio (Loops quietly in background upon interaction) -->
+    <!-- Peaceful Melody Audio -->
     <audio id="peaceful-melody" loop preload="auto">
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
     </audio>
 
-    <!-- Independent Moving Flowering Background & Shine Overlay -->
+    <!-- Independent Moving Background & Shine Overlay -->
     <div class="moving-bg-layer"></div>
     <div class="shine-overlay" id="shine-layer"></div>
 
-    <!-- Community Chat Modal Gate -->
+    <!-- Community Chat Modal Router -->
     <div class="modal-overlay" id="communityModal">
         <div class="modal-box">
-            <h3 style="color: #d4af37; margin-top: 0;">💬 Community Chat Gateway</h3>
-            <p style="color: #c5b59b; font-size: 0.85rem;">Enter your date of birth (MM/DD/YYYY) to route securely to your specific room and game session:</p>
+            <h3 style="color: #d4af37; margin-top: 0;">💬 Community Chat</h3>
+            <p style="color: #c5b59b; font-size: 0.85rem;">Enter your date of birth to route directly to your authorized room and game session:</p>
             <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
-            <button class="royal-btn" onclick="verifyCommunityGate()" style="margin-top:5px; padding:8px 15px;">Verify & Enter Room</button>
+            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
             <br>
-            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close Gateway</button>
+            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close</button>
         </div>
     </div>
 
-    <!-- Top Navigation Bar -->
+    <!-- Clean Top Navigation Bar -->
     <nav> 
         <a href="index.html">🏠 Home</a>
         <a href="library.html">📚 Library</a>
         <a href="trailers.html">🎬 Trailers</a>
         <a href="battle.html">⚔️ Battle Arena</a>
         <a href="proving-grounds.html" style="color: #ffd700;">🛡️ Youth Proving Grounds</a>
-        <a href="#" onclick="openModal(); return false;" style="color: #00ffcc;">💬 Community Gateway</a>
+        <a href="#" onclick="openModal(); return false;" style="color: #00ffcc;">💬 Community Chat</a>
     </nav>
 
-    <!-- Hero Section with Floating Book Cover -->
+    <!-- Hero Section with Floating Book -->
     <div class="hero-section" onclick="playMelody()">
-        <h1 style="color: #d4af37; font-size: 2.2rem; letter-spacing: 3px; text-shadow: 0 0 20px rgba(212,175,55,0.5); margin-bottom: 15px;">Imperial Divine Vision</h1>
+        <h1 class="royal-title">Imperial Divine Vision</h1>
         
         <!-- Floating Cover Image using cover_image.png -->
-        <div class="book-cover-frame">
+        <div class="book-cover-frame" onclick="window.location.href='library.html'">
             <img src="cover_image.png" alt="The Song of Rosanna and the Evil King" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
         </div>
 
-        <div class="scroll-indicator">↓ SCROLL DOWN TO READ BOOK & SUMMARY ↓</div>
-    </div>
-
-    <!-- Scrollable Summary & Read Chamber -->
-    <div class="content-chamber">
-        <h2 style="color: #ffd700; margin-top: 0;">The Song of Rosanna and the Evil King</h2>
-        <p style="color: #c5b59b; font-size: 1rem; line-height: 1.8; font-style: italic; margin-bottom: 25px;">
-            “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace, and the sovereign guardians protect the light of the empire against the dark forces.”
+        <h3 style="color: #e6d5b8; margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
+        <p class="royal-subtitle">
+            “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
         </p>
+
         <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
     </div>
 
@@ -256,7 +250,6 @@
             layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.3) 0%, transparent 60%)";
             layer.style.opacity = "1";
 
-            // Start peaceful melody on first mouse movement or interaction
             if (!musicStarted) {
                 let audio = document.getElementById('peaceful-melody');
                 if (audio) {
@@ -286,13 +279,25 @@
             document.getElementById('communityModal').style.display = 'none';
         }
 
-        function verifyCommunityGate() {
-            let bday = document.getElementById('user-birthday').value;
-            if (bday) {
-                alert("Birthday verified (" + bday + "). Routing securely to your specific room and game session...");
-                closeModal();
+        function routeByBirthday() {
+            let bdayInput = document.getElementById('user-birthday').value.trim();
+            if (!bdayInput) {
+                alert("Please enter your date of birth.");
+                return;
+            }
+
+            // Simple age / year or birthday router logic
+            // You can customize these rules to match adult vs youth years/dates:
+            let bdayLower = bdayInput.toLowerCase();
+            
+            // Example routing logic: if youth (e.g. born in 2010 or later, or containing specific youth year/indicator)
+            if (bdayLower.includes("2010") || bdayLower.includes("2011") || bdayLower.includes("2012") || bdayLower.includes("2013") || bdayLower.includes("2014") || bdayLower.includes("2015") || bdayLower.includes("2016") || bdayLower.includes("2017") || bdayLower.includes("2018") || bdayLower.includes("2019") || bdayLower.includes("2020")) {
+                alert("Youth credentials recognized. Routing to Youth Proving Grounds & Game Sector...");
+                window.location.href = "proving-grounds.html";
             } else {
-                alert("Please enter your birthday to proceed.");
+                // Default adult room / library / combat chamber routing
+                alert("Adult credentials recognized. Routing to Sovereign Chambers & Script Library...");
+                window.location.href = "library.html";
             }
         }
     </script>
