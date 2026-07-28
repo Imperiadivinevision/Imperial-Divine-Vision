@@ -134,7 +134,7 @@
             padding: 10px 18px;
             border-radius: 8px;
             font-family: 'Cinzel Decorative', serif;
-            font-size: 0.85srem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
@@ -273,14 +273,14 @@
 
     <div class="map-container">
         <h1>Interactive Empire Map</h1>
-        <p>Click upon the regional territories below to trigger cinematic character dispatches, emergency alerts, and explore the lands of the Alpha Empire.</p>
+        <p>Click upon the regional territories below to trigger cinematic character dispatches, emergency alerts, or enter the Battle Arena.</p>
 
-        <!-- Interactive Map Board -->
+        <!-- Interactive Map Board with Battle Arena Link -->
         <div class="map-board" onclick="event.stopPropagation()">
             <div id="node-throne" class="map-node" onclick="triggerCinematic('👑 Queen Rosanna', '👑', 'Emergency in the Throne Room! Queen Rosanna requires your counsel regarding the royal decrees and the security of the realm.')">🏛️ Throne Room</div>
             <div id="node-village" class="map-node" onclick="triggerCinematic('🛡️ King Benson', '🛡️', 'Village Alert! King Benson reports that food stocks and feudal registries need immediate oversight from the leaders.')">🏡 Village Commons</div>
             <div id="node-wilderness" class="map-node" onclick="triggerCinematic('✨ Traveler Herald', '✨', 'Traveler Sighted! A weary traveler approaches the wilderness gates seeking grace, provisions, and safe passage.')">🌲 Wilderness Path</div>
-            <div id="node-battlefield" class="map-node" onclick="triggerCinematic('⚔️ King Aram & Ministers', '⚔️', 'Strategic Outpost! King Aram and the ministers call for a defense briefing against incoming rival forces.')">⚔️ Border Outpost</div>
+            <div id="node-battlefield" class="map-node" onclick="window.location.href='battle.html'">⚔️ Border Outpost (Enter Battle)</div>
         </div>
 
         <a href="room-youth.html" class="royal-btn" onclick="event.stopPropagation()">Return to Proving Grounds</a>
