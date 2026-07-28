@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +68,7 @@
         }
 
         .workshop-container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 140px auto 60px auto;
             background: rgba(28, 24, 20, 0.95);
             border: 2px solid var(--gold-shine);
@@ -91,6 +90,23 @@
             line-height: 1.6;
         }
 
+        .cast-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .cast-card {
+            background: rgba(26, 8, 34, 0.8);
+            border: 1px solid var(--gold-accent);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.95rem;
+            color: var(--gold-shine);
+        }
+
         .royal-btn {
             background: #181410;
             color: var(--gold-shine);
@@ -100,7 +116,7 @@
             font-size: 1rem;
             cursor: pointer;
             width: 100%;
-            margin-top: 25px;
+            margin-top: 15px;
             border-radius: 4px;
             text-transform: uppercase;
             text-decoration: none;
@@ -115,6 +131,11 @@
             font-weight: bold;
             box-shadow: 0 0 15px var(--gold-shine);
         }
+
+        .library-btn {
+            background: #2c1605;
+            border-color: #ffd700;
+        }
     </style>
 </head>
 <body>
@@ -122,18 +143,26 @@
     <nav class="top-nav-bar">
         <a href="index.html">Home 🏛️</a>
         <a href="library.html">Library 📖</a>
-        <a href="trailers.html">Trailers 🎬</a>
         <a href="room-youth.html">Proving Grounds 🛡️</a>
     </nav>
 
     <div class="workshop-container">
         <h1>Character Workshop Chamber</h1>
         <p>Welcome to the official Character Workshop. Here, the cast of <em>The Song of Rosanna and the Evil King</em> is sculpted, defined, and prepared for their cinematic entry into the empire.</p>
-        <p><em>Feature Lock active: Permanent attributes secured. Gear and appearances ready for production.</em></p>
+        
+        <div class="cast-grid">
+            <div class="cast-card">👑 Queen Rosanna</div>
+            <div class="cast-card">🛡️ King Benson</div>
+            <div class="cast-card">📜 Rica & Weka</div>
+            <div class="cast-card">⚔️ King Aram</div>
+        </div>
+
+        <p><em>Feature Lock active: Permanent attributes secured. Explore the full archives to witness their complete journeys.</em></p>
+
+        <!-- Direct Link to Library -->
+        <a href="library.html" class="royal-btn library-btn">📖 Enter the Library & View All Characters</a>
         <a href="room-youth.html" class="royal-btn">Return to Proving Grounds</a>
     </div>
 
 </body>
 </html>
-
-```
