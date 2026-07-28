@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -220,7 +221,7 @@
         <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Rosanna Galary</button>
     </div>
 
-    <nav>
+    <nav> 
         <a href="index.html">🏠 Sanctuary Home</a>
         <a href="trailers.html">🎬 Trailer Chamber</a>
         <a href="library.html">Library</a>
@@ -238,11 +239,8 @@
 
         <p style="color: #b3a896; font-style: italic; margin-top: 5px;">Select any cinematic trailer below to play it instantly.</p>
         
-        <!-- Standard Video Player -->
-        <video id="active-video" class="cinematic-video" controls playsinline>
-            <source id="video-source" src="palace-tour-1.mp4" type="video/mp4">
-            Your browser does not support video.
-        </video>
+        <!-- Standard Video Player (Updated with YouTube embed for your new official trailer) -->
+        <iframe id="active-video" class="cinematic-video" src="https://www.youtube.com/embed/saSq7faV1j4" title="The Song of Rosanna and The Evil King Official Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
         <!-- Clickable Playlist Selector -->
         <div id="playlist-container" class="playlist-box">
@@ -254,53 +252,84 @@
 
     <script>
         const cinematicPlaylist = [
-            "palace-tour-1.mp4",
-            "palace-tour-2.mp4",
-            "palace-tour-4.mp4",
-            "palace-tour-3.mp4",
-            "palace-tour-7.mp4",
-            "palace-tour-8.mp4",
-            "palace-tour-9.mp4",
-            "palace-tour-10.mp4",
-            "real-palace-structure-1.mp4",
-            "real-palace-structure-2.mp4",
-            "real-palace-structure-3.mp4",
-            "real-palace-structure-4.mp4",
-            "real-palace-structure-5.mp4",
-            "real-palace-structure-6.mp4",
-            "real-palace-structure-7.mp4",
-            "real-palace-structure-8.mp4",
-            "prayer-room-1.mp4",
-            "prayer-room-2.mp4",
-            "prayer-room-3.mp4",
-            "prayer-room-5.mp4",
-            "imperial-palace.mp4",
-            "imperial-palace-hallway.mp4",
-            "imperial-palace-guess-room.mp4",
-            "imperial-dinner-room.mp4",
-            "imperial-bedroom-CINEMATIC.mp4",
-            "king-queen-bed-room.mp4",
-            "king-benson-imperial-CINEMATIC.mp4",
-            "rosanna-imperial-outfit-CINEMATIC.mp4",
-            "king-queen-moving-carriage-CINEMATIC.mp4",
-            "king-queen-throne-armor-CINEMATIC.mp4"
+            { name: "The Song of Rosanna Official Cinematic Trailer", type: "youtube", src: "https://www.youtube.com/embed/saSq7faV1j4" },
+            { name: "palace-tour-1.mp4", type: "local", src: "palace-tour-1.mp4" },
+            { name: "palace-tour-2.mp4", type: "local", src: "palace-tour-2.mp4" },
+            { name: "palace-tour-4.mp4", type: "local", src: "palace-tour-4.mp4" },
+            { name: "palace-tour-3.mp4", type: "local", src: "palace-tour-3.mp4" },
+            { name: "palace-tour-7.mp4", type: "local", src: "palace-tour-7.mp4" },
+            { name: "palace-tour-8.mp4", type: "local", src: "palace-tour-8.mp4" },
+            { name: "palace-tour-9.mp4", type: "local", src: "palace-tour-9.mp4" },
+            { name: "palace-tour-10.mp4", type: "local", src: "palace-tour-10.mp4" },
+            { name: "real-palace-structure-1.mp4", type: "local", src: "real-palace-structure-1.mp4" },
+            { name: "real-palace-structure-2.mp4", type: "local", src: "real-palace-structure-2.mp4" },
+            { name: "real-palace-structure-3.mp4", type: "local", src: "real-palace-structure-3.mp4" },
+            { name: "real-palace-structure-4.mp4", type: "local", src: "real-palace-structure-4.mp4" },
+            { name: "real-palace-structure-5.mp4", type: "local", src: "real-palace-structure-5.mp4" },
+            { name: "real-palace-structure-6.mp4", type: "local", src: "real-palace-structure-6.mp4" },
+            { name: "real-palace-structure-7.mp4", type: "local", src: "real-palace-structure-7.mp4" },
+            { name: "real-palace-structure-8.mp4", type: "local", src: "real-palace-structure-8.mp4" },
+            { name: "prayer-room-1.mp4", type: "local", src: "prayer-room-1.mp4" },
+            { name: "prayer-room-2.mp4", type: "local", src: "prayer-room-2.mp4" },
+            { name: "prayer-room-3.mp4", type: "local", src: "prayer-room-3.mp4" },
+            { name: "prayer-room-5.mp4", type: "local", src: "prayer-room-5.mp4" },
+            { name: "imperial-palace.mp4", type: "local", src: "imperial-palace.mp4" },
+            { name: "imperial-palace-hallway.mp4", type: "local", src: "imperial-palace-hallway.mp4" },
+            { name: "imperial-palace-guess-room.mp4", type: "local", src: "imperial-palace-guess-room.mp4" },
+            { name: "imperial-dinner-room.mp4", type: "local", src: "imperial-dinner-room.mp4" },
+            { name: "imperial-bedroom-CINEMATIC.mp4", type: "local", src: "imperial-bedroom-CINEMATIC.mp4" },
+            { name: "king-queen-bed-room.mp4", type: "local", src: "king-queen-bed-room.mp4" },
+            { name: "king-benson-imperial-CINEMATIC.mp4", type: "local", src: "king-benson-imperial-CINEMATIC.mp4" },
+            { name: "rosanna-imperial-outfit-CINEMATIC.mp4", type: "local", src: "rosanna-imperial-outfit-CINEMATIC.mp4" },
+            { name: "king-queen-moving-carriage-CINEMATIC.mp4", type: "local", src: "king-queen-moving-carriage-CINEMATIC.mp4" },
+            { name: "king-queen-throne-armor-CINEMATIC.mp4", type: "local", src: "king-queen-throne-armor-CINEMATIC.mp4" }
         ];
 
         const container = document.getElementById("playlist-container");
-        const videoElement = document.getElementById("active-video");
-        const sourceElement = document.getElementById("video-source");
+        const videoContainerParent = document.getElementById("active-video").parentNode;
+        let activeVideoElement = document.getElementById("active-video");
 
-        cinematicPlaylist.forEach((filename, index) => {
+        cinematicPlaylist.forEach((entry, index) => {
             let item = document.createElement("div");
             item.className = "playlist-item";
-            item.innerText = (index + 1) + ". " + filename;
+            item.innerText = (index + 1) + ". " + entry.name;
             if (index === 0) item.classList.add('active');
+            
             item.onclick = () => {
                 document.querySelectorAll('.playlist-item').forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
-                sourceElement.src = filename;
-                videoElement.load();
-                videoElement.play();
+
+                if (entry.type === "youtube") {
+                    if (activeVideoElement.tagName !== "IFRAME") {
+                        let iframe = document.createElement("iframe");
+                        iframe.id = "active-video";
+                        iframe.className = "cinematic-video";
+                        iframe.setAttribute("frameborder", "0");
+                        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+                        iframe.setAttribute("allowfullscreen", "");
+                        videoContainerParent.replaceChild(iframe, activeVideoElement);
+                        activeVideoElement = iframe;
+                    }
+                    activeVideoElement.src = entry.src + "?autoplay=1";
+                } else {
+                    if (activeVideoElement.tagName !== "VIDEO") {
+                        let video = document.createElement("video");
+                        video.id = "active-video";
+                        video.className = "cinematic-video";
+                        video.setAttribute("controls", "");
+                        video.setAttribute("playsinline", "");
+                        let source = document.createElement("source");
+                        source.id = "video-source";
+                        source.setAttribute("type", "video/mp4");
+                        video.appendChild(source);
+                        videoContainerParent.replaceChild(video, activeVideoElement);
+                        activeVideoElement = video;
+                    }
+                    let sourceElem = activeVideoElement.querySelector("source") || activeVideoElement;
+                    sourceElem.src = entry.src;
+                    activeVideoElement.load();
+                    activeVideoElement.play();
+                }
             };
             container.appendChild(item);
         });
@@ -332,3 +361,4 @@
 </body>
 </html>
 
+```
