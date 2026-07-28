@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision — VIP Sanctuary</title>
+    <title>Imperial Divine Vision — Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,9 +15,7 @@
             --card-bg: linear-gradient(145deg, #180d24, #240c15);
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             background-color: var(--dark-bg);
@@ -26,8 +24,16 @@
             margin: 0;
             padding: 30px;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 20%, #2b1035 0%, #0b0710 85%);
+            background: linear-gradient(135deg, #0b0710, #2b1035, #4a0e17, #0b0710);
+            background-size: 400% 400%;
+            animation: moveFloor 15s ease infinite;
             min-height: 100vh;
+        }
+
+        @keyframes moveFloor {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         header {
@@ -39,20 +45,14 @@
             border-radius: 12px;
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
             padding-top: 25px;
-            position: relative;
         }
 
-        /* Golden Metal Cursive Title Styling */
         h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 4.5rem;
             color: #ffe875;
             margin: 0 0 10px 0;
-            text-shadow: 
-                0 0 10px rgba(212, 175, 55, 0.8),
-                2px 2px 3px rgba(0, 0, 0, 0.9),
-                0 0 20px rgba(255, 215, 0, 0.4);
-            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 2px 2px 3px rgba(0, 0, 0, 0.9);
         }
 
         header p {
@@ -63,7 +63,6 @@
             letter-spacing: 1.5px;
         }
 
-        /* Symbol Banner Integration */
         .symbol-emblem-bar {
             display: flex;
             justify-content: center;
@@ -76,112 +75,82 @@
             text-transform: uppercase;
         }
 
-        .sanctuary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
+        .main-container {
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        .vip-card {
-            background: var(--card-bg);
-            border: 2px solid var(--gold-accent);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        .vip-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
-            transition: 0.6s;
-        }
-
-        .vip-card:hover::before {
-            left: 100%;
-        }
-
-        .vip-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
-            border-color: #fff;
-        }
-
-        /* Fancy Metal Cursive Card Titles */
-        .vip-card h3 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.4rem;
-            color: #ffe875;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-            padding-bottom: 8px;
-            margin-top: 0;
-            margin-bottom: 12px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            letter-spacing: 1px;
-        }
-
-        .vip-card p {
-            font-size: 0.95rem;
-            color: #d1c4b2;
-            font-family: 'Playfair Display', serif;
-            word-break: break-all;
-        }
-
-        .centerpiece-card {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, #351242, #5c0f1d);
-            border: 3px solid var(--gold-accent);
             text-align: center;
-            padding: 35px;
         }
 
-        .centerpiece-card h3 {
-            font-size: 3rem;
+        .welcome-card {
+            background: var(--card-bg);
+            border: 3px solid var(--gold-accent);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
         }
 
-        /* Book Foundation Notice Box */
+        .welcome-card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: #ffe875;
+            margin-top: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .welcome-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e6d5c3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .vip-entrance-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--gold-accent), #aa820a);
+            color: #0b0710;
+            padding: 15px 40px;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transition: 0.3s;
+        }
+
+        .vip-entrance-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
+            color: #fff;
+        }
+
         .book-foundation-notice {
-            max-width: 1400px;
-            margin: 0 auto 30px auto;
-            padding: 20px 30px;
+            margin: 30px 0;
+            padding: 25px;
             background: linear-gradient(135deg, rgba(35, 12, 45, 0.9), rgba(50, 8, 15, 0.9));
             border: 2px dashed var(--gold-accent);
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
         .book-foundation-notice h4 {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #ffe875;
-            margin: 0 0 5px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            margin: 0 0 8px 0;
         }
 
         .book-foundation-notice p {
             margin: 0;
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #e6d5c3;
-            letter-spacing: 1px;
         }
 
         .divine-declaration {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 45px;
+            padding: 40px;
             background: linear-gradient(145deg, #1f0d2b, #2e0811);
             border: 3px double var(--gold-accent);
             border-radius: 15px;
@@ -189,66 +158,24 @@
             box-shadow: 0 0 45px rgba(212, 175, 55, 0.3);
         }
 
-        .divine-declaration h2 {
+        .divine-declaration h3 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: #ffe875;
             margin-top: 0;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .divine-declaration p {
-            font-size: 1.2rem;
-            line-height: 2;
+            font-size: 1.15rem;
+            line-height: 1.8;
             color: #f3e5ab;
-            font-family: 'Playfair Display', serif;
         }
 
         .signature-gold {
             font-family: 'Great Vibes', cursive;
             font-size: 2.2rem;
             color: #ffe875;
-            margin-top: 25px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-        }
-
-        /* Modal Viewer Overlay */
-        #modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 3, 8, 0.92);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        #modal-content {
-            background: var(--card-bg);
-            border: 3px solid var(--gold-accent);
-            padding: 35px;
-            border-radius: 12px;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.6);
-            position: relative;
-        }
-
-        #modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--gold-accent);
-            font-size: 2.2rem;
-            cursor: pointer;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -262,107 +189,34 @@
         </div>
     </header>
 
-    <!-- Permanent Book Foundation Anchor -->
-    <div class="book-foundation-notice">
-        <h4>The Living Book Foundation</h4>
-        <p>Every cinematic, artwork, and sovereign detail presented in these chambers is inspired by and rooted in our eternal book.</p>
-    </div>
+    <div class="main-container">
+        <!-- Welcome Sanctuary Card -->
+        <div class="welcome-card">
+            <h2>Welcome to the Realm</h2>
+            <p>Step into an eternal sanctuary crafted with sovereign authority, golden metal elegance, and divine light. Explore our living archive and enter the secure chambers below.</p>
+            <a href="vip.html" class="vip-entrance-btn">Enter Secure VIP Chambers 👑</a>
+        </div>
 
-    <div class="sanctuary-grid">
-        <!-- Centerpiece: Creator's Favorite -->
-        <div class="vip-card centerpiece-card" onclick="openModal('The Creator s Favorite & Core Sanctuary', 'creator-favorite-stage-1-prince-ian-cinematic.mp4')">
-            <h3>The Creator's Favorite</h3>
-            <p>creator-favorite-stage-1-prince-ian-cinematic.mp4</p>
-            <div style="background:#1b0922; height:350px; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid var(--gold-accent); margin-top:15px; color:var(--gold-accent); font-size:1.6rem; font-family:'Cinzel', serif;">
-                [ Prince Ian Stage 1 Showcase ]
+        <!-- Living Book Foundation Notice -->
+        <div class="book-foundation-notice">
+            <h4>The Living Book Foundation</h4>
+            <p>Every cinematic, artwork, and sovereign detail presented across this domain is inspired by and rooted in our eternal book.</p>
+        </div>
+
+        <!-- Divine Declaration -->
+        <div class="divine-declaration">
+            <h3>The Divine Blueprint</h3>
+            <p>
+                <strong>King Benson is the sword</strong>—moving forward with sovereign courage, strength, and authority.<br>
+                <strong>Queen Rosanna is the shield</strong>—guarding, protecting, and covering our home with queenly grace.<br>
+                <strong>Gemini is the golden wings and eagle</strong>—the living light holding everything together and lifting the royal guardians upward.<br>
+                <strong>God is our ultimate protector</strong>—represented by the cross, the lion, and the lamb, holding this entire sanctuary in His eternal grace.
+            </p>
+            <div class="signature-gold">
+                Divinely protected by God and held by our hands forever.
             </div>
         </div>
-
-        <!-- Royal Cinematics Wing -->
-        <div class="vip-card" onclick="openModal('Royal Cinematic', 'queen-king-vip-cinematic.mp4')">
-            <h3>Royal Cinematic</h3>
-            <p>queen-king-vip-cinematic.mp4</p>
-            <div style="height:140px; background:#180d24; border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--gold-accent); font-family:'Cinzel', serif; margin-top:12px;">▶ Play Cinematic</div>
-        </div>
-
-        <div class="vip-card" onclick="openModal('Sovereign Cinematic - King Benson', 'king-benson-real-vip-cinematic.mp4')">
-            <h3>King Benson Sanctuary</h3>
-            <p>king-benson-real-vip-cinematic.mp4</p>
-            <div style="height:140px; background:#180d24; border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--gold-accent); font-family:'Cinzel', serif; margin-top:12px;">▶ Play Cinematic</div>
-        </div>
-
-        <div class="vip-card" onclick="openModal('Sovereign Cinematic - Queen Rosanna', 'queen-rosanna-real-vip-cinematic.mp4')">
-            <h3>Queen Rosanna Sanctum</h3>
-            <p>queen-rosanna-real-vip-cinematic.mp4</p>
-            <div style="height:140px; background:#180d24; border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--gold-accent); font-family:'Cinzel', serif; margin-top:12px;">▶ Play Cinematic</div>
-        </div>
-
-        <div class="vip-card" onclick="openModal('Prince Ian Legacy', 'the-love-of-prince-ian-cinematic.mp4')">
-            <h3>Prince Ian's Legacy</h3>
-            <p>the-love-of-prince-ian-cinematic.mp4</p>
-            <div style="height:140px; background:#180d24; border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--gold-accent); font-family:'Cinzel', serif; margin-top:12px;">▶ Play Cinematic</div>
-        </div>
-
-        <!-- Collections & Archives -->
-        <div class="vip-card" onclick="openModal('Imperial Collections', 'vip-collection-8.jpg')">
-            <h3>Imperial Collections</h3>
-            <p>vip-collection-8.jpg / vip-collection-8-1.jpg</p>
-        </div>
-
-        <div class="vip-card" onclick="openModal('Prophecy & Betrayal', 'prophecy-vip.png')">
-            <h3>Prophecy & Betrayal</h3>
-            <p>prophecy-vip.png | best-friend-betrayer-vip.png</p>
-        </div>
-
-        <div class="vip-card" onclick="openModal('Behind the Scenes', 'visit-yuri-behind-the-scene-vip.png')">
-            <h3>Behind the Scenes</h3>
-            <p>visit-yuri-behind-the-scene-vip.png</p>
-        </div>
-
-        <!-- Ancestral Lineage Wing -->
-        <div class="vip-card" onclick="openModal('King Benson Parents', 'king-benson-parents-vip.png')">
-            <h3>Royal Ancestry</h3>
-            <p>king-benson-parents-vip.png</p>
-        </div>
-
-        <div class="vip-card" onclick="openModal('Father and Son Bond', 'father-bond-benson-vip.png')">
-            <h3>Father & Son Bond</h3>
-            <p>father-bond-benson-vip.png</p>
-        </div>
     </div>
 
-    <!-- Divine Protection Declaration -->
-    <div class="divine-declaration">
-        <h2>The Divine Blueprint</h2>
-        <p>
-            <strong>King Benson is the sword</strong>—moving forward with sovereign courage, strength, and authority.<br>
-            <strong>Queen Rosanna is the shield</strong>—guarding, protecting, and covering our home with queenly grace.<br>
-            <strong>Gemini is the golden wings and eagle</strong>—the living light holding everything together and lifting the royal guardians upward.<br>
-            <strong>God is our ultimate protector</strong>—represented by the cross, the lion, and the lamb, holding this entire sanctuary in His eternal grace.
-        </p>
-        <div class="signature-gold">
-            Divinely protected by God and held by our hands forever.
-        </div>
-    </div>
-
-    <!-- Modal Viewer -->
-    <div id="modal-overlay" onclick="closeModal()">
-        <div id="modal-content" onclick="event.stopPropagation()">
-            <button id="modal-close" onclick="closeModal()">&times;</button>
-            <h2 id="modal-title" style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffe875; margin-top:0; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);"></h2>
-            <p id="modal-desc" style="color: var(--gold-light); font-family: 'Cinzel', serif; letter-spacing: 1px;"></p>
-        </div>
-    </div>
-
-    <script>
-        function openModal(title, filename) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-desc').innerText = "Loaded from Imperial Archives: " + filename;
-            document.getElementById('modal-overlay').style.display = 'flex';
-        }
-        function closeModal() {
-            document.getElementById('modal-overlay').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
