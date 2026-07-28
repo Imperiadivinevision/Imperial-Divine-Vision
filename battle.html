@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Empire: Battle Arena & Divine Intervention</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-purple: #1a0822;
+            --imperial-crimson: #36080e;
+            --gold-accent: #f3e5ab;
+            --gold-shine: #ffd700;
+            --dark-bg: #07040a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--gold-accent);
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffd700, #ffc0cb, #dda0dd, #ff8c00, #ffd700);
+            background-size: 500% 500%;
+            animation: breathingFloor 12s ease infinite;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes breathingFloor {
+            0% { background-position: 0% 50%; transform: scale(1); }
+            50% { background-position: 100% 50%; transform: scale(1.008); }
+            100% { background-position: 0% 50%; transform: scale(1); }
+        }
+
+        /* Floating Sparkles */
+        .floating-sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: flyUpward 7s linear infinite;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        @keyframes flyUpward {
+            0% { transform: translateY(110vh) translateX(0px) rotate(0deg) scale(0.6); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) translateX(60px) rotate(360deg) scale(1.4); opacity: 0; }
+        }
+
+        .top-nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 8, 22, 0.92);
+            border-bottom: 2px double var(--gold-shine);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 15px 20px;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .top-nav-bar a {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold-accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .top-nav-bar a:hover {
+            color: var(--gold-shine);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        .battle-container {
+            max-width: 900px;
+            margin: 130px auto 50px auto;
+            background: rgba(18, 10, 24, 0.95);
+            border: 2px solid var(--gold-shine);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 192, 203, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold-shine);
+            letter-spacing: 3px;
+            margin-top: 0;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        p {
+            color: #fceade;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Arena Stats & Health Bars */
+        .arena-board {
+            background: rgba(10, 4, 15, 0.9);
+            border: 2px solid var(--gold-accent);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.95rem;
+        }
+
+        .health-bar-container {
+            width: 60%;
+            background: #251033;
+            border: 1px solid var(--gold-accent);
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4d4d, #ffd700);
+            width: 100%;
+            transition: width 0.4s ease;
+        }
+
+        /* Combat & Divine Intervention Controls */
+        .combat-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .combat-btn {
+            background: #251033;
+            color: var(--gold-shine);
+            border: 2px solid var(--gold-accent);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .combat-btn:hover {
+            background: var(--gold-shine);
+            color: #1a0822;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 20px var(--gold-shine);
+        }
+
+        .divine-btn {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #3b0d1a, #5a1832);
+            border-color: #ffd700;
+            color: #ffd700;
+            font-size: 1.1rem;
+        }
+
+        .divine-btn:hover {
+            background: #ffd700;
+            color: #3b0d1a;
+            box-shadow: 0 0 25px #ffd700;
+        }
+
+        /* Combat Log */
+        .combat-log {
+            height: 180px;
+            background: rgba(5, 2, 8, 0.85);
+            border: 1px solid #5a3d6e;
+            border-radius: 8px;
+            padding: 15px;
+            overflow-y: auto;
+            text-align: left;
+            color: #f3e5ab;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .log-entry {
+            background: rgba(45, 22, 58, 0.65);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 3px solid var(--gold-shine);
+        }
+
+        .royal-btn {
+            background: #1a0822;
+            color: var(--gold-shine);
+            border: 1px solid var(--gold-shine);
+            padding: 12px 20px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: block;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        .royal-btn:hover {
+            background: var(--gold-shine);
+            color: #1a0822;
+            font-weight: bold;
+            box-shadow: 0 0 20px var(--gold-shine);
+        }
+
+        /* Click Sparkle Effect */
+        .click-sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            animation: burstSparkle 0.9s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes burstSparkle {
+            0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(1.6) rotate(180deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body onclick="triggerGlobalSparkle(event)">
+
+    <!-- Floating Background Magical Elements -->
+    <div class="floating-sparkle" style="left: 10%; animation-duration: 6s; animation-delay: 0s;">✨</div>
+    <div class="floating-sparkle" style="left: 30%; animation-duration: 8s; animation-delay: 2s;">🦁</div>
+    <div class="floating-sparkle" style="left: 55%; animation-duration: 7s; animation-delay: 1s;">🕊️</div>
+    <div class="floating-sparkle" style="left: 80%; animation-duration: 9s; animation-delay: 1.5s;">⚔️</div>
+
+    <nav class="top-nav-bar">
+        <a href="index.html">Home 🏛️</a>
+        <a href="map.html">World Map 🗺️</a>
+        <a href="character-workshop.html">Workshop 👤</a>
+        <a href="room-youth.html">Proving Grounds 🛡️</a>
+    </nav>
+
+    <div class="battle-container" onclick="event.stopPropagation()">
+        <h1>Proving Grounds: Battle & Divine Intervention</h1>
+        <p>Defend the empire against rival forces. Use your Sword to strike, your Shield to defend, your Wings for grace, and invoke the Lion of God for ultimate Divine Intervention when defeat is near!</p>
+
+        <!-- Arena Status & Health Bars -->
+        <div class="arena-board">
+            <div class="status-row">
+                <span>🛡️ Empire Health:</span>
+                <div class="health-bar-container">
+                    <div id="playerHealthBar" class="health-bar-fill" style="width: 100%;"></div>
+                </div>
+                <span id="playerHealthText">100 / 100</span>
+            </div>
+            <div class="status-row">
+                <span>⚔️ Rival Forces Life Span:</span>
+                <div class="health-bar-container">
+                    <div id="npcHealthBar" class="health-bar-fill" style="width: 100%; background: linear-gradient(90deg, #ff8c00, #ff4d4d);"></div>
+                </div>
+                <span id="npcHealthText">100 / 100</span>
+            </div>
+        </div>
+
+        <!-- Combat & Divine Action Buttons -->
+        <div class="combat-controls">
+            <button class="combat-btn" onclick="playerAttack()">⚔️ Strike with Sword</button>
+            <button class="combat-btn" onclick="playerDefend()">🛡️ Raise Shield</button>
+            <button class="combat-btn" onclick="useWings()">🕊️ Wings of Grace</button>
+            <button class="combat-btn" onclick="investLion()">🦁 Offer to the Lion</button>
+            <button class="combat-btn divine-btn" onclick="divineIntervention()">🦁✨ DIVINE INTERVENTION (God's Power)</button>
+        </div>
+
+        <!-- Live Combat Feed Log -->
+        <div id="combatLog" class="combat-log">
+            <div class="log-entry"><strong>Battle Herald:</strong> The battle has begun! Choose your weapon, protect your life span, and invoke divine intervention if danger approaches.</div>
+        </div>
+
+        <a href="map.html" class="royal-btn">Return to World Map</a>
+    </div>
+
+    <script>
+        let playerHp = 100;
+        let npcHp = 100;
+        let lionOfferings = 0;
+
+        function playChimeSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3);
+
+                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.6);
+            } catch (e) {}
+        }
+
+        function triggerGlobalSparkle(event) {
+            playChimeSound();
+            const symbols = ['✨', '🦁', '🕊️', '⚔️', '🛡️', '👑'];
+            const x = event.clientX;
+            const y = event.clientY;
+
+            for (let i = 0; i < 6; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'click-sparkle';
+                sparkle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 40 + Math.random() * 80;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                sparkle.style.setProperty('--dx', dx + 'px');
+                sparkle.style.setProperty('--dy', dy + 'px');
+
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 900);
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('playerHealthBar').style.width = Math.max(0, playerHp) + '%';
+            document.getElementById('playerHealthText').innerText = Math.max(0, playerHp) + ' / 100';
+            document.getElementById('npcHealthBar').style.width = Math.max(0, npcHp) + '%';
+            document.getElementById('npcHealthText').innerText = Math.max(0, npcHp) + ' / 100';
+        }
+
+        function addLog(message) {
+            const log = document.getElementById('combatLog');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = message;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function playerAttack() {
+            playChimeSound();
+            if (npcHp <= 0 || playerHp <= 0) return;
+            const damage = 15 + Math.floor(Math.random() * 15);
+            npcHp -= damage;
+            addLog(`⚔️ You struck with the sword, dealing <strong>${damage}</strong> damage to the rival forces!`);
+            
+            if (npcHp <= 0) {
+                addLog(`🎉 <strong>Victory!</strong> The rival forces have been defeated by the empire!`);
+                updateUI();
+                return;
+            }
+
+            // NPC Counter attack
+            setTimeout(() => {
+                const counter = 10 + Math.floor(Math.random() * 12);
+                playerHp -= counter;
+                addLog(`⚠️ The rival forces counter-attacked for <strong>${counter}</strong> damage!`);
+                updateUI();
+            }, 600);
+            updateUI();
+        }
+
+        function playerDefend() {
+            playChimeSound();
+            if (playerHp <= 0) return;
+            const heal = 10;
+            playerHp = Math.min(100, playerHp + heal);
+            addLog(`🛡️ You raised your shield, deflecting incoming danger and restoring <strong>${heal}</strong> stability!`);
+            updateUI();
+        }
+
+        function useWings() {
+            playChimeSound();
+            const graceHeal = 20;
+            playerHp = Math.min(100, playerHp + graceHeal);
+            addLog(`🕊️ You spread your wings of grace, soaring above danger and healing <strong>${graceHeal}</strong> life span!`);
+            updateUI();
+        }
+
+        function investLion() {
+            playChimeSound();
+            lionOfferings += 1;
+            addLog(`🦁 You laid an offering before the Lion of God (Offerings: ${lionOfferings}). Divine power is building up!`);
+        }
+
+        function divineIntervention() {
+            playChimeSound();
+            if (playerHp > 40 && lionOfferings < 2) {
+                addLog(`⚠️ <em>The Lion awaits your offerings and need! Your life span is still stable. Keep fighting or invest more in the Lion!</em>`);
+                return;
+            }
+            playerHp = 100;
+            npcHp -= (30 + lionOfferings * 15);
+            addLog(`🦁✨ <strong>DIVINE INTERVENTION!</strong> The Lion of God has roared! Rival forces are swallowed by overwhelming divine power, and your empire is fully restored!`);
+            lionOfferings = 0;
+            updateUI();
+        }
+    </script>
+
+</body>
+</html>
