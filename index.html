@@ -8,10 +8,22 @@
             margin: 0;
             padding: 0;
             background-color: #040a08;
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px auto;
+            background-image: url('garden_border_pattern.png');
+            animation: breatheGarden 60s infinite alternate ease-in-out;
             color: #d4af37;
             font-family: 'Cinzel', serif;
             text-align: center;
         }
+
+        @keyframes breatheGarden {
+            0% { background-size: 400px auto; background-position: center center; }
+            50% { background-size: 415px auto; background-position: center top; }
+            100% { background-size: 390px auto; background-position: center bottom; }
+        }
+
         nav { 
             padding: 15px 20px; 
             background: rgba(4, 10, 8, 0.95);
@@ -96,8 +108,8 @@
     </nav>
 
     <div class="chamber-container">
-        <h1 style="color: #d4af37; margin-top: 0;">Welcome to Sanctuary Home</h1>
-        <p style="color: #b3a896; font-style: italic;">“Your home is a sanctuary where love provides everything you need.”</p>
+        <h1 style="color: #d4af37; margin-top: 0;">Imperial Divine Vision</h1>
+        <p style="color: #b3a896; font-style: italic;">“An ancient sanctuary of boundless royalty, power, wealth, and eternal love.”</p>
         
         <!-- Dedicated Youth Group Section -->
         <div class="youth-banner">
