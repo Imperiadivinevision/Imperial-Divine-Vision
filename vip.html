@@ -24,7 +24,6 @@
             margin: 0;
             padding: 30px;
             overflow-x: hidden;
-            /* Moving animated floor/background gradient */
             background: linear-gradient(135deg, #0b0710, #2b1035, #4a0e17, #0b0710);
             background-size: 400% 400%;
             animation: moveFloor 15s ease infinite;
@@ -37,7 +36,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Security Gate Overlay */
+        /* Security Gate Overlay with Cash App Link */
         #security-gate {
             position: fixed;
             top: 0;
@@ -59,14 +58,14 @@
             border: 3px solid var(--gold-accent);
             padding: 40px;
             border-radius: 15px;
-            max-width: 500px;
+            max-width: 520px;
             width: 100%;
             box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
         }
 
         .gate-box h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3.3rem;
             color: #ffe875;
             margin-top: 0;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
@@ -75,7 +74,7 @@
         .gate-box input {
             width: 100%;
             padding: 12px;
-            margin: 20px 0;
+            margin: 15px 0;
             background: #0b0710;
             border: 2px solid var(--gold-accent);
             color: var(--gold-light);
@@ -96,15 +95,44 @@
             cursor: pointer;
             border-radius: 6px;
             transition: 0.3s;
+            width: 100%;
         }
 
         .gate-box button:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
         }
 
+        .payment-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.4);
+        }
+
+        .pay-link-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00D632, #008720);
+            color: #fff;
+            border: 2px solid var(--gold-accent);
+            padding: 12px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+            margin-top: 10px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(0, 214, 50, 0.4);
+        }
+
+        .pay-link-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+
         #vip-sanctuary-content {
-            display: none; /* Hidden until passcode is entered */
+            display: none;
         }
 
         header {
@@ -200,7 +228,6 @@
 
         .centerpiece-card h3 { font-size: 3rem; }
 
-        /* Media Elements inside cards */
         .media-preview {
             width: 100%;
             height: 220px;
@@ -266,7 +293,6 @@
             margin-top: 25px;
         }
 
-        /* Modal Overlay for Zooming Pictures */
         #modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -300,19 +326,25 @@
 </head>
 <body>
 
-    <!-- Security Gate (Passcode Protected) -->
+    <!-- Security Gate with Imperial Divine Vision Cash App Link -->
     <div id="security-gate">
         <div class="gate-box">
             <h2>VIP Sanctuary Access</h2>
-            <p style="font-family: 'Cinzel', serif; color: #e6d5c3; font-size: 0.95rem;">Please enter your authorized VIP access code to enter the chambers.</p>
+            <p style="font-family: 'Cinzel', serif; color: #e6d5c3; font-size: 0.9rem; margin-bottom: 15px;">
+                Enter your authorized VIP access code below, or send payment via Cash App to receive your code.
+            </p>
             <input type="password" id="passcode-input" placeholder="Enter VIP Passcode...">
-            <br>
             <button onclick="unlockVIP()">Unlock Sanctuary</button>
             <p id="error-msg" style="color: #ff6b6b; font-family: 'Cinzel', serif; font-size: 0.85rem; margin-top: 10px; display: none;">Invalid access code. Please try again.</p>
+            
+            <div class="payment-section">
+                <p style="font-family: 'Cinzel', serif; font-size: 0.85rem; color: #e6d5c3; margin: 0 0 5px 0;">Official Bank Account: <strong>Empire Divine Vision</strong> ($tegrakij22)</p>
+                <a href="https://cash.app/$tegrakij22" target="_blank" class="pay-link-btn">💚 Pay via Cash App ($tegrakij22)</a>
+            </div>
         </div>
     </div>
 
-    <!-- Main VIP Content (Unlocked after Passcode) -->
+    <!-- Main VIP Content -->
     <div id="vip-sanctuary-content">
         <header>
             <h1>Imperial Divine Vision</h1>
@@ -328,17 +360,14 @@
         </div>
 
         <div class="sanctuary-grid">
-            <!-- Centerpiece -->
             <div class="vip-card centerpiece-card" onclick="openModalMedia('The Creator\'s Favorite', 'creator-favorite-stage-1-prince-ian-cinematic.mp4', 'video')">
                 <h3>The Creator's Favorite</h3>
                 <p>creator-favorite-stage-1-prince-ian-cinematic.mp4</p>
                 <video class="media-preview" autoplay muted loop>
                     <source src="creator-favorite-stage-1-prince-ian-cinematic.mp4" type="video/mp4">
-                    Your browser does not support video.
                 </video>
             </div>
 
-            <!-- Royal Cinematics -->
             <div class="vip-card" onclick="openModalMedia('Royal Cinematic', 'queen-king-vip-cinematic.mp4', 'video')">
                 <h3>Royal Cinematic</h3>
                 <p>queen-king-vip-cinematic.mp4</p>
@@ -371,7 +400,6 @@
                 </video>
             </div>
 
-            <!-- Collections -->
             <div class="vip-card" onclick="openModalMedia('Imperial Collections', 'vip-collection-8.jpg', 'image')">
                 <h3>Imperial Collections</h3>
                 <p>vip-collection-8.jpg / vip-collection-8-1.jpg</p>
@@ -403,7 +431,6 @@
             </div>
         </div>
 
-        <!-- Divine Declaration -->
         <div class="divine-declaration">
             <h2>The Divine Blueprint</h2>
             <p>
@@ -418,7 +445,6 @@
         </div>
     </div>
 
-    <!-- Zoom Modal Viewer -->
     <div id="modal-overlay" onclick="closeModal()">
         <div id="modal-content" onclick="event.stopPropagation()">
             <button id="modal-close" onclick="closeModal()">&times;</button>
@@ -428,7 +454,6 @@
     </div>
 
     <script>
-        // Set your VIP passcode here
         const VALID_VIP_PASSCODE = "VIP2026"; 
 
         function unlockVIP() {
