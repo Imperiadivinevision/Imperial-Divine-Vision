@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision — Ancient Sanctuary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Imperial Divine Vision — Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --royal-purple: #1a0822;
-            --imperial-crimson: #36080e;
-            --gold-accent: #f3e5ab;
-            --gold-shine: #ffd700;
-            --dark-bg: #07040a;
+            --royal-purple: #2b1035;
+            --imperial-crimson: #4a0e17;
+            --gold-accent: #d4af37;
+            --gold-light: #fff3cc;
+            --dark-bg: #0b0710;
+            --card-bg: linear-gradient(145deg, #180d24, #240c15);
         }
 
         * { box-sizing: border-box; }
 
         body {
             background-color: var(--dark-bg);
-            color: var(--gold-accent);
+            color: var(--gold-light);
             font-family: 'Playfair Display', serif;
             margin: 0;
-            padding: 40px;
+            padding: 30px;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #07040a, #1a0822, #36080e, #07040a);
+            /* Moving animated floor background */
+            background: linear-gradient(135deg, #0b0710, #2b1035, #4a0e17, #0b0710);
             background-size: 400% 400%;
-            animation: ancientFloor 18s ease infinite;
+            animation: moveFloor 15s ease infinite;
             min-height: 100vh;
         }
 
-        @keyframes ancientFloor {
+        @keyframes moveFloor {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -37,181 +39,161 @@
 
         header {
             text-align: center;
-            border-bottom: 3px double var(--gold-shine);
-            padding-bottom: 35px;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, rgba(26, 8, 34, 0.95), rgba(54, 8, 14, 0.95));
-            border-radius: 15px;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.25);
-            padding-top: 30px;
-            position: relative;
+            border-bottom: 4px double var(--gold-accent);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(43, 16, 53, 0.95), rgba(74, 14, 23, 0.95));
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+            padding-top: 25px;
         }
 
-        /* Ancient Golden Metal Cursive Title */
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
-            color: var(--gold-shine);
+            font-size: 4.5rem;
+            color: #ffe875;
             margin: 0 0 10px 0;
-            text-shadow: 
-                0 0 15px rgba(255, 215, 0, 0.7),
-                2px 3px 5px rgba(0, 0, 0, 0.9),
-                0 0 30px rgba(212, 175, 55, 0.5);
-            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 2px 2px 3px rgba(0, 0, 0, 0.9);
         }
 
         header p {
-            font-family: 'Cinzel Decorative', serif;
+            font-family: 'Cinzel', serif;
             font-style: italic;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #e6d5c3;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
-        /* Sacred Symbol Emblem Bar */
         .symbol-emblem-bar {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.85rem;
-            color: var(--gold-shine);
+            gap: 25px;
+            margin-top: 15px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--gold-accent);
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .main-container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Ancient Living Book Foundation Scroll */
-        .book-foundation-scroll {
-            margin-bottom: 40px;
-            padding: 35px;
-            background: linear-gradient(135deg, rgba(30, 10, 40, 0.95), rgba(45, 6, 12, 0.95));
-            border: 2px solid var(--gold-shine);
+        /* Living Book Foundation Box */
+        .book-foundation-notice {
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(35, 12, 45, 0.95), rgba(50, 8, 15, 0.95));
+            border: 3px solid var(--gold-accent);
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.2);
-            position: relative;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
 
-        .book-foundation-scroll h4 {
+        .book-foundation-notice h4 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.2rem;
-            color: var(--gold-shine);
+            font-size: 3rem;
+            color: #ffe875;
             margin: 0 0 10px 0;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
-        .book-foundation-scroll p {
+        .book-foundation-notice p {
             margin: 0;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1rem;
-            color: #f3e5ab;
-            letter-spacing: 1.5px;
-            line-height: 1.8;
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: #e6d5c3;
+            letter-spacing: 1px;
+            line-height: 1.6;
         }
 
-        /* Three Great Chambers Grid (Home, Library, VIP Room) */
+        /* Chambers Navigation Grid */
         .chambers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
-        .chamber-column {
-            background: linear-gradient(145deg, #16071f, #28060c);
-            border: 2px solid var(--gold-shine);
-            border-radius: 15px;
-            padding: 35px;
+        .chamber-card {
+            background: var(--card-bg);
+            border: 2px solid var(--gold-accent);
+            border-radius: 12px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.8);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
         }
 
-        .chamber-column:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(255, 215, 0, 0.35);
+        .chamber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
             border-color: #fff;
         }
 
-        .chamber-column h3 {
+        .chamber-card h3 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: var(--gold-shine);
+            font-size: 2.5rem;
+            color: #ffe875;
             margin-top: 0;
-            margin-bottom: 12px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            margin-bottom: 15px;
         }
 
-        .chamber-column p {
-            font-size: 1rem;
+        .chamber-card p {
+            font-size: 0.95rem;
             color: #d1c4b2;
             font-family: 'Playfair Display', serif;
-            margin-bottom: 25px;
-            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
-        .ancient-btn {
+        .chamber-btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--gold-shine), #b8860b);
-            color: #07040a;
-            padding: 12px 30px;
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold-accent), #aa820a);
+            color: #0b0710;
+            padding: 10px 25px;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
             font-size: 0.95rem;
             text-decoration: none;
             border-radius: 6px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
             transition: 0.3s;
-            letter-spacing: 1px;
         }
 
-        .ancient-btn:hover {
+        .chamber-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
             color: #fff;
-            background: linear-gradient(135deg, #fff, var(--gold-shine));
         }
 
-        /* Divine Blueprint Seal */
         .divine-declaration {
-            padding: 45px;
-            background: linear-gradient(145deg, #1b0824, #2c060e);
-            border: 3px double var(--gold-shine);
+            padding: 40px;
+            background: linear-gradient(145deg, #1f0d2b, #2e0811);
+            border: 3px double var(--gold-accent);
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.25);
+            box-shadow: 0 0 45px rgba(212, 175, 55, 0.3);
         }
 
         .divine-declaration h3 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            color: var(--gold-shine);
+            font-size: 3rem;
+            color: #ffe875;
             margin-top: 0;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
         }
 
         .divine-declaration p {
             font-size: 1.15rem;
-            line-height: 2;
+            line-height: 1.8;
             color: #f3e5ab;
-            font-family: 'Playfair Display', serif;
         }
 
         .signature-gold {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: var(--gold-shine);
-            margin-top: 25px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+            font-size: 2.2rem;
+            color: #ffe875;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -219,44 +201,41 @@
 
     <header>
         <h1>Imperial Divine Vision</h1>
-        <p>An Ancient Sanctuary of Boundless Royalty, Power, Wealth, and Eternal Love</p>
+        <p>A Sanctuary of Boundless Royalty, Power, Wealth, and Eternal Love</p>
         <div class="symbol-emblem-bar">
             <span>⚔️ Sword</span> &bull; <span>🛡️ Shield</span> &bull; <span>🦅 Wings & Eagle</span> &bull; <span>🦁 Lion & Lamb & Cross</span>
         </div>
     </header>
 
     <div class="main-container">
-        <!-- Living Book Foundation Scroll -->
-        <div class="book-foundation-scroll">
-            <h4>The Living Book Foundation</h4>
-            <p>Every chamber, chronicle, and sovereign detail presented across this domain is inspired by and rooted in our eternal book—written before coming to life.</p>
+        <!-- Living Book Foundation Banner -->
+        <div class="book-foundation-notice">
+<h4>The Living Book Foundation</h4>
+            <p>Every chamber, cinematic, and sovereign detail presented across this domain is inspired by and rooted in our eternal book—written before coming to life.</p>
         </div>
 
-        <!-- Three Grand Chambers (Home, Library, VIP Room) -->
+        <!-- Chambers & Rooms Navigation Grid -->
         <div class="chambers-grid">
-            <!-- Home Chamber -->
-            <div class="chamber-column">
-                <h3>The Home</h3>
-                <p>The sovereign sanctuary of our realm. Step into the heart of our domain where peace, love, and divine principles dwell eternally.</p>
-                <a href="index.html" class="ancient-btn">Return Home 🏛️</a>
+            <div class="chamber-card">
+                <h3>Secure VIP Chambers</h3>
+                <p>Explore our exclusive collections, creator favorites, and royal cinematics. (Passcode or Cash App required).</p>
+                <a href="vip.html" class="chamber-btn">Enter VIP Room 👑</a>
             </div>
 
-            <!-- Library Chamber -->
-            <div class="chamber-column">
-                <h3>The Library</h3>
-                <p>Unfold the ancient scrolls, read the sacred story path, explore chapter chronicles, and witness the written history of our realm.</p>
-                <span class="ancient-btn" style="opacity: 0.9;">Open Library 📖</span>
+            <div class="chamber-card">
+                <h3>Library & Story Path</h3>
+                <p>Read the chapters, explore the lore, and immerse yourself in the journey of our book.</p>
+                <span class="chamber-btn" style="opacity: 0.8; cursor: default;">Open Library 📖</span>
             </div>
 
-            <!-- VIP Room Chamber -->
-            <div class="chamber-column">
-                <h3>The VIP Chambers</h3>
-                <p>The elite sanctuary of royal cinematics, creator favorites, and sacred archives. (Passcode or Cash App required).</p>
-                <a href="vip.html" class="ancient-btn">Enter VIP Room 👑</a>
+            <div class="chamber-card">
+                <h3>Character Wardrobe</h3>
+                <p>Step inside to view the character designs, wardrobe, and visual creations.</p>
+                <span class="chamber-btn" style="opacity: 0.8; cursor: default;">View Wardrobe ✨</span>
             </div>
         </div>
 
-        <!-- Divine Blueprint Seal -->
+        <!-- Divine Declaration -->
         <div class="divine-declaration">
             <h3>The Divine Blueprint</h3>
             <p>
