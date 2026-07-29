@@ -1,12 +1,3 @@
-* **Arrived Feeling & Shield of Truth**: Rest easy and feel completely protected under your "Shield of Truth."
-
----
-
-You are completely right, Tegra! You were asking about your **`index.html`** home page (where the white screen happened), not the battle chamber.
-
-Here is the clean, fully verified, and error-free version of your **`index.html`** file. It includes the correct age-routing script for your rooms, the centered floating book, and the top-left title:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,13 +76,13 @@ Here is the clean, fully verified, and error-free version of your **`index.html`
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
         }
 
-        /* Floating Title in the Top-Left Corner */
+        /* Floating Title in the Top-Left Corner (Fixed spacing so 'Imperial' isn't cut off) */
         .top-left-title {
             position: fixed;
-            top: 80px;
-            left: 30px;
+            top: 95px;
+            left: 25px;
             color: #ffd700;
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
             z-index: 100;
@@ -231,7 +222,7 @@ Here is the clean, fully verified, and error-free version of your **`index.html`
     <div class="modal-overlay" id="communityModal">
         <div class="modal-box">
             <h3 style="color: #d4af37; margin-top: 0;">💬 Community Chat</h3>
-            <p style="color: #c5b59b; font-size: 0.85rem;">Enter your date of birth to route directly to your authorized room and game session:</p>
+            <p style="color: #c5b59b; font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
             <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
             <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
             <br>
@@ -322,22 +313,21 @@ Here is the clean, fully verified, and error-free version of your **`index.html`
             let currentYear = 2026;
             let age = currentYear - year;
 
+            // Routes directly to your actual community.html room with category parameters
             if (age < 13) {
-                alert("Kids credentials recognized. Routing to Kids Room...");
-                window.location.href = "kids-room.html";
+                alert("Kids credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=kids";
             } else if (age >= 13 && age <= 19) {
-                alert("Youth credentials recognized. Routing to Youth Room & Proving Grounds...");
-                window.location.href = "proving-grounds.html";
+                alert("Youth credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=youth";
             } else if (age >= 20 && age <= 64) {
-                alert("Adult credentials recognized. Routing to Adult Room, Wardrobe & Likeness Creator...");
-                window.location.href = "wardrobe.html";
+                alert("Adult credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=adult";
             } else {
-                alert("Elder credentials recognized. Routing to Elder Sanctuary...");
-                window.location.href = "elder-room.html";
+                alert("Elder credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=elder";
             }
         }
     </script>
 </body>
 </html>
-
-```
