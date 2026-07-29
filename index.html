@@ -1,4 +1,269 @@
-<script>
+* **Arrived Feeling & Shield of Truth**: Rest easy and feel completely protected under your "Shield of Truth."
+
+---
+
+Here is the **complete, final `index.html` file** with the corrected age-based room router included so that when you enter your birth year, it routes you properly to your personal room, wardrobe, and likeness creator instead of the library:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imperial Divine Vision | Sanctuary Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0f0e;
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Independent Moving Flowering Background */
+        .moving-bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px auto;
+            background-image: url('garden_border_pattern.png');
+            animation: breatheGarden 60s infinite alternate ease-in-out;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        @keyframes breatheGarden {
+            0% { background-size: 400px auto; background-position: center center; }
+            50% { background-size: 415px auto; background-position: center top; }
+            100% { background-size: 390px auto; background-position: center bottom; }
+        }
+
+        /* Interactive Light / Shine Layer on Mouse Move */
+        .shine-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Clean Top Navigation Bar */
+        nav { 
+            padding: 15px 20px; 
+            background: rgba(17, 23, 21, 0.95);
+            border-bottom: 2px solid #d4af37;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            flex-wrap: wrap;
+        }
+        nav a { 
+            color: #e6d5b8; 
+            text-decoration: none; 
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+        nav a:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Floating Title in the Top-Left Corner */
+        .top-left-title {
+            position: fixed;
+            top: 80px;
+            left: 30px;
+            color: #ffd700;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            z-index: 100;
+            animation: floatTitle 4s infinite alternate ease-in-out;
+            pointer-events: none;
+            text-align: left;
+        }
+
+        @keyframes floatTitle {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-8px); }
+        }
+
+        /* Hero Section holding the centered floating book */
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        /* Floating Book Cover with Ancient Golden Flowering Border in the Center */
+        .book-cover-frame {
+            width: 320px;
+            height: 440px;
+            border: 5px solid #d4af37;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.7);
+            animation: floatBook 4s infinite alternate ease-in-out;
+            margin-bottom: 25px;
+            background: #0b0f0e;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover-frame:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 70px #ffd700;
+        }
+
+        @keyframes floatBook {
+            0% { transform: translateY(0px); box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+            100% { transform: translateY(-12px); box-shadow: 0 0 65px rgba(212, 175, 55, 0.9); }
+        }
+
+        .book-cover-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .royal-subtitle {
+            color: #e6d5b8;
+            font-size: 0.95rem;
+            font-style: italic;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+        }
+
+        .royal-btn {
+            background: linear-gradient(to bottom, #d4af37, #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 12px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+            transition: 0.2s;
+        }
+        .royal-btn:hover {
+            background: linear-gradient(to bottom, #fff, #d4af37);
+            box-shadow: 0 0 25px #ffd700;
+        }
+
+        /* Modal for Community Chat Router */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(4, 10, 8, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-box {
+            background: rgba(20, 27, 24, 0.98);
+            border: 2px solid #d4af37;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(212,175,55,0.5);
+        }
+        .gate-input {
+            width: 100%;
+            padding: 10px;
+            background: #0b0f0e;
+            border: 1px solid #d4af37;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            margin: 15px 0;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body onmousemove="shineLight(event)">
+
+    <!-- Peaceful Melody Audio -->
+    <audio id="peaceful-melody" loop preload="auto">
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Independent Moving Background & Shine Overlay -->
+    <div class="moving-bg-layer"></div>
+    <div class="shine-overlay" id="shine-layer"></div>
+
+    <!-- Floating Title in the Top-Left Corner -->
+    <div class="top-left-title">
+        Imperial<br>Divine Vision
+    </div>
+
+    <!-- Community Chat Modal Router -->
+    <div class="modal-overlay" id="communityModal">
+        <div class="modal-box">
+            <h3 style="color: #d4af37; margin-top: 0;">💬 Community Chat</h3>
+            <p style="color: #c5b59b; font-size: 0.85rem;">Enter your date of birth to route directly to your authorized room and game session:</p>
+            <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
+            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
+            <br>
+            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Clean Top Navigation Bar -->
+    <nav> 
+        <a href="index.html">🏠 Home</a>
+        <a href="library.html">📚 Library</a>
+        <a href="trailers.html">🎬 Trailers</a>
+        <a href="battle.html">⚔️ Battle Arena</a>
+        <a href="proving-grounds.html" style="color: #ffd700;">🛡️ Youth Proving Grounds</a>
+        <a href="#" onclick="openModal(); return false;" style="color: #00ffcc;">💬 Community Chat</a>
+    </nav>
+
+    <!-- Hero Section with Centered Floating Book -->
+    <div class="hero-section" onclick="playMelody()">
+        
+        <!-- Floating Cover Image using cover_image.png in the center -->
+        <div class="book-cover-frame" onclick="window.location.href='library.html'">
+            <img src="cover_image.png" alt="The Song of Rosanna and the Evil King" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
+        </div>
+
+        <h3 style="color: #e6d5b8; margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
+        <p class="royal-subtitle">
+            “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
+        </p>
+
+        <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
+    </div>
+
+    <script>
         let musicStarted = false;
 
         function shineLight(event) {
@@ -65,12 +330,15 @@
                 window.location.href = "proving-grounds.html";
             } else if (age >= 20 && age <= 64) {
                 alert("Adult credentials recognized. Routing to Adult Room, Wardrobe & Likeness Creator...");
-                window.location.href = "wardrobe.html"; // Change to your exact adult room / wardrobe file name if needed
+                window.location.href = "wardrobe.html";
             } else {
                 alert("Elder credentials recognized. Routing to Elder Sanctuary...");
                 window.location.href = "elder-room.html";
             }
         }
     </script>
+
 </body>
 </html>
+
+```
