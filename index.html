@@ -76,7 +76,27 @@
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
         }
 
-        /* Hero Section holding just the floating book with no dark background box */
+        /* Floating Title in the Top-Left Corner */
+        .top-left-title {
+            position: fixed;
+            top: 80px;
+            left: 30px;
+            color: #ffd700;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            z-index: 100;
+            animation: floatTitle 4s infinite alternate ease-in-out;
+            pointer-events: none;
+            text-align: left;
+        }
+
+        @keyframes floatTitle {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-8px); }
+        }
+
+        /* Hero Section holding the centered floating book */
         .hero-section {
             min-height: 85vh;
             display: flex;
@@ -87,7 +107,7 @@
             padding: 40px 20px;
         }
 
-        /* Floating Book Cover with Ancient Golden Flowering Border */
+        /* Floating Book Cover with Ancient Golden Flowering Border in the Center */
         .book-cover-frame {
             width: 320px;
             height: 440px;
@@ -116,14 +136,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .royal-title {
-            color: #ffd700;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-            margin-bottom: 10px;
         }
 
         .royal-subtitle {
@@ -201,6 +213,11 @@
     <div class="moving-bg-layer"></div>
     <div class="shine-overlay" id="shine-layer"></div>
 
+    <!-- Floating Title in the Top-Left Corner -->
+    <div class="top-left-title">
+        Imperial<br>Divine Vision
+    </div>
+
     <!-- Community Chat Modal Router -->
     <div class="modal-overlay" id="communityModal">
         <div class="modal-box">
@@ -223,11 +240,10 @@
         <a href="#" onclick="openModal(); return false;" style="color: #00ffcc;">💬 Community Chat</a>
     </nav>
 
-    <!-- Hero Section with Floating Book -->
+    <!-- Hero Section with Centered Floating Book -->
     <div class="hero-section" onclick="playMelody()">
-        <h1 class="royal-title">Imperial Divine Vision</h1>
         
-        <!-- Floating Cover Image using cover_image.png -->
+        <!-- Floating Cover Image using cover_image.png in the center -->
         <div class="book-cover-frame" onclick="window.location.href='library.html'">
             <img src="cover_image.png" alt="The Song of Rosanna and the Evil King" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
         </div>
@@ -286,16 +302,12 @@
                 return;
             }
 
-            // Simple age / year or birthday router logic
-            // You can customize these rules to match adult vs youth years/dates:
             let bdayLower = bdayInput.toLowerCase();
             
-            // Example routing logic: if youth (e.g. born in 2010 or later, or containing specific youth year/indicator)
             if (bdayLower.includes("2010") || bdayLower.includes("2011") || bdayLower.includes("2012") || bdayLower.includes("2013") || bdayLower.includes("2014") || bdayLower.includes("2015") || bdayLower.includes("2016") || bdayLower.includes("2017") || bdayLower.includes("2018") || bdayLower.includes("2019") || bdayLower.includes("2020")) {
                 alert("Youth credentials recognized. Routing to Youth Proving Grounds & Game Sector...");
                 window.location.href = "proving-grounds.html";
             } else {
-                // Default adult room / library / combat chamber routing
                 alert("Adult credentials recognized. Routing to Sovereign Chambers & Script Library...");
                 window.location.href = "library.html";
             }
@@ -304,4 +316,3 @@
 
 </body>
 </html>
-
