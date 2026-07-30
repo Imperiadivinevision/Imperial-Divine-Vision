@@ -1,15 +1,108 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Young Guardians: The Living Capital</title>
+    <title>Young Guardians: The Living Capital - Little Guardians Playroom</title>
     <style>
-        :root { --main-bg: #e3f2fd; --royal-purple: #4a148c; --grace-blue: #00796b; }
-        body { font-family: 'Georgia', serif; background-color: var(--main-bg); text-align: center; }
-        .nav-bar { background: var(--royal-purple); color: #fff; padding: 15px; }
-        .grace-box { background: var(--grace-blue); color: white; padding: 10px; margin: 10px; border-radius: 5px; font-weight: bold; }
-        .control-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 40px; }
-        .card { background: white; padding: 20px; border-radius: 15px; border: 3px solid #1a237e; cursor: pointer; }
-          /* THE ROYAL BRANDING (Added for all rooms) */
+        :root { 
+            --main-bg: #e3f2fd; 
+            --royal-purple: #4a148c; 
+            --grace-blue: #00796b; 
+            --kid-yellow: #ffd700;
+            --kid-pink: #ff69b4;
+            --kid-bg: #fff8dc;
+            --fun-green: #4caf50;
+            --fun-orange: #ff9800;
+        }
+        body { font-family: 'Georgia', serif; background-color: var(--main-bg); text-align: center; margin: 0; padding: 20px; }
+        .nav-bar { background: var(--royal-purple); color: #fff; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .grace-box { background: var(--grace-blue); color: white; padding: 10px; margin: 10px auto; border-radius: 5px; font-weight: bold; max-width: 500px; }
+        
+        #kid-room-container {
+            background: var(--kid-bg);
+            border: 6px dashed var(--kid-pink);
+            border-radius: 25px;
+            margin: 0 auto;
+            padding: 30px;
+            max-width: 850px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .cloud-decoration {
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin: 8px;
+            box-shadow: 0 4px 12px rgba(0,255,255,0.4);
+            font-weight: bold;
+            color: var(--royal-purple);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .game-screen {
+            background: white;
+            border: 4px solid var(--kid-yellow);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .score-board {
+            background: var(--kid-yellow);
+            color: #b8860b;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(255,215,0,0.4);
+        }
+        .play-btn {
+            background: var(--kid-pink);
+            color: white;
+            border: none;
+            padding: 16px 28px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 5px #c71585;
+            transition: all 0.1s ease;
+        }
+        .play-btn:active { transform: translateY(4px); box-shadow: 0 1px #c71585; }
+        
+        .voice-box {
+            background: #e8f5e9;
+            border: 3px dashed var(--fun-green);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        /* MAGICAL STICKER REWARD BOARD */
+        .sticker-board {
+            margin-top: 25px;
+            background: #fff0f5;
+            border: 3px dotted var(--kid-pink);
+            border-radius: 15px;
+            padding: 15px;
+        }
+        .sticker-slot {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #ffe4e1;
+            border-radius: 50%;
+            margin: 5px;
+            line-height: 50px;
+            font-size: 24px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
         .royal-branding {
             position: fixed;
             bottom: 20px;
@@ -17,35 +110,147 @@
             width: 120px;
             z-index: 1000;
             pointer-events: none;
-            }
+        }
     </style>
 </head>
-<body>
+<body onkeydown="handleKeyPress(event)">
 
     <div class="nav-bar">
-        <span>Logged in as: <span id="user-role">ADMIN</span></span>
+        <span style="font-size: 18px; font-weight: bold;">Logged in as: <span id="user-role">KID_ROOM</span></span>
         <div class="grace-box">CHRONICLES OF GRACE: Active (Tracking Kindness)</div>
     </div>
 
-    <h1>Imperial Governance Center</h1>
-    <p>Queen Rosanna's Decree: "To rule with integrity, honesty, and the fear of God above all."</p>
+    <h1>🧸 Little Guardians Magical Nursery 🧸</h1>
+    <p>A brilliant, joyful sanctuary filled with fun learning games, voice talk-back, and magical rewards!</p>
 
-    <div class="control-panel">
-        <div class="card" onclick="setRole('ADMIN')">🛡️ ADMIN: Reality Control</div>
-        <div class="card" onclick="setRole('QUEEN')">👑 QUEEN: Royal Duties & Governance</div>
-        <div class="card" onclick="setRole('COUNCIL')">📜 IMPERIAL COUNCIL: Destiny Helper</div>
+    <!-- KID ROOM PLAYGROUND AREA -->
+    <div id="kid-room-container">
+        <div>
+            <span class="cloud-decoration">☁️ Happy Cloud</span>
+            <span class="cloud-decoration">⭐ Golden Star</span>
+            <span class="cloud-decoration">👑 Little Crown</span>
+            <span class="cloud-decoration">🎈 Floating Balloon</span>
+        </div>
+        <h2>🌈 Voice, Colors & Alphabet Adventure 🌈</h2>
+        <p>Use your keyboard arrow keys <b>(Up, Down, Left, Right)</b> or tap the microphone to talk back and win stickers!</p>
+        
+        <div class="game-screen">
+            <div class="score-board">Coins Collected: <span id="coin-count">0</span> 🪙 | Stickers Won: <span id="sticker-count">0</span> ⭐</div>
+            
+            <h3 id="game-challenge" style="color: var(--royal-purple); font-size: 22px;">Alphabet Stage: Press any Arrow Key or Speak!</h3>
+            <div id="alphabet-display" style="font-size: 64px; color: var(--royal-pink, #ff69b4); font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">A</div>
+            
+            <div class="voice-box">
+                <p style="margin: 0 0 8px 0; font-weight: bold; color: #2e7d32; font-size: 18px;">🎙️ Little Guardian Voice Speaker:</p>
+                <p id="voice-prompt" style="font-size: 15px; margin-bottom: 12px; color: #444;">Tap the button and say a letter, a color like "pink", or color mixing like "purple"!</p>
+                <button class="play-btn" style="background-color: var(--fun-green); box-shadow: 0 5px #2e7d32;" onclick="startVoiceRecognition()">🎤 Tap to Talk Back</button>
+                <p id="voice-output" style="font-style: italic; color: var(--royal-purple); margin-top: 10px; font-weight: bold; font-size: 16px;"></p>
+            </div>
+
+            <div id="color-quiz-box" style="margin-top: 25px;">
+                <p style="font-size: 18px; font-weight: bold; color: #333;">🎨 Bright Color Mixing Game: Tap the right color!</p>
+                <button class="play-btn" style="background-color: #ffd700; color: #333;" onclick="rewardChoice('Golden Yellow')">Golden Yellow 🌟</button>
+                <button class="play-btn" style="background-color: #ff69b4;" onclick="rewardChoice('Pretty Pink')">Pretty Pink 🌸</button>
+                <button class="play-btn" style="background-color: #9c27b0;" onclick="rewardChoice('Magical Purple')">Magical Purple 💜</button>
+            </div>
+
+            <!-- Sticker Reward Collection Board -->
+            <div class="sticker-board">
+                <p style="margin: 0 0 5px 0; font-weight: bold; color: var(--royal-purple);">✨ Magical Sticker Collector Board ✨</p>
+                <div id="sticker-container">
+                    <span class="sticker-slot">🔒</span>
+                    <span class="sticker-slot">🔒</span>
+                    <span class="sticker-slot">🔒</span>
+                    <span class="sticker-slot">🔒</span>
+                    <span class="sticker-slot">🔒</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function setRole(role) {
-            document.getElementById('user-role').innerText = role;
-            if(role === 'QUEEN') {
-                alert("Queen Rosanna, your decree is recorded in the Eternal Archives. The Kingdom now prioritizes Grace alongside Gold.");
+        let coins = 0;
+        let stickers = 0;
+        let alphabetList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
+        let currentIndex = 0;
+        let stickerIcons = ['🌟', '👑', '🎈', '🧸', '🦄'];
+
+        function rewardChoice(colorName) {
+            coins += 10;
+            checkStickerUnlock();
+            document.getElementById('coin-count').innerText = coins;
+            alert(`Amazing job choosing ${colorName}! You earned 10 shiny coins and a step closer to a new sticker! 🎉`);
+        }
+
+        function handleKeyPress(event) {
+            if(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+                coins += 2;
+                checkStickerUnlock();
+                document.getElementById('coin-count').innerText = coins;
+                
+                currentIndex = (currentIndex + 1) % alphabetList.length;
+                document.getElementById('alphabet-display').innerText = alphabetList[currentIndex];
+                document.getElementById('game-challenge').innerText = "Wonderful moving! New alphabet letter unlocked:";
             }
+        }
+
+        function checkStickerUnlock() {
+            if (coins >= (stickers + 1) * 20 && stickers < 5) {
+                stickers++;
+                document.getElementById('sticker-count').innerText = stickers;
+                updateStickerBoard();
+                alert("🎁 Yay! You unlocked a brand new Magical Sticker for your board! Great playing, Little Guardian!");
+            }
+        }
+
+        function updateStickerBoard() {
+            let container = document.getElementById('sticker-container');
+            let slots = "";
+            for (let i = 0; i < 5; i++) {
+                if (i < stickers) {
+                    slots += `<span class="sticker-slot" style="background:#fff; border: 2px solid var(--kid-pink);">${stickerIcons[i]}</span>`;
+                } else {
+                    slots += `<span class="sticker-slot">🔒</span>`;
+                }
+            }
+            container.innerHTML = slots;
+        }
+
+        // Voice Recognition built specifically so little kids who can't type easily can talk back
+        function startVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Voice feature is fully active and ready in Chrome on your Chromebook!");
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            document.getElementById('voice-output').innerText = "Listening closely... Speak your answer now! 🎙️";
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript.toLowerCase();
+                document.getElementById('voice-output').innerText = `You said: "${speechResult}" 🌟 Wonderful talking back!`;
+                
+                coins += 15;
+                checkStickerUnlock();
+                document.getElementById('coin-count').innerText = coins;
+                alert(`Fantastic voice response! You earned 15 bonus coins for talking back! 🪙✨`);
+            };
+
+            recognition.onerror = function(event) {
+                document.getElementById('voice-output').innerText = "I didn't quite hear that. Tap the mic and try saying a color or letter!";
+            };
+
+            recognition.start();
         }
     </script>
 
-     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+    <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 </body>
 </html>
 
+```
