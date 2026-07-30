@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Garden Chambers - Sovereign Sanctuary</title>
+    <style>
+        body { 
+            background: linear-gradient(135deg, #1a1612, #2c241d, #14120e); 
+            background-size: 400% 400%;
+            animation: flow 20s infinite alternate;
+            color: #f3e5ab; 
+            font-family: 'Cinzel', 'Georgia', serif; 
+            margin: 0; padding: 20px; 
+            text-align: center;
+        }
+        @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        
+        .sanctuary-header {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: #ffd700;
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 2px solid #d4af37;
+        }
+
+        .imperial-box { 
+            border: 3px solid #d4af37; 
+            padding: 30px; 
+            background: rgba(26, 22, 18, 0.95); 
+            border-radius: 25px; 
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(212,175,55,0.15);
+        }
+
+        .comfort-btn {
+            background: linear-gradient(to bottom, #d4af37, #aa820a);
+            color: #1a1612;
+            border: 1px solid #fff;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 5px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .comfort-btn:hover {
+            background: linear-gradient(to bottom, #fff, #d4af37);
+            box-shadow: 0 0 20px #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .garden-display {
+            background: rgba(15, 25, 15, 0.9);
+            border: 2px dashed #4caf50;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #c8e6c9;
+            min-height: 90px;
+            box-shadow: inset 0 0 20px rgba(76,175,80,0.3);
+        }
+
+        .chat-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            background: #1a1612;
+            border: 1px solid #d4af37;
+            color: #fff;
+            border-radius: 6px;
+            font-family: 'Cinzel', serif;
+            margin: 10px 0;
+        }
+
+        .royal-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            z-index: 1000;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="sanctuary-header">
+        <h1 style="margin:0 0 10px 0; font-size: 2.2rem; text-shadow: 0 0 10px rgba(212,175,55,0.6);">🌸 The Forest Garden Chambers 🌿</h1>
+        <p style="margin:0; font-style: italic; font-size: 1.1rem; color: #f7f3e9;">"A serene sanctuary featuring pristine white blossoms, pink daylilies, blue hydrangeas, golden marigolds, and living waters."</p>
+    </div>
+
+    <!-- Navigation Back Link -->
+    <div style="margin-bottom: 20px;">
+        <a href="room-elder.html" class="comfort-btn">🏛️ Return to Sovereign Sanctuary</a>
+        <a href="index.html" class="comfort-btn">🏠 Return to Home</a>
+    </div>
+
+    <!-- Interactive Garden Chamber Station -->
+    <div class="imperial-box">
+        <h2 style="color: #ffd700; margin-top:0;">💧 Living Water & Floral Care</h2>
+        <p style="color: #c5b59b;">Water the sacred garden to make the white blooms, pink daylilies, and blue hydrangeas flourish in full radiance.</p>
+        
+        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white;" onclick="waterGarden()">Water the Garden 🚿</button>
+        
+        <div id="garden-screen" class="garden-display">
+            🌿 The garden is peaceful. White blossoms, pink lilies, and blue hydrangeas await the living water...
+        </div>
+    </div>
+
+    <!-- Flower Request & Suggestion Section -->
+    <div class="imperial-box">
+        <h2 style="color: #ffd700; margin-top:0;">🌹 Suggest a Flower for the Garden</h2>
+        <p style="color: #c5b59b;">Write down which flowers in white, pink, or any color you want to see growing next in our Sanctuary Garden.</p>
+        
+        <input type="text" id="flowerInput" class="chat-input" placeholder="e.g., White Jasmine, Pure White Roses...">
+        <br>
+        <button class="comfort-btn" onclick="submitFlowerRequest()">Submit Flower Request 🌷</button>
+        
+        <div id="flower-request-log" style="margin-top: 15px; font-style: italic; color: #e6d5b8;">
+            <b>Recent Family Requests:</b> Pure White Blossoms, Pink Daylilies, Blue & White Hydrangeas, Golden Marigolds.
+        </div>
+    </div>
+
+    <!-- THE ROYAL SEAL IMAGE -->
+    <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+
+    <script>
+        function waterGarden() {
+            let screen = document.getElementById('garden-screen');
+            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water sprays gracefully across the soil! 💧<br><br>🤍🌸🌿 <b>Pristine white flowers glow under the mist, pink daylilies open wide, blue hydrangeas shine deep and vibrant, and golden marigolds catch the light! The Forest Garden is thriving with life and beauty!</b> ✨";
+        }
+
+        function submitFlowerRequest() {
+            let input = document.getElementById('flowerInput');
+            let val = input.value.trim();
+            if (!val) {
+                alert("Please type the name of a flower you would like to see.");
+                return;
+            }
+            let log = document.getElementById('flower-request-log');
+            log.innerHTML += `<br>✨ <b>New Added:</b> ${val} (Logged into Sanctuary Archives)`;
+            input.value = "";
+            alert("🌷 Your flower request has been successfully planted into the garden ledger!");
+        }
+    </script>
+</body>
+</html>
