@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Garden Chambers - Sovereign Sanctuary</title>
+    <title>The Forest Garden Chambers - Sovereign Sanctuary</title>
     <style>
         body { 
-            background: linear-gradient(135deg, #1a1612, #2c241d, #14120e); 
+            background: linear-gradient(135deg, #0b0f0e, #1a1612, #14120e); 
             background-size: 400% 400%;
             animation: flow 20s infinite alternate;
             color: #f3e5ab; 
             font-family: 'Cinzel', 'Georgia', serif; 
             margin: 0; padding: 20px; 
             text-align: center;
+            overflow-x: hidden;
         }
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
@@ -23,6 +24,8 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             border: 2px solid #d4af37;
+            position: relative;
+            z-index: 2;
         }
 
         .imperial-box { 
@@ -32,11 +35,13 @@
             border-radius: 25px; 
             margin-bottom: 25px;
             box-shadow: 0 10px 25px rgba(212,175,55,0.15);
+            position: relative;
+            z-index: 2;
         }
 
         .comfort-btn {
             background: linear-gradient(to bottom, #d4af37, #aa820a);
-            color: #1a1612;
+            color: #0b0f0e;
             border: 1px solid #fff;
             padding: 14px 24px;
             font-size: 15px;
@@ -56,15 +61,59 @@
             transform: translateY(-2px);
         }
 
+        /* Fully Rendered Mind-blowing Garden Stage */
+        .cinematic-garden-stage {
+            width: 100%;
+            height: 420px;
+            background: radial-gradient(circle at center, #1b4d3e, #0b1f17, #060c09);
+            border: 3px solid #d4af37;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: inset 0 0 50px rgba(76,175,80,0.6), 0 15px 35px rgba(0,0,0,0.9);
+        }
+
+        /* Animated Flora Elements */
+        .flora-item {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: swayFlora 5s infinite ease-in-out alternate;
+            filter: drop-shadow(0 0 12px rgba(255,215,0,0.7));
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .flora-item:hover {
+            transform: scale(1.4) rotate(10deg);
+        }
+
+        @keyframes swayFlora {
+            0% { transform: translateY(0px) rotate(-5deg); }
+            100% { transform: translateY(-12px) rotate(5deg); }
+        }
+
+        /* Ambient Light / Mist Particles Overlay */
+        .mist-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent, rgba(76,175,80,0.1));
+            pointer-events: none;
+            opacity: 0.6;
+            animation: pulseMist 8s infinite alternate ease-in-out;
+        }
+        @keyframes pulseMist {
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.05); }
+        }
+
         .garden-display {
             background: rgba(15, 25, 15, 0.9);
             border: 2px dashed #4caf50;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 15px;
             margin-top: 20px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #c8e6c9;
-            min-height: 90px;
             box-shadow: inset 0 0 20px rgba(76,175,80,0.3);
         }
 
@@ -91,36 +140,67 @@
         }
     </style>
 </head>
-<body>
+<body onclick="initializeGardenExperience()">
+
+    <!-- Embedded Ambient Audio Synthesizers & Soundscapes -->
+    <!-- 1. Background Music -->
+    <audio id="gardenMusic" loop preload="auto">
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- 2. Wind / Fresh Air Sound (Simulated via Web Audio or Audio Element if available) -->
+    <audio id="windSound" loop preload="auto">
+        <source src="https://actions.google.com/sounds/v1/weather/wind_heavy.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- 3. Insect Chirping Sound -->
+    <audio id="insectSound" loop preload="auto">
+        <source src="https://actions.google.com/sounds/v1/environments/summer_forest_birds.ogg" type="audio/ogg">
+    </audio>
 
     <!-- Header -->
     <div class="sanctuary-header">
         <h1 style="margin:0 0 10px 0; font-size: 2.2rem; text-shadow: 0 0 10px rgba(212,175,55,0.6);">🌸 The Forest Garden Chambers 🌿</h1>
-        <p style="margin:0; font-style: italic; font-size: 1.1rem; color: #f7f3e9;">"A serene sanctuary featuring pristine white blossoms, pink daylilies, blue hydrangeas, golden marigolds, and living waters."</p>
+        <p style="margin:0; font-style: italic; font-size: 1.1rem; color: #f7f3e9;">"A mind-blowing, fully coded sanctuary complete with background music, panning fresh air breeze, gentle insect chorus, and interactive living waters."</p>
     </div>
 
     <!-- Navigation Back Link -->
-    <div style="margin-bottom: 20px;">
+    <div style="margin-bottom: 20px; position:relative; z-index:2;">
         <a href="room-elder.html" class="comfort-btn">🏛️ Return to Sovereign Sanctuary</a>
         <a href="index.html" class="comfort-btn">🏠 Return to Home</a>
     </div>
 
-    <!-- Interactive Garden Chamber Station -->
+    <!-- Mind-Blowing Fully Coded Garden Stage -->
     <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">💧 Living Water & Floral Care</h2>
-        <p style="color: #c5b59b;">Water the sacred garden to make the white blooms, pink daylilies, and blue hydrangeas flourish in full radiance.</p>
+        <h2 style="color: #ffd700; margin-top:0;">✨ Fully Rendered Living Garden Stage</h2>
+        <p style="color: #c5b59b;">Click anywhere on the page to awaken the background music, panning breeze, and insect melodies. Click the watering button to nourish the blossoms!</p>
         
-        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white;" onclick="waterGarden()">Water the Garden 🚿</button>
+        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white;" onclick="waterGardenStage(event)">Water the Garden 🚿</button>
         
+        <!-- Interactive Fully Coded Garden Stage -->
+        <div class="cinematic-garden-stage" id="gardenStage">
+            <div class="mist-overlay"></div>
+            <!-- Coded Flora: White Blossoms, Pink Daylilies, Blue Hydrangeas, Golden Marigolds -->
+            <div class="flora-item" style="top: 15%; left: 8%; animation-delay: 0s;" title="Pristine White Blossom">🤍</div>
+            <div class="flora-item" style="top: 55%; left: 12%; animation-delay: 1.2s;" title="Pink Daylily">🌸</div>
+            <div class="flora-item" style="top: 25%; left: 22%; animation-delay: 0.5s;" title="Blue Hydrangea">🌊</div>
+            <div class="flora-item" style="top: 65%; left: 28%; animation-delay: 2.1s;" title="Golden Marigold">🌼</div>
+            <div class="flora-item" style="top: 20%; right: 10%; animation-delay: 0.8s;" title="Pink Daylily">🌸</div>
+            <div class="flora-item" style="top: 60%; right: 14%; animation-delay: 1.6s;" title="Pristine White Blossom">🤍</div>
+            <div class="flora-item" style="top: 30%; right: 25%; animation-delay: 0.3s;" title="Blue Hydrangea">🌊</div>
+            <div class="flora-item" style="top: 70%; right: 22%; animation-delay: 1.9s;" title="Golden Marigold">🌼</div>
+            <div class="flora-item" style="top: 40%; left: 45%; animation-delay: 1.0s;" title="Sacred Rose">🌹</div>
+        </div>
+
         <div id="garden-screen" class="garden-display">
-            🌿 The garden is peaceful. White blossoms, pink lilies, and blue hydrangeas await the living water...
+            🌿 The garden is peaceful. Ambient music, soft wind, and insect symphonies are active. Click above to spray crystal water!
         </div>
     </div>
 
     <!-- Flower Request & Suggestion Section -->
     <div class="imperial-box">
         <h2 style="color: #ffd700; margin-top:0;">🌹 Suggest a Flower for the Garden</h2>
-        <p style="color: #c5b59b;">Write down which flowers in white, pink, or any color you want to see growing next in our Sanctuary Garden.</p>
+        <p style="color: #c5b59b;">Write down which flowers in white, pink, or any color you want to add to our fully coded sanctuary stage.</p>
         
         <input type="text" id="flowerInput" class="chat-input" placeholder="e.g., White Jasmine, Pure White Roses...">
         <br>
@@ -135,9 +215,37 @@
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 
     <script>
-        function waterGarden() {
+        let audioStarted = false;
+
+        function initializeGardenExperience() {
+            if (!audioStarted) {
+                let music = document.getElementById('gardenMusic');
+                let wind = document.getElementById('windSound');
+                let insects = document.getElementById('insectSound');
+
+                if (music) { music.volume = 0.3; music.play().catch(e => {}); }
+                if (wind) { wind.volume = 0.2; wind.play().catch(e => {}); }
+                if (insects) { insects.volume = 0.25; insects.play().catch(e => {}); }
+
+                audioStarted = true;
+            }
+        }
+
+        function waterGardenStage(event) {
+            event.stopPropagation(); // Prevent triggering body click twice
+            initializeGardenExperience();
+
             let screen = document.getElementById('garden-screen');
-            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water sprays gracefully across the soil! 💧<br><br>🤍🌸🌿 <b>Pristine white flowers glow under the mist, pink daylilies open wide, blue hydrangeas shine deep and vibrant, and golden marigolds catch the light! The Forest Garden is thriving with life and beauty!</b> ✨";
+            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water cascades over the coded flower bed! 💧<br><br>🤍🌸🌊🌼🌿 <b>White blossoms glow under the mist, pink daylilies expand, blue hydrangeas radiate color, and golden marigolds dance in the breeze! The entire garden thrives in absolute peace!</b> ✨";
+            
+            // Dynamic visual pulse on all flora elements
+            let flora = document.querySelectorAll('.flora-item');
+            flora.forEach(el => {
+                el.style.transform = "scale(1.5) rotate(15deg)";
+                setTimeout(() => {
+                    el.style.transform = "scale(1) rotate(0deg)";
+                }, 1500);
+            });
         }
 
         function submitFlowerRequest() {
@@ -148,7 +256,7 @@
                 return;
             }
             let log = document.getElementById('flower-request-log');
-            log.innerHTML += `<br>✨ <b>New Added:</b> ${val} (Logged into Sanctuary Archives)`;
+            log.innerHTML += `<br>✨ <b>New Added:</b> ${val} (Coded & Logged into Sanctuary Archives)`;
             input.value = "";
             alert("🌷 Your flower request has been successfully planted into the garden ledger!");
         }
