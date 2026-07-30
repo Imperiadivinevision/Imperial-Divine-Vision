@@ -1,30 +1,73 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Sage's Quarter - Imperial Empire</title>
+    <title>The Sovereign Sanctuary: Elder Room - Imperial Empire</title>
     <style>
-        /* Shared Imperial Styles with Intentionality */
+        /* Shared Imperial Styles with Serene Elder Grace */
         body { 
-            background: linear-gradient(135deg, #FFD1DC, #FDFD96, #AEC6CF); 
+            background: linear-gradient(135deg, #f5f5dc, #e8f5e9, #fff8dc); 
             background-size: 400% 400%;
             animation: flow 20s infinite alternate;
-            color: #d4af37; 
+            color: #3e2723; 
             font-family: 'Georgia', serif; 
             margin: 0; padding: 20px; 
         }
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
-        .imperial-box { border: 3px solid #d4af37; padding: 30px; background: rgba(26, 26, 46, 0.9); border-radius: 50px 50px 0 0; }
+        .imperial-box { 
+            border: 3px solid #b8860b; 
+            padding: 30px; 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 30px; 
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
         
         /* Divine Aura Effect */
-        .aura-gold { box-shadow: 0 0 20px #FFD700; border: 1px solid #FFD700; }
+        .aura-gold { box-shadow: 0 0 25px #d4af37; border: 2px solid #d4af37; }
         
         /* Sacred Layout */
         .sacred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
+        /* Elder Room Specifics */
+        .sanctuary-header {
+            background: #2e7d32;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .comfort-btn {
+            background: #d4af37;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 8px;
+            box-shadow: 0 4px #996515;
+            transition: all 0.1s ease;
+        }
+        .comfort-btn:active { transform: translateY(3px); box-shadow: 0 1px #996515; }
+
+        .legacy-archive {
+            background: #fdfbf7;
+            border: 2px dashed #b8860b;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #5d4037;
+        }
+
         /* ========================================= */
-        /* THE ROYAL BRANDING (Copy this to all rooms) */
+        /* THE ROYAL BRANDING                        */
         /* ========================================= */
         .royal-branding {
             position: fixed;
@@ -39,59 +82,76 @@
 </head>
 <body>
 
-    <!-- 1. The Throne Room (Admin Control) -->
+    <!-- Sanctuary Header -->
+    <div class="sanctuary-header">
+        <h1>🌿 The Sovereign Sanctuary: Elder Room 🌿</h1>
+        <p>"A serene and comforting space dedicated to welcoming family with honor, respect, and enduring peace."</p>
+    </div>
+
+    <!-- 1. The Throne of Honor (Admin & Welcome Control) -->
     <div id="adminPanel" class="imperial-box">
-        <h1>Sage's Quarter: Command Center</h1>
-        <button onclick="issueRoyalDecree()">Issue Royal Decree</button>
-        <button onclick="toggleTimeLock()">Toggle Celestial Time-Lock</button>
+        <h2>🛡️ Elder's Command & Blessings</h2>
+        <p>Manage the tranquil environment and extend welcoming honors to family and revered guests.</p>
+        <button class="comfort-btn" onclick="issueBlessing()">Extend Royal Blessing</button>
+        <button class="comfort-btn" onclick="toggleSanctuaryPeace()">Toggle Sanctuary Quietude</button>
     </div>
 
-    <!-- 2. The Wall of Heroes -->
+    <!-- 2. Wall of Eternal Legacy -->
     <div id="wallOfHeroes" class="imperial-box">
-        <h2>Wall of Eternal Legacy</h2>
-        <div id="heroGallery"> <!-- Dynamic Heroes appear here --> </div>
+        <h2>📜 Wall of Ancestral Legacy & Wisdom</h2>
+        <p>Preserving the guidance, stories, and foundation built by those who paved the way.</p>
+        <div class="legacy-archive" id="legacyDisplay">
+            "With honor we remember, with respect we live, and with love we provide a sanctuary for all."
+        </div>
+        <div id="heroGallery"> <!-- Dynamic Ancestors appear here --> </div>
     </div>
 
-    <!-- 3. Sage's Tools -->
+    <!-- 3. Sanctuary Chambers -->
     <div class="sacred-grid">
         <div class="imperial-box">
-            <h3>Truth-Seeking Archive</h3>
-            <p>Study the lore of the Empire and report back to the Throne.</p>
+            <h3>🍵 Chamber of Rest & Reflection</h3>
+            <p>A quiet corner designed for peaceful contemplation, deep rest, and spiritual renewal.</p>
+            <button class="comfort-btn" style="background-color: #558b2f;" onclick="triggerRest()">Enter Rest Mode</button>
         </div>
         <div class="imperial-box">
-            <h3>Tribunal Court</h3>
-            <p>Provide judgment on current affairs.</p>
+            <h3>📖 Family Archive & History</h3>
+            <p>Review the cherished milestones, testimonies, and enduring victories of the family dynasty.</p>
+            <button class="comfort-btn" style="background-color: #6d4c41;" onclick="viewHistory()">Open Family Scroll</button>
         </div>
     </div>
 
     <!-- ========================================= -->
-    <!-- THE ROYAL SEAL IMAGE (Copy this to all rooms) -->
+    <!-- THE ROYAL SEAL IMAGE                      -->
     <!-- ========================================= -->
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 
     <script>
         // Divine Aura Engine
         function applyAura(role) {
-            if (role === 'Queen' || role === 'King') {
-                console.log("Applying Golden Radiance...");
+            if (role === 'Queen' || role === 'King' || role === 'Elder') {
+                console.log("Applying Golden Sanctuary Radiance...");
                 document.body.classList.add('aura-gold');
             }
         }
 
-        // 12-Hour Celestial Clock
-        function getImperialTime() {
-            let hour = new Date().getHours() % 12;
-            return hour < 6 ? "Day" : "Night";
+        function issueBlessing() {
+            alert("A peaceful blessing has been recorded across the Sanctuary archives. Family is welcomed with utmost honor.");
         }
 
-        // Admin Override
-        function toggleTimeLock() {
-            alert("Celestial Clock Locked/Unlocked by Royal Decree.");
+        function toggleSanctuaryPeace() {
+            alert("Sanctuary Quietude toggled: The atmosphere rests in absolute calm and safety.");
         }
 
-        // Execution
-        applyAura('Queen'); // Example for your account
+        function triggerRest() {
+            alert("Entering Chamber of Rest: Soft lighting and tranquil ambiance engaged.");
+        }
+
+        function viewHistory() {
+            alert("Opening Family Scroll: The legacy of strength, faith, and provision shines bright.");
+        }
+
+        // Execution for Sovereign Sanctuary
+        applyAura('Elder');
     </script>
 </body>
 </html>
-
