@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -231,13 +230,14 @@
         </div>
     </div>
 
-    <!-- Clean Top Navigation Bar -->
+    <!-- Clean Top Navigation Bar with Linked Elder Room / Sovereign Sanctuary -->
     <nav> 
         <a href="index.html">🏠 Home</a>
         <a href="library.html">📚 Library</a>
         <a href="trailers.html">🎬 Trailers</a>
         <a href="battle.html">⚔️ Battle Arena</a>
         <a href="proving-grounds.html" style="color: #ffd700;">🛡️ Youth Proving Grounds</a>
+        <a href="room-elder.html" style="color: #d4af37;">🌿 Sovereign Sanctuary (Elder Room)</a>
         <a href="#" onclick="openModal(); return false;" style="color: #00ffcc;">💬 Community Chat</a>
     </nav>
 
@@ -324,12 +324,10 @@
                 alert("Adult credentials recognized. Routing to Community Chamber...");
                 window.location.href = "community.html?room=adult";
             } else {
-                alert("Elder credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=elder";
+                alert("Elder credentials recognized. Routing to Sovereign Sanctuary...");
+                window.location.href = "room-elder.html";
             }
         }
     </script>
 </body>
 </html>
-
-```
