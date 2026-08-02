@@ -63,19 +63,29 @@
             transform: translateY(-3px);
         }
 
-        /* Extraordinary Cinematic Garden Stage */
+        /* Extraordinary Cinematic Video Garden Stage */
         .cinematic-garden-stage {
             width: 100%;
-            height: 520px;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('watermarked_img_6855713402416347538.png');
-            background-size: cover;
-            background-position: center;
+            height: 540px;
             border: 3px solid #d4af37;
             border-radius: 24px;
             position: relative;
             overflow: hidden;
             margin-top: 20px;
             box-shadow: inset 0 0 60px rgba(0,0,0,0.7), 0 20px 40px rgba(0,0,0,0.9);
+            background: #000;
+        }
+
+        /* Video Background Styling */
+        .garden-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.9) contrast(1.05);
         }
 
         /* Floating Magical Light Fireflies / Petals */
@@ -88,6 +98,7 @@
             box-shadow: 0 0 12px #ffd700, 0 0 20px #ff77ff;
             animation: floatParticle 8s infinite ease-in-out;
             pointer-events: none;
+            z-index: 3;
         }
         @keyframes floatParticle {
             0% { transform: translateY(500px) scale(0.5); opacity: 0; }
@@ -99,14 +110,15 @@
         .mist-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent, rgba(76,175,80,0.15));
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent, rgba(76,175,80,0.12));
             pointer-events: none;
             opacity: 0.7;
             animation: pulseMist 6s infinite alternate ease-in-out;
+            z-index: 2;
         }
         @keyframes pulseMist {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0.9; transform: scale(1.04); }
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.04); }
         }
 
         .garden-display {
@@ -120,6 +132,8 @@
             box-shadow: inset 0 0 25px rgba(76,175,80,0.3);
             font-family: 'Cormorant Garamond', serif;
             letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
         }
 
         .chat-input {
@@ -151,7 +165,6 @@
             filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
         }
 
-        /* Sound Control Status Badge */
         .audio-status {
             display: inline-block;
             background: rgba(212, 175, 55, 0.15);
@@ -171,19 +184,16 @@
 </head>
 <body onclick="initializeGardenExperience()">
 
-    <!-- Embedded Ambient Audio Channels (Smooth Soft Background Symphony & Nature) -->
-    <!-- 1. Smooth Soft Background Melody / Music -->
+    <!-- Embedded Ambient Audio Channels -->
     <audio id="gardenMusic" loop preload="auto">
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
         <source src="https://actions.google.com/sounds/v1/ambiences/daytime_forest_bonfire.ogg" type="audio/ogg">
     </audio>
 
-    <!-- 2. Soft Wind Breeze -->
     <audio id="windSound" loop preload="auto">
         <source src="https://actions.google.com/sounds/v1/weather/wind_heavy.ogg" type="audio/ogg">
     </audio>
 
-    <!-- 3. Peaceful Summer Forest Birds & Insect Symphony -->
     <audio id="insectSound" loop preload="auto">
         <source src="https://actions.google.com/sounds/v1/environments/summer_forest_birds.ogg" type="audio/ogg">
     </audio>
@@ -191,7 +201,7 @@
     <!-- Header -->
     <div class="sanctuary-header">
         <h1 style="margin:0 0 10px 0; font-size: 2.5rem; text-shadow: 0 0 15px rgba(212,175,55,0.8);">🌸 The Forest Garden Chambers 🌿</h1>
-        <p style="margin:0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: #f7f3e9;">"A sovereign sanctuary where smooth soft music plays, sunbeams touch the sacred white and purple blossoms, and peace reigns eternal."</p>
+        <p style="margin:0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: #f7f3e9;">"A sovereign sanctuary where smooth soft music plays, your cinematic video masterpiece loops in absolute harmony, and peace reigns eternal."</p>
     </div>
 
     <!-- Navigation Back Link -->
@@ -200,22 +210,24 @@
         <a href="index.html" class="comfort-btn">🏠 Return to Home</a>
     </div>
 
-    <!-- Extraordinary Cinematic Garden Stage -->
+    <!-- Extraordinary Cinematic Video Garden Stage -->
     <div class="imperial-box">
         <div class="audio-status" id="audioStatusBadge">🎵 Click anywhere to awaken smooth background music & ambient breeze</div>
-        <h2 style="color: #ffd700; margin-top:0; font-size: 1.8rem;">✨ Sovereign Living Garden Stage</h2>
-        <p style="color: #c5b59b; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">Immerse your senses in your custom cinematic masterpiece. Click the watering button below to cascade crystal water over the white lilies, purple wisterias, and red roses!</p>
+        <h2 style="color: #ffd700; margin-top:0; font-size: 1.8rem;">✨ Sovereign Living Cinematic Video Stage</h2>
+        <p style="color: #c5b59b; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">Immerse your senses in your live video masterpiece. Click the watering button below to cascade crystal water over the sanctuary!</p>
         
-        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white; font-size: 1.05rem;" onclick="waterGardenStage(event)">Water the Garden 🚿💧</button>
+        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white; font-size: 1.05rem; position: relative; z-index: 5;" onclick="waterGardenStage(event)">Water the Garden 🚿💧</button>
         
-        <!-- Cinematic Garden Stage Frame with Generated Masterpiece Image -->
+        <!-- Cinematic Video Stage Frame -->
         <div class="cinematic-garden-stage" id="gardenStage">
+            <video autoplay muted loop playsinline class="garden-video-bg">
+                <source src="forest-garden-cinematic.mp4" type="video/mp4">
+            </video>
             <div class="mist-overlay"></div>
-            <!-- Dynamic Magical Floating Particles generated via JS -->
         </div>
 
         <div id="garden-screen" class="garden-display">
-            🌿 The garden is peaceful. Smooth background music, panning soft wind, and harmonious forest symphonies are active. Click above to spray crystal water!
+            🌿 The garden video is playing live. Smooth background music, panning soft wind, and harmonious forest symphonies are active. Click above to spray crystal water!
         </div>
     </div>
 
@@ -274,13 +286,12 @@
         }
 
         function waterGardenStage(event) {
-            event.stopPropagation(); // Prevent triggering body click twice
+            event.stopPropagation();
             initializeGardenExperience();
 
             let screen = document.getElementById('garden-screen');
-            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water cascades down the sunlit forest canopy and over the vibrant flower beds! 💧<br><br>🤍💜🌹✨ <b>White lilies glisten under the mist, purple wisterias sway in the soft breeze, and the entire sanctuary radiates divine peace and absolute beauty!</b> ✨";
+            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water cascades down your cinematic video forest canopy! 💧<br><br>🤍💜🌹✨ <b>White lilies glisten under the mist, purple wisterias sway, and your live video sanctuary radiates divine peace and absolute beauty!</b> ✨";
             
-            // Create temporary sparkling burst
             const stage = document.getElementById('gardenStage');
             for (let i = 0; i < 8; i++) {
                 let sparkle = document.createElement('div');
