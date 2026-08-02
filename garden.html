@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>The Forest Garden Chambers - Sovereign Sanctuary</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
         body { 
-            background: linear-gradient(135deg, #0b0f0e, #1a1612, #14120e); 
+            background: linear-gradient(135deg, #050807, #0f1a14, #080e0a); 
             background-size: 400% 400%;
-            animation: flow 20s infinite alternate;
+            animation: flow 25s infinite alternate;
             color: #f3e5ab; 
             font-family: 'Cinzel', 'Georgia', serif; 
             margin: 0; padding: 20px; 
@@ -17,12 +19,12 @@
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
         .sanctuary-header {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            background: linear-gradient(135deg, rgba(20, 50, 30, 0.9), rgba(10, 30, 15, 0.95));
             color: #ffd700;
-            padding: 30px;
-            border-radius: 25px;
+            padding: 40px;
+            border-radius: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.2);
             border: 2px solid #d4af37;
             position: relative;
             z-index: 2;
@@ -30,11 +32,11 @@
 
         .imperial-box { 
             border: 3px solid #d4af37; 
-            padding: 30px; 
-            background: rgba(26, 22, 18, 0.95); 
-            border-radius: 25px; 
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(212,175,55,0.15);
+            padding: 35px; 
+            background: rgba(12, 20, 15, 0.92); 
+            border-radius: 30px; 
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 15px rgba(76,175,80,0.1);
             position: relative;
             z-index: 2;
         }
@@ -43,90 +45,99 @@
             background: linear-gradient(to bottom, #d4af37, #aa820a);
             color: #0b0f0e;
             border: 1px solid #fff;
-            padding: 14px 24px;
+            padding: 14px 28px;
             font-size: 15px;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            margin: 10px 5px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transition: all 0.2s ease;
+            margin: 10px 6px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
         .comfort-btn:hover {
             background: linear-gradient(to bottom, #fff, #d4af37);
-            box-shadow: 0 0 20px #ffd700;
-            transform: translateY(-2px);
+            box-shadow: 0 0 25px #ffd700;
+            transform: translateY(-3px);
         }
 
-        /* Fully Rendered Mind-blowing Garden Stage */
+        /* Extraordinary Cinematic Garden Stage */
         .cinematic-garden-stage {
             width: 100%;
-            height: 420px;
-            background: radial-gradient(circle at center, #1b4d3e, #0b1f17, #060c09);
+            height: 520px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('watermarked_img_6855713402416347538.png');
+            background-size: cover;
+            background-position: center;
             border: 3px solid #d4af37;
-            border-radius: 20px;
+            border-radius: 24px;
             position: relative;
             overflow: hidden;
             margin-top: 20px;
-            box-shadow: inset 0 0 50px rgba(76,175,80,0.6), 0 15px 35px rgba(0,0,0,0.9);
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.7), 0 20px 40px rgba(0,0,0,0.9);
         }
 
-        /* Animated Flora Elements */
-        .flora-item {
+        /* Floating Magical Light Fireflies / Petals */
+        .magic-particle {
             position: absolute;
-            font-size: 2.5rem;
-            animation: swayFlora 5s infinite ease-in-out alternate;
-            filter: drop-shadow(0 0 12px rgba(255,215,0,0.7));
-            cursor: pointer;
-            transition: transform 0.3s;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #fff, #ffd700);
+            border-radius: 50%;
+            box-shadow: 0 0 12px #ffd700, 0 0 20px #ff77ff;
+            animation: floatParticle 8s infinite ease-in-out;
+            pointer-events: none;
         }
-        .flora-item:hover {
-            transform: scale(1.4) rotate(10deg);
+        @keyframes floatParticle {
+            0% { transform: translateY(500px) scale(0.5); opacity: 0; }
+            50% { opacity: 0.9; }
+            100% { transform: translateY(-50px) scale(1.2); opacity: 0; }
         }
 
-        @keyframes swayFlora {
-            0% { transform: translateY(0px) rotate(-5deg); }
-            100% { transform: translateY(-12px) rotate(5deg); }
-        }
-
-        /* Ambient Light / Mist Particles Overlay */
+        /* Ambient Mist Overlay */
         .mist-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent, rgba(76,175,80,0.1));
+            background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent, rgba(76,175,80,0.15));
             pointer-events: none;
-            opacity: 0.6;
-            animation: pulseMist 8s infinite alternate ease-in-out;
+            opacity: 0.7;
+            animation: pulseMist 6s infinite alternate ease-in-out;
         }
         @keyframes pulseMist {
-            0% { opacity: 0.4; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.05); }
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.04); }
         }
 
         .garden-display {
-            background: rgba(15, 25, 15, 0.9);
-            border: 2px dashed #4caf50;
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(10, 20, 12, 0.95);
+            border: 2px solid #4caf50;
+            padding: 22px;
+            border-radius: 18px;
             margin-top: 20px;
-            font-size: 1.1rem;
-            color: #c8e6c9;
-            box-shadow: inset 0 0 20px rgba(76,175,80,0.3);
+            font-size: 1.15rem;
+            color: #d1e7d2;
+            box-shadow: inset 0 0 25px rgba(76,175,80,0.3);
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.5px;
         }
 
         .chat-input {
             width: 100%;
-            max-width: 400px;
-            padding: 12px;
-            background: #1a1612;
+            max-width: 420px;
+            padding: 14px;
+            background: rgba(15, 22, 17, 0.9);
             border: 1px solid #d4af37;
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Cinzel', serif;
             margin: 10px 0;
+            outline: none;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .chat-input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
         }
 
         .royal-branding {
@@ -137,77 +148,88 @@
             z-index: 1000;
             opacity: 0.9;
             pointer-events: none;
+            filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
+        }
+
+        /* Sound Control Status Badge */
+        .audio-status {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #d4af37;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+            animation: softGlow 3s infinite alternate;
+        }
+        @keyframes softGlow {
+            0% { box-shadow: 0 0 5px rgba(212,175,55,0.2); }
+            100% { box-shadow: 0 0 15px rgba(212,175,55,0.6); }
         }
     </style>
 </head>
 <body onclick="initializeGardenExperience()">
 
-    <!-- Embedded Ambient Audio Synthesizers & Soundscapes -->
-    <!-- 1. Background Music -->
+    <!-- Embedded Ambient Audio Channels (Smooth Soft Background Symphony & Nature) -->
+    <!-- 1. Smooth Soft Background Melody / Music -->
     <audio id="gardenMusic" loop preload="auto">
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
+        <source src="https://actions.google.com/sounds/v1/ambiences/daytime_forest_bonfire.ogg" type="audio/ogg">
     </audio>
 
-    <!-- 2. Wind / Fresh Air Sound (Simulated via Web Audio or Audio Element if available) -->
+    <!-- 2. Soft Wind Breeze -->
     <audio id="windSound" loop preload="auto">
         <source src="https://actions.google.com/sounds/v1/weather/wind_heavy.ogg" type="audio/ogg">
     </audio>
 
-    <!-- 3. Insect Chirping Sound -->
+    <!-- 3. Peaceful Summer Forest Birds & Insect Symphony -->
     <audio id="insectSound" loop preload="auto">
         <source src="https://actions.google.com/sounds/v1/environments/summer_forest_birds.ogg" type="audio/ogg">
     </audio>
 
     <!-- Header -->
     <div class="sanctuary-header">
-        <h1 style="margin:0 0 10px 0; font-size: 2.2rem; text-shadow: 0 0 10px rgba(212,175,55,0.6);">🌸 The Forest Garden Chambers 🌿</h1>
-        <p style="margin:0; font-style: italic; font-size: 1.1rem; color: #f7f3e9;">"A mind-blowing, fully coded sanctuary complete with background music, panning fresh air breeze, gentle insect chorus, and interactive living waters."</p>
+        <h1 style="margin:0 0 10px 0; font-size: 2.5rem; text-shadow: 0 0 15px rgba(212,175,55,0.8);">🌸 The Forest Garden Chambers 🌿</h1>
+        <p style="margin:0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: #f7f3e9;">"A sovereign sanctuary where smooth soft music plays, sunbeams touch the sacred white and purple blossoms, and peace reigns eternal."</p>
     </div>
 
     <!-- Navigation Back Link -->
-    <div style="margin-bottom: 20px; position:relative; z-index:2;">
+    <div style="margin-bottom: 25px; position:relative; z-index:2;">
         <a href="room-elder.html" class="comfort-btn">🏛️ Return to Sovereign Sanctuary</a>
         <a href="index.html" class="comfort-btn">🏠 Return to Home</a>
     </div>
 
-    <!-- Mind-Blowing Fully Coded Garden Stage -->
+    <!-- Extraordinary Cinematic Garden Stage -->
     <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">✨ Fully Rendered Living Garden Stage</h2>
-        <p style="color: #c5b59b;">Click anywhere on the page to awaken the background music, panning breeze, and insect melodies. Click the watering button to nourish the blossoms!</p>
+        <div class="audio-status" id="audioStatusBadge">🎵 Click anywhere to awaken smooth background music & ambient breeze</div>
+        <h2 style="color: #ffd700; margin-top:0; font-size: 1.8rem;">✨ Sovereign Living Garden Stage</h2>
+        <p style="color: #c5b59b; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">Immerse your senses in your custom cinematic masterpiece. Click the watering button below to cascade crystal water over the white lilies, purple wisterias, and red roses!</p>
         
-        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white;" onclick="waterGardenStage(event)">Water the Garden 🚿</button>
+        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white; font-size: 1.05rem;" onclick="waterGardenStage(event)">Water the Garden 🚿💧</button>
         
-        <!-- Interactive Fully Coded Garden Stage -->
+        <!-- Cinematic Garden Stage Frame with Generated Masterpiece Image -->
         <div class="cinematic-garden-stage" id="gardenStage">
             <div class="mist-overlay"></div>
-            <!-- Coded Flora: White Blossoms, Pink Daylilies, Blue Hydrangeas, Golden Marigolds -->
-            <div class="flora-item" style="top: 15%; left: 8%; animation-delay: 0s;" title="Pristine White Blossom">🤍</div>
-            <div class="flora-item" style="top: 55%; left: 12%; animation-delay: 1.2s;" title="Pink Daylily">🌸</div>
-            <div class="flora-item" style="top: 25%; left: 22%; animation-delay: 0.5s;" title="Blue Hydrangea">🌊</div>
-            <div class="flora-item" style="top: 65%; left: 28%; animation-delay: 2.1s;" title="Golden Marigold">🌼</div>
-            <div class="flora-item" style="top: 20%; right: 10%; animation-delay: 0.8s;" title="Pink Daylily">🌸</div>
-            <div class="flora-item" style="top: 60%; right: 14%; animation-delay: 1.6s;" title="Pristine White Blossom">🤍</div>
-            <div class="flora-item" style="top: 30%; right: 25%; animation-delay: 0.3s;" title="Blue Hydrangea">🌊</div>
-            <div class="flora-item" style="top: 70%; right: 22%; animation-delay: 1.9s;" title="Golden Marigold">🌼</div>
-            <div class="flora-item" style="top: 40%; left: 45%; animation-delay: 1.0s;" title="Sacred Rose">🌹</div>
+            <!-- Dynamic Magical Floating Particles generated via JS -->
         </div>
 
         <div id="garden-screen" class="garden-display">
-            🌿 The garden is peaceful. Ambient music, soft wind, and insect symphonies are active. Click above to spray crystal water!
+            🌿 The garden is peaceful. Smooth background music, panning soft wind, and harmonious forest symphonies are active. Click above to spray crystal water!
         </div>
     </div>
 
     <!-- Flower Request & Suggestion Section -->
     <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">🌹 Suggest a Flower for the Garden</h2>
-        <p style="color: #c5b59b;">Write down which flowers in white, pink, or any color you want to add to our fully coded sanctuary stage.</p>
+        <h2 style="color: #ffd700; margin-top:0; font-size: 1.8rem;">🌹 Plant a New Flower in the Sanctuary</h2>
+        <p style="color: #c5b59b; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">Add custom flowers in pristine white, royal purple, pink, or gold to your everlasting sanctuary archives.</p>
         
-        <input type="text" id="flowerInput" class="chat-input" placeholder="e.g., White Jasmine, Pure White Roses...">
+        <input type="text" id="flowerInput" class="chat-input" placeholder="e.g., White Jasmine, Purple Wisteria, Velvet Rose...">
         <br>
         <button class="comfort-btn" onclick="submitFlowerRequest()">Submit Flower Request 🌷</button>
         
-        <div id="flower-request-log" style="margin-top: 15px; font-style: italic; color: #e6d5b8;">
-            <b>Recent Family Requests:</b> Pure White Blossoms, Pink Daylilies, Blue & White Hydrangeas, Golden Marigolds.
+        <div id="flower-request-log" style="margin-top: 20px; font-style: italic; color: #e6d5b8; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;">
+            <b>Recent Sanctuary Plantings:</b> Pristine White Lilies, Royal Purple Wisterias, Golden Marigolds, Sacred Red Roses.
         </div>
     </div>
 
@@ -222,12 +244,32 @@
                 let music = document.getElementById('gardenMusic');
                 let wind = document.getElementById('windSound');
                 let insects = document.getElementById('insectSound');
+                let badge = document.getElementById('audioStatusBadge');
 
-                if (music) { music.volume = 0.3; music.play().catch(e => {}); }
+                if (music) { music.volume = 0.35; music.play().catch(e => {}); }
                 if (wind) { wind.volume = 0.2; wind.play().catch(e => {}); }
                 if (insects) { insects.volume = 0.25; insects.play().catch(e => {}); }
 
+                if (badge) {
+                    badge.innerHTML = "🎶 Smooth background music & forest symphonies are now playing actively ✨";
+                    badge.style.borderColor = "#4caf50";
+                    badge.style.color = "#81c784";
+                }
+
                 audioStarted = true;
+                spawnFloatingParticles();
+            }
+        }
+
+        function spawnFloatingParticles() {
+            const stage = document.getElementById('gardenStage');
+            for (let i = 0; i < 15; i++) {
+                let particle = document.createElement('div');
+                particle.className = 'magic-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                stage.appendChild(particle);
             }
         }
 
@@ -236,29 +278,32 @@
             initializeGardenExperience();
 
             let screen = document.getElementById('garden-screen');
-            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water cascades over the coded flower bed! 💧<br><br>🤍🌸🌊🌼🌿 <b>White blossoms glow under the mist, pink daylilies expand, blue hydrangeas radiate color, and golden marigolds dance in the breeze! The entire garden thrives in absolute peace!</b> ✨";
+            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water cascades down the sunlit forest canopy and over the vibrant flower beds! 💧<br><br>🤍💜🌹✨ <b>White lilies glisten under the mist, purple wisterias sway in the soft breeze, and the entire sanctuary radiates divine peace and absolute beauty!</b> ✨";
             
-            // Dynamic visual pulse on all flora elements
-            let flora = document.querySelectorAll('.flora-item');
-            flora.forEach(el => {
-                el.style.transform = "scale(1.5) rotate(15deg)";
-                setTimeout(() => {
-                    el.style.transform = "scale(1) rotate(0deg)";
-                }, 1500);
-            });
+            // Create temporary sparkling burst
+            const stage = document.getElementById('gardenStage');
+            for (let i = 0; i < 8; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.className = 'magic-particle';
+                sparkle.style.left = (40 + Math.random() * 20) + '%';
+                sparkle.style.top = (40 + Math.random() * 20) + '%';
+                sparkle.style.animationDuration = '2s';
+                stage.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 2000);
+            }
         }
 
         function submitFlowerRequest() {
             let input = document.getElementById('flowerInput');
             let val = input.value.trim();
             if (!val) {
-                alert("Please type the name of a flower you would like to see.");
+                alert("Please type the name of a flower you would like to add.");
                 return;
             }
             let log = document.getElementById('flower-request-log');
-            log.innerHTML += `<br>✨ <b>New Added:</b> ${val} (Coded & Logged into Sanctuary Archives)`;
+            log.innerHTML += `<br>✨ <b>Newly Planted:</b> ${val} (Permanently Added to Sovereign Sanctuary Archives)`;
             input.value = "";
-            alert("🌷 Your flower request has been successfully planted into the garden ledger!");
+            alert("🌷 Your flower has been successfully planted into the sanctuary garden!");
         }
     </script>
 </body>
