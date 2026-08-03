@@ -1,9 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Song of Rosana and the Evil King - Rosanna Book Chamber</title>
+    <title>The Song of Rosanna and the Evil King - Rosanna Book Chamber</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700&display=swap');
 
@@ -94,7 +93,6 @@
             text-align: center;
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
             backdrop-filter: blur(12px);
-            transition: background 10s ease;
         }
         .book-chamber-content h1 {
             font-family: 'Great Vibes', cursive;
@@ -230,7 +228,6 @@
 </head>
 <body>
 
-<!-- Crisp acoustic click feedback sound effect -->
 <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c365b454.mp3?filename=ui-click-43196.mp3" preload="auto"></audio>
 
 <div class="top-bar">
@@ -241,10 +238,10 @@
     <h1>The Song of Rosana and the Evil King</h1>
     <p>"Step into the dry lands of Hikmid and the golden halls of Boparl. Witness the birth of the promised queen, the trials of her parents Tarma and Jirmak, and an empire poised on the edge of destiny."</p>
     
-    <!-- Large widescreen cinematic video player with its own native audio -->
-    <div class="video-display-frame" onclick="playClick()">
+    <!-- Large widescreen cinematic video player using royal_theme.mp4 -->
+    <div class="video-display-frame">
         <video autoplay muted loop playsinline controls>
-            <source src="YouCut_20260802_220241655-2.mp4" type="video/mp4">
+            <source src="royal_theme.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -275,7 +272,7 @@
             <h3>Page Scene XIII</h3>
         </div>
         <div class="illustration-card" onclick="playClick(); openModal('7.png', 'Page Sanctuary', 'A sanctuary moment preserved in the sacred script.')">
-            <img src="7.png" alt="Illustration 13">
+            <img src="7.png" alt="Illustration 7">
             <h3>Page Sanctuary</h3>
         </div>
     </div>
@@ -318,5 +315,3 @@
 
 </body>
 </html>
-
-```
