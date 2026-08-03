@@ -2,24 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Song of Rosanna and the Evil King - Rosanna Book Chamber</title>
+    <title>The Song of Rosana and the Evil King - Rosanna Book Chamber</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700&display=swap');
 
-        :root {
-            --bg-glow: rgba(212, 175, 55, 0.15);
-        }
-
-        @keyframes livingAtmosphere {
+        /* Living breathing dynamic background shifting between emerald green, deep blue, and pink hues */
+        @keyframes imperialAtmosphere {
             0% { background: radial-gradient(circle at 20% 30%, #063827 0%, #021a12 50%, #010a07 100%); }
-            25% { background: radial-gradient(circle at 80% 20%, #0d2342 0%, #040e1f 50%, #01050a 100%); }
-            50% { background: radial-gradient(circle at 50% 80%, #4a1525 0%, #20040b 50%, #0a0103 100%); }
-            75% { background: radial-gradient(circle at 70% 60%, #3d2a08 0%, #1a1002 50%, #050301 100%); }
+            33% { background: radial-gradient(circle at 80% 20%, #0d2342 0%, #040e1f 50%, #01050a 100%); }
+            66% { background: radial-gradient(circle at 50% 80%, #4a1535 0%, #200412 50%, #0a0105 100%); }
             100% { background: radial-gradient(circle at 20% 30%, #063827 0%, #021a12 50%, #010a07 100%); }
         }
 
         body {
-            animation: livingAtmosphere 20s infinite ease-in-out;
+            animation: imperialAtmosphere 18s infinite ease-in-out;
             background-color: #030d09;
             color: #fdf5e6;
             font-family: 'Cinzel', serif;
@@ -38,15 +34,15 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at center, var(--bg-glow) 0%, transparent 75%);
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.12) 0%, transparent 75%);
             pointer-events: none;
             z-index: 1;
             animation: ambientBreath 7s infinite ease-in-out;
         }
 
         @keyframes ambientBreath {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.04); }
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.03); }
         }
 
         .top-bar, .book-chamber-content, .illustrations-container {
@@ -87,27 +83,6 @@
             transform: translateY(-3px) scale(1.03);
         }
 
-        .ambient-player {
-            background: rgba(3, 20, 14, 0.85);
-            border: 1px solid #d4af37;
-            padding: 10px 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
-        .ambient-player span {
-            font-size: 12px;
-            color: #d4af37;
-            letter-spacing: 1px;
-        }
-        .ambient-player audio {
-            height: 25px;
-            outline: none;
-        }
-
         .book-chamber-content {
             max-width: 900px;
             margin: 0 auto 40px auto;
@@ -134,26 +109,23 @@
             font-style: italic;
             margin-bottom: 25px;
         }
-        .book-display-frame {
-            max-width: 380px;
+
+        /* Thematic Video Container replacing static cover */
+        .video-display-frame {
+            max-width: 650px;
             margin: 0 auto;
             border: 4px solid #d4af37;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.7);
             overflow: hidden;
             background: #010a07;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            position: relative;
         }
-        .book-display-frame:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 45px rgba(212, 175, 55, 0.9);
-        }
-        .book-display-frame img {
+        .video-display-frame video {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         .illustrations-container {
@@ -254,51 +226,51 @@
 </head>
 <body>
 
+<!-- Hidden audio element for click/tap feedback sound effects -->
+<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c365b454.mp3?filename=ui-click-43196.mp3" preload="auto"></audio>
+
 <div class="top-bar">
-    <a href="library.html" class="gateway-btn">👑 Return to Imperial Library</a>
-    <div class="ambient-player">
-        <span>♫ Imperial Symphony</span>
-        <audio controls loop autoplay>
-            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=meditation-ambient-110022.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
+    <a href="library.html" class="gateway-btn" onclick="playClick()">👑 Return to Imperial Library</a>
 </div>
 
 <div class="book-chamber-content">
-    <h1>The Song of Rosanna and the Evil King</h1>
-    <p>"Step into the dry lands of Hikmid and the golden halls of Boparl. Witness the birth of the promised queen, the trials of her parents Tarma and Jirmak, and an empire poised on the edge of destiny. Explore the generated scenes below before opening the full interactive book."</p>
+    <h1>The Song of Rosana and the Evil King</h1>
+    <p>"Step into the dry lands of Hikmid and the golden halls of Boparl. Witness the birth of the promised queen, the trials of her parents Tarma and Jirmak, and an empire poised on the edge of destiny. Experience the thematic royal vision below before opening the full interactive book."</p>
     
-    <div class="book-display-frame" onclick="openModal('rosanna.png', 'Book Cover', 'The Song of Rosana and the Evil King')">
-        <img src="rosanna.png" alt="The Book Cover">
+    <!-- Thematic Video Player with its own audio track -->
+    <div class="video-display-frame">
+        <video autoplay muted loop playsinline controls>
+            <source src="your-video-file.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-    <p style="font-size: 13px; color: #d4af37; margin-top: 20px;">Click cover or illustrations to inspect closely in starlight.</p>
+    <p style="font-size: 13px; color: #d4af37; margin-top: 15px;">Immersive Royal Theme & Visuals</p>
 </div>
 
 <div class="illustrations-container">
     <div class="section-title">✨ Book Illustrations & Scenes</div>
     <div class="illustrations-grid">
-        <div class="illustration-card" onclick="openModal('5.png', 'Page Scene V', 'A delicate moment captured in the kingdom.')">
+        <div class="illustration-card" onclick="playClick(); openModal('5.png', 'Page Scene V', 'A delicate moment captured in the kingdom.')">
             <img src="5.png" alt="Illustration 5">
             <h3>Page Scene V</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('8.png', 'Page Scene VIII', 'The tides of fate and devotion by the water.')">
+        <div class="illustration-card" onclick="playClick(); openModal('8.png', 'Page Scene VIII', 'The tides of fate and devotion by the water.')">
             <img src="8.png" alt="Illustration 8">
             <h3>Page Scene VIII</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('9.png', 'Page Scene IX', 'Building a new life together outside the village.')">
+        <div class="illustration-card" onclick="playClick(); openModal('9.png', 'Page Scene IX', 'Building a new life together outside the village.')">
             <img src="9.png" alt="Illustration 9">
             <h3>Page Scene IX</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('12.png', 'Page Scene XII', 'Guidance under the ancient skies and marketplace.')">
+        <div class="illustration-card" onclick="playClick(); openModal('12.png', 'Page Scene XII', 'Guidance under the ancient skies and marketplace.')">
             <img src="12.png" alt="Illustration 12">
             <h3>Page Scene XII</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('13.png', 'Page Scene XIII', 'Storms and trials testing the bond of the realm.')">
+        <div class="illustration-card" onclick="playClick(); openModal('13.png', 'Page Scene XIII', 'Storms and trials testing the bond of the realm.')">
             <img src="13.png" alt="Illustration 13">
             <h3>Page Scene XIII</h3>
         </div>
-        <div class="illustration-card" onclick="openModal('7.png', 'Page Sanctuary', 'A sanctuary moment preserved in the sacred script.')">
+        <div class="illustration-card" onclick="playClick(); openModal('7.png', 'Page Sanctuary', 'A sanctuary moment preserved in the sacred script.')">
             <img src="7.png" alt="Illustration 7">
             <h3>Page Sanctuary</h3>
         </div>
@@ -307,7 +279,7 @@
 
 <div style="text-align: center; margin: 40px 0;">
     <!-- Links directly to your Turn.js full storybook reader -->
-    <a href="full_story.html" class="gateway-btn" style="font-size: 18px; padding: 16px 36px;">📖 Read Book Pages</a>
+    <a href="full_story.html" class="gateway-btn" onclick="playClick()" style="font-size: 18px; padding: 16px 36px;">📖 Read Book Pages</a>
 </div>
 
 <div id="characterModal" class="modal" onclick="closeModal()">
@@ -316,17 +288,26 @@
         <p id="modalDesc" style="color: #c5a059; font-style: italic; font-size: 13px; margin: 0 0 15px 0;"></p>
         <img id="modalImage" src="" alt="Expanded View">
         <br>
-        <button class="close-btn" onclick="closeModal()">Close Chamber</button>
+        <button class="close-btn" onclick="playClick(); closeModal()">Close Chamber</button>
     </div>
 </div>
 
 <script>
+    function playClick() {
+        const sound = document.getElementById('clickSound');
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Audio play blocked by browser policy until interaction"));
+        }
+    }
+
     function openModal(imageSrc, title, description = '') {
         document.getElementById('modalImage').src = imageSrc;
         document.getElementById('modalTitle').textContent = title;
         document.getElementById('modalDesc').textContent = description;
         document.getElementById('characterModal').style.display = 'flex';
     }
+    
     function closeModal() {
         document.getElementById('characterModal').style.display = 'none';
     }
