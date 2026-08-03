@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Song of Rosana and the Evil King - Imperial Divine Vision</title>
+    <title>The Song of Rosana and the Evil King - Complete Imperial Divine Vision</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4/turn.min.js"></script>
     <style>
@@ -116,7 +116,6 @@
             position: relative;
         }
 
-        /* Decorative Wire / Gold Inner Border Frame */
         #book .page::before {
             content: '';
             position: absolute;
@@ -140,7 +139,7 @@
         h1 {
             font-family: 'Great Vibes', cursive;
             color: #997a15;
-            font-size: 38px;
+            font-size: 34px;
             margin-top: 5px;
             margin-bottom: 8px;
             text-align: center;
@@ -150,9 +149,9 @@
         h2 {
             font-family: 'Cinzel', serif;
             color: #2b2510;
-            font-size: 16px;
+            font-size: 15px;
             margin-top: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: 1px;
             border-bottom: 1px solid #d4af37;
             padding-bottom: 4px;
@@ -164,17 +163,17 @@
         p {
             font-family: 'Cinzel', serif;
             color: #3e2723;
-            font-size: 11.5px;
-            line-height: 1.55;
-            margin-top: 4px;
-            margin-bottom: 8px;
+            font-size: 10.5px;
+            line-height: 1.45;
+            margin-top: 3px;
+            margin-bottom: 6px;
             text-align: justify;
             width: 100%;
             z-index: 1;
         }
 
         .dialogue {
-            margin-left: 15px;
+            margin-left: 10px;
             font-style: italic;
             color: #5c3a21;
         }
@@ -188,30 +187,23 @@
             display: block;
         }
 
-        .arabic-text {
-            font-family: 'Traditional Arabic', 'Amiri', serif;
-            direction: rtl;
-            text-align: right;
-            font-size: 13px;
-        }
-
         .lock-overlay {
             background: rgba(253, 245, 230, 0.96);
             border: 2px double #b8860b;
-            padding: 25px;
+            padding: 15px;
             text-align: center;
-            margin-top: 50px;
+            margin-top: 10px;
             border-radius: 8px;
             z-index: 10;
-            width: 80%;
+            width: 90%;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .lock-overlay h3 {
             color: #8b0000;
             font-family: 'Cinzel', serif;
-            margin-bottom: 10px;
-            font-size: 18px;
+            margin-bottom: 5px;
+            font-size: 15px;
         }
 
         .page-number {
@@ -232,580 +224,189 @@
     <select id="languageSelector" class="lang-select" onchange="changeLanguage(this.value)">
         <option value="en">English</option>
         <option value="es">Español (Spanish)</option>
-        <option value="ar">العربية (Arabic)</option>
     </select>
 </div>
 
 <div id="book-container">
     <div id="book">
-        <!-- Page 1 (Free) -->
+        <!-- Page 1 -->
         <div class="page">
             <div class="lang-content en active">
                 <h1>The Song of Rosana and the Evil King</h1>
                 <h2>Introduction: The Land of Hikmid</h2>
-                <p>Rosana is a village girl born from a handsome sailor called Tarma and a beautiful performer called Jirmak. She was born in a village located in a dry land called Hikmid. Hikmid was two miles far from the sea and had been colonized by a very powerful, rich empire called Boparl. The people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom: the Hikmidians were allowed to do whatever they wanted as long as they respected the law.</p>
-                <p>Boparl consisted of seven states: Kahli, Gorma, Tunera, Farisa, Hjortigar, Hakma, and the capital region. These six states were governed by the king's most trusted ministers, while the king, Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar. Tumar was located in the center of the empire, a beautiful city where money flowed, businesses thrived, and gold miners searched for gold. Hikmid was within the state of Farisa to the south of the capital. Rosana's father, Tarma, was a righteous man, the son of a fisherman, Irsha, and a housekeeper named Luisa.</p>
+                <p>Rosana is a village girl born from a handsome sailor named Tarma and a beautiful performer named Jirmak[cite: 1]. She was born in a village located in a dry land called Hikmid, which was two miles far from the sea[cite: 1]. Hikmid had been colonized by a very powerful, rich empire called Boparl[cite: 1]. The people of Hikmid were treated like war slaves, yet they were allowed a strange kind of freedom: the Hikmidians were allowed to do whatever they wanted as long as they respected the law[cite: 1].</p>
+                <p>Boparl consisted of seven states: Kahli, Gorma, Tunera, Farisa, Hjortigar, Hakma, and the capital region[cite: 1]. These six states were governed by the king's most trusted ministers, while the king, Shirkisir, his wife Kumata, and his three concubines lived in the capital, Tumar[cite: 1]. Tumar was located in the center of the empire, a beautiful city where money flowed, businesses thrived, and gold miners searched for gold[cite: 1]. Hikmid was within the state of Farisa to the south of the capital[cite: 1]. Rosana’s father, Tarma, was a righteous man, the son of a fisherman, Irsha, and a housekeeper named Luisa[cite: 1].</p>
             </div>
             <div class="lang-content es">
                 <h1>La Canción de Rosana y el Rey Malvado</h1>
                 <h2>Introducción: La Tierra de Hikmid</h2>
-                <p>Rosana es una niña de aldea nacida de un apuesto marinero llamado Tarma y una hermosa artista llamada Jirmak. Nació en un pueblo ubicado en una tierra seca llamada Hikmid. Hikmid estaba a dos millas del mar y había sido colonizado por un imperio muy poderoso y rico llamado Boparl. La gente de Hikmid era tratada como esclavos de guerra, pero se les permitía un extraño tipo de libertad: a los habitantes de Hikmid se les permitía hacer lo que quisieran siempre y cuando respetaran la ley.</p>
-                <p>Boparl constaba de siete estados: Kahli, Gorma, Tunera, Farisa, Hjortigar, Hakma y la región capital. Estos seis estados eran gobernados por los ministros más confiables del rey, mientras que el rey Shirkisir, su esposa Kumata y sus tres concubinas vivían en la capital, Tumar. Tumar estaba ubicada en el centro del imperio, una hermosa ciudad donde el dinero fluyó, los negocios prosperaron y los mineros de oro buscaron oro. Hikmid estaba dentro del estado de Farisa, al sur de la capital. El padre de Rosana, Tarma, era un hombre justo, hijo de un pescador, Irsha, y una ama de llaves llamada Luisa.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h1>أغنية روسانا والملك الشرير</h1>
-                <h2>مقدمة: أرض حكميد</h2>
-                <p>روسانا هي فتاة قروية ولدت من بحار وسيم يدعى تارما ومؤدية جميلة تدعى جيرماك. ولدت في قرية تقع في أرض جافة تدعى حكميد. تبعد حكميد ميلين عن البحر وقد استعمرتها إمبراطورية قوية وغنية جداً تدعى بوبارل. كان شعب حكميد يعامل كعبيد حرب، ومع ذلك مُنحوا نوعاً غريباً من الحرية: سُمح لسكان حكميد أن يفعلوا ما يريدون طالما أنهم يحترمون القانون.</p>
-                <p>تكونت بوبارل من سبع ولايات: كاهلي، جورما، تونيرا، فاريسا، هيورتيجار، حكما، ومنطقة العاصمة. كانت هذه الولايات الست تحكم من قبل وزراء الملك الأكثر ثقة، بينما كان الملك شيركيسير، وزوجته كوماتا، ومحظياته الثلاث يعيشون في العاصمة تومار. تقع تومار في وسط الإمبراطورية، وهي مدينة جميلة تدفق فيها المال، وازدهرت الأعمال، وبحث عمال المناجم عن الذهب. كانت حكميد ضمن ولاية فاريسا جنوب العاصمة. كان والد روسانا، تارما، رجلاً صالحاً، وهو ابن صياد يدعى إرشا ومدبرة منزل تدعى لويزا.</p>
+                <p>Rosana es una niña de aldea nacida de un apuesto marinero llamado Tarma y una hermosa artista llamada Jirmak[cite: 1]. Nació en un pueblo ubicado en una tierra seca llamada Hikmid, que estaba a dos millas del mar[cite: 1]. Hikmid había sido colonizado por un imperio muy poderoso y rico llamado Boparl[cite: 1]. La gente de Hikmid era tratada como esclavos de guerra, pero se les permitía un extraño tipo de libertad[cite: 1].</p>
             </div>
             <div class="page-number">1</div>
         </div>
 
-        <!-- Page 2 (Free) -->
+        <!-- Page 2 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Introduction: Jirmak's Past</h2>
-                <p>Rosana's mother, Jirmak, had a different beginning. She was abandoned by her parents at the doorstep of a pleasure house. She was found by Kapoor, the prostitute building owner. Kapoor, charmed by Jirmak's beauty, adopted her and raised her as her daughter. Jirmak was sent to school and trained in the art of dance and music. Kapoor raised Jirmak to carry herself with grace in high social status, harboring a secret hope that Jirmak would marry a rich man and move to a mansion in the capital with servants, enabling Jirmak to provide for Kapoor in her old age.</p>
-                <p>As Jirmak grew, her beauty became legendary. Men and women from all over the village would gather just to catch a glimpse of her dancing and singing. Jirmak grew more beautiful and elegant day by day. Though many suitors proposed, Kapoor rejected them all, having big plans for her daughter's future.</p>
+                <h2>Jirmak's Past & The Rescue</h2>
+                <p>Rosana's mother, Jirmak, had a different beginning[cite: 1]. She was abandoned by her parents at the doorstep of a pleasure house[cite: 1]. She was found by Kapoor, the prostitute building owner[cite: 1]. Kapoor, charmed by Jirmak's beauty, adopted her and raised her as her daughter[cite: 1]. Jirmak was sent to school and trained in the art of dance and music[cite: 1]. As Jirmak grew, her beauty became legendary[cite: 1]. Men and women from all over the village would gather just to catch a glimpse of her dancing and singing[cite: 1].</p>
+                <p>One day early in the morning, just as the sun began to break, Jirmak attempted a desperate escape[cite: 1]. Driven by the weight of her mother's obsession, she took a small boat to the sea, hoping to find a life of her own[cite: 1]. While trying to sail in her little boat, a storm started, and the waves were unforgiving[cite: 1]. Jirmak slipped and fell into the sea, and she didn't know how to swim[cite: 1]. Luckily, Tarma was returning from a long night of fishing with his father, Irsha[cite: 1]. Seeing the struggle, Tarma dove deep into the water to save Jirmak[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Introducción: El Pasado de Jirmak</h2>
-                <p>La madre de Rosana, Jirmak, tuvo un comienzo diferente. Fue abandonada por sus padres en la puerta de una casa de placer. Fue encontrada por Kapoor, la propietaria del edificio de prostitutas. Kapoor, encantada por la belleza de Jirmak, la adoptó y la crió como su hija. Jirmak fue enviada a la escuela y entrenada en el arte de la danza y la música. Kapoor crio a Jirmak para llevarse con gracia en un alto estatus social, albergar la esperanza secreta de que Jirmak se casara con un hombre rico y se mudara a una mansión en la capital con sirvientes, lo que le permitiría a Jirmak mantener a Kapoor en su vejez.</p>
-                <p>A medida que Jirmak crecía, su belleza se volvió legendaria. Hombres y mujeres de todo el pueblo se reunían solo para vislumbrar su baile y canto. Jirmak se volvió más hermosa y elegante día a día. Aunque muchos pretendientes propusieron matrimonio, Kapoor los rechazó a todos, teniendo grandes planes para el futuro de su hija.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>مقدمة: ماضي جيرماك</h2>
-                <p>كان لوالدة روسانا، جيرماك، بداية مختلفة. لقد تخلى عنها والداها على عتبة دار للمتعة. عثرت عليها كابور، صاحبة مبنى البغاء. كابور، التي سحرتها جمال جيرماك، تبنتها وتربتها كابنة لها. أُرسلت جيرماك إلى المدرسة وتدربت على فن الرقص والموسيقى. ربت كابور جيرماك لتتحلى بالنعمة في مكانة اجتماعية عالية، محتفظة بأمل سرّي في أن تتزوج جيرماك من رجل غني وتنتقل إلى قصر في العاصمة مع خدم، مما يتيح لجيرماك إعانة كابور في شيخوختها.</p>
-                <p>مع نمو جيرماك، أصبح جمالها أسطورياً. كان الرجال والنساء من جميع أنحاء القرية يتجمعون لمجرد إلقاء نظرة على رقصها وغنائها. أصبحت جيرماك أكثر جمالاً وأناقة يومًا بعد يوم. على الرغم من تقدم العديد من الخطاب، رفضتهم كابور جميعاً، كان لديها خطط كبيرة لمستقبل ابنتها.</p>
+                <h2>El Pasado de Jirmak y El Rescate</h2>
+                <p>La madre de Rosana, Jirmak, tuvo un comienzo diferente[cite: 1]. Fue abandonada por sus padres en la puerta de una casa de placer y encontrada por Kapoor[cite: 1]. A medida que crecía, su belleza se volvió legendaria[cite: 1]. Un día, Jirmak intentó una huida desesperada al mar en un bote pequeño, pero una tormenta la hizo caer al agua sin saber nadar[cite: 1]. Por suerte, Tarma regresaba de pescar y se sumergió para salvarla[cite: 1].</p>
             </div>
             <div class="page-number">2</div>
         </div>
 
-        <!-- Page 3 (Free) -->
+        <!-- Page 3 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter I: The Rescue and the Vow</h2>
-                <p>One day early in the morning, just as the sun began to break, Jirmak attempted a desperate escape. Driven by the weight of her mother's obsession, she took a small boat to the sea, hoping to find a life of her own. While trying to sail in her little boat, a storm started, and the waves were unforgiving. Jirmak slipped and fell into the sea and she did not know how to swim.</p>
-                <p>Luckily, Tarma was returning from a long night of fishing with his father, Irsha. Seeing the struggle, Tarma dove deep into the water to save Jirmak. When he brought her back to the sand, Jirmak was not breathing. He tried to revive her, but she remained still. In a final desperate act, Tarma breathed his own air into her lungs. It worked, and she opened her eyes and screamed. Jirmak looked into the eyes of her rescuer, and they both fell deeply in love.</p>
+                <h2>Secret Marriage and Exile</h2>
+                <p>When he brought her back to the sand, Jirmak was not breathing[cite: 1]. In a final desperate act, Tarma breathed his own air into her lungs[cite: 1]. It worked, and she opened her eyes and screamed[cite: 1]. Jirmak looked into the eyes of her rescuer, and they both fell deeply in love[cite: 1]. Two years later, Tarma proposed to Jirmak[cite: 1]. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride[cite: 1]. Luisa, Tarma’s mother, could not accept Jirmak's upbringing and banned Tarma from seeing her[cite: 1]. Kapoor, in her greed, banned Jirmak as well[cite: 1].</p>
+                <p>Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other and married in secret[cite: 1]. When the truth came out, they were both cast out by the villagers and disowned by their families[cite: 1]. With nothing but love and small savings, they built a small hut outside the village[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo I: El Rescate y el Voto</h2>
-                <p>Un día temprano por la mañana, justo cuando el sol comenzaba a salir, Jirmak intentó una huida desesperada. Impulsada por el peso de la obsesión de su madre, tomó un pequeño bote hacia el mar, con la esperanza de encontrar una vida propia. Mientras intentaba navegar en su botecito, comenzó una tormenta y las olas fueron implacables. Jirmak resbaló y cayó al mar y no sabía nadar.</p>
-                <p>Por suerte, Tarma regresaba de una larga noche de pesca con su padre, Irsha. Al ver la lucha, Tarma se sumergió profundamente en el agua para salvar a Jirmak. Cuando la trajo de vuelta a la arena, Jirmak no respiraba. Intentó revivirla, pero ella seguía inmóvil. En un acto final de desesperación, Tarma respiró su propio aire en sus pulmones. Funcionó, abrió los ojos y gritó. Jirmak miró a los ojos de su rescatador, y ambos se enamoraron profundamente.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الأول: الإنقاذ والعهد</h2>
-                <p>في أحد الأيام في الصباح الباكر، تماماً مع بدء شروق الشمس، حاولت جيرماك الهروب بيأس. مدفوعة بوزن هوس والدتها، أخذت قوارباً صغيراً إلى البحر، على أمل العثور على حياة خاصة بها. أثناء محاولتها الإبحار في قاربها الصغير، بدأت عاصفة، وكانت الأمواج لا تقهر. انزلقة جيرماك وسقطت في البحر ولم تكن تعرف كيف تسبح.</p>
-                <p>حسناً، كان تارما عائداً من ليلة صيد طويلة مع والده، إرشا. عندما رأى النضال، غاص تارما عميقاً في الماء لإنقاذ جيرماك. عندما أعادها إلى الرمال، لم تكن جيرماك تتنفس. حاول إحيائها، لكنها بقيت ساكنة. في عمل يائس أخير، نفخ تارما هواءه الخاص في رئتيها. نجح الأمر، فتحت عينيها وصرخت. نظرت جيرماك في عيني منقذها، ووقعا في حب عميق.</p>
+                <h2>Matrimonio Secreto y Exilio</h2>
+                <p>Tarma le revivió respirando en sus pulmones[cite: 1]. Se enamoraron profundamente y se casaron en secreto dos años después[cite: 1]. Las familias de ambos los repudiaron por orgullo y codicia[cite: 1]. Con nada más que amor y pequeños ahorros, construyeron una pequeña choza fuera del pueblo[cite: 1].</p>
             </div>
             <div class="page-number">3</div>
         </div>
 
-        <!-- Page 4 (Free) -->
+        <!-- Page 4 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter I: Secret Marriage and Exile</h2>
-                <p>Jirmak started meeting Tarma in secret, and their love became deeper and deeper. Two years later, Tarma proposed to Jirmak. Jirmak joyfully accepted, but their happiness was met with a wall of gold and pride. Luisa, Tarma’s mother, could not accept Jirmak's upbringing. She was greatly displeased and banned her son Tarma from seeing Jirmak. Kapoor, Jirmak’s mother, in her greed for wealth, banned Jirmak from seeing Tarma or going outside alone.</p>
-                <p>Faced with a world that wanted to keep them apart, Tarma and Jirmak chose each other. They married in secret, a quiet vow between their two souls. When the truth came out, they were both cast out by the villagers and disowned by their families. Jirmak's mother found out and decided to disown her; Luisa was displeased by her son's decision and decided to kick him out. With nothing but love and small savings, they built a small hut outside the village.</p>
+                <h2>The Meeting of the Prophet</h2>
+                <p>To provide for their new life, Tarma became a sailor[cite: 1]. Jirmak stayed behind on solid ground, leaning into her gifts as a renowned dancer and singer[cite: 1]. One year later, while gathering supplies in the bustling market, Jirmak was approached by a powerful prophet named Kafura[cite: 1].</p>
+                <p class="dialogue">Prophet Kafura: "You will give birth to the most beautiful woman in the entire world, but greatness comes with a price. Your daughter will face trials of immense pain... Yet, she will rise as a powerful queen, the one destined to deliver your people from the grip of the colonizers."[cite: 1]</p>
+                <p class="dialogue">Jirmak: "What mother would wish for her child to suffer? Please, prophet, help me! How can I save my daughter from her destiny?"[cite: 1]</p>
+                <p class="dialogue">Prophet Kafura: "I can help you delay the prophecy. I will return to visit you the moment the promised child is born."[cite: 1]</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo I: Matrimonio Secreto y Exilio</h2>
-                <p>Jirmak comenzó a reunirse con Tarma en secreto, y su amor se hizo cada vez más profundo. Dos años después, Tarma le propuso matrimonio a Jirmak. Jirmak aceptó alegremente, pero su felicidad se encontró con un muro de oro y orgullo. Luisa, la madre de Tarma, no podía aceptar la crianza de Jirmak. Estaba muy disgustada y prohibió a su hijo Tarma ver a Jirmak. Kapoor, la madre de Jirmak, en su codicia por la riqueza, le prohibió a Jirmak ver a Tarma o salir sola.</p>
-                <p>Frente a un mundo que quería mantenerlos separados, Tarma y Jirmak se eligieron mutuamente. Se casaron en secreto, un voto silencioso entre sus dos almas. Cuando salió la verdad, ambos fueron expulsados por los aldeanos y repudiados por sus familias. La madre de Jirmak se enteró y decidió repudiarla; Luisa estaba disgustada por la decisión de su hijo y decidió Echarlo. Con nada más que amor y pequeños ahorros, construyeron una pequeña choza fuera del pueblo.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الأول: الزواج السري والمنفى</h2>
-                <p>بدأت جيرماك تقابل تارما في السر، وأصبح حبهما أعمق فأعمق. بعد عامين، طلب تارما يد جيرماك للزواج. وافقت جيرماك بفرح، لكن سعادتهما قوبلت بجدار من الذهب والكبرياء. لم تستطع لويزا، والدة تارما، قبول تربية جيرماك. لقد كانت مستاءة للغاية وحظرت على ابنها تارما رؤية جيرماك. أما كابور، والدة جيرماك، ففي جشعها للثروة، منعت جيرماك من رؤية تارما أو الخروج بمفردها.</p>
-                <p>في مواجهة عالم أراد إبقائهما منفصلين، اختار تارما وجيرماك بعضهما البعض. تزوجا في السر، عهد هادئ بين روحتيهما. عندما ظهرت الحقيقة، طردهما القرويون وتبرأت منهما عائلاتهما. اكتشفت والدة جيرماك الأمر وقررت التبرؤ منها؛ وكانت لويزا مستاءة من قرار ابنها وقررت طرده. مع عدم وجود سوى الحب والمدخرات الصغيرة، بنيا كوخاً صغيراً خارج القرية.</p>
+                <h2>El Encuentro del Profeta</h2>
+                <p>Tarma se convirtió en marinero y Jirmak en una bailarina de renombre[cite: 1]. Un año después, el profeta Kafura se acercó a Jirmak[cite: 1].</p>
+                <p class="dialogue">Profeta Kafura: "Darás a luz a la mujer más hermosa del mundo, pero la grandeza tiene un precio. Ella se alzará como una reina poderosa para liberar a tu pueblo."[cite: 1]</p>
+                <p class="dialogue">Jirmak: "¡Por favor, profeta, ayúdame! ¿Cómo puedo salvar a mi hija?"[cite: 1]</p>
             </div>
             <div class="page-number">4</div>
         </div>
 
-                <!-- Page 5 (Free) -->
+        <!-- Page 5 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter II: The Birth of Rosana</h2>
-                <p>To provide for their new life, Tarma chose to become a sailor. His days were spent navigating the waves, traveling to the capital to trade merchandise. Jirmak stayed behind on solid ground; her near-drowning experience had left her with a deep fear of the water. Instead, Jirmak leaned into the gifts she was raised with, becoming a renowned dancer and singer. She performed at a famous theater in the neighboring village. The couple found themselves living a successful and stable life. Yet, despite their success, their family still cut all contact with them.</p>
-                <h2>The Meeting of the Prophet</h2>
-                <p>One year later, while Jirmak was gathering supplies in the bustling market, she was approached by a figure of immense presence: a powerful prophet named Kafura.</p>
+                <h2>The Birth of Rosana</h2>
+                <p>As time passed, Jirmak's physical body grew weak, and her pregnancy became visible[cite: 1]. The sea became restless, and strange natural disasters plagued the land[cite: 1]. The villagers began pointing fingers at Jirmak's womb, calling her unborn child an evil seed and threatening to kill them[cite: 1]. Tarma stopped working to fish in the freezing early mornings to feed his family[cite: 1].</p>
+                <p>One gray, raining morning, labor pains struck Jirmak in the mud[cite: 1]. Cruel villagers ignored her[cite: 1]. Tarma found her and begged his old friend Kurita for help[cite: 1]. Kurita and his wife rushed to their aid in the freezing rain[cite: 1]. Inside the humble hut, amidst chaos and blood loss, Jirmak pushed with all her might, giving birth to a gorgeous baby girl with sea-blue eyes and glowing skin[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo II: El Nacimiento de Rosana</h2>
-                <p>Para proveer a su nueva vida, Tarma decidió convertirse en marinero. Pasaba sus días navegando por las olas, viajando a la capital para comerciar mercancías. Jirmak se quedó atrás en tierra firme; su experiencia cercana al ahogamiento la había dejado con un profundo miedo al agua. En su lugar, Jirmak se inclinó hacia los dones con los que fue criada, convirtiéndose en una bailarina y cantante de renombre. Actuó en un famoso teatro en el pueblo vecino. La pareja se encontró viviendo una vida exitosa y estable. Sin embargo, a pesar de su éxito, su familia aún cortó todo contacto con ellos.</p>
-                <h2>El Encuentro del Profeta</h2>
-                <p>Un año después, mientras Jirmak reunía provisiones en el bullicio del mercado, se le acercó una figura de inmensa presencia: un poderoso profeta llamado Kafura.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثاني: ولادة روسانا</h2>
-                <p>لتوفير حياة جديدة، اختار تارما أن يصبح بحاراً. أمضى أيامه في التنقل بين الأمواج، مسافراً إلى العاصمة لتجارة البضائع. بقيت جيرماك في الخلف على أرض صلبة؛ فقد تركت تجربة الغرق الوشيك لديها خوفاً عميقاً من الماء. بدلاً من ذلك، اعتمدت جيرماك على المواهب التي رُبيت عليها، وأصبحت راقصة ومغنية مشهورة. قدمت عروضاً في مسرح شهير بالقرية المجاورة. وجد الزوجان نفسيهما يعيشان حياة ناجحة ومستقرة. ومع ذلك، على الرغم من نجاحهما، قطعت عائلتهما كل اتصال بهما.</p>
-                <h2>لقاء النبي</h2>
-                <p>بعد عام واحد، بينما كانت جيرماك تجمع الإمدادات في السوق المزدحم، اقتربت منها شخصية ذات حضور هائل: نبي قوي يدعى كافورا.</p>
+                <h2>El Nacimiento de Rosana</h2>
+                <p>El embarazo de Jirmak trajo disturbios y amenazas de los aldeanos supersticiosos[cite: 1]. Una mañana lluviosa, Jirmak entró en labor de parto en el lodo[cite: 1]. Con la ayuda del amigo de Tarma, Kurita, y su esposa, dio a luz a una hermosa niña con ojos color azul mar y piel brillante[cite: 1].</p>
             </div>
             <div class="page-number">5</div>
         </div>
 
-        <!-- Page 6 (Free) -->
+        <!-- Page 6 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter II: The Prophet's Revelation</h2>
-                <p>Kafura looked deep into Jirmak's eyes and spoke a revelation that chilled her blood.</p>
-                <p class="dialogue">Prophet Kafura: "You will give birth to the most beautiful woman in the entire world, but greatness comes with a price. Your daughter will face trials of immense pain and challenges that would break a common soul. Yet, she will rise as a powerful queen, the one destined to defeat your people from the grip of the colonizers and change the very course of the world."</p>
-                <p>Kafura's voice grew urgent.</p>
-                <p class="dialogue">Prophet Kafura: "Teach her everything you know, Jirmak. Do not hold back your skills, for she will need every ounce of your wisdom to survive the future that awaits her."</p>
-                <p>Fear gripped Jirmak.</p>
-                <p class="dialogue">Jirmak: "What mother would wish for her child to suffer? I want my daughter to have a happy, normal life free from pain and life's struggles. Please, prophet, help me! How can I save my daughter from her destiny?"</p>
+                <h2>The Declaration of the Prophecy</h2>
+                <p>Just as Tarma questioned the child's appearance, Prophet Kafura arrived at their door[cite: 1].</p>
+                <p class="dialogue">Prophet Kafura: "Do not be fooled by appearance! That little girl is your daughter... You will name her Rosana! Rosana the rising sun. She will free the slaves, but hear me: Rosana will be taken away, she will cross the sea, she will be beaten, homeless, and her home will be burned."[cite: 1]</p>
+                <p>When the villagers rushed forward to harm them, Kafura raised his staff, summoning winds, tsunamis, and water tornadoes to defend the family[cite: 1]. Terrified, the villagers begged for mercy[cite: 1]. To protect Rosana from immediate danger, Kafura performed a spell: her blue hair turned black, her blue eyes turned brown, and her glowing skin became normal[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo II: La Revelación del Profeta</h2>
-                <p>Kafura miró profundamente a los ojos de Jirmak y pronunció una revelación que heló su sangre.</p>
-                <p class="dialogue">Profeta Kafura: "Darás a luz a la mujer más hermosa de todo el mundo, pero la grandeza tiene un precio. Tu hija enfrentará pruebas de inmenso dolor y desafíos que romperían a un alma común. Sin embargo, ella se alzará como una reina poderosa, la destinada a liberar a tu pueblo de las garras de los colonizadores y cambiar el curso mismo del mundo."</p>
-                <p>La voz de Kafura se volvió urgente.</p>
-                <p class="dialogue">Profeta Kafura: "Enséñale todo lo que sabes, Jirmak. No te guardes tus habilidades, porque ella necesitará cada onza de tu sabiduría para sobrevivir al futuro que le espera."</p>
-                <p>El miedo se apoderó de Jirmak.</p>
-                <p class="dialogue">Jirmak: "Qué madre desearía que su hijo sufriera? Quiero que mi hija tenga una vida feliz y normal, libre de dolor y de las luchas de la vida. Por favor, profeta, ¡ayúdame! ¿Cómo puedo salvar a su destino a mi hija?"</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثاني: الوحي النبوي</h2>
-                <p>نظر كافورا بعمق في عيني جيرماك وتحدث بوحي جمد دمها.</p>
-                <p class="dialogue">النبي كافورا: "ستلدين أجمل امرأة في العالم بأجمعه، لكن العظمة تأتي بثمن. ستواجه ابنتك محناً من الألم الهائل والتحديات التي من شأنها أن تكسر روحاً عادية. ومع ذلك، ستنهض كملكة قوية، الشخص المقدر له تحرير شعبك من قبضة المستعمرين وتغيير مسار العالم نفسه."</p>
-                <p>أصبح صوت كافورا ملحاً.</p>
-                <p class="dialogue">النبي كافورا: "علميها كل ما تعلمينه يا جيرماك. لا تحجبي مهاراتك، لأنها ستحتاج إلى كل ذرة من حهودك وحكمتك للبقاء على قيد الحياة في المستقبل الذي ينتظرها."</p>
-                <p>أمسك الخوف بجيرماك.</p>
-                <p class="dialogue">جيرماك: "أي أم تتمنى أن يعاني طفلها؟ أريد أن تتمتع ابنتي بحياة سعيدة وعادية خالية من الألم وصراعات الحياة. أرجوك أيها النبي، ساعدني! كيف يمكنني إنقاذ ابنتي من مصيرها؟"</p>
+                <h2>La Declaración de la Profecía</h2>
+                <p>El profeta Kafura apareció declarando que la niña se llamaría Rosana[cite: 1].</p>
+                <p class="dialogue">Profeta Kafura: "¡Ella liberará a los esclavos! Se llamará Rosana, el sol naciente."[cite: 1]</p>
+                <p>Cuando los aldeanos intentaron atacar, Kafura desató el poder del mar para defenderla[cite: 1]. Luego, lanzó un hechizo para ocultar su verdadera apariencia: su cabello azul se volvió negro y sus ojos marrones[cite: 1].</p>
             </div>
             <div class="page-number">6</div>
         </div>
 
-        <!-- Page 7 (Free) -->
+        <!-- Page 7 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter III: The Cost of the Prophecy</h2>
-                <p>Kafura looked at her with pity and resolve.</p>
-                <p class="dialogue">Prophet Kafura: "My dear daughter Jirmak, I have been watching you for a very long time; I know the depth of your sacrifice. But even the most powerful prophet cannot rewrite what God has spoken. It is impossible; as Esther, Ruth, and Deborah, she must walk this path. However, I can help you delay the prophecy."</p>
-                <p>As the prophet turned to leave, his final word lingered in the air like a vow:</p>
-                <p class="dialogue">Prophet Kafura: "I will return to visit you the moment the promised child is born."</p>
-                <p>Jirmak returned from the market with the prophet’s words echoing in her mind like a drumbeat. She ran home to her loving husband and told him the good news of her pregnancy, but she kept the fire of that secret locked deep within her, knowing this was no ordinary child.</p>
+                <h2>Growing Up in the Palace & Meeting Jack</h2>
+                <p>The chief leader adopted Jirmak, Tarma, and Rosana into his house, providing servants and stability[cite: 1]. Rosana grew up smart, fast-learning, and sheltered, leading her to develop a short temper[cite: 1]. Though locked away from the outside world, she sneaked out and met Jack, a clever servant boy living on the farm[cite: 1]. They shared a tender crush[cite: 1].</p>
+                <p>When Jirmak discovered this, her obsession with social hierarchy led her to banish Jack and his sister[cite: 1]. Rosana was heartbroken and furious with her mother[cite: 1]. Soon after, Prophet Kafura returned, insisting that Rosana must go to the temple to be raised for her destiny[cite: 1]. Despite Jirmak's heartbreaking screams and resistance, Rosana chose to go[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo III: El Costo de la Profecía</h2>
-                <p>Kafura la miró con lástima y determinación.</p>
-                <p class="dialogue">Profeta Kafura: "Mi querida hija Jirmak, te he estado observando durante mucho tiempo; sé la profundidad de tu sacrificio. Pero ni siquiera el profeta más poderoso puede reescribir lo que Dios ha hablado. Es imposible; como Ester, Rut y Débora, ella debe caminar por este camino. Sin embargo, puedo ayudarte a retrasar la profecía."</p>
-                <p>Cuando el profeta se dio la vuelta para irse, su última palabra quedó suspendida en el aire como un voto:</p>
-                <p class="dialogue">Profeta Kafura: "Regresaré a visitarte en el momento en que nazca el niño prometido."</p>
-                <p>Jirmak regresó del mercado con las palabras del profeta resonando en su mente como el eco de un tambor. Corrió a casa con su amado esposo y le dio la buena noticia de su embarazo, pero mantuvo el fuego de ese secreto guardado en lo más profundo de su ser, sabiendo que este no era un niño común.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثالث: ثمن النبوءة</h2>
-                <p>نظر إليها كافورا بشفقة وعزم.</p>
-                <p class="dialogue">النبي كافورا: "ابنتي العزيزة جيرماك، كنت أراقبك لفترة طويلة جداً؛ وأنا أعلم عمق تضحيتك. لكن حتى أقوى الأنبياء لا يستطيع إعادة كتابة ما تكلم به الله. هذا مستحيل؛ مثل إستير، راعوث، ودبورة، يجب عليها أن تسلك هذا الطريق. ومع ذلك، يمكنني مساعدتك في تأخير النبوءة."</p>
-                <p>بينما استدار النبي ليغادر، ظلت كلمته الأخيرة معلقة في الهواء مثل العهد:</p>
-                <p class="dialogue">النبي كافورا: "سأعود لزيارتك اللحظة التي يولد فيها الطفل الموعود."</p>
-                <p>عادت جيرماك من السوق وكلمات النبي تتردد في ذهنيها كضربات الطبول. ركضت إلى المنزل نحو زوجها المحب وأخبرته بالبشارة عن حملها، لكنها احتفظت بنار ذلك السر مقفلة بعمق في داخلها، عالماً أن هذا لم يكن طفلاً عادياً.</p>
+                <h2>Creciendo en el Palacio y Conociendo a Jack</h2>
+                <p>La familia se mudó con el líder del pueblo[cite: 1]. Rosana creció protegida pero con carácter fuerte, y conoció en secreto a Jack, un joven sirviente de la granja de quien se enamoró[cite: 1]. Al enterarse, Jirmak desterró a Jack[cite: 1]. Poco después, el profeta Kafura se llevó a Rosana al templo para prepararla para su destino[cite: 1].</p>
             </div>
             <div class="page-number">7</div>
         </div>
 
-        <!-- Page 8 (Free) -->
+        <!-- Page 8 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter III: The Stormy Labor</h2>
-                <p>As time passed, Jirmak's physical body grew weak, and her pregnancy became visible to the villagers. The sea became restless, churning with a fury no one had seen before, and strange natural disasters began to plague the land. As months passed, the prophecy began to take a toll on her; Jirmak couldn't walk or leave her bed. The air felt heavy with an omen they couldn't name. The villagers, growing in terror, began to point fingers at Jirmak's growing womb, calling her unborn child an evil seed, which turned into threats to kill both the mother and the unborn child.</p>
-                <p>Tarma, seeing the danger, made the choice to stop working to care for his family. Because both could not work and had nobody to support them, early in the morning in the cold, Tarma had to go to the sea to fish for food and desperately return before his wife woke up.</p>
+                <h2>Trials at the Temple & Prince Ian</h2>
+                <p>At the temple's Servant Chambers, Rosana faced harsh bullies like Resekelushi and her mother[cite: 1]. True to her royal spirit, Rosana fought back, exposed corruption, and earned the respect of her loyal friend Elara[cite: 1]. When she proved her mastery of sewing a rare purple lily, she was promoted to the Eleventh Chamber[cite: 1].</p>
+                <p>During her time there, she repeatedly crossed paths with Prince Ian of the Boparl empire, who was hiding in Hikmid[cite: 1]. Ian playfully called her his "wife," gave her a rare handmade necklace, and vowed to return for her[cite: 1]. Rosana secretly fell for his charm[cite: 1]. Years passed, and Jirmak visited her annually until Rosana turned eighteen[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo III: El Parto Tormentoso</h2>
-                <p>Con el paso del tiempo, el cuerpo físico de Jirmak se debilitó y su embarazo se hizo visible para los aldeanos. El mar se inquietó, agitarse con una furia que nadie había visto antes, y extraños desastres naturales comenzaron a plagar la tierra. A medida que pasaban los meses, la profecía comenzó a cobrar factura en ella; Jirmak no podía caminar ni abandonar su cama. El aire se sentía pesado con un augurio que no podían nombrar. Los aldeanos, aterrorizados, comenzaron a señalar con el dedo el vientre creciente de Jirmak, llamando a su hijo por nacer una semilla malvada, lo que se convirtió en amenazas de matar tanto a la madre como al hijo por nacer.</p>
-                <p>Tarma, al ver el peligro, tomó la decisión de dejar de trabajar para cuidar a su familia. Debido a que ambos no podían trabajar y no tenían a nadie que los apoyara, temprano en la mañana y con el frío, Tarma tenía que ir al mar a pescar comida y regresar desesperadamente antes de que su esposa se despertara.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثالث: المخاض العاصف</h2>
-                <p>مع مرور الوقت، أصبح جسد جيرماك الجسدي ضعيفاً، وأصبح حملها مرئياً للقرويين. أصبح البحر مضطرباً، يهيج بغضب لم يره أحد من قبل، وبدأت الكوارث الطبيعية الغريبة تعصف بالأرض. مع مرور الأشهر، بدأت النبوءة تأخذ خسائرها عليها؛ لم تستطيع جيرماك المشي أو مغادرة سريرها. شعور الهواء ثقيلاً بنذير لمبلوغهم تسميته. بدأ القرويون، المتزايدون في الرعب، يشيرون بأصابعهم إلى رحم جيرماك المتنامي، ويصفون طفلها الذي لم يولد بعد بالبذرة الشريرة، والتي تحولت إلى تهديدات بقتل كل من الأم والطفل الذي لم يولد بعد.</p>
-                <p>رأى تارما الخطر، فاتخذ قرار التوقف عن العمل لرعاية عائلته. نظراً لعدم قدرة كليكما على العمل وعدم وجود من يدعمهما، في الصباح الباكر في البرد، كان على تارما الذهاب إلى البحر لصيد الطعام والعودة بيأس قبل أن تستيقظ زوجته.</p>
+                <h2>Pruebas en el Templo y el Príncipe Ian</h2>
+                <p>En el templo, Rosana enfrentó abusos pero demostró su temple, ganándose una leal amiga llamada Elara y ascendiendo de rango[cite: 1]. Allí conoció al Príncipe Ian de Boparl, quien se ocultaba en el pueblo[cite: 1]. Ian la llamó su esposa, le regaló un collar y prometió volver por ella[cite: 1].</p>
             </div>
             <div class="page-number">8</div>
         </div>
 
-        <!-- Page 9 (Free) -->
+        <!-- Page 9 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter IV: Kurita's Help</h2>
-                <p>One gray, raining morning, Jirmak dragged herself outside the hut, her body weak, waiting for her husband's return. Suddenly, a wave of deep labor pains struck her stomach; she collapsed into the mud and screamed in agony. The cruel villagers ignored her and walked away, leaving her alone in the rain. When Tarma finally crossed the hill on his way back, he heard Jirmak crying, dropped his catch, ran to hold her, and realized that she was in labor. Realizing he could not afford any nurse or hospital, Tarma ran to his old friend and begged for help on his knees in the rain. Feeling sorry and remembering old days, his friend had mercy and reached out to help.</p>
-                <p>Tarma’s friend, Kurita, and his wife did not hesitate. They ran into the freezing rain, lifting Jirmak's limp body.</p>
+                <h2>The Destruction and Capture</h2>
+                <p>When Rosana turned eighteen, the fragile peace shattered. Imperial soldiers sent by the Boparl empire invaded Hikmid, burning houses and searching for the blue-haired girl[cite: 1]. Tarma rushed home to warn Jirmak[cite: 1]. They ran desperately toward the docks where Rosana was being dragged away[cite: 1].</p>
+                <p>Tarma fought fiercely to save his daughter, gripping a soldier's boot until a sword struck him down[cite: 1]. Jirmak rushed forward in blind fury, but a soldier's blade slashed across her eyes, leaving her permanently blind[cite: 1]. Rosana shrieked in agonizing despair as her father was killed and her mother blinded, before being locked away on a ship sailing to the capital[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo IV: La Ayuda de Kurita</h2>
-                <p>Una mañana gris y lluviosa, Jirmak se arrastró fuera de la choza, con el cuerpo débil, esperando el regreso de su esposo. De repente, una ola de profundos dolores de parto golpeó su estómago; se desmayó en el lodo y gritó de agonía. Los aldeanos crueles la ignoraron y se alejaron, dejándola sola bajo la lluvia. Cuando Tarma finalmente cruzó la colina en su camino de regreso, escuchó a Jirmak llorar, dejó caer su pesca, corrió a abrazarla y se dio cuenta de que estaba de parto. Al darse cuenta de que no podía pagar ninguna enfermera u hospital, Tarma corrió hacia su viejo amigo y suplicó ayuda de rodillas bajo la lluvia. Sintiéndose apenado y recordando los viejos días, su amigo tuvo misericordia y se ofreció a ayudar.</p>
-                <p>El amigo de Tarma, Kurita, y su esposa no dudaron. Corrieron hacia la lluvia helada, levantando el cuerpo inerte de Jirmak.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الرابع: مساعدة كوريتا</h2>
-                <p>في صباح رمادي ممطر، جرت جيرماك نفسها خارج الكوخ، وكان جسدها ضعيفاً، في انتظار عودة زوجها. فجأة، ضربت موجة من آلام المخاض العميقة بطنها؛ فانهارت في الوحل وصرخت بألم شديد. تجاهلها القرويون القساة ومضوا بعيداً، تاركين إياها وحدها في المطر. عندما عبر تارما التل أخيراً في طريق عودته، سمع صرخات جيرماك، وأسقط صيده، وركض ليحتضنها، وأدرك أنها في حالة مخاض. وإذ أدرك أنه لا يستطيع تحمل تكاليف أي ممرضة أو مستشفى، ركض تارما إلى صديقه القديم وتوسل للحصول على المساعدة على ركبتيه في المطر. شعوراً بالأسف وتذكر الأيام الخوالي، رحِم صديقه ومد يده للمساعدة.</p>
-                <p>لم يتردد صديق تارما، كوريتا، وزوجته. ركضا إلى المطر المتجمد، حاملين جسد جيرماك الهامد.</p>
+                <h2>La Destrucción y la Captura</h2>
+                <p>A los dieciocho años, soldados imperiales invadieron Hikmid buscando a la joven de cabello azul[cite: 1]. Tarma luchó valientemente para salvar a Rosana, pero fue asesinado por un soldado[cite: 1]. Jirmak corrió a defenderla, pero fue cegada por una espada[cite: 1]. Rosana fue capturada y llevada en un barco hacia la capital[cite: 1].</p>
             </div>
             <div class="page-number">9</div>
         </div>
 
-        <!-- Page 10 (Free) -->
+        <!-- Page 10 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter IV: The Birth Scene</h2>
-                <p>Inside the hut, the reality of their poverty was laid bare: a muddy floor with a single mat and one knit blanket. The only light came from candles flickering against the damp walls. Dishes sat forgotten on the left side of the entry as the room erupted into chaos.</p>
-                <p class="dialogue">Kurita's wife: "Put her on the floor! Put her on the floor now! Bring me water! I need wipers! Jirmak, breathe, breathe deeply! You've got two lives!"</p>
-                <p>Jirmak was fading.</p>
-                <p class="dialogue">Tarma: "Please, please, Jirmak! I need you!"</p>
-                <p class="dialogue">Jirmak: "It hurts! It hurts! I can't, I can't!"</p>
-                <p class="dialogue">Tarma: "I need you! I need you, wife! Please, push! Push!"</p>
-                <p class="dialogue">Kurita's wife: "She is losing too much blood, Tarma! I do not know if she is going to make it!"</p>
-                <p class="dialogue">Tarma: "She will make it! She has to!"</p>
+                <h2>Arrival in the Capital & King Benson</h2>
+                <p>Arriving in the capital after a two-year journey, Rosana was brought before the new king of Boparl: King Benson—who was none other than Ian, her childhood prince[cite: 1]. King Benson showered her with luxury and declared she would be his queen[cite: 1]. However, consumed by grief over her parents and village, Rosana looked at him with pure hatred[cite: 1].</p>
+                <p>The palace harem, led by the cruel Concubine Tiju, Concubine Rika, and the powerful Imperial Consort, immediately targeted Rosana out of jealousy and malice[cite: 1]. Tiju even confessed during a plot that she was the one who ordered the burning of Hikmid[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo IV: La Escena del Nacimiento</h2>
-                <p>Dentro de la choza, la realidad de su pobreza quedó al descubierto: un piso de lodo con una sola estera y una cobija tejida. La única luz provenía de velas que parpadeaban contra las paredes húmedas. Los platos yacían olvidados en el lado izquierdo de la entrada mientras la habitación estallaba en caos.</p>
-                <p class="dialogue">Esposa de Kurita: "¡Pónganla en el suelo! ¡Pónganla en el suelo ahora! ¡Tráiganme agua! ¡Necesito paños! ¡Jirmak, respira, respira profundamente! ¡Tienes dos vidas!"</p>
-                <p>Jirmak se estaba desvaneciendo.</p>
-                <p class="dialogue">Tarma: "¡Por favor, por favor, Jirmak! ¡Te necesito!"</p>
-                <p class="dialogue">Jirmak: "¡Duele! ¡Duele! ¡No puedo, no puedo!"</p>
-                <p class="dialogue">Tarma: "¡Te necesito! ¡Te necesito, esposa! ¡Por favor, empuja! ¡Empuja!"</p>
-                <p class="dialogue">Esposa de Kurita: "¡Está perdiendo demasiada sangre, Tarma! ¡No sé si va a sobrevivir!"</p>
-                <p class="dialogue">Tarma: "¡Sobrevivirá! ¡Tiene que hacerlo!"</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الرابع: مشهد الولادة</h2>
-                <p>داخل الكوخ، ظهرت حقيقة فقرهم جلية: أرضية طينية مع حصيرة واحدة وبطانية محبوكة واحدة. جاء الضوء الوحيد من الشموع المتراقصة على الجدران الرطبة. ظلت الأطباق منسية على الجانب الأيسر من المدخل حيث انفجرت الغرفة في الفوضى.</p>
-                <p class="dialogue">زوجة كوريتا: "ضعوها على الأرض! ضعيها على الأرض الآن! أحضروا لي الماء! أحتاج إلى مناديل! جيرماك، تنفسي، تنفسي بعمق! لديك حياة!"</p>
-                <p>كانت جيرماك تتلاشى.</p>
-                <p class="dialogue">تارما: "أرجوك، أرجوك يا جيرماك! أنا بحاجة إليك!"</p>
-                <p class="dialogue">جيرماك: "هذا يؤلم! هذا يؤلم! لا أستطيع، لا أستطيع!"</p>
-                <p class="dialogue">تارما: "أنا بحاجة إليك! أنا بحاجة إليك يا زوجتي! أرجوك، ادفعي! ادفعي!"</p>
-                <p class="dialogue">زوجة كوريتا: "إنها تفقد الكثير من الدم يا تارما! لا أعرف ما إذا كانت ستنجو!"</p>
-                <p class="dialogue">تارما: "ستنجو! يجب أن تفعل!"</p>
+                <h2>Llegada a la Capital y el Rey Benson</h2>
+                <p>En la capital, Rosana fue presentada ante el nuevo rey, Benson, quien resultó ser Ian, su príncipe de la infancia[cite: 1]. Benson la colmó de lujos y declaró que sería su reina[cite: 1]. Sin embargo, consumida por el dolor de la pérdida de su familia, Rosana lo odiaba[cite: 1]. Las concubinas del palacio, lideradas por Tiju y Rika, conspiraron cruelmente contra ella[cite: 1].</p>
             </div>
             <div class="page-number">10</div>
         </div>
 
-        <!-- Page 11 (Free Preview End) -->
+        <!-- Page 11 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter V: The Miraculous Child</h2>
-                <p class="dialogue">Kurita's wife: "Wifey, you got this! Push!"</p>
-                <p>With a final gagged breath, Jirmak gathered all her strength and gave one massive, bone-shattering push. The silence that followed was broken by the cry of a baby.</p>
-                <p class="dialogue">Kurita's wife: "It is a girl! It is a girl!"</p>
-                <p>She gave birth to a very gorgeous girl.</p>
-                <p class="dialogue">Tarma: "Thank you, God! We made it!"</p>
-                <p>But the cost was absolute: the damage from the labor cost Jirmak her health and ability to ever conceive or do hard labor again. As the child was wrapped in the knit blanket and handed to J
-irmax and her husband, the room went cold.</p>
-                <p class="dialogue">Tarma: "What is this? Were you seeing a foreign man behind my back, Jirmak? Everyone in the village looks the same; everyone in the village has dark and brown hair with tan skin and brown eyes. She has blue eyes, hair like the sea, and tan glowing skin."</p>
+                <h2>The Palace Trial & Ultimate Justice</h2>
+                <p>Concubine Tiju framed Rosana for poisoning the Imperial Consort using a spiked drink and a hidden cursed doll[cite: 1]. Rosana was dragged to prison and brutally tortured for days[cite: 1]. When King Benson discovered the truth, his fury was absolute[cite: 1]. He executed Concubine Tiju with his own sword, banished Rika to the cold palace, and stripped the corrupt royal factions of their power[cite: 1].</p>
+                <p>Finding Rosana near death in the dungeons, King Benson wept over her, confessing his true identity as Ian and pouring out his soul[cite: 1]. Rosana miraculously recovered under his devoted care and the faith of her heritage[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo V: La Niña Milagrosa</h2>
-                <p class="dialogue">Esposa de Kurita: "¡Esposita, tú puedes con esto! ¡Empuja!"</p>
-                <p>Con un último aliento ahogado, Jirmak reunió todas sus fuerzas y dio un empujón masivo y desgarrador. El silencio que siguió se rompió con el llanto de un bebé.</p>
-                <p class="dialogue">Esposa de Kurita: "¡Es una niña! ¡Es una niña!"</p>
-                <p>Dio a luz a una niña hermosa.</p>
-                <p class="dialogue">Tarma: "¡Gracias, Dios! ¡Lo logramos!"</p>
-                <p>Pero el costo fue absoluto: los daños del parto le costaron a Jirmak su salud y su capacidad para volver a concebir o hacer trabajos pesados. Mientras la niña era envuelta en la cobija tejida y entregada a Jirmak y su esposo, la habitación se enfrió.</p>
-                <p class="dialogue">Tarma: "¿Qué es esto? ¿Estabas viendo a un hombre extranjero a mis espaldas, Jirmak? Todos en el pueblo se ven iguales; todos en el pueblo tienen cabello oscuro y castaño con piel bronceada y ojos marrones. Ella tiene ojos azules, cabello como el mar y piel bronceada brillante."</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الخامس: الطفل المعجزة</h2>
-                <p class="dialogue">زوجة كوريتا: "يا زوجتي، أنت قدها! ادفعي!"</p>
-                <p>مع نفس أخير مختنق، جمعت جيرماك كل قوتها وأعطت دفعة واحدة ضخمة محطمة للعظام. تم كسر الصمت الذي أعقب ذلك بصراخ طفل.</p>
-                <p class="dialogue">زوجة كوريتا: "إنها فتاة! إنها فتاة!"</p>
-                <p>لقد أنجبت فتاة رائعة للغاية.</p>
-                <p class="dialogue">تارما: "شكراً لله! لقد نجحنا!"</p>
-                <p>لكن الثمن كان مطلقاً: لقد كلف الضرر الناتج عن المخاض جيرماك صحتها وقدرتها على الحمل مرة أخرى أو القيام بأعمال شاقة. عندما تم لف الطفل في البطانية المحبوكة وتسليمها إلى جيرماك وزوجها، أصبحت الغرفة باردة.</p>
-                <p class="dialogue">تارما: "ما هذا؟ هل كنت ترين رجلاً أجنبياً من وراء ظهري يا جيرماك؟ الجميع في القرية يبدون متشابهين؛ الجميع في القرية لديهم شعر داكن وبني بشرة سمراء وعيون بنية. لديها عيون زرقاء، وشعر مثل البحر، وبشرة سمراء متوهجة."</p>
+                <h2>El Juicio del Palacio y la Justicia</h2>
+                <p>Las concubinas culparon a Rosana de envenenar a la Consorte Imperial, llevándola a sufrir brutales torturas en prisión[cite: 1]. Al descubrir la verdad, el rey Benson ejecutó a Tiju y desterró a Rika[cite: 1]. El rey lloró junto a Rosana en el calabozo, revelando que él era Ian[cite: 1]. Rosana sanó gracias a sus cuidados[cite: 1].</p>
             </div>
             <div class="page-number">11</div>
         </div>
 
-        <!-- Page 12 (Randomly Paid: $1.45) -->
+        <!-- Page 12 -->
         <div class="page">
             <div class="lang-content en active">
-                <h2>Chapter VI: The Declaration of the Prophecy</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Premium Page ($1.45)</h3>
-                    <p style="text-align: center;">Unlock this single page via Cash App ($1.45) or get the entire book for $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pay with Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Buy Full Book ($19.99)</a>
-                </div>
+                <h2>Epilogue: The King and Queen</h2>
+                <p>Under the moon, the king and queen signed their lawful covenant, becoming one in the palace garden[cite: 1]. The next morning, King Benson greeted his queen warmly[cite: 1].</p>
+                <p class="dialogue">King Benson: "Good morning, Queen of my heart! I want you to accompany me to the court today."[cite: 1]</p>
+                <p class="dialogue">Imperial Noble Consort Rosanna: "Me? Are you sure it's my place to be there?"[cite: 1]</p>
+                <p class="dialogue">King Benson: "It is my wife's place to be wherever I am. We will accompany each other for the rest of our lives."[cite: 1]</p>
+                <p>Dressed in magnificent gold and royal robes, they walked hand in hand before the entire empire[cite: 1]. The ceremony concluded with the whole court bowing in loyalty to King Ian and Queen Rosanna, sealing an era of justice, peace, and eternal love[cite: 1].</p>
             </div>
             <div class="lang-content es">
-                <h2>Capítulo VI: La Declaración de la Profecía</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Página Premium ($1.45)</h3>
-                    <p style="text-align: center;">Desbloquea esta página individual por Cash App ($1.45) o llévate todo el libro por $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pagar con Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Comprar Libro Completo ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل السادس: إعلان النبوءة</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 صفحة مميزة (1.45 دولار)</h3>
-                    <p style="text-align: center;">افتح هذه الصفحة الفردية عبر تطبيق كاش آب (1.45 دولار) أو احصل على الكتاب بأكمله مقابل 19.99 دولاراً.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">الدفع عبر Cash App (1.45 دولار)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">شراء الكتاب كاملاً (19.99 دولار)</a>
-                </div>
+                <h2>Epílogo: El Rey y la Reina</h2>
+                <p>Bajo la luna, el rey y la reina sellaron su pacto de amor en el jardín del palacio[cite: 1]. A la mañana siguiente, el rey Benson la invitó a acompañarlo a la corte[cite: 1]. Vestidos con magníficos ropajes reales, caminaron de la mano ante todo el imperio[cite: 1]. La ceremonia concluyó con toda la corte rindiendo lealtad al rey Ian y la reina Rosana, sellando una era de justicia, paz y amor eterno[cite: 1].</p>
             </div>
             <div class="page-number">12</div>
-        </div>
-
-        <!-- Page 13 (Randomly Free) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter VII: The Villagers' Reaction</h2>
-                <p>The villagers shouted:</p>
-                <p class="dialogue">Villagers: "It is the Prophet Kafura!"</p>
-                <p>They ran toward him to take his blessing.</p>
-                <p class="dialogue">Villagers: "The prophet is here! Prophet! Prophet! Welcome to our humble village; we are honored to have you as our guest. Please give us your blessing!"</p>
-                <p>The prophet, his face stern and disappointed, refused to enter their homes:</p>
-                <p class="dialogue">Prophet Kafura: "No, my children. I am not here to stay, nor am I here to be pleased by your hospitality. I have come on a mission, and I am not allowed to linger. Where is Jirmak?"</p>
-                <p>The crowd hissed at the name of the woman they had abandoned and tormented:</p>
-                <p class="dialogue">Villagers: "Jirmak? That prostitute from the pleasure house! We knew you were a righteous man, prophet; give us permission to burn this witch and her demon!"</p>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo VII: La Reacción de los Aldeanos</h2>
-                <p>Los aldeanos gritaron:</p>
-                <p class="dialogue">Aldeanos: "¡Es el Profeta Kafura!"</p>
-                <p>Corrieron hacia él para recibir su bendición.</p>
-                <p class="dialogue">Aldeanos: "¡El profeta está aquí! ¡Profeta! ¡Profeta! Bienvenido a nuestra humilde aldea; nos honra tenerte como invitado. ¡Por favor, danos tu bendición!"</p>
-                <p>El profeta, con el rostro severo y decepcionado, se negó a entrar en sus hogares:</p>
-                <p class="dialogue">Profeta Kafura: "No, mis hijos. No estoy aquí para quedarme, ni estoy aquí para complacer su hospitalidad. He venido en una misión y no se me permite demorarme. ¿Dónde está Jirmak?"</p>
-                <p>La multitud siseó ante el nombre de la mujer a la que habían abandonado y atormentado:</p>
-                <p class="dialogue">Aldeanos: "¿Jirmak? ¡Esa prostituta de la casa de placer! Sabíamos que eras un hombre justo, profeta; ¡danos permiso para quemar a esta bruja y a su demonio!"</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل السابع: رد فعل القرويين</h2>
-                <p>صرخ القرويون:</p>
-                <p class="dialogue">القرويون: "إنه النبي كافورا!"</p>
-                <p>ركضوا نحوه لأخذ بركته.</p>
-                <p class="dialogue">القرويون: "النبي هنا! يا نبي! يا نبي! أهلاً بك في قريتنا المتواضعة؛ يشرفنا أن نستظفك كضيف لنا. من فضلك أعطنا بركتك!"</p>
-                <p>رفض النبي، ووجهه صارم ومخيب للآمال، دخول منازلهم:</p>
-                <p class="dialogue">النبي كافورا: "لا يا أبنائي. أنا لست هنا لأبقى، لست هنا لأرضى بحسن ضيافتكم. لقد جئت في مهمة، ولا يُسمح لي بالتأخير. أين جيرماك؟"</p>
-                <p>أصدر الحشد صوتاً ساخراً عند ذكر اسم المرأة التي هجروها وعذبوها:</p>
-                <p class="dialogue">القرويون: "جيرماك؟ تلك العاهرة من دار المتعة! كنا نعلم أنك رجل صالح أيها النبي؛ اعطنا الإذن لحرق هذه الساحرة وشيطانها!"</p>
-            </div>
-            <div class="page-number">13</div>
-        </div>
-
-        <!-- Page 14 (Randomly Paid: $1.45) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter VIII: Queen, Empress Rosana</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Premium Page ($1.45)</h3>
-                    <p style="text-align: center;">Unlock this single page via Cash App ($1.45) or get the entire book for $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pay with Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Buy Full Book ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo VIII: Reina, Emperatriz Rosana</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Página Premium ($1.45)</h3>
-                    <p style="text-align: center;">Desbloquea esta página individual por Cash App ($1.45) o llévate todo el libro por $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pagar con Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Comprar Libro Completo ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثامن: الملكة، الإمبراطورة روسانا</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 صفحة مميزة (1.45 دولار)</h3>
-                    <p style="text-align: center;">افتح هذه الصفحة الفردية عبر تطبيق كاش آب (1.45 دولار) أو احصل على الكتاب بأكمله مقابل 19.99 دولاراً.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">الدفع عبر Cash App (1.45 دولار)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">شراء الكتاب كاملاً (19.99 دولار)</a>
-                </div>
-            </div>
-            <div class="page-number">14</div>
-        </div>
-
-        <!-- Page 15 (Randomly Free) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter IX: The Prophet's Protection</h2>
-                <p>A gasp went through the villagers, but the prophet's voice only grew stronger:</p>
-                <p class="dialogue">Prophet Kafura: "She will be a sword in God's hand to bring justice and save nations. Queen, Empress Rosana."</p>
-                <p class="dialogue">Villagers (whispering in fear): "We were right... she is a cursed child. Swords only bring blood."</p>
-                <p class="dialogue">Tarma (his voice trembling with awe): "My daughter? The promised child? How is that possible?"</p>
-                <p class="dialogue">Jirmak (clutching the baby to her chest, her eyes wide with terror): "No! No! No! Not my daughter! I won't let them! I will not let her be taken away from me... no, nooo!"</p>
-                <p class="dialogue">Villagers (sneering toward the hut): "Why, prophet? Why the daughter of a prostitute? We should have killed them earlier and had God choose us!"</p>
-                <p class="dialogue">Tarma (exploding with a roar of anger): "My wife is not a prostitute!"</p>
-                <p>He bowed down and carried his wife out of the mud.</p>
-                <p class="dialogue">Tarma: "Jirmak, you got me! I am here! I will protect our daughter. Nothing will happen to her! I promise."</p>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo IX: La Protección del Profeta</h2>
-                <p>Un suspiro recorrió a los aldeanos, pero la voz del profeta solo se volvió más fuerte:</p>
-                <p class="dialogue">Profeta Kafura: "Ella será una espada en la mano de Dios para traer justicia y salvar naciones. Reina, Emperatriz Rosana."</p>
-                <p class="dialogue">Aldeanos (susurrando con miedo): "Tenía razón... ella es una niña maldita. Las espada solo traen sangre."</p>
-                <p class="dialogue">Tarma (con la voz temblorosa de asombro): "¿Mi hija? ¿La niña prometida? ¿Cómo es eso posible?"</p>
-                <p class="dialogue">Jirmak (apretando al bebé contra su pecho, con los ojos muy abiertos por el terror): "¡No! ¡No! ¡No! ¡No mi hija! ¡No dejaré que lo hagan! ¡No dejaré que me la arrebaten... no, nooo!"</p>
-                <p class="dialogue">Aldeanos (burlándose hacia la choza): "¿Por qué, profeta? ¿Por qué la hija de una prostituta? ¡Debimos haberlos matado antes y haber dejado que Dios nos eligiera a nosotros!"</p>
-                <p class="dialogue">Tarma (estallando con un rugido de ira): "¡Mi esposa no es una prostituta!"</p>
-                <p>Se inclinó y sacó a su esposa del lodo.</p>
-                <p class="dialogue">Tarma: "¡Jirmak, me tienes a mí! ¡Estoy aquí! Protegeré a nuestra hija. ¡Nada le pasará! Lo prometo."</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل التاسع: حماية النبي</h2>
-                <p>سرت شهقة بين القرويين، لكن صوت النبي ازداد قوة:</p>
-                <p class="dialogue">النبي كافورا: "ستكون سيفاً في يد الله لإحضار العدالة وإنقاذ الأمم. الملكة، الإمبراطورة روسانا."</p>
-                <p class="dialogue">القرويون (يهمشون في خوف): "كنا محقين... إنها طفلة ملعونة. السيوف لا تجلب سوى الدماء."</p>
-                <p class="dialogue">تارما (وصوته يرتجف رهبة): "ابنتي؟ الطفل الموعود؟ كيف يكون ذلك ممكناً؟"</p>
-                <p class="dialogue">جيرماك (تتشبث بالطفلة إلى صدرها، وعيناها واسعتان رعباً): "لا! لا! لا! ليس ابنتي! لن أسمح لهم! لن أسمح بأن تُؤخذ مني... لا، لااا!"</p>
-                <p class="dialogue">القرويون (يسخرون نحو الكوخ): "لماذا أيها النبي؟ لماذا ابنة عاهرة؟ كان يجب أن نقتلهم سابقاً وأن نجعل الله يختارنا!"</p>
-                <p class="dialogue">تارما (ينفجر بزئير من الغضب): "زوجتي ليست عاهرة!"</p>
-                <p>انحنى وحمل زوجته خارج الوحل.</p>
-                <p class="dialogue">تارما: "يا جيرماك، معك أنا! أنا هنا! سأحمي ابنتنا. لن يحدث لها شيء! أعدك."</p>
-            </div>
-            <div class="page-number">15</div>
-        </div>
-
-        <!-- Page 16 (Randomly Paid: $1.45) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter X: The Storm Rises</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Premium Page ($1.45)</h3>
-                    <p style="text-align: center;">Unlock this single page via Cash App ($1.45) or get the entire book for $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pay with Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Buy Full Book ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo X: La Tormenta se Levanta</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Página Premium ($1.45)</h3>
-                    <p style="text-align: center;">Desbloquea esta página individual por Cash App ($1.45) o llévate todo el libro por $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pagar con Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Comprar Libro Completo ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل العاشر: العاصفة ترتفع</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 صفحة مميزة (1.45 دولار)</h3>
-                    <p style="text-align: center;">افتح هذه الصفحة الفردية عبر تطبيق كاش آب (1.45 دولار) أو احصل على الكتاب بأكمله مقابل 19.99 دولاراً.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">الدفع عبر Cash App (1.45 دولار)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">شراء الكتاب كاملاً (19.99 دولار)</a>
-                </div>
-            </div>
-            <div class="page-number">16</div>
-        </div>
-
-        <!-- Page 17 (Randomly Free) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter XI: The Beginning of Rosana's Journey</h2>
-                <p>The prophet stood firm to defend Rosana, his hair whipping in the wind as he held his staff:</p>
-                <p class="dialogue">Prophet Kafura: "You shall do no more! You shall not hurt Rosana nor her family! This girl is the future queen, and she shall be treated as such from this moment."</p>
-                <p class="dialogue">Villagers (laying down in the mud in terror as the sea calmed and the wind stopped): "We promise to never hurt the queen and her family!"</p>
-                <p class="dialogue">Jirmak: "It's true, my daughter is truly the promised child. Prophet, why don't you take her away and raise her? You can teach her everything she needs for the future to come!"</p>
-                <p class="dialogue">Prophet Kafura: "That is not God's will. Rosana will be raised here. You, Jirmak, will be the one to teach her what she needs to succeed. Have faith."</p>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo XI: El Comienzo del Viaje de Rosana</h2>
-                <p>El profeta se mantuvo firme para defender a Rosana, con su cabello azotando en el viento mientras sostenía su bastón:</p>
-                <p class="dialogue">Profeta Kafura: "¡No harán más! ¡No lastimarán a Rosana ni a su familia! Esta niña es la futura reina, y será tratada como tal a partir de este momento."</p>
-                <p class="dialogue">Aldeanos (postrándose en el lodo con terror mientras el mar se calmaba y el viento se detenía): "¡Prometemos no lastimar nunca a la reina y a su familia!"</p>
-                <p class="dialogue">Jirmak: "Es verdad, mi hija es verdaderamente la niña prometida. Profeta, ¿por qué no te la llevas y la crías? ¡Puedes enseñarle todo lo que necesita para el futuro que se avecina!"</p>
-                <p class="dialogue">Profeta Kafura: "Esa no es la voluntad de Dios. Rosana será criada aquí. Tú, Jirmak, serás quien le enseñe lo que necesita para tener éxito. Ten fe."</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الحادي عشر: بداية رحلة روسانا</h2>
-                <p>قف النبي صامداً للدفاع عن روسانا، وكان شعره يتطاير في الريح وهو يمسك بعصاه:</p>
-                        <!-- Page 18 (Randomly Paid: $1.45) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter XII: The Chief's Reconciliation</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Premium Page ($1.45)</h3>
-                    <p style="text-align: center;">Unlock this single page via Cash App ($1.45) or get the entire book for $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pay with Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Buy Full Book ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo XII: La Reconciliación del Jefe</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Página Premium ($1.45)</h3>
-                    <p style="text-align: center;">Desbloquea esta página individual por Cash App ($1.45) o llévate todo el libro por $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pagar con Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Comprar Libro Completo ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثاني عشر: مصالحة الزعيم</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 صفحة مميزة (1.45 دولار)</h3>
-                    <p style="text-align: center;">افتح هذه الصفحة الفردية عبر تطبيق كاش آب (1.45 دولار) أو احصل على الكتاب بأكمله مقابل 19.99 دولاراً.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">الدفع عبر Cash App (1.45 دولار)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">شراء الكتاب كاملاً (19.99 دولار)</a>
-                </div>
-            </div>
-            <div class="page-number">18</div>
-        </div>
-
-        <!-- Page 19 (Randomly Free) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter XIII: The Spell is Cast</h2>
-                <p class="dialogue">Tarma (with a smile): "It is okay! We are a family. Well, I just wish that my parents were here with me, but it is all good. I will be the father she deserves, and my house is always open for you all."</p>
-                <p class="dialogue">Jirmak (smiles): "Hopefully, the villagers will be kinder to our daughter."</p>
-                <p>The villagers looked down in shame and embarrassment.</p>
-                <p class="dialogue">Prophet Kafura: "I will put a spell on Rosana. I will turn her blue hair into black, her blue eyes into brown, and her glowing skin into non-glowing."</p>
-                <p>He held Rosana in his arms, lifted her to the sky, and cried out to God. Suddenly, white thunder erupted across the air, striking down until it touched the water with a sharp, echoing sound. As the vibration settled and a single teardrop touched Rosana, her hair changed into black, her blue eyes into brown, and her skin into non-glowing.</p>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo XIII: El Hechizo es Lanzado</h2>
-                <p class="dialogue">Tarma (con una sonrisa): "¡Está bien! Somos una familia. Bueno, solo desearía que mis padres estuvieran aquí conmigo, pero todo está bien. Seré el padre que ella se merece, y mi casa siempre está abierta para todos ustedes."</p>
-                <p class="dialogue">Jirmak (sonríe): "Esperemos que los aldeanos sean más amables con nuestra hija."</p>
-                <p>Los aldeanos miraron hacia abajo con vergüenza y bochorno.</p>
-                <p class="dialogue">Profeta Kafura: "Pondré un hechizo sobre Rosana. Haré que su cabello azul sea negro, sus ojos azules marrones y su piel brillante deje de brillar."</p>
-                <p>Sostuvo a Rosana en sus brazos, la levantó hacia el cielo y clamó a Dios. De repente, un trueno blanco estalló en el aire, cayendo hasta tocar el agua con un sonido agudo y resonante. Cuando la vibración se asentó y una sola lágrima tocó a Rosana, su cabello cambió a negro, sus ojos azules a marrones y su piel a una apariencia normal.</p>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الثالث عشر: إلقاء التعويذة</h2>
-                <p class="dialogue">تارما (مبتسماً): "لا بأس! نحن عائلة. حسناً، أتمنى فقط لو كان والداي هنا معي، لكن الأمور على ما يرام. سأكون الأب الذي تستحقه، ومنزلي مفتوح دائماً للجميع."</p>
-                <p class="dialogue">جيرماك (تبتسم): "نأمل أن يكون القرويون ألطف مع ابنتنا."</p>
-                <p>نظر القرويون إلى الأسفل بخزي وإحراج.</p>
-                <p class="dialogue">النبي كافورا: "سألقي تعويذة على روسانا. سأحول شعرها الأزرق إلى أسود، وعينيها الزرقاوين إلى بنيتين، وبشرتها المتوهجة إلى بشرة عادية."</p>
-                <p class="dialogue">حمل روسانا بين ذراعيه، ورفعها نحو السماء، وصرخ إلى الله. فجأة، انفجر رعد أبيض عبر الهواء، واجتاح حتى لامس الماء بصوت حاد ومتردد. عندما استقرت الاهتزازات ولمست دمعة واحدة روسانا، تحول شعرها إلى أسود، وعيناها الزرقاوان إلى بنيتين، وبشرتها إلى بشرة عادية.</p>
-            </div>
-            <div class="page-number">19</div>
-        </div>
-
-        <!-- Page 20 (Randomly Paid: $1.45) -->
-        <div class="page">
-            <div class="lang-content en active">
-                <h2>Chapter XIV: The Secret</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Premium Page ($1.45)</h3>
-                    <p style="text-align: center;">Unlock this final page via Cash App ($1.45) or get the entire book for $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pay with Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Buy Full Book ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content es">
-                <h2>Capítulo XIV: El Secreto</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 Página Premium ($1.45)</h3>
-                    <p style="text-align: center;">Desbloquea esta última página por Cash App ($1.45) o llévate todo el libro por $19.99.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">Pagar con Cash App ($1.45)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">Comprar Libro Completo ($19.99)</a>
-                </div>
-            </div>
-            <div class="lang-content ar arabic-text">
-                <h2>الفصل الرابع عشر: السر</h2>
-                <div class="lock-overlay">
-                    <h3>🔒 صفحة مميزة (1.45 دولار)</h3>
-                    <p style="text-align: center;">افتح هذه الصفحة الأخيرة عبر تطبيق كاش آب (1.45 دولار) أو احصل على الكتاب بأكمله مقابل 19.99 دولاراً.</p>
-                    <a href="https://cash.app/$tegrakij22/1.45" target="_blank" class="gateway-btn cashapp-btn" style="margin-top: 8px;">الدفع عبر Cash App (1.45 دولار)</a><br>
-                    <a href="https://cash.app/$tegrakij22/19.99" target="_blank" class="gateway-btn" style="margin-top: 6px; background: linear-gradient(to bottom, #2e7d32, #1b5e20);">شراء الكتاب كاملاً (19.99 دولار)</a>
-                </div>
-            </div>
-            <div class="page-number">20</div>
         </div>
     </div>
 </div>
@@ -830,7 +431,3 @@ irmax and her husband, the room went cold.</p>
 
 </body>
 </html>
-
-
-                
-
