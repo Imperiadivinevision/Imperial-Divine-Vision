@@ -1,12 +1,4 @@
-## Likeness Chamber Routing Fix
 
-The routing issue happens because of how the character array maps paths inside `create-likeness.html`. When you select a character, the script looks up their assigned `path` property from the list and loads that file when you click **"Begin Story Path"**.
-
-In the updated code for `create-likeness.html` below, Queen Rosanna's path has been explicitly mapped to your dedicated game path file **`sovereign.html`**, while King Benson remains mapped to his standalone chamber **`room-benson.html`**.
-
-Replace the contents of your **`create-likeness.html`** file with this verified code:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -598,7 +590,7 @@ Replace the contents of your **`create-likeness.html`** file with this verified 
                 id: "rosanna",
                 name: "Queen Rosanna",
                 role: "The Imperial Queen (Hero Path)",
-                path: "sovereign.html", // <-- Corrected path routing to her dedicated game path file
+                path: "sovereign-path.html", // <-- Corrected path routing to her dedicated game path file
                 outfits: [
                     { name: "Sovereign Robe", file: "Queen-rosanna-perfect-gown-CINEMATIC.mp4", vip: false },
                     { name: "Imperial Purple", file: "rosanna-formal-even.CINEMATIC.mp4", vip: false },
