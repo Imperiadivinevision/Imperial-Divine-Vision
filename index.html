@@ -1,18 +1,42 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperial Divine Vision | Sanctuary Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
+        @keyframes cosmicShift {
+            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+            33% { background-position: 50% 100%; filter: hue-rotate(90deg); }
+            66% { background-position: 100% 0%; filter: hue-rotate(180deg); }
+            100% { background-position: 0% 50%; filter: hue-rotate(310deg); }
+        }
+
+        :root {
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(17, 23, 21, 0.92);
+            --theme-color: #d4af37; /* Professional Imperial Gold Default */
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
+            --glow-strength: rgba(212, 175, 55, 0.4);
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #0b0f0e;
-            color: #d4af37;
+            background-color: var(--bg-dark);
+            color: var(--theme-color);
             font-family: 'Cinzel', serif;
             text-align: center;
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #180e22, #111715, #0b0f0e, #1a0e14);
+            background-size: 500% 500%;
+            animation: cosmicShift 22s ease infinite alternate;
         }
 
         /* Independent Moving Flowering Background */
@@ -29,6 +53,7 @@
             animation: breatheGarden 60s infinite alternate ease-in-out;
             z-index: -2;
             pointer-events: none;
+            opacity: 0.35;
         }
 
         @keyframes breatheGarden {
@@ -41,79 +66,117 @@
         .shine-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Clean Top Navigation Bar */
+        /* Professional, Uncrowded Navigation Hub */
         nav { 
-            padding: 15px 20px; 
-            background: rgba(17, 23, 21, 0.95);
-            border-bottom: 2px solid #d4af37;
+            padding: 14px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
             position: sticky;
             top: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            gap: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
             flex-wrap: wrap;
+            backdrop-filter: blur(8px);
+            transition: border-color 0.5s ease;
         }
+
+        /* Clean Rectangular Button Modules */
+        .nav-module {
+            background: rgba(22, 30, 27, 0.85);
+            border: 1px solid var(--theme-color);
+            padding: 8px 14px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+
+        .nav-module:hover {
+            background: rgba(30, 42, 38, 0.95);
+            box-shadow: 0 0 15px var(--glow-strength);
+            transform: translateY(-2px);
+        }
+
         nav a { 
-            color: #e6d5b8; 
+            color: var(--text-main); 
             text-decoration: none; 
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 1px;
+            text-transform: uppercase;
             transition: 0.2s;
         }
+
         nav a:hover {
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+            color: var(--theme-color);
+            text-shadow: 0 0 8px var(--glow-strength);
         }
 
-        /* Floating Title in the Top-Left Corner */
-        .top-left-title {
-            position: fixed;
-            top: 90px;
-            left: 25px;
-            color: #ffd700;
-            font-size: 1.25rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
-            z-index: 100;
-            animation: floatTitle 4s infinite alternate ease-in-out;
-            pointer-events: none;
-            text-align: left;
+        /* Live Color Theme Switcher Bar */
+        .theme-switcher-bar {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            background: rgba(11, 15, 14, 0.75);
+            padding: 8px;
+            border-radius: 6px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        @keyframes floatTitle {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-8px); }
+        .color-btn {
+            background: #111715;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .color-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px currentColor;
         }
 
         /* Hero Section holding the centered 3D Book */
         .hero-section {
-            min-height: 85vh;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
-        /* 3D Real Book Container simulating height, spine, and hardcover perspective */
+        /* 3D Real Book Container */
         .real-book-container {
-            width: 360px;
-            height: 510px;
+            width: 340px;
+            height: 480px;
             position: relative;
             perspective: 1200px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             cursor: pointer;
             animation: floatBook 4s infinite alternate ease-in-out;
         }
@@ -130,15 +193,14 @@
             transform-style: preserve-3d;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             border-radius: 4px 12px 12px 4px;
-            box-shadow: -15px 20px 40px rgba(0,0,0,0.8), 0 0 50px rgba(212, 175, 55, 0.5);
+            box-shadow: -15px 20px 40px rgba(0,0,0,0.8), 0 0 45px var(--glow-strength);
         }
 
         .real-book-container:hover .real-book {
             transform: scale(1.03) rotateY(0deg) rotateX(0deg);
-            box-shadow: -20px 25px 60px rgba(0,0,0,0.9), 0 0 80px #ffd700;
+            box-shadow: -20px 25px 60px rgba(0,0,0,0.9), 0 0 70px var(--theme-color);
         }
 
-        /* Book Spine Effect on the Left */
         .real-book::before {
             content: '';
             position: absolute;
@@ -152,7 +214,6 @@
             z-index: 10;
         }
 
-        /* 3D Page Edges Effect on the Right & Bottom */
         .real-book::after {
             content: '';
             position: absolute;
@@ -171,14 +232,15 @@
             height: 100%;
             object-fit: cover;
             border-radius: 4px 12px 12px 4px;
-            border: 4px solid #d4af37;
+            border: 4px solid var(--theme-color);
             box-sizing: border-box;
             position: relative;
             z-index: 5;
+            transition: border-color 0.5s ease;
         }
 
         .royal-subtitle {
-            color: #e6d5b8;
+            color: var(--text-muted);
             font-size: 0.95rem;
             font-style: italic;
             max-width: 600px;
@@ -188,7 +250,7 @@
         }
 
         .royal-btn {
-            background: linear-gradient(to bottom, #d4af37, #aa820a);
+            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
             color: #0b0f0e;
             border: 1px solid #fff;
             padding: 12px 25px;
@@ -200,12 +262,59 @@
             text-decoration: none;
             display: inline-block;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 4px 15px var(--glow-strength);
             transition: 0.2s;
         }
         .royal-btn:hover {
-            background: linear-gradient(to bottom, #fff, #d4af37);
-            box-shadow: 0 0 25px #ffd700;
+            background: linear-gradient(to bottom, #fff, var(--theme-color));
+            box-shadow: 0 0 25px var(--theme-color);
+        }
+
+        /* Professional Footer with Imperial Divine Vision & Contact Info */
+        .footer-sanctuary {
+            background: var(--panel-bg);
+            border-top: 2px solid var(--theme-color);
+            padding: 25px 20px;
+            margin-top: auto;
+            box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
+            transition: border-color 0.5s ease;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-title {
+            color: var(--theme-color);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--glow-strength);
+            transition: color 0.5s ease;
+        }
+
+        .footer-contact {
+            color: var(--text-main);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact:hover {
+            color: var(--theme-color);
+            text-shadow: 0 0 8px var(--glow-strength);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-top: 5px;
         }
 
         /* Modal for Community Chat Router */
@@ -220,19 +329,19 @@
         }
         .modal-box {
             background: rgba(20, 27, 24, 0.98);
-            border: 2px solid #d4af37;
+            border: 2px solid var(--theme-color);
             padding: 30px;
             border-radius: 8px;
             width: 90%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(212,175,55,0.5);
+            box-shadow: 0 0 30px var(--glow-strength);
         }
         .gate-input {
             width: 100%;
             padding: 10px;
             background: #0b0f0e;
-            border: 1px solid #d4af37;
+            border: 1px solid var(--theme-color);
             color: #fff;
             font-family: 'Cinzel', serif;
             margin: 15px 0;
@@ -252,16 +361,11 @@
     <div class="moving-bg-layer"></div>
     <div class="shine-overlay" id="shine-layer"></div>
 
-    <!-- Floating Title in the Top-Left Corner -->
-    <div class="top-left-title">
-        Imperial<br>Divine Vision
-    </div>
-
     <!-- Community Chat Modal Router -->
     <div class="modal-overlay" id="communityModal">
         <div class="modal-box">
-            <h3 style="color: #d4af37; margin-top: 0;">💬 Community Chat</h3>
-            <p style="color: #c5b59b; font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
+            <h3 style="color: var(--theme-color); margin-top: 0;">💬 Community Chat</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
             <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
             <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
             <br>
@@ -269,17 +373,28 @@
         </div>
     </div>
 
-    <!-- Clean Top Navigation Bar with Linked Garden & Elder Room -->
+    <!-- Clean, Uncrowded Professional Navigation Bar (Removed floating title from top-left) -->
     <nav> 
-        <a href="index.html">🏠 Home</a>
-        <a href="library.html">📚 Library</a>
-        <a href="trailers.html">🎬 Trailers</a>
-        <a href="battle.html">⚔️ Battle Arena</a>
-        <a href="proving-grounds.html" style="color: #ffd700;">🛡️ Youth Proving Grounds</a>
-        <a href="garden.html" style="color: #4caf50;">🌸 Garden Chambers</a>
-        <a href="room-elder.html" style="color: #d4af37;">🌿 Sovereign Sanctuary (Elder Room)</a>
-        <a href="#" onclick="openModal(); return false;" style="color: #00ffcc;">💬 Community Chat</a>
+        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
+        <div class="nav-module"><a href="library.html">📚 Library</a></div>
+        <div class="nav-module"><a href="trailers.html">🎬 Trailers</a></div>
+        <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
+        <div class="nav-module"><a href="proving-grounds.html">🛡️ Youth</a></div>
+        <div class="nav-module"><a href="garden.html">🌸 Garden</a></div>
+        <div class="nav-module"><a href="room-elder.html">🌿 Elder Sanctuary</a></div>
+        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
+        <div class="nav-module"><a href="#" onclick="openModal(); return false;">💬 Community</a></div>
     </nav>
+
+    <!-- Live Color Theme Switcher Bar -->
+    <div class="theme-switcher-bar">
+        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted);">Vibe Theme:</span>
+        <button class="color-btn" style="border-color: #ff69b4; color: #ff69b4;" onclick="setTheme('#ff69b4', 'rgba(255, 105, 180, 0.5)')">Pink</button>
+        <button class="color-btn" style="border-color: #d4af37; color: #d4af37;" onclick="setTheme('#d4af37', 'rgba(212, 175, 55, 0.5)')">Gold</button>
+        <button class="color-btn" style="border-color: #4169e1; color: #4169e1;" onclick="setTheme('#4169e1', 'rgba(65, 105, 225, 0.5)')">Blue</button>
+        <button class="color-btn" style="border-color: #32cd32; color: #32cd32;" onclick="setTheme('#32cd32', 'rgba(50, 205, 50, 0.5)')">Green</button>
+        <button class="color-btn" style="border-color: #ff8c00; color: #ff8c00;" onclick="setTheme('#ff8c00', 'rgba(255, 140, 0, 0.5)')">Orange</button>
+    </div>
 
     <!-- Hero Section with Centered 3D Real Book -->
     <div class="hero-section" onclick="playMelody()">
@@ -291,7 +406,7 @@
             </div>
         </div>
 
-        <h3 style="color: #e6d5b8; margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
+        <h3 style="color: var(--text-main); margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
         <p class="royal-subtitle">
             “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
         </p>
@@ -299,14 +414,28 @@
         <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
     </div>
 
+    <!-- Professional Footer with Imperial Divine Vision & Contact Email -->
+    <footer class="footer-sanctuary">
+        <div class="footer-content">
+            <div class="footer-title">Imperial Divine Vision</div>
+            <a href="mailto:imperialdivinevision@gmail.com" class="footer-contact">✉️ imperialdivinevision@gmail.com</a>
+            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Rights Reserved.</div>
+        </div>
+    </footer>
+
     <script>
         let musicStarted = false;
+
+        function setTheme(color, glow) {
+            document.documentElement.style.setProperty('--theme-color', color);
+            document.documentElement.style.setProperty('--glow-strength', glow);
+        }
 
         function shineLight(event) {
             let layer = document.getElementById('shine-layer');
             let x = (event.clientX / window.innerWidth) * 100;
             let y = (event.clientY / window.innerHeight) * 100;
-            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.3) 0%, transparent 60%)";
+            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.25) 0%, transparent 60%)";
             layer.style.opacity = "1";
 
             if (!musicStarted) {
@@ -373,3 +502,5 @@
     </script>
 </body>
 </html>
+
+```
