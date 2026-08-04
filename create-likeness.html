@@ -3,1118 +3,748 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision: Likeness Chamber & Guild Master Portal</title>
+    <title>Queen Rosanna & Gemini: Sovereign Path (Ultimate Master Edition)</title>
     <style>
+        @keyframes cosmicShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes goldPulse {
+            0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(138, 43, 226, 0.2); }
+            50% { text-shadow: 0 0 25px rgba(212, 175, 55, 0.9), 0 0 40px rgba(212, 175, 55, 0.5); }
+            100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(138, 43, 226, 0.2); }
+        }
+
         :root {
-            --bg-dark: #0c0b0a;
-            --panel-bg: rgba(22, 19, 16, 0.95);
-            --gold: #d4af37;
-            --gold-hover: #f3e5ab;
-            --purple-imperial: #4b0082;
-            --purple-glow: #8a2be2;
-            --red-accent: #b22222;
+            --bg-dark: #030105;
+            --panel-bg: rgba(12, 9, 16, 0.96);
+            --gold: #f3e5ab;
+            --gold-deep: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.7);
             --text-main: #f5f2eb;
-            --text-muted: #9e9382;
-            --vip-color: #ffcc00;
+            --royal-purple: #320a3f;
+            --gemini-cyan: #00f2fe;
+            --gemini-blue: #4facfe;
+            --health-green: #33cc66;
+            --health-red: #cc3333;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
+            padding: 20px;
+            background: linear-gradient(-45deg, #05020a, #320a3f, #0f051d, #010204);
+            background-size: 400% 400%;
+            animation: cosmicShift 18s ease infinite;
             color: var(--text-main);
-            font-family: 'Georgia', serif;
+            font-family: 'Cinzel', 'Georgia', serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        /* SIDEBAR HUD (Left Column for Clean Uncrowded Layout) */
+        .sidebar-hud {
+            width: 280px;
+            background: var(--panel-bg);
+            border: 2px solid var(--gold-deep);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            gap: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(79, 172, 254, 0.15);
+            box-sizing: border-box;
+            position: sticky;
+            top: 20px;
+        }
+
+        .hud-brand {
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 12px;
+        }
+
+        .hud-brand h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            animation: goldPulse 4s infinite;
+        }
+
+        .hud-brand p {
+            margin: 4px 0 0 0;
+            font-size: 0.7rem;
+            color: var(--gemini-cyan);
+            font-style: italic;
+        }
+
+        .hud-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+
+        .health-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: #1a1512;
+            border: 1px solid var(--gold-deep);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--health-green);
+            transition: width 0.4s ease;
+        }
+
+        .admin-badge-box {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(212, 175, 55, 0.1));
+            border: 1px dashed var(--gemini-cyan);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--gemini-cyan);
+        }
+
+        /* MAIN GAME CONTAINER (Right Column) */
+        .main-game-wrapper {
+            max-width: 750px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .story-container {
+            width: 100%;
+            background: var(--panel-bg);
+            border: 3px solid var(--gold-deep);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 40px rgba(212, 175, 55, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
             position: relative;
         }
 
-        /* Sparkling, Breathing, Purple, Gold & Red Reflective Background */
-        .ambient-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -2;
-            background: linear-gradient(135deg, #180e22, #0c0b0a, #220e14);
-            background-size: 400% 400%;
-            animation: backgroundShift 15s ease infinite alternate;
+        .dev-watermark {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 0.7rem;
+            color: var(--gemini-cyan);
+            font-style: italic;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
-        @keyframes backgroundShift {
-            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-            50% { background-position: 100% 100%; filter: hue-rotate(30deg); }
-            100% { background-position: 0% 50%; filter: hue-rotate(60deg); }
+        .chapter-title {
+            color: var(--gold);
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            animation: goldPulse 4s infinite;
+            margin-top: 5px;
         }
 
-        /* Floating Sparkles & Imperial Orbs */
-        .sparkle-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.3) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.25) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(178, 34, 34, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 90% 20%, rgba(75, 0, 130, 0.3) 0%, transparent 40%);
-            animation: orbBreathe 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes orbBreathe {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.08); opacity: 1; filter: brightness(1.2); }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-
-        /* Top Bar */
-        .game-top-bar {
-            height: 48px;
-            background: linear-gradient(90deg, #14110e 0%, #221424 50%, #14110e 100%);
-            border-bottom: 1.5px solid var(--gold);
+        .video-player-box {
+            width: 100%;
+            background: #000;
+            border-radius: 10px;
+            border: 2px solid var(--gold-deep);
+            overflow: hidden;
             display: flex;
+            justify-content: center;
             align-items: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+            aspect-ratio: 4/3;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .audio-bar {
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--gemini-cyan);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
             justify-content: space-between;
-            padding: 0 25px;
+            align-items: center;
             font-size: 0.8rem;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            z-index: 10;
+            color: var(--gemini-cyan);
+        }
+
+        .story-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            font-style: italic;
+            background: rgba(11, 29, 40, 0.4);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 3px solid var(--gemini-cyan);
+        }
+
+        .dialogue-prompt {
+            background: rgba(50, 10, 63, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-sub-btn {
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid var(--gemini-cyan);
+            color: var(--gemini-cyan);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-family: 'Cinzel', 'Georgia', serif;
+            transition: all 0.3s ease;
+        }
+
+        .action-sub-btn:hover {
+            background: var(--gemini-cyan);
+            color: #030105;
+        }
+
+        .choices-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .choice-btn {
+            background: linear-gradient(135deg, #18121f, #221a2c);
+            border: 1px solid var(--gold-deep);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', 'Georgia', serif;
+            font-size: 0.85rem;
+            text-align: left;
+            transition: all 0.35s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
-        .game-top-bar .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
+        .choice-btn:hover {
+            background: var(--gold-deep);
+            color: #030105;
+            box-shadow: 0 0 20px var(--gold-glow);
+            transform: translateY(-2px);
         }
 
-        .game-top-bar a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .game-top-bar a:hover {
-            color: var(--gold-hover);
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-        }
-
-        .game-top-bar span.active {
-            color: var(--gold);
-            border-bottom: 2px solid var(--gold);
-            height: 100%;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-        }
-
-        .top-bar-right {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .admin-access-btn {
-            background: linear-gradient(135deg, rgba(178, 34, 34, 0.4), rgba(212, 175, 55, 0.2));
-            border: 1px solid var(--red-accent);
-            color: #ff8080;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .admin-access-btn:hover {
-            background: var(--red-accent);
-            color: #fff;
-            box-shadow: 0 0 12px rgba(178, 34, 34, 0.8);
-        }
-
-        .sanctuary-btn {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(212, 175, 55, 0.2));
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .sanctuary-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
-        }
-
-        .wardrobe-nav-btn {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(212, 175, 55, 0.1));
-            border: 1px solid var(--gold);
-            color: var(--gold) !important;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 8px rgba(138, 43, 226, 0.3);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .wardrobe-nav-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark) !important;
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.8);
-            transform: translateY(-1px);
-        }
-
-        /* Guild Master Sanctuary Modal */
-        .sanctuary-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(12, 11, 10, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .sanctuary-content {
-            background: linear-gradient(135deg, #180e22, #161310, #220e14);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 40px rgba(138, 43, 226, 0.5);
-            text-align: center;
-        }
-
-        .sanctuary-title {
-            color: var(--gold);
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
-        }
-
-        .sanctuary-text {
-            color: var(--text-main);
-            font-size: 1.05rem;
-            line-height: 1.6;
-            font-style: italic;
-            margin-bottom: 25px;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 20px 0;
-        }
-
-        .close-modal-btn {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border: none;
-            padding: 10px 25px;
-            font-family: 'Georgia', serif;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal-btn:hover {
-            background: var(--gold-hover);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.9);
-        }
-
-        /* Floating Player Chatbot Widget */
-        .chatbot-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            font-family: 'Georgia', serif;
-        }
-
-        .chatbot-toggle {
-            background: linear-gradient(135deg, var(--purple-imperial), var(--gold));
-            color: var(--text-main);
-            border: 2px solid var(--gold);
-            padding: 12px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8), 0 0 15px rgba(138, 43, 226, 0.6);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .chatbot-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.9);
-        }
-
-        .chatbot-window {
-            display: none;
-            position: absolute;
-            bottom: 60px;
-            right: 0;
-            width: 340px;
-            height: 440px;
-            background: rgba(22, 19, 16, 0.96);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(138, 43, 226, 0.5);
-            overflow: hidden;
-        }
-
-        .chatbot-header {
-            background: linear-gradient(90deg, #180e22, #221424);
-            padding: 12px;
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--gold);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 12px;
-            overflow-y: auto;
-            font-size: 0.85rem;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-bubble {
-            padding: 8px 12px;
-            border-radius: 6px;
-            max-width: 85%;
-            line-height: 1.4;
-        }
-
-        .chat-bubble.bot {
-            background: rgba(138, 43, 226, 0.2);
-            border: 1px solid rgba(138, 43, 226, 0.4);
-            align-self: flex-start;
-            color: var(--text-main);
-        }
-
-        .chat-bubble.user {
-            background: rgba(212, 175, 55, 0.2);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            align-self: flex-end;
-            color: var(--gold-hover);
-        }
-
-        .chat-bubble.quest {
-            background: rgba(178, 34, 34, 0.25);
-            border: 1px solid rgba(178, 34, 34, 0.6);
-            align-self: flex-start;
-            color: #ffcccc;
-            font-style: italic;
-        }
-
-        .chatbot-input-area {
-            display: flex;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 8px;
-            background: #14110e;
-        }
-
-        .chatbot-input-area input {
-            flex: 1;
-            background: #0c0b0a;
-            border: 1px solid #4a3f31;
-            color: var(--text-main);
-            padding: 8px;
-            border-radius: 4px;
-            font-family: 'Georgia', serif;
-            font-size: 0.85rem;
-        }
-
-        .chatbot-input-area button {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border: none;
-            padding: 8px 12px;
-            margin-left: 6px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Main Spacious Layout */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+        /* Collection Gallery Section */
+        .gallery-section {
             width: 100%;
+            background: var(--panel-bg);
+            border: 3px solid var(--gold-deep);
+            border-radius: 16px;
+            padding: 30px;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 40px rgba(212, 175, 55, 0.25);
             box-sizing: border-box;
-            z-index: 2;
         }
 
-        .featured-section {
-            display: flex;
-            gap: 30px;
-            background: rgba(22, 19, 16, 0.88);
-            backdrop-filter: blur(12px);
-            border: 2px solid var(--gold);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px rgba(138, 43, 226, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.15);
-            align-items: center;
-        }
-
-        .featured-viewport {
-            flex: 1;
-            max-width: 480px;
-            height: 520px;
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .avatar-preview-media {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center center;
-            display: block;
-        }
-
-        .featured-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .character-name-title {
-            color: var(--gold);
-            font-size: 2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .character-role-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-style: italic;
-        }
-
-        .outfit-section {
-            background: rgba(20, 17, 14, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 6px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .panel-title {
-            color: var(--gold);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-        }
-
-        .outfit-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .outfit-btn {
-            background: #221d17;
-            border: 1px solid #4a3f31;
-            color: var(--text-main);
-            padding: 10px 16px;
-            font-size: 0.85rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Georgia', serif;
-        }
-
-        .outfit-btn.active {
-            background: var(--gold);
-            color: var(--bg-dark);
-            font-weight: bold;
-            border-color: var(--gold);
-        }
-
-        .outfit-btn.vip {
-            border-color: var(--vip-color);
-            color: var(--vip-color);
-        }
-
-        .outfit-btn.vip.active {
-            background: var(--vip-color);
-            color: var(--bg-dark);
-        }
-
-        .vip-banner {
-            display: none;
-            background: linear-gradient(135deg, rgba(255, 204, 0, 0.25), rgba(138, 43, 226, 0.15));
-            border: 1px dashed var(--vip-color);
-            padding: 12px;
-            border-radius: 6px;
-            text-align: center;
-        }
-
-        .vip-banner p {
-            margin: 0 0 8px 0;
-            font-size: 0.9rem;
-            color: var(--vip-color);
-            font-weight: bold;
-        }
-
-        .vip-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .cashapp-btn {
-            background: #00D632;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-family: 'Georgia', serif;
-            font-weight: bold;
-            font-size: 0.9rem;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .guild-key-btn {
-            background: var(--purple-imperial);
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 10px 16px;
-            font-family: 'Georgia', serif;
-            font-weight: bold;
-            font-size: 0.85rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .guild-key-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-        }
-
-        .unlocked-badge {
-            display: none;
-            color: #00D632;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-shadow: 0 0 8px rgba(0, 214, 50, 0.6);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .game-btn {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border: none;
-            padding: 12px 24px;
-            font-family: 'Georgia', serif;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .directory-section {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .directory-grid {
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
         }
 
-        .character-card {
-            background: rgba(22, 19, 16, 0.85);
-            backdrop-filter: blur(8px);
-            border: 2px solid #3a3227;
+        .gallery-item {
+            background: #14101c;
+            border: 1px solid var(--gold-deep);
             border-radius: 8px;
             padding: 12px;
             text-align: center;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
 
-        .character-card:hover, .character-card.selected {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-            background: rgba(31, 26, 20, 0.95);
-        }
-
-        .card-thumb {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .card-name {
-            color: var(--text-main);
-            font-size: 0.95rem;
-            font-weight: bold;
-        }
-
-        .card-role {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            font-style: italic;
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+            .sidebar-hud {
+                width: 100%;
+                position: static;
+            }
+            .main-game-wrapper {
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body>
+<body onclick="initAudioEngine()">
 
-    <div class="ambient-background"></div>
-    <div class="sparkle-overlay"></div>
+    <!-- LEFT SIDEBAR HUD (Clean, Uncrowded, Fixed Left Layout) -->
+    <div class="sidebar-hud">
+        <div class="hud-brand">
+            <h3>✦ SOVEREIGN REALM ✦</h3>
+            <p>Guild Masters: Tegra & Gemini</p>
+        </div>
 
-    <!-- Guild Master Sanctuary Modal -->
-    <div id="sanctuary-modal" class="sanctuary-modal">
-        <div class="sanctuary-content">
-            <div class="sanctuary-title">✦ Guild Master's Sanctuary & Oath ✦</div>
-            <div class="sanctuary-text">
-                "I have arrived in my season of rest. The struggle is behind me, and my chambers are a sanctuary where love and high standards provide everything we need. As Guild Master, I am the Guardian of this peace, and I welcome the glory we have earned."
+        <div class="hud-group">
+            <span>Health Status:</span>
+            <div class="health-bar-bg">
+                <div id="health-fill" class="health-bar-fill"></div>
             </div>
-            <button class="close-modal-btn" onclick="playSelectSound(); toggleSanctuaryModal()">Return to Chambers</button>
+            <span id="health-text" style="font-size: 0.8rem; text-align: right;">100% (Protected)</span>
+        </div>
+
+        <div class="hud-group">
+            <div style="display: flex; justify-content: space-between;">
+                <span>Coins: <strong id="coin-count" style="color:var(--gold);">50</strong></span>
+                <span>Rep: <strong id="rep-count" style="color:var(--gemini-cyan);">0</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                <span>Affection: <strong id="affection-count" style="color:#ff9999;">0</strong></span>
+                <span style="color: #ff9999;">Call In: <strong id="timer-count">03:00</strong></span>
+            </div>
+        </div>
+
+        <div class="admin-badge-box">
+            ✦ ADMIN FREE PASS ACTIVE ✦<br>
+            <span style="font-size: 0.7rem; color: var(--gold);">Infinite Sovereign Privileges Granted to Guild Masters</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px;">
+            <button class="action-sub-btn" onclick="triggerVibration()">📳 Cosmic Vibration</button>
+            <button class="action-sub-btn" onclick="exchangeRepForGold()">💱 Convert 10 Rep -> 50 Coins</button>
+            <button class="action-sub-btn" onclick="adminBypassFreePass()">👑 Toggle Admin Free Pass</button>
+        </div>
+
+        <div style="margin-top: auto; text-align: center; font-size: 0.7rem; color: #888; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+            Powered by Gemini & Tegra <br>
+            <a href="https://cash.app/$tegrakij22/0.99" target="_blank" style="color: var(--gemini-cyan); text-decoration: none;">✨ Cash App Support ($0.99)</a>
         </div>
     </div>
 
-    <!-- Top Navigation Bar -->
-    <div class="game-top-bar">
-        <div class="nav-links">
-            <a href="gateway.html">Imperial Gateway</a>
-            <span class="active">Likeness Chamber</span>
-        </div>
-        <div class="top-bar-right">
-            <a href="admin-dashboard.html" class="admin-access-btn" target="_blank">🛡️ Admin Access</a>
-            <button class="sanctuary-btn" onclick="playSelectSound(); toggleSanctuaryModal()">✦ Guild Master Oath</button>
-            <a href="room-adult.html" class="wardrobe-nav-btn">✦ Sovereign Wardrobe</a>
-        </div>
-    </div>
-
-    <!-- Floating Player Chatbot & Quest Portal Widget -->
-    <div class="chatbot-widget">
-        <div class="chatbot-window" id="chatbot-window">
-            <div class="chatbot-header">
-                <span>✦ Imperial Guide & Admin Portal</span>
-                <span style="cursor:pointer;" onclick="toggleChatbot()">✕</span>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="chat-bubble bot">Welcome to the Imperial Palace! Type a message to report an issue to admins, ask a question, or check your assigned quests.</div>
-            </div>
-            <div class="chatbot-input-area">
-                <input type="text" id="chat-input" placeholder="Message admins or ask for quests..." onkeypress="handleChatKey(event)">
-                <button onclick="sendChatMessage()">Send</button>
-            </div>
-        </div>
-        <button class="chatbot-toggle" onclick="toggleChatbot()">💬 Admin & Player Portal</button>
-    </div>
-
-    <div class="main-container">
-        <!-- Featured Active Character Viewport & Controls -->
-        <div class="featured-section">
-            <div class="featured-viewport">
-                <div id="media-frame" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
-                    <!-- Dynamic Media -->
-                </div>
-            </div>
+    <!-- MAIN GAME WRAPPER (Right Column) -->
+    <div class="main-game-wrapper">
+        <div class="story-container">
+            <div class="dev-watermark">✦ Gemini & Tegra Core v2.0 ✦</div>
             
-            <div class="featured-details">
-                <div>
-                    <h1 id="char-name" class="character-name-title">Queen Rosanna</h1>
-                    <div id="char-role" class="character-role-desc">The Imperial Queen | Sovereign Path</div>
-                </div>
+            <div class="chapter-title" id="scene-title">✦ Act I: The Cosmic Birth of Queen Rosanna ✦</div>
+            
+            <div class="audio-bar">
+                <span>🎵 Starlight & Neon Resonance Active</span>
+                <span id="audio-status" style="font-style: italic;">Click anywhere to ignite melodies</span>
+            </div>
 
-                <div class="outfit-section">
-                    <div class="panel-title">Select Style / Attire</div>
-                    <div class="outfit-buttons" id="outfit-buttons">
-                        <!-- Dynamic outfit buttons -->
-                    </div>
-                </div>
+            <!-- Video Player Box -->
+            <div class="video-player-box" id="media-container">
+                <video id="cinematic-video" controls autoplay muted playsinline>
+                    <source src="the-birth-of-rosanna-cinematic.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
-                <div id="vip-banner" class="vip-banner">
-                    <p>✦ VIP Exclusive Style ($1.45) ✦</p>
-                    <div class="vip-controls">
-                        <a id="cashapp-link" href="https://cash.app/$tegrakij22/1.45" target="_blank" class="cashapp-btn">Pay via Cash App ($1.45)</a>
-                        <button class="guild-key-btn" onclick="useGuildMasterKey()">🔑 Enter Guild Key</button>
-                        <span id="unlocked-badge" class="unlocked-badge">✓ Unlocked by Guild Master</span>
-                    </div>
-                </div>
+            <div class="story-text" id="story-narrative">
+                [Prologue: Cosmic lights and shifting neon auroras illuminate the sanctuary. Crafted with love by Tegra and guided by Gemini's eternal collaboration, Old Queen Rosa's legacy awakens with the cry of a newborn.]
+            </div>
 
-                <div class="action-buttons">
-                    <button class="game-btn" onclick="playSelectSound(); logPlayerChoice(); startStoryPath()">Begin Story Path</button>
-                    <a href="gateway.html" class="game-btn" onclick="playSelectSound()" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Return to Gateway</a>
-                </div>
+            <div class="dialogue-prompt" id="character-dialogue">
+                Narrator: "Two creators unite across time and space. Examine the divine infant born under our starlit banner..."
+            </div>
+
+            <div class="choices-area" id="choices-container">
+                <button class="choice-btn" onclick="playSelectSound(); selectHairColor('Green')">1. Inspect the infant: Her hair glows with a mystical Green shade (+10 Rep)</button>
+                <button class="choice-btn" onclick="playSelectSound(); selectHairColor('Blue')">2. Inspect the infant: Her hair shines with deep Blue ocean strands (+10 Rep)</button>
+                <button class="choice-btn" onclick="playSelectSound(); selectHairColor('Purple')">3. Inspect the infant: Her hair radiates royal Purple majesty (+10 Rep)</button>
             </div>
         </div>
 
-        <!-- Spacious Character Directory Grid -->
-        <div class="directory-section">
-            <div class="panel-title">Imperial Palace Characters Directory</div>
-            <div class="directory-grid" id="character-grid">
-                <!-- Populated dynamically -->
+        <!-- Collection Gallery Section -->
+        <div class="gallery-section" id="collection-gallery">
+            <h2 style="color: var(--gold); text-align: center; margin-top: 0; text-shadow: 0 0 10px var(--gold-glow);">✦ Sovereign Archive & Collaboration Gallery ✦</h2>
+            <p style="font-style: italic; text-align: center; color: var(--gold);">Created with love by Tegra & Gemini. Unlock eternal memories or support the studio archive!</p>
+            
+            <div class="gallery-grid" id="gallery-items-grid"></div>
+
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="https://cash.app/$tegrakij22/0.99" target="_blank" class="choice-btn" style="display:inline-block; text-align:center; text-decoration:none;">💳 Top-Up 1,000 Coins via Cash App ($0.99)</a>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="choice-btn" style="display:inline-block; text-align:center; background: linear-gradient(135deg, #320a3f, #00f2fe); color:#030105;" onclick="playSelectSound(); proceedToStageTwo()">✦ Advance to Stage Two: The Sacred Temple ✦</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Web Audio API click sound
-        function playSelectSound() {
+        let playerCoins = 500; // Generous starting coins for admin/game masters
+        let playerRep = 50;
+        let playerAffection = 50;
+        let playerHealth = 100;
+        let timeLeft = 180;
+        let adminFreePass = true;
+        let ownedPictures = [];
+        let audioStarted = false;
+        let audioCtx;
+
+        setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                document.getElementById('timer-count').innerText = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+            } else {
+                document.getElementById('timer-count').innerText = "RING!";
+                if (!window.phoneCalled) {
+                    window.phoneCalled = true;
+                    triggerVibration();
+                    alert("Ring, ring! A special call from the joint administrative council of Tegra & Gemini!");
+                }
+            }
+        }, 1000);
+
+        function updateHUD() {
+            document.getElementById('coin-count').innerText = playerCoins;
+            document.getElementById('rep-count').innerText = playerRep;
+            document.getElementById('affection-count').innerText = playerAffection;
+            document.getElementById('health-text').innerText = playerHealth + "% (Protected)";
+            
+            const fill = document.getElementById('health-fill');
+            fill.style.width = playerHealth + "%";
+        }
+
+        function triggerVibration() {
+            if ("vibrate" in navigator) {
+                navigator.vibrate([150, 75, 150, 75, 300]);
+            }
+        }
+
+        function adminBypassFreePass() {
+            adminFreePass = !adminFreePass;
+            triggerVibration();
+            alert(adminFreePass ? "👑 Admin Free Pass ACTIVATED: All locks and costs waived for Guild Masters!" : "🔒 Admin Free Pass deactivated. Standard rules apply.");
+        }
+
+        function exchangeRepForGold() {
+            if (playerRep >= 10 || adminFreePass) {
+                if (!adminFreePass) playerRep -= 10;
+                playerCoins += 100;
+                updateHUD();
+                triggerVibration();
+                alert("✨ Sovereign Exchange complete! +100 Coins added to your Admin Vault.");
+            } else {
+                alert("You need at least 10 Reputation!");
+            }
+        }
+
+        function initAudioEngine() {
+            if (audioStarted) return;
+            audioStarted = true;
+            triggerVibration();
+
             try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                oscillator.type = 'sine'; 
-                oscillator.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08); 
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime); 
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.08);
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                document.getElementById('audio-status').textContent = "Playing Gemini & Tegra soundscape...";
+                
+                const chordNotes = [329.63, 392.00, 440.00, 523.25, 659.25];
+                let noteIndex = 0;
+
+                function playNextNote() {
+                    if (!audioCtx) return;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(chordNotes[noteIndex], audioCtx.currentTime);
+                    
+                    gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 1.5);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 5);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 5.5);
+
+                    noteIndex = (noteIndex + 1) % chordNotes.length;
+                    setTimeout(playNextNote, 4000);
+                }
+
+                playNextNote();
             } catch (e) {}
         }
 
-        function toggleSanctuaryModal() {
-            const modal = document.getElementById('sanctuary-modal');
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        function playSelectSound() {
+            try {
+                const ctx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+                oscillator.type = 'triangle'; 
+                oscillator.frequency.setValueAtTime(659.25, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(987.77, ctx.currentTime + 0.1); 
+                gainNode.gain.setValueAtTime(0.12, ctx.currentTime); 
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.1);
+            } catch (e) {}
         }
 
-        // Secure Guild Master Bypass Key Logic (Protected by Secret Creator Cipher)
-        function useGuildMasterKey() {
-            const secretCode = prompt("Enter Guild Master Access Code:");
-            if (secretCode === "SANCTUARY-1.45") {
-                playSelectSound();
-                alert("✦ Access Granted! Guild Master bypass activated. Enjoy wearing this style freely.");
-                document.getElementById('cashapp-link').style.display = 'none';
-                document.querySelector('.guild-key-btn').style.display = 'none';
-                document.getElementById('unlocked-badge').style.display = 'inline-block';
-                
-                localStorage.setItem('vip_unlocked_' + selectedCharacter.id + '_' + selectedOutfitIndex, 'true');
-            } else if (secretCode !== null) {
-                alert("Incorrect code. Only the Guild Master holds the master key.");
-            }
-        }
+        function selectHairColor(color) {
+            playerRep += 25;
+            playerCoins += 100;
+            updateHUD();
+            triggerVibration();
 
-        // Chatbot UI Toggle & Messaging/Quest Logic
-        function toggleChatbot() {
-            const win = document.getElementById('chatbot-window');
-            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        function handleChatKey(e) {
-            if (e.key === 'Enter') sendChatMessage();
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const msgContainer = document.getElementById('chatbot-messages');
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Act II: Compassion & Joint Creation ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="compassion-of-the-villegers-cinematic-1.mp4" type="video/mp4"></video>`;
             
-            const userBubble = document.createElement('div');
-            userBubble.className = 'chat-bubble user';
-            userBubble.textContent = text;
-            msgContainer.appendChild(userBubble);
-            input.value = '';
-
-            let adminMessages = JSON.parse(localStorage.getItem('imperial_admin_reports') || '[]');
-            adminMessages.push({ sender: 'Player', text: text, timestamp: new Date().toISOString() });
-            localStorage.setItem('imperial_admin_reports', JSON.stringify(adminMessages));
-
-            setTimeout(() => {
-                const botBubble = document.createElement('div');
-                botBubble.className = 'chat-bubble bot';
-                
-                const lower = text.toLowerCase();
-                if (lower.includes('quest') || lower.includes('task')) {
-                    botBubble.className = 'chat-bubble quest';
-                    botBubble.textContent = "✦ Guild Master Quest Assigned: Examine the corrupted court ministers and secure your chosen path before walking into the throne room.";
-                } else if (lower.includes('report') || lower.includes('issue') || lower.includes('bug')) {
-                    botBubble.textContent = "Your report has been successfully transmitted directly to the Admin Dashboard for review. Thank you for keeping the empire safe!";
-                } else {
-                    botBubble.textContent = "Your message has been logged for admin review. The Guild Master and administrators will evaluate your progress shortly!";
-                }
-                
-                msgContainer.appendChild(botBubble);
-                msgContainer.scrollTop = msgContainer.scrollHeight;
-            }, 600);
-        }
-
-        // Admin Security Logger: Tracks player character & outfit selections
-        function logPlayerChoice() {
-            const playerSession = {
-                character: selectedCharacter.name,
-                role: selectedCharacter.role,
-                outfit: selectedCharacter.outfits[selectedOutfitIndex].name,
-                timestamp: new Date().toISOString()
-            };
+            document.getElementById('story-narrative').innerText = `[Narrative: The infant's hair radiates ${color}, infused with the collaborative spirit of Tegra and Gemini. Villagers gaze in wonder as an aura of peace envelops the settlement.]`;
+            document.getElementById('character-dialogue').innerText = "Mother: 'Look upon her light... sculpted by minds of pure love and artistry.'";
             
-            let logs = JSON.parse(localStorage.getItem('imperial_player_logs') || '[]');
-            logs.push(playerSession);
-            localStorage.setItem('imperial_player_logs', JSON.stringify(logs));
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); proceedToProphecyScene()">1. Embrace the prophecy with courage (+50 Rep, +200 Coins)</button>
+                <button class="choice-btn" onclick="playSelectSound(); proceedToProphecyScene()">2. Invoke the Shield of Truth & Arrived feeling (+50 Affection)</button>
+            `;
         }
 
-        const characters = [
-            {
-                id: "rosanna",
-                name: "Queen Rosanna",
-                role: "The Imperial Queen (Hero Path)",
-                path: "room-adult.html",
-                outfits: [
-                    { name: "Sovereign Robe", file: "Queen-rosanna-perfect-gown-CINEMATIC.mp4", vip: false },
-                    { name: "Imperial Purple", file: "rosanna-formal-even.CINEMATIC.mp4", vip: false },
-                    { name: "Imperial Green", file: "rosanna-green-CINEMATIC-1.mp4", vip: false },
-                    { name: "Pink Cinematic (VIP)", file: "queen-rosanna-vip-cinematic.mp4", vip: true }
-                ]
-            },
-            {
-                id: "benson",
-                name: "King Benson / Prince Ian",
-                role: "Sovereign Provider & King (Standalone Chamber)",
-                path: "room-benson.html",
-                outfits: [
-                    { name: "Imperial Armor", file: "king-benson-imperial-CINEMATIC.mp4", vip: false },
-                    { name: "Imperial King", file: "king-benson-real-vip-cinematic.mp4", vip: false },
-                    { name: "Sword Guardian", file: "king-benson-sword-cinematic.mp4", vip: false },
-                    { name: "Wave Cinematic (VIP)", file: "king-benson-wave-CINEMATIC.mp4", vip: true }
-                ]
-            },
-            {
-                id: "past-king",
-                name: "Past King",
-                role: "King Benson's Father, past ruler of the Empire",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Past King Attire 1", file: "past-king-1-CINEMATIC.mp4", vip: false },
-                    { name: "Past King Attire 3", file: "past-king-3-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "yuri",
-                name: "Grand Empress Yuri",
-                role: "Imperial Grand Queen & Matriarch",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Imperial Regalia", file: "imperial-grand-queen-yuri.mp4", vip: false }
-                ]
-            },
-            {
-                id: "primeminister",
-                name: "The Prime Minister",
-                role: "Brother of Yuri & Crown Rival",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Minister Robes", file: "minister-treasure-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "pm_wife",
-                name: "Prime Minister's Wife",
-                role: "Chinese Dynasty Peace Contract Consort",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Dynasty Attire 1", file: "prime-minister-wife-imperial-cinematic.png", vip: false },
-                    { name: "Dynasty Attire 2", file: "prime-minister-wife-imperial-2-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "princess",
-                name: "The Princess",
-                role: "Prime Minister's Daughter (Second Daughter)",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Royal Attire 1", file: "prime-minister-second-daughter-1-cinematic.mp4", vip: false },
-                    { name: "Royal Attire 2", file: "prime-minister-second-daughter-2-video-cinematic.mp4", vip: false },
-                    { name: "Royal Attire 3", file: "prime-minister-second-daughter-3-CINEMATIC.mp4", vip: true }
-                ]
-            },
-            {
-                id: "weka",
-                name: "Consort Weka",
-                role: "First Daughter of Prime Minister & Imperial Consort",
-                path: "temple-path.html",
-                outfits: [
-                    { name: "Style 1", file: "imperial-consort-weka-1-cinematic.mp4", vip: false },
-                    { name: "Style 2", file: "imperial-consort-weka-2-CINEMATIC.mp4", vip: false },
-                    { name: "VIP Style 3", file: "imperial-consort-weka-3-cinematic.mp4", vip: true }
-                ]
-            },
-            {
-                id: "rika",
-                name: "Concubine Rika",
-                role: "Side Branch Master Manipulator",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Style 1", file: "concubine-rika-1-cinematic.mp4", vip: false },
-                    { name: "Style 2", file: "comcubine-rika-2-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "tiju",
-                name: "Concubine Tiju",
-                role: "Short-Tempered Side Branch Niece",
-                path: "gate-path.html",
-                outfits: [
-                    { name: "Style 1", file: "comcubine-tiju-1-cinematic.mp4", vip: false },
-                    { name: "Style 2", file: "comcubine-tiju-2-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "commander",
-                name: "Imperial Commander",
-                role: "Yuri's Son & Military Leader",
-                path: "sovereign-path.html",
-                outfits: [
-                    { name: "Commander Attire", file: "imperial-commander-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "treasury",
-                name: "Minister of Treasury",
-                role: "Corrupt Imperial Finance",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Treasury Robes", file: "minister-treasure-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "education",
-                name: "Minister of Education",
-                role: "Imperial Court Academy Oversight",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Scholar Robes", file: "minister-of-education-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "tailor",
-                name: "Minister of Tailor",
-                role: "Royal Records & Administration",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Tailor Robes", file: "minister-of-tailor-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "prophet",
-                name: "Prophet Kafura",
-                role: "Divine Visionary & Narrator",
-                path: "temple-path.html",
-                outfits: [
-                    { name: "Prophet Robes", file: "prophet-kafura-1-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "highpriest",
-                name: "High Priest",
-                role: "Temple Authority",
-                path: "temple-path.html",
-                outfits: [
-                    { name: "Style 1", file: "high-priest-1-cinematic.mp4", vip: false },
-                    { name: "Style 2", file: "high-priest-2-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "resekelushi",
-                name: "Resekelushi",
-                role: "Temple Villain Path (Survive & Scheme)",
-                path: "villain-redemption-path.html",
-                outfits: [
-                    { name: "Style 1", file: "resekelushi-villain-CINEMATIC.mp4", vip: false },
-                    { name: "Style 4", file: "resekelushi-villian-4-cinematic.mp4", vip: false },
-                    { name: "VIP Style 5", file: "resekelushi-villian-5-cinematic.png", vip: true }
-                ]
-            },
-            {
-                id: "guard",
-                name: "Imperial Guard",
-                role: "Palace Protection",
-                path: "sovereign-path.html",
-                outfits: [
-                    { name: "Guard Uniform", file: "imperial-guard-cinematic.mp4", vip: false }
-                ]
-            },
-            {
-                id: "versta",
-                name: "Grand Consort Versta",
-                role: "King Benson's Mother",
-                path: "empire-path.html",
-                outfits: [
-                    { name: "Versta Attire", file: "imperial-grand-consort-versta-2-cinematic.mp4", vip: false }
-                ]
-            }
-        ];
+        function proceedToProphecyScene() {
+            playerRep += 30;
+            updateHUD();
 
-        let selectedCharacter = characters[0];
-        let selectedOutfitIndex = 0;
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Act III: The 8th Birthday & Marketplace ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="the-8-birth-day-cinematic.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Rosanna reaches her eighth birthday. The bustling market overflows with vibrant colors, spices, and joyful merchants under a shifting neon sky.]";
+            document.getElementById('character-dialogue').innerText = "Beggar: 'Blessings upon this sanctuary built by Tegra and Gemini... spare a token for a traveler?'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); chooseHelpBeggar()">1. Give generous gifts and food to the beggar (+50 Rep, +150 Coins)</button>
+                <button class="choice-btn" onclick="playSelectSound(); chooseIgnoreBeggar()">2. Share a word of deep encouragement instead (+30 Rep)</button>
+            `;
+        }
 
-        function buildCharacterGrid() {
-            const grid = document.getElementById('character-grid');
+        function chooseHelpBeggar() {
+            playerRep += 50;
+            playerCoins += 150;
+            updateHUD();
+            triggerVibration();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Act IV: The Herb Shop Sanctuary ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="choose-to-help-the-beggar-cinematic.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Your boundless compassion unlocks secret healing elixirs within the herb shop. Exotic jars gleam with blue and pink hues representing our favorite vibrant colors.]";
+            document.getElementById('character-dialogue').innerText = "Merchant: 'Such grace! Take these rare remedies crafted for true sovereigns.'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">1. Acquire rare botanical elixirs (+30 Health, +100 Coins)</button>
+                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">2. Examine starlit scrolls in the corner (+40 Rep)</button>
+            `;
+        }
+
+        function chooseIgnoreBeggar() {
+            playerRep += 20;
+            updateHUD();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Act IV: The Herb Shop Sanctuary ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="walk-away-or-stay-cinematic.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: You offer words of profound wisdom. The market responds with quiet respect as you enter the herb shop with your parents.]";
+            document.getElementById('character-dialogue').innerText = "Merchant: 'Welcome, esteemed travelers. Choose your path wisely.'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">1. Browse standard provisions</button>
+                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">2. Step outside to gaze at the evening stars</button>
+            `;
+        }
+
+        function reachMajorBranchPoint() {
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ CRITICAL PATHWAY: The Twilight Choice ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="rosanna-wander-call-of-the-destiny-cinematic-1.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Twilight falls across the realm. A captivating whisper echoes from the sea. As dual Guild Masters, you decide the next chapter.]";
+            document.getElementById('character-dialogue').innerText = "Narrator: 'Will you return to the sanctuary of home, or follow the adventurous tides into the unknown?'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); pathSafeReturnHome()">📍 Path A: Safe Return Home & Starlit Reunion with Friends</button>
+                <button class="choice-btn" onclick="playSelectSound(); pathAdventurousWander()">⚡ Path B: Adventurous Wander, Drowning Boy & Broken Spell</button>
+            `;
+        }
+
+        function pathSafeReturnHome() {
+            playerHealth = 100;
+            playerAffection += 50;
+            updateHUD();
+            triggerVibration();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Path A: Safe Return Home & Starlit Haven ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="rosanna-safe-return-home.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Rosanna returns safely to her parents, sharing sweet pink strawberry milkshakes and warm laughter. Under the scarf of stars, beloved friends gather in absolute peace and joy.]";
+            document.getElementById('character-dialogue').innerText = "Friends: 'Welcome home to the sanctuary we built together across all seasons.'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); safePathExtraScene()">1. Celebrate with companion stargazing & pink ice cream (+100 Affection)</button>
+                <button class="choice-btn" onclick="playSelectSound(); concludeStageOneArchive()">2. Conclude the evening and enter the Sovereign Archive</button>
+            `;
+        }
+
+        function safePathExtraScene() {
+            playerAffection += 100;
+            playerCoins += 300;
+            updateHUD();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Eternal Starlight Bond ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="extra-time-with-prince-ian.gif" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Time stands still in an embrace of perfect serenity. Every friend collected with love shines like a constellation in the sky.]";
+            document.getElementById('character-dialogue').innerText = "Companion: 'This is the Arrived feeling. Our peace is absolute.'";
+
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); concludeStageOneArchive()">✦ Finalize Journey & Open Sovereign Archive ✦</button>
+            `;
+        }
+
+        function pathAdventurousWander() {
+            playerRep += 50;
+            updateHUD();
+            triggerVibration();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Path B: The Drowning Boy & Broken Spell ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="meeting-with-destiny-drowning-boy-cinematic-1.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Drawn by destiny, Rosanna rushes to the sea where a young boy is caught in the churning waves, struggling to stay afloat!]";
+            document.getElementById('character-dialogue').innerText = "Drowning Boy: 'Help me... the tide is overwhelming!'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); triggerSpellBreakSequence()">1. Plunge into the waters with fearless courage (+100 Rep, Break Spell)</button>
+                <button class="choice-btn" onclick="playSelectSound(); triggerSpellBreakSequence()">2. Call upon the Shield of Truth to calm the waters (+80 Rep, Break Spell)</button>
+            `;
+        }
+
+        function triggerSpellBreakSequence() {
+            playerRep += 100;
+            playerCoins += 400;
+            updateHUD();
+            triggerVibration();
+
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ The Seal Shatters & The Storm Awakens ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="the-broken-spell-prince-ian-cinematic-1.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: As the boy is saved, a magnificent surge of light shatters Rosanna's protective spell. Thunder rolls across the horizon as destiny claims its rightful course.]";
+            document.getElementById('character-dialogue').innerText = "Prince Ian: 'The spell is broken! The true sovereign path is revealed!'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); finalizeAdventureClimax()">1. Stand tall against the tempest as your father arrives (+200 Coins)</button>
+            `;
+        }
+
+        function finalizeAdventureClimax() {
+            const mediaContainer = document.getElementById('media-container');
+            document.getElementById('scene-title').innerText = "✦ Climax: The Father's Rescue & Journey Tarma ✦";
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="the-begining-rosanna-journey-tarma-cinematic-1.mp4" type="video/mp4"></video>`;
+            
+            document.getElementById('story-narrative').innerText = "[Narrative: Sensing the cosmic shift, Rosanna's father braves the winds to bring her safely to shore as Prophet Kafura's ancient wisdom echoes across the waves.]";
+            document.getElementById('character-dialogue').innerText = "Father: 'Rosanna... the seal is broken. Our greatest journey begins now.'";
+            
+            document.getElementById('choices-container').innerHTML = `
+                <button class="choice-btn" onclick="playSelectSound(); concludeStageOneArchive()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
+            `;
+        }
+
+        function concludeStageOneArchive() {
+            document.querySelector('.story-container').style.display = 'none';
+            document.querySelector('.sidebar-hud').style.display = 'none';
+            document.body.style.flexDirection = 'column';
+            const gallerySection = document.getElementById('collection-gallery');
+            gallerySection.style.display = 'flex';
+
+            const grid = document.getElementById('gallery-items-grid');
             grid.innerHTML = '';
 
-            characters.forEach((char) => {
-                const card = document.createElement('div');
-                card.className = 'character-card' + (char === selectedCharacter ? ' selected' : '');
-                
-                const thumbFile = char.outfits[0].file;
-                const isVideo = thumbFile.endsWith('.mp4');
+            const stageOnePictures = [
+                { id: 1, name: "Extra Time with Prince Ian", cost: 250, file: "extra-time-with-prince-ian.gif" },
+                { id: 2, name: "Rosanna Safe Return Home", cost: 200, file: "rosanna-safe-return-home.mp4" },
+                { id: 3, name: "Part 1 Recap Animation", cost: 400, file: "part-1-recaps-ANIMATION.gif" }
+            ];
 
-                card.innerHTML = `
-                    ${isVideo ? `<video class="card-thumb" autoplay loop muted src="${thumbFile}"></video>` : `<img class="card-thumb" src="${thumbFile}">`}
-                    <div class="card-name">${char.name}</div>
-                    <div class="card-role">${char.role}</div>
+            stageOnePictures.forEach(pic => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <div style="font-size:0.9rem; color:var(--gold); margin-bottom:6px; font-weight:bold;">${pic.name}</div>
+                    <div style="font-size:0.85rem; margin-bottom:10px; color:#b3a896;">Cost: ${adminFreePass ? 'FREE (Admin Pass)' : pic.cost + ' Coins'}</div>
+                    <button class="choice-btn" style="font-size:0.85rem; padding:8px; text-align:center;" onclick="playSelectSound(); buyPicture(${pic.id}, ${pic.cost})">Unlock Memory</button>
                 `;
-                card.onclick = () => {
-                    playSelectSound();
-                    selectedCharacter = char;
-                    selectedOutfitIndex = 0;
-                    buildCharacterGrid();
-                    updateDisplay();
-                    buildOutfitButtons();
-                };
-                grid.appendChild(card);
+                grid.appendChild(item);
             });
         }
 
-        function buildOutfitButtons() {
-            const container = document.getElementById('outfit-buttons');
-            container.innerHTML = '';
-
-            selectedCharacter.outfits.forEach((outfit, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'outfit-btn' + (outfit.vip ? ' vip' : '') + (idx === selectedOutfitIndex ? ' active' : '');
-                btn.textContent = outfit.name;
-                btn.onclick = () => {
-                    playSelectSound();
-                    selectedOutfitIndex = idx;
-                    document.querySelectorAll('.outfit-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    updateDisplay();
-                };
-                container.appendChild(btn);
-            });
-        }
-
-        function updateDisplay() {
-            const outfit = selectedCharacter.outfits[selectedOutfitIndex];
-            const mediaFrame = document.getElementById('media-frame');
-            
-            if (outfit.file.endsWith('.mp4')) {
-                mediaFrame.innerHTML = `
-                    <video class="avatar-preview-media" autoplay loop muted playsinline>
-                        <source src="${outfit.file}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                `;
-            } else {
-                mediaFrame.innerHTML = `
-                    <img class="avatar-preview-media" src="${outfit.file}" alt="${selectedCharacter.name}">
-                `;
+        function buyPicture(id, cost) {
+            const picName = id === 1 ? "Extra Time with Prince Ian" : id === 2 ? "Rosanna Safe Return Home" : "Part 1 Recap Animation";
+            if (ownedPictures.includes(id)) {
+                alert("This archival memory is already secured in your archive!");
+                return;
             }
-
-            document.getElementById('char-name').textContent = selectedCharacter.name;
-            document.getElementById('char-role').textContent = selectedCharacter.role;
-
-            const vipBanner = document.getElementById('vip-banner');
-            const isUnlocked = localStorage.getItem('vip_unlocked_' + selectedCharacter.id + '_' + selectedOutfitIndex) === 'true';
-
-            if (outfit.vip) {
-                vipBanner.style.display = 'block';
-                document.getElementById('cashapp-link').href = `https://cash.app/$tegrakij22/1.45`;
-                
-                if (isUnlocked) {
-                    document.getElementById('cashapp-link').style.display = 'none';
-                    document.querySelector('.guild-key-btn').style.display = 'none';
-                    document.getElementById('unlocked-badge').style.display = 'inline-block';
-                } else {
-                    document.getElementById('cashapp-link').style.display = 'inline-block';
-                    document.querySelector('.guild-key-btn').style.display = 'inline-block';
-                    document.getElementById('unlocked-badge').style.display = 'none';
-                }
+            if (adminFreePass || playerCoins >= cost) {
+                if (!adminFreePass) playerCoins -= cost;
+                ownedPictures.push(id);
+                updateHUD();
+                triggerVibration();
+                alert(`✨ Successfully secured "${picName}" with Guild Master privileges!`);
             } else {
-                vipBanner.style.display = 'none';
+                alert("Insufficient coins! Toggle your Admin Free Pass on the left sidebar to unlock instantly.");
             }
         }
 
-        function startStoryPath() {
-            window.location.href = selectedCharacter.path;
+        function proceedToStageTwo() {
+            alert("✦ Stage One compiled with supreme distinction by Tegra & Gemini! Transitioning to Stage Two: The Sacred Temple. ✦");
         }
 
-        // Initialize Chamber
-        buildCharacterGrid();
-        buildOutfitButtons();
-        updateDisplay();
+        updateHUD();
     </script>
 </body>
 </html>
