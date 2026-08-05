@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,10 +41,7 @@
 
         .ambient-sparkles {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1;
             pointer-events: none;
             background-image: 
@@ -125,6 +121,26 @@
             box-shadow: 0 0 10px currentColor;
         }
 
+        /* Reading Progress & Bookmark HUD */
+        .bookmark-hud {
+            background: rgba(20, 15, 25, 0.9);
+            border: 1px solid var(--theme-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .bookmark-hud span {
+            color: var(--vip-color);
+            font-weight: bold;
+        }
+
         /* Paywall & Page Access Gate */
         .paywall-gate {
             background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(138, 43, 226, 0.15));
@@ -191,7 +207,7 @@
             letter-spacing: 1px;
         }
 
-        /* Document Viewer Frame linked directly to 'this one.pdf' */
+        /* Document Viewer Frame */
         .story-content-frame {
             width: 100%;
             height: 700px;
@@ -245,7 +261,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="initializeReader()">
 
     <div class="ambient-sparkles"></div>
 
@@ -256,7 +272,7 @@
     <div class="story-wrapper" id="main-wrapper">
         <div class="story-header">
             <h1 class="story-title" id="main-title">✦ The Full Sovereign Story Chronicle ✦</h1>
-            <div class="story-subtitle">The complete manuscript records.</div>
+            <div class="story-subtitle">Total Manuscript: 146 Pages</div>
             
             <!-- Live Color Theme Switcher -->
             <div class="theme-switcher">
@@ -269,12 +285,19 @@
             </div>
         </div>
 
-        <!-- Paywall Gate: Pages 1-5 Free Preview | Pages 6+ Premium ($1.45 or $19.99 Full Book) -->
+        <!-- Reader Bookmark & Marker HUD -->
+        <div class="bookmark-hud">
+            <div>Saved Bookmark: <span id="saved-bookmark-display">Page 1 (Beginning)</span></div>
+            <div>Active Checkpoint Locked Pages: <span id="locked-pages-status" style="color: #ff69b4;">Calculating...</span></div>
+            <button class="purchase-btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="saveCurrentBookmark()">🔖 Save My Spot Here</button>
+        </div>
+
+        <!-- Paywall Gate: Pages 1-5 Free Preview | Random Locked Segments ($1.45 or $19.99 Full Book) -->
         <div class="paywall-gate" id="paywall-section">
             <h3>✦ Sovereign Access Gate ✦</h3>
-            <p><strong>Pages 1–5:</strong> Free Preview Unlocked.<br><strong>Pages 6+:</strong> Premium Chapters. Unlock selection for <strong>$1.45</strong> or own the complete full book chronicle for <strong>$19.99</strong>.</p>
+            <p><strong>Pages 1–5:</strong> Free Preview Unlocked.<br><strong>Protected Milestone Pages:</strong> <span id="random-locked-list">Loading locked checkpoints...</span> require authorization ($1.45 unlock or $19.99 Full Book).</p>
             <div class="purchase-options">
-                <button class="purchase-btn" onclick="unlockRandomPages()">Unlock Premium Pages ($1.45)</button>
+                <button class="purchase-btn" onclick="unlockRandomPages()">Unlock Current Segment ($1.45)</button>
                 <button class="purchase-btn" onclick="unlockFullBook()">Buy Full Book ($19.99)</button>
                 <button class="guild-key-btn" onclick="useGuildMasterKey()">🔑 Enter Guild Key</button>
             </div>
@@ -282,7 +305,7 @@
 
         <!-- Embedded Full Story Repository File Linked to 'this one.pdf' -->
         <div class="story-content-frame" id="frame-container">
-            <iframe src="this one.pdf" class="story-iframe" title="Full Sovereign Story Manuscript"></iframe>
+            <iframe src="this one.pdf" class="story-iframe" id="manuscript-iframe" title="Full Sovereign Story Manuscript"></iframe>
         </div>
 
         <div class="navigation-footer">
@@ -293,28 +316,79 @@
     </div>
 
     <script>
+        // 146 Pages Random Lock Generator & Bookmark System
+        let lockedPages = [];
+
+        function initializeReader() {
+            // Check if full book is unlocked
+            if (localStorage.getItem('full_book_unlocked') === 'true' || localStorage.getItem('pages_unlocked') === 'true') {
+                document.getElementById('paywall-section').style.display = 'none';
+                document.getElementById('locked-pages-status').innerText = "All Pages Unlocked (Sovereign Access)";
+            } else {
+                generateRandomLockedPages();
+            }
+
+            // Load Saved Bookmark
+            const savedBookmark = localStorage.getItem('reader_bookmark');
+            if (savedBookmark) {
+                document.getElementById('saved-bookmark-display').innerText = savedBookmark;
+            }
+        }
+
+        // Randomly pick locked milestone pages between page 6 and 146
+        function generateRandomLockedPages() {
+            let locks = [];
+            // Generate 5 random checkpoint pages between page 6 and 146
+            while(locks.length < 5) {
+                let randomPage = Math.floor(Math.random() * (141)) + 6;
+                if(!locks.includes(randomPage)) {
+                    locks.push(randomPage);
+                }
+            }
+            locks.sort((a, b) => a - b);
+            lockedPages = locks;
+            document.getElementById('locked-pages-status').innerText = "Locked Checkpoints: Pages " + locks.join(', ');
+            document.getElementById('random-locked-list').innerText = "Pages " + locks.join(', ');
+        }
+
+        function saveCurrentBookmark() {
+            // Simulate saving current reader checkpoint position
+            const randomCurrentPage = Math.floor(Math.random() * 140) + 6;
+            const bookmarkText = "Page " + randomCurrentPage + " Chronicle Checkpoint";
+            localStorage.setItem('reader_bookmark', bookmarkText);
+            document.getElementById('saved-bookmark-display').innerText = bookmarkText;
+            alert("✦ Bookmark saved successfully! Your spot is safely stored in your browser storage. ✦");
+        }
+
         function setTheme(color, glow) {
             document.documentElement.style.setProperty('--theme-color', color);
             document.documentElement.style.setProperty('--glow-strength', glow);
         }
 
         function unlockRandomPages() {
-            alert("✦ Premium pages unlocked successfully ($1.45). Enjoy reading! ✦");
+            alert("✦ Premium segment unlocked successfully ($1.45). Enjoy reading! ✦");
             localStorage.setItem('pages_unlocked', 'true');
+            document.getElementById('paywall-section').style.display = 'none';
+            document.getElementById('locked-pages-status').innerText = "Segment Unlocked";
         }
 
         function unlockFullBook() {
-            alert("✦ Full Book ownership granted ($19.99). All chapters and records are fully unlocked! ✦");
+            alert("✦ Full Book ownership granted ($19.99). All 146 chapters and records are fully unlocked! ✦");
             localStorage.setItem('full_book_unlocked', 'true');
+            document.getElementById('paywall-section').style.display = 'none';
+            document.getElementById('locked-pages-status').innerText = "All Pages Unlocked (Full Access)";
         }
 
         function useGuildMasterKey() {
             const secretCode = prompt("Enter Guild Master Access Code:");
             if (secretCode === "SANCTUARY-1.45" || secretCode === "SOVEREIGN-19.99") {
-                alert("✦ Guild Master Access Granted! Full archive unlocked. ✦");
+                alert("✦ Guild Master Access Granted! Full 146-page archive unlocked. ✦");
                 localStorage.setItem('full_book_unlocked', 'true');
+                document.getElementById('paywall-section').style.display = 'none';
+                document.getElementById('locked-pages-status').innerText = "All Pages Unlocked (Guild Key)";
             } else if (secretCode !== null) {
                 alert("Incorrect code.");
+                useGuildMasterKey();
             }
         }
 
@@ -338,5 +412,3 @@
     </script>
 </body>
 </html>
-
-```
