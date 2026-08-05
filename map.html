@@ -1,3 +1,14 @@
+Here is your updated **`map.html`** code.
+
+As requested, I have updated all the map hotspots so they are ready for your brand new chambers:
+
+* **Throne Room** $\rightarrow$ now links to `throne.html`
+* **Wilderness Forest** $\rightarrow$ now links to `wilderness.html`
+* **Royal Marketplace** $\rightarrow$ now links to `market-chamber.html`
+* **Villages (North Village & South Hamlet)** $\rightarrow$ now link to `village.html`
+* **Border Outpost** $\rightarrow$ left untouched, continuing to link to `battle.html`
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,7 +198,7 @@
             font-size: 0.75rem;
         }
 
-        /* Cinematic Living Image Map Board Canvas (Using empire-map.jpg) */
+        /* Cinematic Living Image Map Board Canvas */
         .game-map-board {
             position: relative;
             width: 100%;
@@ -227,6 +238,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            text-decoration: none;
         }
 
         .map-hotspot:hover {
@@ -243,7 +255,7 @@
             border-color: #32cd32;
         }
 
-        /* Exact Coordinates to match your empire-map.jpg layout */
+        /* Exact Coordinates matched to empire-map.jpg */
         #hotspot-throne { top: 8%; left: 6%; width: 18%; height: 25%; }
         #hotspot-wilderness { top: 18%; right: 12%; width: 22%; height: 26%; }
         #hotspot-market { top: 52%; left: 38%; width: 22%; height: 22%; }
@@ -341,22 +353,22 @@
             <!-- Atmospheric Shimmer over Water -->
             <div class="water-glow-overlay"></div>
 
-            <!-- 1. Throne Room Hotspot -->
-            <a href="room-adult.html" class="map-hotspot" id="hotspot-throne" title="Enter Throne Room"></a>
+            <!-- 1. Throne Room Chamber Link (New Chamber: throne.html) -->
+            <a href="throne.html" class="map-hotspot" id="hotspot-throne" title="Enter Throne Room Chamber"></a>
 
-            <!-- 2. Wilderness Forest Hotspot -->
-            <a href="forest.html" class="map-hotspot" id="hotspot-wilderness" title="Explore Wilderness Forest"></a>
+            <!-- 2. Wilderness Forest Chamber Link (New Chamber: wilderness.html) -->
+            <a href="wilderness.html" class="map-hotspot" id="hotspot-wilderness" title="Explore Wilderness Forest"></a>
 
-            <!-- 3. Royal Marketplace Hotspot -->
-            <a href="market.html" class="map-hotspot" id="hotspot-market" title="Visit Royal Marketplace"></a>
+            <!-- 3. Royal Marketplace Chamber Link (New Chamber: market-chamber.html) -->
+            <a href="market-chamber.html" class="map-hotspot" id="hotspot-market" title="Visit Royal Marketplace"></a>
 
-            <!-- 4. North Village Hotspot -->
-            <a href="community.html" class="map-hotspot" id="hotspot-village1" title="Visit North Village"></a>
+            <!-- 4. North Village Chamber Link (New Chamber: village.html) -->
+            <a href="village.html" class="map-hotspot" id="hotspot-village1" title="Visit North Village"></a>
 
-            <!-- 5. South Hamlet Hotspot -->
-            <a href="community.html" class="map-hotspot" id="hotspot-village2" title="Visit South Hamlet"></a>
+            <!-- 5. South Hamlet Chamber Link (New Chamber: village.html) -->
+            <a href="village.html" class="map-hotspot" id="hotspot-village2" title="Visit South Hamlet"></a>
 
-            <!-- 6. Border Outpost Hotspot -->
+            <!-- 6. Border Outpost Battle Arena Link (Unchanged: battle.html) -->
             <a href="battle.html" class="map-hotspot" id="hotspot-border" title="Enter Border Outpost Battle Arena"></a>
 
             <!-- Purchasable Land Hotspots -->
@@ -515,3 +527,5 @@
     </script>
 </body>
 </html>
+
+```
