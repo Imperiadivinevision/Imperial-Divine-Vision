@@ -683,13 +683,11 @@
             const body = document.body;
             const fsBtn = document.getElementById('fsToggleBtn');
 
-            // Toggle custom chamber view expansion first for a seamless web experience
             body.classList.toggle('is-chamber-fullscreen');
 
             if (body.classList.contains('is-chamber-fullscreen')) {
                 fsBtn.innerHTML = '⤡';
                 fsBtn.title = "Exit Fullscreen View";
-                // Also trigger native browser fullscreen if possible
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen().catch(err => {});
                 }
