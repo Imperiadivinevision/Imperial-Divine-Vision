@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Royal Throne Room | Imperial Divine Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(17, 23, 21, 0.95);
+            --theme-color: #ffd700; 
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background: #0b0f0e;
+        }
+
+        /* Fullscreen Cinematic Video Background */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -10;
+            filter: brightness(0.85);
+        }
+
+        /* YouTube-Style Fullscreen Expand / Decrease Button */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px var(--theme-color);
+        }
+
+        /* Global Fullscreen Expansion Mode */
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen .chamber-subtitle,
+        body.is-chamber-fullscreen h1,
+        body.is-chamber-fullscreen .court-hud {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .chamber-container {
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100vh !important;
+            justify-content: center !important;
+        }
+        body.is-chamber-fullscreen .petition-box {
+            max-width: 95vw !important;
+            height: 92vh !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 0 !important;
+        }
+
+        /* Top Navigation Bar */
+        nav { 
+            padding: 12px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            flex-wrap: wrap;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-module {
+            background: rgba(22, 30, 27, 0.85);
+            border: 1px solid var(--theme-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav a:hover { color: var(--theme-color); }
+
+        /* Throne Room Chamber Container */
+        .chamber-container {
+            max-width: 1000px;
+            margin: 15px auto;
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--theme-color);
+            margin: 2px 0;
+            text-shadow: 0 0 25px rgba(0, 0, 0, 0.95), 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .chamber-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #f5f2eb;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+        }
+
+        /* Court Status & Timer HUD */
+        .court-hud {
+            background: rgba(17, 23, 21, 0.92);
+            border: 2px solid var(--theme-color);
+            padding: 8px 18px;
+            border-radius: 8px;
+            display: flex;
+            gap: 18px;
+            font-size: 0.78rem;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.95);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .court-hud span { color: #ffe875; font-weight: bold; }
+
+        /* Royal Petition / Decision Box */
+        .petition-box {
+            background: linear-gradient(135deg, rgba(15, 23, 19, 0.96), rgba(8, 14, 11, 0.98));
+            border: 3px ridge var(--theme-color);
+            border-radius: 14px;
+            padding: 25px;
+            width: 100%;
+            max-width: 850px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.95);
+            text-align: left;
+            margin-bottom: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .petition-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: #ffd700;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .petition-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #f5f2eb;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Royal Decision Buttons */
+        .decision-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .royal-btn {
+            background: linear-gradient(to right, rgba(35, 45, 40, 0.9), rgba(20, 30, 25, 0.9));
+            color: var(--text-main);
+            border: 2px solid var(--theme-color);
+            padding: 12px 18px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+        .royal-btn:hover {
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px #ffd700;
+            transform: translateX(5px);
+        }
+
+        /* Lockout Tea Time Container */
+        .lockout-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(11, 15, 14, 0.95);
+            border: 3px solid var(--theme-color);
+            border-radius: 14px;
+            padding: 25px;
+            max-width: 650px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(0,0,0,0.95);
+            backdrop-filter: blur(8px);
+        }
+        .lockout-video {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 10px;
+            border: 2px solid var(--theme-color);
+            margin-bottom: 15px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+    </style>
+</head>
+<body onload="initThroneRoom()">
+
+    <!-- Cinematic Background Video -->
+    <video autoplay muted loop class="bg-video" id="courtBgVideo">
+        <source src="throne-room-back-crown.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- YouTube-Style Fullscreen Toggle Button -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Chamber View">⤢</button>
+
+    <!-- Top Navigation Bar -->
+    <nav> 
+        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
+        <div class="nav-module"><a href="library.html">📚 Library</a></div>
+        <div class="nav-module"><a href="map.html" style="color: #79ff9c;">🗺️ Empire Map</a></div>
+        <div class="nav-module"><a href="throne.html" style="color: #ffd700;">🏛️ Throne Room</a></div>
+        <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
+        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
+    </nav>
+
+    <!-- Throne Room Content Container -->
+    <div class="chamber-container" id="chamberMainWrap">
+        <h1>The Sovereign Throne Room</h1>
+        <p class="chamber-subtitle">Render political decrees, manage alliances, and secure your realm.</p>
+
+        <!-- Court Status & Timer HUD -->
+        <div class="court-hud">
+            <div>Imperial Coins: <span id="throne-coin-display">0</span> 🪙</div>
+            <div>Royal Standing: <span id="throne-status-display">Sovereign Regent</span></div>
+            <div>Session Petitions Left: <span id="session-counter">4</span> / 4</div>
+            <div>Cooldown Timer: <span id="timer-display">06:00</span></div>
+        </div>
+
+        <!-- Active Royal Petition Box -->
+        <div class="petition-box" id="activePetitionBox">
+            <div class="petition-title">
+                <span id="petition-category">📜 Political & Strategic Petition</span>
+                <span id="question-counter">Dilemma 1 of 200</span>
+            </div>
+            <div class="petition-text" id="petition-content">
+                Loading royal decree...
+            </div>
+            <div class="decision-actions">
+                <button class="royal-btn" id="choice-btn-1" onclick="makeRoyalChoice(0)">Choice A</button>
+                <button class="royal-btn" id="choice-btn-2" onclick="makeRoyalChoice(1)">Choice B</button>
+            </div>
+        </div>
+
+        <!-- Lockout Tea Time Box -->
+        <div class="lockout-container" id="lockoutBox">
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffd700; margin-top: 0;">Court Recess</h2>
+            
+            <!-- Queen Having Tea with Mother-in-Law Video -->
+            <video autoplay muted loop class="lockout-video">
+                <source src="tea-with-mother.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <p id="lockout-msg" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: #f5f2eb; line-height: 1.6; margin-bottom: 20px;">
+                "Your time is up! The Queen is having tea with her mother-in-law, the King is busy, and court is adjourned. You must wait for the timer to unlock the chamber again!"
+            </p>
+            <div style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: #ffe875;">
+                Time Until Court Resumes: <strong id="lockout-timer-display" style="font-size: 1.2rem;">06:00</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Full Bank of 200 Royal Dilemmas
+        const royalDilemmas = [
+            { cat: "Political & Border Defense", q: "Armed raiders are approaching the eastern watchtower. Do you dispatch the royal guard to crush them immediately, or negotiate a temporary trade treaty to secure peace?", a: "Dispatch the royal guard to protect the border.", b: "Negotiate a temporary trade treaty." },
+            { cat: "Marriage & Alliances", q: "A neighboring monarch offers a marriage alliance to unify your realms, but their ruler is known for harsh rule. Do you accept the political marriage, or reject it and risk a trade embargo?", a: "Accept the political marriage for absolute unity.", b: "Reject the alliance to preserve your kingdom's laws." },
+            { cat: "Treasury & Economy", q: "Winter is approaching and the royal granaries are half empty. Do you tax the wealthy merchant guilds heavily, or open the palace reserves to feed the citizens?", a: "Tax the wealthy merchant guilds to refill the vaults.", b: "Open palace reserves to feed the common people directly." },
+            { cat: "Rebellion & Power", q: "A charismatic rebel leader has been captured by your sentinels. Do you make them a royal advisor to bring peace to the dissidents, or exile them across the northern sea?", a: "Appoint the rebel leader as an advisor for unity.", b: "Exile them across the sea to deter future uprisings." },
+            { cat: "Sacred & Environmental", q: "Local villagers wish to clear part of the sacred wilderness forest to expand their farms. Do you protect the ancient trees and wildlife, or grant the land to boost food production?", a: "Protect the sacred forest and wild habitats.", b: "Clear the land to maximize agricultural harvest." },
+            { cat: "Military & Commerce", q: "Your veteran Guard Captain requests more soldiers stationed at the outpost, but it will drain funds from marketplace expansion. Do you prioritize military defense, or civic commerce?", a: "Prioritize military defense and soldier reinforcement.", b: "Prioritize civic commerce and marketplace growth." },
+            { cat: "Foreign Affairs", q: "A foreign scholar arrives bearing advanced blueprints for defensive stone walls. Do you welcome them into your court as a master builder, or turn them away out of fear of espionage?", a: "Welcome the scholar and fund the defensive walls.", b: "Turn them away to protect sovereign state secrets." },
+            { cat: "Guild Laws", q: "The northern guilds refuse to pay their annual tribute unless you grant them monopoly rights over river trade. Do you enforce the crown's law with armed guards, or compromise to keep commerce flowing?", a: "Enforce crown law with armed guards to show strength.", b: "Compromise and grant them the trade monopoly." },
+            { cat: "Royal Succession", q: "How shall the young prince or princess be raised for leadership? Should they train in military combat and strategy, or diplomacy and statecraft?", a: "Focus their training entirely on military combat and protection.", b: "Focus their training entirely on diplomacy and foreign relations." },
+            { cat: "Public Relief", q: "A severe summer drought has left the southern hamlets parched. Do you use imperial funds to build aqueducts from the mountains, or pray at the temple and ration existing water supplies?", a: "Fund the construction of permanent mountain aqueducts.", b: "Ration existing water and rely on traditional relief." }
+        ];
+
+        // Fill up to 200 questions dynamically
+        while (royalDilemmas.length < 200) {
+            let base = royalDilemmas[royalDilemmas.length % 10];
+            royalDilemmas.push({
+                cat: base.cat + " (Realm Petition #" + (royalDilemmas.length + 1) + ")",
+                q: "Petition regarding " + base.q.toLowerCase(),
+                a: base.a,
+                b: base.b
+            });
+        }
+
+        let userState = { coins: 0, rank: "Sovereign Regent", currentQuestionIndex: 0, sessionCount: 0, lockoutEnd: 0 };
+        let timerInterval = null;
+
+        function initThroneRoom() {
+            loadUserData();
+            checkLockoutStatus();
+            startGlobalTimer();
+        }
+
+        function loadUserData() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                userState.coins = parsed.coins || 0;
+                userState.currentQuestionIndex = parsed.throneIndex || 0;
+                userState.sessionCount = parsed.throneSessionCount || 0;
+                userState.lockoutEnd = parsed.throneLockoutEnd || 0;
+                if (parsed.estates && parsed.estates.length >= 4) userState.rank = "Grand Duke";
+                else if (parsed.estates && parsed.estates.length >= 2) userState.rank = "Duke";
+                else if (parsed.estates && parsed.estates.length >= 1) userState.rank = "Lord / Noble";
+            }
+            document.getElementById('throne-coin-display').innerText = userState.coins;
+            document.getElementById('throne-status-display').innerText = userState.rank;
+        }
+
+        function checkLockoutStatus() {
+            let now = Date.now();
+            if (userState.lockoutEnd > now) {
+                // Currently locked out
+                document.getElementById('activePetitionBox').style.display = 'none';
+                document.getElementById('lockoutBox').style.display = 'flex';
+            } else {
+                // Active session
+                if (userState.sessionCount >= 4) {
+                    userState.sessionCount = 0;
+                    saveUserDataState();
+                }
+                document.getElementById('lockoutBox').style.display = 'none';
+                document.getElementById('activePetitionBox').style.display = 'block';
+                loadCurrentDilemma();
+                document.getElementById('session-counter').innerText = (4 - userState.sessionCount);
+            }
+        }
+
+        function loadCurrentDilemma() {
+            let idx = userState.currentQuestionIndex % royalDilemmas.length;
+            let current = royalDilemmas[idx];
+
+            document.getElementById('petition-category').innerText = "📜 " + current.cat;
+            document.getElementById('question-counter').innerText = "Dilemma " + (idx + 1) + " of 200";
+            document.getElementById('petition-content').innerText = `"${current.q}"`;
+            document.getElementById('choice-btn-1').innerText = "A) " + current.a;
+            document.getElementById('choice-btn-2').innerText = "B) " + current.b;
+        }
+
+        function makeRoyalChoice(choiceIndex) {
+            let now = Date.now();
+            if (userState.lockoutEnd > now) {
+                alert("The King is busy and the Queen is having tea with her mother-in-law! Court is in recess.");
+                return;
+            }
+
+            if (userState.sessionCount >= 4) {
+                triggerLockout();
+                return;
+            }
+
+            let idx = userState.currentQuestionIndex % royalDilemmas.length;
+            let current = royalDilemmas[idx];
+            let chosenText = choiceIndex === 0 ? current.a : current.b;
+
+            userState.coins += 150;
+            userState.currentQuestionIndex++;
+            userState.sessionCount++;
+
+            saveUserDataState();
+
+            alert(`👑 Decree Rendered Successfully!\n\nYour Choice: "${chosenText}"\n\nReward: +150 Imperial Coins added!`);
+
+            if (userState.sessionCount >= 4) {
+                triggerLockout();
+            } else {
+                loadUserData();
+                checkLockoutStatus();
+            }
+        }
+
+        function triggerLockout() {
+            userState.lockoutEnd = Date.now() + 360000; // 6 minutes
+            saveUserDataState();
+            checkLockoutStatus();
+            alert("🔔 You have completed your 4 petitions for this session! The Queen is having tea with her mother-in-law. You must wait 6 minutes for court to resume.");
+        }
+
+        function saveUserDataState() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            let parsed = saved ? JSON.parse(saved) : { coins: 0, estates: [] };
+            parsed.coins = userState.coins;
+            parsed.throneIndex = userState.currentQuestionIndex;
+            parsed.throneSessionCount = userState.sessionCount;
+            parsed.throneLockoutEnd = userState.lockoutEnd;
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
+        }
+
+        function startGlobalTimer() {
+            timerInterval = setInterval(() => {
+                let now = Date.now();
+                if (userState.lockoutEnd > now) {
+                    let diffSecs = Math.floor((userState.lockoutEnd - now) / 1000);
+                    let mins = Math.floor(diffSecs / 60);
+                    let secs = diffSecs % 60;
+                    let timeStr = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+                    
+                    document.getElementById('timer-display').innerText = timeStr;
+                    document.getElementById('lockout-timer-display').innerText = timeStr;
+                } else {
+                    document.getElementById('timer-display').innerText = "00:00";
+                    if (document.getElementById('lockoutBox').style.display === 'flex') {
+                        userState.sessionCount = 0;
+                        userState.lockoutEnd = 0;
+                        saveUserDataState();
+                        checkLockoutStatus();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Fullscreen Toggle Engine
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Decrease / Exit Fullscreen";
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Expand to Fullscreen";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+    </script>
+</body>
+</html>
