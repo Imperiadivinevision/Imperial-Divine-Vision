@@ -3,353 +3,803 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Empire: Interactive World Map & Cinematic Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Imperial Divine Vision | Sanctuary Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --royal-purple: #1a0822;
-            --imperial-crimson: #36080e;
-            --gold-accent: #f3e5ab;
-            --gold-shine: #ffd700;
-            --dark-bg: #07040a;
+        @keyframes cosmicShift {
+            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+            33% { background-position: 50% 100%; filter: hue-rotate(90deg); }
+            66% { background-position: 100% 0%; filter: hue-rotate(180deg); }
+            100% { background-position: 0% 50%; filter: hue-rotate(310deg); }
         }
 
-        * { box-sizing: border-box; }
+        :root {
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(17, 23, 21, 0.95);
+            --theme-color: #c5b59b; 
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
+            --glow-strength: rgba(197, 181, 155, 0.2);
+        }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--gold-accent);
-            font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffd700, #ffc0cb, #dda0dd, #ff8c00, #ffd700);
-            background-size: 500% 500%;
-            animation: breathingFloor 12s ease infinite;
-            min-height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--theme-color);
+            font-family: 'Cinzel', serif;
             text-align: center;
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #0b0f0e;
+            transition: background 0.8s ease;
         }
 
-        @keyframes breathingFloor {
-            0% { background-position: 0% 50%; transform: scale(1); }
-            50% { background-position: 100% 50%; transform: scale(1.008); }
-            100% { background-position: 0% 50%; transform: scale(1); }
+        body.animated-vibe {
+            background: linear-gradient(135deg, #180e22, #111715, #0b0f0e, #1a0e14);
+            background-size: 500% 500%;
+            animation: cosmicShift 22s ease infinite alternate;
         }
 
-        /* Floating Sparkles */
-        .floating-sparkle {
-            position: absolute;
-            pointer-events: none;
-            animation: flyUpward 7s linear infinite;
-            opacity: 0.8;
-            z-index: 1;
-        }
-
-        @keyframes flyUpward {
-            0% { transform: translateY(110vh) translateX(0px) rotate(0deg) scale(0.6); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(-10vh) translateX(60px) rotate(360deg) scale(1.4); opacity: 0; }
-        }
-
-        .top-nav-bar {
+        /* Independent Moving Flowering Background */
+        .moving-bg-layer {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            background: rgba(15, 8, 22, 0.92);
-            border-bottom: 2px double var(--gold-shine);
+            width: 100vw;
+            height: 100vh;
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px auto;
+            background-image: url('garden_border_pattern.png');
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        body.animated-vibe .moving-bg-layer {
+            animation: breatheGarden 60s infinite alternate ease-in-out;
+        }
+
+        @keyframes breatheGarden {
+            0% { background-size: 400px auto; background-position: center center; }
+            50% { background-size: 415px auto; background-position: center top; }
+            100% { background-size: 390px auto; background-position: center bottom; }
+        }
+
+        /* Interactive Light / Shine Layer on Mouse Move */
+        .shine-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(197, 181, 155, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* YouTube-Style Fullscreen Button in Upper-Right Corner */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 3000;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            padding: 15px 20px;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px var(--theme-color);
         }
 
-        .top-nav-bar a {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
+        /* Global Fullscreen Chamber Mode */
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen .theme-switcher-bar,
+        body.is-chamber-fullscreen .royal-scroll-trigger,
+        body.is-chamber-fullscreen .footer-sanctuary {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .hero-section {
+            padding: 0 !important;
+            justify-content: center !important;
+            min-height: 100vh !important;
+        }
+        body.is-chamber-fullscreen .real-book-container {
+            width: 420px !important;
+            height: 600px !important;
+        }
+
+        /* Floating Royal Scroll Button (Tutorial & Navigation Guide) */
+        .royal-scroll-trigger {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: linear-gradient(135deg, #2b1035, #4a0e17);
+            border: 2px solid var(--theme-color);
+            color: #ffe875;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 2500;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .royal-scroll-trigger:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 0 25px var(--theme-color);
+        }
+
+        /* Unrolling Parchment Scroll Modal */
+        .scroll-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 8, 7, 0.9);
+            z-index: 4000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .scroll-parchment {
+            background: linear-gradient(135deg, #f4ecd8, #e5d3b3);
+            border: 4px double #5c3a21;
+            color: #2c1810;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+            animation: unrollScroll 0.5s ease-out;
+        }
+        @keyframes unrollScroll {
+            0% { transform: scaleY(0.1); opacity: 0; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+        .scroll-parchment h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #5c3a21;
+            margin-top: 0;
+            text-align: center;
+        }
+        .scroll-parchment h4 {
+            font-family: 'Cinzel', serif;
+            color: #7b4b2a;
+            border-bottom: 1px solid #c8b08c;
+            padding-bottom: 4px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+        .scroll-parchment p {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+        .close-scroll-btn {
+            background: #5c3a21;
+            color: #f4ecd8;
+            border: none;
+            padding: 10px 25px;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 25px auto 0 auto;
+            transition: 0.2s;
+        }
+        .close-scroll-btn:hover { background: #3d2514; }
+
+        /* Professional Navigation Hub */
+        nav { 
+            padding: 14px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            flex-wrap: wrap;
+            backdrop-filter: blur(8px);
+            transition: border-color 0.5s ease;
+        }
+
+        .nav-module {
+            background: rgba(22, 30, 27, 0.85);
+            border: 1px solid var(--theme-color);
+            padding: 8px 14px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .nav-module:hover {
+            background: rgba(30, 42, 38, 0.95);
+            box-shadow: 0 0 15px var(--glow-strength);
+            transform: translateY(-2px);
+        }
+
+        nav a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--theme-color);
+            text-shadow: 0 0 8px var(--glow-strength);
+        }
+
+        /* Library Sub-Menu Popup Bar */
+        .library-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(17, 23, 21, 0.98);
+            border: 1px solid var(--theme-color);
+            border-radius: 6px;
+            margin-top: 6px;
+            padding: 8px;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.9);
+            z-index: 1100;
+            min-width: 150px;
+            text-align: left;
+        }
+
+        .library-dropdown a {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .library-dropdown a:hover {
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        /* Live Color Theme Switcher Bar */
+        .theme-switcher-bar {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            background: rgba(11, 15, 14, 0.75);
+            padding: 8px;
+            border-radius: 6px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .color-btn {
+            background: #111715;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
             text-transform: uppercase;
         }
 
-        .top-nav-bar a:hover {
-            color: var(--gold-shine);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
-            transform: scale(1.05);
+        .color-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px currentColor;
         }
 
-        .map-container {
-            max-width: 950px;
-            margin: 130px auto 50px auto;
-            background: rgba(18, 10, 24, 0.95);
-            border: 2px solid var(--gold-shine);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 192, 203, 0.4);
+        /* Hero Section */
+        .hero-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             position: relative;
+            padding: 30px 20px;
+        }
+
+        /* 3D Real Book Container */
+        .real-book-container {
+            width: 340px;
+            height: 480px;
+            position: relative;
+            perspective: 1200px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            animation: floatBook 4s infinite alternate ease-in-out;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes floatBook {
+            0% { transform: translateY(0px) rotateY(-5deg) rotateX(3deg); }
+            100% { transform: translateY(-12px) rotateY(-2deg) rotateX(1deg); }
+        }
+
+        .real-book {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border-radius: 4px 12px 12px 4px;
+            box-shadow: -15px 20px 40px rgba(0,0,0,0.8), 0 0 45px var(--glow-strength);
+        }
+
+        .real-book-container:hover .real-book {
+            transform: scale(1.03) rotateY(0deg) rotateX(0deg);
+            box-shadow: -20px 25px 60px rgba(0,0,0,0.9), 0 0 70px var(--theme-color);
+        }
+
+        .real-book::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 25px; height: 100%;
+            background: linear-gradient(90deg, #112618, #1b3b28, #0b140f);
+            border-radius: 4px 0 0 4px;
+            box-shadow: inset -3px 0 6px rgba(0,0,0,0.7);
             z-index: 10;
         }
 
-        h1 {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-shine);
-            letter-spacing: 3px;
-            margin-top: 0;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-        }
-
-        p {
-            color: #fceade;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        /* Interactive Map Board simulation */
-        .map-board {
-            position: relative;
-            background: rgba(10, 4, 15, 0.9);
-            border: 2px solid var(--gold-accent);
-            border-radius: 12px;
-            height: 380px;
-            margin: 25px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: radial-gradient(circle, rgba(255,215,0,0.08) 10%, transparent 10%);
-            background-size: 30px 30px;
-        }
-
-        .map-node {
+        .real-book::after {
+            content: '';
             position: absolute;
-            background: #251033;
-            color: var(--gold-shine);
-            border: 2px solid var(--gold-shine);
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            top: 4px; right: -12px; width: 12px; height: calc(100% - 8px);
+            background: linear-gradient(90deg, #e6d5b8, #fff, #c5b59b, #a39378);
+            transform: skewY(45deg);
+            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+            border-radius: 0 2px 2px 0;
         }
 
-        .map-node:hover {
-            background: var(--gold-shine);
-            color: #1a0822;
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 0 20px var(--gold-shine);
+        .book-cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px 12px 12px 4px;
+            border: 4px solid var(--theme-color);
+            box-sizing: border-box;
+            position: relative;
+            z-index: 5;
+            transition: border-color 0.5s ease;
         }
 
-        /* Node Positions on Map */
-        #node-throne { top: 15%; left: 15%; }
-        #node-village { top: 65%; left: 20%; }
-        #node-wilderness { top: 25%; right: 15%; }
-        #node-battlefield { top: 70%; right: 20%; }
-
-        /* Cinematic Pop-up Modal */
-        .cinematic-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 2, 8, 0.88);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(8px);
-        }
-
-        .cinematic-content {
-            background: linear-gradient(135deg, #1f0b2b, #3b0d1a);
-            border: 3px solid var(--gold-shine);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 550px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
-            animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes popUpAnim {
-            0% { transform: scale(0.6); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .cinematic-avatar {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px var(--gold-shine));
-        }
-
-        .close-cinematic {
-            background: var(--gold-shine);
-            color: #1a0822;
-            border: none;
-            padding: 10px 25px;
-            font-family: 'Cinzel Decorative', serif;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        .close-cinematic:hover {
-            box-shadow: 0 0 15px var(--gold-shine);
-            transform: scale(1.05);
+        .royal-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-style: italic;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
         }
 
         .royal-btn {
-            background: #1a0822;
-            color: var(--gold-shine);
-            border: 1px solid var(--gold-shine);
-            padding: 12px 20px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            text-decoration: none;
-            display: block;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
-
-        .royal-btn:hover {
-            background: var(--gold-shine);
-            color: #1a0822;
+            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 12px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
             font-weight: bold;
-            box-shadow: 0 0 20px var(--gold-shine);
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px var(--glow-strength);
+            transition: 0.2s;
+        }
+        .royal-btn:hover {
+            background: linear-gradient(to bottom, #fff, var(--theme-color));
+            box-shadow: 0 0 25px var(--theme-color);
         }
 
-        /* Click Sparkle Effect */
-        .click-sparkle {
+        /* Universal Scroll Down Indicator */
+        #global-scroll-indicator {
             position: fixed;
-            pointer-events: none;
-            font-size: 1.5rem;
-            animation: burstSparkle 0.9s ease-out forwards;
-            z-index: 9999;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(17, 23, 21, 0.9);
+            border: 1px solid var(--theme-color);
+            color: var(--text-main);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            z-index: 2000;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: floatIndicator 2s infinite ease-in-out;
+            transition: opacity 0.3s ease;
+        }
+        @keyframes floatIndicator {
+            0% { transform: translate(-50%, 0px); }
+            50% { transform: translate(-50%, 6px); }
+            100% { transform: translate(-50%, 0px); }
         }
 
-        @keyframes burstSparkle {
-            0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 1; }
-            100% { transform: translate(var(--dx), var(--dy)) scale(1.6) rotate(180deg); opacity: 0; }
+        /* Professional Footer */
+        .footer-sanctuary {
+            background: var(--panel-bg);
+            border-top: 2px solid var(--theme-color);
+            padding: 25px 20px;
+            margin-top: auto;
+            box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
+            transition: border-color 0.5s ease;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-title {
+            color: var(--theme-color);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--glow-strength);
+        }
+        .footer-contact {
+            color: var(--text-main);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Community Chat Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(4, 10, 8, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-box {
+            background: rgba(20, 27, 24, 0.98);
+            border: 2px solid var(--theme-color);
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 30px var(--glow-strength);
+        }
+        .gate-input {
+            width: 100%;
+            padding: 10px;
+            background: #0b0f0e;
+            border: 1px solid var(--theme-color);
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            margin: 15px 0;
+            box-sizing: border-box;
+            border-radius: 4px;
         }
     </style>
 </head>
-<body onclick="triggerGlobalSparkle(event)">
+<body onmousemove="shineLight(event)">
 
-    <!-- Floating Background Magical Elements -->
-    <div class="floating-sparkle" style="left: 10%; animation-duration: 6s; animation-delay: 0s;">✨</div>
-    <div class="floating-sparkle" style="left: 30%; animation-duration: 8s; animation-delay: 2s;">👑</div>
-    <div class="floating-sparkle" style="left: 55%; animation-duration: 7s; animation-delay: 1s;">⚔️</div>
-    <div class="floating-sparkle" style="left: 80%; animation-duration: 9s; animation-delay: 1.5s;">🌟</div>
+    <!-- YouTube-Style Fullscreen Toggle Button -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
 
-    <nav class="top-nav-bar">
-        <a href="index.html">Home 🏛️</a>
-        <a href="character-workshop.html">Workshop 👤</a>
-        <a href="library.html">Library 📖</a>
-        <a href="room-youth.html">Proving Grounds 🛡️</a>
+    <!-- Floating Royal Scroll Tutorial Trigger -->
+    <div class="royal-scroll-trigger" onclick="openScrollTutorial()">
+        📜 Sanctuary Guide
+    </div>
+
+    <!-- Unrolling Scroll Modal -->
+    <div class="scroll-modal-overlay" id="scrollModal">
+        <div class="scroll-parchment">
+            <h2>Imperial Sanctuary Guide</h2>
+            <p style="text-align: center; font-style: italic; color: #5c3a21; margin-bottom: 20px;">
+                Welcome to your sovereign map. Discover the purpose of every chamber within our empire.
+            </p>
+
+            <h4>🏠 Home (`index.html`)</h4>
+            <p>Your sanctuary root. Features the 3D living book, ambient background melody, and the Live Vibe Theme switcher (choose Pink, Gold, Blue, Green, Orange, or No Color).</p>
+
+            <h4>📚 Library & Sub-tabs (`library.html`)</h4>
+            <p>Hover or click Library in the navigation to reveal sub-tabs. Read the sacred book, explore Trailers, visit the Garden, or enter the Elder Sanctuary.</p>
+
+            <h4>⚔️ Battle Chambers (`battle.html`)</h4>
+            <p>The interactive combat arena. Click the stage to slash, battle rebellion forces, manage your army soldiers, visit the market, and equip your custom player champion.</p>
+
+            <h4>🛡️ Youth Proving Grounds (`proving-grounds.html`)</h4>
+            <p>Training and growth grounds dedicated to youthful development and strength.</p>
+
+            <h4>🪙 Imperial Shop (`shop.html`)</h4>
+            <p>Acquire sovereign items, register your email to link your profile, and watch your coin balance sync instantly across all rooms.</p>
+
+            <h4>💬 Community Chat</h4>
+            <p>Age-verified community routing chambers tailored for kids, youth, adults, and elders.</p>
+
+            <button class="close-scroll-btn" onclick="closeScrollTutorial()">Roll Up Scroll</button>
+        </div>
+    </div>
+
+    <!-- Peaceful Melody Audio -->
+    <audio id="peaceful-melody" loop preload="auto">
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Moving Background & Shine Overlay -->
+    <div class="moving-bg-layer"></div>
+    <div class="shine-overlay" id="shine-layer"></div>
+
+    <!-- Universal Floating Scroll Down Indicator -->
+    <div id="global-scroll-indicator" onclick="window.scrollBy({ top: 400, behavior: 'smooth' })">
+        <span>Scroll Down for More</span>
+        <span>↓</span>
+    </div>
+
+    <!-- Community Chat Modal -->
+    <div class="modal-overlay" id="communityModal">
+        <div class="modal-box">
+            <h3 style="color: var(--theme-color); margin-top: 0;">💬 Community Chat</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
+            <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
+            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
+            <br>
+            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Navigation Bar with Library Submenu -->
+    <nav> 
+        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
+        
+        <div class="nav-module" onmouseenter="toggleLibraryMenu(true)" onmouseleave="toggleLibraryMenu(false)">
+            <a href="library.html">📚 Library ▾</a>
+            <div class="library-dropdown" id="libraryDropdown">
+                <a href="trailers.html">🎬 Trailers</a>
+                <a href="garden.html">🌸 Garden</a>
+                <a href="room-elder.html">🌿 Elder Sanctuary</a>
+            </div>
+        </div>
+
+        <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
+        <div class="nav-module"><a href="proving-grounds.html">🛡️ Youth</a></div>
+        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
+        <div class="nav-module"><a href="#" onclick="openModal(); return false;">💬 Community</a></div>
     </nav>
 
-    <!-- Cinematic Event Modal Popup -->
-    <div id="cinematicModal" class="cinematic-modal">
-        <div class="cinematic-content" onclick="event.stopPropagation()">
-            <div id="modalAvatar" class="cinematic-avatar">👑</div>
-            <h2 id="modalTitle" style="font-family: 'Cinzel Decorative', serif; color: var(--gold-shine); margin-top: 0;">Emergency Dispatch</h2>
-            <p id="modalText">"It's an emergency! We have this stuff to do across the kingdom!"</p>
-            <button class="close-cinematic" onclick="closeCinematic()">Acknowledge & Proceed</button>
-        </div>
+    <!-- Live Color Theme Switcher Bar with No Color Option -->
+    <div class="theme-switcher-bar">
+        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted);">Vibe Theme:</span>
+        <button class="color-btn" style="border-color: #8c8c8c; color: #8c8c8c;" onclick="setTheme('reset', '#c5b59b', 'rgba(197, 181, 155, 0.2)')">No Color</button>
+        <button class="color-btn" style="border-color: #ff69b4; color: #ff69b4;" onclick="setTheme('active', '#ff69b4', 'rgba(255, 105, 180, 0.5)')">Pink</button>
+        <button class="color-btn" style="border-color: #d4af37; color: #d4af37;" onclick="setTheme('active', '#d4af37', 'rgba(212, 175, 55, 0.5)')">Gold</button>
+        <button class="color-btn" style="border-color: #4169e1; color: #4169e1;" onclick="setTheme('active', '#4169e1', 'rgba(65, 105, 225, 0.5)')">Blue</button>
+        <button class="color-btn" style="border-color: #32cd32; color: #32cd32;" onclick="setTheme('active', '#32cd32', 'rgba(50, 205, 50, 0.5)')">Green</button>
+        <button class="color-btn" style="border-color: #ff8c00; color: #ff8c00;" onclick="setTheme('active', '#ff8c00', 'rgba(255, 140, 0, 0.5)')">Orange</button>
     </div>
 
-    <div class="map-container">
-        <h1>Interactive Empire Map</h1>
-        <p>Click upon the regional territories below to trigger cinematic character dispatches, emergency alerts, or enter the Battle Arena.</p>
-
-        <!-- Interactive Map Board with Battle Arena Link -->
-        <div class="map-board" onclick="event.stopPropagation()">
-            <div id="node-throne" class="map-node" onclick="triggerCinematic('👑 Queen Rosanna', '👑', 'Emergency in the Throne Room! Queen Rosanna requires your counsel regarding the royal decrees and the security of the realm.')">🏛️ Throne Room</div>
-            <div id="node-village" class="map-node" onclick="triggerCinematic('🛡️ King Benson', '🛡️', 'Village Alert! King Benson reports that food stocks and feudal registries need immediate oversight from the leaders.')">🏡 Village Commons</div>
-            <div id="node-wilderness" class="map-node" onclick="triggerCinematic('✨ Traveler Herald', '✨', 'Traveler Sighted! A weary traveler approaches the wilderness gates seeking grace, provisions, and safe passage.')">🌲 Wilderness Path</div>
-            <div id="node-battlefield" class="map-node" onclick="window.location.href='battle.html'">⚔️ Border Outpost (Enter Battle)</div>
+    <!-- Hero Section -->
+    <div class="hero-section" onclick="playMelody()">
+        <div class="real-book-container" onclick="window.location.href='library.html'">
+            <div class="real-book">
+                <img src="cover_image.png" class="book-cover-image" alt="The Song of Rosanna and the Evil King" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
+            </div>
         </div>
 
-        <a href="room-youth.html" class="royal-btn" onclick="event.stopPropagation()">Return to Proving Grounds</a>
+        <h3 style="color: var(--text-main); margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
+        <p class="royal-subtitle">
+            “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
+        </p>
+
+        <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
     </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer-sanctuary">
+        <div class="footer-content">
+            <div class="footer-title">Imperial Divine Vision</div>
+            <a href="mailto:imperialdivinevision@gmail.com" class="footer-contact">✉️ imperialdivinevision@gmail.com</a>
+            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Rights Reserved.</div>
+        </div>
+    </footer>
 
     <script>
-        // Web Audio Chime Sound
-        function playChimeSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
+        let musicStarted = false;
 
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3);
-
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.6);
-            } catch (e) {}
-        }
-
-        // Global Click Sparkle & Sound
-        function triggerGlobalSparkle(event) {
-            playChimeSound();
-            const symbols = ['✨', '💖', '👑', '🌸', '🌟', '💫'];
-            const x = event.clientX;
-            const y = event.clientY;
-
-            for (let i = 0; i < 6; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'click-sparkle';
-                sparkle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-                sparkle.style.left = x + 'px';
-                sparkle.style.top = y + 'px';
-
-                const angle = Math.random() * Math.PI * 2;
-                const distance = 40 + Math.random() * 80;
-                const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance;
-
-                sparkle.style.setProperty('--dx', dx + 'px');
-                sparkle.style.setProperty('--dy', dy + 'px');
-
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 900);
+        // Theme Switcher
+        function setTheme(mode, color, glow) {
+            if (mode === 'reset') {
+                document.body.classList.remove('animated-vibe');
+                document.documentElement.style.setProperty('--theme-color', '#c5b59b');
+                document.documentElement.style.setProperty('--glow-strength', glow);
+            } else {
+                document.body.classList.add('animated-vibe');
+                document.documentElement.style.setProperty('--theme-color', color);
+                document.documentElement.style.setProperty('--glow-strength', glow);
             }
         }
 
-        // Cinematic Modal Trigger
-        function triggerCinematic(title, emoji, message) {
-            playChimeSound();
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalAvatar').innerText = emoji;
-            document.getElementById('modalText').innerText = `"${message}"`;
-            document.getElementById('cinematicModal').style.display = 'flex';
+        // Library Submenu Toggle
+        function toggleLibraryMenu(show) {
+            document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
         }
 
-        function closeCinematic() {
-            playChimeSound();
-            document.getElementById('cinematicModal').style.display = 'none';
+        // Fullscreen YouTube-Style Toggle / Chamber Expansion Engine
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+
+            // Toggle custom chamber view expansion first for a seamless web experience
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Exit Fullscreen View";
+                // Also trigger native browser fullscreen if possible
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Toggle Fullscreen View";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+
+        // Unrolling Scroll Modal
+        function openScrollTutorial() {
+            document.getElementById('scrollModal').style.display = 'flex';
+        }
+        function closeScrollTutorial() {
+            document.getElementById('scrollModal').style.display = 'none';
+        }
+
+        // Mouse Shine Effect & Auto-Audio Start
+        function shineLight(event) {
+            let layer = document.getElementById('shine-layer');
+            let x = (event.clientX / window.innerWidth) * 100;
+            let y = (event.clientY / window.innerHeight) * 100;
+            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(197, 181, 155, 0.2) 0%, transparent 60%)";
+            layer.style.opacity = "1";
+
+            if (!musicStarted) {
+                let audio = document.getElementById('peaceful-melody');
+                if (audio) {
+                    audio.volume = 0.4;
+                    audio.play().then(() => {
+                        musicStarted = true;
+                    }).catch(e => {});
+                }
+            }
+        }
+
+        function playMelody() {
+            let audio = document.getElementById('peaceful-melody');
+            if (audio && !musicStarted) {
+                audio.volume = 0.4;
+                audio.play().then(() => {
+                    musicStarted = true;
+                }).catch(e => {});
+            }
+        }
+
+        // Community Modal
+        function openModal() {
+            document.getElementById('communityModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('communityModal').style.display = 'none';
+        }
+
+        // Scroll Down Indicator Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const indicator = document.getElementById('global-scroll-indicator');
+            if (document.documentElement.scrollHeight > window.innerHeight + 100) {
+                indicator.style.display = 'flex';
+            } else {
+                indicator.style.display = 'none';
+            }
+
+            window.addEventListener('scroll', () => {
+                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80) {
+                    indicator.style.opacity = '0';
+                    indicator.style.pointerEvents = 'none';
+                } else {
+                    indicator.style.opacity = '1';
+                    indicator.style.pointerEvents = 'auto';
+                }
+            });
+        });
+
+        // Birthday Router for Community
+        function routeByBirthday() {
+            let bdayInput = document.getElementById('user-birthday').value.trim();
+            if (!bdayInput) {
+                alert("Please enter your date of birth.");
+                return;
+            }
+
+            let parts = bdayInput.split(/[\/\-\.]/);
+            let year = parseInt(parts[parts.length - 1]);
+
+            if (isNaN(year) || year < 1900 || year > 2026) {
+                alert("Please enter a valid date format (e.g., MM/DD/YYYY).");
+                return;
+            }
+
+            let currentYear = 2026;
+            let age = currentYear - year;
+
+            if (age < 13) {
+                alert("Kids credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=kids";
+            } else if (age >= 13 && age <= 19) {
+                alert("Youth credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=youth";
+            } else if (age >= 20 && age <= 64) {
+                alert("Adult credentials recognized. Routing to Community Chamber...");
+                window.location.href = "community.html?room=adult";
+            } else {
+                alert("Elder credentials recognized. Routing to Sovereign Sanctuary...");
+                window.location.href = "room-elder.html";
+            }
         }
     </script>
-
 </body>
 </html>
