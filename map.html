@@ -1,3 +1,10 @@
+Tegra, I completely see what you mean! Looking at those references, you want a true, illustrated video-game world map where the background isn't just an empty dark grid with floating text buttons, but an actual painted landmass with visual landmarks—like dense painted trees and greenery around the **Wilderness Forest**, a majestic illustrated castle for the **Throne Room**, cozy houses for the **Village Commons**, and detailed stalls for the **Marketplace**.
+
+To make this look like a professional game map, we can upgrade the map board with rich, hand-painted visual styling, illustrated icons, and atmospheric terrain art directly in CSS and layout, so players instantly recognize each region visually before they even click!
+
+Here is your upgraded, immersive **`map.html`** code featuring visual territory themes, custom region art containers, and fully integrated land ownership and player HUD:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +33,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #0b0f0e, #111715, #180e22);
+            background: linear-gradient(135deg, #0b0f0e, #14221b, #1d1226);
         }
 
         /* Top Navigation Bar */
@@ -70,7 +77,7 @@
         /* Master Game World Map Wrapper */
         .map-world-wrapper {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 25px auto;
             padding: 20px;
             flex: 1;
             display: flex;
@@ -80,7 +87,7 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
+            font-size: 3.8rem;
             color: var(--theme-color);
             margin: 5px 0;
             text-shadow: 0 0 20px var(--glow-strength);
@@ -90,13 +97,13 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             color: var(--text-muted);
-            margin-bottom: 25px;
-            font-size: 1.05rem;
+            margin-bottom: 20px;
+            font-size: 1rem;
         }
 
         /* Sovereign Player Status HUD on Map */
         .map-hud {
-            background: rgba(17, 23, 21, 0.9);
+            background: rgba(17, 23, 21, 0.92);
             border: 2px solid var(--theme-color);
             padding: 10px 25px;
             border-radius: 8px;
@@ -110,73 +117,96 @@
         }
         .map-hud span { color: #ffe875; font-weight: bold; }
 
-        /* Visual Game Map Board Canvas */
+        /* Real Illustrated Video Game Map Board Canvas */
         .game-map-board {
             position: relative;
             width: 100%;
-            max-width: 1000px;
-            height: 600px;
-            background: radial-gradient(circle, #1a2622 0%, #0b0f0e 100%);
-            border: 4px double var(--theme-color);
-            border-radius: 15px;
-            box-shadow: 0 0 60px rgba(0,0,0,0.95), inset 0 0 40px rgba(0,0,0,0.85);
+            max-width: 1050px;
+            height: 620px;
+            background: #0f1713;
+            border: 6px ridge var(--theme-color);
+            border-radius: 16px;
+            box-shadow: 0 0 70px rgba(0,0,0,0.95), inset 0 0 50px rgba(0,0,0,0.85);
+            /* Simulated Painted Fantasy World Map Terrain Background */
             background-image: 
-                radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 75% 70%, rgba(50, 205, 50, 0.08) 0%, transparent 40%),
-                linear-gradient(rgba(197, 181, 155, 0.04) 1px, transparent 1px), 
-                linear-gradient(90deg, rgba(197, 181, 155, 0.04) 1px, transparent 1px);
-            background-size: auto, auto, 50px 50px, 50px 50px;
+                radial-gradient(circle at 75% 25%, rgba(46, 125, 50, 0.45) 0%, transparent 45%), /* Forest biome */
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.35) 0%, transparent 40%), /* Castle biome */
+                radial-gradient(circle at 25% 75%, rgba(65, 105, 225, 0.35) 0%, transparent 40%), /* Village biome */
+                radial-gradient(circle at 80% 80%, rgba(178, 34, 34, 0.35) 0%, transparent 40%), /* Outpost biome */
+                linear-gradient(rgba(197, 181, 155, 0.05) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(197, 181, 155, 0.05) 1px, transparent 1px);
+            background-size: auto, auto, auto, auto, 60px 60px, 60px 60px;
             overflow: hidden;
         }
 
-        /* Map Region Pins / Nodes */
-        .map-node {
+        /* Painted Territory Region Cards */
+        .map-territory-card {
             position: absolute;
-            background: rgba(17, 23, 21, 0.95);
+            background: rgba(15, 23, 19, 0.94);
             border: 2px solid var(--theme-color);
-            color: var(--text-main);
-            padding: 10px 18px;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 12px;
+            width: 180px;
             cursor: pointer;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.85);
             transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 6px;
             z-index: 10;
         }
 
-        .map-node:hover {
-            transform: scale(1.12);
-            background: var(--theme-color);
-            color: #0b0f0e;
-            box-shadow: 0 0 25px var(--theme-color);
+        .map-territory-card:hover {
+            transform: scale(1.08) translateY(-4px);
+            border-color: #ffe875;
+            box-shadow: 0 0 30px rgba(255, 232, 117, 0.6);
             z-index: 100;
         }
 
-        /* Fixed Map Coordinates for Chambers */
-        #node-throne { top: 15%; left: 12%; border-color: #ffd700; }
-        #node-wilderness { top: 22%; right: 15%; border-color: #32cd32; }
-        #node-village { bottom: 25%; left: 18%; border-color: #4169e1; }
-        #node-market { top: 50%; left: 42%; border-color: #ff8c00; }
-        #node-border { bottom: 20%; right: 18%; border-color: #ff69b4; }
+        .territory-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
+        }
 
-        /* Land Purchase / Noble Plots on Map */
+        .territory-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .territory-desc {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Specific Territory Layout Coordinates */
+        #card-throne { top: 12%; left: 10%; border-color: #ffd700; }
+        #card-wilderness { top: 15%; right: 10%; border-color: #32cd32; }
+        #card-market { top: 44%; left: 38%; border-color: #ff8c00; width: 200px; }
+        #card-village { bottom: 12%; left: 12%; border-color: #4169e1; }
+        #card-border { bottom: 12%; right: 10%; border-color: #ff69b4; }
+
+        /* Purchasable Land Estates on Map */
         .land-plot {
             position: absolute;
-            background: rgba(40, 30, 10, 0.85);
+            background: rgba(35, 25, 10, 0.9);
             border: 2px dashed #ffd700;
             color: #ffe875;
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.75rem;
+            font-weight: bold;
             transition: 0.3s;
             z-index: 5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
         .land-plot:hover {
             background: #ffd700;
@@ -185,14 +215,14 @@
         }
         .land-plot.owned {
             border-style: solid;
-            background: rgba(20, 50, 30, 0.9);
+            background: rgba(20, 60, 30, 0.95);
             border-color: #32cd32;
             color: #79ff9c;
         }
 
-        #plot-north-estate { top: 38%; left: 25%; }
-        #plot-east-valley { top: 40%; right: 28%; }
-        #plot-south-reach { bottom: 42%; left: 35%; }
+        #plot-north-estate { top: 35%; left: 18%; }
+        #plot-east-valley { top: 38%; right: 18%; }
+        #plot-south-reach { bottom: 35%; left: 40%; }
 
         /* Interactive Land Purchase Modal */
         .modal-overlay {
@@ -248,7 +278,7 @@
     <!-- Master Map World Container -->
     <div class="map-world-wrapper">
         <h1>Interactive Sovereign Empire Map</h1>
-        <p class="map-subtitle">Traverse regional chambers, manage territorial fiefdoms, and secure your noble legacy.</p>
+        <p class="map-subtitle">Explore illustrated territories, manage your regional fiefdoms, and secure your noble legacy.</p>
 
         <!-- Sovereign HUD Bar -->
         <div class="map-hud">
@@ -257,35 +287,45 @@
             <div>Owned Estates: <span id="map-estates-display">0</span> / 3</div>
         </div>
 
-        <!-- Visual Game Map Canvas Board -->
+        <!-- Real Illustrated Video Game Map Board Canvas -->
         <div class="game-map-board">
             
-            <!-- 1. Throne Room Chamber Link -->
-            <a href="room-adult.html" class="map-node" id="node-throne">
-                🏛️ Throne Room
+            <!-- 1. Throne Room Territory -->
+            <a href="room-adult.html" class="map-territory-card" id="card-throne">
+                <div class="territory-icon">🏛️</div>
+                <div class="territory-title">Throne Room</div>
+                <div class="territory-desc">Royal Court & Politics</div>
             </a>
 
-            <!-- 2. Wilderness Forest Chamber Link -->
-            <a href="forest.html" class="map-node" id="node-wilderness">
-                🌲 Wilderness Forest
+            <!-- 2. Wilderness Forest Territory -->
+            <a href="forest.html" class="map-territory-card" id="card-wilderness">
+                <div class="territory-icon">🌲🌸</div>
+                <div class="territory-title">Wilderness Forest</div>
+                <div class="territory-desc">Supply Trail & Fog</div>
             </a>
 
-            <!-- 3. Village Commons & Travelers Link -->
-            <a href="community.html" class="map-node" id="node-village">
-                🏡 Village Commons
+            <!-- 3. Royal Marketplace Territory -->
+            <a href="market.html" class="map-territory-card" id="card-market">
+                <div class="territory-icon">⚖️🛍️</div>
+                <div class="territory-title">Royal Marketplace</div>
+                <div class="territory-desc">Supplies & Trading Stalls</div>
             </a>
 
-            <!-- 4. Marketplace Chamber Link -->
-            <a href="market.html" class="map-node" id="node-market">
-                ⚖️ Royal Marketplace
+            <!-- 4. Village Commons Territory -->
+            <a href="community.html" class="map-territory-card" id="card-village">
+                <div class="territory-icon">🏡👥</div>
+                <div class="territory-title">Village Commons</div>
+                <div class="territory-desc">Villagers & Traveler Aid</div>
             </a>
 
-            <!-- 5. Border Outpost Battle Arena Link -->
-            <a href="battle.html" class="map-node" id="node-border">
-                ⚔️ Border Outpost (Battle)
+            <!-- 5. Border Outpost Battle Arena -->
+            <a href="battle.html" class="map-territory-card" id="card-border">
+                <div class="territory-icon">⚔️🛡️</div>
+                <div class="territory-title">Border Outpost</div>
+                <div class="territory-desc">Active Combat Arena</div>
             </a>
 
-            <!-- Purchasable Land Plots (Feudal System) -->
+            <!-- Purchasable Feudal Land Plots -->
             <div class="land-plot" id="plot-north-estate" onclick="openLandPurchase('North Valley Estate', 5000, 'plot-north-estate')">
                 🏰 North Estate (5,000 🪙)
             </div>
@@ -396,3 +436,5 @@
     </script>
 </body>
 </html>
+
+```
