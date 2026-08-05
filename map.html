@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +27,54 @@
             display: flex;
             flex-direction: column;
             background: linear-gradient(135deg, #0b0f0e, #14221b, #1d1226);
+            transition: background 0.8s ease;
+        }
+
+        /* YouTube-Style Fullscreen Toggle Button in Upper-Right Corner */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px var(--theme-color);
+        }
+
+        /* Global Fullscreen Map Chamber Expansion Mode */
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen .map-subtitle,
+        body.is-chamber-fullscreen .map-hud {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .map-world-wrapper {
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100vh !important;
+            justify-content: center !important;
+        }
+        body.is-chamber-fullscreen .game-map-board {
+            max-width: 100vw !important;
+            height: 92vh !important;
+            border-radius: 0 !important;
+            border: none !important;
         }
 
         /* Top Navigation Bar */
@@ -71,17 +118,18 @@
         /* Master Game World Map Wrapper */
         .map-world-wrapper {
             max-width: 1200px;
-            margin: 25px auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 15px;
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: all 0.4s ease;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             color: var(--theme-color);
             margin: 5px 0;
             text-shadow: 0 0 20px var(--glow-strength);
@@ -91,20 +139,20 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
         /* Sovereign Player Status HUD on Map */
         .map-hud {
             background: rgba(17, 23, 21, 0.92);
             border: 2px solid var(--theme-color);
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
-            gap: 30px;
-            font-size: 0.85rem;
+            gap: 25px;
+            font-size: 0.8rem;
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
             flex-wrap: wrap;
             justify-content: center;
@@ -116,21 +164,21 @@
             position: relative;
             width: 100%;
             max-width: 1050px;
-            height: 620px;
+            height: 650px;
             background: #0f1713;
             border: 6px ridge var(--theme-color);
             border-radius: 16px;
             box-shadow: 0 0 70px rgba(0,0,0,0.95), inset 0 0 50px rgba(0,0,0,0.85);
-            /* Simulated Painted Fantasy World Map Terrain Background */
             background-image: 
-                radial-gradient(circle at 75% 25%, rgba(46, 125, 50, 0.45) 0%, transparent 45%), /* Forest biome */
-                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.35) 0%, transparent 40%), /* Castle biome */
-                radial-gradient(circle at 25% 75%, rgba(65, 105, 225, 0.35) 0%, transparent 40%), /* Village biome */
-                radial-gradient(circle at 80% 80%, rgba(178, 34, 34, 0.35) 0%, transparent 40%), /* Outpost biome */
+                radial-gradient(circle at 80% 20%, rgba(46, 125, 50, 0.4) 0%, transparent 40%), 
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.3) 0%, transparent 40%), 
+                radial-gradient(circle at 20% 80%, rgba(65, 105, 225, 0.3) 0%, transparent 40%), 
+                radial-gradient(circle at 80% 80%, rgba(178, 34, 34, 0.3) 0%, transparent 40%), 
                 linear-gradient(rgba(197, 181, 155, 0.05) 1px, transparent 1px), 
                 linear-gradient(90deg, rgba(197, 181, 155, 0.05) 1px, transparent 1px);
             background-size: auto, auto, auto, auto, 60px 60px, 60px 60px;
             overflow: hidden;
+            transition: all 0.4s ease;
         }
 
         /* Painted Territory Region Cards */
@@ -139,8 +187,8 @@
             background: rgba(15, 23, 19, 0.94);
             border: 2px solid var(--theme-color);
             border-radius: 12px;
-            padding: 12px;
-            width: 180px;
+            padding: 10px;
+            width: 170px;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(0,0,0,0.85);
             transition: all 0.3s ease;
@@ -148,8 +196,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            z-index: 10;
+            gap: 4px;
+            z-index: 20;
         }
 
         .map-territory-card:hover {
@@ -160,13 +208,13 @@
         }
 
         .territory-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
         }
 
         .territory-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             color: var(--text-main);
             letter-spacing: 1px;
@@ -175,31 +223,31 @@
 
         .territory-desc {
             font-family: 'Playfair Display', serif;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             font-style: italic;
         }
 
-        /* Specific Territory Layout Coordinates */
-        #card-throne { top: 12%; left: 10%; border-color: #ffd700; }
-        #card-wilderness { top: 15%; right: 10%; border-color: #32cd32; }
-        #card-market { top: 44%; left: 38%; border-color: #ff8c00; width: 200px; }
-        #card-village { bottom: 12%; left: 12%; border-color: #4169e1; }
-        #card-border { bottom: 12%; right: 10%; border-color: #ff69b4; }
+        /* Clean Non-Overlapping Layout Coordinates */
+        #card-throne { top: 8%; left: 8%; border-color: #ffd700; }
+        #card-wilderness { top: 8%; right: 8%; border-color: #32cd32; }
+        #card-market { top: 42%; left: 50%; transform: translateX(-50%); border-color: #ff8c00; width: 190px; }
+        #card-village { bottom: 8%; left: 8%; border-color: #4169e1; }
+        #card-border { bottom: 8%; right: 8%; border-color: #ff69b4; }
 
-        /* Purchasable Land Estates on Map */
+        /* Purchasable Land Estates with Clean Spacing */
         .land-plot {
             position: absolute;
             background: rgba(35, 25, 10, 0.9);
             border: 2px dashed #ffd700;
             color: #ffe875;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: bold;
             transition: 0.3s;
-            z-index: 5;
+            z-index: 15;
             box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
         .land-plot:hover {
@@ -214,9 +262,9 @@
             color: #79ff9c;
         }
 
-        #plot-north-estate { top: 35%; left: 18%; }
-        #plot-east-valley { top: 38%; right: 18%; }
-        #plot-south-reach { bottom: 35%; left: 40%; }
+        #plot-north-estate { top: 28%; left: 28%; }
+        #plot-east-valley { top: 28%; right: 28%; }
+        #plot-south-reach { bottom: 28%; left: 50%; transform: translateX(-50%); }
 
         /* Interactive Land Purchase Modal */
         .modal-overlay {
@@ -259,6 +307,9 @@
     </style>
 </head>
 <body onload="loadMapData()">
+
+    <!-- YouTube-Style Fullscreen Expand / Decrease Button in Upper-Right Corner -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Map View">⤢</button>
 
     <!-- Top Navigation Bar -->
     <nav> 
@@ -319,7 +370,7 @@
                 <div class="territory-desc">Active Combat Arena</div>
             </a>
 
-            <!-- Purchasable Feudal Land Plots -->
+            <!-- Purchasable Feudal Land Plots (Non-Overlapping) -->
             <div class="land-plot" id="plot-north-estate" onclick="openLandPurchase('North Valley Estate', 5000, 'plot-north-estate')">
                 🏰 North Estate (5,000 🪙)
             </div>
@@ -349,6 +400,28 @@
     </div>
 
     <script>
+        // Fullscreen Toggle / Expansion Engine
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Decrease / Exit Fullscreen";
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Expand to Fullscreen Map";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+
         let selectedPlotName = "";
         let selectedPlotCost = 0;
         let selectedPlotId = "";
@@ -374,7 +447,6 @@
             document.getElementById('map-rank-display').innerText = userState.rank;
             document.getElementById('map-estates-display').innerText = userState.estates.length;
 
-            // Mark owned estates visually on map
             userState.estates.forEach(plotId => {
                 const el = document.getElementById(plotId);
                 if (el) {
@@ -416,7 +488,6 @@
             else if (userState.estates.length === 2) userState.rank = "Duke";
             else userState.rank = "Lord / Noble";
 
-            // Save back to localStorage
             const saved = localStorage.getItem('imperial_sanctuary_user');
             let parsed = saved ? JSON.parse(saved) : {};
             parsed.coins = userState.coins;
@@ -430,5 +501,3 @@
     </script>
 </body>
 </html>
-
-
