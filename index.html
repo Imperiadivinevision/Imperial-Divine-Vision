@@ -1,506 +1,569 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision | Sanctuary Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>Sovereign Empire: Battle Chambers (Divine Edition)</title>
     <style>
-        @keyframes cosmicShift {
-            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-            33% { background-position: 50% 100%; filter: hue-rotate(90deg); }
-            66% { background-position: 100% 0%; filter: hue-rotate(180deg); }
-            100% { background-position: 0% 50%; filter: hue-rotate(310deg); }
-        }
-
         :root {
-            --bg-dark: #0b0f0e;
-            --panel-bg: rgba(17, 23, 21, 0.92);
-            --theme-color: #d4af37; /* Professional Imperial Gold Default */
-            --text-main: #f5f2eb;
-            --text-muted: #c5b59b;
-            --glow-strength: rgba(212, 175, 55, 0.4);
+            --primary-red: #8B0000;
+            --gold: #D4AF37;
+            --purple: #4B0082;
+            --dark-bg: #0a0a0c;
+            --card-bg: #16161a;
+            --text-light: #f4f4f4;
+            --glow-gold: 0 0 25px rgba(212, 175, 55, 0.6);
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-dark);
-            color: var(--theme-color);
-            font-family: 'Cinzel', serif;
-            text-align: center;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background: linear-gradient(135deg, #180e22, #111715, #0b0f0e, #1a0e14);
-            background-size: 500% 500%;
-            animation: cosmicShift 22s ease infinite alternate;
+            user-select: none;
         }
 
-        /* Independent Moving Flowering Background */
-        .moving-bg-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-repeat: repeat;
-            background-position: center;
-            background-size: 400px auto;
-            background-image: url('garden_border_pattern.png');
-            animation: breatheGarden 60s infinite alternate ease-in-out;
-            z-index: -2;
-            pointer-events: none;
-            opacity: 0.35;
+        header {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(180deg, #1b1b22, #111);
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
-        @keyframes breatheGarden {
-            0% { background-size: 400px auto; background-position: center center; }
-            50% { background-size: 415px auto; background-position: center top; }
-            100% { background-size: 390px auto; background-position: center bottom; }
+        header h1 {
+            color: var(--gold);
+            margin: 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Interactive Light / Shine Layer on Mouse Move */
-        .shine-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Professional, Uncrowded Navigation Hub */
-        nav { 
-            padding: 14px 20px; 
-            background: var(--panel-bg);
-            border-bottom: 2px solid var(--theme-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* Fully Restored Navigation Menu Links */
+        .nav-bar {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            background: #141418;
+            padding: 10px;
+            gap: 20px;
+            border-bottom: 1px solid #2a2a35;
+            font-size: 0.9rem;
+            font-weight: bold;
             flex-wrap: wrap;
-            backdrop-filter: blur(8px);
-            transition: border-color 0.5s ease;
         }
 
-        /* Clean Rectangular Button Modules */
-        .nav-module {
-            background: rgba(22, 30, 27, 0.85);
-            border: 1px solid var(--theme-color);
-            padding: 8px 14px;
-            border-radius: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-        }
-
-        .nav-module:hover {
-            background: rgba(30, 42, 38, 0.95);
-            box-shadow: 0 0 15px var(--glow-strength);
-            transform: translateY(-2px);
-        }
-
-        nav a { 
-            color: var(--text-main); 
-            text-decoration: none; 
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .nav-bar a {
+            color: var(--gold);
+            text-decoration: none;
             transition: 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--theme-color);
-            text-shadow: 0 0 8px var(--glow-strength);
-        }
-
-        /* Live Color Theme Switcher Bar */
-        .theme-switcher-bar {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin: 15px 0;
-            flex-wrap: wrap;
-            background: rgba(11, 15, 14, 0.75);
-            padding: 8px;
-            border-radius: 6px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .color-btn {
-            background: #111715;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: var(--text-main);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
         }
 
-        .color-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 10px currentColor;
+        .nav-bar a:hover, .nav-bar a.active {
+            color: #fff;
+            text-shadow: 0 0 8px var(--gold);
+            text-decoration: underline;
         }
 
-        /* Hero Section holding the centered 3D Book */
-        .hero-section {
-            flex: 1;
+        /* Color-Coded Status HUD Bars */
+        .hud-container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 30px 20px;
-        }
-
-        /* 3D Real Book Container */
-        .real-book-container {
-            width: 340px;
-            height: 480px;
-            position: relative;
-            perspective: 1200px;
-            margin-bottom: 25px;
-            cursor: pointer;
-            animation: floatBook 4s infinite alternate ease-in-out;
-        }
-
-        @keyframes floatBook {
-            0% { transform: translateY(0px) rotateY(-5deg) rotateX(3deg); }
-            100% { transform: translateY(-12px) rotateY(-2deg) rotateX(1deg); }
-        }
-
-        .real-book {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            border-radius: 4px 12px 12px 4px;
-            box-shadow: -15px 20px 40px rgba(0,0,0,0.8), 0 0 45px var(--glow-strength);
-        }
-
-        .real-book-container:hover .real-book {
-            transform: scale(1.03) rotateY(0deg) rotateX(0deg);
-            box-shadow: -20px 25px 60px rgba(0,0,0,0.9), 0 0 70px var(--theme-color);
-        }
-
-        .real-book::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 25px;
-            height: 100%;
-            background: linear-gradient(90deg, #112618, #1b3b28, #0b140f);
-            border-radius: 4px 0 0 4px;
-            box-shadow: inset -3px 0 6px rgba(0,0,0,0.7);
-            z-index: 10;
-        }
-
-        .real-book::after {
-            content: '';
-            position: absolute;
-            top: 4px;
-            right: -12px;
-            width: 12px;
-            height: calc(100% - 8px);
-            background: linear-gradient(90deg, #e6d5b8, #fff, #c5b59b, #a39378);
-            transform: skewY(45deg);
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
-            border-radius: 0 2px 2px 0;
-        }
-
-        .book-cover-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px 12px 12px 4px;
-            border: 4px solid var(--theme-color);
-            box-sizing: border-box;
-            position: relative;
-            z-index: 5;
-            transition: border-color 0.5s ease;
-        }
-
-        .royal-subtitle {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-style: italic;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
-        }
-
-        .royal-btn {
-            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
-            color: #0b0f0e;
-            border: 1px solid #fff;
-            padding: 12px 25px;
-            font-family: 'Cinzel', serif;
+            justify-content: space-between;
+            background: #111116;
+            padding: 10px 30px;
+            border-bottom: 2px solid var(--primary-red);
             font-size: 0.95rem;
             font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px var(--glow-strength);
-            transition: 0.2s;
-        }
-        .royal-btn:hover {
-            background: linear-gradient(to bottom, #fff, var(--theme-color));
-            box-shadow: 0 0 25px var(--theme-color);
         }
 
-        /* Professional Footer with Imperial Divine Vision & Contact Info */
-        .footer-sanctuary {
-            background: var(--panel-bg);
-            border-top: 2px solid var(--theme-color);
-            padding: 25px 20px;
-            margin-top: auto;
-            box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
-            transition: border-color 0.5s ease;
+        .hud-gold { color: var(--gold); }
+        .hud-soldier { color: #ff4d4d; }
+        .hud-life { color: #3399ff; }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(-1deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            60% { transform: translate(-1px, 2px) rotate(0deg); }
+            80% { transform: translate(3px, -1px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .shake-fx { animation: shake 0.4s ease-in-out; }
+
+        /* Master Sketch-Aligned Layout Grid */
+        .game-layout {
+            max-width: 1300px;
+            margin: 15px auto;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 220px 1fr 240px;
+            gap: 15px;
+        }
+
+        /* Left Sidebar: Tactical Cards */
+        .card-sidebar {
             display: flex;
             flex-direction: column;
-            align-items: center;
             gap: 10px;
         }
 
-        .footer-title {
-            color: var(--theme-color);
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--glow-strength);
-            transition: color 0.5s ease;
-        }
-
-        .footer-contact {
-            color: var(--text-main);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+        .tactical-card {
+            background: linear-gradient(145deg, #1e1e24, #121216);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: var(--text-light);
+            display: block;
         }
 
-        .footer-contact:hover {
-            color: var(--theme-color);
-            text-shadow: 0 0 8px var(--glow-strength);
+        .tactical-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--glow-gold);
+            border-color: #fff;
         }
 
-        .footer-copy {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            margin-top: 5px;
+        .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.85rem; text-transform: uppercase; }
+        .tactical-card p { font-size: 0.7rem; color: #bbb; margin: 0; }
+
+        .shield-card { background: linear-gradient(145deg, #ffffff, #e6e6fa); border-color: var(--gold); color: #111; }
+        .shield-card h4 { color: #8B0000; }
+        .shield-card p { color: #333; }
+
+        .player-slot-card {
+            border-color: #00ffcc;
+            background: linear-gradient(145deg, #122222, #121216);
         }
 
-        /* Modal for Community Chat Router */
-        .modal-overlay {
+        .player-slot-card img, .player-slot-card video {
+            width: 100%;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
+        /* Center Panel: Interactive Stage */
+        .center-panel {
+            background-color: var(--card-bg);
+            border: 2px solid #2a2a35;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .center-panel h2 {
+            color: var(--gold);
+            border-bottom: 1px solid #333;
+            padding-bottom: 6px;
+            margin: 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .media-stage {
+            width: 100%;
+            height: 320px;
+            background-color: #000;
+            border: 2px solid #333;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: crosshair;
+        }
+
+        .media-stage video, .media-stage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        .floating-dmg {
+            position: absolute;
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #ff3333;
+            text-shadow: 0 0 5px #000;
+            pointer-events: none;
+            animation: floatUp 0.8s ease-out forwards;
+            z-index: 50;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-40px) scale(1.3); }
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .action-panel {
+            background-color: var(--card-bg);
+            border: 2px solid #2a2a35;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        .action-panel h3 {
+            color: var(--gold);
+            margin: 0 0 10px 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 4px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-red), #500);
+            color: white;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            margin-top: 6px;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(139,0,0,0.4);
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .btn:hover { background: linear-gradient(135deg, #a00000, var(--primary-red)); box-shadow: var(--glow-gold); }
+
+        #flash-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(75,0,130,0.5) 50%, transparent 100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-out;
+            z-index: 40;
+        }
+
+        #modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(4, 10, 8, 0.85);
-            z-index: 2000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5,5,8,0.9);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
-        .modal-box {
-            background: rgba(20, 27, 24, 0.98);
-            border: 2px solid var(--theme-color);
+
+        #modal-content {
+            background: #181820;
+            border: 3px solid var(--gold);
             padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
             text-align: center;
-            box-shadow: 0 0 30px var(--glow-strength);
+            border-radius: 12px;
+            max-width: 420px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
         }
-        .gate-input {
-            width: 100%;
-            padding: 10px;
-            background: #0b0f0e;
-            border: 1px solid var(--theme-color);
-            color: #fff;
-            font-family: 'Cinzel', serif;
-            margin: 15px 0;
-            box-sizing: border-box;
+
+        #modal-content h1 { font-size: 2.2rem; margin: 0 0 12px 0; text-transform: uppercase; }
+        
+        .battle-log {
+            background: #060608;
+            border: 1px solid #222;
+            padding: 8px;
+            height: 65px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.7rem;
+            color: #00ffcc;
             border-radius: 4px;
+            margin-top: 6px;
         }
     </style>
 </head>
-<body onmousemove="shineLight(event)">
+<body onload="loadEquippedPlayer()">
 
-    <!-- Peaceful Melody Audio -->
-    <audio id="peaceful-melody" loop preload="auto">
-        <source src="rosanna-music-galary.m4a" type="audio/mp4">
-    </audio>
+    <header>
+        <h1>Sovereign Empire: Battle Chambers</h1>
+    </header>
 
-    <!-- Independent Moving Background & Shine Overlay -->
-    <div class="moving-bg-layer"></div>
-    <div class="shine-overlay" id="shine-layer"></div>
+    <!-- Restored Navigation Links Bar -->
+    <div class="nav-bar">
+        <a href="index.html">Sanctuary Home</a>
+        <a href="trailer.html">Trailer Chamber</a>
+        <a href="battle.html" class="active">Sovereign Combat Arena</a>
+        <a href="library.html">Library</a>
+        <a href="vip.html" style="color: #ff4d4d;">VIP Behind-the-Scenes</a>
+        <a href="seal.html">Our Official Seal</a>
+    </div>
 
-    <!-- Community Chat Modal Router -->
-    <div class="modal-overlay" id="communityModal">
-        <div class="modal-box">
-            <h3 style="color: var(--theme-color); margin-top: 0;">💬 Community Chat</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
-            <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
-            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
-            <br>
-            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close</button>
+    <!-- Color-Coded Status HUD Bars -->
+    <div class="hud-container">
+        <div>
+            Player Life Span (NPC): <span id="p-life" class="hud-life">100</span>/100 | 
+            Gold: <span id="p-coins" class="hud-gold">1000</span> | 
+            Soldiers: <span id="p-soldiers" class="hud-soldier">12</span>
+        </div>
+        <div>
+            Rebellion Force | Prime Minister & Big Boss | Level: 3
         </div>
     </div>
 
-    <!-- Clean, Uncrowded Professional Navigation Bar (Removed floating title from top-left) -->
-    <nav> 
-        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
-        <div class="nav-module"><a href="library.html">📚 Library</a></div>
-        <div class="nav-module"><a href="trailers.html">🎬 Trailers</a></div>
-        <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
-        <div class="nav-module"><a href="proving-grounds.html">🛡️ Youth</a></div>
-        <div class="nav-module"><a href="garden.html">🌸 Garden</a></div>
-        <div class="nav-module"><a href="room-elder.html">🌿 Elder Sanctuary</a></div>
-        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
-        <div class="nav-module"><a href="#" onclick="openModal(); return false;">💬 Community</a></div>
-    </nav>
-
-    <!-- Live Color Theme Switcher Bar -->
-    <div class="theme-switcher-bar">
-        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted);">Vibe Theme:</span>
-        <button class="color-btn" style="border-color: #ff69b4; color: #ff69b4;" onclick="setTheme('#ff69b4', 'rgba(255, 105, 180, 0.5)')">Pink</button>
-        <button class="color-btn" style="border-color: #d4af37; color: #d4af37;" onclick="setTheme('#d4af37', 'rgba(212, 175, 55, 0.5)')">Gold</button>
-        <button class="color-btn" style="border-color: #4169e1; color: #4169e1;" onclick="setTheme('#4169e1', 'rgba(65, 105, 225, 0.5)')">Blue</button>
-        <button class="color-btn" style="border-color: #32cd32; color: #32cd32;" onclick="setTheme('#32cd32', 'rgba(50, 205, 50, 0.5)')">Green</button>
-        <button class="color-btn" style="border-color: #ff8c00; color: #ff8c00;" onclick="setTheme('#ff8c00', 'rgba(255, 140, 0, 0.5)')">Orange</button>
-    </div>
-
-    <!-- Hero Section with Centered 3D Real Book -->
-    <div class="hero-section" onclick="playMelody()">
+    <div class="game-layout">
         
-        <!-- 3D Real Book Container with Spine and Page Edges -->
-        <div class="real-book-container" onclick="window.location.href='library.html'">
-            <div class="real-book">
-                <img src="cover_image.png" class="book-cover-image" alt="The Song of Rosanna and the Evil King" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
+        <!-- Left Sidebar: Tactical Deck -->
+        <div class="card-sidebar">
+            <h3 style="color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase;">Tactical Deck</h3>
+            
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-king-benson-strength.mp4'); activateCard('King Benson (Strength)', 'The Lord is my strength & defense boost');" style="border-color: var(--purple);">
+                <h4>Benson</h4>
+                <p>Divine Strength & Defense</p>
+            </div>
+
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-queen-rosanna-healing.mp4'); activateCard('Queen Rosanna (Healing)', 'Rank A+ Restoration');">
+                <h4>Rosanna</h4>
+                <p>Divine Healing & Life</p>
+            </div>
+
+            <div class="tactical-card shield-card" onclick="activateCard('Shield of Truth', 'Radiant Gold Barrier Burst');">
+                <h4>God (Shield)</h4>
+                <p>Radiant Sparkling Shield</p>
+            </div>
+
+            <div class="tactical-card" onclick="activateCard('Ego of Phoenix', 'Wings as Eagles Sparkling Soul');" style="border-color: #ff8c00;">
+                <h4>Eagle (Soul)</h4>
+                <p>Sparkling White Soul</p>
+            </div>
+
+            <div class="tactical-card" onclick="activateCard('A+ Combat Skills', 'Maximum Strike Power');">
+                <h4>A+ Skills</h4>
+                <p>Elite Tactical Mastery</p>
+            </div>
+
+            <a href="player.html" class="tactical-card player-slot-card">
+                <h4>Add Player</h4>
+                <div id="active-player-display">
+                    <p style="font-size: 0.6rem; color: #00ffcc;">[Click to Open Chamber]</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Center Panel: Interactive Stage -->
+        <div class="center-panel">
+            <h2>Interactive War Chambers (Click & Slash)</h2>
+            <div class="media-stage" id="combat-stage" onclick="triggerMouseSlash(event)">
+                <div id="flash-overlay"></div>
+                <video id="combat-video" controls autoplay loop>
+                    <source src="big-boss-cinematic.mp4" type="video/mp4">
+                    Your browser does not support video.
+                </video>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="engageWarBattle()">Engage Big Boss & Rebellion</button>
+                <button class="btn" style="background-color: #444;" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Grind Arena</button>
+            </div>
+            <div class="battle-log" id="game-log">
+                [System Initialized]: Navigation & VIP Chambers fully restored. Click stage to slash!
             </div>
         </div>
 
-        <h3 style="color: var(--text-main); margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
-        <p class="royal-subtitle">
-            “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
-        </p>
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="action-panel">
+                <h3>Combat Chambers</h3>
+                <button class="btn" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Arena Battle</button>
+                <button class="btn" onclick="engageWarBattle()">War Campaign</button>
+                <button class="btn" onclick="playCombatVideo('assets-video-boss-fight-forest.mp4')">Training Academy</button>
+                <button class="btn" onclick="playCombatVideo('assets-video-recruitment-camp.mp4'); recruitSoldiers();">Recruiting Camp</button>
+            </div>
 
-        <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
+            <div class="action-panel">
+                <h3>Supply Hub</h3>
+                <button class="btn" onclick="openMarket()">Buy Supplies (Market)</button>
+                <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Collect Forest Supply</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Professional Footer with Imperial Divine Vision & Contact Email -->
-    <footer class="footer-sanctuary">
-        <div class="footer-content">
-            <div class="footer-title">Imperial Divine Vision</div>
-            <a href="mailto:imperialdivinevision@gmail.com" class="footer-contact">✉️ imperialdivinevision@gmail.com</a>
-            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Rights Reserved.</div>
+    <!-- Modal -->
+    <div id="modal-overlay">
+        <div id="modal-content">
+            <h1 id="modal-title" style="color: var(--gold);">VICTORY</h1>
+            <p id="modal-text" style="color: #ccc; font-size: 1.1rem;">Rebellion forces pushed back!</p>
+            <button class="btn" onclick="closeModal()">Continue Campaign</button>
         </div>
-    </footer>
+    </div>
 
     <script>
-        let musicStarted = false;
+        let forestCooldownEnd = 0;
 
-        function setTheme(color, glow) {
-            document.documentElement.style.setProperty('--theme-color', color);
-            document.documentElement.style.setProperty('--glow-strength', glow);
+        function logMessage(msg) {
+            const logBox = document.getElementById('game-log');
+            logBox.innerHTML += `<br>> ${msg}`;
+            logBox.scrollTop = logBox.scrollHeight;
         }
 
-        function shineLight(event) {
-            let layer = document.getElementById('shine-layer');
-            let x = (event.clientX / window.innerWidth) * 100;
-            let y = (event.clientY / window.innerHeight) * 100;
-            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.25) 0%, transparent 60%)";
-            layer.style.opacity = "1";
+        function loadEquippedPlayer() {
+            const savedAsset = localStorage.getItem('selectedPlayerAsset');
+            const savedName = localStorage.getItem('selectedPlayerName');
+            const displayContainer = document.getElementById('active-player-display');
 
-            if (!musicStarted) {
-                let audio = document.getElementById('peaceful-melody');
-                if (audio) {
-                    audio.volume = 0.4;
-                    audio.play().then(() => {
-                        musicStarted = true;
-                    }).catch(e => {});
+            if (savedAsset && savedName) {
+                if (savedAsset.endsWith('.mp4')) {
+                    displayContainer.innerHTML = `<video autoplay loop muted><source src="${savedAsset}" type="video/mp4"></video><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">${savedName}</p>`;
+                } else {
+                    displayContainer.innerHTML = `<img src="${savedAsset}" alt="Equipped Player"><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">${savedName}</p>`;
                 }
+                logMessage(`Loaded equipped champion: ${savedName}`);
+            } else {
+                displayContainer.innerHTML = `<img src="player-1-come-free.png" alt="Default Player"><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">Vanguard (Default)</p>`;
             }
         }
 
-        function playMelody() {
-            let audio = document.getElementById('peaceful-melody');
-            if (audio && !musicStarted) {
-                audio.volume = 0.4;
-                audio.play().then(() => {
-                    musicStarted = true;
-                }).catch(e => {});
+        function openMarket() {
+            const vid = document.getElementById('combat-video');
+            vid.src = "market-buy-supplies.mp4";
+            vid.play();
+            let coins = parseInt(document.getElementById('p-coins').innerText);
+            if (coins >= 2) {
+                coins -= 2;
+                let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 3;
+                document.getElementById('p-coins').innerText = coins;
+                document.getElementById('p-soldiers').innerText = soldiers;
+                logMessage('Market Transaction: Purchased goods (-2 Gold, +3 Soldier strength).');
+            } else {
+                logMessage('Market: Insufficient Gold to purchase supplies!');
             }
         }
 
-        function openModal() {
-            document.getElementById('communityModal').style.display = 'flex';
+        function openForest() {
+            const now = Date.now();
+            if (now < forestCooldownEnd) {
+                const remainingSecs = Math.ceil((forestCooldownEnd - now) / 1000);
+                const mins = Math.floor(remainingSecs / 60);
+                const secs = remainingSecs % 60;
+                logMessage(`Forest Cooldown: You still have ${mins} minutes and ${secs} seconds remaining before you can return to the forest!`);
+                return;
+            }
+
+            const vid = document.getElementById('combat-video');
+            vid.src = "forest-gather-supplied.mp4";
+            vid.play();
+            
+            let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 5;
+            document.getElementById('p-soldiers').innerText = soldiers;
+            logMessage('Forest Foraging: Successfully collected free apples and mushrooms (+5 soldier morale)!');
+            
+            forestCooldownEnd = Date.now() + 300000; // 5-minute cool-off timer
+        }
+
+        function recruitSoldiers() {
+            let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 2;
+            document.getElementById('p-soldiers').innerText = soldiers;
+            logMessage('Recruiting Camp: New soldiers enlisted (+2).');
+        }
+
+        function playCombatVideo(videoFile) {
+            const vid = document.getElementById('combat-video');
+            vid.src = videoFile;
+            vid.play();
+            logMessage(`Switching screen view: ${videoFile}`);
+        }
+
+        function triggerMouseSlash(event) {
+            const stage = document.getElementById('combat-stage');
+            stage.classList.add('shake-fx');
+            setTimeout(() => stage.classList.remove('shake-fx'), 400);
+
+            let lifeElem = document.getElementById('p-life');
+            let currentLife = parseInt(lifeElem.innerText);
+            currentLife = Math.max(10, currentLife - 5);
+            lifeElem.innerText = currentLife;
+
+            const rect = stage.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const dmgIndicator = document.createElement('div');
+            dmgIndicator.className = 'floating-dmg';
+            dmgIndicator.innerText = `-150 DMG`;
+            dmgIndicator.style.left = `${x}px`;
+            dmgIndicator.style.top = `${y}px`;
+            stage.appendChild(dmgIndicator);
+            setTimeout(() => dmgIndicator.remove(), 800);
+
+            logMessage('Commander slash executed! Enemy forces impacted.');
+
+            setTimeout(() => {
+                currentLife = Math.min(100, currentLife + 8);
+                lifeElem.innerText = currentLife;
+            }, 600);
+        }
+
+        function engageWarBattle() {
+            const vid = document.getElementById('combat-video');
+            vid.src = "assets-video-war-combat.mp4";
+            vid.play();
+            logMessage('Engaged Big Boss & Rebellion war forces!');
+
+            setTimeout(() => {
+                let lifeVal = parseInt(document.getElementById('p-life').innerText);
+                if (lifeVal < 35) {
+                    vid.src = "neighbour-villian-rebbelian.mp4";
+                    vid.play();
+                    logMessage('Prime Minister intervenes: "Maybe we lost this time, but next time we will definitely win!"');
+                    showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d');
+                } else {
+                    showModal('VICTORY', 'Rebellion defeated! Earned reputation, gold, and rare card drop!', 'var(--gold)');
+                }
+            }, 6000);
+        }
+
+        function activateCard(cardName, effectDesc) {
+            const flash = document.getElementById('flash-overlay');
+            flash.style.opacity = '1';
+            setTimeout(() => flash.style.opacity = '0', 400);
+
+            let lifeElem = document.getElementById('p-life');
+            lifeElem.innerText = '100';
+
+            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Life span fully restored.`);
+        }
+
+        function showModal(title, text, color) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-title').style.color = color;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('modal-overlay').style.display = 'flex';
         }
 
         function closeModal() {
-            document.getElementById('communityModal').style.display = 'none';
-        }
-
-        function routeByBirthday() {
-            let bdayInput = document.getElementById('user-birthday').value.trim();
-            if (!bdayInput) {
-                alert("Please enter your date of birth.");
-                return;
-            }
-
-            let parts = bdayInput.split(/[\/\-\.]/);
-            let year = parseInt(parts[parts.length - 1]);
-
-            if (isNaN(year) || year < 1900 || year > 2026) {
-                alert("Please enter a valid date format (e.g., MM/DD/YYYY).");
-                return;
-            }
-
-            let currentYear = 2026;
-            let age = currentYear - year;
-
-            if (age < 13) {
-                alert("Kids credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=kids";
-            } else if (age >= 13 && age <= 19) {
-                alert("Youth credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=youth";
-            } else if (age >= 20 && age <= 64) {
-                alert("Adult credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=adult";
-            } else {
-                alert("Elder credentials recognized. Routing to Sovereign Sanctuary...");
-                window.location.href = "room-elder.html";
-            }
+            document.getElementById('modal-overlay').style.display = 'none';
         }
     </script>
 </body>
 </html>
-
-
