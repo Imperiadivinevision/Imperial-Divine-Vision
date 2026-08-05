@@ -39,7 +39,6 @@
             font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Navigation Menu */
@@ -57,7 +56,7 @@
         .nav-bar span { color: var(--gold); cursor: pointer; transition: 0.2s; }
         .nav-bar span:hover { color: #fff; text-shadow: 0 0 8px var(--gold); }
 
-        /* Dual Status HUD Bars */
+        /* Color-Coded Status HUD Bars */
         .hud-container {
             display: flex;
             justify-content: space-between;
@@ -68,10 +67,10 @@
             font-weight: bold;
         }
 
-        .hud-left span { color: var(--gold); }
-        .hud-right span { color: #ff4d4d; }
+        .hud-gold { color: var(--gold); }
+        .hud-soldier { color: #ff4d4d; }
+        .hud-life { color: #3399ff; }
 
-        /* Screen Shake Animation */
         @keyframes shake {
             0% { transform: translate(1px, 1px) rotate(0deg); }
             20% { transform: translate(-3px, 0px) rotate(-1deg); }
@@ -81,9 +80,7 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        .shake-fx {
-            animation: shake 0.4s ease-in-out;
-        }
+        .shake-fx { animation: shake 0.4s ease-in-out; }
 
         /* Game Layout Grid */
         .game-layout {
@@ -128,7 +125,7 @@
             cursor: crosshair;
         }
 
-        .media-stage video, .media-stage canvas {
+        .media-stage video, .media-stage img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -209,6 +206,20 @@
         .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.8rem; text-transform: uppercase; }
         .tactical-card p { font-size: 0.65rem; color: #bbb; margin: 0; }
 
+        /* Player Profile Card Slot Special Styling */
+        .player-slot-card {
+            border-color: #00ffcc;
+            background: linear-gradient(145deg, #122222, #121216);
+        }
+
+        .player-slot-card img, .player-slot-card video {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
         /* Cinematic Fullscreen Flash Overlay */
         #flash-overlay {
             position: absolute;
@@ -258,7 +269,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="loadEquippedPlayer()">
 
     <header>
         <h1>Sovereign Empire: Battle Chambers</h1>
@@ -272,12 +283,14 @@
         <span>Our Official Seal</span>
     </div>
 
-    <!-- Dual Status HUD Bars -->
+    <!-- Color-Coded Status HUD Bars -->
     <div class="hud-container">
-        <div class="hud-left">
-            Player HP: <span id="p-hp">100</span>/100 | Coins: <span id="p-coins">1000</span> | Supplies: <span id="p-supplies">50</span> | Combo: <span id="p-combo">1x</span>
+        <div>
+            Player Life Span (NPC): <span id="p-life" class="hud-life">100</span>/100 | 
+            Gold: <span id="p-coins" class="hud-gold">1000</span> | 
+            Soldiers: <span id="p-soldiers" class="hud-soldier">12</span>
         </div>
-        <div class="hud-right">
+        <div>
             Rebellion Force | Prime Minister & Big Boss | Level: 3
         </div>
     </div>
@@ -293,7 +306,7 @@
                     Your browser does not support video.
                 </video>
             </div>
-            <button class="btn" onclick="openMarket()">Visit Market (Buy Bread: 1 Coin / Veggies: 2 Coins)</button>
+            <button class="btn" onclick="openMarket()">Visit Market (Bread: 1 Gold / Veggies: 2 Gold)</button>
             <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Forage Forest (Free Supplies / 5m Timer)</button>
         </div>
 
@@ -310,15 +323,23 @@
             <button class="btn" onclick="engageWarBattle()">Engage Big Boss & Rebellion</button>
             <button class="btn" style="background-color: #444;" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Grind Points in Arena</button>
             <div class="battle-log" id="game-log">
-                [System Initialized]: Interactive mouse slashing & tactical deck active. Click arena to strike!
+                [System Initialized]: Commander standing by. Color-coded HUD & Player Chambers linked.
             </div>
         </div>
 
     </div>
 
-    <!-- Gold & Purple Tactical Card Deck Bar -->
+    <!-- Gold & Purple Tactical Card Deck Bar with Player Slot -->
     <div class="card-deck-bar">
         
+        <!-- Interactive Player Slot Card Linking to player.html -->
+        <div class="tactical-card player-slot-card" onclick="openPlayerChambers()">
+            <h4>Add Player</h4>
+            <div id="active-player-display">
+                <p style="font-size: 0.6rem; color: #00ffcc;">[Click to Open Chamber]</p>
+            </div>
+        </div>
+
         <div class="tactical-card" onclick="activateCard('Imperial Shield', 'Psalm 3:3 Defense Boost')">
             <h4>Shield Card</h4>
             <p>Gold Barrier Burst</p>
@@ -339,11 +360,6 @@
             <p>Rank: Divine</p>
         </div>
 
-        <div class="tactical-card" style="border-color: #ff8c00;" onclick="activateCard('Ego of Phoenix', 'Wings as Eagles / Phoenix Resurrection');">
-            <h4>Ego of Phoenix</h4>
-            <p>Legendary Buff</p>
-        </div>
-
     </div>
 
     <!-- Victory / Failure Popup Modal -->
@@ -356,13 +372,33 @@
     </div>
 
     <script>
-        let forestCooldown = false;
-        let comboCount = 1;
+        let forestCooldownEnd = 0;
 
         function logMessage(msg) {
             const logBox = document.getElementById('game-log');
             logBox.innerHTML += `<br>> ${msg}`;
             logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        function openPlayerChambers() {
+            window.location.href = 'player.html';
+        }
+
+        function loadEquippedPlayer() {
+            const savedAsset = localStorage.getItem('selectedPlayerAsset');
+            const savedName = localStorage.getItem('selectedPlayerName');
+            const displayContainer = document.getElementById('active-player-display');
+
+            if (savedAsset && savedName) {
+                if (savedAsset.endsWith('.mp4')) {
+                    displayContainer.innerHTML = `<video autoplay loop muted><source src="${savedAsset}" type="video/mp4"></video><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">${savedName}</p>`;
+                } else {
+                    displayContainer.innerHTML = `<img src="${savedAsset}" alt="Equipped Player"><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">${savedName}</p>`;
+                }
+                logMessage(`Loaded equipped champion: ${savedName}`);
+            } else {
+                displayContainer.innerHTML = `<img src="player-1-come-free.png" alt="Default Player"><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">Vanguard (Default)</p>`;
+            }
         }
 
         function openMarket() {
@@ -372,32 +408,34 @@
             let coins = parseInt(document.getElementById('p-coins').innerText);
             if (coins >= 2) {
                 coins -= 2;
-                let supplies = parseInt(document.getElementById('p-supplies').innerText) + 3;
+                let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 3;
                 document.getElementById('p-coins').innerText = coins;
-                document.getElementById('p-supplies').innerText = supplies;
-                logMessage('Market Transaction: Purchased vegetables and bread supplies (-2 coins).');
+                document.getElementById('p-soldiers').innerText = soldiers;
+                logMessage('Market Transaction: Purchased goods (-2 Gold, +3 Soldier strength).');
             } else {
-                logMessage('Market: Not enough coins to purchase supplies!');
+                logMessage('Market: Insufficient Gold to purchase supplies!');
             }
         }
 
         function openForest() {
-            if (forestCooldown) {
-                logMessage('Forest Gathering: Cooldown active! Please wait 5 minutes before foraging again.');
+            const now = Date.now();
+            if (now < forestCooldownEnd) {
+                const remainingSecs = Math.ceil((forestCooldownEnd - now) / 1000);
+                const mins = Math.floor(remainingSecs / 60);
+                const secs = remainingSecs % 60;
+                logMessage(`Forest Cooldown: You still have ${mins} minutes and ${secs} seconds remaining before you can return to the forest!`);
                 return;
             }
+
             const vid = document.getElementById('left-video');
             vid.src = "forest-gather-supplied.mp4";
             vid.play();
-            let supplies = parseInt(document.getElementById('p-supplies').innerText) + 5;
-            document.getElementById('p-supplies').innerText = supplies;
-            logMessage('Forest Foraging: Successfully collected free apples and mushrooms (+5 supplies)!');
             
-            forestCooldown = true;
-            setTimeout(() => {
-                forestCooldown = false;
-                logMessage('Forest Gathering: Cooldown reset. The forest is ready to yield supplies again.');
-            }, 300000); // 5-minute cool-off timer
+            let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 5;
+            document.getElementById('p-soldiers').innerText = soldiers;
+            logMessage('Forest Foraging: Successfully collected free apples and mushrooms (+5 soldier morale)!');
+            
+            forestCooldownEnd = Date.now() + 300000; // 5-minute cool-off timer
         }
 
         function playCombatVideo(videoFile) {
@@ -412,23 +450,29 @@
             stage.classList.add('shake-fx');
             setTimeout(() => stage.classList.remove('shake-fx'), 400);
 
-            // Create floating damage number at click coordinates
+            let lifeElem = document.getElementById('p-life');
+            let currentLife = parseInt(lifeElem.innerText);
+            currentLife = Math.max(10, currentLife - 5);
+            lifeElem.innerText = currentLife;
+
             const rect = stage.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
 
             const dmgIndicator = document.createElement('div');
             dmgIndicator.className = 'floating-dmg';
-            let damageVal = 150 * comboCount;
-            dmgIndicator.innerText = `-${damageVal} DMG`;
+            dmgIndicator.innerText = `-150 DMG`;
             dmgIndicator.style.left = `${x}px`;
             dmgIndicator.style.top = `${y}px`;
             stage.appendChild(dmgIndicator);
             setTimeout(() => dmgIndicator.remove(), 800);
 
-            comboCount = Math.min(comboCount + 1, 5);
-            document.getElementById('p-combo').innerText = comboCount + 'x';
-            logMessage(`Direct Slash executed! Combo increased to ${comboCount}x.`);
+            logMessage('Commander slash executed! Enemy forces impacted.');
+
+            setTimeout(() => {
+                currentLife = Math.min(100, currentLife + 8);
+                lifeElem.innerText = currentLife;
+            }, 600);
         }
 
         function engageWarBattle() {
@@ -438,14 +482,14 @@
             logMessage('Engaged Big Boss & Rebellion war forces!');
 
             setTimeout(() => {
-                let playerHP = parseInt(document.getElementById('p-hp').innerText);
-                if (playerHP < 40) {
+                let lifeVal = parseInt(document.getElementById('p-life').innerText);
+                if (lifeVal < 35) {
                     vid.src = "neighbour-villian-rebbelian.mp4";
                     vid.play();
                     logMessage('Prime Minister intervenes: "Maybe we lost this time, but next time we will definitely win!"');
                     showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d');
                 } else {
-                    showModal('VICTORY', 'Rebellion defeated! Earned reputation, coins, and rare card drop!', 'var(--gold)');
+                    showModal('VICTORY', 'Rebellion defeated! Earned reputation, gold, and rare card drop!', 'var(--gold)');
                 }
             }, 6000);
         }
@@ -455,9 +499,10 @@
             flash.style.opacity = '1';
             setTimeout(() => flash.style.opacity = '0', 400);
 
-            comboCount = 1; // Reset combo on divine card activation
-            document.getElementById('p-combo').innerText = '1x';
-            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Radiant light burst deployed!`);
+            let lifeElem = document.getElementById('p-life');
+            lifeElem.innerText = '100';
+
+            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Radiant light burst deployed! Life span fully restored.`);
         }
 
         function showModal(title, text, color) {
