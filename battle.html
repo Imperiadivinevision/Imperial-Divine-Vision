@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
             --dark-bg: #0a0a0c;
             --card-bg: #16161a;
             --text-light: #f4f4f4;
-            --glow-gold: 0 0 20px rgba(212, 175, 55, 0.6);
+            --glow-gold: 0 0 25px rgba(212, 175, 55, 0.6);
         }
 
         body {
@@ -39,6 +40,7 @@
             font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Navigation Menu */
@@ -82,38 +84,89 @@
 
         .shake-fx { animation: shake 0.4s ease-in-out; }
 
-        /* Game Layout Grid */
+        /* Master Sketch-Aligned Layout Grid */
         .game-layout {
-            max-width: 1250px;
+            max-width: 1300px;
             margin: 15px auto;
             padding: 10px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 220px 1fr 240px;
+            gap: 15px;
         }
 
-        .panel {
+        /* Left Card Deck Sidebar */
+        .card-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tactical-card {
+            background: linear-gradient(145deg, #1e1e24, #121216);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: var(--text-light);
+            display: block;
+        }
+
+        .tactical-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--glow-gold);
+            border-color: #fff;
+        }
+
+        .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.85rem; text-transform: uppercase; }
+        .tactical-card p { font-size: 0.7rem; color: #bbb; margin: 0; }
+
+        /* Special Card Themes */
+        .shield-card { background: linear-gradient(145deg, #ffffff, #e6e6fa); border-color: var(--gold); color: #111; }
+        .shield-card h4 { color: #8B0000; }
+        .shield-card p { color: #333; }
+
+        .player-slot-card {
+            border-color: #00ffcc;
+            background: linear-gradient(145deg, #122222, #121216);
+        }
+
+        .player-slot-card img, .player-slot-card video {
+            width: 100%;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
+        /* Center Panel: Main Interactive Screen */
+        .center-panel {
             background-color: var(--card-bg);
             border: 2px solid #2a2a35;
             border-radius: 10px;
             padding: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.6);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .panel h2 {
+        .center-panel h2 {
             color: var(--gold);
             border-bottom: 1px solid #333;
             padding-bottom: 6px;
-            margin-top: 0;
+            margin: 0;
             font-size: 1.1rem;
             text-transform: uppercase;
         }
 
-        /* Interactive Combat Canvas & Media Stage */
         .media-stage {
             width: 100%;
-            height: 250px;
+            height: 320px;
             background-color: #000;
             border: 2px solid #333;
             border-radius: 6px;
@@ -150,75 +203,51 @@
             100% { opacity: 0; transform: translateY(-40px) scale(1.3); }
         }
 
-        /* Control Buttons */
+        /* Right Control Panel */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .action-panel {
+            background-color: var(--card-bg);
+            border: 2px solid #2a2a35;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+
+        .action-panel h3 {
+            color: var(--gold);
+            margin: 0 0 10px 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 4px;
+        }
+
         .btn {
             background: linear-gradient(135deg, var(--primary-red), #500);
             color: white;
             border: 1px solid var(--gold);
             padding: 10px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
-            margin-top: 8px;
+            margin-top: 6px;
             transition: 0.2s;
             box-shadow: 0 4px 10px rgba(139,0,0,0.4);
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            box-sizing: border-box;
         }
 
         .btn:hover { background: linear-gradient(135deg, #a00000, var(--primary-red)); box-shadow: var(--glow-gold); }
-
-        /* Master Deck & Card Bar */
-        .card-deck-bar {
-            max-width: 1250px;
-            margin: 0 auto 15px auto;
-            padding: 12px;
-            background: #121216;
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
-        }
-
-        .tactical-card {
-            width: 135px;
-            background: linear-gradient(145deg, #1e1e24, #121216);
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            padding: 8px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .tactical-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: var(--glow-gold);
-            border-color: #fff;
-        }
-
-        .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.8rem; text-transform: uppercase; }
-        .tactical-card p { font-size: 0.65rem; color: #bbb; margin: 0; }
-
-        /* Player Profile Card Slot Special Styling */
-        .player-slot-card {
-            border-color: #00ffcc;
-            background: linear-gradient(145deg, #122222, #121216);
-        }
-
-        .player-slot-card img, .player-slot-card video {
-            width: 100%;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-top: 4px;
-        }
 
         /* Cinematic Fullscreen Flash Overlay */
         #flash-overlay {
@@ -259,13 +288,13 @@
             background: #060608;
             border: 1px solid #222;
             padding: 8px;
-            height: 75px;
+            height: 65px;
             overflow-y: auto;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #00ffcc;
             border-radius: 4px;
-            margin-top: 8px;
+            margin-top: 6px;
         }
     </style>
 </head>
@@ -297,21 +326,45 @@
 
     <div class="game-layout">
         
-        <!-- Left Panel: Market & Forest Gathering Hub -->
-        <div class="panel">
-            <h2>Supply Hub: Market & Forest</h2>
-            <div class="media-stage" id="left-stage">
-                <video id="left-video" controls>
-                    <source src="market-buy-supplies.mp4" type="video/mp4">
-                    Your browser does not support video.
-                </video>
+        <!-- Left Sidebar: Tactical Card Deck -->
+        <div class="card-sidebar">
+            <h3 style="color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase;">Tactical Deck</h3>
+            
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-king-benson-strength.mp4'); activateCard('King Benson (Strength)', 'The Lord is my strength & defense boost');" style="border-color: var(--purple);">
+                <h4>Benson</h4>
+                <p>Divine Strength & Defense</p>
             </div>
-            <button class="btn" onclick="openMarket()">Visit Market (Bread: 1 Gold / Veggies: 2 Gold)</button>
-            <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Forage Forest (Free Supplies / 5m Timer)</button>
+
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-queen-rosanna-healing.mp4'); activateCard('Queen Rosanna (Healing)', 'Rank A+ Restoration');">
+                <h4>Rosanna</h4>
+                <p>Divine Healing & Life</p>
+            </div>
+
+            <div class="tactical-card shield-card" onclick="activateCard('Shield of Truth', 'Radiant Gold Barrier Burst');">
+                <h4>God (Shield)</h4>
+                <p>Radiant Sparkling Shield</p>
+            </div>
+
+            <div class="tactical-card" onclick="activateCard('Ego of Phoenix', 'Wings as Eagles Sparkling Soul');" style="border-color: #ff8c00;">
+                <h4>Eagle (Soul)</h4>
+                <p>Sparkling White Soul</p>
+            </div>
+
+            <div class="tactical-card" onclick="activateCard('A+ Combat Skills', 'Maximum Strike Power');">
+                <h4>A+ Skills</h4>
+                <p>Elite Tactical Mastery</p>
+            </div>
+
+            <a href="player.html" class="tactical-card player-slot-card">
+                <h4>Add Player</h4>
+                <div id="active-player-display">
+                    <p style="font-size: 0.6rem; color: #00ffcc;">[Click to Open Chamber]</p>
+                </div>
+            </a>
         </div>
 
-        <!-- Right Panel: War & Interactive Boss Chambers -->
-        <div class="panel">
+        <!-- Center Panel: Interactive Stage (Click & Slash) -->
+        <div class="center-panel">
             <h2>Interactive War Chambers (Click & Slash)</h2>
             <div class="media-stage" id="combat-stage" onclick="triggerMouseSlash(event)">
                 <div id="flash-overlay"></div>
@@ -320,44 +373,32 @@
                     Your browser does not support video.
                 </video>
             </div>
-            <button class="btn" onclick="engageWarBattle()">Engage Big Boss & Rebellion</button>
-            <button class="btn" style="background-color: #444;" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Grind Points in Arena</button>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="engageWarBattle()">Engage Big Boss & Rebellion</button>
+                <button class="btn" style="background-color: #444;" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Grind Arena</button>
+            </div>
             <div class="battle-log" id="game-log">
-                [System Initialized]: Commander standing by. Color-coded HUD & Player Chambers linked.
+                [System Initialized]: Dynamic buttons active. Click stage to slash!
             </div>
         </div>
 
-    </div>
-
-    <!-- Gold & Purple Tactical Card Deck Bar with Player Slot -->
-    <div class="card-deck-bar">
-        
-        <!-- Interactive Player Slot Card Linking to player.html -->
-        <div class="tactical-card player-slot-card" onclick="openPlayerChambers()">
-            <h4>Add Player</h4>
-            <div id="active-player-display">
-                <p style="font-size: 0.6rem; color: #00ffcc;">[Click to Open Chamber]</p>
+        <!-- Right Sidebar: Arena, War, Training, Recruiting & Supply Hub -->
+        <div class="right-sidebar">
+            
+            <div class="action-panel">
+                <h3>Combat Chambers</h3>
+                <button class="btn" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Arena Battle</button>
+                <button class="btn" onclick="engageWarBattle()">War Campaign</button>
+                <button class="btn" onclick="playCombatVideo('assets-video-boss-fight-forest.mp4')">Training Academy</button>
+                <button class="btn" onclick="playCombatVideo('assets-video-recruitment-camp.mp4'); recruitSoldiers();">Recruiting Camp</button>
             </div>
-        </div>
 
-        <div class="tactical-card" onclick="activateCard('Imperial Shield', 'Psalm 3:3 Defense Boost')">
-            <h4>Shield Card</h4>
-            <p>Gold Barrier Burst</p>
-        </div>
+            <div class="action-panel">
+                <h3>Supply Hub</h3>
+                <button class="btn" onclick="openMarket()">Buy Supplies (Market)</button>
+                <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Collect Forest Supply</button>
+            </div>
 
-        <div class="tactical-card" onclick="activateCard('Forged Sword', 'Attack Power Scaling')">
-            <h4>Sword Card</h4>
-            <p>Offensive Strike</p>
-        </div>
-
-        <div class="tactical-card" onclick="playCombatVideo('assets-video-queen-rosanna-healing.mp4'); activateCard('Divine Healing (Queen Rosanna)', 'Rank A+ Restoration');">
-            <h4>Queen Rosanna</h4>
-            <p>Divine Healing</p>
-        </div>
-
-        <div class="tactical-card" style="border-color: var(--purple);" onclick="playCombatVideo('assets-video-king-benson-strength.mp4'); activateCard('King Benson (Divine)', 'Attack: 1000k Sword');">
-            <h4>King Benson</h4>
-            <p>Rank: Divine</p>
         </div>
 
     </div>
@@ -380,10 +421,6 @@
             logBox.scrollTop = logBox.scrollHeight;
         }
 
-        function openPlayerChambers() {
-            window.location.href = 'player.html';
-        }
-
         function loadEquippedPlayer() {
             const savedAsset = localStorage.getItem('selectedPlayerAsset');
             const savedName = localStorage.getItem('selectedPlayerName');
@@ -402,7 +439,7 @@
         }
 
         function openMarket() {
-            const vid = document.getElementById('left-video');
+            const vid = document.getElementById('combat-video');
             vid.src = "market-buy-supplies.mp4";
             vid.play();
             let coins = parseInt(document.getElementById('p-coins').innerText);
@@ -427,7 +464,7 @@
                 return;
             }
 
-            const vid = document.getElementById('left-video');
+            const vid = document.getElementById('combat-video');
             vid.src = "forest-gather-supplied.mp4";
             vid.play();
             
@@ -438,11 +475,17 @@
             forestCooldownEnd = Date.now() + 300000; // 5-minute cool-off timer
         }
 
+        function recruitSoldiers() {
+            let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 2;
+            document.getElementById('p-soldiers').innerText = soldiers;
+            logMessage('Recruiting Camp: New soldiers enlisted (+2).');
+        }
+
         function playCombatVideo(videoFile) {
             const vid = document.getElementById('combat-video');
             vid.src = videoFile;
             vid.play();
-            logMessage(`Playing cinematic: ${videoFile}`);
+            logMessage(`Switching screen view: ${videoFile}`);
         }
 
         function triggerMouseSlash(event) {
@@ -502,7 +545,7 @@
             let lifeElem = document.getElementById('p-life');
             lifeElem.innerText = '100';
 
-            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Radiant light burst deployed! Life span fully restored.`);
+            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Life span fully restored.`);
         }
 
         function showModal(title, text, color) {
@@ -518,3 +561,4 @@
     </script>
 </body>
 </html>
+
