@@ -107,6 +107,23 @@
             box-shadow: 0 0 20px var(--theme-color);
         }
 
+        /* Global Fullscreen Chamber Mode */
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen .theme-switcher-bar,
+        body.is-chamber-fullscreen .royal-scroll-trigger,
+        body.is-chamber-fullscreen .footer-sanctuary {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .hero-section {
+            padding: 0 !important;
+            justify-content: center !important;
+            min-height: 100vh !important;
+        }
+        body.is-chamber-fullscreen .real-book-container {
+            width: 420px !important;
+            height: 600px !important;
+        }
+
         /* Floating Royal Scroll Button (Tutorial & Navigation Guide) */
         .royal-scroll-trigger {
             position: fixed;
@@ -334,6 +351,7 @@
             margin-bottom: 25px;
             cursor: pointer;
             animation: floatBook 4s infinite alternate ease-in-out;
+            transition: all 0.4s ease;
         }
 
         @keyframes floatBook {
@@ -660,15 +678,26 @@
             document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
         }
 
-        // Fullscreen YouTube-Style Toggle
+        // Fullscreen YouTube-Style Toggle / Chamber Expansion Engine
         function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    alert("Error attempting to enable full-screen mode: " + err.message);
-                });
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+
+            // Toggle custom chamber view expansion first for a seamless web experience
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Exit Fullscreen View";
+                // Also trigger native browser fullscreen if possible
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Toggle Fullscreen View";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
                 }
             }
         }
