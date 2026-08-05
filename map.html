@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial Divine Vision | Sanctuary Home</title>
+    <title>Interactive Sovereign Empire Map | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        @keyframes cosmicShift {
-            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-            33% { background-position: 50% 100%; filter: hue-rotate(90deg); }
-            66% { background-position: 100% 0%; filter: hue-rotate(180deg); }
-            100% { background-position: 0% 50%; filter: hue-rotate(310deg); }
-        }
-
         :root {
             --bg-dark: #0b0f0e;
             --panel-bg: rgba(17, 23, 21, 0.95);
             --theme-color: #c5b59b; 
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
-            --glow-strength: rgba(197, 181, 155, 0.2);
+            --glow-strength: rgba(197, 181, 155, 0.3);
         }
 
         body {
@@ -33,189 +26,10 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: #0b0f0e;
-            transition: background 0.8s ease;
+            background: linear-gradient(135deg, #0b0f0e, #111715, #180e22);
         }
 
-        body.animated-vibe {
-            background: linear-gradient(135deg, #180e22, #111715, #0b0f0e, #1a0e14);
-            background-size: 500% 500%;
-            animation: cosmicShift 22s ease infinite alternate;
-        }
-
-        /* Independent Moving Flowering Background */
-        .moving-bg-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-repeat: repeat;
-            background-position: center;
-            background-size: 400px auto;
-            background-image: url('garden_border_pattern.png');
-            z-index: -2;
-            pointer-events: none;
-            opacity: 0.35;
-        }
-
-        body.animated-vibe .moving-bg-layer {
-            animation: breatheGarden 60s infinite alternate ease-in-out;
-        }
-
-        @keyframes breatheGarden {
-            0% { background-size: 400px auto; background-position: center center; }
-            50% { background-size: 415px auto; background-position: center top; }
-            100% { background-size: 390px auto; background-position: center bottom; }
-        }
-
-        /* Interactive Light / Shine Layer on Mouse Move */
-        .shine-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(197, 181, 155, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* YouTube-Style Fullscreen Button in Upper-Right Corner */
-        .fullscreen-toggle-btn {
-            position: fixed;
-            top: 15px;
-            right: 20px;
-            background: rgba(17, 23, 21, 0.9);
-            border: 2px solid var(--theme-color);
-            color: var(--text-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            cursor: pointer;
-            z-index: 3000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            transition: all 0.3s ease;
-        }
-        .fullscreen-toggle-btn:hover {
-            transform: scale(1.1);
-            background: var(--theme-color);
-            color: #0b0f0e;
-            box-shadow: 0 0 20px var(--theme-color);
-        }
-
-        /* Global Fullscreen Chamber Mode */
-        body.is-chamber-fullscreen nav,
-        body.is-chamber-fullscreen .theme-switcher-bar,
-        body.is-chamber-fullscreen .royal-scroll-trigger,
-        body.is-chamber-fullscreen .footer-sanctuary {
-            display: none !important;
-        }
-        body.is-chamber-fullscreen .hero-section {
-            padding: 0 !important;
-            justify-content: center !important;
-            min-height: 100vh !important;
-        }
-        body.is-chamber-fullscreen .real-book-container {
-            width: 420px !important;
-            height: 600px !important;
-        }
-
-        /* Floating Royal Scroll Button (Tutorial & Navigation Guide) */
-        .royal-scroll-trigger {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: linear-gradient(135deg, #2b1035, #4a0e17);
-            border: 2px solid var(--theme-color);
-            color: #ffe875;
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            z-index: 2500;
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        .royal-scroll-trigger:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 0 25px var(--theme-color);
-        }
-
-        /* Unrolling Parchment Scroll Modal */
-        .scroll-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(5, 8, 7, 0.9);
-            z-index: 4000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .scroll-parchment {
-            background: linear-gradient(135deg, #f4ecd8, #e5d3b3);
-            border: 4px double #5c3a21;
-            color: #2c1810;
-            padding: 40px;
-            border-radius: 12px;
-            max-width: 700px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            text-align: left;
-            position: relative;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
-            animation: unrollScroll 0.5s ease-out;
-        }
-        @keyframes unrollScroll {
-            0% { transform: scaleY(0.1); opacity: 0; }
-            100% { transform: scaleY(1); opacity: 1; }
-        }
-        .scroll-parchment h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: #5c3a21;
-            margin-top: 0;
-            text-align: center;
-        }
-        .scroll-parchment h4 {
-            font-family: 'Cinzel', serif;
-            color: #7b4b2a;
-            border-bottom: 1px solid #c8b08c;
-            padding-bottom: 4px;
-            margin-top: 20px;
-            text-transform: uppercase;
-        }
-        .scroll-parchment p {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin: 8px 0;
-        }
-        .close-scroll-btn {
-            background: #5c3a21;
-            color: #f4ecd8;
-            border: none;
-            padding: 10px 25px;
-            font-family: 'Cinzel', serif;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            display: block;
-            margin: 25px auto 0 auto;
-            transition: 0.2s;
-        }
-        .close-scroll-btn:hover { background: #3d2514; }
-
-        /* Professional Navigation Hub */
+        /* Top Navigation Bar */
         nav { 
             padding: 14px 20px; 
             background: var(--panel-bg);
@@ -230,7 +44,6 @@
             box-shadow: 0 4px 25px rgba(0,0,0,0.85);
             flex-wrap: wrap;
             backdrop-filter: blur(8px);
-            transition: border-color 0.5s ease;
         }
 
         .nav-module {
@@ -241,15 +54,6 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-            position: relative;
-        }
-
-        .nav-module:hover {
-            background: rgba(30, 42, 38, 0.95);
-            box-shadow: 0 0 15px var(--glow-strength);
-            transform: translateY(-2px);
         }
 
         nav a { 
@@ -259,546 +63,335 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: 0.2s;
         }
 
-        nav a:hover {
-            color: var(--theme-color);
-            text-shadow: 0 0 8px var(--glow-strength);
-        }
+        nav a:hover { color: var(--theme-color); }
 
-        /* Library Sub-Menu Popup Bar */
-        .library-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: rgba(17, 23, 21, 0.98);
-            border: 1px solid var(--theme-color);
-            border-radius: 6px;
-            margin-top: 6px;
-            padding: 8px;
-            flex-direction: column;
-            gap: 6px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.9);
-            z-index: 1100;
-            min-width: 150px;
-            text-align: left;
-        }
-
-        .library-dropdown a {
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            display: block;
-            border-radius: 4px;
-        }
-
-        .library-dropdown a:hover {
-            background: rgba(212, 175, 55, 0.15);
-        }
-
-        /* Live Color Theme Switcher Bar */
-        .theme-switcher-bar {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin: 15px 0;
-            flex-wrap: wrap;
-            background: rgba(11, 15, 14, 0.75);
-            padding: 8px;
-            border-radius: 6px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .color-btn {
-            background: #111715;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: var(--text-main);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-        }
-
-        .color-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        /* Hero Section */
-        .hero-section {
+        /* Master Game World Map Wrapper */
+        .map-world-wrapper {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            position: relative;
-            padding: 30px 20px;
         }
 
-        /* 3D Real Book Container */
-        .real-book-container {
-            width: 340px;
-            height: 480px;
-            position: relative;
-            perspective: 1200px;
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--theme-color);
+            margin: 5px 0;
+            text-shadow: 0 0 20px var(--glow-strength);
+        }
+
+        .map-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-muted);
             margin-bottom: 25px;
-            cursor: pointer;
-            animation: floatBook 4s infinite alternate ease-in-out;
-            transition: all 0.4s ease;
+            font-size: 1.05rem;
         }
 
-        @keyframes floatBook {
-            0% { transform: translateY(0px) rotateY(-5deg) rotateX(3deg); }
-            100% { transform: translateY(-12px) rotateY(-2deg) rotateX(1deg); }
+        /* Sovereign Player Status HUD on Map */
+        .map-hud {
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            padding: 10px 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 30px;
+            font-size: 0.85rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            flex-wrap: wrap;
+            justify-content: center;
         }
+        .map-hud span { color: #ffe875; font-weight: bold; }
 
-        .real-book {
+        /* Visual Game Map Board Canvas */
+        .game-map-board {
+            position: relative;
             width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            border-radius: 4px 12px 12px 4px;
-            box-shadow: -15px 20px 40px rgba(0,0,0,0.8), 0 0 45px var(--glow-strength);
+            max-width: 1000px;
+            height: 600px;
+            background: radial-gradient(circle, #1a2622 0%, #0b0f0e 100%);
+            border: 4px double var(--theme-color);
+            border-radius: 15px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.95), inset 0 0 40px rgba(0,0,0,0.85);
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 75% 70%, rgba(50, 205, 50, 0.08) 0%, transparent 40%),
+                linear-gradient(rgba(197, 181, 155, 0.04) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(197, 181, 155, 0.04) 1px, transparent 1px);
+            background-size: auto, auto, 50px 50px, 50px 50px;
+            overflow: hidden;
         }
 
-        .real-book-container:hover .real-book {
-            transform: scale(1.03) rotateY(0deg) rotateX(0deg);
-            box-shadow: -20px 25px 60px rgba(0,0,0,0.9), 0 0 70px var(--theme-color);
-        }
-
-        .real-book::before {
-            content: '';
+        /* Map Region Pins / Nodes */
+        .map-node {
             position: absolute;
-            top: 0; left: 0; width: 25px; height: 100%;
-            background: linear-gradient(90deg, #112618, #1b3b28, #0b140f);
-            border-radius: 4px 0 0 4px;
-            box-shadow: inset -3px 0 6px rgba(0,0,0,0.7);
+            background: rgba(17, 23, 21, 0.95);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             z-index: 10;
         }
 
-        .real-book::after {
-            content: '';
+        .map-node:hover {
+            transform: scale(1.12);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 25px var(--theme-color);
+            z-index: 100;
+        }
+
+        /* Fixed Map Coordinates for Chambers */
+        #node-throne { top: 15%; left: 12%; border-color: #ffd700; }
+        #node-wilderness { top: 22%; right: 15%; border-color: #32cd32; }
+        #node-village { bottom: 25%; left: 18%; border-color: #4169e1; }
+        #node-market { top: 50%; left: 42%; border-color: #ff8c00; }
+        #node-border { bottom: 20%; right: 18%; border-color: #ff69b4; }
+
+        /* Land Purchase / Noble Plots on Map */
+        .land-plot {
             position: absolute;
-            top: 4px; right: -12px; width: 12px; height: calc(100% - 8px);
-            background: linear-gradient(90deg, #e6d5b8, #fff, #c5b59b, #a39378);
-            transform: skewY(45deg);
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
-            border-radius: 0 2px 2px 0;
-        }
-
-        .book-cover-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px 12px 12px 4px;
-            border: 4px solid var(--theme-color);
-            box-sizing: border-box;
-            position: relative;
+            background: rgba(40, 30, 10, 0.85);
+            border: 2px dashed #ffd700;
+            color: #ffe875;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: 0.3s;
             z-index: 5;
-            transition: border-color 0.5s ease;
+        }
+        .land-plot:hover {
+            background: #ffd700;
+            color: #0b0f0e;
+            transform: scale(1.08);
+        }
+        .land-plot.owned {
+            border-style: solid;
+            background: rgba(20, 50, 30, 0.9);
+            border-color: #32cd32;
+            color: #79ff9c;
         }
 
-        .royal-subtitle {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-style: italic;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+        #plot-north-estate { top: 38%; left: 25%; }
+        #plot-east-valley { top: 40%; right: 28%; }
+        #plot-south-reach { bottom: 42%; left: 35%; }
+
+        /* Interactive Land Purchase Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 8, 7, 0.88);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-box {
+            background: linear-gradient(135deg, #181205, #2c220a);
+            border: 3px solid var(--theme-color);
+            padding: 35px;
+            border-radius: 14px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.6);
         }
 
         .royal-btn {
             background: linear-gradient(to bottom, var(--theme-color), #aa820a);
             color: #0b0f0e;
             border: 1px solid #fff;
-            padding: 12px 25px;
+            padding: 10px 22px;
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
+            margin-top: 15px;
             text-decoration: none;
             display: inline-block;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px var(--glow-strength);
             transition: 0.2s;
         }
-        .royal-btn:hover {
-            background: linear-gradient(to bottom, #fff, var(--theme-color));
-            box-shadow: 0 0 25px var(--theme-color);
-        }
-
-        /* Universal Scroll Down Indicator */
-        #global-scroll-indicator {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(17, 23, 21, 0.9);
-            border: 1px solid var(--theme-color);
-            color: var(--text-main);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            z-index: 2000;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            animation: floatIndicator 2s infinite ease-in-out;
-            transition: opacity 0.3s ease;
-        }
-        @keyframes floatIndicator {
-            0% { transform: translate(-50%, 0px); }
-            50% { transform: translate(-50%, 6px); }
-            100% { transform: translate(-50%, 0px); }
-        }
-
-        /* Professional Footer */
-        .footer-sanctuary {
-            background: var(--panel-bg);
-            border-top: 2px solid var(--theme-color);
-            padding: 25px 20px;
-            margin-top: auto;
-            box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
-            transition: border-color 0.5s ease;
-        }
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .footer-title {
-            color: var(--theme-color);
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--glow-strength);
-        }
-        .footer-contact {
-            color: var(--text-main);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
-        .footer-copy {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-
-        /* Community Chat Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(4, 10, 8, 0.85);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-box {
-            background: rgba(20, 27, 24, 0.98);
-            border: 2px solid var(--theme-color);
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 0 30px var(--glow-strength);
-        }
-        .gate-input {
-            width: 100%;
-            padding: 10px;
-            background: #0b0f0e;
-            border: 1px solid var(--theme-color);
-            color: #fff;
-            font-family: 'Cinzel', serif;
-            margin: 15px 0;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
+        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; }
     </style>
 </head>
-<body onmousemove="shineLight(event)">
+<body onload="loadMapData()">
 
-    <!-- YouTube-Style Fullscreen Toggle Button -->
-    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
-
-    <!-- Floating Royal Scroll Tutorial Trigger -->
-    <div class="royal-scroll-trigger" onclick="openScrollTutorial()">
-        📜 Sanctuary Guide
-    </div>
-
-    <!-- Unrolling Scroll Modal -->
-    <div class="scroll-modal-overlay" id="scrollModal">
-        <div class="scroll-parchment">
-            <h2>Imperial Sanctuary Guide</h2>
-            <p style="text-align: center; font-style: italic; color: #5c3a21; margin-bottom: 20px;">
-                Welcome to your sovereign map. Discover the purpose of every chamber within our empire.
-            </p>
-
-            <h4>🏠 Home (`index.html`)</h4>
-            <p>Your sanctuary root. Features the 3D living book, ambient background melody, and the Live Vibe Theme switcher (choose Pink, Gold, Blue, Green, Orange, or No Color).</p>
-
-            <h4>📚 Library & Sub-tabs (`library.html`)</h4>
-            <p>Hover or click Library in the navigation to reveal sub-tabs. Read the sacred book, explore Trailers, visit the Garden, or enter the Elder Sanctuary.</p>
-
-            <h4>⚔️ Battle Chambers (`battle.html`)</h4>
-            <p>The interactive combat arena. Click the stage to slash, battle rebellion forces, manage your army soldiers, visit the market, and equip your custom player champion.</p>
-
-            <h4>🛡️ Youth Proving Grounds (`proving-grounds.html`)</h4>
-            <p>Training and growth grounds dedicated to youthful development and strength.</p>
-
-            <h4>🪙 Imperial Shop (`shop.html`)</h4>
-            <p>Acquire sovereign items, register your email to link your profile, and watch your coin balance sync instantly across all rooms.</p>
-
-            <h4>💬 Community Chat</h4>
-            <p>Age-verified community routing chambers tailored for kids, youth, adults, and elders.</p>
-
-            <button class="close-scroll-btn" onclick="closeScrollTutorial()">Roll Up Scroll</button>
-        </div>
-    </div>
-
-    <!-- Peaceful Melody Audio -->
-    <audio id="peaceful-melody" loop preload="auto">
-        <source src="rosanna-music-galary.m4a" type="audio/mp4">
-    </audio>
-
-    <!-- Moving Background & Shine Overlay -->
-    <div class="moving-bg-layer"></div>
-    <div class="shine-overlay" id="shine-layer"></div>
-
-    <!-- Universal Floating Scroll Down Indicator -->
-    <div id="global-scroll-indicator" onclick="window.scrollBy({ top: 400, behavior: 'smooth' })">
-        <span>Scroll Down for More</span>
-        <span>↓</span>
-    </div>
-
-    <!-- Community Chat Modal -->
-    <div class="modal-overlay" id="communityModal">
-        <div class="modal-box">
-            <h3 style="color: var(--theme-color); margin-top: 0;">💬 Community Chat</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
-            <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
-            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
-            <br>
-            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close</button>
-        </div>
-    </div>
-
-    <!-- Navigation Bar with Library Submenu -->
+    <!-- Top Navigation Bar -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Home</a></div>
-        
-        <div class="nav-module" onmouseenter="toggleLibraryMenu(true)" onmouseleave="toggleLibraryMenu(false)">
-            <a href="library.html">📚 Library ▾</a>
-            <div class="library-dropdown" id="libraryDropdown">
-                <a href="trailers.html">🎬 Trailers</a>
-                <a href="garden.html">🌸 Garden</a>
-                <a href="room-elder.html">🌿 Elder Sanctuary</a>
-            </div>
-        </div>
-
+        <div class="nav-module"><a href="library.html">📚 Library</a></div>
+        <div class="nav-module"><a href="map.html" style="color: #79ff9c;">🗺️ Empire Map</a></div>
         <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
-        <div class="nav-module"><a href="proving-grounds.html">🛡️ Youth</a></div>
         <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
-        <div class="nav-module"><a href="#" onclick="openModal(); return false;">💬 Community</a></div>
     </nav>
 
-    <!-- Live Color Theme Switcher Bar with No Color Option -->
-    <div class="theme-switcher-bar">
-        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted);">Vibe Theme:</span>
-        <button class="color-btn" style="border-color: #8c8c8c; color: #8c8c8c;" onclick="setTheme('reset', '#c5b59b', 'rgba(197, 181, 155, 0.2)')">No Color</button>
-        <button class="color-btn" style="border-color: #ff69b4; color: #ff69b4;" onclick="setTheme('active', '#ff69b4', 'rgba(255, 105, 180, 0.5)')">Pink</button>
-        <button class="color-btn" style="border-color: #d4af37; color: #d4af37;" onclick="setTheme('active', '#d4af37', 'rgba(212, 175, 55, 0.5)')">Gold</button>
-        <button class="color-btn" style="border-color: #4169e1; color: #4169e1;" onclick="setTheme('active', '#4169e1', 'rgba(65, 105, 225, 0.5)')">Blue</button>
-        <button class="color-btn" style="border-color: #32cd32; color: #32cd32;" onclick="setTheme('active', '#32cd32', 'rgba(50, 205, 50, 0.5)')">Green</button>
-        <button class="color-btn" style="border-color: #ff8c00; color: #ff8c00;" onclick="setTheme('active', '#ff8c00', 'rgba(255, 140, 0, 0.5)')">Orange</button>
-    </div>
+    <!-- Master Map World Container -->
+    <div class="map-world-wrapper">
+        <h1>Interactive Sovereign Empire Map</h1>
+        <p class="map-subtitle">Traverse regional chambers, manage territorial fiefdoms, and secure your noble legacy.</p>
 
-    <!-- Hero Section -->
-    <div class="hero-section" onclick="playMelody()">
-        <div class="real-book-container" onclick="window.location.href='library.html'">
-            <div class="real-book">
-                <img src="cover_image.png" class="book-cover-image" alt="The Song of Rosanna and the Evil King" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
+        <!-- Sovereign HUD Bar -->
+        <div class="map-hud">
+            <div>Imperial Coins: <span id="map-coin-display">0</span> 🪙</div>
+            <div>Noble Rank: <span id="map-rank-display">Common Citizen</span></div>
+            <div>Owned Estates: <span id="map-estates-display">0</span> / 3</div>
+        </div>
+
+        <!-- Visual Game Map Canvas Board -->
+        <div class="game-map-board">
+            
+            <!-- 1. Throne Room Chamber Link -->
+            <a href="room-adult.html" class="map-node" id="node-throne">
+                🏛️ Throne Room
+            </a>
+
+            <!-- 2. Wilderness Forest Chamber Link -->
+            <a href="forest.html" class="map-node" id="node-wilderness">
+                🌲 Wilderness Forest
+            </a>
+
+            <!-- 3. Village Commons & Travelers Link -->
+            <a href="community.html" class="map-node" id="node-village">
+                🏡 Village Commons
+            </a>
+
+            <!-- 4. Marketplace Chamber Link -->
+            <a href="market.html" class="map-node" id="node-market">
+                ⚖️ Royal Marketplace
+            </a>
+
+            <!-- 5. Border Outpost Battle Arena Link -->
+            <a href="battle.html" class="map-node" id="node-border">
+                ⚔️ Border Outpost (Battle)
+            </a>
+
+            <!-- Purchasable Land Plots (Feudal System) -->
+            <div class="land-plot" id="plot-north-estate" onclick="openLandPurchase('North Valley Estate', 5000, 'plot-north-estate')">
+                🏰 North Estate (5,000 🪙)
             </div>
+
+            <div class="land-plot" id="plot-east-valley" onclick="openLandPurchase('East Forest Fiefdom', 8000, 'plot-east-valley')">
+                🛡️ East Fiefdom (8,000 🪙)
+            </div>
+
+            <div class="land-plot" id="plot-south-reach" onclick="openLandPurchase('Grand Southern Duchy', 15000, 'plot-south-reach')">
+                👑 Grand Duchy (15,000 🪙)
+            </div>
+
         </div>
-
-        <h3 style="color: var(--text-main); margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
-        <p class="royal-subtitle">
-            “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
-        </p>
-
-        <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
     </div>
 
-    <!-- Professional Footer -->
-    <footer class="footer-sanctuary">
-        <div class="footer-content">
-            <div class="footer-title">Imperial Divine Vision</div>
-            <a href="mailto:imperialdivinevision@gmail.com" class="footer-contact">✉️ imperialdivinevision@gmail.com</a>
-            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Rights Reserved.</div>
+    <!-- Land Purchase Modal -->
+    <div class="modal-overlay" id="landModal">
+        <div class="modal-box">
+            <h2 id="modal-estate-title" style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #ffd700; margin-top: 0;">Acquire Territory</h2>
+            <p id="modal-estate-desc" style="font-size: 0.9rem; color: #f5f2eb; font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+                Claim this sovereign land to rise in noble rank, manage regional resources, and care for your local NPCs.
+            </p>
+            <button class="royal-btn" onclick="confirmLandPurchase()">Claim Territory & Become Noble 👑</button>
+            <br>
+            <button style="background:transparent; border:none; color:#b3a896; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeLandModal()">Cancel</button>
         </div>
-    </footer>
+    </div>
 
     <script>
-        let musicStarted = false;
+        let selectedPlotName = "";
+        let selectedPlotCost = 0;
+        let selectedPlotId = "";
 
-        // Theme Switcher
-        function setTheme(mode, color, glow) {
-            if (mode === 'reset') {
-                document.body.classList.remove('animated-vibe');
-                document.documentElement.style.setProperty('--theme-color', '#c5b59b');
-                document.documentElement.style.setProperty('--glow-strength', glow);
-            } else {
-                document.body.classList.add('animated-vibe');
-                document.documentElement.style.setProperty('--theme-color', color);
-                document.documentElement.style.setProperty('--glow-strength', glow);
-            }
-        }
+        let userState = {
+            coins: 0,
+            rank: "Common Citizen",
+            estates: []
+        };
 
-        // Library Submenu Toggle
-        function toggleLibraryMenu(show) {
-            document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
-        }
-
-        // Fullscreen YouTube-Style Toggle / Chamber Expansion Engine
-        function toggleFullScreen() {
-            const body = document.body;
-            const fsBtn = document.getElementById('fsToggleBtn');
-
-            // Toggle custom chamber view expansion first for a seamless web experience
-            body.classList.toggle('is-chamber-fullscreen');
-
-            if (body.classList.contains('is-chamber-fullscreen')) {
-                fsBtn.innerHTML = '⤡';
-                fsBtn.title = "Exit Fullscreen View";
-                // Also trigger native browser fullscreen if possible
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen().catch(err => {});
-                }
-            } else {
-                fsBtn.innerHTML = '⤢';
-                fsBtn.title = "Toggle Fullscreen View";
-                if (document.exitFullscreen && document.fullscreenElement) {
-                    document.exitFullscreen().catch(err => {});
-                }
-            }
-        }
-
-        // Unrolling Scroll Modal
-        function openScrollTutorial() {
-            document.getElementById('scrollModal').style.display = 'flex';
-        }
-        function closeScrollTutorial() {
-            document.getElementById('scrollModal').style.display = 'none';
-        }
-
-        // Mouse Shine Effect & Auto-Audio Start
-        function shineLight(event) {
-            let layer = document.getElementById('shine-layer');
-            let x = (event.clientX / window.innerWidth) * 100;
-            let y = (event.clientY / window.innerHeight) * 100;
-            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(197, 181, 155, 0.2) 0%, transparent 60%)";
-            layer.style.opacity = "1";
-
-            if (!musicStarted) {
-                let audio = document.getElementById('peaceful-melody');
-                if (audio) {
-                    audio.volume = 0.4;
-                    audio.play().then(() => {
-                        musicStarted = true;
-                    }).catch(e => {});
-                }
-            }
-        }
-
-        function playMelody() {
-            let audio = document.getElementById('peaceful-melody');
-            if (audio && !musicStarted) {
-                audio.volume = 0.4;
-                audio.play().then(() => {
-                    musicStarted = true;
-                }).catch(e => {});
-            }
-        }
-
-        // Community Modal
-        function openModal() {
-            document.getElementById('communityModal').style.display = 'flex';
-        }
-        function closeModal() {
-            document.getElementById('communityModal').style.display = 'none';
-        }
-
-        // Scroll Down Indicator Logic
-        window.addEventListener('DOMContentLoaded', () => {
-            const indicator = document.getElementById('global-scroll-indicator');
-            if (document.documentElement.scrollHeight > window.innerHeight + 100) {
-                indicator.style.display = 'flex';
-            } else {
-                indicator.style.display = 'none';
+        function loadMapData() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                userState.coins = parsed.coins || 0;
+                if (parsed.estates) userState.estates = parsed.estates;
+                if (userState.estates.length >= 3) userState.rank = "Grand Duke";
+                else if (userState.estates.length >= 2) userState.rank = "Duke";
+                else if (userState.estates.length >= 1) userState.rank = "Lord / Noble";
             }
 
-            window.addEventListener('scroll', () => {
-                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80) {
-                    indicator.style.opacity = '0';
-                    indicator.style.pointerEvents = 'none';
-                } else {
-                    indicator.style.opacity = '1';
-                    indicator.style.pointerEvents = 'auto';
+            document.getElementById('map-coin-display').innerText = userState.coins;
+            document.getElementById('map-rank-display').innerText = userState.rank;
+            document.getElementById('map-estates-display').innerText = userState.estates.length;
+
+            // Mark owned estates visually on map
+            userState.estates.forEach(plotId => {
+                const el = document.getElementById(plotId);
+                if (el) {
+                    el.classList.add('owned');
+                    el.innerHTML = "👑 Owned Fiefdom";
                 }
             });
-        });
+        }
 
-        // Birthday Router for Community
-        function routeByBirthday() {
-            let bdayInput = document.getElementById('user-birthday').value.trim();
-            if (!bdayInput) {
-                alert("Please enter your date of birth.");
+        function openLandPurchase(name, cost, plotId) {
+            if (userState.estates.includes(plotId)) {
+                alert("You already own this sovereign territory!");
+                return;
+            }
+            selectedPlotName = name;
+            selectedPlotCost = cost;
+            selectedPlotId = plotId;
+
+            document.getElementById('modal-estate-title').innerText = name;
+            document.getElementById('modal-estate-desc').innerHTML = `Cost: <strong>${cost} Imperial Coins</strong>.<br>Purchasing this land grants you noble status. You will be responsible for providing supplies to your resident NPCs to avoid crown petitions and divine penalties!`;
+            document.getElementById('landModal').style.display = 'flex';
+        }
+
+        function closeLandModal() {
+            document.getElementById('landModal').style.display = 'none';
+        }
+
+        function confirmLandPurchase() {
+            if (userState.coins < selectedPlotCost) {
+                alert(`You require ${selectedPlotCost} Imperial Coins to claim this land. Current balance: ${userState.coins} 🪙.`);
+                closeLandModal();
                 return;
             }
 
-            let parts = bdayInput.split(/[\/\-\.]/);
-            let year = parseInt(parts[parts.length - 1]);
+            userState.coins -= selectedPlotCost;
+            userState.estates.push(selectedPlotId);
 
-            if (isNaN(year) || year < 1900 || year > 2026) {
-                alert("Please enter a valid date format (e.g., MM/DD/YYYY).");
-                return;
-            }
+            if (userState.estates.length === 3) userState.rank = "Grand Duke";
+            else if (userState.estates.length === 2) userState.rank = "Duke";
+            else userState.rank = "Lord / Noble";
 
-            let currentYear = 2026;
-            let age = currentYear - year;
+            // Save back to localStorage
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            let parsed = saved ? JSON.parse(saved) : {};
+            parsed.coins = userState.coins;
+            parsed.estates = userState.estates;
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
 
-            if (age < 13) {
-                alert("Kids credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=kids";
-            } else if (age >= 13 && age <= 19) {
-                alert("Youth credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=youth";
-            } else if (age >= 20 && age <= 64) {
-                alert("Adult credentials recognized. Routing to Community Chamber...");
-                window.location.href = "community.html?room=adult";
-            } else {
-                alert("Elder credentials recognized. Routing to Sovereign Sanctuary...");
-                window.location.href = "room-elder.html";
-            }
+            alert(`✦ Congratulations! You are now the official ruler of ${selectedPlotName}! Your rank has risen to ${userState.rank}. ✦`);
+            closeLandModal();
+            loadMapData();
         }
     </script>
 </body>
