@@ -1,3 +1,12 @@
+Here is your completely updated, masterwork edition of **`shop.html`**.
+
+I have safely integrated everything into your code:
+
+1. **The 3D Flipping Coin Pop-Up Modal**: Features your official seal on the front and King Benson & Queen Rosanna on the back. When a player purchases coins, the magnificent pop-up appears, plays the financial chime sound, and lets them flip the coin back and forth by clicking it.
+2. **Transparent Background Shielding**: Styled with clean circular clipping (`border-radius: 50%` and `object-fit: cover`) so there are no awkward background squares.
+3. **Automated Cash App Vault Linking**: Clicking any of the coin vaults (`recordPurchase(...)`) automatically triggers the celebration and updates the user's balance live across the empire.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -251,7 +260,7 @@
             text-align: left;
         }
 
-        /* Custom Coin Pop-up Celebration Styles */
+        /* 3D Flipping Coin Popup Styles */
         #imperial-coin-popup {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -270,6 +279,52 @@
         @keyframes popCoinCard {
             from { transform: scale(0.6); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
+        }
+
+        /* 3D Coin Flip Mechanics & Transparent Shielding */
+        .coin-flip-scene {
+            width: 140px;
+            height: 140px;
+            margin: 20px auto 5px auto;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .coin-object {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .coin-object.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            backface-visibility: hidden;
+            border: 4px solid #ffe875;
+            box-shadow: 0 0 35px #d4af37;
+            background: radial-gradient(circle, #ffe875, #aa820a);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: transparent;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
@@ -399,7 +454,7 @@
         </div>
     </div>
 
-    <!-- Custom Coin Purchase Pop-up Modal Container -->
+    <!-- 3D Flipping Coin Purchase Popup Modal Container -->
     <div id="imperial-coin-popup">
         <div style="
             background: linear-gradient(135deg, #181205, #2c220a);
@@ -415,12 +470,22 @@
         ">
             <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffe875; margin: 0 0 10px 0; text-shadow: 0 0 15px rgba(212,175,55,0.8);">Sovereign Wealth Acquired!</h2>
             
-            <!-- Custom Designed Coin Image Container -->
-            <div style="margin: 20px auto; width: 130px; height: 130px; border-radius: 50%; border: 4px solid #ffe875; box-shadow: 0 0 35px #d4af37; overflow: hidden; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffe875, #aa820a);">
-                <img src="imperial-coin-design.png" alt="Imperial Coin" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=300&q=80'">
+            <!-- 3D Flipping Coin Wrapper -->
+            <div class="coin-flip-scene" onclick="toggleCoinFlip()" title="Click to inspect both sides of the coin">
+                <div class="coin-object" id="imperialCoinObject">
+                    <!-- FRONT: Official Seal -->
+                    <div class="coin-face coin-front">
+                        <img src="imperial-coin-design.png" alt="Imperial Seal Front" onerror="this.src='https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=300&q=80'">
+                    </div>
+                    <!-- BACK: King Benson & Queen Rosanna -->
+                    <div class="coin-face coin-back">
+                        <img src="king-benson-queen-rosanna.png" alt="King Benson & Queen Rosanna Back" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80'">
+                    </div>
+                </div>
             </div>
+            <p style="font-size: 0.75rem; color: #e6d5c3; font-style: italic; margin: 5px 0 15px 0;">(Tap coin to flip and view reverse side)</p>
 
-            <p id="coin-popup-amount" style="font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; color: #f3e5ab; margin: 15px 0 25px 0; font-weight: bold;">+ Coins Added to Your Vault</p>
+            <p id="coin-popup-amount" style="font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; color: #f3e5ab; margin: 5px 0 20px 0; font-weight: bold;">+ Coins Added to Your Vault</p>
             
             <button onclick="closeCoinPopup()" class="ancient-btn" style="padding: 12px 30px; font-size: 1rem;">Claim Wealth 🪙</button>
         </div>
@@ -467,7 +532,7 @@
 
         function recordPurchase(itemTitle, price, coinReward = 0) {
             if (!userProgress.email) {
-                alert("Please register your email in the top sovereign HUD before making an acquisition so notifications and codes can be sent to you!");
+                alert("Please register your email in the top sovereign HUD before making a acquisition so notifications and codes can be sent to you!");
             }
 
             if (coinReward > 0) {
@@ -506,10 +571,15 @@
             document.getElementById('imperial-coin-popup').style.display = 'none';
         }
 
+        // Toggle coin flip when clicked
+        function toggleCoinFlip() {
+            const coin = document.getElementById('imperialCoinObject');
+            coin.classList.toggle('is-flipped');
+        }
+
         function playCoinClinkSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                // Play a crisp multi-chime financial clink
                 [987.77, 1318.51, 1567.98].forEach((freq, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
@@ -552,3 +622,5 @@
     </script>
 </body>
 </html>
+
+```
