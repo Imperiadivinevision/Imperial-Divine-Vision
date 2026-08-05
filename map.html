@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,43 +6,40 @@
     <title>Cinematic Sovereign Empire Map | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        @keyframes cosmicShift {
-            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-            50% { background-position: 100% 50%; filter: hue-rotate(45deg); }
-            100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+        @keyframes cosmicGlow {
+            0% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.08) saturate(1.15); }
+            100% { filter: brightness(1) saturate(1); }
         }
 
-        @keyframes terrainBreathe {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        @keyframes waterShimmer {
+            0% { opacity: 0.3; transform: translateY(0px); }
+            50% { opacity: 0.6; transform: translateY(-3px); }
+            100% { opacity: 0.3; transform: translateY(0px); }
         }
 
         :root {
             --bg-dark: #0b0f0e;
             --panel-bg: rgba(17, 23, 21, 0.92);
-            --theme-color: #c5b59b; 
+            --theme-color: #ffd700; 
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
-            --glow-strength: rgba(197, 181, 155, 0.3);
         }
 
         body {
             margin: 0;
             padding: 0;
-            color: var(--theme-color);
+            color: var(--text-main);
             font-family: 'Cinzel', serif;
             text-align: center;
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #180e22, #111715, #0b0f0e, #1a0e14);
-            background-size: 400% 400%;
-            animation: cosmicShift 25s ease infinite alternate;
+            background: #0b0f0e;
         }
 
-        /* YouTube-Style Fullscreen Expand / Decrease Button in Upper-Right */
+        /* YouTube-Style Fullscreen Expand / Decrease Button */
         .fullscreen-toggle-btn {
             position: fixed;
             top: 15px;
@@ -70,11 +66,11 @@
             box-shadow: 0 0 20px var(--theme-color);
         }
 
-        /* Global Fullscreen Map Chamber Expansion Mode */
+        /* Global Fullscreen Map Expansion Mode */
         body.is-chamber-fullscreen nav,
         body.is-chamber-fullscreen .map-subtitle,
-        body.is-chamber-fullscreen .map-hud,
-        body.is-chamber-fullscreen .music-player-bar {
+        body.is-chamber-fullscreen h1,
+        body.is-chamber-fullscreen .map-hud-container {
             display: none !important;
         }
         body.is-chamber-fullscreen .map-world-wrapper {
@@ -86,14 +82,15 @@
         }
         body.is-chamber-fullscreen .game-map-board {
             max-width: 100vw !important;
-            height: 96vh !important;
+            width: 100vw !important;
+            height: 100vh !important;
             border-radius: 0 !important;
             border: none !important;
         }
 
         /* Top Navigation Bar */
         nav { 
-            padding: 14px 20px; 
+            padding: 12px 20px; 
             background: var(--panel-bg);
             border-bottom: 2px solid var(--theme-color);
             position: sticky;
@@ -111,17 +108,17 @@
         .nav-module {
             background: rgba(22, 30, 27, 0.85);
             border: 1px solid var(--theme-color);
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: 6px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         nav a { 
             color: var(--text-main); 
             text-decoration: none; 
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -131,9 +128,9 @@
 
         /* Master Game World Map Wrapper */
         .map-world-wrapper {
-            max-width: 1300px;
-            margin: 15px auto;
-            padding: 15px;
+            max-width: 1350px;
+            margin: 10px auto;
+            padding: 10px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -143,25 +140,25 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: var(--theme-color);
-            margin: 5px 0;
-            text-shadow: 0 0 25px var(--glow-strength);
+            margin: 2px 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
 
         .map-subtitle {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             color: var(--text-muted);
-            margin-bottom: 12px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
         /* Sovereign Player Status HUD & Music Player Bar */
         .map-hud-container {
             display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
@@ -170,138 +167,95 @@
         .map-hud {
             background: rgba(17, 23, 21, 0.92);
             border: 2px solid var(--theme-color);
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 8px;
             display: flex;
-            gap: 20px;
-            font-size: 0.8rem;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            gap: 15px;
+            font-size: 0.75rem;
+            box-shadow: 0 0 15px rgba(0,0,0,0.8);
         }
         .map-hud span { color: #ffe875; font-weight: bold; }
 
         .music-player-bar {
             background: rgba(17, 23, 21, 0.92);
             border: 2px solid var(--theme-color);
-            padding: 6px 15px;
+            padding: 5px 12px;
             border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.8rem;
+            gap: 8px;
+            font-size: 0.75rem;
         }
 
-        /* Cinematic Living World Map Board Canvas */
+        /* Cinematic Living Image Map Board Canvas */
         .game-map-board {
             position: relative;
             width: 100%;
-            max-width: 1180px;
-            height: 700px;
-            background: radial-gradient(circle at center, #13221a 0%, #0a0f0d 100%);
+            max-width: 1200px;
+            height: 750px;
+            background: url('empire-map.png') no-repeat center center;
+            background-size: cover;
             border: 6px ridge var(--theme-color);
-            border-radius: 18px;
-            box-shadow: 0 0 80px rgba(0,0,0,0.95), inset 0 0 60px rgba(0,0,0,0.85);
+            border-radius: 16px;
+            box-shadow: 0 0 70px rgba(0,0,0,0.95), inset 0 0 40px rgba(0,0,0,0.6);
             overflow: hidden;
-            animation: terrainBreathe 12s ease-in-out infinite;
+            animation: cosmicGlow 15s ease-in-out infinite alternate;
         }
 
-        /* Organic Terrain Biomes & Decorations */
-        .map-terrain-cluster {
+        /* Cinematic Water Shimmer Overlay */
+        .water-glow-overlay {
             position: absolute;
-            font-size: 1.4rem;
-            opacity: 0.85;
+            top: 38%;
+            left: 32%;
+            width: 180px;
+            height: 90px;
+            background: radial-gradient(circle, rgba(100, 210, 255, 0.35) 0%, transparent 70%);
+            border-radius: 50%;
             pointer-events: none;
-            z-index: 2;
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.85));
-            line-height: 1.3;
-            letter-spacing: 2px;
+            animation: waterShimmer 4s ease-in-out infinite;
         }
 
-        /* Cinematic Territory Pins */
-        .map-territory-card {
+        /* Interactive Transparent Hotspots Overlaying Your Painted Map */
+        .map-hotspot {
             position: absolute;
-            background: rgba(15, 23, 19, 0.96);
-            border: 2px solid var(--theme-color);
-            border-radius: 12px;
-            padding: 10px 14px;
-            width: 175px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px dashed rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.9);
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
             z-index: 25;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .map-territory-card:hover {
-            transform: scale(1.1) translateY(-5px);
-            border-color: #ffe875;
-            box-shadow: 0 0 35px rgba(255, 232, 117, 0.7);
-            z-index: 100;
-        }
-
-        .territory-icon {
-            font-size: 1.9rem;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
-        }
-
-        .territory-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: var(--text-main);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .territory-desc {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        /* Positioned Across the Living Map */
-        #card-throne { top: 10%; left: 8%; border-color: #ffd700; }
-        #card-wilderness { top: 10%; right: 8%; border-color: #32cd32; }
-        #card-market { top: 44%; left: 50%; transform: translateX(-50%); border-color: #ff8c00; width: 195px; }
-        #card-village1 { bottom: 10%; left: 8%; border-color: #4169e1; }
-        #card-village2 { bottom: 10%; right: 42%; border-color: #4169e1; }
-        #card-border { bottom: 10%; right: 8%; border-color: #ff69b4; }
-
-        /* Purchasable Feudal Land Plots */
-        .land-plot {
-            position: absolute;
-            background: rgba(35, 25, 10, 0.92);
-            border: 2px dashed #ffd700;
-            color: #ffe875;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 20;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-        }
-        .land-plot:hover {
-            background: #ffd700;
-            color: #0b0f0e;
-            transform: scale(1.08);
-        }
-        .land-plot.owned {
+        .map-hotspot:hover {
+            background: rgba(255, 215, 0, 0.3);
             border-style: solid;
-            background: rgba(20, 60, 30, 0.95);
-            border-color: #32cd32;
-            color: #79ff9c;
+            border-color: #fff;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+            transform: scale(1.05);
         }
 
-        #plot-north-estate { top: 30%; left: 24%; }
-        #plot-east-valley { top: 30%; right: 24%; }
-        #plot-central-barony { top: 60%; left: 22%; }
-        #plot-south-reach { bottom: 30%; right: 22%; }
+        .map-hotspot.owned {
+            border-style: solid;
+            background: rgba(46, 125, 50, 0.4);
+            border-color: #32cd32;
+        }
+
+        /* Exact Coordinates to match your empire-map.png layout */
+        #hotspot-throne { top: 8%; left: 6%; width: 18%; height: 25%; }
+        #hotspot-wilderness { top: 18%; right: 12%; width: 22%; height: 26%; }
+        #hotspot-market { top: 52%; left: 38%; width: 22%; height: 22%; }
+        #hotspot-village1 { bottom: 6%; left: 6%; width: 20%; height: 22%; }
+        #hotspot-village2 { bottom: 6%; left: 38%; width: 18%; height: 20%; }
+        #hotspot-border { bottom: 6%; right: 6%; width: 24%; height: 28%; }
+
+        /* Purchasable Land Hotspots */
+        #plot-north-estate { top: 22%; left: 26%; width: 14%; height: 12%; border-color: #00ffff; }
+        #plot-east-valley { top: 46%; right: 26%; width: 14%; height: 12%; border-color: #00ffff; }
+        #plot-central-barony { top: 40%; left: 24%; width: 13%; height: 12%; border-color: #00ffff; }
+        #plot-south-reach { bottom: 35%; right: 38%; width: 12%; height: 12%; border-color: #00ffff; }
 
         /* Interactive Land Purchase Modal */
         .modal-overlay {
@@ -366,7 +320,7 @@
     <!-- Master Map World Container -->
     <div class="map-world-wrapper">
         <h1>Cinematic Sovereign Empire Map</h1>
-        <p class="map-subtitle">A living, breathing world map featuring dense forests, flowing rivers, sprawling villages, and royal estates.</p>
+        <p class="map-subtitle">Click directly upon your illustrated realms to enter chambers, trade, and manage estates.</p>
 
         <!-- Sovereign HUD & Music Bar -->
         <div class="map-hud-container">
@@ -376,89 +330,40 @@
                 <div>Owned Estates: <span id="map-estates-display">0</span> / 4</div>
             </div>
             <div class="music-player-bar">
-                <span>🎵 Realm Atmosphere: <strong id="music-status">Playing</strong></span>
+                <span>🎵 Atmosphere: <strong id="music-status">Playing</strong></span>
                 <button onclick="toggleMusic(event)" id="musicToggleBtn" style="background:var(--theme-color); border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-family:'Cinzel'; font-size:0.75rem; font-weight:bold;">Pause</button>
             </div>
         </div>
 
-        <!-- Cinematic Living World Map Board Canvas -->
+        <!-- Cinematic Living Image Map Board Canvas -->
         <div class="game-map-board">
             
-            <!-- Flowing Rivers & Waterways -->
-            <div class="map-terrain-cluster" style="top: 35%; left: 35%;">🌊 〰️ 🌊 〰️ 🌊</div>
-            <div class="map-terrain-cluster" style="top: 52%; right: 35%;">〰️ 🌊 〰️ 🌊 〰️</div>
+            <!-- Atmospheric Shimmer over Water -->
+            <div class="water-glow-overlay"></div>
 
-            <!-- Dense Wilderness Forest Biome -->
-            <div class="map-terrain-cluster" style="top: 8%; right: 28%;">🌲 🌳 🌲 🪾 🌴</div>
-            <div class="map-terrain-cluster" style="top: 20%; right: 25%;">🌳 🪾 🌲 🌳 🌲</div>
-            <div class="map-terrain-cluster" style="top: 15%; right: 36%;">🌲 🌴 🌳 🌸 🌲</div>
+            <!-- 1. Throne Room Hotspot -->
+            <a href="room-adult.html" class="map-hotspot" id="hotspot-throne" title="Enter Throne Room"></a>
 
-            <!-- Sprawling Village Settlements -->
-            <div class="map-terrain-cluster" style="bottom: 8%; left: 26%;">🛖 🏘️ 🏠 🏡 🏚️</div>
-            <div class="map-terrain-cluster" style="bottom: 18%; left: 32%;">🏠 🛖 🏡 🏘️ 🛖</div>
-            <div class="map-terrain-cluster" style="bottom: 8%; right: 30%;">🏘️ 🏡 🛖 🏚️ 🏠</div>
+            <!-- 2. Wilderness Forest Hotspot -->
+            <a href="forest.html" class="map-hotspot" id="hotspot-wilderness" title="Explore Wilderness Forest"></a>
 
-            <!-- Royal Throne Complex & Overseer Mansions -->
-            <div class="map-terrain-cluster" style="top: 18%; left: 22%;">🏰 🏛️ 🕌 🛡️</div>
+            <!-- 3. Royal Marketplace Hotspot -->
+            <a href="market.html" class="map-hotspot" id="hotspot-market" title="Visit Royal Marketplace"></a>
 
-            <!-- 1. Throne Room Territory -->
-            <a href="room-adult.html" class="map-territory-card" id="card-throne">
-                <div class="territory-icon">🏛️🏰</div>
-                <div class="territory-title">Throne Room</div>
-                <div class="territory-desc">Royal Court & Politics</div>
-            </a>
+            <!-- 4. North Village Hotspot -->
+            <a href="community.html" class="map-hotspot" id="hotspot-village1" title="Visit North Village"></a>
 
-            <!-- 2. Wilderness Forest Territory -->
-            <a href="forest.html" class="map-territory-card" id="card-wilderness">
-                <div class="territory-icon">🌲🌳🪾</div>
-                <div class="territory-title">Wilderness Forest</div>
-                <div class="territory-desc">Supply Trail & Fog</div>
-            </a>
+            <!-- 5. South Hamlet Hotspot -->
+            <a href="community.html" class="map-hotspot" id="hotspot-village2" title="Visit South Hamlet"></a>
 
-            <!-- 3. Royal Marketplace Territory -->
-            <a href="market.html" class="map-territory-card" id="card-market">
-                <div class="territory-icon">⚖️🛍️🪙</div>
-                <div class="territory-title">Royal Marketplace</div>
-                <div class="territory-desc">Supplies & Merchant Stalls</div>
-            </a>
+            <!-- 6. Border Outpost Hotspot -->
+            <a href="battle.html" class="map-hotspot" id="hotspot-border" title="Enter Border Outpost Battle Arena"></a>
 
-            <!-- 4. Village Commons 1 -->
-            <a href="community.html" class="map-territory-card" id="card-village1">
-                <div class="territory-icon">🏡👥🛖</div>
-                <div class="territory-title">North Village</div>
-                <div class="territory-desc">Villagers & Traveler Aid</div>
-            </a>
-
-            <!-- 5. Village Commons 2 -->
-            <a href="community.html" class="map-territory-card" id="card-village2">
-                <div class="territory-icon">🏘️🌾👥</div>
-                <div class="territory-title">South Hamlet</div>
-                <div class="territory-desc">Farming & Secret Quests</div>
-            </a>
-
-            <!-- 6. Border Outpost Battle Arena -->
-            <a href="battle.html" class="map-territory-card" id="card-border">
-                <div class="territory-icon">⚔️🛡️</div>
-                <div class="territory-title">Border Outpost</div>
-                <div class="territory-desc">Active Combat Arena</div>
-            </a>
-
-            <!-- Purchasable Feudal Land Plots (Linked to Local Storage) -->
-            <div class="land-plot" id="plot-north-estate" onclick="openLandPurchase('North Valley Estate', 5000, 'plot-north-estate')">
-                🏰 North Estate (5,000 🪙)
-            </div>
-
-            <div class="land-plot" id="plot-east-valley" onclick="openLandPurchase('East Forest Fiefdom', 8000, 'plot-east-valley')">
-                🛡️ East Fiefdom (8,000 🪙)
-            </div>
-
-            <div class="land-plot" id="plot-central-barony" onclick="openLandPurchase('Central River Barony', 12000, 'plot-central-barony')">
-                🌊 Central Barony (12,000 🪙)
-            </div>
-
-            <div class="land-plot" id="plot-south-reach" onclick="openLandPurchase('Grand Southern Duchy', 18000, 'plot-south-reach')">
-                👑 Grand Duchy (18,000 🪙)
-            </div>
+            <!-- Purchasable Land Hotspots -->
+            <div class="map-hotspot land-plot" id="plot-north-estate" onclick="openLandPurchase('North Valley Estate', 5000, 'plot-north-estate')"></div>
+            <div class="map-hotspot land-plot" id="plot-east-valley" onclick="openLandPurchase('East Forest Fiefdom', 8000, 'plot-east-valley')"></div>
+            <div class="map-hotspot land-plot" id="plot-central-barony" onclick="openLandPurchase('Central River Barony', 12000, 'plot-central-barony')"></div>
+            <div class="map-hotspot land-plot" id="plot-south-reach" onclick="openLandPurchase('Grand Southern Duchy', 18000, 'plot-south-reach')"></div>
 
         </div>
     </div>
@@ -559,12 +464,13 @@
                 const el = document.getElementById(plotId);
                 if (el) {
                     el.classList.add('owned');
-                    el.innerHTML = "👑 Owned Fiefdom";
+                    el.title = "Owned Fiefdom 👑";
                 }
             });
         }
 
         function openLandPurchase(name, cost, plotId) {
+            event.stopPropagation();
             if (userState.estates.includes(plotId)) {
                 alert("You already own this sovereign territory!");
                 return;
@@ -609,5 +515,3 @@
     </script>
 </body>
 </html>
-
-```
