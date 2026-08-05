@@ -2,700 +2,473 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Imperial Divine Vision | AAA Sovereign Combat & Cash App Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Empire: Battle Chambers (Divine Edition)</title>
     <style>
+        :root {
+            --primary-red: #8B0000;
+            --gold: #D4AF37;
+            --purple: #4B0082;
+            --dark-bg: #0a0a0c;
+            --card-bg: #16161a;
+            --text-light: #f4f4f4;
+            --glow-gold: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #040a08;
-            background-repeat: repeat;
-            background-position: center;
-            background-size: 400px auto;
-            background-image: url('garden_border_pattern.png');
-            animation: breatheGarden 60s infinite alternate ease-in-out;
-            color: #d4af37;
-            font-family: 'Cinzel', serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        header {
             text-align: center;
+            padding: 12px;
+            background: linear-gradient(180deg, #1b1b22, #111);
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
-        @keyframes breatheGarden {
-            0% { background-size: 400px auto; background-position: center center; }
-            50% { background-size: 415px auto; background-position: center top; }
-            100% { background-size: 390px auto; background-position: center bottom; }
-        }
-
-        /* Floating Audio Beacons */
-        .beacon-container {
-            position: fixed;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .royal-music-beacon, .battle-audio-beacon {
-            background: rgba(18, 16, 14, 0.95);
-            border: 2px solid #d4af37;
-            padding: 15px 10px;
-            border-radius: 12px;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .battle-audio-beacon {
-            border-color: #ff4500;
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.6);
-        }
-
-        .beacon-btn {
-            background: #d4af37;
-            color: #12100e;
-            border: none;
-            padding: 12px 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 6px;
+        header h1 {
+            color: var(--gold);
+            margin: 0;
+            font-size: 1.8rem;
             text-transform: uppercase;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
             letter-spacing: 2px;
-            transition: 0.3s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .battle-btn {
-            background: #ff4500;
-            color: #fff;
-        }
-
-        .beacon-btn:hover {
-            background: #f5f2eb;
-            box-shadow: 0 0 15px #d4af37;
-        }
-
-        nav { 
-            padding: 15px 20px; 
-            background: rgba(4, 10, 8, 0.95);
-            border-bottom: 2px solid #d4af37;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* Navigation Menu */
+        .nav-bar {
             display: flex;
             justify-content: center;
-            align-items: center;
+            background: #141418;
+            padding: 8px;
             gap: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-        }
-        nav a { 
-            color: #f5f2eb; 
-            text-decoration: none; 
-            font-size: 1.2rem;
+            border-bottom: 1px solid #2a2a35;
+            font-size: 0.9rem;
             font-weight: bold;
-            font-family: 'Cinzel', serif;
-        }
-        nav a:hover {
-            color: #d4af37;
-            text-shadow: 0 0 10px #d4af37;
         }
 
-        .chamber-container {
-            max-width: 950px;
-            width: 90%;
-            margin: 40px auto;
-            background: rgba(28, 24, 20, 0.95);
-            border: 2px solid #d4af37;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        .nav-bar span { color: var(--gold); cursor: pointer; transition: 0.2s; }
+        .nav-bar span:hover { color: #fff; text-shadow: 0 0 8px var(--gold); }
+
+        /* Dual Status HUD Bars */
+        .hud-container {
+            display: flex;
+            justify-content: space-between;
+            background: #111116;
+            padding: 10px 30px;
+            border-bottom: 2px solid var(--primary-red);
+            font-size: 0.95rem;
+            font-weight: bold;
         }
 
-        /* AAA Visual Combat & Screen Shake Screen */
-        .visual-effect-screen {
-            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(4,10,8,0.95) 80%);
-            border: 2px solid #ff4500;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 25px rgba(255, 69, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-            transition: 0.3s ease;
+        .hud-left span { color: var(--gold); }
+        .hud-right span { color: #ff4d4d; }
+
+        /* Screen Shake Animation */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(-1deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            60% { transform: translate(-1px, 2px) rotate(0deg); }
+            80% { transform: translate(3px, -1px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        @keyframes screenShake {
-            0% { transform: translate(0, 0); }
-            20% { transform: translate(-4px, 4px); }
-            40% { transform: translate(4px, -4px); }
-            60% { transform: translate(-2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0, 0); }
+        .shake-fx {
+            animation: shake 0.4s ease-in-out;
         }
 
-        .shake { animation: screenShake 0.4s ease; }
-
-        .light-burst {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .light-burst.active {
-            opacity: 1;
-            animation: burstGlow 0.8s infinite alternate;
-        }
-
-        @keyframes burstGlow {
-            0% { box-shadow: inset 0 0 15px #ff4500; }
-            100% { box-shadow: inset 0 0 50px #d4af37; }
-        }
-
-        /* Life Span Bars & Combo Meter */
-        .lifespan-container {
+        /* Game Layout Grid */
+        .game-layout {
+            max-width: 1250px;
+            margin: 15px auto;
+            padding: 10px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-bottom: 15px;
         }
 
-        .fighter-bar-box {
-            background: rgba(12, 22, 18, 0.9);
-            border: 1px solid #d4af37;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: left;
-        }
-
-        .bar-bg {
-            width: 100%;
-            background: #222;
-            height: 16px;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid #444;
-            margin-top: 5px;
-        }
-
-        .bar-fill {
-            height: 100%;
-            width: 100%;
-            background: #ff4500;
-            transition: width 0.4s ease;
-        }
-
-        .bar-fill.player { background: #d4af37; }
-
-        /* Cash App Store & Combo Panel */
-        .store-panel {
-            background: rgba(12, 22, 18, 0.95);
-            border: 2px solid #d4af37;
-            border-radius: 8px;
+        .panel {
+            background-color: var(--card-bg);
+            border: 2px solid #2a2a35;
+            border-radius: 10px;
             padding: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            position: relative;
         }
 
-        .store-btn {
-            background: #00875a;
-            color: #fff;
-            border: 1px solid #d4af37;
-            padding: 10px 16px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .store-btn:hover {
-            background: #00a86b;
-            box-shadow: 0 0 15px #00a86b;
-        }
-
-        /* Stances & Mythical Relics */
-        .class-board {
-            background: rgba(12, 22, 18, 0.9);
-            border: 2px solid #ff4500;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .class-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .class-btn {
-            background: #181410;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            padding: 10px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.3s;
-        }
-
-        .class-btn.selected {
-            background: #ff4500;
-            color: #fff;
-            border-color: #fff;
-            box-shadow: 0 0 10px #ff4500;
-        }
-
-        .controls-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .action-points-btn {
-            background: #ff4500;
-            color: #fff;
-            border: 1px solid #d4af37;
-            padding: 12px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.2s;
-            width: 100%;
-        }
-
-        .action-points-btn:hover {
-            background: #d4af37;
-            color: #12100e;
-        }
-
-        .auto-btn {
-            background: #181410;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-        }
-
-        .battle-video {
-            width: 100%;
-            max-height: 400px;
-            background: #0b0907;
-            border: 2px solid #d4af37;
-            border-radius: 6px;
-            margin: 20px 0;
-            outline: none;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
-        }
-
-        .narrator-echo {
-            color: #b3a896;
-            font-size: 0.95rem;
-            font-style: italic;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            opacity: 0.85;
-        }
-
-        .collaborator-badge {
-            font-size: 0.8rem;
-            color: #ff4500;
-            border: 1px dashed #ff4500;
-            padding: 6px 12px;
-            border-radius: 4px;
-            margin: 15px 0;
-            background: rgba(255, 69, 0, 0.05);
-            letter-spacing: 1px;
-        }
-
-        .playlist-box {
-            max-height: 200px;
-            overflow-y: auto;
-            background: rgba(12, 22, 18, 0.95);
-            border: 1px solid #d4af37;
-            border-radius: 6px;
-            padding: 10px;
-            margin: 15px 0;
-            text-align: left;
-        }
-        .playlist-item {
-            padding: 10px 14px;
-            color: #f5f2eb;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            font-size: 0.95rem;
-            transition: 0.2s;
-        }
-        .playlist-item:hover, .playlist-item.active {
-            background: #d4af37;
-            color: #12100e;
-            font-weight: bold;
-            padding-left: 18px;
-        }
-
-        .royal-btn {
-            background: #181410;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            padding: 12px 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 4px;
+        .panel h2 {
+            color: var(--gold);
+            border-bottom: 1px solid #333;
+            padding-bottom: 6px;
+            margin-top: 0;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            text-decoration: none;
-            display: block;
-            box-sizing: border-box;
-            transition: 0.3s;
         }
-        .royal-btn:hover {
-            background: #d4af37;
-            color: #12100e;
+
+        /* Interactive Combat Canvas & Media Stage */
+        .media-stage {
+            width: 100%;
+            height: 250px;
+            background-color: #000;
+            border: 2px solid #333;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: crosshair;
+        }
+
+        .media-stage video, .media-stage canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        /* Floating Damage Indicator */
+        .floating-dmg {
+            position: absolute;
             font-weight: bold;
-            box-shadow: 0 0 15px #d4af37;
+            font-size: 1.4rem;
+            color: #ff3333;
+            text-shadow: 0 0 5px #000;
+            pointer-events: none;
+            animation: floatUp 0.8s ease-out forwards;
+            z-index: 50;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-40px) scale(1.3); }
+        }
+
+        /* Control Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--primary-red), #500);
+            color: white;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            margin-top: 8px;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(139,0,0,0.4);
+        }
+
+        .btn:hover { background: linear-gradient(135deg, #a00000, var(--primary-red)); box-shadow: var(--glow-gold); }
+
+        /* Master Deck & Card Bar */
+        .card-deck-bar {
+            max-width: 1250px;
+            margin: 0 auto 15px auto;
+            padding: 12px;
+            background: #121216;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .tactical-card {
+            width: 135px;
+            background: linear-gradient(145deg, #1e1e24, #121216);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tactical-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: var(--glow-gold);
+            border-color: #fff;
+        }
+
+        .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.8rem; text-transform: uppercase; }
+        .tactical-card p { font-size: 0.65rem; color: #bbb; margin: 0; }
+
+        /* Cinematic Fullscreen Flash Overlay */
+        #flash-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(75,0,130,0.5) 50%, transparent 100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-out;
+            z-index: 40;
+        }
+
+        /* Modal Popups */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5,5,8,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #modal-content {
+            background: #181820;
+            border: 3px solid var(--gold);
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            max-width: 420px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+        }
+
+        #modal-content h1 { font-size: 2.2rem; margin: 0 0 12px 0; text-transform: uppercase; }
+        
+        .battle-log {
+            background: #060608;
+            border: 1px solid #222;
+            padding: 8px;
+            height: 75px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.75rem;
+            color: #00ffcc;
+            border-radius: 4px;
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Audio Channels for Sound FX -->
-    <audio id="royal-audio" loop preload="auto">
-        <source src="rosanna-music-galary.m4a" type="audio/mp4">
-    </audio>
-    <audio id="battle-audio" loop preload="auto">
-        <source src="battle-screams-weapons.mp3" type="audio/mp3">
-    </audio>
-    <audio id="sound-sword" src="sound-sword-slash.mp3" preload="auto"></audio>
-    <audio id="sound-shield" src="sound-shield-block.mp3" preload="auto"></audio>
-    <audio id="sound-eagle" src="sound-eagle-cry.mp3" preload="auto"></audio>
-    <audio id="sound-lion" src="sound-lion-roar.mp3" preload="auto"></audio>
+    <header>
+        <h1>Sovereign Empire: Battle Chambers</h1>
+    </header>
 
-    <!-- Floating Audio Beacons -->
-    <div class="beacon-container">
-        <div class="royal-music-beacon">
-            <span style="font-size: 1.2rem;" id="music-icon">👑</span>
-            <button class="beacon-btn" onclick="toggleAudio()" id="audio-toggle-btn">Play Gallery</button>
+    <div class="nav-bar">
+        <span>Sanctuary Home</span>
+        <span>Trailer Chamber</span>
+        <span style="color: #fff; text-decoration: underline;">Sovereign Combat Arena</span>
+        <span>Library</span>
+        <span>Our Official Seal</span>
+    </div>
+
+    <!-- Dual Status HUD Bars -->
+    <div class="hud-container">
+        <div class="hud-left">
+            Player HP: <span id="p-hp">100</span>/100 | Coins: <span id="p-coins">1000</span> | Supplies: <span id="p-supplies">50</span> | Combo: <span id="p-combo">1x</span>
         </div>
-        <div class="battle-audio-beacon">
-            <span style="font-size: 1.2rem;" id="battle-icon">⚔️</span>
-            <button class="beacon-btn battle-btn" onclick="toggleBattleSound()" id="battle-toggle-btn">Battle Cries</button>
+        <div class="hud-right">
+            Rebellion Force | Prime Minister & Big Boss | Level: 3
         </div>
     </div>
 
-    <nav> 
-        <a href="index.html">🏠 Sanctuary Home</a>
-        <a href="trailers.html">🎬 Trailer Chamber</a>
-        <a href="battle.html">⚔️ Sovereign Combat Arena</a>
-        <a href="library.html">Library</a>
-        <a href="seal.html">Our Official Seal</a>
-    </nav>
-
-    <div class="chamber-container">
-        <h1 style="color: #ff4500; margin-top: 0; letter-spacing: 2px;">⚔️ AAA Sovereign Combat & Cash App Store 🛡️</h1>
+    <div class="game-layout">
         
-        <div class="narrator-echo">“Experience cinematic screen shakes, combo chains, tactical stances, and secure Cash App coin purchases!”</div>
-        
-        <!-- Official Imperial Cash App Store & Vault Panel -->
-        <div class="store-panel">
-            <div style="text-align: left;">
-                <div style="font-size: 0.8rem; color: #b3a896;">IMPERIAL MERCHANT VAULT</div>
-                <div style="font-size: 1.1rem; color: #d4af37; font-weight: bold;">🪙 Gold Coins: <span id="player-coins">500</span> | 🔥 Combo Multiplier: <span id="combo-count">0</span>x</div>
+        <!-- Left Panel: Market & Forest Gathering Hub -->
+        <div class="panel">
+            <h2>Supply Hub: Market & Forest</h2>
+            <div class="media-stage" id="left-stage">
+                <video id="left-video" controls>
+                    <source src="market-buy-supplies.mp4" type="video/mp4">
+                    Your browser does not support video.
+                </video>
             </div>
-            <button class="store-btn" onclick="openCashAppStore()">💳 Open Cash App Store ($ImperialDivineVision)</button>
+            <button class="btn" onclick="openMarket()">Visit Market (Buy Bread: 1 Coin / Veggies: 2 Coins)</button>
+            <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Forage Forest (Free Supplies / 5m Timer)</button>
         </div>
 
-        <!-- Dynamic Visual Light Burst & Screen Shake Screen -->
-        <div class="visual-effect-screen" id="visual-screen">
-            <div class="light-burst" id="light-burst-effect"></div>
-            <div style="font-size: 0.9rem; color: #ff4500; font-weight: bold; margin-bottom: 10px;">REAL-TIME BATTLE LIFE SPAN MONITOR</div>
-            
-            <div class="lifespan-container">
-                <div class="fighter-bar-box">
-                    <div style="font-size: 0.8rem; color: #d4af37;">Sovereign Player Life Span</div>
-                    <div class="bar-bg"><div class="bar-fill player" id="player-bar" style="width: 100%;"></div></div>
-                    <div style="font-size: 0.75rem; color: #b3a896; margin-top: 4px;"><span id="player-hp">100</span> / 100 HP</div>
-                </div>
-                <div class="fighter-bar-box">
-                    <div style="font-size: 0.8rem; color: #ff4500;">Opponent / Boss Life Span</div>
-                    <div class="bar-bg"><div class="bar-fill" id="enemy-bar" style="width: 100%;"></div></div>
-                    <div style="font-size: 0.75rem; color: #b3a896; margin-top: 4px;"><span id="enemy-hp">100</span> / 100 HP</div>
-                </div>
+        <!-- Right Panel: War & Interactive Boss Chambers -->
+        <div class="panel">
+            <h2>Interactive War Chambers (Click & Slash)</h2>
+            <div class="media-stage" id="combat-stage" onclick="triggerMouseSlash(event)">
+                <div id="flash-overlay"></div>
+                <video id="combat-video" controls autoplay loop>
+                    <source src="big-boss-cinematic.mp4" type="video/mp4">
+                    Your browser does not support video.
+                </video>
             </div>
-            <div id="battle-log" style="font-size: 0.85rem; color: #f5f2eb; font-style: italic;">Combat Status: Ready for professional AAA encounter.</div>
-        </div>
-
-        <!-- Tactical Investment & Stances -->
-        <div class="class-board">
-            <div style="font-size: 0.85rem; color: #d4af37; font-weight: bold;">SELECT STANCE (TRIGGERS SOUND, LIGHT BURST & STAT BUFF)</div>
-            <div class="class-grid">
-                <button class="class-btn selected" onclick="activateStance('Sword', this)">⚔️ Sword Stance</button>
-                <button class="class-btn" onclick="activateStance('Shield', this)">🛡️ Shield Stance</button>
-                <button class="class-btn" onclick="activateStance('Eagle', this)">🦅 Eagle Vision</button>
-                <button class="class-btn" onclick="activateStance('Lion', this)">🦁 Lion Courage</button>
+            <button class="btn" onclick="engageWarBattle()">Engage Big Boss & Rebellion</button>
+            <button class="btn" style="background-color: #444;" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Grind Points in Arena</button>
+            <div class="battle-log" id="game-log">
+                [System Initialized]: Interactive mouse slashing & tactical deck active. Click arena to strike!
             </div>
         </div>
 
-        <!-- Combat Controls -->
-        <div class="controls-grid">
-            <button class="action-points-btn" onclick="executeComboStrike()">⚡ Execute Combo Strike / Slash</button>
-            <button class="action-points-btn auto-btn" onclick="toggleAutoFighter()" id="auto-toggle-btn">Toggle Auto-Fighter Mode</button>
-        </div>
+    </div>
 
-        <div class="collaborator-badge">⚡ Features: Cash App Store Integration • Screen Shake FX • Combo Multiplier • Real-Time Health Bars ⚡</div>
-
-        <p style="color: #b3a896; font-style: italic; margin-top: 5px;">Select your training arena video below.</p>
+    <!-- Gold & Purple Tactical Card Deck Bar -->
+    <div class="card-deck-bar">
         
-        <!-- Active Video Player -->
-        <iframe id="active-video" class="battle-video" src="https://www.youtube.com/embed/CfRwzpkV-Zo" title="AAA Combat Arena" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-        <!-- Playlist -->
-        <div id="playlist-container" class="playlist-box">
-            <!-- Populated dynamically -->
+        <div class="tactical-card" onclick="activateCard('Imperial Shield', 'Psalm 3:3 Defense Boost')">
+            <h4>Shield Card</h4>
+            <p>Gold Barrier Burst</p>
         </div>
 
-        <a href="index.html" class="royal-btn">Return to Sanctuary Home</a>
+        <div class="tactical-card" onclick="activateCard('Forged Sword', 'Attack Power Scaling')">
+            <h4>Sword Card</h4>
+            <p>Offensive Strike</p>
+        </div>
+
+        <div class="tactical-card" onclick="playCombatVideo('assets-video-queen-rosanna-healing.mp4'); activateCard('Divine Healing (Queen Rosanna)', 'Rank A+ Restoration');">
+            <h4>Queen Rosanna</h4>
+            <p>Divine Healing</p>
+        </div>
+
+        <div class="tactical-card" style="border-color: var(--purple);" onclick="playCombatVideo('assets-video-king-benson-strength.mp4'); activateCard('King Benson (Divine)', 'Attack: 1000k Sword');">
+            <h4>King Benson</h4>
+            <p>Rank: Divine</p>
+        </div>
+
+        <div class="tactical-card" style="border-color: #ff8c00;" onclick="activateCard('Ego of Phoenix', 'Wings as Eagles / Phoenix Resurrection');">
+            <h4>Ego of Phoenix</h4>
+            <p>Legendary Buff</p>
+        </div>
+
+    </div>
+
+    <!-- Victory / Failure Popup Modal -->
+    <div id="modal-overlay">
+        <div id="modal-content">
+            <h1 id="modal-title" style="color: var(--gold);">VICTORY</h1>
+            <p id="modal-text" style="color: #ccc; font-size: 1.1rem;">Rebellion forces pushed back!</p>
+            <button class="btn" onclick="closeModal()">Continue Campaign</button>
+        </div>
     </div>
 
     <script>
-        let playerHp = 100;
-        let enemyHp = 100;
-        let currentStance = "Sword";
-        let comboCount = 0;
-        let playerCoins = 500;
-        let autoFighterActive = false;
-        let autoInterval = null;
+        let forestCooldown = false;
+        let comboCount = 1;
 
-        function openCashAppStore() {
-            let amount = prompt("Enter amount of Gold Coins to purchase via Imperial Cash App ($ImperialDivineVision):\n(100 Coins = $5, 500 Coins = $20, 1500 Coins = $50)");
-            if (amount) {
-                let addedCoins = parseInt(amount) * 20 || 200; // Bonus conversion
-                playerCoins += addedCoins;
-                document.getElementById('player-coins').innerText = playerCoins;
-                alert("Official Cash App Order Processed! Your payment of $" + (amount < 20 ? "5" : "20") + " was verified via $ImperialDivineVision. +" + addedCoins + " Gold Coins added to your sovereign vault!");
+        function logMessage(msg) {
+            const logBox = document.getElementById('game-log');
+            logBox.innerHTML += `<br>> ${msg}`;
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        function openMarket() {
+            const vid = document.getElementById('left-video');
+            vid.src = "market-buy-supplies.mp4";
+            vid.play();
+            let coins = parseInt(document.getElementById('p-coins').innerText);
+            if (coins >= 2) {
+                coins -= 2;
+                let supplies = parseInt(document.getElementById('p-supplies').innerText) + 3;
+                document.getElementById('p-coins').innerText = coins;
+                document.getElementById('p-supplies').innerText = supplies;
+                logMessage('Market Transaction: Purchased vegetables and bread supplies (-2 coins).');
+            } else {
+                logMessage('Market: Not enough coins to purchase supplies!');
             }
         }
 
-        function triggerVisualBurst(colorCode) {
-            let burst = document.getElementById('light-burst-effect');
-            let screen = document.getElementById('visual-screen');
-            burst.style.boxShadow = "inset 0 0 60px " + colorCode;
-            burst.classList.add('active');
+        function openForest() {
+            if (forestCooldown) {
+                logMessage('Forest Gathering: Cooldown active! Please wait 5 minutes before foraging again.');
+                return;
+            }
+            const vid = document.getElementById('left-video');
+            vid.src = "forest-gather-supplied.mp4";
+            vid.play();
+            let supplies = parseInt(document.getElementById('p-supplies').innerText) + 5;
+            document.getElementById('p-supplies').innerText = supplies;
+            logMessage('Forest Foraging: Successfully collected free apples and mushrooms (+5 supplies)!');
             
-            // Trigger professional screen shake
-            screen.classList.add('shake');
+            forestCooldown = true;
             setTimeout(() => {
-                burst.classList.remove('active');
-                screen.classList.remove('shake');
-            }, 500);
+                forestCooldown = false;
+                logMessage('Forest Gathering: Cooldown reset. The forest is ready to yield supplies again.');
+            }, 300000); // 5-minute cool-off timer
         }
 
-        function activateStance(stanceName, btnElement) {
-            document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('selected'));
-            btnElement.classList.add('selected');
-            currentStance = stanceName;
-
-            if (stanceName === 'Sword') {
-                document.getElementById('sound-sword').play().catch(e => {});
-                triggerVisualBurst('#ff4500');
-                document.getElementById('battle-log').innerText = "Stance Active: Sword Master. Blade gleams with lethal precision!";
-            } else if (stanceName === 'Shield') {
-                document.getElementById('sound-shield').play().catch(e => {});
-                triggerVisualBurst('#d4af37');
-                document.getElementById('battle-log').innerText = "Stance Active: Sovereign Shield. Defense barrier glowing golden!";
-            } else if (stanceName === 'Eagle') {
-                document.getElementById('sound-eagle').play().catch(e => {});
-                triggerVisualBurst('#00ffff');
-                document.getElementById('battle-log').innerText = "Stance Active: Eagle Vision. Piercing sight reveals enemy weak points!";
-            } else if (stanceName === 'Lion') {
-                document.getElementById('sound-lion').play().catch(e => {});
-                triggerVisualBurst('#ffa500');
-                document.getElementById('battle-log').innerText = "Stance Active: Lion Courage. Majestic roar echoes across the battlefield!";
-            }
+        function playCombatVideo(videoFile) {
+            const vid = document.getElementById('combat-video');
+            vid.src = videoFile;
+            vid.play();
+            logMessage(`Playing cinematic: ${videoFile}`);
         }
 
-        function executeComboStrike() {
-            comboCount++;
-            let damageMultiplier = 1 + (comboCount * 0.15);
-            let damageToEnemy = Math.floor((Math.random() * 15 + 15) * damageMultiplier);
-            let damageToPlayer = Math.floor(Math.random() * 8 + 4);
+        function triggerMouseSlash(event) {
+            const stage = document.getElementById('combat-stage');
+            stage.classList.add('shake-fx');
+            setTimeout(() => stage.classList.remove('shake-fx'), 400);
 
-            if (currentStance === 'Shield') damageToPlayer = Math.floor(damageToPlayer / 2);
-            if (currentStance === 'Sword') damageToEnemy += 12;
+            // Create floating damage number at click coordinates
+            const rect = stage.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
 
-            enemyHp = Math.max(0, enemyHp - damageToEnemy);
-            playerHp = Math.max(0, playerHp - damageToPlayer);
+            const dmgIndicator = document.createElement('div');
+            dmgIndicator.className = 'floating-dmg';
+            let damageVal = 150 * comboCount;
+            dmgIndicator.innerText = `-${damageVal} DMG`;
+            dmgIndicator.style.left = `${x}px`;
+            dmgIndicator.style.top = `${y}px`;
+            stage.appendChild(dmgIndicator);
+            setTimeout(() => dmgIndicator.remove(), 800);
 
-            document.getElementById('combo-count').innerText = comboCount;
-            updateHPCounters();
-            triggerVisualBurst('#ff4500');
-
-            document.getElementById('battle-log').innerText = "COMBO STRIKE x" + comboCount + "! Dealt " + damageToEnemy + " damage to opponent life span!";
-
-            if (enemyHp === 0) {
-                alert("Cinematic Victory! Your combo chain overwhelmed the opponent's entire life span! +150 bonus coins awarded.");
-                playerCoins += 150;
-                document.getElementById('player-coins').innerText = playerCoins;
-                resetBattle();
-            } else if (playerHp === 0) {
-                alert("Defeat! Your life span reached zero. Tactical reset initiated.");
-                resetBattle();
-            }
+            comboCount = Math.min(comboCount + 1, 5);
+            document.getElementById('p-combo').innerText = comboCount + 'x';
+            logMessage(`Direct Slash executed! Combo increased to ${comboCount}x.`);
         }
 
-        function updateHPCounters() {
-            document.getElementById('player-bar').style.width = playerHp + "%";
-            document.getElementById('enemy-bar').style.width = enemyHp + "%";
-            document.getElementById('player-hp').innerText = playerHp;
-            document.getElementById('enemy-hp').innerText = enemyHp;
-        }
+        function engageWarBattle() {
+            const vid = document.getElementById('combat-video');
+            vid.src = "assets-video-war-combat.mp4";
+            vid.play();
+            logMessage('Engaged Big Boss & Rebellion war forces!');
 
-        function toggleAutoFighter() {
-            autoFighterActive = !autoFighterActive;
-            let btn = document.getElementById('auto-toggle-btn');
-            if (autoFighterActive) {
-                btn.innerText = "Stop Auto-Fighter Mode";
-                btn.style.background = "#ff4500";
-                btn.style.color = "#fff";
-                document.getElementById('battle-log').innerText = "Auto-Fighter Engine Engaged: Automated combat simulation running.";
-                autoInterval = setInterval(() => {
-                    executeComboStrike();
-                }, 1800);
-            } else {
-                btn.innerText = "Toggle Auto-Fighter Mode";
-                btn.style.background = "#181410";
-                btn.style.color = "#d4af37";
-                clearInterval(autoInterval);
-                comboCount = 0;
-                document.getElementById('combo-count').innerText = comboCount;
-                document.getElementById('battle-log').innerText = "Auto-Fighter Disengaged. Manual control restored.";
-            }
-        }
-
-        function resetBattle() {
-            playerHp = 100;
-            enemyHp = 100;
-            comboCount = 0;
-            document.getElementById('combo-count').innerText = comboCount;
-            updateHPCounters();
-            document.getElementById('battle-log').innerText = "Battle reset. Life spans restored to maximum.";
-        }
-
-        const aaaplaylist = [
-            { name: "🛡️ Stage 1: Official AAA Visual Combat & Store Trailer", type: "youtube", src: "https://www.youtube.com/embed/CfRwzpkV-Zo" },
-            { name: "⚔️ Stage 2: Screen Shake & Combo Chain Chamber", type: "local", src: "screen-shake-combo.mp4" },
-            { name: "💳 Stage 3: Cash App Sovereign Merchant Vault", type: "local", src: "cash-app-vault.mp4" },
-            { name: "⚡ Stage 4: Cinematic Auto-Fighter Simulation", type: "local", src: "cinematic-auto-fighter.mp4" }
-        ];
-
-        const container = document.getElementById("playlist-container");
-        const videoContainerParent = document.getElementById("active-video").parentNode;
-        let activeVideoElement = document.getElementById("active-video");
-
-        aaaplaylist.forEach((entry, index) => {
-            let item = document.createElement("div");
-            item.className = "playlist-item";
-            item.innerText = entry.name;
-            if (index === 0) item.classList.add('active');
-            
-            item.onclick = () => {
-                document.querySelectorAll('.playlist-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-
-                if (entry.type === "youtube") {
-                    if (activeVideoElement.tagName !== "IFRAME") {
-                        let iframe = document.createElement("iframe");
-                        iframe.id = "active-video";
-                        iframe.className = "battle-video";
-                        iframe.setAttribute("frameborder", "0");
-                        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-                        iframe.setAttribute("allowfullscreen", "");
-                        videoContainerParent.replaceChild(iframe, activeVideoElement);
-                        activeVideoElement = iframe;
-                    }
-                    activeVideoElement.src = entry.src + "?autoplay=1";
+            setTimeout(() => {
+                let playerHP = parseInt(document.getElementById('p-hp').innerText);
+                if (playerHP < 40) {
+                    vid.src = "neighbour-villian-rebbelian.mp4";
+                    vid.play();
+                    logMessage('Prime Minister intervenes: "Maybe we lost this time, but next time we will definitely win!"');
+                    showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d');
                 } else {
-                    if (activeVideoElement.tagName !== "VIDEO") {
-                        let video = document.createElement("video");
-                        video.id = "active-video";
-                        video.className = "battle-video";
-                        video.setAttribute("controls", "");
-                        video.setAttribute("playsinline", "");
-                        let source = document.createElement("source");
-                        source.id = "video-source";
-                        source.setAttribute("type", "video/mp4");
-                        video.appendChild(source);
-                        videoContainerParent.replaceChild(video, activeVideoElement);
-                        activeVideoElement = video;
-                    }
-                    let sourceElem = activeVideoElement.querySelector("source") || activeVideoElement;
-                    sourceElem.src = entry.src;
-                    activeVideoElement.load();
-                    activeVideoElement.play();
+                    showModal('VICTORY', 'Rebellion defeated! Earned reputation, coins, and rare card drop!', 'var(--gold)');
                 }
-            };
-            container.appendChild(item);
-        });
-
-        let isPlayingMusic = false;
-        function toggleAudio() {
-            const audio = document.getElementById('royal-audio');
-            const btn = document.getElementById('audio-toggle-btn');
-            const icon = document.getElementById('music-icon');
-            if (!audio) return;
-            
-            if (isPlayingMusic) {
-                audio.pause();
-                btn.innerText = "Play Gallery";
-                icon.innerText = "👑";
-                isPlayingMusic = false;
-            } else {
-                audio.volume = 1.0;
-                audio.play().then(() => {
-                    btn.innerText = "Pause Gallery";
-                    icon.innerText = "🎶";
-                    isPlayingMusic = true;
-                }).catch(error => console.log("Audio prevented:", error));
-            }
+            }, 6000);
         }
 
-        let isPlayingBattle = false;
-        function toggleBattleSound() {
-            const battleAudio = document.getElementById('battle-audio');
-            const btn = document.getElementById('battle-toggle-btn');
-            const icon = document.getElementById('battle-icon');
-            if (!battleAudio) return;
-            
-            if (isPlayingBattle) {
-                battleAudio.pause();
-                btn.innerText = "Battle Cries";
-                icon.innerText = "⚔️";
-                isPlayingBattle = false;
-            } else {
-                battleAudio.volume = 1.0;
-                battleAudio.play().then(() => {
-                    btn.innerText = "Silence Clash";
-                    icon.innerText = "🔥";
-                    isPlayingBattle = true;
-                }).catch(error => console.log("Battle audio prevented:", error));
-            }
+        function activateCard(cardName, effectDesc) {
+            const flash = document.getElementById('flash-overlay');
+            flash.style.opacity = '1';
+            setTimeout(() => flash.style.opacity = '0', 400);
+
+            comboCount = 1; // Reset combo on divine card activation
+            document.getElementById('p-combo').innerText = '1x';
+            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Radiant light burst deployed!`);
+        }
+
+        function showModal(title, text, color) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-title').style.color = color;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('modal-overlay').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').style.display = 'none';
         }
     </script>
 </body>
