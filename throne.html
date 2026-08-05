@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Royal Throne Room | Imperial Divine Vision</title>
+    <title>The Grand Imperial Throne Room | Sovereign Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0b0f0e;
-            --panel-bg: rgba(17, 23, 21, 0.95);
+            --panel-bg: rgba(12, 18, 15, 0.94);
             --theme-color: #ffd700; 
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
+        }
+
+        @keyframes royalGoldPulse {
+            0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(255, 215, 0, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(255, 215, 0, 0.8), inset 0 0 25px rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(255, 215, 0, 0.2); }
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.96); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         body {
@@ -36,7 +47,7 @@
             height: 100vh;
             object-fit: cover;
             z-index: -10;
-            filter: brightness(0.85);
+            filter: brightness(0.82) contrast(1.05);
         }
 
         /* YouTube-Style Fullscreen Expand / Decrease Button */
@@ -78,20 +89,12 @@
             margin: 0 !important;
             padding: 0 !important;
             height: 100vh !important;
-            justify-content: center !important;
-        }
-        body.is-chamber-fullscreen .petition-box {
-            max-width: 95vw !important;
-            height: 92vh !important;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-radius: 0 !important;
+            justify-content: flex-end !important;
         }
 
         /* Top Navigation Bar */
         nav { 
-            padding: 12px 20px; 
+            padding: 10px 20px; 
             background: var(--panel-bg);
             border-bottom: 2px solid var(--theme-color);
             position: sticky;
@@ -103,13 +106,13 @@
             gap: 12px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.85);
             flex-wrap: wrap;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
         .nav-module {
             background: rgba(22, 30, 27, 0.85);
             border: 1px solid var(--theme-color);
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 6px;
             display: inline-flex;
             align-items: center;
@@ -119,7 +122,7 @@
         nav a { 
             color: var(--text-main); 
             text-decoration: none; 
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -127,24 +130,25 @@
 
         nav a:hover { color: var(--theme-color); }
 
-        /* Throne Room Chamber Container */
+        /* Throne Room Chamber Container - Positioned to keep King & Queen faces visible */
         .chamber-container {
-            max-width: 1000px;
-            margin: 15px auto;
-            padding: 15px;
+            max-width: 920px;
+            margin: auto auto 15px auto;
+            padding: 10px 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-end;
             z-index: 10;
             position: relative;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             color: var(--theme-color);
-            margin: 2px 0;
+            margin: 0;
             text-shadow: 0 0 25px rgba(0, 0, 0, 0.95), 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
@@ -152,88 +156,103 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             color: #f5f2eb;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
         }
 
         /* Court Status & Timer HUD */
         .court-hud {
-            background: rgba(17, 23, 21, 0.92);
+            background: rgba(12, 18, 15, 0.92);
             border: 2px solid var(--theme-color);
-            padding: 8px 18px;
+            padding: 5px 15px;
             border-radius: 8px;
             display: flex;
-            gap: 18px;
-            font-size: 0.78rem;
-            margin-bottom: 15px;
+            gap: 15px;
+            font-size: 0.73rem;
+            margin-bottom: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.95);
             flex-wrap: wrap;
             justify-content: center;
         }
         .court-hud span { color: #ffe875; font-weight: bold; }
 
-        /* Royal Petition / Decision Box */
+        /* Extraordinary Royal Petition Box with Character Avatar/Badge */
         .petition-box {
-            background: linear-gradient(135deg, rgba(15, 23, 19, 0.96), rgba(8, 14, 11, 0.98));
+            background: linear-gradient(135deg, rgba(14, 22, 18, 0.96), rgba(6, 12, 9, 0.98));
             border: 3px ridge var(--theme-color);
-            border-radius: 14px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 18px 22px;
             width: 100%;
-            max-width: 850px;
+            max-width: 800px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.95);
             text-align: left;
-            margin-bottom: 20px;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            animation: fadeInScale 0.4s ease-in-out, royalGoldPulse 6s infinite alternate;
+            position: relative;
+        }
+
+        .petitioner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid var(--theme-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #ffd700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .petition-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
+            font-size: 0.9rem;
             color: #ffd700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: 1px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
+            padding-bottom: 4px;
         }
 
         .petition-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
+            font-size: 0.96rem;
             color: #f5f2eb;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            line-height: 1.4;
+            margin-bottom: 12px;
             font-style: italic;
         }
 
-        /* Royal Decision Buttons */
+        /* Royal Decision Buttons with Smooth Hover Reactions */
         .decision-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 7px;
         }
 
         .royal-btn {
-            background: linear-gradient(to right, rgba(35, 45, 40, 0.9), rgba(20, 30, 25, 0.9));
+            background: linear-gradient(to right, rgba(28, 38, 32, 0.92), rgba(15, 24, 20, 0.92));
             color: var(--text-main);
-            border: 2px solid var(--theme-color);
-            padding: 12px 18px;
+            border: 2px solid rgba(255, 215, 0, 0.7);
+            padding: 9px 14px;
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
+            font-size: 0.73rem;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
+            border-radius: 6px;
+            transition: all 0.25s ease;
             text-align: left;
             box-shadow: 0 4px 12px rgba(0,0,0,0.6);
         }
         .royal-btn:hover {
             background: var(--theme-color);
             color: #0b0f0e;
+            border-color: #fff;
             box-shadow: 0 0 20px #ffd700;
-            transform: translateX(5px);
+            transform: translateX(6px);
         }
 
         /* Lockout Tea Time Container */
@@ -242,26 +261,32 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            background: rgba(11, 15, 14, 0.95);
+            background: rgba(11, 15, 14, 0.96);
             border: 3px solid var(--theme-color);
             border-radius: 14px;
-            padding: 25px;
-            max-width: 650px;
+            padding: 20px;
+            max-width: 580px;
             width: 90%;
             box-shadow: 0 0 50px rgba(0,0,0,0.95);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            animation: fadeInScale 0.5s ease;
         }
         .lockout-video {
             width: 100%;
-            max-width: 420px;
+            max-width: 360px;
             border-radius: 10px;
             border: 2px solid var(--theme-color);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
         }
     </style>
 </head>
-<body onload="initThroneRoom()">
+<body onload="initThroneRoom()" onclick="startBackgroundMusic()">
+
+    <!-- Peaceful Background Gallery Music -->
+    <audio id="chamber-bg-music" loop>
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+    </audio>
 
     <!-- Cinematic Background Video -->
     <video autoplay muted loop class="bg-video" id="courtBgVideo">
@@ -297,9 +322,9 @@
 
         <!-- Active Royal Petition Box -->
         <div class="petition-box" id="activePetitionBox">
-            <div class="petition-title">
-                <span id="petition-category">📜 Political & Strategic Petition</span>
-                <span id="question-counter">Dilemma 1 of 200</span>
+            <div class="petitioner-badge" id="petitioner-badge">👑 Petitioner: Royal High Chancellor</div>
+            <div class="petition-title" id="petition-category">
+                📜 Political & Strategic Petition
             </div>
             <div class="petition-text" id="petition-content">
                 Loading royal decree...
@@ -312,7 +337,7 @@
 
         <!-- Lockout Tea Time Box -->
         <div class="lockout-container" id="lockoutBox">
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffd700; margin-top: 0;">Court Recess</h2>
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: #ffd700; margin-top: 0;">Court Recess</h2>
             
             <!-- Queen Having Tea with Mother-in-Law Video -->
             <video autoplay muted loop class="lockout-video">
@@ -320,17 +345,39 @@
                 Your browser does not support the video tag.
             </video>
 
-            <p id="lockout-msg" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: #f5f2eb; line-height: 1.6; margin-bottom: 20px;">
+            <p id="lockout-msg" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: #f5f2eb; line-height: 1.4; margin-bottom: 12px;">
                 "Your time is up! The Queen is having tea with her mother-in-law, the King is busy, and court is adjourned. You must wait for the timer to unlock the chamber again!"
             </p>
-            <div style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: #ffe875;">
-                Time Until Court Resumes: <strong id="lockout-timer-display" style="font-size: 1.2rem;">06:00</strong>
+            <div style="font-family: 'Cinzel', serif; font-size: 0.8rem; color: #ffe875;">
+                Time Until Court Resumes: <strong id="lockout-timer-display" style="font-size: 1rem;">06:00</strong>
             </div>
         </div>
     </div>
 
     <script>
-        // Full Bank of 200 Royal Dilemmas
+        // Peaceful background music trigger
+        let musicStarted = false;
+        function startBackgroundMusic() {
+            if (!musicStarted) {
+                const audio = document.getElementById('chamber-bg-music');
+                if (audio) {
+                    audio.volume = 0.35;
+                    audio.play().then(() => { musicStarted = true; }).catch(e => {});
+                }
+            }
+        }
+
+        // Expanded Immersive Bank of 200 Creative Royal Dilemmas with Unique Petitioners
+        const petitioners = [
+            "👑 Royal High Chancellor", 
+            "⚔️ Commander of the Imperial Guard", 
+            "🪙 Grand Master of the Merchant Guilds", 
+            "🌿 Elder of the Sacred Wilderness", 
+            "📜 Chief Envoy of Foreign Diplomacy", 
+            "🌊 Master Admiral of the Royal Fleet", 
+            "🍞 Overseer of the Imperial Granaries"
+        ];
+
         const royalDilemmas = [
             { cat: "Political & Border Defense", q: "Armed raiders are approaching the eastern watchtower. Do you dispatch the royal guard to crush them immediately, or negotiate a temporary trade treaty to secure peace?", a: "Dispatch the royal guard to protect the border.", b: "Negotiate a temporary trade treaty." },
             { cat: "Marriage & Alliances", q: "A neighboring monarch offers a marriage alliance to unify your realms, but their ruler is known for harsh rule. Do you accept the political marriage, or reject it and risk a trade embargo?", a: "Accept the political marriage for absolute unity.", b: "Reject the alliance to preserve your kingdom's laws." },
@@ -344,12 +391,12 @@
             { cat: "Public Relief", q: "A severe summer drought has left the southern hamlets parched. Do you use imperial funds to build aqueducts from the mountains, or pray at the temple and ration existing water supplies?", a: "Fund the construction of permanent mountain aqueducts.", b: "Ration existing water and rely on traditional relief." }
         ];
 
-        // Fill up to 200 questions dynamically
+        // Fill up to 200 uniquely styled questions dynamically so the player is always surprised
         while (royalDilemmas.length < 200) {
             let base = royalDilemmas[royalDilemmas.length % 10];
             royalDilemmas.push({
                 cat: base.cat + " (Realm Petition #" + (royalDilemmas.length + 1) + ")",
-                q: "Petition regarding " + base.q.toLowerCase(),
+                q: "Urgent petition regarding " + base.q.toLowerCase(),
                 a: base.a,
                 b: base.b
             });
@@ -383,11 +430,9 @@
         function checkLockoutStatus() {
             let now = Date.now();
             if (userState.lockoutEnd > now) {
-                // Currently locked out
                 document.getElementById('activePetitionBox').style.display = 'none';
                 document.getElementById('lockoutBox').style.display = 'flex';
             } else {
-                // Active session
                 if (userState.sessionCount >= 4) {
                     userState.sessionCount = 0;
                     saveUserDataState();
@@ -402,9 +447,10 @@
         function loadCurrentDilemma() {
             let idx = userState.currentQuestionIndex % royalDilemmas.length;
             let current = royalDilemmas[idx];
+            let randomPetitioner = petitioners[idx % petitioners.length];
 
+            document.getElementById('petitioner-badge').innerText = "👑 Petitioner: " + randomPetitioner;
             document.getElementById('petition-category').innerText = "📜 " + current.cat;
-            document.getElementById('question-counter').innerText = "Dilemma " + (idx + 1) + " of 200";
             document.getElementById('petition-content').innerText = `"${current.q}"`;
             document.getElementById('choice-btn-1').innerText = "A) " + current.a;
             document.getElementById('choice-btn-2').innerText = "B) " + current.b;
@@ -432,7 +478,7 @@
 
             saveUserDataState();
 
-            alert(`👑 Decree Rendered Successfully!\n\nYour Choice: "${chosenText}"\n\nReward: +150 Imperial Coins added!`);
+            alert(`👑 Royal Decree Rendered Successfully!\n\nYour Choice: "${chosenText}"\n\nReward: +150 Imperial Coins added to your treasury!`);
 
             if (userState.sessionCount >= 4) {
                 triggerLockout();
