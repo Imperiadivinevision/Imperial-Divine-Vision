@@ -1,21 +1,22 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ancient Market Chamber - Victory Project</title>
+    <title>Imperial Market & Trading Chamber - Victory Project</title>
     <style>
         :root {
             --primary-blue: #1a365d;
             --accent-pink: #d53f8c;
             --gold: #d69e2e;
             --sand: #f7fafc;
-            --dark-wood: #2c1810;
+            --dark-wood: #1a0f0a;
+            --panel-bg: rgba(26, 15, 10, 0.95);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-wood);
+            background: radial-gradient(circle at center, #2c1810 0%, #1a0f0a 100%);
             color: var(--sand);
             margin: 0;
             padding: 0;
@@ -23,96 +24,195 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            transition: font-size 0.3s ease;
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(26,15,10,0.95));
             width: 100%;
-            padding: 15px 0;
+            padding: 20px 0;
             text-align: center;
             border-bottom: 3px solid var(--gold);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.8);
         }
 
         h1 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             color: var(--gold);
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+        }
+
+        .admin-banner {
+            background: linear-gradient(135deg, #2a1b12, #4a2818);
+            border: 2px solid var(--gold);
+            padding: 12px 25px;
+            margin: 15px 0 5px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1rem;
+            color: #f7d794;
+            max-width: 1300px;
+            width: 90%;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+        }
+
+        #scalable-workspace {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
         }
 
         .market-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            width: 90%;
+            max-width: 1300px;
+            margin: 15px auto;
+            background: var(--panel-bg);
+            border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.9);
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            padding: 20px;
+        }
+
+        .left-column {
             display: flex;
             flex-direction: column;
-            width: 90%;
-            max-width: 900px;
-            margin: 20px auto;
-            background: #3d2314;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-            overflow: hidden;
-            border: 2px solid #5c3a21;
+            gap: 15px;
         }
 
         .video-wrapper {
             position: relative;
             width: 100%;
             background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #5c3a21;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
 
         video {
             width: 100%;
             display: block;
-            max-height: 500px;
-            object-fit: contain;
+            max-height: 480px;
+            object-fit: cover;
         }
 
-        /* Interactive Clickable Hotspot Squares over Video Items */
         .hotspot {
             position: absolute;
             border: 2px dashed var(--gold);
-            background: rgba(214, 158, 46, 0.2);
+            background: rgba(214, 158, 46, 0.3);
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: #fff;
-            text-shadow: 1px 1px 2px #000;
+            text-shadow: 1px 1px 3px #000;
+            border-radius: 6px;
         }
 
         .hotspot:hover {
-            background: rgba(214, 158, 46, 0.5);
+            background: rgba(214, 158, 46, 0.6);
             border-color: #fff;
             transform: scale(1.03);
+            box-shadow: 0 0 12px var(--gold);
         }
 
-        .shop-controls {
-            padding: 20px;
+        .right-column {
+            background: #25130b;
+            border: 2px solid #5c3a21;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            max-height: 560px;
+            overflow-y: auto;
+        }
+
+        .right-column h3 {
+            color: var(--gold);
+            margin-top: 0;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 8px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .shop-item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .shop-item {
+            background: #3d2314;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #6b4423;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #2c1810;
-            border-top: 2px solid #5c3a21;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .shop-item:hover {
+            background: #4a2818;
+        }
+
+        .shop-item button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: 1px solid var(--gold);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .shop-item button:hover {
+            background-color: #2b4c8c;
+        }
+
+        .shop-controls {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1f100a;
+            border-radius: 8px;
+            border: 1px solid #5c3a21;
         }
 
         .player-wallet {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--gold);
             font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
         }
 
         .video-selector {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .btn {
             background-color: var(--primary-blue);
             color: white;
             border: 1px solid var(--gold);
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
@@ -123,127 +223,194 @@
             background-color: #2b4c8c;
         }
 
-        /* Purchase Modal / Popup Overlay */
+        .top-action-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1300px;
+            margin: 15px 0 5px 0;
+            align-items: center;
+        }
+
+        .scale-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            padding: 6px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+        }
+
+        .scale-btn {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            width: 30px;
+            height: 30px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .scale-btn:hover { background: #e2b742; }
+
         #purchase-modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.85);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .modal-content {
-            background: #4a2818;
-            padding: 25px;
-            border-radius: 10px;
+            background: #3d2314;
+            padding: 30px;
+            border-radius: 12px;
             border: 2px solid var(--gold);
             text-align: center;
-            max-width: 350px;
-            width: 80%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            max-width: 400px;
+            width: 85%;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
         }
 
-        .modal-content h3 {
-            color: var(--gold);
-            margin-top: 0;
-        }
-
-        .modal-buttons {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .btn-buy {
-            background-color: #276749;
-        }
-        .btn-buy:hover {
-            background-color: #2f855a;
-        }
-        .btn-cancel {
-            background-color: #9b2c2c;
-        }
-        .btn-cancel:hover {
-            background-color: #c53030;
-        }
+        .modal-content h3 { color: var(--gold); margin-top: 0; font-size: 1.4rem; }
+        .modal-buttons { margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
+        .btn-buy { background-color: #276749; }
+        .btn-buy:hover { background-color: #2f855a; }
+        .btn-cancel { background-color: #9b2c2c; }
+        .btn-cancel:hover { background-color: #c53030; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>The Grand Market Chamber</h1>
+        <h1>Imperial Market & Trading Chamber</h1>
     </header>
 
-    <div class="market-container">
-        <div class="video-wrapper">
-            <!-- Video element loading your registered market videos -->
-            <video id="marketVideo" controls autoplay muted>
-                <source src="market-1.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-
-            <!-- Dynamic Clickable Hotspots overlayed on video items -->
-            <div id="hotspot-container"></div>
+    <div class="top-action-bar">
+        <div class="scale-controls">
+            <span style="font-size: 0.9rem; color: var(--gold); font-weight: bold;">Screen Size:</span>
+            <button class="scale-btn" onclick="adjustScale(-0.1)">-</button>
+            <button class="scale-btn" onclick="resetScale()">100%</button>
+            <button class="scale-btn" onclick="adjustScale(0.1)">+</button>
         </div>
+        <button class="btn" onclick="window.location.href='index.html'">Return to Map</button>
+    </div>
 
-        <div class="shop-controls">
-            <div class="player-wallet">
-                🪙 Coins: <span id="coin-count">10</span> Copper
+    <div class="admin-banner">
+        👑 <strong>Sovereign Royal Administration Tax Policy:</strong> All standard merchant transactions incur crown tax revenue. As Queen & Administrator, your personal acquisitions enjoy <strong>0% Zero Taxation Privilege</strong>!
+    </div>
+
+    <div id="scalable-workspace">
+        <div class="market-container">
+            
+            <div class="left-column">
+                <div class="video-wrapper">
+                    <video id="marketVideo" controls autoplay muted>
+                        <source src="market-1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div id="hotspot-container"></div>
+                </div>
+
+                <div class="shop-controls">
+                    <div class="player-wallet">
+                        🪙 Royal Treasury: <span id="coin-count">100</span> Copper
+                    </div>
+                    <div class="video-selector">
+                        <button class="btn" onclick="switchVideo('market-1.mp4')">Overview</button>
+                        <button class="btn" onclick="switchVideo('market-2.mp4')">Fountain</button>
+                        <button class="btn" onclick="switchVideo('market-3.mp4')">Fish</button>
+                        <button class="btn" onclick="switchVideo('market-4.mp4')">Smith</button>
+                        <button class="btn" onclick="switchVideo('market-5.mp4')">Bakery</button>
+                    </div>
+                </div>
             </div>
-            <div class="video-selector">
-                <button class="btn" onclick="switchVideo('market-1.mp4', 'general')">Overview</button>
-                <button class="btn" onclick="switchVideo('market-2.mp4', 'fountain')">Fountain</button>
-                <button class="btn" onclick="switchVideo('market-3.mp4', 'fish')">Fish Stall</button>
-                <button class="btn" onclick="switchVideo('market-4.mp4', 'smith')">Blacksmith</button>
-                <button class="btn" onclick="switchVideo('market-5.mp4', 'bakery')">Bakery & Fabric</button>
+
+            <div class="right-column">
+                <h3>Imperial Apothecary & Goods</h3>
+                <div class="shop-item-list">
+                    <div class="shop-item">
+                        <span>Clear Liquid (Minor Scrapes) - 2c</span>
+                        <button onclick="openModal({name: 'Clear Liquid', price: 2})">Acquire</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Light Blue Elixir - 5c</span>
+                        <button onclick="openModal({name: 'Light Blue Elixir', price: 5})">Acquire</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Emerald Blue Elixir - 10c</span>
+                        <button onclick="openModal({name: 'Emerald Blue Elixir', price: 10})">Acquire</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Purple Elixir (Serious) - 18c</span>
+                        <button onclick="openModal({name: 'Purple Elixir', price: 18})">Acquire</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Gold Elixir (Heavy Combat) - 30c</span>
+                        <button onclick="openModal({name: 'Gold Elixir', price: 30})">Acquire</button>
+                    </div>
+                    <div class="shop-item" style="border: 2px solid var(--gold);">
+                        <span style="color: var(--gold); font-weight: bold;">Glowing Gold Elixir (Imperial) - 50c</span>
+                        <button onclick="openModal({name: 'Glowing Gold Elixir', price: 50})">Acquire</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Soft Silk Fabric - 3c</span>
+                        <button onclick="openModal({name: 'Soft Silk Fabric', price: 3})">Acquire</button>
+                    </div>
+                    <div class="shop-item">
+                        <span>Forged Iron Dagger - 8c</span>
+                        <button onclick="openModal({name: 'Forged Iron Dagger', price: 8})">Acquire</button>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 
-    <!-- Purchase Confirmation Modal -->
     <div id="purchase-modal">
         <div class="modal-content">
             <h3 id="item-title">Item Name</h3>
-            <p id="item-desc">Would you like to purchase this item?</p>
-            <p style="color: var(--gold); font-weight: bold;" id="item-price">Cost: 1 Copper</p>
+            <p id="item-desc">Imperial Administrative acquisition with zero royal tax applied.</p>
+            <p style="color: var(--gold); font-weight: bold;" id="item-price">Cost: 0 Copper</p>
             <div class="modal-buttons">
-                <button class="btn btn-buy" onclick="confirmPurchase()">Buy</button>
+                <button class="btn btn-buy" onclick="confirmPurchase()">Confirm Acquisition</button>
                 <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- Audio element for click/purchase sound effects -->
     <audio id="clickSound" src="https://actions.google.com/sounds/v1/ui/click.ogg"></audio>
     <audio id="coinSound" src="https://actions.google.com/sounds/v1/foley/coins_tinkle.ogg"></audio>
 
     <script>
-        let playerCoins = 10;
+        let playerCoins = 100;
         let selectedItem = null;
+        let currentScale = 1.0;
 
         const videoItems = {
             'market-1.mp4': [
                 { name: "Woven Blanket", price: 3, top: "40%", left: "30%", width: "15%", height: "30%" }
             ],
             'market-2.mp4': [
-                { name: "Fresh Produce", price: 1, top: "60%", left: "10%", width: "20%", height: "25%" }
+                { name: "Fresh Produce Cart", price: 2, top: "60%", left: "10%", width: "20%", height: "25%" }
             ],
             'market-3.mp4': [
-                { name: "Leaping Fish", price: 1, top: "50%", left: "25%", width: "25%", height: "35%" }
+                { name: "Leaping Fish Catch", price: 4, top: "50%", left: "25%", width: "25%", height: "35%" }
             ],
             'market-4.mp4': [
-                { name: "Forged Dagger", price: 4, top: "45%", left: "40%", width: "20%", height: "40%" }
+                { name: "Forged Steel Dagger", price: 8, top: "45%", left: "40%", width: "20%", height: "40%" }
             ],
             'market-5.mp4': [
                 { name: "Artisan Bread", price: 1, top: "55%", left: "15%", width: "25%", height: "30%" },
-                { name: "Soft Silk Fabric", price: 2, top: "35%", left: "60%", width: "25%", height: "30%" }
+                { name: "Soft Silk Fabric", price: 3, top: "35%", left: "60%", width: "25%", height: "30%" }
             ]
         };
 
-        function switchVideo(videoSrc, locationKey) {
+        function switchVideo(videoSrc) {
             document.getElementById('clickSound').play();
             const video = document.getElementById('marketVideo');
             video.src = videoSrc;
@@ -254,7 +421,6 @@
         function renderHotspots(videoSrc) {
             const container = document.getElementById('hotspot-container');
             container.innerHTML = '';
-            
             const items = videoItems[videoSrc] || [];
             items.forEach(item => {
                 const div = document.createElement('div');
@@ -273,7 +439,7 @@
             document.getElementById('clickSound').play();
             selectedItem = item;
             document.getElementById('item-title').innerText = item.name;
-            document.getElementById('item-desc').innerText = `Acquire this wonderful item from the market stall.`;
+            document.getElementById('item-desc').innerText = `Imperial tax exempt under Queen Privilege.`;
             document.getElementById('item-price').innerText = `Cost: ${item.price} Copper`;
             document.getElementById('purchase-modal').style.display = 'flex';
         }
@@ -288,14 +454,25 @@
                 playerCoins -= selectedItem.price;
                 document.getElementById('coin-count').innerText = playerCoins;
                 document.getElementById('coinSound').play();
-                alert(`Successfully purchased ${selectedItem.name}! Added to your inventory.`);
+                alert(`Successfully acquired ${selectedItem.name} into Imperial Inventory! Tax processed by Royal Administration.`);
                 closeModal();
             } else {
-                alert("You don't have enough copper coins for this item!");
+                alert("Insufficient copper coins in the Royal Treasury!");
             }
         }
 
-        // Initialize hotspots for the default video on load
+        function adjustScale(amount) {
+            currentScale += amount;
+            if (currentScale < 0.7) currentScale = 0.7;
+            if (currentScale > 1.3) currentScale = 1.3;
+            document.getElementById('scalable-workspace').style.transform = `scale(${currentScale})`;
+        }
+
+        function resetScale() {
+            currentScale = 1.0;
+            document.getElementById('scalable-workspace').style.transform = `scale(1)`;
+        }
+
         window.onload = () => {
             renderHotspots('market-1.mp4');
         };
