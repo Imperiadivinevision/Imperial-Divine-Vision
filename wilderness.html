@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wilderness Forest | Sovereign Divine Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(12, 22, 16, 0.94);
+            --theme-color: #ffd700; 
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.96); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0px) scale(1); }
+            100% { opacity: 0; transform: translateY(-75px) scale(1.3); }
+        }
+
+        @keyframes magicalGlow {
+            0% { filter: brightness(0.85) saturate(1.1); }
+            50% { filter: brightness(1.05) saturate(1.3); }
+            100% { filter: brightness(0.85) saturate(1.1); }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #0b0f0e;
+            cursor: crosshair;
+        }
+
+        /* Cinematic Mixed Video Layering for Smooth Transitioning */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            mix-blend-mode: screen; /* Cinematic mix effect to eliminate hard cuts */
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            animation: magicalGlow 12s infinite alternate;
+        }
+
+        .bg-video.active {
+            opacity: 1;
+            z-index: -5;
+        }
+
+        /* YouTube-Style Fullscreen Toggle Button */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px var(--theme-color);
+        }
+
+        /* Top Navigation Bar */
+        nav { 
+            padding: 10px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-module {
+            background: rgba(22, 30, 27, 0.85);
+            border: 1px solid var(--theme-color);
+            padding: 5px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav a:hover { color: var(--theme-color); }
+
+        /* Wilderness Header Panel */
+        .wilderness-header {
+            background: rgba(12, 22, 16, 0.92);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+            padding: 10px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            z-index: 20;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            backdrop-filter: blur(8px);
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #79ff9c;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.95), 0 0 15px rgba(121, 255, 156, 0.5);
+        }
+
+        .chamber-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #f5f2eb;
+            margin: 0;
+            font-size: 0.78rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+        }
+
+        /* Wilderness Inventory HUD */
+        .wilderness-hud {
+            background: rgba(8, 16, 11, 0.94);
+            border: 1.5px solid var(--theme-color);
+            padding: 5px 15px;
+            border-radius: 6px;
+            display: flex;
+            gap: 15px;
+            font-size: 0.72rem;
+            box-shadow: 0 0 15px rgba(0,0,0,0.8);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .wilderness-hud span { color: #79ff9c; font-weight: bold; }
+
+        /* Floating Click Notification Text */
+        .floating-notif {
+            position: absolute;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #79ff9c;
+            text-shadow: 0 0 12px rgba(0,0,0,0.95), 0 0 6px rgba(121, 255, 156, 0.9);
+            pointer-events: none;
+            z-index: 2500;
+            animation: floatUp 1.2s ease-out forwards;
+        }
+
+        /* Cooldown Lockout Container */
+        .lockout-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(11, 15, 14, 0.96);
+            border: 3px solid var(--theme-color);
+            border-radius: 14px;
+            padding: 25px;
+            max-width: 580px;
+            width: 90%;
+            margin: auto;
+            box-shadow: 0 0 50px rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            animation: fadeInScale 0.5s ease;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body onload="initWilderness()" onclick="handleScreenClick(event)">
+
+    <!-- Peaceful Background Music -->
+    <audio id="chamber-bg-music" loop>
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Cinematic Mixed Video Container -->
+    <div class="video-container">
+        <video autoplay muted loop class="bg-video active" id="vid-0"><source src="wilderness-1.mp4" type="video/mp4"></video>
+        <video autoplay muted loop class="bg-video" id="vid-1"><source src="wilderness-2.mp4" type="video/mp4"></video>
+        <video autoplay muted loop class="bg-video" id="vid-2"><source src="wilderness-3.mp4" type="video/mp4"></video>
+        <video autoplay muted loop class="bg-video" id="vid-3"><source src="wilderness-4.mp4" type="video/mp4"></video>
+        <video autoplay muted loop class="bg-video" id="vid-4"><source src="wilderness-5.mp4" type="video/mp4"></video>
+    </div>
+
+    <!-- YouTube-Style Fullscreen Toggle Button -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen(); event.stopPropagation();" title="Toggle Fullscreen Chamber View">⤢</button>
+
+    <!-- Top Navigation Bar -->
+    <nav onclick="event.stopPropagation()"> 
+        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
+        <div class="nav-module"><a href="library.html">📚 Library</a></div>
+        <div class="nav-module"><a href="map.html">🗺️ Empire Map</a></div>
+        <div class="nav-module"><a href="wilderness.html" style="color: #79ff9c;">🌲 Wilderness</a></div>
+        <div class="nav-module"><a href="throne.html">🏛️ Throne Room</a></div>
+        <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
+        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
+    </nav>
+
+    <!-- Top Header Panel -->
+    <div class="wilderness-header" onclick="event.stopPropagation()">
+        <h1>The Wilderness Forest</h1>
+        <p class="chamber-subtitle">Touch anywhere on the living forest to collect supplies, coins, souls, shields, armor, and rare cart buffs!</p>
+        
+        <div class="wilderness-hud">
+            <div>Supplies: <span id="stat-supplies">0</span> 📦</div>
+            <div>Coins: <span id="stat-coins">0</span> 🪙</div>
+            <div>Souls: <span id="stat-souls">0</span> 👻</div>
+            <div>Shields: <span id="stat-shields">0</span> 🛡️</div>
+            <div>Armor: <span id="stat-armor">0</span> ⚔️</div>
+            <div>Foraging Time Left: <span id="timer-display">03:00</span></div>
+        </div>
+    </div>
+
+    <!-- Active Foraging Area -->
+    <div id="foragingArea" style="flex: 1; width: 100%; position: relative; display: flex; justify-content: center; align-items: center;">
+        
+        <!-- Cooldown Lockout Box -->
+        <div class="lockout-container" id="lockoutBox" onclick="event.stopPropagation()">
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #ffd700; margin-top: 0;">Foraging Rest</h2>
+            <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: #f5f2eb; line-height: 1.5; margin-bottom: 15px;">
+                "Your 3-minute foraging session has ended! The forest creatures rest and the magical trails recharge. You must wait 5 minutes before entering the wilderness again to collect more inventory."
+            </p>
+            <div style="font-family: 'Cinzel', serif; font-size: 0.85rem; color: #ffe875;">
+                Wilderness Unlocks In: <strong id="lockout-timer-display" style="font-size: 1.1rem;">05:00</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Seamless Video Mixer & Crossfade Cycler (Applies mix effect smoothly across all 5 videos)
+        let activeVidIndex = 0;
+        const totalVideos = 5;
+
+        setInterval(() => {
+            const currentVid = document.getElementById(`vid-${activeVidIndex}`);
+            currentVid.classList.remove('active');
+
+            activeVidIndex = (activeVidIndex + 1) % totalVideos;
+            
+            const nextVid = document.getElementById(`vid-${activeVidIndex}`);
+            nextVid.currentTime = 0;
+            nextVid.play().catch(e => {});
+            nextVid.classList.add('active');
+        }, 12000); // Crossfade mix every 12 seconds
+
+        // Interactive Audio Chime Synthesizer for Touch / Click Feedback
+        function playGatherSound(isRare = false) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = isRare ? 'triangle' : 'sine';
+                osc.frequency.setValueAtTime(isRare ? 1046.50 : 880, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(isRare ? 1318.51 : 587.33, audioCtx.currentTime + 0.12);
+                
+                gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } catch(e) {}
+        }
+
+        let userState = {
+            coins: 0,
+            supplies: 0,
+            souls: 0,
+            shields: 0,
+            armor: 0,
+            wildSessionEnd: 0,
+            wildLockoutEnd: 0
+        };
+
+        let timerInterval = null;
+
+        function initWilderness() {
+            loadUserData();
+            checkLockoutStatus();
+            startGlobalTimer();
+            startBackgroundMusic();
+        }
+
+        function loadUserData() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                userState.coins = parsed.coins || 0;
+                userState.supplies = parsed.supplies || 0;
+                userState.souls = parsed.souls || 0;
+                userState.shields = parsed.shields || 0;
+                userState.armor = parsed.armor || 0;
+                userState.wildSessionEnd = parsed.wildSessionEnd || 0;
+                userState.wildLockoutEnd = parsed.wildLockoutEnd || 0;
+            }
+            updateHUD();
+        }
+
+        function updateHUD() {
+            document.getElementById('stat-supplies').innerText = userState.supplies;
+            document.getElementById('stat-coins').innerText = userState.coins;
+            document.getElementById('stat-souls').innerText = userState.souls;
+            document.getElementById('stat-shields').innerText = userState.shields;
+            document.getElementById('stat-armor').innerText = userState.armor;
+        }
+
+        function saveUserDataState() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            let parsed = saved ? JSON.parse(saved) : {};
+            parsed.coins = userState.coins;
+            parsed.supplies = userState.supplies;
+            parsed.souls = userState.souls;
+            parsed.shields = userState.shields;
+            parsed.armor = userState.armor;
+            parsed.wildSessionEnd = userState.wildSessionEnd;
+            parsed.wildLockoutEnd = userState.wildLockoutEnd;
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
+        }
+
+        function checkLockoutStatus() {
+            let now = Date.now();
+            if (userState.wildLockoutEnd > now) {
+                document.getElementById('lockoutBox').style.display = 'flex';
+            } else {
+                document.getElementById('lockoutBox').style.display = 'none';
+                if (!userState.wildSessionEnd || userState.wildSessionEnd < now) {
+                    // 3-minute active foraging session (180,000 ms)
+                    userState.wildSessionEnd = now + 180000;
+                    saveUserDataState();
+                }
+            }
+        }
+
+        function handleScreenClick(event) {
+            let now = Date.now();
+            if (userState.wildLockoutEnd > now) return; // Locked out during cooldown
+
+            let roll = Math.random();
+            let isRare = false;
+            let notifText = "";
+
+            if (roll < 0.35) {
+                userState.supplies += 1;
+                notifText = "+1 Supply Collected! 📦";
+            } else if (roll < 0.65) {
+                userState.coins += 50;
+                notifText = "+50 Coins Gained! 🪙";
+            } else if (roll < 0.80) {
+                userState.souls += 1;
+                notifText = "+1 Soul Gathered! 👻";
+            } else if (roll < 0.90) {
+                userState.shields += 1;
+                notifText = "+1 Shield Acquired! 🛡️";
+            } else if (roll < 0.96) {
+                userState.armor += 1;
+                notifText = "+1 Armor Secured! ⚔️";
+            } else {
+                // Rare Cart Buff Found!
+                userState.coins += 200;
+                userState.supplies += 3;
+                isRare = true;
+                notifText = "✨ Rare Cart Buff Found! (+200 Coins, +3 Supplies)";
+            }
+
+            playGatherSound(isRare);
+            updateHUD();
+            saveUserDataState();
+
+            // Spawn floating notification right where the user touched/clicked
+            spawnFloatingText(event.clientX, event.clientY, notifText);
+        }
+
+        function spawnFloatingText(x, y, text) {
+            const el = document.createElement('div');
+            el.className = 'floating-notif';
+            el.innerText = text;
+            el.style.left = (x - 70) + 'px';
+            el.style.top = (y - 30) + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => { el.remove(); }, 1200);
+        }
+
+        function startGlobalTimer() {
+            timerInterval = setInterval(() => {
+                let now = Date.now();
+                
+                if (userState.wildLockoutEnd <= now && userState.wildSessionEnd <= now) {
+                    // Trigger 5-minute lockout (300,000 ms)
+                    userState.wildLockoutEnd = now + 300000;
+                    saveUserDataState();
+                    checkLockoutStatus();
+                }
+
+                if (userState.wildLockoutEnd > now) {
+                    let diffSecs = Math.floor((userState.wildLockoutEnd - now) / 1000);
+                    let mins = Math.floor(diffSecs / 60);
+                    let secs = diffSecs % 60;
+                    let timeStr = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+                    document.getElementById('lockout-timer-display').innerText = timeStr;
+                    document.getElementById('timer-display').innerText = "00:00 (Resting)";
+                } else {
+                    let diffSecs = Math.floor((userState.wildSessionEnd - now) / 1000);
+                    let mins = Math.floor(diffSecs / 60);
+                    let secs = diffSecs % 60;
+                    let timeStr = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+                    document.getElementById('timer-display').innerText = timeStr;
+                }
+            }, 1000);
+        }
+
+        let musicStarted = false;
+        function startBackgroundMusic() {
+            if (!musicStarted) {
+                const audio = document.getElementById('chamber-bg-music');
+                if (audio) {
+                    audio.volume = 0.35;
+                    audio.play().then(() => { musicStarted = true; }).catch(e => {});
+                }
+            }
+        }
+
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+            body.classList.toggle('is-chamber-fullscreen');
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+    </script>
+</body>
+</html>
