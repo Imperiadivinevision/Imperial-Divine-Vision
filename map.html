@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -343,22 +342,22 @@
             <!-- Atmospheric Shimmer over Water -->
             <div class="water-glow-overlay"></div>
 
-            <!-- 1. Throne Room Chamber Link (New Chamber: throne.html) -->
+            <!-- 1. Throne Room Chamber Link -->
             <a href="throne.html" class="map-hotspot" id="hotspot-throne" title="Enter Throne Room Chamber"></a>
 
-            <!-- 2. Wilderness Forest Chamber Link (New Chamber: wilderness.html) -->
+            <!-- 2. Wilderness Forest Chamber Link -->
             <a href="wilderness.html" class="map-hotspot" id="hotspot-wilderness" title="Explore Wilderness Forest"></a>
 
-            <!-- 3. Royal Marketplace Chamber Link (New Chamber: market-chamber.html) -->
+            <!-- 3. Royal Marketplace Chamber Link (Points to market-chamber.html) -->
             <a href="market-chamber.html" class="map-hotspot" id="hotspot-market" title="Visit Royal Marketplace"></a>
 
-            <!-- 4. North Village Chamber Link (New Chamber: village.html) -->
+            <!-- 4. North Village Chamber Link -->
             <a href="village.html" class="map-hotspot" id="hotspot-village1" title="Visit North Village"></a>
 
-            <!-- 5. South Hamlet Chamber Link (New Chamber: village.html) -->
+            <!-- 5. South Hamlet Chamber Link -->
             <a href="village.html" class="map-hotspot" id="hotspot-village2" title="Visit South Hamlet"></a>
 
-            <!-- 6. Border Outpost Battle Arena Link (Unchanged: battle.html) -->
+            <!-- 6. Border Outpost Battle Arena Link -->
             <a href="battle.html" class="map-hotspot" id="hotspot-border" title="Enter Border Outpost Battle Arena"></a>
 
             <!-- Purchasable Land Hotspots -->
@@ -384,7 +383,6 @@
     </div>
 
     <script>
-        // Background Music Engine
         let musicStarted = false;
         function startBackgroundMusic() {
             if (!musicStarted) {
@@ -415,7 +413,6 @@
             }
         }
 
-        // Fullscreen Toggle / Expansion Engine
         function toggleFullScreen() {
             const body = document.body;
             const fsBtn = document.getElementById('fsToggleBtn');
@@ -482,7 +479,7 @@
             selectedPlotId = plotId;
 
             document.getElementById('modal-estate-title').innerText = name;
-            document.getElementById('modal-estate-desc').innerHTML = `Cost: <strong>${cost} Imperial Coins</strong>.<br>Purchasing this land grants you noble status. You will be responsible for providing supplies to your resident NPCs to avoid crown petitions and divine penalties!`;
+            document.getElementById('modal-estate-desc').innerHTML = `Cost: <strong>${cost} Imperial Coins</strong>.<br>Claiming this land grants noble status.`;
             document.getElementById('landModal').style.display = 'flex';
         }
 
@@ -492,7 +489,7 @@
 
         function confirmLandPurchase() {
             if (userState.coins < selectedPlotCost) {
-                alert(`You require ${selectedPlotCost} Imperial Coins to claim this land. Current balance: ${userState.coins} 🪙.`);
+                alert(`You require ${selectedPlotCost} Imperial Coins to claim this land.`);
                 closeLandModal();
                 return;
             }
@@ -510,12 +507,10 @@
             parsed.estates = userState.estates;
             localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
 
-            alert(`✦ Congratulations! You are now the official ruler of ${selectedPlotName}! Your rank has risen to ${userState.rank}. ✦`);
+            alert(`✦ Congratulations! You are now the official ruler of ${selectedPlotName}! ✦`);
             closeLandModal();
             loadMapData();
         }
     </script>
 </body>
 </html>
-
-
