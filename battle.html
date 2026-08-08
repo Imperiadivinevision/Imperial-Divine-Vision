@@ -1,19 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Battle Chambers (Divine Edition)</title>
+    <title>Sovereign Empire: Action Combat Arena (Master Imperial Edition)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-red: #8B0000;
             --gold: #D4AF37;
+            --gold-bright: #ffe875;
             --purple: #4B0082;
-            --dark-bg: #0a0a0c;
-            --card-bg: #16161a;
-            --text-light: #f4f4f4;
-            --glow-gold: 0 0 25px rgba(212, 175, 55, 0.6);
+            --dark-bg: #070908;
+            --card-bg: rgba(17, 23, 21, 0.94);
+            --text-light: #f5f2eb;
+            --glow-gold: 0 0 30px rgba(212, 175, 55, 0.7);
         }
 
         body {
@@ -21,114 +22,128 @@
             padding: 0;
             background-color: var(--dark-bg);
             color: var(--text-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cinzel', serif;
             overflow-x: hidden;
             user-select: none;
-            transition: font-size 0.3s ease;
+        }
+
+        /* YouTube-Style Fullscreen Expansion Mode Button */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.95);
+            border: 2px solid var(--gold);
+            color: var(--text-light);
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.12);
+            background: var(--gold);
+            color: #0b0f0e;
+            box-shadow: 0 0 25px var(--gold);
+        }
+
+        body.is-chamber-fullscreen header,
+        body.is-chamber-fullscreen .nav-bar,
+        body.is-chamber-fullscreen .top-action-bar {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .game-layout {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            border: none !important;
+            border-radius: 0 !important;
+        }
+        body.is-chamber-fullscreen .media-stage {
+            height: 65vh !important;
         }
 
         header {
             text-align: center;
-            padding: 12px;
-            background: linear-gradient(180deg, #1b1b22, #111);
-            border-bottom: 2px solid var(--gold);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            padding: 15px;
+            background: linear-gradient(180deg, #18221e, #0b0f0e);
+            border-bottom: 3px ridge var(--gold);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.9);
         }
 
         header h1 {
             color: var(--gold);
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
-        /* Fully Restored Navigation Menu Links */
         .nav-bar {
             display: flex;
             justify-content: center;
-            background: #141418;
-            padding: 10px;
-            gap: 20px;
-            border-bottom: 1px solid #2a2a35;
-            font-size: 0.9rem;
+            background: rgba(11, 15, 14, 0.95);
+            padding: 12px;
+            gap: 25px;
+            border-bottom: 2px solid var(--gold);
+            font-size: 0.85rem;
             font-weight: bold;
             flex-wrap: wrap;
+            letter-spacing: 1px;
+            backdrop-filter: blur(8px);
         }
 
         .nav-bar a {
-            color: var(--gold);
+            color: var(--text-light);
             text-decoration: none;
             transition: 0.2s;
             cursor: pointer;
+            text-transform: uppercase;
         }
 
         .nav-bar a:hover, .nav-bar a.active {
-            color: #fff;
-            text-shadow: 0 0 8px var(--gold);
-            text-decoration: underline;
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold);
         }
 
-        /* Screen Size Scaling Control Bar */
         .top-action-bar {
             display: flex;
             justify-content: space-between;
-            width: 90%;
-            max-width: 1300px;
-            margin: 10px auto;
+            width: 92%;
+            max-width: 1350px;
+            margin: 12px auto;
             align-items: center;
         }
 
-        .scale-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            background: rgba(0,0,0,0.6);
-            padding: 5px 15px;
-            border-radius: 6px;
-            border: 1px solid var(--gold);
-        }
-
-        .scale-btn {
-            background: var(--gold);
-            color: #000;
-            border: none;
-            width: 28px;
-            height: 28px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .scale-btn:hover { background: #e2b742; }
-
-        #scalable-workspace {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transform-origin: top center;
-            transition: transform 0.2s ease;
-        }
-
-        /* Color-Coded Status HUD Bars */
         .hud-container {
             display: flex;
             justify-content: space-between;
-            background: #111116;
-            padding: 10px 30px;
+            background: var(--card-bg);
+            padding: 12px 35px;
+            border: 2px solid var(--gold);
             border-bottom: 2px solid var(--primary-red);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
-            width: 90%;
-            max-width: 1300px;
+            width: 92%;
+            max-width: 1350px;
             box-sizing: border-box;
-            border-radius: 8px 8px 0 0;
+            border-radius: 10px 10px 0 0;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
-        .hud-gold { color: var(--gold); }
-        .hud-soldier { color: #ff4d4d; }
-        .hud-life { color: #3399ff; }
+        .hud-gold { color: var(--gold-bright); }
+        .hud-soldier { color: #ff6666; }
+        .hud-life { color: #55bbff; }
 
         @keyframes shake {
             0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -141,22 +156,21 @@
 
         .shake-fx { animation: shake 0.4s ease-in-out; }
 
-        /* Master Sketch-Aligned Layout Grid */
         .game-layout {
-            max-width: 1300px;
-            width: 90%;
-            margin: 0 auto 20px auto;
-            padding: 10px;
+            max-width: 1350px;
+            width: 92%;
+            margin: 0 auto 25px auto;
+            padding: 15px;
             display: grid;
-            grid-template-columns: 220px 1fr 240px;
+            grid-template-columns: 240px 1fr 260px;
             gap: 15px;
-            background: #111116;
-            border-radius: 0 0 8px 8px;
-            border: 2px solid #2a2a35;
+            background: var(--card-bg);
+            border-radius: 0 0 10px 10px;
+            border: 2px solid var(--gold);
             border-top: none;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.9);
         }
 
-        /* Left Sidebar: Tactical Cards */
         .card-sidebar {
             display: flex;
             flex-direction: column;
@@ -164,52 +178,35 @@
         }
 
         .tactical-card {
-            background: linear-gradient(145deg, #1e1e24, #121216);
+            background: linear-gradient(145deg, #18221e, #0e1412);
             border: 2px solid var(--gold);
             border-radius: 8px;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            transition: all 0.3s ease;
             text-decoration: none;
             color: var(--text-light);
             display: block;
         }
 
         .tactical-card:hover {
-            transform: translateY(-4px) scale(1.02);
+            transform: translateY(-4px) scale(1.03);
             box-shadow: var(--glow-gold);
             border-color: #fff;
+            background: linear-gradient(145deg, #22302a, #141c19);
         }
 
-        .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.85rem; text-transform: uppercase; }
-        .tactical-card p { font-size: 0.7rem; color: #bbb; margin: 0; }
+        .tactical-card h4 { color: var(--gold); margin: 4px 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .tactical-card p { font-size: 0.7rem; color: #c5b59b; margin: 0; font-family: 'Playfair Display', serif; font-style: italic; }
 
-        .shield-card { background: linear-gradient(145deg, #ffffff, #e6e6fa); border-color: var(--gold); color: #111; }
-        .shield-card h4 { color: #8B0000; }
-        .shield-card p { color: #333; }
-
-        .player-slot-card {
-            border-color: #00ffcc;
-            background: linear-gradient(145deg, #122222, #121216);
-        }
-
-        .player-slot-card img, .player-slot-card video {
-            width: 100%;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-top: 4px;
-        }
-
-        /* Center Panel: Interactive Stage */
         .center-panel {
-            background-color: var(--card-bg);
-            border: 2px solid #2a2a35;
+            background-color: rgba(10, 15, 13, 0.9);
+            border: 2px solid var(--gold);
             border-radius: 10px;
             padding: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -218,19 +215,37 @@
 
         .center-panel h2 {
             color: var(--gold);
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--gold);
             padding-bottom: 6px;
             margin: 0;
             font-size: 1.1rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Prominent NPC Life Status Bar Above Stage */
+        .npc-stage-life-banner {
+            background: linear-gradient(90deg, #12221c, #1e352b);
+            border: 2px solid #55bbff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(85, 187, 255, 0.3);
+        }
+
+        .npc-stage-life-banner span {
+            color: #55bbff;
+            font-weight: 900;
         }
 
         .media-stage {
             width: 100%;
-            height: 320px;
+            height: 310px;
             background-color: #000;
-            border: 2px solid #333;
-            border-radius: 6px;
+            border: 3px ridge var(--gold);
+            border-radius: 8px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -239,7 +254,7 @@
             cursor: crosshair;
         }
 
-        .media-stage video, .media-stage img {
+        .media-stage video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -249,10 +264,10 @@
 
         .floating-dmg {
             position: absolute;
-            font-weight: bold;
-            font-size: 1.4rem;
-            color: #ff3333;
-            text-shadow: 0 0 5px #000;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #ff4d4d;
+            text-shadow: 0 0 8px #000, 0 0 12px #ff0000;
             pointer-events: none;
             animation: floatUp 0.8s ease-out forwards;
             z-index: 50;
@@ -260,10 +275,9 @@
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-40px) scale(1.3); }
+            100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
         }
 
-        /* Right Sidebar */
         .right-sidebar {
             display: flex;
             flex-direction: column;
@@ -271,232 +285,236 @@
         }
 
         .action-panel {
-            background-color: var(--card-bg);
-            border: 2px solid #2a2a35;
+            background-color: rgba(10, 15, 13, 0.9);
+            border: 2px solid var(--gold);
             border-radius: 10px;
             padding: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
         }
 
         .action-panel h3 {
             color: var(--gold);
             margin: 0 0 10px 0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--gold);
             padding-bottom: 4px;
+            letter-spacing: 1px;
         }
 
         .btn {
-            background: linear-gradient(135deg, var(--primary-red), #500);
-            color: white;
-            border: 1px solid var(--gold);
+            background: linear-gradient(135deg, var(--gold), #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
             padding: 10px;
-            font-size: 0.85rem;
-            font-weight: bold;
+            font-size: 0.8rem;
+            font-weight: 900;
             border-radius: 6px;
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
             margin-top: 6px;
-            transition: 0.2s;
-            box-shadow: 0 4px 10px rgba(139,0,0,0.4);
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(212,175,55,0.4);
             text-align: center;
             display: block;
             text-decoration: none;
             box-sizing: border-box;
+            letter-spacing: 1px;
+            font-family: 'Cinzel', serif;
         }
 
-        .btn:hover { background: linear-gradient(135deg, #a00000, var(--primary-red)); box-shadow: var(--glow-gold); }
+        .btn:hover { background: #fff; color: #0b0f0e; box-shadow: 0 0 20px var(--gold); transform: translateY(-2px); }
 
-        #flash-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(75,0,130,0.5) 50%, transparent 100%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease-out;
-            z-index: 40;
+        .btn-combat {
+            background: linear-gradient(135deg, var(--primary-red), #500);
+            color: white;
+            border-color: var(--gold);
         }
+        .btn-combat:hover { background: #a00000; color: white; box-shadow: 0 0 20px var(--primary-red); }
+
+        .btn-mission {
+            background: linear-gradient(135deg, #104030, #082018);
+            color: #79ff9c;
+            border-color: #79ff9c;
+        }
+        .btn-mission:hover { background: #186048; color: #fff; box-shadow: 0 0 20px #79ff9c; }
 
         #modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5,5,8,0.9);
+            background: rgba(5, 8, 7, 0.92);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            backdrop-filter: blur(5px);
         }
 
         #modal-content {
-            background: #181820;
+            background: linear-gradient(135deg, #181205, #2c220a);
             border: 3px solid var(--gold);
-            padding: 30px;
+            padding: 35px;
             text-align: center;
-            border-radius: 12px;
-            max-width: 420px;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+            border-radius: 14px;
+            max-width: 450px;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.7);
         }
 
-        #modal-content h1 { font-size: 2.2rem; margin: 0 0 12px 0; text-transform: uppercase; }
+        #modal-content h1 { font-size: 2.2rem; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 2px; }
         
         .battle-log {
-            background: #060608;
-            border: 1px solid #222;
-            padding: 8px;
-            height: 65px;
+            background: #040605;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            height: 70px;
             overflow-y: auto;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.7rem;
-            color: #00ffcc;
-            border-radius: 4px;
-            margin-top: 6px;
+            font-size: 0.75rem;
+            color: #79ff9c;
+            border-radius: 6px;
+            margin-top: 8px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
         }
     </style>
 </head>
-<body onload="loadEquippedPlayer()">
+<body>
+
+    <!-- YouTube-Style Fullscreen Expand Button -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Battle Chamber">⤢</button>
 
     <header>
-        <h1>Sovereign Empire: Battle Chambers</h1>
+        <h1>Sovereign Empire: Action Combat Arena</h1>
     </header>
 
-    <!-- Restored Navigation Links Bar -->
     <div class="nav-bar">
-        <a href="index.html">Sanctuary Home</a>
-        <a href="trailer.html">Trailer Chamber</a>
-        <a href="battle.html" class="active">Sovereign Combat Arena</a>
-        <a href="library.html">Library</a>
-        <a href="vip.html" style="color: #ff4d4d;">VIP Behind-the-Scenes</a>
-        <a href="seal.html">Our Official Seal</a>
+        <a href="index.html">🏠 Sanctuary Home</a>
+        <a href="trailer.html">🎥 Trailer Chamber</a>
+        <a href="battle.html" class="active" style="color: var(--gold);">⚔️ Combat Arena</a>
+        <a href="library.html">📚 Library</a>
+        <a href="vip.html" style="color: #ff6666;">👑 VIP Behind-the-Scenes</a>
     </div>
 
-    <!-- Screen Size Scaling Control Bar -->
     <div class="top-action-bar">
-        <div class="scale-controls">
-            <span style="font-size: 0.85rem; color: var(--gold); font-weight: bold;">Screen Size:</span>
-            <button class="scale-btn" onclick="adjustScale(-0.1)">-</button>
-            <button class="scale-btn" onclick="resetScale()">100%</button>
-            <button class="scale-btn" onclick="adjustScale(0.1)">+</button>
-        </div>
-        <a href="index.html" class="btn" style="width: auto; padding: 6px 15px; margin: 0;">Return to Map</a>
+        <span style="color: var(--gold); font-size: 0.9rem; font-weight: bold; font-family: 'Playfair Display', serif; font-style: italic;">✦ Sovereign Command: Strike red blocks with gold hammers and conquer the rebellion ✦</span>
+        <a href="map.html" class="btn" style="width: auto; padding: 8px 18px; margin: 0;">🗺️ Return to Map</a>
     </div>
 
-    <div id="scalable-workspace">
-        <!-- Color-Coded Status HUD Bars -->
-        <div class="hud-container">
-            <div>
-                Player Life Span (NPC): <span id="p-life" class="hud-life">100</span>/100 | 
-                Gold: <span id="p-coins" class="hud-gold">1000</span> | 
-                Soldiers: <span id="p-soldiers" class="hud-soldier">12</span>
-            </div>
-            <div>
-                Rebellion Force | Prime Minister & Big Boss | Level: 3
-            </div>
+    <!-- Status HUD Bars -->
+    <div class="hud-container">
+        <div>
+            Player Life Span (NPC): <span id="p-life" class="hud-life">100</span>/100 | 
+            Gold: <span id="p-coins" class="hud-gold">1000</span> 🪙 | 
+            Soldiers: <span id="p-soldiers" class="hud-soldier">12</span> 🛡️
         </div>
+        <div>
+            Rebellion Force | Prime Minister & Big Boss | Stage Level: 3
+        </div>
+    </div>
 
-        <div class="game-layout">
+    <div class="game-layout">
+        
+        <!-- Left Sidebar: Tactical Deck -->
+        <div class="card-sidebar">
+            <h3 style="color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Tactical Deck</h3>
             
-            <!-- Left Sidebar: Tactical Deck -->
-            <div class="card-sidebar">
-                <h3 style="color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase;">Tactical Deck</h3>
-                
-                <div class="tactical-card" onclick="playCombatVideo('assets-video-king-benson-strength.mp4'); activateCard('King Benson (Strength)', 'The Lord is my strength & defense boost');" style="border-color: var(--purple);">
-                    <h4>Benson</h4>
-                    <p>Divine Strength & Defense</p>
-                </div>
-
-                <div class="tactical-card" onclick="playCombatVideo('assets-video-queen-rosanna-healing.mp4'); activateCard('Queen Rosanna (Healing)', 'Rank A+ Restoration');">
-                    <h4>Rosanna</h4>
-                    <p>Divine Healing & Life</p>
-                </div>
-
-                <div class="tactical-card shield-card" onclick="activateCard('Shield of Truth', 'Radiant Gold Barrier Burst');">
-                    <h4>God (Shield)</h4>
-                    <p>Radiant Sparkling Shield</p>
-                </div>
-
-                <div class="tactical-card" onclick="activateCard('Ego of Phoenix', 'Wings as Eagles Sparkling Soul');" style="border-color: #ff8c00;">
-                    <h4>Eagle (Soul)</h4>
-                    <p>Sparkling White Soul</p>
-                </div>
-
-                <div class="tactical-card" onclick="activateCard('A+ Combat Skills', 'Maximum Strike Power');">
-                    <h4>A+ Skills</h4>
-                    <p>Elite Tactical Mastery</p>
-                </div>
-
-                <a href="player.html" class="tactical-card player-slot-card">
-                    <h4>Add Player</h4>
-                    <div id="active-player-display">
-                        <p style="font-size: 0.6rem; color: #00ffcc;">[Click to Open Chamber]</p>
-                    </div>
-                </a>
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-king-benson-strength.mp4')" style="border-color: var(--purple);">
+                <h4>Benson</h4>
+                <p>Divine Strength & Defense</p>
             </div>
 
-            <!-- Center Panel: Interactive Stage -->
-            <div class="center-panel">
-                <h2>Interactive War Chambers (Click & Slash)</h2>
-                <div class="media-stage" id="combat-stage" onclick="triggerMouseSlash(event)">
-                    <div id="flash-overlay"></div>
-                    <video id="combat-video" controls autoplay loop muted>
-                        <source src="big-boss-cinematic.mp4" type="video/mp4">
-                        Your browser does not support video.
-                    </video>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn" onclick="engageWarBattle()">Engage Big Boss & Rebellion</button>
-                    <button class="btn" style="background-color: #444;" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Grind Arena</button>
-                </div>
-                <div class="battle-log" id="game-log">
-                    [System Initialized]: Navigation & VIP Chambers fully restored. Click stage to slash!
-                </div>
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-queen-rosanna-healing.mp4')">
+                <h4>Rosanna</h4>
+                <p>Divine Healing & Life</p>
             </div>
 
-            <!-- Right Sidebar -->
-            <div class="right-sidebar">
-                <div class="action-panel">
-                    <h3>Combat Chambers</h3>
-                    <button class="btn" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Arena Battle</button>
-                    <button class="btn" onclick="engageWarBattle()">War Campaign</button>
-                    <button class="btn" onclick="playCombatVideo('assets-video-boss-fight-forest.mp4')">Training Academy</button>
-                    <button class="btn" onclick="playCombatVideo('assets-video-recruitment-camp.mp4'); recruitSoldiers();">Recruiting Camp</button>
-                </div>
-
-                <div class="action-panel">
-                    <h3>Supply Hub</h3>
-                    <button class="btn" onclick="openMarket()">Buy Supplies (Market)</button>
-                    <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Collect Forest Supply</button>
-                </div>
+            <div class="tactical-card" onclick="playCombatVideo('assets-video-arena-combat.mp4')">
+                <h4>God (Shield)</h4>
+                <p>Radiant Sparkling Shield</p>
             </div>
-
         </div>
+
+        <!-- Center Panel: Interactive Stage -->
+        <div class="center-panel">
+            <h2>Interactive War Chambers (Click & Slash Blocks)</h2>
+            
+            <!-- Prominent NPC Life Status Banner Directly Above Stage -->
+            <div class="npc-stage-life-banner">
+                <span>🛡️ ACTIVE NPC LIFE STATUS:</span>
+                <span id="npc-banner-life" style="font-size: 1.1rem; color: #55bbff;">100 / 100 HP</span>
+            </div>
+
+            <div class="media-stage" id="combat-stage" onclick="triggerBlockSlash(event)">
+                <video id="combat-video" controls autoplay loop muted>
+                    <source src="big-boss-cinematic.mp4" type="video/mp4">
+                    Your browser does not support video.
+                </video>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-combat" onclick="engageBigBossBattle()">⚔️ Engage Big Boss</button>
+                <button class="btn" style="background: #22302a; border-color: var(--gold);" onclick="playCombatVideo('assets-video-arena-combat.mp4')">🔥 Grind Arena</button>
+            </div>
+            <div class="battle-log" id="game-log">
+                [System Initialized]: Click stage to strike red rebel blocks with gold hammers! Track NPC life above.
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="action-panel">
+                <h3>Combat Chambers</h3>
+                <button class="btn btn-mission" onclick="triggerBorderChaosMission()">🚨 Border Chaos Mission</button>
+                <button class="btn btn-combat" onclick="playCombatVideo('assets-video-arena-combat.mp4')">Arena Battle</button>
+                <button class="btn btn-combat" onclick="playWarCampaign()">War Campaign</button>
+                <button class="btn btn-combat" onclick="playCombatVideo('small-boss.mp4')">Small Boss Fight</button>
+                <button class="btn" onclick="playCombatVideo('assets-video-recruitment-camp.mp4'); recruitSoldiers();">Recruiting Camp</button>
+            </div>
+
+            <div class="action-panel">
+                <h3>Supply Hub</h3>
+                <button class="btn" onclick="openMarket()">Buy Supplies (Market)</button>
+                <button class="btn" style="background-color: var(--purple);" onclick="openForest()">Collect Forest Supply</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Modal -->
+    <!-- Victory / Defeat Modal with Revive Option -->
     <div id="modal-overlay">
         <div id="modal-content">
             <h1 id="modal-title" style="color: var(--gold);">VICTORY</h1>
-            <p id="modal-text" style="color: #ccc; font-size: 1.1rem;">Rebellion forces pushed back!</p>
-            <button class="btn" onclick="closeModal()">Continue Campaign</button>
+            <p id="modal-text" style="color: #f5f2eb; font-size: 1.05rem; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.6;">Rebellion forces pushed back!</p>
+            <div id="modal-buttons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                <button class="btn" onclick="closeModal()">Continue Campaign 👑</button>
+                <button class="btn" id="revive-btn" style="background: linear-gradient(135deg, #3399ff, #115599); color: white; display: none;" onclick="revivePlayer()">Revive with 50 Gold 🪙</button>
+            </div>
         </div>
     </div>
 
     <script>
         let forestCooldownEnd = 0;
-        let currentScale = 1.0;
 
-        function adjustScale(amount) {
-            currentScale += amount;
-            if (currentScale < 0.7) currentScale = 0.7;
-            if (currentScale > 1.3) currentScale = 1.3;
-            document.getElementById('scalable-workspace').style.transform = `scale(${currentScale})`;
-        }
+        // YouTube-style Fullscreen Toggle
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
 
-        function resetScale() {
-            currentScale = 1.0;
-            document.getElementById('scalable-workspace').style.transform = `scale(1)`;
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Exit Fullscreen";
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Expand to Fullscreen";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
         }
 
         function logMessage(msg) {
@@ -505,27 +523,53 @@
             logBox.scrollTop = logBox.scrollHeight;
         }
 
-        function loadEquippedPlayer() {
-            const savedAsset = localStorage.getItem('selectedPlayerAsset');
-            const savedName = localStorage.getItem('selectedPlayerName');
-            const displayContainer = document.getElementById('active-player-display');
+        function updateLifeUI(val) {
+            document.getElementById('p-life').innerText = val;
+            document.getElementById('npc-banner-life').innerText = `${val} / 100 HP`;
+        }
 
-            if (savedAsset && savedName) {
-                if (savedAsset.endsWith('.mp4')) {
-                    displayContainer.innerHTML = `<video autoplay loop muted><source src="${savedAsset}" type="video/mp4"></video><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">${savedName}</p>`;
+        function playCombatVideo(videoFile) {
+            const vid = document.getElementById('combat-video');
+            vid.src = videoFile;
+            vid.play().catch(e => {});
+            logMessage(`Switching view: ${videoFile}`);
+        }
+
+        function triggerBorderChaosMission() {
+            let coins = parseInt(document.getElementById('p-coins').innerText);
+            let confirmMission = confirm("🚨 URGENT MISSION: Chaos has erupted at the sovereign border! Two rebel block opponents are raiding the outpost. Pay 10 Gold tribute to mobilize your soldiers and fight?");
+            
+            if (confirmMission) {
+                if (coins >= 10) {
+                    coins -= 10;
+                    document.getElementById('p-coins').innerText = coins;
+                    logMessage('Border Mission Accepted! Paid 10 Gold tribute. Two rebel opponents engaged in block combat.');
+                    
+                    playCombatVideo('assets-video-war-combat.mp4');
+                    
+                    setTimeout(() => {
+                        let rewardCoins = 100;
+                        let rewardSoldiers = 8;
+                        let totalCoins = parseInt(document.getElementById('p-coins').innerText) + rewardCoins;
+                        let totalSoldiers = parseInt(document.getElementById('p-soldiers').innerText) + rewardSoldiers;
+                        
+                        document.getElementById('p-coins').innerText = totalCoins;
+                        document.getElementById('p-soldiers').innerText = totalSoldiers;
+                        
+                        showModal('VICTORY!', `✦ BORDER WAR CONQUERED! ✦\nYou successfully defeated the 2 rebel block opponents in fierce combat!\n\nRewards Claimed:\n+${rewardCoins} Gold 🪙\n+${rewardSoldiers} Soldiers Enlisted 🛡️`, 'var(--gold)', false);
+                        logMessage('Border mission victory! War cinematic played and rewards secured.');
+                    }, 5000);
                 } else {
-                    displayContainer.innerHTML = `<img src="${savedAsset}" alt="Equipped Player"><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">${savedName}</p>`;
+                    alert("You require at least 10 Gold to mobilize for the Border Chaos mission!");
+                    logMessage('Border Mission Failed: Insufficient gold.');
                 }
-                logMessage(`Loaded equipped champion: ${savedName}`);
             } else {
-                displayContainer.innerHTML = `<img src="player-1-come-free.png" alt="Default Player"><p style="font-size:0.55rem; color:#ffd700; margin:2px 0;">Vanguard (Default)</p>`;
+                logMessage('Border Mission declined.');
             }
         }
 
         function openMarket() {
-            const vid = document.getElementById('combat-video');
-            vid.src = "market-buy-supplies.mp4";
-            vid.play().catch(e => {});
+            playCombatVideo('market-buy-supplies.mp4');
             let coins = parseInt(document.getElementById('p-coins').innerText);
             if (coins >= 2) {
                 coins -= 2;
@@ -534,53 +578,47 @@
                 document.getElementById('p-soldiers').innerText = soldiers;
                 logMessage('Market Transaction: Purchased goods (-2 Gold, +3 Soldier strength).');
             } else {
-                logMessage('Market: Insufficient Gold to purchase supplies!');
+                logMessage('Market: Insufficient Gold!');
             }
         }
 
         function openForest() {
             const now = Date.now();
             if (now < forestCooldownEnd) {
-                const remainingSecs = Math.ceil((forestCooldownEnd - now) / 1000);
-                const mins = Math.floor(remainingSecs / 60);
-                const secs = remainingSecs % 60;
-                logMessage(`Forest Cooldown: You still have ${mins} minutes and ${secs} seconds remaining before you can return to the forest!`);
+                logMessage(`Forest is on cooldown. Please wait.`);
                 return;
             }
-
-            const vid = document.getElementById('combat-video');
-            vid.src = "forest-gather-supplied.mp4";
-            vid.play().catch(e => {});
-            
+            playCombatVideo('forest-gather-supplied.mp4');
             let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 5;
             document.getElementById('p-soldiers').innerText = soldiers;
-            logMessage('Forest Foraging: Successfully collected free apples and mushrooms (+5 soldier morale)!');
-            
-            forestCooldownEnd = Date.now() + 300000; // 5-minute cool-off timer
+            logMessage('Forest Foraging: Collected supplies (+5 soldiers)!');
+            forestCooldownEnd = Date.now() + 300000;
         }
 
         function recruitSoldiers() {
             let soldiers = parseInt(document.getElementById('p-soldiers').innerText) + 2;
             document.getElementById('p-soldiers').innerText = soldiers;
-            logMessage('Recruiting Camp: New soldiers enlisted (+2).');
+            logMessage('Recruiting Camp: New soldiers enlisted (+2) via assets-video-recruitment-camp.mp4.');
         }
 
-        function playCombatVideo(videoFile) {
-            const vid = document.getElementById('combat-video');
-            vid.src = videoFile;
-            vid.play().catch(e => {});
-            logMessage(`Switching screen view: ${videoFile}`);
+        function playWarCampaign() {
+            playCombatVideo('assets-video-war-combat.mp4');
+            logMessage('War Campaign engaged: Multiple group blocks colliding!');
+            setTimeout(() => {
+                showModal('VICTORY', 'War Campaign won! Group blocks successfully conquered enemy lines.', 'var(--gold)', false);
+                let coins = parseInt(document.getElementById('p-coins').innerText) + 200;
+                document.getElementById('p-coins').innerText = coins;
+            }, 6000);
         }
 
-        function triggerMouseSlash(event) {
+        function triggerBlockSlash(event) {
             const stage = document.getElementById('combat-stage');
             stage.classList.add('shake-fx');
             setTimeout(() => stage.classList.remove('shake-fx'), 400);
 
-            let lifeElem = document.getElementById('p-life');
-            let currentLife = parseInt(lifeElem.innerText);
-            currentLife = Math.max(10, currentLife - 5);
-            lifeElem.innerText = currentLife;
+            let currentLife = parseInt(document.getElementById('p-life').innerText);
+            currentLife = Math.max(0, currentLife - 5);
+            updateLifeUI(currentLife);
 
             const rect = stage.getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -594,48 +632,62 @@
             stage.appendChild(dmgIndicator);
             setTimeout(() => dmgIndicator.remove(), 800);
 
-            logMessage('Commander slash executed! Enemy forces impacted.');
+            logMessage('Gold hammer strike landed on red rebel block!');
 
-            setTimeout(() => {
-                currentLife = Math.min(100, currentLife + 8);
-                lifeElem.innerText = currentLife;
-            }, 600);
+            if (currentLife <= 0) {
+                triggerDefeat();
+            }
         }
 
-        function engageWarBattle() {
-            const vid = document.getElementById('combat-video');
-            vid.src = "assets-video-war-combat.mp4";
-            vid.play().catch(e => {});
-            logMessage('Engaged Big Boss & Rebellion war forces!');
+        function engageBigBossBattle() {
+            playCombatVideo('big-boss-cinematic.mp4');
+            logMessage('Engaged Big Boss & Rebellion forces!');
 
             setTimeout(() => {
                 let lifeVal = parseInt(document.getElementById('p-life').innerText);
-                if (lifeVal < 35) {
-                    vid.src = "neighbour-villian-rebbelian.mp4";
-                    vid.play().catch(e => {});
-                    logMessage('Prime Minister intervenes: "Maybe we lost this time, but next time we will definitely win!"');
-                    showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d');
+                if (lifeVal < 40) {
+                    playCombatVideo('neighboor-villian-rebbelian.mp4');
+                    logMessage('Villain speaks: "Maybe we lost this time, but next time we will definitely win!"');
+                    showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d', true);
                 } else {
-                    showModal('VICTORY', 'Rebellion defeated! Earned reputation, gold, and rare card drop!', 'var(--gold)');
+                    playCombatVideo('assets-video-arena-combat.mp4');
+                    showModal('VICTORY', 'Big Boss defeated! Earned +150 Gold and advanced to the next stage.', 'var(--gold)', false);
+                    let coins = parseInt(document.getElementById('p-coins').innerText) + 150;
+                    document.getElementById('p-coins').innerText = coins;
                 }
             }, 6000);
         }
 
-        function activateCard(cardName, effectDesc) {
-            const flash = document.getElementById('flash-overlay');
-            flash.style.opacity = '1';
-            setTimeout(() => flash.style.opacity = '0', 400);
-
-            let lifeElem = document.getElementById('p-life');
-            lifeElem.innerText = '100';
-
-            logMessage(`Divine Card Triggered: [${cardName}] - Effect: ${effectDesc}. Life span fully restored.`);
+        function triggerDefeat() {
+            playCombatVideo('neighboor-villian-rebbelian.mp4');
+            showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d', true);
         }
 
-        function showModal(title, text, color) {
+        function revivePlayer() {
+            let coins = parseInt(document.getElementById('p-coins').innerText);
+            if (coins >= 50) {
+                coins -= 50;
+                document.getElementById('p-coins').innerText = coins;
+                updateLifeUI(100);
+                document.getElementById('modal-overlay').style.display = 'none';
+                logMessage('Revived using 50 Gold! Back into the battle.');
+            } else {
+                alert("You need at least 50 Gold to revive!");
+            }
+        }
+
+        function showModal(title, text, color, isDefeat) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-title').style.color = color;
             document.getElementById('modal-text').innerText = text;
+            
+            const reviveBtn = document.getElementById('revive-btn');
+            if (isDefeat) {
+                reviveBtn.style.display = 'block';
+            } else {
+                reviveBtn.style.display = 'none';
+            }
+            
             document.getElementById('modal-overlay').style.display = 'flex';
         }
 
@@ -645,5 +697,3 @@
     </script>
 </body>
 </html>
-
-```
