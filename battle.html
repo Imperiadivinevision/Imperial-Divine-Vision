@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +54,6 @@
             font-weight: bold;
         }
 
-        /* Fighting Arena Layout */
         .arcade-container {
             max-width: 1100px;
             margin: 10px auto;
@@ -66,7 +64,6 @@
             box-shadow: 0 0 40px rgba(0,0,0,0.9);
         }
 
-        /* HUD Health & Energy Bars */
         .hud-arena {
             display: flex;
             justify-content: space-between;
@@ -107,7 +104,6 @@
             transition: width 0.1s ease;
         }
 
-        /* Interactive Canvas Fighting Stage */
         #fight-canvas {
             width: 100%;
             height: 400px;
@@ -118,7 +114,6 @@
             cursor: crosshair;
         }
 
-        /* Action Move Controls */
         .control-deck {
             display: flex;
             justify-content: center;
@@ -178,10 +173,9 @@
     </div>
 
     <div class="arcade-container">
-        <!-- HUD -->
         <div class="hud-arena">
             <div class="fighter-hud">
-                <div>PLAYER (Sovereign Guardian)</div>
+                <div>PLAYER (King Benson / Sovereign Guardian)</div>
                 <div class="health-bar-frame"><div id="player-hp"></div></div>
             </div>
             <div style="font-size: 1.2rem; color: var(--gold); font-weight: bold;">VS</div>
@@ -191,10 +185,8 @@
             </div>
         </div>
 
-        <!-- Canvas Stage where actual fighting happens -->
         <canvas id="fight-canvas" width="1000" height="400"></canvas>
 
-        <!-- Command Deck Buttons -->
         <div class="control-deck">
             <button class="fight-btn" onclick="playerAttack('slash')">⚔️ Sword Slash (J)</button>
             <button class="fight-btn" onclick="playerAttack('heavy')">🔥 Divine Strike (K)</button>
@@ -203,7 +195,7 @@
         </div>
 
         <div class="battle-ticker" id="ticker">
-            [Match Start]: Use buttons or keyboard controls to fight the rebel boss! Avoid incoming attacks.
+            [Match Start]: Use buttons or keyboard controls to fight the rebel boss with your characters!
         </div>
     </div>
 
@@ -211,8 +203,15 @@
         const canvas = document.getElementById('fight-canvas');
         const ctx = canvas.getContext('2d');
 
-        let player = { x: 150, y: 250, width: 50, height: 90, hp: 100, maxHp: 100, color: '#00ffcc', attacking: false, blocking: false };
-        let boss = { x: 750, y: 240, width: 60, height: 100, hp: 200, maxHp: 200, color: '#ff4d4d', attacking: false };
+        // Load Character Images (Replace these URLs/filenames with your actual character artwork files)
+        const playerImg = new Image();
+        playerImg.src = 'king-benson.png'; // Put your character image file name here
+
+        const bossImg = new Image();
+        bossImg.src = 'rebel-boss.png'; // Put your boss image file name here
+
+        let player = { x: 150, y: 220, width: 80, height: 110, hp: 100, maxHp: 100, attacking: false, blocking: false };
+        let boss = { x: 730, y: 210, width: 90, height: 120, hp: 200, maxHp: 200, attacking: false };
         
         let gameState = "FIGHT"; // FIGHT, WIN, LOSE
         let particles = [];
@@ -240,11 +239,10 @@
             
             setTimeout(() => player.attacking = false, 200);
 
-            // Check collision range
-            if (Math.abs(player.x - boss.x) < 120) {
+            if (Math.abs(player.x - boss.x) < 130) {
                 boss.hp = Math.max(0, boss.hp - dmg);
-                logFight(type === 'slash' ? "Direct sword slash hits the rebel boss!" : "Powerful Divine Strike lands hard!");
-                createSpark(boss.x, boss.y + 40, '#ffd700');
+                logFight(type === 'slash' ? "King Benson strikes with a direct sword slash!" : "Divine Strike hits the rebel boss hard!");
+                createSpark(boss.x + 45, boss.y + 50, '#ffd700');
                 checkWinCondition();
             } else {
                 logFight("Attack missed! Boss is out of range.");
@@ -259,12 +257,10 @@
 
         function bossAI() {
             if (gameState !== "FIGHT") return;
-            // Simple boss behavior: moves toward player and attacks
             if (Math.random() < 0.03) {
-                if (boss.x > player.x + 80) boss.x -= 15;
-                else if (boss.x < player.x - 80) boss.x += 15;
+                if (boss.x > player.x + 90) boss.x -= 15;
+                else if (boss.x < player.x - 90) boss.x += 15;
                 else {
-                    // Boss attacks player
                     boss.attacking = true;
                     setTimeout(() => boss.attacking = false, 300);
 
@@ -274,7 +270,7 @@
                         let bDmg = Math.floor(Math.random() * 10) + 5;
                         player.hp = Math.max(0, player.hp - bDmg);
                         logFight(`Rebel boss strikes back! You took ${bDmg} damage.`);
-                        createSpark(player.x, player.y + 40, '#ff4d4d');
+                        createSpark(player.x + 40, player.y + 50, '#ff4d4d');
                         checkWinCondition();
                     }
                 }
@@ -304,7 +300,7 @@
                 logFight("VICTORY! The rebel forces have been crushed!");
             } else if (player.hp <= 0) {
                 gameState = "LOSE";
-                logFight("DEFEAT! The Sovereign fell in battle.");
+                logFight("DEFEAT! King Benson fell in battle.");
             }
         }
 
@@ -312,21 +308,20 @@
             player.hp = player.maxHp;
             boss.hp = boss.maxHp;
             player.x = 150;
-            boss.x = 750;
+            boss.x = 730;
             gameState = "FIGHT";
             logFight("New match started. Fight!");
         }
 
         function gameLoop() {
-            // Update
             if (gameState === "FIGHT") {
                 bossAI();
             }
 
-            // Render Arena
+            // Render Arena Background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw Arena Floor
+            // Draw Arena Floor & Pillars
             ctx.fillStyle = "#161222";
             ctx.fillRect(0, 330, canvas.width, 70);
             ctx.strokeStyle = "#D4AF37";
@@ -336,24 +331,35 @@
             ctx.lineTo(canvas.width, 330);
             ctx.stroke();
 
-            // Draw Player Fighter
-            ctx.fillStyle = player.blocking ? "#3399ff" : player.color;
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-            // Player Sword effect if attacking
+            // Draw Player Character (Image if loaded, fallback rectangle if loading)
+            if (playerImg.complete && playerImg.naturalWidth !== 0) {
+                ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+            } else {
+                ctx.fillStyle = player.blocking ? "#3399ff" : "#00ffcc";
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+            }
+
+            // Player Attack Effect
             if (player.attacking) {
                 ctx.fillStyle = "#fff";
-                ctx.fillRect(player.x + 40, player.y + 20, 50, 10);
+                ctx.fillRect(player.x + 60, player.y + 30, 60, 12);
             }
 
-            // Draw Boss Fighter
-            ctx.fillStyle = boss.color;
-            ctx.fillRect(boss.x, boss.y, boss.width, boss.height);
+            // Draw Boss Character (Image if loaded, fallback rectangle if loading)
+            if (bossImg.complete && bossImg.naturalWidth !== 0) {
+                ctx.drawImage(bossImg, boss.x, boss.y, boss.width, boss.height);
+            } else {
+                ctx.fillStyle = "#ff4d4d";
+                ctx.fillRect(boss.x, boss.y, boss.width, boss.height);
+            }
+
+            // Boss Attack Effect
             if (boss.attacking) {
                 ctx.fillStyle = "#ff0";
-                ctx.fillRect(boss.x - 40, boss.y + 30, 40, 10);
+                ctx.fillRect(boss.x - 50, boss.y + 40, 50, 12);
             }
 
-            // Draw Particles
+            // Draw Particles / Sparks
             for (let i = particles.length - 1; i >= 0; i--) {
                 let p = particles[i];
                 ctx.fillStyle = p.color;
@@ -364,12 +370,12 @@
                 if (p.life <= 0) particles.splice(i, 1);
             }
 
-            // Draw Game State text if over
+            // Draw Game State Overlays
             if (gameState !== "FIGHT") {
                 ctx.fillStyle = "rgba(0,0,0,0.8)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = gameState === "WIN" ? "#D4AF37" : "#ff4d4d";
-                ctx.font = "bold 40px Cinzel, sans-serif";
+                ctx.font = "bold 40px sans-serif";
                 ctx.textAlign = "center";
                 ctx.fillText(gameState === "WIN" ? "VICTORY ACHIEVED" : "DEFEAT", canvas.width / 2, canvas.height / 2);
             }
@@ -380,4 +386,3 @@
     </script>
 </body>
 </html>
-
