@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: 32-Stage Interactive Gameplay Chamber</title>
+    <title>Sovereign Empire: Ultimate Tactical Gameplay Chamber</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,13 +14,19 @@
             --dark-bg: #070908;
             --card-bg: rgba(17, 23, 21, 0.95);
             --text-light: #f5f2eb;
-            --glow-gold: 0 0 30px rgba(212, 175, 55, 0.7);
+            --glow-gold: 0 0 35px rgba(212, 175, 55, 0.8);
+        }
+
+        @keyframes bgShift {
+            0% { background-color: #070908; }
+            50% { background-color: #120b18; }
+            100% { background-color: #070908; }
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--dark-bg);
+            animation: bgShift 15s ease infinite;
             color: var(--text-light);
             font-family: 'Cinzel', serif;
             overflow-x: hidden;
@@ -150,11 +156,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, #121c18, #080d0b);
+            background: linear-gradient(135deg, #18221e, #0b1411);
             border: 2px solid var(--gold);
             border-radius: 8px;
             padding: 15px;
-            min-height: 180px;
+            min-height: 200px;
             position: relative;
             overflow: hidden;
         }
@@ -168,6 +174,19 @@
             color: var(--gold);
             margin: 5px 0;
             font-size: 1rem;
+        }
+
+        .fighter-avatar {
+            font-size: 2.2rem;
+            margin: 8px 0;
+            filter: drop-shadow(0 0 10px var(--gold));
+            animation: pulseAvatar 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseAvatar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
         }
 
         .health-bar-container {
@@ -227,8 +246,8 @@
             background: linear-gradient(135deg, var(--gold), #aa820a);
             color: #0b0f0e;
             border: 1px solid #fff;
-            padding: 8px;
-            font-size: 0.75rem;
+            padding: 10px;
+            font-size: 0.8rem;
             font-weight: 900;
             border-radius: 6px;
             cursor: pointer;
@@ -317,9 +336,9 @@
     <!-- Tutorial & Instructions Modal on Start -->
     <div id="modal-overlay">
         <div id="modal-content">
-            <h1>⚔️ 32-Stage Combat Chamber Guide</h1>
+            <h1>⚔️ Ultimate Tactical Guide</h1>
             <p>
-                Welcome to the ultimate tactical arena! Prepare your forces across 32 progressive campaign stages.<br><br>
+                Welcome to the infinite tactical arena! Your fighter evolves from a block into a powerful warrior across mysterious progressive campaign stages.<br><br>
                 <strong>Controls & Actions:</strong><br>
                 🔹 <strong>Left Click / Key:</strong> Execute a powerful Kick attack.<br>
                 🔹 <strong>Right Click / Key:</strong> Dodge incoming boss attacks.<br>
@@ -327,12 +346,12 @@
                 🔹 <strong>Phoenix Eagle & Divine Soul Cards:</strong> Invoke sacred power & divine skills!<br>
                 🔹 <strong>Imperial Pharmacy:</strong> Purchase healing potions with Gold.
             </p>
-            <button class="btn" onclick="closeTutorialModal()">Begin Battle 🛡️</button>
+            <button class="btn" onclick="closeTutorialModal()" style="background: linear-gradient(135deg, var(--gold), #aa820a); color: #0b0f0e; font-weight: 900; padding: 12px; cursor: pointer;">Begin Battle 🛡️</button>
         </div>
     </div>
 
     <header>
-        <h1>Sovereign Empire: Gameplay Chamber (32 Stages)</h1>
+        <h1>Sovereign Empire: Ultimate Gameplay Chamber</h1>
     </header>
 
     <div class="nav-bar">
@@ -347,8 +366,8 @@
         <div class="sidebar-panel">
             <h3>Imperial Status</h3>
             <div style="font-size: 0.8rem; line-height: 1.5;">
-                Stage: <span id="lbl-stage" style="color: var(--gold); font-weight: 900;">1</span> / 32<br>
-                Gold Coins: <span id="lbl-coins" class="hud-gold" style="color: var(--gold-bright); font-weight: 900;">1000</span> 🪙<br>
+                Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Whispering Shadows</span><br>
+                Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">1000</span> 🪙<br>
                 Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">50</span> 🛡️
             </div>
 
@@ -358,17 +377,18 @@
 
             <h3>Tactical Upgrades</h3>
             <button class="btn btn-combat" onclick="upgradeShield()">Upgrade Shield (+25) [100 Gold]</button>
-            <a href="battle.html" class="btn" style="text-decoration: none; background: #222; color: var(--gold); border-color: var(--gold);">Back to Arena Hub</a>
+            <a href="battle.html" class="btn" style="text-decoration: none; background: #222; color: var(--gold); border-color: var(--gold); text-align: center; display: block;">Back to Arena Hub</a>
         </div>
 
         <!-- Center: Arena Display & Action Cards -->
         <div class="arena-screen" id="main-arena-box">
-            <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 1.1rem; text-transform: uppercase;">Stage 1: Vanguard Rebel Boss</h2>
+            <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 1.1rem; text-transform: uppercase;">Campaign Battle Arena</h2>
             
             <div class="combatants-arena">
-                <!-- Player Box -->
+                <!-- Player Box with Evolving Form -->
                 <div class="fighter-box">
                     <h4 id="player-name-lbl">Sovereign Guardian</h4>
+                    <div class="fighter-avatar" id="player-avatar-icon">🟩</div>
                     <div style="font-size: 0.75rem; color: #55bbff;">HP: <span id="player-hp-text">100</span>/100</div>
                     <div class="health-bar-container">
                         <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 100%;"></div>
@@ -377,9 +397,10 @@
 
                 <div class="vs-badge">VS</div>
 
-                <!-- Boss Box -->
+                <!-- Boss Box with Evolving Form -->
                 <div class="fighter-box">
                     <h4 id="boss-name-lbl">Rebel Vanguard</h4>
+                    <div class="fighter-avatar" id="boss-avatar-icon">🟥</div>
                     <div style="font-size: 0.75rem; color: #ff6666;">Energy: <span id="boss-hp-text">100</span>/100</div>
                     <div class="health-bar-container">
                         <div class="health-bar-fill" id="boss-hp-bar" style="width: 100%;"></div>
@@ -387,7 +408,7 @@
                 </div>
             </div>
 
-            <!-- Action Cards Grid (Including Phoenix Eagle & Divine Soul Cards) -->
+            <!-- Action Cards Grid -->
             <h3 style="color: var(--gold); margin: 0; font-size: 0.8rem; text-transform: uppercase;">Tactical & Divine Cards</h3>
             <div class="action-cards-grid">
                 <div class="action-card" onclick="playerAction('kick')">
@@ -413,7 +434,7 @@
             </div>
 
             <div class="battle-log" id="gameplay-log">
-                [Gameplay Chamber Ready]: Tutorial reviewed. Choose your combat card or use keyboard/mouse to fight across 32 stages!
+                [Gameplay Chamber Ready]: Tutorial reviewed. Choose your combat card or use keyboard/mouse to fight!
             </div>
 
             <div class="credits-footer">
@@ -424,7 +445,6 @@
     </div>
 
     <script>
-        // Web Audio Sound FX Generator
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
             if (!audioCtx) return;
@@ -434,7 +454,14 @@
             osc.connect(gain);
             gain.connect(audioCtx.destination);
 
-            if (type === 'hit') {
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.08);
+            } else if (type === 'hit') {
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(140, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.15);
@@ -455,18 +482,32 @@
                 gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
                 gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.4);
+            } else if (type === 'victory') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.5);
             }
         }
 
-        // Gameplay State (32 Stages)
         let game = {
             stage: parseInt(localStorage.getItem('sovereign_stage')) || 1,
             coins: parseInt(localStorage.getItem('sovereign_coins')) || 1000,
             playerHp: parseInt(localStorage.getItem('sovereign_life')) || 100,
             shieldPower: 50,
             bossMaxHp: 100,
-            bossHp: 100
+            bossHp: 100,
+            maxStages: 50
         };
+
+        const tierNames = [
+            "Whispering Shadows", "Iron Citadel", "The Crimson Pass", "Border Marches", "Shattered Valley",
+            "Obsidian Keep", "Temple of Echoes", "Ebon Gate", "Storm Peak", "The Unknown Throne",
+            "Void Outpost", "Abyssal Trench", "Titan's Rest", "Solar Bastion", "Dreadnought Hull",
+            "Rebel Stronghold", "Shadow Spire", "Eclipse Ridge", "Inferno Forge", "The Final Apex"
+        ];
 
         const bossNames = [
             "Vanguard Rebel", "Shadow Enforcer", "District Warlord", "Rebellion General", "Iron Vanguard",
@@ -474,7 +515,7 @@
             "Crimson Zealot", "Void Lieutenant", "Abyssal Guard", "Obsidian Brute", "Ebon Champion",
             "Dreadnought Sentinel", "Rebel Overlord", "Phantom Assassin", "Titan Guardian", "Stormbringer",
             "Infernal General", "Solar Eclipse Boss", "Royal Traitor", "Imperial Warlord", "Supreme Rebel Leader",
-            "Dark Sovereign", "Shadow Monarch", "Apocalypse Herald", "Eternal Reaver", "World Breaker", "The Final Rebellion Boss"
+            "Dark Sovereign", "Shadow Monarch", "Apocalypse Herald", "Eternal Reaver", "World Breaker", "The Eternal Sovereign Boss"
         ];
 
         window.onload = function() {
@@ -483,10 +524,12 @@
         };
 
         function closeTutorialModal() {
+            playSound('click');
             document.getElementById('modal-overlay').style.display = 'none';
         }
 
         function toggleFullScreen() {
+            playSound('click');
             const body = document.body;
             const fsBtn = document.getElementById('fsToggleBtn');
             body.classList.toggle('is-chamber-fullscreen');
@@ -500,22 +543,45 @@
         }
 
         function initStage() {
-            game.bossMaxHp = 80 + (game.stage * 30);
+            game.bossMaxHp = 80 + (game.stage * 20);
             game.bossHp = game.bossMaxHp;
             let currentBossTitle = bossNames[(game.stage - 1) % bossNames.length];
-            document.getElementById('boss-title').innerText = `Stage ${game.stage} / 32: ${currentBossTitle}`;
+            let tierTitle = tierNames[(game.stage - 1) % tierNames.length];
+            
+            document.getElementById('lbl-stage-name').innerText = tierTitle;
+            document.getElementById('boss-title').innerText = `Campaign Tier: ${tierTitle} — Facing ${currentBossTitle}`;
             document.getElementById('boss-name-lbl').innerText = currentBossTitle;
-            logMsg(`Entering Stage ${game.stage}: Facing ${currentBossTitle} (Strength Tier ${game.stage})!`);
+            
+            updateFighterAvatars();
+            logMsg(`Entering Campaign Stage ${game.stage} (${tierTitle}): Facing ${currentBossTitle}!`);
             updateDOM();
         }
 
+        function updateFighterAvatars() {
+            const playerAvatar = document.getElementById('player-avatar-icon');
+            const bossAvatar = document.getElementById('boss-avatar-icon');
+
+            // Fighter evolution: Blocks -> Blocks with Arms -> Blocks with Legs -> Full Warrior
+            if (game.stage < 10) {
+                playerAvatar.innerText = "🟦"; // Basic fighting block
+                bossAvatar.innerText = "🟥";
+            } else if (game.stage < 20) {
+                playerAvatar.innerText = "🦾🟦"; // Block with arms
+                bossAvatar.innerText = "🦾🟥";
+            } else if (game.stage < 35) {
+                playerAvatar.innerText = "🤺🟦"; // Block with legs & fighting stance
+                bossAvatar.innerText = "🤺🟥";
+            } else {
+                playerAvatar.innerText = "🛡️⚔️👑"; // Fully armored legendary warrior
+                bossAvatar.innerText = "🗡️🔥👹";
+            }
+        }
+
         function updateDOM() {
-            document.getElementById('lbl-stage').innerText = game.stage;
             document.getElementById('lbl-coins').innerText = game.coins;
             document.getElementById('lbl-shield').innerText = game.shieldPower;
             
             document.getElementById('player-hp-text').innerText = game.playerHp;
-            document.getElementById('player-hp-bar'].style?.width = `${Math.max(0, game.playerHp)}%`;
             document.getElementById('player-hp-bar').style.width = `${Math.max(0, game.playerHp)}%`;
 
             document.getElementById('boss-hp-text').innerText = `${game.bossHp}/${game.bossMaxHp}`;
@@ -534,6 +600,7 @@
         }
 
         function playerAction(type) {
+            playSound('click');
             const arena = document.getElementById('main-arena-box');
             arena.classList.add('shake-fx');
             setTimeout(() => arena.classList.remove('shake-fx'), 400);
@@ -566,27 +633,26 @@
                 logMsg(`✨ Divine Soul Card activated! God's grace restored +${healAmt} HP.`);
             }
 
-            // Check Boss Defeat
             if (game.bossHp <= 0) {
-                let reward = 60 * game.stage;
+                playSound('victory');
+                let reward = 50 * game.stage;
                 game.coins += reward;
-                logMsg(`🎉 Stage ${game.stage} Conquered! Earned +${reward} Gold Coins.`);
-                alert(`✦ VICTORY! Stage ${game.stage} Completed! Earned +${reward} Gold Coins. ✦`);
+                logMsg(`🎉 Campaign Tier Conquered! Earned +${reward} Gold Coins.`);
+                alert(`✦ VICTORY! Boss Defeated! Earned +${reward} Gold Coins. ✦`);
                 
-                if (game.stage < 32) {
+                if (game.stage < game.maxStages) {
                     game.stage++;
                     initStage();
                 } else {
-                    alert("👑 MAGNIFICENT VICTORY! You have conquered all 32 Stages and saved the Sovereign Empire!");
+                    alert("👑 MAGNIFICENT VICTORY! You have conquered all 50 mystical tiers and saved the Sovereign Empire!");
                     game.stage = 1;
                     initStage();
                 }
             } else {
-                // Progressive Boss Auto-AI Turn & Skills
                 setTimeout(() => {
                     let bossSkills = ['Divine Flame Surge 🔥', 'Shadow Strike ⚔️', 'Imperium Tempest ⚡', 'Rebel Crush 🛡️'];
                     let chosenSkill = bossSkills[Math.floor(Math.random() * bossSkills.length)];
-                    let bossDmg = 10 + (game.stage * 4);
+                    let bossDmg = 10 + (game.stage * 3);
 
                     if (type === 'shield') {
                         bossDmg = Math.max(3, bossDmg - game.shieldPower);
@@ -608,6 +674,7 @@
         }
 
         function buyPotion(type, cost, healAmt) {
+            playSound('click');
             if (game.coins >= cost) {
                 game.coins -= cost;
                 game.playerHp = Math.min(100, game.playerHp + healAmt);
@@ -616,11 +683,12 @@
                 alert(`✦ Imperial Pharmacy: Successfully purchased potion! +${healAmt} HP restored. ✦`);
                 updateDOM();
             } else {
-                alert("Insufficient Gold Coins! Win battles in the stages to earn more gold.");
+                alert("Insufficient Gold Coins! Win battles to earn more gold.");
             }
         }
 
         function upgradeShield() {
+            playSound('click');
             if (game.coins >= 100) {
                 game.coins -= 100;
                 game.shieldPower += 25;
@@ -633,7 +701,6 @@
             }
         }
 
-        // Mouse and Keyboard support for quick action
         window.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft' || e.key === 'a') playerAction('kick');
             else if (e.key === 'ArrowRight' || e.key === 'd') playerAction('dodge');
