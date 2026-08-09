@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Active Tactical & Visual Effects Arena</title>
+    <title>Sovereign Empire: Active Walking Combat Arena</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -82,7 +82,7 @@
         header h1 {
             color: var(--gold);
             margin: 0;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
@@ -143,10 +143,9 @@
             box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
             min-height: 280px;
             overflow: hidden;
-            transition: background-color 0.3s ease;
         }
 
-        /* Special Visual Notification Light Flash Overlays */
+        /* Visual Light Flash Overlays */
         .arena-flash-shield {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -174,30 +173,50 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            padding: 0 40px;
+            padding: 0 50px;
             z-index: 5;
+            height: 180px;
         }
 
         .fighter-lane {
             text-align: center;
-            transition: transform 0.2s ease-out;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
         }
 
-        .fighter-avatar {
-            font-size: 4rem;
-            margin: 10px 0;
-            filter: drop-shadow(0 0 15px var(--gold));
-            animation: pulseAvatar 2s infinite ease-in-out;
+        /* Active Moving Block Avatars */
+        .fighter-block {
+            width: 70px;
+            height: 90px;
+            background: linear-gradient(135deg, #33bbff, #005588);
+            border: 3px solid #fff;
+            border-radius: 8px;
+            margin: 10px auto;
+            box-shadow: 0 0 20px rgba(51, 187, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
         }
 
-        @keyframes pulseAvatar {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .boss-block {
+            width: 70px;
+            height: 90px;
+            background: linear-gradient(135deg, #ff4d4d, #880000);
+            border: 3px solid #fff;
+            border-radius: 8px;
+            margin: 10px auto;
+            box-shadow: 0 0 20px rgba(255, 77, 77, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
         }
 
         .health-bar-container {
-            width: 220px;
+            width: 200px;
             background: #222;
             border: 2px solid var(--gold);
             height: 16px;
@@ -302,7 +321,6 @@
         }
         .btn:hover { background: #fff; color: #0b0f0e; box-shadow: 0 0 15px var(--gold); }
 
-        /* Modal Overlay for Pre-Battle Allocation */
         #modal-overlay {
             display: flex;
             position: fixed;
@@ -357,8 +375,8 @@
     <!-- Pre-Battle Point Allocation Modal -->
     <div id="modal-overlay">
         <div id="modal-content">
-            <h1 id="modal-header-title">🛡️ Pre-Battle Point Allocation</h1>
-            <p id="modal-desc">
+            <h1>🛡️ Pre-Battle Point Allocation</h1>
+            <p>
                 Allocate your Gold Coins to strengthen your forces before the enemy approaches! Choose wisely to survive the encounter.
             </p>
             <div id="allocation-controls">
@@ -379,7 +397,7 @@
     </div>
 
     <header>
-        <h1>Sovereign Empire: Active Tactical Arena</h1>
+        <h1>Sovereign Empire: Active Walking Combat Arena</h1>
     </header>
 
     <div class="nav-bar">
@@ -398,17 +416,16 @@
         </div>
 
         <div class="massive-arena-screen" id="main-arena-box">
-            <!-- Special Visual Effect Overlays -->
             <div class="arena-flash-shield" id="flash-shield"></div>
             <div class="arena-flash-strike" id="flash-strike"></div>
 
             <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 1.1rem; text-transform: uppercase; text-align: center; z-index: 5;">Campaign Battle Arena</h2>
             
             <div class="combatants-widescreen">
-                <!-- Player Lane with Active Marching -->
+                <!-- Player Active Marching Block -->
                 <div class="fighter-lane" id="player-lane" style="transform: translateX(0px);">
                     <h4 id="player-name-lbl" style="color: var(--gold); margin: 0;">Sovereign Guardian</h4>
-                    <div class="fighter-avatar" id="player-avatar-icon">🟩</div>
+                    <div class="fighter-block" id="player-avatar-block">⚔️</div>
                     <div style="font-size: 0.8rem; color: #55bbff;">HP: <span id="player-hp-text">100</span>/100</div>
                     <div class="health-bar-container">
                         <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 100%;"></div>
@@ -417,10 +434,10 @@
 
                 <div class="vs-badge">VS</div>
 
-                <!-- Boss Lane with Active Marching -->
+                <!-- Boss Active Marching Block -->
                 <div class="fighter-lane" id="boss-lane" style="transform: translateX(0px);">
                     <h4 id="boss-name-lbl" style="color: var(--gold); margin: 0;">Rebel Vanguard</h4>
-                    <div class="fighter-avatar" id="boss-avatar-icon">🟥</div>
+                    <div class="boss-block" id="boss-avatar-block">🛡️</div>
                     <div style="font-size: 0.8rem; color: #ff6666;">Energy: <span id="boss-hp-text">100</span>/100</div>
                     <div class="health-bar-container">
                         <div class="health-bar-fill" id="boss-hp-bar" style="width: 100%;"></div>
@@ -429,7 +446,7 @@
             </div>
 
             <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.8rem; z-index: 5;" id="arena-action-status">
-                Arena active. Choose your tactical card or use keyboard keys!
+                Arena active. Blocks are marching and ready for combat!
             </div>
         </div>
 
@@ -437,7 +454,7 @@
             <div class="action-cards-grid">
                 <div class="action-card" onclick="playerAction('kick')">
                     <h4>⚔️ Kick Strike</h4>
-                    <p>March & attack enemy.</p>
+                    <p>Walk & attack enemy.</p>
                 </div>
                 <div class="action-card" onclick="playerAction('shield')">
                     <h4>🛡️ Deploy Shield</h4>
@@ -458,7 +475,7 @@
             </div>
 
             <div class="battle-log" id="gameplay-log">
-                [Active Widescreen Chamber Ready]: Visual flash effects and point allocation active!
+                [Active Walking Arena Ready]: LocalStorage and automated marching synchronized!
             </div>
 
             <div class="credits-footer">
@@ -602,28 +619,8 @@
             document.getElementById('boss-title').innerText = `Campaign Tier: ${tierTitle} — Facing ${currentBossTitle}`;
             document.getElementById('boss-name-lbl').innerText = currentBossTitle;
             
-            updateFighterAvatars();
             logMsg(`Entering Stage ${game.stage} (${tierTitle}): Facing ${currentBossTitle}!`);
             updateDOM();
-        }
-
-        function updateFighterAvatars() {
-            const playerAvatar = document.getElementById('player-avatar-icon');
-            const bossAvatar = document.getElementById('boss-avatar-icon');
-
-            if (game.stage < 10) {
-                playerAvatar.innerText = "🟦";
-                bossAvatar.innerText = "🟥";
-            } else if (game.stage < 20) {
-                playerAvatar.innerText = "🦾🟦";
-                bossAvatar.innerText = "🦾🟥";
-            } else if (game.stage < 35) {
-                playerAvatar.innerText = "🤺🟦";
-                bossAvatar.innerText = "🤺🟥";
-            } else {
-                playerAvatar.innerText = "🛡️⚔️👑";
-                bossAvatar.innerText = "🗡️🔥👹";
-            }
         }
 
         function updateDOM() {
@@ -660,26 +657,26 @@
             }
         }
 
-        function animateActiveMarch(actionType) {
+        function animateWalkingCombat(actionType) {
             const playerLane = document.getElementById('player-lane');
             const bossLane = document.getElementById('boss-lane');
             const statusLbl = document.getElementById('arena-action-status');
             
             if (actionType === 'forward') {
-                playerLane.style.transform = 'translateX(70px)';
-                bossLane.style.transform = 'translateX(-30px)';
-                statusLbl.innerText = "Sovereign Guardian marches forward, swinging arms to strike!";
+                playerLane.style.transform = 'translateX(90px)';
+                bossLane.style.transform = 'translateX(-50px)';
+                statusLbl.innerText = "Sovereign Guardian block walks forward and strikes!";
                 setTimeout(() => {
                     playerLane.style.transform = 'translateX(0px)';
                     bossLane.style.transform = 'translateX(0px)';
-                }, 350);
+                }, 400);
             } else if (actionType === 'dodge') {
-                playerLane.style.transform = 'translateX(-60px)';
-                statusLbl.innerText = "Tactical Dodge! Stepping aside to evade incoming blow.";
-                setTimeout(() => playerLane.style.transform = 'translateX(0px)', 350);
+                playerLane.style.transform = 'translateX(-70px)';
+                statusLbl.innerText = "Tactical Dodge! Stepping aside.";
+                setTimeout(() => playerLane.style.transform = 'translateX(0px)', 400);
             } else if (actionType === 'shield') {
-                statusLbl.innerText = "Shield deployed! Shimmering light barrier blocks the incoming assault.";
-                setTimeout(() => statusLbl.innerText = "Arena active. Choose your tactical card or use keyboard keys!", 1500);
+                statusLbl.innerText = "Shield deployed! Energy barrier shimmering with light.";
+                setTimeout(() => statusLbl.innerText = "Arena active. Blocks are marching and ready for combat!", 1500);
             }
         }
 
@@ -694,27 +691,27 @@
             if (type === 'kick') {
                 playSound('hit');
                 triggerVisualEffect('strike');
-                animateActiveMarch('forward');
+                animateWalkingCombat('forward');
                 playerDmg = 18 + (game.stage * 2);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                logMsg(`Player marched forward & executed Kick Strike! Dealt -${playerDmg} DMG.`);
+                logMsg(`Player block walked forward & executed Kick Strike! Dealt -${playerDmg} DMG.`);
             } else if (type === 'shield') {
                 playSound('shield');
                 triggerVisualEffect('shield');
-                animateActiveMarch('shield');
+                animateWalkingCombat('shield');
                 game.shieldPower += 15;
                 logMsg(`Shield deployed! Defense reinforced to ${game.shieldPower}.`);
             } else if (type === 'dodge') {
                 playSound('hit');
                 triggerVisualEffect('strike');
-                animateActiveMarch('dodge');
+                animateWalkingCombat('dodge');
                 playerDmg = 15;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 logMsg(`Tactical Dodge successful! Counter-attack dealt -${playerDmg} DMG.`);
             } else if (type === 'phoenix') {
                 playSound('divine');
                 triggerVisualEffect('strike');
-                animateActiveMarch('forward');
+                animateWalkingCombat('forward');
                 playerDmg = 35 + (game.stage * 3);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 logMsg(`🦅 Phoenix Eagle Card invoked! Blazing fire strike dealt -${playerDmg} DMG!`);
