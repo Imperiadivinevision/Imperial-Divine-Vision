@@ -3,134 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help a Traveler - Alpha Empire</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Help a Traveler & Village Pleas | Imperial Divine Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --royal-purple: #1a0822;
-            --imperial-crimson: #36080e;
-            --gold-accent: #f3e5ab;
-            --gold-shine: #ffd700;
-            --dark-bg: #07040a;
+        @keyframes cosmicGlow {
+            0% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.1) saturate(1.2); }
+            100% { filter: brightness(1) saturate(1); }
         }
 
-        * { box-sizing: border-box; }
+        :root {
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(14, 20, 18, 0.96);
+            --theme-color: #ffd700;
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
+        }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--gold-accent);
-            font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #07040a, #1a0822, #36080e, #07040a);
-            background-size: 400% 400%;
-            animation: ancientFloor 18s ease infinite;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            background: var(--bg-dark);
             min-height: 100vh;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            animation: cosmicGlow 12s ease-in-out infinite alternate;
         }
 
-        @keyframes ancientFloor {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        .top-nav-bar {
+        /* YouTube-Style Fullscreen Toggle Button */
+        .fullscreen-toggle-btn {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(7, 4, 10, 0.92);
-            border-bottom: 2px double var(--gold-shine);
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 4000;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            padding: 15px 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px var(--theme-color);
+        }
+
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen h1,
+        body.is-chamber-fullscreen .subtitle {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .interactive-overlay-panel,
+        body.is-chamber-fullscreen .cinematic-stage {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            border: none !important;
+            height: 100vh !important;
+        }
+
+        nav { 
+            padding: 10px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            backdrop-filter: blur(8px);
+        }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+        nav a:hover { color: var(--theme-color); }
+
+        .cinematic-stage {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 70vh;
+            margin: 20px auto;
+            border: 4px ridge var(--theme-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 0 60px rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
         }
 
-        .top-nav-bar a {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            text-transform: uppercase;
+        .cinematic-stage video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .top-nav-bar a:hover {
-            color: var(--gold-shine);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-            transform: scale(1.05);
+        .interactive-overlay-panel {
+            display: none;
+            max-width: 1050px;
+            width: 92%;
+            margin: 20px auto;
+            background: var(--panel-bg);
+            border: 4px ridge var(--theme-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 70px rgba(0,0,0,0.95);
         }
 
-        .chamber-container {
-            max-width: 800px;
-            margin: 140px auto 60px auto;
-            background: rgba(28, 24, 20, 0.95);
-            border: 2px solid var(--gold-shine);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        .village-hud {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 40, 25, 0.85);
+            border: 2px solid var(--theme-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 0.82rem;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
-        h1 {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-shine);
-            letter-spacing: 3px;
-            margin-top: 0;
-        }
-
-        p {
-            color: #e6d5c3;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
+        .village-hud span { color: #ffe875; font-weight: bold; }
 
         .royal-btn {
-            background: #181410;
-            color: var(--gold-shine);
-            border: 1px solid var(--gold-shine);
-            padding: 12px 20px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 25px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            text-decoration: none;
-            display: block;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
-
-        .royal-btn:hover {
-            background: var(--gold-shine);
-            color: #12100e;
+            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 10px 22px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
             font-weight: bold;
-            box-shadow: 0 0 15px var(--gold-shine);
+            cursor: pointer;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+            margin: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
+        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; transform: translateY(-1px); }
     </style>
 </head>
-<body>
+<body onload="initTravelerExperience()">
 
-    <nav class="top-nav-bar">
-        <a href="index.html">Home 🏛️</a>
-        <a href="character-workshop.html">Workshop 👤</a>
-        <a href="feudal-registry.html">Registry 🏰</a>
-        <a href="room-youth.html">Proving Grounds 🛡️</a>
+    <!-- Soft Lullaby Audio Element -->
+    <audio id="chamber-lullaby-audio" loop>
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- YouTube-Style Fullscreen Expand / Decrease Button -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
+
+    <nav> 
+        <a href="index.html">🏠 Home</a>
+        <a href="library.html">📚 Library</a>
+        <a href="map.html">🗺️ Empire Map</a>
+        <a href="village.html">🏛️ Guild Chambers</a>
+        <a href="help-traveler.html">🤝 Help a Traveler</a>
     </nav>
 
-    <div class="chamber-container">
-        <h1>Help a Traveler</h1>
-        <p>Rare grace-triggered missions unfold here. Every traveler who enters your domain carries an opportunity to show mercy, offer a helping hand, and unlock secret paths within the empire.</p>
-        <p><em>Your heart is light. The path of grace provides.</em></p>
-        <a href="room-youth.html" class="royal-btn">Return to Proving Grounds</a>
+    <h1 style="color: var(--theme-color); font-size: 2.2rem; margin: 15px 0 5px 0; text-shadow: 0 0 15px rgba(255,215,0,0.4);">Help a Traveler — Village of Ikmid Plea</h1>
+    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 15px;">
+        Listen to the visiting villager's personal testimony from Ikmid, then review and accept her request.
+    </p>
+
+    <!-- Cinematic Video Stage (Village Woman's Plea) -->
+    <div class="cinematic-stage" id="stage-container">
+        <!-- You can name or upload the village woman's plea video here -->
+        <video id="master-cinematic-video" controls autoplay onended="onCinematicFinished()">
+            <source src="village-woman-plea.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
+    <!-- Interactive Panel Unlocks After Video Finishes -->
+    <div class="interactive-overlay-panel" id="interactive-panel">
+        <h2 style="color: #79ff9c; margin-top: 0; font-size: 1.8rem; text-transform: uppercase;">The Village of Ikmid Mission</h2>
+        
+        <div class="village-hud">
+            <div>Adventurer: <span id="ui-adventurer">Traveler</span></div>
+            <div>Imperial Wallet: <span id="ui-coins">0</span> 🪙</div>
+            <div>Royal Tax Vault: <span id="ui-tax">0</span> 🪙</div>
+        </div>
+
+        <div style="background: rgba(4,10,8,0.92); border: 2px solid rgba(121,255,156,0.5); padding: 22px; border-radius: 10px; text-align: left; margin-top: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);">
+            <h3 style="color: var(--theme-color); margin-top:0;">🧑‍🌾 Villager Testimony: "Greetings, brave traveler. I am from the village of Ikmid. Our families require immediate assistance and provisions. Will you aid us?"</h3>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; line-height: 1.6;">
+                <strong>Objective:</strong> Gather vital supplies from the <a href="shop.html" style="color:#ffd700;">Market Stalls</a> or forage in the <a href="wilderness.html" style="color:#ffd700;">Wilderness Forest</a> to support the villagers of Ikmid.
+            </p>
+            <button class="royal-btn" onclick="acceptIkmidQuest()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">📦 Accept Ikmid Relief Quest (Gross: 250 | Tax: -25 | Net: 225 Coins + Ikmid Token)</button>
+        </div>
+
+        <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <button class="royal-btn" onclick="replayCinematic()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Villager Plea Video</button>
+            <a href="village.html" class="royal-btn" style="background: linear-gradient(135deg, #0066cc, #003366); font-size: 0.75rem;">🏛️ Return to Guild Chambers</a>
+            <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ Return to Empire Map</a>
+        </div>
+    </div>
+
+    <script>
+        let playerState = {
+            coins: 500,
+            treasuryTaxCollected: 0,
+            adventurerName: "Traveler",
+            inventory: []
+        };
+
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Exit Fullscreen";
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Toggle Fullscreen Mode";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+
+        function initTravelerExperience() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            if (saved) {
+                let parsed = JSON.parse(saved);
+                playerState.coins = parsed.coins !== undefined ? parsed.coins : 500;
+                playerState.treasuryTaxCollected = parsed.treasuryTaxCollected || 0;
+                playerState.adventurerName = parsed.adventurerName || "Traveler";
+                playerState.inventory = parsed.inventory || [];
+            }
+
+            document.getElementById('ui-coins').innerText = playerState.coins;
+            document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
+            document.getElementById('ui-adventurer').innerText = playerState.adventurerName;
+        }
+
+        function onCinematicFinished() {
+            document.getElementById('stage-container').style.display = 'none';
+            document.getElementById('interactive-panel').style.display = 'block';
+
+            const audio = document.getElementById('chamber-lullaby-audio');
+            if (audio) {
+                audio.volume = 0.35;
+                audio.play().catch(e => {});
+            }
+        }
+
+        function replayCinematic() {
+            const audio = document.getElementById('chamber-lullaby-audio');
+            if (audio) { audio.pause(); }
+
+            document.getElementById('interactive-panel').style.display = 'none';
+            const stage = document.getElementById('stage-container');
+            stage.style.display = 'flex';
+            
+            const video = document.getElementById('master-cinematic-video');
+            video.currentTime = 0;
+            video.play();
+        }
+
+        function acceptIkmidQuest() {
+            let gross = 250;
+            let tax = Math.floor(gross * 0.10);
+            let net = gross - tax;
+            let item = "Ikmid Relief Token";
+
+            playerState.coins += net;
+            playerState.treasuryTaxCollected += tax;
+            if(!playerState.inventory) playerState.inventory = [];
+            playerState.inventory.push(item);
+
+            syncStorage();
+
+            document.getElementById('ui-coins').innerText = playerState.coins;
+            document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
+
+            alert(`✦ Ikmid Quest Fulfilled! ✦\n\n- Gross Reward: ${gross} Coins\n- Royal Tax (10% to Vault): -${tax} Coins\n- Net Payout to Wallet: ${net} Coins\n- Unique Item Secured: ${item}\n\n[Local Storage & Tax Vault Synced]`);
+        }
+
+        function syncStorage() {
+            let saved = localStorage.getItem('imperial_sanctuary_user');
+            let parsed = saved ? JSON.parse(saved) : {};
+            parsed.coins = playerState.coins;
+            parsed.treasuryTaxCollected = playerState.treasuryTaxCollected;
+            parsed.adventurerName = playerState.adventurerName;
+            parsed.inventory = playerState.inventory;
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
+        }
+    </script>
 </body>
 </html>
