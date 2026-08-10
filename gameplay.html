@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Fully Interactive Master Edition</title>
+    <title>Sovereign Empire: 3D Canvas Master Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,6 +35,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            perspective: 1200px;
         }
 
         body.is-chamber-fullscreen .blueprint-container {
@@ -77,6 +78,7 @@
             background: linear-gradient(180deg, #18221e, #0b0f0e);
             border-bottom: 3px ridge var(--gold);
             box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            z-index: 50;
         }
 
         header h1 {
@@ -98,6 +100,7 @@
             font-size: 0.75rem;
             font-weight: bold;
             text-transform: uppercase;
+            z-index: 50;
         }
 
         .nav-bar a {
@@ -118,6 +121,7 @@
             box-sizing: border-box;
             height: calc(100vh - 100px);
             transition: all 0.3s ease;
+            transform-style: preserve-3d;
         }
 
         .left-cards-deck {
@@ -130,6 +134,7 @@
             gap: 8px;
             overflow-y: auto;
             box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+            transform: translateZ(20px);
         }
 
         .left-cards-deck h3 {
@@ -142,6 +147,7 @@
             padding-bottom: 4px;
         }
 
+        /* 3D Rotating & Tilting Blueprint Cards */
         .blueprint-card {
             background: linear-gradient(145deg, #004488, #002244);
             border: 2px solid var(--gold);
@@ -149,13 +155,14 @@
             padding: 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4);
             position: relative;
+            transform-style: preserve-3d;
         }
 
         .blueprint-card:hover {
-            transform: translateY(-6px) scale(1.03);
+            transform: translateY(-6px) scale(1.04) translateZ(30px);
             background: linear-gradient(145deg, #0066cc, #003366);
             box-shadow: var(--glow-blue), var(--glow-gold);
             border-color: #fff;
@@ -170,6 +177,7 @@
             flex-direction: column;
             gap: 10px;
             height: 100%;
+            transform: translateZ(10px);
         }
 
         .top-light-bar {
@@ -184,9 +192,10 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
 
+        /* 3D Perspective Arena Screen & Interactive Canvas Layer */
         .massive-arena-screen {
             flex: 1;
-            background: rgba(10, 15, 13, 0.96);
+            background: rgba(10, 15, 13, 0.92);
             border: 3px ridge var(--gold);
             border-radius: 10px;
             padding: 15px;
@@ -194,8 +203,23 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.9), 0 15px 40px rgba(0,0,0,0.8);
             overflow: hidden;
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.3s ease;
+        }
+        .massive-arena-screen:hover {
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
         }
 
         .arena-flash-shield {
@@ -227,12 +251,12 @@
             color: #ff4d4d;
             text-shadow: 0 0 15px #000, 0 0 25px #ff0000;
             pointer-events: none;
-            z-index: 20;
+            z-index: 30;
             animation: floatUp 0.8s ease-out forwards;
         }
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-60px) scale(1.4); opacity: 0; }
+            0% { transform: translateY(0) scale(1) translateZ(50px); opacity: 1; }
+            100% { transform: translateY(-60px) scale(1.4) translateZ(80px); opacity: 0; }
         }
 
         .arena-header-status {
@@ -275,9 +299,10 @@
             transition: transform 0.25s ease-in-out;
         }
 
+        /* 3D Fighter Cards */
         .fighter-block {
-            width: 95px;
-            height: 130px;
+            width: 90px;
+            height: 125px;
             background: linear-gradient(135deg, #0066cc, #002244);
             border: 3px solid var(--gold);
             border-radius: 12px;
@@ -287,13 +312,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             position: relative;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
         }
         .fighter-block:hover {
-            transform: translateY(-8px) scale(1.08);
+            transform: translateY(-8px) scale(1.08) translateZ(40px);
             border-color: #fff;
             box-shadow: 0 0 35px #00ffaa, var(--glow-gold);
         }
@@ -307,11 +333,11 @@
             border-color: #55ff88;
             box-shadow: var(--glow-emerald);
         }
-        .fighter-block span { font-size: 0.6rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
+        .fighter-block span { font-size: 0.55rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
 
         .boss-block {
-            width: 95px;
-            height: 130px;
+            width: 90px;
+            height: 125px;
             background: linear-gradient(135deg, #cc0000, #440000);
             border: 3px solid var(--gold);
             border-radius: 12px;
@@ -321,12 +347,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             position: relative;
             transition: transform 0.3s ease;
+            transform-style: preserve-3d;
         }
         .boss-block.ai-attacking {
-            transform: scale(1.1) rotate(3deg);
+            transform: scale(1.1) rotate(3deg) translateZ(30px);
             box-shadow: 0 0 40px #ff0000;
         }
         .boss-block.red-green-enemy {
@@ -334,7 +361,7 @@
             border-color: #33ff77;
             box-shadow: var(--glow-emerald);
         }
-        .boss-block span { font-size: 0.6rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
+        .boss-block span { font-size: 0.55rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
 
         .health-bar-container {
             width: 100%;
@@ -373,6 +400,7 @@
             color: #79ff9c;
             border-radius: 6px;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
+            z-index: 5;
         }
 
         .credits-footer {
@@ -383,6 +411,7 @@
             font-style: italic;
             border-top: 1px dashed var(--gold);
             padding-top: 3px;
+            z-index: 5;
         }
 
         .btn {
@@ -417,7 +446,7 @@
             100% { background: linear-gradient(135deg, #031a14, #010b08); border-color: #D4AF37; }
         }
 
-        #modal-overlay, #guide-modal-overlay, #warning-modal-overlay, #defeat-modal-overlay, #victory-modal-overlay {
+        #modal-overlay, #guide-modal-overlay, #defeat-modal-overlay, #victory-modal-overlay {
             display: flex;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -429,7 +458,7 @@
             backdrop-filter: blur(10px);
         }
 
-        #modal-content, #guide-modal-content, #warning-modal-content, #defeat-modal-content, #victory-modal-content {
+        #modal-content, #guide-modal-content, #defeat-modal-content, #victory-modal-content {
             animation: modalBgShift 8s ease infinite;
             border: 3px solid var(--gold);
             padding: 35px;
@@ -440,8 +469,8 @@
             box-shadow: 0 0 60px rgba(0, 255, 150, 0.4);
         }
 
-        #modal-content h1, #guide-modal-content h1, #warning-modal-content h1, #defeat-modal-content h1, #victory-modal-content h1 { font-size: 1.6rem; margin: 0 0 10px 0; color: var(--gold); text-transform: uppercase; }
-        #modal-content p, #guide-modal-content p, #warning-modal-content p, #defeat-modal-content p, #victory-modal-content p { font-size: 0.85rem; line-height: 1.5; color: var(--text-light); font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: left; }
+        #modal-content h1, #guide-modal-content h1, #defeat-modal-content h1, #victory-modal-content h1 { font-size: 1.6rem; margin: 0 0 10px 0; color: var(--gold); text-transform: uppercase; }
+        #modal-content p, #guide-modal-content p, #defeat-modal-content p, #victory-modal-content p { font-size: 0.85rem; line-height: 1.5; color: var(--text-light); font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: left; }
 
         .current-status-dashboard {
             display: flex;
@@ -538,7 +567,7 @@
         <div id="victory-modal-content">
             <h1 style="color: var(--gold-bright); font-size: 2rem; text-shadow: 0 0 25px var(--gold);">✨ VICTORY! EPIC TRIUMPH ✨</h1>
             <p style="text-align: center;">
-                Your strategic brilliance triumphed over the enemy AI's calculation! All stats securely saved to local storage. Proceed to the next stage.
+                Your tactical brilliance in 3D space triumphed over the smart enemy AI! Proceed smoothly to the next stage.
             </p>
             <div class="current-status-dashboard">
                 <div class="status-item">
@@ -557,31 +586,20 @@
         </div>
     </div>
 
-    <!-- Enemy Surprise Warning Modal -->
-    <div id="warning-modal-overlay" style="display: none;">
-        <div id="warning-modal-content">
-            <h1 id="warning-title" style="color: #ff4d4d;">⚠️ SMART AI ENEMY AMBUSH! ⚠️</h1>
-            <p id="warning-desc" style="text-align: center;">
-                The enemy AI is analyzing your card deck and ready to calculate tactical counters across all stages!
-            </p>
-            <button class="btn" onclick="closeWarningModal()" style="padding: 10px 25px; font-size: 0.85rem; margin-top: 10px;">Engage Smart AI ⚔️</button>
-        </div>
-    </div>
-
     <!-- How To Play Guide Modal -->
     <div id="guide-modal-overlay">
         <div id="guide-modal-content">
-            <h1>📜 Sovereign Arena: Smart AI Guide</h1>
+            <h1>📜 Sovereign Arena: 3D Master Edition</h1>
             <p>
-                <strong>Welcome to Sovereign AI Battle!</strong> Click any card on your left deck or arena board to switch stances and trigger active moves. All states and enemy turns are saved in Local Storage!
+                <strong>Welcome to the 3D Perspective Chamber!</strong> Experience true depth with tiltable cards, dynamic particle bursts on every strike, and expanding card slots as you level up!
             </p>
             <p>
-                1. <strong>Interactive Card Switching:</strong> Click cards to launch specific attacks and switch stances.
+                1. <strong>3D Tilt Perspective:</strong> Hover over cards and arenas to view them in 3D space.
             </p>
             <p>
-                2. <strong>Smart AI Calculations:</strong> The enemy adapts its card choices dynamically.
+                2. <strong>Canvas Particle Engine:</strong> Magic spark effects trigger automatically on attacks.
             </p>
-            <button class="btn" onclick="closeGuideModal()" style="margin-top: 10px; padding: 10px 25px; font-size: 0.85rem;">Proceed to Point Allocation 🛡️</button>
+            <button class="btn" onclick="closeGuideModal()" style="margin-top: 10px; padding: 10px 25px; font-size: 0.85rem;">Enter the Arena ⚔️</button>
         </div>
     </div>
 
@@ -595,8 +613,8 @@
 
             <div class="current-status-dashboard">
                 <div class="status-item">
-                    <span class="status-label">Campaign Tier</span>
-                    <span class="status-value" id="alloc-tier">Level 1</span>
+                    <span class="status-label">Campaign Stage</span>
+                    <span class="status-value" id="alloc-tier">Stage 1</span>
                 </div>
                 <div class="status-item">
                     <span class="status-label">Current HP</span>
@@ -630,7 +648,7 @@
     </div>
 
     <header>
-        <h1>Sovereign Empire: Smart AI & Local Storage Edition</h1>
+        <h1>Sovereign Empire: 3D Canvas Master Edition</h1>
     </header>
 
     <div class="nav-bar">
@@ -687,6 +705,9 @@
             </div>
 
             <div class="massive-arena-screen" id="main-arena-box">
+                <!-- Particle Canvas Layer for 2.5D Magic Explosions -->
+                <canvas id="particle-canvas"></canvas>
+
                 <div class="arena-flash-shield" id="flash-shield"></div>
                 <div class="arena-flash-strike" id="flash-strike"></div>
 
@@ -701,7 +722,7 @@
 
                     <div style="text-align: center;">
                         <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 0.8rem; text-transform: uppercase;">Vanguard Rebel</h2>
-                        <div id="boss-intent" style="font-size: 0.65rem; color: #ff9933; font-family: 'Playfair Display', serif;">🧠 Smart AI Tactical Calculation</div>
+                        <div id="boss-intent" style="font-size: 0.65rem; color: #ff9933; font-family: 'Playfair Display', serif;">🧠 Smart 3D AI Calculator</div>
                     </div>
 
                     <div class="combatant-status-box">
@@ -720,11 +741,11 @@
                 </div>
 
                 <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.75rem; z-index: 5;" id="arena-action-status">
-                    Smart AI battle active. Click any card to switch actions & strike!
+                    3D Perspective & Canvas Particle Engine active. Click cards to trigger magical FX!
                 </div>
 
                 <div class="battle-log" id="gameplay-log">
-                    [Local Storage Synchronized]: Smart AI card switching online.
+                    [3D Master Edition Synchronized]: Particle engine and perspective chamber online.
                 </div>
 
                 <div class="credits-footer">
@@ -744,6 +765,69 @@
                 audioCtx.resume();
             }
         }, { once: true });
+
+        // Canvas Particle Engine for 2.5D Magic Explosions
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('load', resizeCanvas);
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = (Math.random() - 0.5) * 10;
+                this.speedY = (Math.random() - 0.5) * 10;
+                this.life = 1.0;
+                this.decay = Math.random() * 0.03 + 0.02;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function triggerParticleBurst(isPlayerSide, type) {
+            resizeCanvas();
+            const x = isPlayerSide ? canvas.width * 0.3 : canvas.width * 0.7;
+            const y = canvas.height * 0.5;
+            const color = type === 'shield' ? '#00ffaa' : (type === 'thunder' ? '#ffe600' : '#ff4d4d');
+            
+            for (let i = 0; i < 35; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.life <= 0) {
+                    particles.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
 
         function playAmbientMusic() {
             if (!audioCtx) return;
@@ -846,7 +930,7 @@
             shieldPower: parseInt(localStorage.getItem('sovereign_shield')) || 25,
             bossMaxHp: parseInt(localStorage.getItem('sovereign_bossmaxhp')) || 160,
             bossHp: parseInt(localStorage.getItem('sovereign_bosshp')) || 160,
-            maxStages: 50,
+            maxStages: 99,
             unlockedCards: JSON.parse(localStorage.getItem('sovereign_unlocked')) || ['thunder']
         };
 
@@ -875,14 +959,15 @@
         };
 
         function getPlayerCardCount() {
-            if (game.stage >= 7) return 3;
-            if (game.stage >= 3) return 2;
+            if (game.stage >= 15) return 4;
+            if (game.stage >= 8) return 3;
+            if (game.stage >= 4) return 2;
             return 1;
         }
 
         function getEnemyCount() {
-            if (game.stage >= 9) return 3;
-            if (game.stage >= 4) return 2;
+            if (game.stage >= 12) return 3;
+            if (game.stage >= 5) return 2;
             return 1;
         }
 
@@ -891,18 +976,20 @@
             let eCount = getEnemyCount();
 
             let playerHTML = '';
-            // Array of actions to let users switch between active cards
-            const availableActions = ['kick', 'shield', 'dodge', 'phoenix', 'soul'];
-            
+            const actionTypes = ['kick', 'shield', 'dodge', 'phoenix', 'soul', 'thunder'];
+            const icons = ['⚔️', '🛡️', '💨', '🦅', '✨', '⚡'];
+            const labels = ['Guardian', 'Gold Shield', 'Dodge Stance', 'Phoenix', 'Divine Soul', 'Thunder'];
+
             for (let i = 1; i <= pCards; i++) {
-                let cardClass = (i === 2) ? 'gold-shield' : (i === 3 ? 'red-green' : '');
-                let icon = (i === 2) ? '🛡️' : (i === 3 ? '🦅' : '⚔️');
-                let label = (i === 2) ? 'Gold Shield' : (i === 3 ? 'Phoenix Guard' : 'Guardian');
-                let actionType = (i === 2) ? 'shield' : (i === 3 ? 'phoenix' : 'kick');
+                let cardClass = (i === 2) ? 'gold-shield' : (i >= 3 ? 'red-green' : '');
+                let idx = (i - 1) % actionTypes.length;
+                let actionType = actionTypes[idx];
+                let icon = icons[idx];
+                let label = labels[idx];
 
                 playerHTML += `
                     <div class="fighter-lane">
-                        <div class="fighter-block ${cardClass}" onclick="playerAction('${actionType}')" title="Click to Switch Stance & Attack!">
+                        <div class="fighter-block ${cardClass}" onclick="playerAction('${actionType}')" title="Click Card to Switch & Attack!">
                             ${icon}
                             <span>${label}</span>
                         </div>
@@ -942,7 +1029,7 @@
 
         function openAllocationModal() {
             let tierTitle = tierNames[(game.stage - 1) % tierNames.length];
-            document.getElementById('alloc-tier').innerText = `${tierTitle} (Stage ${game.stage})`;
+            document.getElementById('alloc-tier').innerText = `Stage ${game.stage} (${tierTitle})`;
             document.getElementById('alloc-hp').innerText = game.playerHp;
             document.getElementById('alloc-shield').innerText = game.shieldPower;
             document.getElementById('alloc-coins').innerText = game.coins;
@@ -1035,19 +1122,19 @@
         }
 
         function initStage() {
-            game.bossMaxHp = 120 + (game.stage * 25);
-            if (!localStorage.getItem('sovereign_bosshp')) {
+            game.bossMaxHp = 110 + (game.stage * 22);
+            if (!localStorage.getItem('sovereign_bosshp') || parseInt(localStorage.getItem('sovereign_bosshp')) <= 0) {
                 game.bossHp = game.bossMaxHp;
             }
             let currentBossTitle = bossNames[(game.stage - 1) % bossNames.length];
             let tierTitle = tierNames[(game.stage - 1) % tierNames.length];
             
-            document.getElementById('lbl-stage-name').innerText = tierTitle;
+            document.getElementById('lbl-stage-name').innerText = `${tierTitle} (Lvl ${game.stage})`;
             document.getElementById('boss-title').innerText = currentBossTitle;
-            document.getElementById('boss-name-lbl').innerText = `${currentBossTitle} Smart AI Alliance`;
+            document.getElementById('boss-name-lbl').innerText = `${currentBossTitle} Smart AI`;
             
             setupBattleFieldLayout();
-            logMsg(`Entering Stage ${game.stage} (${tierTitle}): Card switching & Smart AI online.`);
+            logMsg(`Stage ${game.stage} engaged. Active Player Cards: ${getPlayerCardCount()}`);
             updateDOM();
         }
 
@@ -1131,7 +1218,7 @@
                 renderUnlockedCards();
                 openAllocationModal();
             } else {
-                alert("🌟 LEGENDARY SOVEREIGN VICTORY! You have conquered all 50 mystical tiers!");
+                alert("🌟 LEGENDARY SOVEREIGN VICTORY! You have conquered all secret tiers!");
                 game.stage = 1;
                 localStorage.removeItem('sovereign_bosshp');
                 initStage();
@@ -1151,36 +1238,34 @@
                     setTimeout(() => aiCardEl.classList.remove('ai-attacking'), 400);
                 }
 
-                let baseAiDmg = 14 + (game.stage * 4);
+                let baseAiDmg = 12 + (game.stage * 3);
                 let aiActionType = Math.random();
 
-                if (game.shieldPower > 40 && aiActionType < 0.5) {
+                if (game.shieldPower > 35 && aiActionType < 0.5) {
                     playSound('thunder');
                     triggerVisualEffect('strike');
-                    baseAiDmg += 22;
-                    logMsg(`🧠 Smart AI calculated your high shield! Piercing Strike executed for -${baseAiDmg} DMG.`);
-                } else if (aiActionType < 0.4) {
+                    triggerParticleBurst(true, 'thunder');
+                    baseAiDmg += 18;
+                    logMsg(`🧠 Smart AI pierced your shield for -${baseAiDmg} DMG!`);
+                } else if (aiActionType < 0.5) {
                     playSound('hit');
                     triggerVisualEffect('strike');
-                    baseAiDmg += 12;
-                    logMsg(`🧠 Smart AI executed Calculated Shadow Strike for -${baseAiDmg} DMG.`);
-                } else if (aiActionType < 0.75) {
-                    playSound('thunder');
-                    triggerVisualEffect('thunder');
-                    baseAiDmg += 16;
-                    logMsg(`🧠 Smart AI unleashed Tactical Vanguard Burst for -${baseAiDmg} DMG.`);
+                    triggerParticleBurst(true, 'hit');
+                    baseAiDmg += 10;
+                    logMsg(`🧠 Smart AI executed Shadow Strike for -${baseAiDmg} DMG.`);
                 } else {
                     playSound('shield');
                     triggerVisualEffect('shield');
-                    baseAiDmg = Math.max(5, baseAiDmg - Math.floor(game.shieldPower / 2));
-                    logMsg(`🧠 Smart AI fortified its armor and counter-calculated for -${baseAiDmg} DMG.`);
+                    triggerParticleBurst(true, 'shield');
+                    baseAiDmg = Math.max(4, baseAiDmg - Math.floor(game.shieldPower / 3));
+                    logMsg(`🧠 Smart AI fortified and counter-calculated for -${baseAiDmg} DMG.`);
                 }
 
                 game.playerHp = Math.max(0, game.playerHp - baseAiDmg);
                 showFloatingDmg(`-${baseAiDmg}`, true);
                 updateDOM();
                 checkDefeat();
-            }, 600);
+            }, 500);
         }
 
         function playerAction(type) {
@@ -1195,59 +1280,52 @@
             if (type === 'kick') {
                 playSound('hit');
                 triggerVisualEffect('strike');
+                triggerParticleBurst(false, 'hit');
                 playerDmg += 15;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg}`, false);
-                logMsg(`Kick Strike executed! Dealt -${playerDmg} DMG.`);
+                logMsg(`Kick Strike dealt -${playerDmg} DMG.`);
             } else if (type === 'shield') {
                 playSound('shield');
                 triggerVisualEffect('shield');
-                game.shieldPower += 25;
-                playerDmg += 15;
+                triggerParticleBurst(false, 'shield');
+                game.shieldPower += 20;
+                playerDmg += 12;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                showFloatingDmg(`+25 Shield & -${playerDmg}`, true);
-                logMsg(`Deploy Shield activated! Reinforced shield & dealt -${playerDmg} counter DMG.`);
+                showFloatingDmg(`+20 Shield & -${playerDmg}`, true);
+                logMsg(`Deploy Shield activated! Shield boosted & dealt -${playerDmg} DMG.`);
             } else if (type === 'dodge') {
                 playSound('hit');
                 triggerVisualEffect('strike');
-                playerDmg += 20;
+                triggerParticleBurst(false, 'hit');
+                playerDmg += 18;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg} 💨`, false);
-                logMsg(`Tactical Dodge counter-attack dealt -${playerDmg} DMG.`);
+                logMsg(`Tactical Dodge counter-dealt -${playerDmg} DMG.`);
             } else if (type === 'phoenix') {
                 playSound('divine');
                 triggerVisualEffect('strike');
-                playerDmg = 55 + (game.stage * 4);
+                triggerParticleBurst(false, 'thunder');
+                playerDmg = 50 + (game.stage * 4);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg} 🔥`, false);
-                logMsg(`🦅 Phoenix Eagle soaring strike burned enemy ranks for -${playerDmg} DMG!`);
+                logMsg(`🦅 Phoenix Eagle strike burned enemy for -${playerDmg} DMG!`);
             } else if (type === 'soul') {
                 playSound('divine');
                 triggerVisualEffect('shield');
-                let healAmt = 50;
+                triggerParticleBurst(false, 'shield');
+                let healAmt = 40;
                 game.playerHp = Math.min(100, game.playerHp + healAmt);
                 showFloatingDmg(`+${healAmt} HP ✨`, true);
-                logMsg(`✨ Divine Soul holy grace restored +${healAmt} HP.`);
+                logMsg(`✨ Divine Soul restored +${healAmt} HP.`);
             } else if (type === 'thunder') {
                 playSound('thunder');
                 triggerVisualEffect('thunder');
-                playerDmg = 75 + (game.stage * 5);
+                triggerParticleBurst(false, 'thunder');
+                playerDmg = 70 + (game.stage * 5);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg} ⚡`, false);
-                logMsg(`⚡ Thunder God's Wrath struck enemy ranks for -${playerDmg} DMG!`);
-            } else if (type === 'solar') {
-                playSound('divine');
-                triggerVisualEffect('strike');
-                playerDmg = 65 + (game.stage * 4);
-                game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                showFloatingDmg(`-${playerDmg} ☀️`, false);
-                logMsg(`☀️ Solar Flare Slash blinded enemy for -${playerDmg} DMG!`);
-            } else if (type === 'frost') {
-                playSound('shield');
-                triggerVisualEffect('shield');
-                game.shieldPower += 40;
-                showFloatingDmg(`+40 Shield ❄️`, true);
-                logMsg(`❄️ Glacial Aegis reinforced shield to ${game.shieldPower}.`);
+                logMsg(`⚡ Thunder God's Wrath struck for -${playerDmg} DMG!`);
             }
 
             updateDOM();
@@ -1261,7 +1339,7 @@
                 document.getElementById('victory-reward').innerText = `+${reward} 🪙`;
                 document.getElementById('victory-total-coins').innerText = `${game.coins} 🪙`;
                 document.getElementById('victory-modal-overlay').style.display = 'flex';
-                logMsg(`🎉 Stage Conquered! Earned +${reward} Gold Coins. Data saved.`);
+                logMsg(`🎉 Stage Conquered! Earned +${reward} Gold Coins.`);
             } else {
                 triggerSmartAITurn();
             }
