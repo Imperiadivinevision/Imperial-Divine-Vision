@@ -54,7 +54,6 @@
             box-shadow: 0 0 25px var(--gold);
         }
 
-        /* YouTube Player Style Bottom-Right Fullscreen Square */
         .yt-stage-fs-btn {
             position: absolute;
             bottom: 12px;
@@ -286,7 +285,34 @@
             top: 0; left: 0;
         }
 
-        /* Interactive Clickable Hotspot Squares Over Market & Wilderness */
+        /* Powerful Cinematic Script Overlay Banner on Stage */
+        .cinematic-script-overlay {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            background: rgba(7, 9, 8, 0.92);
+            border: 3px ridge var(--gold);
+            color: var(--gold-bright);
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.8);
+            z-index: 50;
+            display: none;
+            border-radius: 8px;
+            animation: fadeInScript 0.5s ease-out;
+        }
+
+        @keyframes fadeInScript {
+            0% { opacity: 0; transform: translate(-50%, -20px); }
+            100% { opacity: 1; transform: translate(-50%, 0); }
+        }
+
         .hotspot-box {
             position: absolute;
             border: 2px dashed rgba(212, 175, 55, 0.9);
@@ -319,7 +345,7 @@
             text-shadow: 0 0 8px #000, 0 0 12px #ff0000;
             pointer-events: none;
             animation: floatUp 0.8s ease-out forwards;
-            z-index: 50;
+            z-index: 60;
         }
 
         @keyframes floatUp {
@@ -430,7 +456,6 @@
 </head>
 <body>
 
-    <!-- YouTube-Style Fullscreen Expand Button -->
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
 
     <header>
@@ -446,11 +471,10 @@
     </div>
 
     <div class="top-action-bar">
-        <span style="color: var(--gold); font-size: 0.9rem; font-weight: bold; font-family: 'Playfair Display', serif; font-style: italic;">✦ Local Storage Synced | AI Auto-Boss Active | Stage Level: <span id="display-stage-lvl">1</span> ✦</span>
+        <span style="color: var(--gold); font-size: 0.9rem; font-weight: bold; font-family: 'Playfair Display', serif; font-style: italic;">✦ LocalStorage Synced | Campaign Level: <span id="display-stage-lvl">1</span> ✦</span>
         <a href="map.html" class="btn" style="width: auto; padding: 8px 18px; margin: 0;">🗺️ Return to Map</a>
     </div>
 
-    <!-- Status HUD Bars (Synced with LocalStorage) -->
     <div class="hud-container">
         <div>
             Player Life Span (NPC): <span id="p-life" class="hud-life">100</span>/100 | 
@@ -458,23 +482,23 @@
             Soldiers: <span id="p-soldiers" class="hud-soldier">12</span> 🛡️
         </div>
         <div>
-            Boss AI Status: <span id="boss-status-text" style="color: #ff6666;">Ready</span> | Level: <span id="hud-stage-lvl">1</span>
+            Boss AI Status: <span id="boss-status-text" style="color: #ff6666;">Ready</span> | Stage: <span id="hud-stage-lvl">1</span>
         </div>
     </div>
 
     <div class="game-layout">
         
-        <!-- Left Sidebar: Market Stalls (1-5 with priced items, unlimited time) -->
+        <!-- Left Sidebar: Market Stalls (1-5 with priced items) -->
         <div class="card-sidebar">
             <h3 style="color: var(--gold); margin: 0 0 5px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Market Stalls (1-5)</h3>
             <div class="tactical-card" onclick="playMarketVideo('market-1.mp4', 'fish')"><h4>Stall 1: Fish Vendor</h4><p>Fresh Fish (2 Coins)</p></div>
             <div class="tactical-card" onclick="playMarketVideo('market-2.mp4', 'bread')"><h4>Stall 2: Bakery</h4><p>Fresh Bread (1 Coin)</p></div>
             <div class="tactical-card" onclick="playMarketVideo('market-3.mp4', 'clothes')"><h4>Stall 3: Clothier</h4><p>Soft Silk (5 Coins)</p></div>
-            <div class="tactical-card" onclick="playMarketVideo('market-4.mp4', 'armor')"><h4>Stall 4: Armorer</h4><p>Steel Shield & Armor (10 Coins)</p></div>
+            <div class="tactical-card" onclick="playMarketVideo('market-4.mp4', 'armor')"><h4>Stall 4: Armorer</h4><p>Steel Armor (10 Coins)</p></div>
             <div class="tactical-card" onclick="playMarketVideo('market-5.mp4', 'weapons')"><h4>Stall 5: Weaponsmith</h4><p>Forged Swords (15 Coins)</p></div>
         </div>
 
-        <!-- Center Panel: Interactive Stage with Clickable Squares & YouTube Fullscreen Inside Stage -->
+        <!-- Center Panel: Interactive Stage with Huge Cinematic Script Overlays -->
         <div class="center-panel">
             <h2 id="stage-title">Interactive War Chambers (Click & Slash Blocks)</h2>
             
@@ -488,29 +512,32 @@
                     <source src="big-boss-cinematic.mp4" type="video/mp4">
                     Your browser does not support video.
                 </video>
-                <!-- YouTube Player Style Fullscreen Square Inside Video Bottom Right -->
+                <!-- Huge Powerful Cinematic Script Banner Overlay -->
+                <div id="cinematic-script-banner" class="cinematic-script-overlay">Script text goes here</div>
+
                 <button class="yt-stage-fs-btn" onclick="toggleFullScreen()" title="Expand Fullscreen">⤢</button>
-                <!-- Dynamic Interactive Clickable Hotspot Squares -->
                 <div id="hotspot-container"></div>
             </div>
 
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-combat" onclick="engageBigBossBattle()">⚔️ Engage Big Boss</button>
-                <button class="btn" style="background: #22302a; border-color: var(--gold);" onclick="playCombatVideo('assets-video-arena-combat.mp4')">🔥 Grind Arena</button>
+                <button class="btn btn-combat" onclick="startSmallBossEncounter()">⚔️ Engage Small Boss</button>
+                <button class="btn btn-combat" onclick="engageBigBossBattle()" style="background: linear-gradient(135deg, #8B0000, #4B0082);">👑 Engage Big Boss</button>
             </div>
             <div class="battle-log" id="game-log">
-                [System Initialized]: LocalStorage active. Boss AI auto-attacks in Block Fight Chamber!
+                [System Initialized]: Training Playhouse, Arena Combat, and Recruiting Camp synced. Ready for action!
             </div>
         </div>
 
-        <!-- Right Sidebar: Wilderness 1-5 & Block Fight Chamber -->
+        <!-- Right Sidebar: Wilderness 1-5, Recruiting Camp, Arena, & Block Fight Chamber -->
         <div class="right-sidebar">
             <div class="action-panel">
-                <h3>Combat Chambers</h3>
-                <button class="btn btn-combat" onclick="enterBlockFightChamber()" style="background: linear-gradient(135deg, #4B0082, #8B0000);">🥊 Enter Block Fight Chamber</button>
+                <h3>Combat & Training Chambers</h3>
+                <!-- Linked to Standalone Gameplay Chamber -->
+                <a href="gameplay.html" class="btn btn-combat" style="background: linear-gradient(135deg, #4B0082, #8B0000); text-decoration: none;">🎮 Enter Gameplay (32-Stage Game)</a>
+                <button class="btn btn-combat" onclick="enterBlockFightChamber()" style="background: linear-gradient(135deg, #1b3d30, #0c1f17);">🥊 Fancy Block Fight Chamber</button>
                 <button class="btn btn-mission" onclick="triggerBorderChaosMission()">🚨 Border Chaos Mission</button>
-                <button class="btn btn-combat" onclick="playWarCampaign()">War Campaign</button>
-                <button class="btn" onclick="playCombatVideo('assets-video-recruitment-camp.mp4'); recruitSoldiers();">Recruiting Camp</button>
+                <button class="btn btn-combat" onclick="playArenaCombat()">🏟️ Arena Combat (Training)</button>
+                <button class="btn" onclick="playRecruitingCamp()" style="background: linear-gradient(135deg, #1b4d3e, #0b2219); color: #79ff9c; border-color: #79ff9c;">🛡️ Recruiting Camp Playhouse</button>
             </div>
 
             <div class="action-panel">
@@ -529,7 +556,7 @@
     <!-- Victory / Defeat Modal -->
     <div id="modal-overlay">
         <div id="modal-content">
-            <h1 id="modal-title" style="color: var(--gold);">VICTORY</h1>
+            <h1 id="modal-title" style="color: #D4AF37;">VICTORY</h1>
             <p id="modal-text" style="color: #f5f2eb; font-size: 1.05rem; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.6;">Rebellion forces pushed back!</p>
             <div id="modal-buttons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
                 <button class="btn" onclick="closeModal()">Continue Campaign 👑</button>
@@ -539,7 +566,41 @@
     </div>
 
     <script>
-        // Game State & LocalStorage Synchronization
+        // Web Audio Sound FX Generator for Fancy Block Fight Chamber
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'hit') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+            } else if (type === 'kick') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+            } else if (type === 'victory') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.4);
+            }
+        }
+
+        // Game State & LocalStorage
         let gameState = {
             life: parseInt(localStorage.getItem('sovereign_life')) || 100,
             coins: parseInt(localStorage.getItem('sovereign_coins')) || 1000,
@@ -547,17 +608,16 @@
             stageLevel: parseInt(localStorage.getItem('sovereign_stage')) || 1
         };
 
-        let currentMode = 'combat'; // combat, market, wilderness, block-fight
+        let currentMode = 'combat';
         let wildernessTimer = null;
         let wildernessSecondsLeft = 180;
         let isWildernessLocked = false;
         let lockoutCooldownTimer = null;
         let bossAiInterval = null;
 
-        // Initialize HUD on load
         window.onload = function() {
             syncStateToDOM();
-            logMessage("System Loaded: LocalStorage stats retrieved successfully.");
+            logMessage("System Loaded: LocalStorage active. Ready for campaign.");
         };
 
         function saveGameState() {
@@ -596,34 +656,126 @@
             logBox.scrollTop = logBox.scrollHeight;
         }
 
-        function playCombatVideo(videoFile) {
+        function showCinematicScript(text, duration = 4000) {
+            const banner = document.getElementById('cinematic-script-banner');
+            banner.innerText = text;
+            banner.style.display = 'block';
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, duration);
+        }
+
+        function playVideoWithFile(videoFile, scriptText = "") {
             stopBossAI();
             currentMode = 'combat';
             clearHotspots();
-            document.getElementById('stage-title').innerText = "Interactive War Chambers (Click & Slash Blocks)";
             const vid = document.getElementById('combat-video');
             vid.src = videoFile;
             vid.play().catch(e => {});
-            logMessage(`Switching view: ${videoFile}`);
+            if (scriptText) {
+                showCinematicScript(scriptText, 5000);
+            }
+            logMessage(`Cinematic playing: ${videoFile}`);
         }
 
-        /* --- BLOCK FIGHT CHAMBER WITH AI AUTO-BOSS --- */
+        /* --- TRAINING PLAYHOUSE & RECRUITING CAMP --- */
+        function playRecruitingCamp() {
+            playVideoWithFile('assets-video-recruitment-camp.mp4', "Recruiting Camp Playhouse: Enlisting fresh forces for the Empire!");
+            setTimeout(() => {
+                gameState.soldiers += 5;
+                saveGameState();
+                alert("🛡️ Recruiting Training Complete! +5 New Soldiers joined your ranks.");
+                logMessage("Recruiting Camp Playhouse training finished. +5 Soldiers added.");
+            }, 5000);
+        }
+
+        function playArenaCombat() {
+            playVideoWithFile('assets-video-arena-combat.mp4', "Arena Combat Training Playhouse: Sharpening combat blades!");
+            setTimeout(() => {
+                gameState.coins += 50;
+                saveGameState();
+                alert("🏆 Arena Combat Training Successful! Earned +50 Gold coins.");
+                logMessage("Arena combat training completed successfully.");
+            }, 5000);
+        }
+
+        /* --- CAMPAIGN FLOW: SMALL BOSS & SCRIPT --- */
+        function startSmallBossEncounter() {
+            playVideoWithFile('small-boss.mp4', "I'm not gonna win and I'm not gonna lose!");
+            setTimeout(() => {
+                let confirmFight = confirm("⚔️ Small Boss Encountered! Press OK to enter the Block Fight Chamber and battle!");
+                if (confirmFight) {
+                    enterBlockFightChamber();
+                }
+            }, 5000);
+        }
+
+        /* --- FANCY BLOCK FIGHT CHAMBER (Mouse & Keyboard Support) --- */
         function enterBlockFightChamber() {
+            stopBossAI();
             currentMode = 'block-fight';
             clearHotspots();
-            document.getElementById('stage-title').innerText = `🥊 Block Fight Chamber (Boss Level ${gameState.stageLevel} - AI Active)`;
+            document.getElementById('stage-title').innerText = `🥊 Fancy Block Fight Chamber (Level ${gameState.stageLevel} - Use Mouse or Arrow Keys!)`;
             const vid = document.getElementById('combat-video');
-            vid.src = 'big-boss-cinematic.mp4';
+            vid.src = 'assets-video-arena-combat.mp4';
             vid.play().catch(e => {});
 
             const container = document.getElementById('hotspot-container');
             container.innerHTML = `
-                <div class="hotspot-box" style="top: 60%; left: 15%; width: 30%; height: 25%; background: rgba(139,0,0,0.4);" onclick="playerAttack('kick')">👟 KICK (Deal DMG)</div>
-                <div class="hotspot-box" style="top: 60%; left: 55%; width: 30%; height: 25%; background: rgba(212,175,55,0.4);" onclick="playerAttack('slash')">⚔️ SWORD SLASH</div>
+                <div class="hotspot-box" style="top: 60%; left: 15%; width: 30%; height: 25%; background: rgba(139,0,0,0.4);" onclick="performFightAction('strike')">⚔️ STRIKE (Left/Right Key)</div>
+                <div class="hotspot-box" style="top: 60%; left: 55%; width: 30%; height: 25%; background: rgba(212,175,55,0.4);" onclick="performFightAction('kick')">👟 KICK (Up Arrow Key)</div>
             `;
-            logMessage(`Entered Block Fight Chamber! Boss AI is active (Stage Level ${gameState.stageLevel}). Defend yourself!`);
-            
+            logMessage("Entered Fancy Block Fight Chamber! Use mouse buttons or Keyboard Arrow Keys (Left/Right to Strike, Up to Kick).");
+
             startBossAI();
+        }
+
+        // Keyboard Event Listeners for Arrow Keys
+        window.addEventListener('keydown', function(e) {
+            if (currentMode !== 'block-fight') return;
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                performFightAction('strike');
+            } else if (e.key === 'ArrowUp') {
+                performFightAction('kick');
+            }
+        });
+
+        function performFightAction(actionType) {
+            if (currentMode !== 'block-fight') return;
+            const stage = document.getElementById('combat-stage');
+            stage.classList.add('shake-fx');
+            setTimeout(() => stage.classList.remove('shake-fx'), 400);
+
+            if (actionType === 'strike') playSound('hit');
+            else playSound('kick');
+
+            let reward = 25 * gameState.stageLevel;
+            gameState.coins += reward;
+            saveGameState();
+
+            logMessage(`Player performed ${actionType.toUpperCase()}! Earned +${reward} Gold 🪙.`);
+            
+            const rect = stage.getBoundingClientRect();
+            const dmgIndicator = document.createElement('div');
+            dmgIndicator.className = 'floating-dmg';
+            dmgIndicator.innerText = actionType === 'strike' ? `-250 DMG` : `-350 KICK DMG`;
+            dmgIndicator.style.left = `${Math.random() * 200 + 50}px`;
+            dmgIndicator.style.top = `${Math.random() * 100 + 50}px`;
+            stage.appendChild(dmgIndicator);
+            setTimeout(() => dmgIndicator.remove(), 800);
+
+            // Win condition check for small/big boss battle
+            if (gameState.coins >= gameState.stageLevel * 400) {
+                stopBossAI();
+                playSound('victory');
+                playVideoWithFile('assets-video-arena-combat.mp4');
+                showModal('VICTORY!', `✦ BATTLE WON! ✦\nAdvancing campaign stage.`, '#D4AF37', false);
+                
+                if (gameState.stageLevel < 5) {
+                    gameState.stageLevel++;
+                    saveGameState();
+                }
+            }
         }
 
         function startBossAI() {
@@ -631,8 +783,7 @@
             document.getElementById('boss-status-text').innerText = "AI Attacking";
             document.getElementById('boss-status-text').style.color = "#ff3333";
 
-            // Boss attack speed and damage scale with stage level (1 to 5)
-            let attackSpeed = Math.max(1500, 4000 - (gameState.stageLevel * 500)); 
+            let attackSpeed = Math.max(1500, 4000 - (gameState.stageLevel * 500));
 
             bossAiInterval = setInterval(() => {
                 if (currentMode !== 'block-fight') {
@@ -643,16 +794,15 @@
                 const stage = document.getElementById('combat-stage');
                 stage.classList.add('shake-fx');
                 setTimeout(() => stage.classList.remove('shake-fx'), 400);
+                playSound('hit');
 
-                // Boss moves based on level strength
                 let moves = ['Fire Attack 🔥', 'Divine Light ✨', 'Special Slash ⚡'];
                 let chosenMove = moves[Math.floor(Math.random() * moves.length)];
-                let bossDmg = 5 * gameState.stageLevel; // Scales with level
+                let bossDmg = 8 * gameState.stageLevel;
 
                 gameState.life = Math.max(0, gameState.life - bossDmg);
                 saveGameState();
 
-                const rect = stage.getBoundingClientRect();
                 const dmgIndicator = document.createElement('div');
                 dmgIndicator.className = 'floating-dmg';
                 dmgIndicator.innerText = `BOSS: ${chosenMove} (-${bossDmg} HP)`;
@@ -665,7 +815,7 @@
 
                 if (gameState.life <= 0) {
                     stopBossAI();
-                    triggerDefeat();
+                    triggerMainVillainDefeatSequence();
                 }
             }, attackSpeed);
         }
@@ -679,26 +829,36 @@
             document.getElementById('boss-status-text').style.color = "#79ff9c";
         }
 
-        function playerAttack(actionType) {
-            if (currentMode !== 'block-fight') return;
-            const stage = document.getElementById('combat-stage');
-            stage.classList.add('shake-fx');
-            setTimeout(() => stage.classList.remove('shake-fx'), 400);
+        /* --- MAIN VILLAIN DEFEAT SEQUENCE WITH SCRIPT OVERLAY --- */
+        function triggerMainVillainDefeatSequence() {
+            currentMode = 'combat';
+            clearHotspots();
+            const vid = document.getElementById('combat-video');
+            vid.src = 'neighboor-villian-rebbelian.mp4';
+            vid.play().catch(e => {});
 
-            let goldReward = 15 * gameState.stageLevel;
-            gameState.coins += goldReward;
-            saveGameState();
+            // Display the Main Villain Script Overlay
+            showCinematicScript("We lose this time, but next time we will definitely win!", 7000);
+            logMessage("Main Villain Script Triggered: We lose this time, but next time we will definitely win!");
 
-            logMessage(`Player performed ${actionType.toUpperCase()}! Earned +${goldReward} Gold 🪙.`);
-            alert(`✦ Successful ${actionType.toUpperCase()}! You landed a blow on the Boss and gained +${goldReward} Gold. ✦`);
+            setTimeout(() => {
+                showModal('DEFEAT', 'The main villain has spoken! Prepare your forces for the next campaign.', '#ff4d4d', true);
+            }, 6000);
+        }
 
-            // Check if player earned enough to level up stage
-            if (gameState.coins >= gameState.stageLevel * 500 && gameState.stageLevel < 5) {
-                gameState.stageLevel++;
-                saveGameState();
-                alert(`🎉 LEVEL UP! Sovereign Empire Stage increased to Level ${gameState.stageLevel}. Boss strength is increasing!`);
-                startBossAI(); // restart AI with higher difficulty
-            }
+        function engageBigBossBattle() {
+            playVideoWithFile('big-boss-cinematic.mp4', "The Sovereign Empire stands against all rebellion!");
+            setTimeout(() => {
+                if (gameState.life < 40) {
+                    triggerMainVillainDefeatSequence();
+                } else {
+                    playVideoWithFile('assets-video-arena-combat.mp4');
+                    showModal('VICTORY', 'Big Boss defeated! Earned +200 Gold and advanced stage.', '#D4AF37', false);
+                    gameState.coins += 200;
+                    if(gameState.stageLevel < 5) gameState.stageLevel++;
+                    saveGameState();
+                }
+            }, 6000);
         }
 
         function playMarketVideo(file, itemCategory) {
@@ -731,7 +891,7 @@
                 gameState.coins -= cost;
                 gameState.soldiers += soldierGain;
                 saveGameState();
-                logMessage(`Purchased ${itemName}! -${cost} Coins, +${soldierGain} Soldiers. LocalStorage updated.`);
+                logMessage(`Purchased ${itemName}! -${cost} Coins, +${soldierGain} Soldiers.`);
                 alert(`✦ Transaction Successful! Purchased ${itemName} for ${cost} Coins. +${soldierGain} Soldiers joined your ranks! ✦`);
             } else {
                 alert(`Insufficient Gold! You need ${cost} Coins. Go forage for free in Wilderness 1-5!`);
@@ -765,7 +925,7 @@
         }
 
         function startWildernessTimer() {
-            wildernessSecondsLeft = 180; // 3 minutes
+            wildernessSecondsLeft = 180;
             const timerDisplay = document.getElementById('timer-display');
             
             wildernessTimer = setInterval(() => {
@@ -783,7 +943,7 @@
                     alert("⏱️ 3-minute wilderness session expired! You are now locked out. Please wait 3 minutes before logging back in.");
                     
                     startLockoutCooldown();
-                    playCombatVideo('big-boss-cinematic.mp4');
+                    playVideoWithFile('big-boss-cinematic.mp4');
                 }
             }, 1000);
         }
@@ -813,7 +973,7 @@
             gameState.coins += goldBonus;
             gameState.soldiers += soldierBonus;
             saveGameState();
-            logMessage(`Foraged ${item} for free! Gained +${goldBonus} Gold and +${soldierBonus} Soldiers (Synced).`);
+            logMessage(`Foraged ${item} for free! Gained +${goldBonus} Gold and +${soldierBonus} Soldiers.`);
             alert(`✦ Successful Free Forage! Found ${item} (+${goldBonus} Gold, +${soldierBonus} Soldiers). ✦`);
         }
 
@@ -827,12 +987,12 @@
                 if (gameState.coins >= 10) {
                     gameState.coins -= 10;
                     saveGameState();
-                    playCombatVideo('assets-video-war-combat.mp4');
+                    playVideoWithFile('assets-video-war-combat.mp4');
                     setTimeout(() => {
                         gameState.coins += 100;
                         gameState.soldiers += 8;
                         saveGameState();
-                        showModal('VICTORY!', `✦ BORDER WAR CONQUERED! ✦\nDefeated 2 rebel opponents!\n+100 Gold 🪙\n+8 Soldiers Enlisted 🛡️`, 'var(--gold)', false);
+                        showModal('VICTORY!', `✦ BORDER WAR CONQUERED! ✦\nDefeated 2 rebel opponents!\n+100 Gold 🪙\n+8 Soldiers Enlisted 🛡️`, '#D4AF37', false);
                     }, 5000);
                 } else {
                     alert("Insufficient Gold! Visit Wilderness 1-5 or Market 1-5.");
@@ -840,20 +1000,12 @@
             }
         }
 
-        function playWarCampaign() {
-            playCombatVideo('assets-video-war-combat.mp4');
-            setTimeout(() => {
-                showModal('VICTORY', 'War Campaign won! Group blocks successfully conquered enemy lines.', 'var(--gold)', false);
-                gameState.coins += 200;
-                saveGameState();
-            }, 6000);
-        }
-
         function triggerBlockSlash(event) {
             if (currentMode !== 'combat') return;
             const stage = document.getElementById('combat-stage');
             stage.classList.add('shake-fx');
             setTimeout(() => stage.classList.remove('shake-fx'), 400);
+            playSound('hit');
 
             gameState.life = Math.max(0, gameState.life - 5);
             saveGameState();
@@ -868,29 +1020,7 @@
             setTimeout(() => dmgIndicator.remove(), 800);
 
             logMessage('Gold hammer strike landed on red rebel block!');
-            if (gameState.life <= 0) triggerDefeat();
-        }
-
-        function engageBigBossBattle() {
-            playCombatVideo('big-boss-cinematic.mp4');
-            setTimeout(() => {
-                if (gameState.life < 40) {
-                    playCombatVideo('neighboor-villian-rebbelian.mp4');
-                    showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d', true);
-                } else {
-                    playCombatVideo('assets-video-arena-combat.mp4');
-                    showModal('VICTORY', 'Big Boss defeated! Earned +150 Gold and advanced.', 'var(--gold)', false);
-                    gameState.coins += 150;
-                    if(gameState.stageLevel < 5) gameState.stageLevel++;
-                    saveGameState();
-                }
-            }, 6000);
-        }
-
-        function triggerDefeat() {
-            stopBossAI();
-            playCombatVideo('neighboor-villian-rebbelian.mp4');
-            showModal('DEFEAT', 'Prime Minister: "Maybe we lost this time, but next time we will definitely win!"', '#ff4d4d', true);
+            if (gameState.life <= 0) triggerMainVillainDefeatSequence();
         }
 
         function revivePlayer() {
@@ -899,7 +1029,7 @@
                 gameState.life = 100;
                 saveGameState();
                 document.getElementById('modal-overlay').style.display = 'none';
-                logMessage('Revived using 50 Gold (Synced)!');
+                logMessage('Revived using 50 Gold!');
             } else {
                 alert("You need at least 50 Gold to revive! Try foraging in Wilderness 1-5 for free supplies.");
             }
