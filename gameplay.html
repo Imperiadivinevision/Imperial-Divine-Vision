@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Blueprint Tactical Arena</title>
+    <title>Sovereign Empire: Sovereign Blue Tactical Arena</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,14 +12,16 @@
             --gold-bright: #ffe875;
             --purple: #4B0082;
             --dark-bg: #070908;
-            --card-bg: rgba(17, 23, 21, 0.95);
+            --card-bg: linear-gradient(135deg, #0b1f2d, #061017);
+            --card-hover: linear-gradient(135deg, #102d42, #0b1f2d);
             --text-light: #f5f2eb;
             --glow-gold: 0 0 35px rgba(212, 175, 55, 0.8);
+            --glow-blue: 0 0 25px rgba(51, 187, 255, 0.5);
         }
 
         @keyframes bgShift {
             0% { background-color: #070908; }
-            50% { background-color: #120b18; }
+            50% { background-color: #0c0b18; }
             100% { background-color: #070908; }
         }
 
@@ -98,7 +100,6 @@
         }
         .nav-bar a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
-        /* Blueprint Layout: Left Deck + Right Cinematic Arena */
         .blueprint-container {
             flex: 1;
             max-width: 1550px;
@@ -111,7 +112,7 @@
             height: calc(100vh - 100px);
         }
 
-        /* Left Side Tactical Cards Deck */
+        /* Sovereign Blue Left Cards Deck */
         .left-cards-deck {
             background: var(--card-bg);
             border: 2px solid var(--gold);
@@ -119,45 +120,44 @@
             padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             overflow-y: auto;
             box-shadow: 0 6px 20px rgba(0,0,0,0.8);
         }
 
         .left-cards-deck h3 {
             color: var(--gold);
-            margin: 0 0 5px 0;
+            margin: 0 0 4px 0;
             font-size: 0.85rem;
             text-transform: uppercase;
             text-align: center;
             border-bottom: 1px solid var(--gold);
-            padding-bottom: 5px;
+            padding-bottom: 4px;
         }
 
         .blueprint-card {
-            background: linear-gradient(145deg, #18221e, #0e1412);
+            background: linear-gradient(145deg, #0d2333, #071520);
             border: 2px solid var(--gold);
             border-radius: 8px;
             padding: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 15px rgba(51, 187, 255, 0.2);
             position: relative;
         }
 
         .blueprint-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            background: linear-gradient(145deg, #22302a, #141c19);
-            box-shadow: var(--glow-gold);
-            border-color: #fff;
+            transform: translateY(-5px) scale(1.02);
+            background: linear-gradient(145deg, #14354c, #0d2333);
+            box-shadow: var(--glow-blue), var(--glow-gold);
+            border-color: #33bbff;
         }
 
-        .blueprint-card h4 { color: var(--gold-bright); margin: 0 0 4px 0; font-size: 0.85rem; text-transform: uppercase; }
-        .blueprint-card p { font-size: 0.7rem; color: #c5b59b; margin: 0; font-family: 'Playfair Display', serif; }
-        .blueprint-card .card-icon { font-size: 1.8rem; margin-bottom: 4px; display: block; }
+        .blueprint-card h4 { color: var(--gold-bright); margin: 0 0 3px 0; font-size: 0.85rem; text-transform: uppercase; }
+        .blueprint-card p { font-size: 0.7rem; color: #a0c4de; margin: 0; font-family: 'Playfair Display', serif; }
+        .blueprint-card .card-icon { font-size: 1.6rem; margin-bottom: 3px; display: block; filter: drop-shadow(0 0 8px #33bbff); }
 
-        /* Right Side: Cinematic Arena & Status */
         .right-arena-panel {
             display: flex;
             flex-direction: column;
@@ -194,7 +194,7 @@
         .arena-flash-shield {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(85,187,255,0.4) 0%, rgba(212,175,55,0.2) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(51,187,255,0.4) 0%, rgba(212,175,55,0.2) 60%, transparent 100%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -213,12 +213,29 @@
         }
         .arena-flash-strike.active { opacity: 1; }
 
+        /* Top HP Bars & Status in Arena */
+        .arena-header-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 22, 20, 0.9);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 10px 20px;
+            z-index: 5;
+        }
+
+        .combatant-status-box {
+            text-align: center;
+            width: 38%;
+        }
+
         .combatants-widescreen {
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
-            padding: 0 40px;
+            padding: 0 80px;
             z-index: 5;
             flex: 1;
         }
@@ -226,45 +243,45 @@
         .fighter-lane {
             text-align: center;
             position: relative;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.25s ease-in-out;
         }
 
         .fighter-block {
-            width: 80px;
-            height: 110px;
+            width: 100px;
+            height: 130px;
             background: linear-gradient(135deg, #33bbff, #005588);
             border: 3px solid #fff;
-            border-radius: 8px;
-            margin: 8px auto;
-            box-shadow: 0 0 25px rgba(51, 187, 255, 0.7);
+            border-radius: 10px;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(51, 187, 255, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
 
         .boss-block {
-            width: 80px;
-            height: 110px;
+            width: 100px;
+            height: 130px;
             background: linear-gradient(135deg, #ff4d4d, #880000);
             border: 3px solid #fff;
-            border-radius: 8px;
-            margin: 8px auto;
-            box-shadow: 0 0 25px rgba(255, 77, 77, 0.7);
+            border-radius: 10px;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(255, 77, 77, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
 
         .health-bar-container {
-            width: 200px;
+            width: 100%;
             background: #222;
             border: 2px solid var(--gold);
-            height: 15px;
+            height: 14px;
             border-radius: 4px;
             overflow: hidden;
-            margin: 4px auto 0 auto;
+            margin-top: 4px;
         }
 
         .health-bar-fill {
@@ -287,7 +304,7 @@
             background: #040605;
             border: 1px solid var(--gold);
             padding: 6px 10px;
-            height: 50px;
+            height: 45px;
             overflow-y: auto;
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.7rem;
@@ -374,7 +391,6 @@
 
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
 
-    <!-- Pre-Battle Point Allocation Modal -->
     <div id="modal-overlay">
         <div id="modal-content">
             <h1>🛡️ Pre-Battle Point Allocation</h1>
@@ -383,7 +399,7 @@
             </p>
             <div id="allocation-controls">
                 <div class="allocation-box">
-                    <span>Available Gold: <strong id="alloc-coins" style="color: var(--gold-bright);">1000</strong> 🪙</span>
+                    <span>Available Gold: <strong id="alloc-coins" style="color: var(--gold-bright);">1165</strong> 🪙</span>
                 </div>
                 <div class="allocation-box">
                     <span>Reinforce Shield Power (+20) [Cost: 50 Gold]</span>
@@ -399,7 +415,7 @@
     </div>
 
     <header>
-        <h1>Sovereign Empire: Blueprint Tactical Arena</h1>
+        <h1>Sovereign Empire: Sovereign Blue Tactical Arena</h1>
     </header>
 
     <div class="nav-bar">
@@ -408,12 +424,11 @@
         <a href="map.html">🗺️ Map</a>
     </div>
 
-    <!-- Blueprint Widescreen Layout -->
     <div class="blueprint-container">
         
-        <!-- Left Side: Interactive Tactical Cards Deck -->
+        <!-- Sovereign Blue Tactical Cards Deck -->
         <div class="left-cards-deck">
-            <h3>Tactical Cards</h3>
+            <h3>Sovereign Cards</h3>
             
             <div class="blueprint-card" onclick="playerAction('kick')">
                 <span class="card-icon">⚔️</span>
@@ -446,13 +461,13 @@
             </div>
         </div>
 
-        <!-- Right Side: Cinematic Arena & Status -->
+        <!-- Right Side: Cinematic Arena with Top HP Bars -->
         <div class="right-arena-panel">
             
             <div class="top-light-bar">
                 <div>Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Border Marches</span></div>
-                <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">1000</span> 🪙</div>
-                <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">50</span> 🛡️</div>
+                <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">1165</span> 🪙</div>
+                <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">145</span> 🛡️</div>
                 <div><a href="battle.html" class="btn" style="padding: 4px 8px; font-size: 0.65rem;">Hub</a></div>
             </div>
 
@@ -460,38 +475,46 @@
                 <div class="arena-flash-shield" id="flash-shield"></div>
                 <div class="arena-flash-strike" id="flash-strike"></div>
 
-                <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 1rem; text-transform: uppercase; text-align: center; z-index: 5;">Campaign Tier: Border Marches — Facing Rebellion General</h2>
-                
-                <div class="combatants-widescreen">
-                    <!-- Player Active Marching Block -->
-                    <div class="fighter-lane" id="player-lane" style="transform: translateX(0px);">
-                        <h4 id="player-name-lbl" style="color: var(--gold); margin: 0; font-size: 0.9rem;">Sovereign Guardian</h4>
-                        <div class="fighter-block" id="player-avatar-block">⚔️</div>
-                        <div style="font-size: 0.75rem; color: #55bbff;">HP: <span id="player-hp-text">100</span>/100</div>
+                <!-- Top HP and Status Bar Inside Arena for Maximum Space -->
+                <div class="arena-header-status">
+                    <div class="combatant-status-box">
+                        <h4 id="player-name-lbl" style="color: #33bbff; margin: 0; font-size: 0.85rem;">Sovereign Guardian</h4>
+                        <div style="font-size: 0.7rem; color: #f5f2eb;">HP: <span id="player-hp-text">100</span>/100</div>
                         <div class="health-bar-container">
                             <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 100%;"></div>
                         </div>
                     </div>
 
-                    <div class="vs-badge">VS</div>
+                    <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 0.85rem; text-transform: uppercase; text-align: center;">Rebellion General</h2>
 
-                    <!-- Villain General Active Block -->
-                    <div class="fighter-lane" id="boss-lane" style="transform: translateX(0px);">
-                        <h4 id="boss-name-lbl" style="color: var(--gold); margin: 0; font-size: 0.9rem;">Rebellion General</h4>
-                        <div class="boss-block" id="boss-avatar-block">🛡️</div>
-                        <div style="font-size: 0.75rem; color: #ff6666;">Energy: <span id="boss-hp-text">100</span>/100</div>
+                    <div class="combatant-status-box">
+                        <h4 id="boss-name-lbl" style="color: #ff6666; margin: 0; font-size: 0.85rem;">Rebellion General</h4>
+                        <div style="font-size: 0.7rem; color: #f5f2eb;">Energy: <span id="boss-hp-text">160</span>/160</div>
                         <div class="health-bar-container">
                             <div class="health-bar-fill" id="boss-hp-bar" style="width: 100%;"></div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Massive Center Space for Touch-and-Clash Action -->
+                <div class="combatants-widescreen">
+                    <div class="fighter-lane" id="player-lane" style="transform: translateX(0px);">
+                        <div class="fighter-block" id="player-avatar-block">⚔️</div>
+                    </div>
+
+                    <div class="vs-badge">VS</div>
+
+                    <div class="fighter-lane" id="boss-lane" style="transform: translateX(0px);">
+                        <div class="boss-block" id="boss-avatar-block">🛡️</div>
+                    </div>
+                </div>
 
                 <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.75rem; z-index: 5;" id="arena-action-status">
-                    Blueprint arena active. Click cards on the left to fight the Villain General!
+                    Sovereign Blue cards active. Click cards to make blocks touch and clash!
                 </div>
 
                 <div class="battle-log" id="gameplay-log">
-                    [Blueprint Chamber Synchronized]: Left-deck cards active. Ready for fair combat!
+                    [Sovereign Blue Chamber Ready]: HP moved to top. Arena fully optimized!
                 </div>
 
                 <div class="credits-footer">
@@ -555,7 +578,7 @@
             stage: parseInt(localStorage.getItem('sovereign_stage')) || 4,
             coins: parseInt(localStorage.getItem('sovereign_coins')) || 1165,
             playerHp: parseInt(localStorage.getItem('sovereign_life')) || 100,
-            shieldPower: 50,
+            shieldPower: parseInt(localStorage.getItem('sovereign_shield')) || 145,
             bossMaxHp: 160,
             bossHp: 160,
             maxStages: 50
@@ -628,7 +651,7 @@
             let tierTitle = tierNames[(game.stage - 1) % tierNames.length];
             
             document.getElementById('lbl-stage-name').innerText = tierTitle;
-            document.getElementById('boss-title').innerText = `Campaign Tier: ${tierTitle} — Facing ${currentBossTitle}`;
+            document.getElementById('boss-title').innerText = currentBossTitle;
             document.getElementById('boss-name-lbl').innerText = currentBossTitle;
             
             logMsg(`Entering ${tierTitle}: Facing ${currentBossTitle}!`);
@@ -649,6 +672,7 @@
             localStorage.setItem('sovereign_stage', game.stage);
             localStorage.setItem('sovereign_coins', game.coins);
             localStorage.setItem('sovereign_life', game.playerHp);
+            localStorage.setItem('sovereign_shield', game.shieldPower);
         }
 
         function logMsg(txt) {
@@ -669,27 +693,20 @@
             }
         }
 
-        function animateWalkingCombat(actionType) {
+        function animateTouchAndClash() {
             const playerLane = document.getElementById('player-lane');
             const bossLane = document.getElementById('boss-lane');
             const statusLbl = document.getElementById('arena-action-status');
             
-            if (actionType === 'forward') {
-                playerLane.style.transform = 'translateX(90px)';
-                bossLane.style.transform = 'translateX(-50px)';
-                statusLbl.innerText = "Sovereign Guardian block walks forward and strikes!";
-                setTimeout(() => {
-                    playerLane.style.transform = 'translateX(0px)';
-                    bossLane.style.transform = 'translateX(0px)';
-                }, 400);
-            } else if (actionType === 'dodge') {
-                playerLane.style.transform = 'translateX(-70px)';
-                statusLbl.innerText = "Tactical Dodge! Stepping aside.";
-                setTimeout(() => playerLane.style.transform = 'translateX(0px)', 400);
-            } else if (actionType === 'shield') {
-                statusLbl.innerText = "Shield deployed! Energy barrier shimmering with light.";
-                setTimeout(() => statusLbl.innerText = "Blueprint arena active. Click cards on the left to fight!", 1500);
-            }
+            playerLane.style.transform = 'translateX(140px)';
+            bossLane.style.transform = 'translateX(-140px)';
+            statusLbl.innerText = "Sovereign Blue blocks collide and touch in combat!";
+            
+            setTimeout(() => {
+                playerLane.style.transform = 'translateX(0px)';
+                bossLane.style.transform = 'translateX(0px)';
+                statusLbl.innerText = "Sovereign Blue cards active. Click cards to make blocks touch and clash!";
+            }, 450);
         }
 
         function playerAction(type) {
@@ -703,36 +720,35 @@
             if (type === 'kick') {
                 playSound('hit');
                 triggerVisualEffect('strike');
-                animateWalkingCombat('forward');
+                animateTouchAndClash();
                 playerDmg = 18 + (game.stage * 2);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                logMsg(`Player executed Kick Strike! Dealt -${playerDmg} DMG.`);
+                logMsg(`Kick Strike executed! Blocks clashed. Dealt -${playerDmg} DMG.`);
             } else if (type === 'shield') {
                 playSound('shield');
                 triggerVisualEffect('shield');
-                animateWalkingCombat('shield');
                 game.shieldPower += 15;
                 logMsg(`Shield deployed! Defense reinforced to ${game.shieldPower}.`);
             } else if (type === 'dodge') {
                 playSound('hit');
                 triggerVisualEffect('strike');
-                animateWalkingCombat('dodge');
+                animateTouchAndClash();
                 playerDmg = 15;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                logMsg(`Tactical Dodge successful! Counter-attack dealt -${playerDmg} DMG.`);
+                logMsg(`Tactical Dodge & counter-clash dealt -${playerDmg} DMG.`);
             } else if (type === 'phoenix') {
                 playSound('divine');
                 triggerVisualEffect('strike');
-                animateWalkingCombat('forward');
+                animateTouchAndClash();
                 playerDmg = 35 + (game.stage * 3);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                logMsg(`🦅 Phoenix Eagle Card invoked! Blazing fire strike dealt -${playerDmg} DMG!`);
+                logMsg(`🦅 Phoenix Eagle invoked! Blazing fire strike dealt -${playerDmg} DMG!`);
             } else if (type === 'soul') {
                 playSound('divine');
                 triggerVisualEffect('shield');
                 let healAmt = 40;
                 game.playerHp = Math.min(100, game.playerHp + healAmt);
-                logMsg(`✨ Divine Soul Card activated! God's grace restored +${healAmt} HP.`);
+                logMsg(`✨ Divine Soul activated! Holy grace restored +${healAmt} HP.`);
             }
 
             if (game.bossHp <= 0) {
@@ -740,14 +756,14 @@
                 let reward = 60 * game.stage;
                 game.coins += reward;
                 logMsg(`🎉 Campaign Tier Conquered! Earned +${reward} Gold Coins.`);
-                alert(`✦ VICTORY! Villain General Defeated! Earned +${reward} Gold Coins. ✦`);
+                alert(`✦ VICTORY! Enemy Defeated! Earned +${reward} Gold Coins. ✦`);
                 
                 if (game.stage < game.maxStages) {
                     game.stage++;
                     initStage();
                     openAllocationModal();
                 } else {
-                    alert("👑 MAGNIFICENT VICTORY! You have conquered all mystical tiers and saved the Sovereign Empire!");
+                    alert("👑 MAGNIFICENT VICTORY! You have conquered all 50 mystical tiers!");
                     game.stage = 1;
                     initStage();
                     openAllocationModal();
@@ -760,15 +776,15 @@
 
                     if (type === 'shield') {
                         bossDmg = Math.max(3, bossDmg - game.shieldPower);
-                        logMsg(`Villain General used ${chosenSkill}, but your Shield absorbed the blow (-${bossDmg} HP).`);
+                        logMsg(`Villain used ${chosenSkill}, but your Shield absorbed the blow (-${bossDmg} HP).`);
                     } else {
-                        logMsg(`⚠️ Villain General executed ${chosenSkill}! You took -${bossDmg} damage.`);
+                        logMsg(`⚠️ Villain executed ${chosenSkill}! You took -${bossDmg} damage.`);
                     }
                     game.playerHp = Math.max(0, game.playerHp - bossDmg);
                     updateDOM();
 
                     if (game.playerHp <= 0) {
-                        alert("💀 DEFEAT! Your NPC life span has fallen. Visit the Imperial Pharmacy or use the Divine Soul card.");
+                        alert("💀 DEFEAT! Your NPC life span has fallen. Use Divine Soul or Pharmacy to recover.");
                         game.playerHp = 100;
                         updateDOM();
                         openAllocationModal();
