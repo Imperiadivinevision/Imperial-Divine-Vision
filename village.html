@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinematic Guild & Village Experience | Imperial Divine Vision</title>
+    <title>Sovereign Guild & Village Chambers | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         @keyframes cosmicGlow {
@@ -157,8 +157,9 @@
             transition: 0.2s;
             display: inline-block;
             margin: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; }
+        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; transform: translateY(-1px); }
 
         #registration-modal {
             display: none;
@@ -210,11 +211,11 @@
         <div class="reg-box">
             <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.5rem;">📜 Guild Registration Desk</h2>
             <p style="font-family: 'Playfair Display', serif; font-size: 0.88rem; line-height: 1.5; color: #d0e8ff;">
-                Welcome, adventurer. Enter your name to officially join the guild, acknowledge the 10% Sovereign Tax policy, and unlock contracts.
+                Welcome, adventurer. Enter your name to officially join the guild, acknowledge the 10% Sovereign Tax policy, and unlock daily contracts (5 max per day).
             </p>
             <input type="text" id="adventurer-name-input" placeholder="Enter Adventurer Name..." />
             <br>
-            <button class="royal-btn" onclick="saveRegistration()">Register & Unlock Quests ⚔️</button>
+            <button class="royal-btn" onclick="saveRegistration()">Register & Begin Questing ⚔️</button>
         </div>
     </div>
 
@@ -247,6 +248,7 @@
             <div>Adventurer: <span id="ui-adventurer">Traveler</span></div>
             <div>Imperial Wallet: <span id="ui-coins">0</span> 🪙</div>
             <div>Royal Tax Vault: <span id="ui-tax">0</span> 🪙</div>
+            <div>Daily Quests: <span id="ui-daily-count">0</span> / 5 Max</div>
         </div>
 
         <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
@@ -260,7 +262,7 @@
         </div>
 
         <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="shop.html" class="royal-btn" style="background: linear-gradient(135deg, #0066cc, #003366); font-size: 0.75rem;">🛒 Visit Market Chambers</a>
+            <a href="shop.html" class="royal-btn" style="background: linear-gradient(135deg, #0066cc, #003366); font-size: 0.75rem;">🛒 Visit Market Stalls</a>
             <a href="battle.html" class="royal-btn" style="background: linear-gradient(135deg, #cc0000, #660000); font-size: 0.75rem;">⚔️ Enter Battle Chambers</a>
             <a href="wilderness.html" class="royal-btn" style="background: linear-gradient(135deg, #2e7d32, #1b5e20); font-size: 0.75rem;">🌲 Explore Wilderness Forest</a>
             <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ Return to Empire Map</a>
@@ -272,7 +274,9 @@
             coins: 500,
             treasuryTaxCollected: 0,
             adventurerName: "",
-            inventory: []
+            inventory: [],
+            dailyQuestsDone: 0,
+            cooldownUntil: 0
         };
 
         function toggleFullScreen() {
@@ -296,7 +300,6 @@
         }
 
         function initCinematicExperience() {
-            // Retrieve and sync from Local Storage on load
             const saved = localStorage.getItem('imperial_sanctuary_user');
             if (saved) {
                 let parsed = JSON.parse(saved);
@@ -304,10 +307,13 @@
                 playerState.treasuryTaxCollected = parsed.treasuryTaxCollected || 0;
                 playerState.adventurerName = parsed.adventurerName || "";
                 playerState.inventory = parsed.inventory || [];
+                playerState.dailyQuestsDone = parsed.dailyQuestsDone || 0;
+                playerState.cooldownUntil = parsed.cooldownUntil || 0;
             }
 
             document.getElementById('ui-coins').innerText = playerState.coins;
             document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
+            document.getElementById('ui-daily-count').innerText = playerState.dailyQuestsDone;
 
             if (playerState.adventurerName) {
                 document.getElementById('ui-adventurer').innerText = playerState.adventurerName;
@@ -318,14 +324,12 @@
             document.getElementById('stage-container').style.display = 'none';
             document.getElementById('interactive-panel').style.display = 'block';
 
-            // Play soft lullaby background music
             const audio = document.getElementById('chamber-lullaby-audio');
             if (audio) {
                 audio.volume = 0.35;
                 audio.play().catch(e => {});
             }
 
-            // Check local storage state for registration name
             if (!playerState.adventurerName) {
                 document.getElementById('registration-modal').style.display = 'flex';
             }
@@ -350,14 +354,54 @@
                 playerState.adventurerName = nameInput;
                 document.getElementById('ui-adventurer').innerText = nameInput;
                 document.getElementById('registration-modal').style.display = 'none';
-                syncStorage(); // Save immediately to local storage
-                alert(`✦ Welcome, ${nameInput}! Registration complete. Saved to Local Storage. ✦`);
+                syncStorage();
+                alert(`✦ Welcome, ${nameInput}! Registration complete and saved to Local Storage. ✦`);
             } else {
                 alert("Please enter a valid adventurer name.");
             }
         }
 
+        function checkDailyLimit() {
+            let now = Date.now();
+            if (playerState.cooldownUntil && now < playerState.cooldownUntil) {
+                let remainingMins = Math.ceil((playerState.cooldownUntil - now) / 60000);
+                alert(`⏳ Daily Quest Limit Reached! You are on cooldown for ${remainingMins} more minute(s).\n\nTip: You can visit the Market Chambers shop and spend 50 coins to instantly reset your timer!`);
+                return false;
+            }
+            if (playerState.dailyQuestsDone >= 5) {
+                // Set 5-minute timeout cooldown
+                playerState.cooldownUntil = now + (5 * 60 * 1000);
+                playerState.dailyQuestsDone = 0; // reset for next batch after cooldown
+                syncStorage();
+                alert(`⏳ You have completed all 5 daily quests! A 5-minute cooldown timer has initiated.\n\nSpend 50 coins at the Market Stalls to instantly refresh and take more quests right now!`);
+                return false;
+            }
+            return true;
+        }
+
+        function resetTimerWithCoins() {
+            if (playerState.coins >= 50) {
+                playerState.coins -= 50;
+                playerState.cooldownUntil = 0;
+                playerState.dailyQuestsDone = 0;
+                syncStorage();
+                initCinematicExperience();
+                alert("✦ Market Refresh Successful! Paid 50 coins. Cooldown timer reset. You may accept new quests! ✦");
+            } else {
+                alert("You need at least 50 coins to instantly refresh your quest timer at the market!");
+            }
+        }
+
         function openGuildMasterDialog() {
+            if (!checkDailyLimit()) {
+                document.getElementById('dynamic-quest-view').innerHTML = `
+                    <h3 style="color: #ff6b6b; margin-top:0;">⏳ Guild Chamber on Cooldown</h3>
+                    <p style="font-family: 'Playfair Display', serif;">"Sovereign, your daily contracts are exhausted. Rest or pay a 50-coin refresh fee at the market."</p>
+                    <button class="royal-btn" onclick="resetTimerWithCoins()" style="background: linear-gradient(to bottom, #0066cc, #003366);">🪙 Pay 50 Coins to Instantly Reset Timer</button>
+                `;
+                return;
+            }
+
             document.getElementById('dynamic-quest-view').innerHTML = `
                 <h3 style="color: var(--theme-color); margin-top:0;">👑 Guild Master Vane's Official Contracts</h3>
                 <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem;">"Welcome to the high table, Sovereign. Eliminate highway bandits threatening our regional supply caravans by heading into the <a href='battle.html' style='color:#ffd700;'>Battle Chambers</a>."</p>
@@ -366,6 +410,15 @@
         }
 
         function openVillagerDialog() {
+            if (!checkDailyLimit()) {
+                document.getElementById('dynamic-quest-view').innerHTML = `
+                    <h3 style="color: #ff6b6b; margin-top:0;">⏳ Guild Chamber on Cooldown</h3>
+                    <p style="font-family: 'Playfair Display', serif;">"Sovereign, daily pleas are paused. Pay a 50-coin refresh fee to take more requests."</p>
+                    <button class="royal-btn" onclick="resetTimerWithCoins()" style="background: linear-gradient(to bottom, #0066cc, #003366);">🪙 Pay 50 Coins to Instantly Reset Timer</button>
+                `;
+                return;
+            }
+
             document.getElementById('dynamic-quest-view').innerHTML = `
                 <h3 style="color: #79ff9c; margin-top:0;">🧑‍🌾 Visiting Villager's Personal Plea</h3>
                 <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem;">"Please, brave traveler! Our northern homesteads survived the frost, but we need emergency provisions gathered from the <a href='shop.html' style='color:#79ff9c;'>Market Stalls</a> or foraged in the <a href='wilderness.html' style='color:#79ff9c;'>Wilderness Forest</a>."</p>
@@ -378,15 +431,17 @@
             let net = gross - tax;
             playerState.coins += net;
             playerState.treasuryTaxCollected += tax;
+            playerState.dailyQuestsDone++;
             if(!playerState.inventory) playerState.inventory = [];
             playerState.inventory.push(item);
             
-            syncStorage(); // Save updated wallet, tax vault, and inventory to local storage
+            syncStorage();
             
             document.getElementById('ui-coins').innerText = playerState.coins;
             document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
+            document.getElementById('ui-daily-count').innerText = playerState.dailyQuestsDone;
 
-            alert(`✦ Contract Fulfilled: "${title}" ✦\n\n- Gross Payout: ${gross} Coins\n- Royal Tax (10% to Vault): -${tax} Coins\n- Net Payout to Wallet: ${net} Coins\n- Unique Item Secured: ${item}\n\n[Local Storage Updated]`);
+            alert(`✦ Contract Fulfilled: "${title}" ✦\n\n- Gross Payout: ${gross} Coins\n- Royal Tax (10% to Vault): -${tax} Coins\n- Net Payout to Wallet: ${net} Coins\n- Unique Item Secured: ${item}\n- Daily Quests Completed: ${playerState.dailyQuestsDone}/5\n\n[Local Storage Synced]`);
         }
 
         function syncStorage() {
@@ -396,6 +451,8 @@
             parsed.treasuryTaxCollected = playerState.treasuryTaxCollected;
             parsed.adventurerName = playerState.adventurerName;
             parsed.inventory = playerState.inventory;
+            parsed.dailyQuestsDone = playerState.dailyQuestsDone;
+            parsed.cooldownUntil = playerState.cooldownUntil;
             localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
         }
     </script>
