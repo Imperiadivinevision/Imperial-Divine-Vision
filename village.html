@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinematic Guild & Village Chambers | Sovereign Empire</title>
+    <title>Cinematic Guild & Village Experience | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
+        @keyframes cosmicGlow {
+            0% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.1) saturate(1.2); }
+            100% { filter: brightness(1) saturate(1); }
+        }
+
         :root {
             --bg-dark: #0b0f0e;
             --panel-bg: rgba(14, 20, 18, 0.96);
@@ -24,10 +30,54 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
+            animation: cosmicGlow 12s ease-in-out infinite alternate;
+        }
+
+        /* YouTube-Style Fullscreen Toggle Button */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 4000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--theme-color);
+            color: #0b0f0e;
+            box-shadow: 0 0 20px var(--theme-color);
+        }
+
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen h1,
+        body.is-chamber-fullscreen .subtitle {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .interactive-overlay-panel,
+        body.is-chamber-fullscreen .cinematic-stage {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            border: none !important;
+            height: 100vh !important;
         }
 
         nav { 
-            padding: 12px 20px; 
+            padding: 10px 20px; 
             background: var(--panel-bg);
             border-bottom: 2px solid var(--theme-color);
             position: sticky;
@@ -38,24 +88,46 @@
             gap: 15px;
             width: 100%;
             box-sizing: border-box;
+            backdrop-filter: blur(8px);
         }
         nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
         nav a:hover { color: var(--theme-color); }
 
-        .village-wrapper {
+        .cinematic-stage {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 70vh;
+            margin: 20px auto;
+            border: 4px ridge var(--theme-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 0 60px rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .cinematic-stage video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .interactive-overlay-panel {
+            display: none;
             max-width: 1050px;
             width: 92%;
-            margin: 25px auto;
+            margin: 20px auto;
             background: var(--panel-bg);
             border: 4px ridge var(--theme-color);
             border-radius: 16px;
-            padding: 35px;
-            box-shadow: 0 0 70px rgba(0,0,0,0.95), inset 0 0 30px rgba(0,0,0,0.6);
+            padding: 30px;
             text-align: center;
+            box-shadow: 0 0 70px rgba(0,0,0,0.95);
         }
-
-        h1 { color: var(--theme-color); font-size: 2.2rem; margin-top: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(255,215,0,0.5); }
-        p.subtitle { font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
 
         .village-hud {
             display: flex;
@@ -71,80 +143,6 @@
         }
         .village-hud span { color: #ffe875; font-weight: bold; }
 
-        /* Cinematic Guild Table Presentation */
-        .cinematic-guild-table {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 20px;
-            background: rgba(5, 12, 10, 0.92);
-            border: 2px solid rgba(255, 215, 0, 0.6);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
-            text-align: left;
-            align-items: center;
-        }
-
-        .npc-portrait-frame {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #1b2e25, #0a1410);
-            border: 3px ridge var(--theme-color);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 3.5rem;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            position: relative;
-        }
-
-        .npc-portrait-frame span {
-            font-size: 0.75rem;
-            color: var(--theme-color);
-            text-transform: uppercase;
-            margin-top: 8px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .dialogue-content-box h3 {
-            color: var(--theme-color);
-            margin: 0 0 10px 0;
-            font-size: 1.15rem;
-            text-transform: uppercase;
-        }
-
-        .dialogue-content-box p {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-main);
-            margin: 0 0 15px 0;
-        }
-
-        .action-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .action-btn {
-            background: linear-gradient(135deg, #16261f, #09120e);
-            border: 1px solid var(--theme-color);
-            color: var(--text-main);
-            padding: 12px 16px;
-            text-align: left;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            transition: all 0.2s ease;
-        }
-        .action-btn:hover { background: var(--theme-color); color: #0b0f0e; transform: scale(1.01); box-shadow: 0 0 20px var(--theme-color); }
-
         .royal-btn {
             background: linear-gradient(to bottom, var(--theme-color), #aa820a);
             color: #0b0f0e;
@@ -158,27 +156,67 @@
             text-decoration: none;
             transition: 0.2s;
             display: inline-block;
+            margin: 5px;
         }
         .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; }
 
-        .quest-log-status {
-            margin-top: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.8rem;
-            color: #79ff9c;
-            background: #040605;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #335544;
-            text-align: left;
+        #registration-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(5, 12, 10, 0.94);
+            z-index: 5000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-
-        @media(max-width: 800px) {
-            .cinematic-guild-table { grid-template-columns: 1fr; }
+        .reg-box {
+            background: linear-gradient(135deg, #18221e, #0b0f0e);
+            border: 3px solid var(--theme-color);
+            padding: 35px;
+            border-radius: 14px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+        .reg-box input {
+            width: 80%;
+            padding: 10px;
+            background: #040605;
+            border: 1px solid var(--theme-color);
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            border-radius: 4px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1rem;
         }
     </style>
 </head>
-<body onload="initCinematicGuild()">
+<body onload="initCinematicExperience()">
+
+    <!-- Soft Lullaby Audio Element -->
+    <audio id="chamber-lullaby-audio" loop>
+        <source src="rosanna-music-galary.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- YouTube-Style Fullscreen Expand / Decrease Button -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
+
+    <!-- Registration Modal -->
+    <div id="registration-modal">
+        <div class="reg-box">
+            <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.5rem;">📜 Guild Registration Desk</h2>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.88rem; line-height: 1.5; color: #d0e8ff;">
+                Welcome, adventurer. Enter your name to officially join the guild, acknowledge the 10% Sovereign Tax policy, and unlock contracts.
+            </p>
+            <input type="text" id="adventurer-name-input" placeholder="Enter Adventurer Name..." />
+            <br>
+            <button class="royal-btn" onclick="saveRegistration()">Register & Unlock Quests ⚔️</button>
+        </div>
+    </div>
 
     <nav> 
         <a href="index.html">🏠 Home</a>
@@ -188,142 +226,177 @@
         <a href="shop.html">🪙 Imperial Shop</a>
     </nav>
 
-    <div class="village-wrapper">
-        <h1>Cinematic Guild & Village Chamber</h1>
-        <p class="subtitle">Sit at the heavy oak table with Guild Master Vane and regional leaders to review active sovereign contracts.</p>
+    <h1 style="color: var(--theme-color); font-size: 2.2rem; margin: 15px 0 5px 0; text-shadow: 0 0 15px rgba(255,215,0,0.4);">Sovereign Guild & Village Chambers</h1>
+    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 15px;">
+        Experience the cinematic arrival sequence, then speak with Guild Master Vane or visiting villagers.
+    </p>
 
+    <!-- Cinematic Video Sequence Stage -->
+    <div class="cinematic-stage" id="stage-container">
+        <video id="master-cinematic-video" controls autoplay onended="onCinematicFinished()">
+            <source src="village-to-guild-sequence.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Interactive Panel Unlocks After Video -->
+    <div class="interactive-overlay-panel" id="interactive-panel">
+        <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.8rem; text-transform: uppercase;">Command & Contract Hub</h2>
+        
         <div class="village-hud">
-            <div>Imperial Wallet: <span id="hub-coins">0</span> 🪙</div>
-            <div>Royal Treasury Tax Vault: <span id="hub-tax">0</span> 🪙</div>
-            <div>Contracts Fulfilled: <span id="hub-quests-done">0</span></div>
+            <div>Adventurer: <span id="ui-adventurer">Traveler</span></div>
+            <div>Imperial Wallet: <span id="ui-coins">0</span> 🪙</div>
+            <div>Royal Tax Vault: <span id="ui-tax">0</span> 🪙</div>
         </div>
 
-        <!-- Cinematic NPC Table Presentation -->
-        <div class="cinematic-guild-table">
-            <div class="npc-portrait-frame">
-                📜
-                <span id="npc-role-label">Guild Master Vane</span>
-            </div>
-            <div class="dialogue-content-box">
-                <h3 id="contract-title-display">The Frost Provision Shortage</h3>
-                <p id="contract-dialogue-display">
-                    "Welcome to the Guild table, Sovereign. We have active regional contracts requiring your prompt intervention. Review the terms below and choose your decree."
-                </p>
-                <div class="action-options" id="quest-board-list">
-                    <!-- Dynamically populated unique contracts -->
-                </div>
-            </div>
+        <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
+            <button class="royal-btn" onclick="openGuildMasterDialog()">👑 Speak to Guild Master Vane (Official Contracts)</button>
+            <button class="royal-btn" onclick="openVillagerDialog()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">🧑‍🌾 Speak to Visiting Villager (Personal Plea)</button>
+            <button class="royal-btn" onclick="replayCinematic()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Cinematic Video</button>
         </div>
 
-        <div class="quest-log-status" id="hub-log">
-            [Cinematic Chamber Initialized]: Seated at Guild Table. Awaiting Sovereign decree...
+        <div id="dynamic-quest-view" style="background: rgba(4,10,8,0.92); border: 2px solid rgba(255,215,0,0.4); padding: 22px; border-radius: 10px; text-align: left; margin-top: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);">
+            <p style="color: #a0deca; font-family: 'Courier New', monospace; margin: 0;">[System Ready]: Click Guild Master Vane or the Visiting Villager above to review active mission contracts.</p>
         </div>
 
-        <div style="margin-top: 25px;">
-            <a href="map.html" class="royal-btn">🗺️ Return to Empire Map</a>
+        <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="shop.html" class="royal-btn" style="background: linear-gradient(135deg, #0066cc, #003366); font-size: 0.75rem;">🛒 Visit Market Chambers</a>
+            <a href="battle.html" class="royal-btn" style="background: linear-gradient(135deg, #cc0000, #660000); font-size: 0.75rem;">⚔️ Enter Battle Chambers</a>
+            <a href="wilderness.html" class="royal-btn" style="background: linear-gradient(135deg, #2e7d32, #1b5e20); font-size: 0.75rem;">🌲 Explore Wilderness Forest</a>
+            <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ Return to Empire Map</a>
         </div>
     </div>
 
     <script>
-        let hubState = {
+        let playerState = {
             coins: 500,
             treasuryTaxCollected: 0,
-            questsCompleted: 0,
+            adventurerName: "",
             inventory: []
         };
 
-        const uniqueQuests = [
-            {
-                id: 1,
-                title: "The Frost Provision Shortage",
-                npc: "Elder Thomas (North Village)",
-                description: "Deliver vital winter supplies to the northern homesteads.",
-                grossReward: 200,
-                rewardItem: "Winter Fur Pelt",
-                log: "Provisions delivered successfully. Earned a unique Winter Fur Pelt!"
-            },
-            {
-                id: 2,
-                title: "Clearing the Border Outlaws",
-                npc: "Guild Master Vane",
-                description: "Eliminate highway bandits threatening regional trade caravans.",
-                grossReward: 350,
-                rewardItem: "Mercenary Honor Badge",
-                log: "Outlaws neutralized. Guild contract fulfilled with honors!"
-            },
-            {
-                id: 3,
-                title: "Rare Apothecary Flora Gathering",
-                npc: "Apothecary Selena",
-                description: "Harvest glowing medicinal roots from the deep shadows of the wilderness.",
-                grossReward: 250,
-                rewardItem: "Ancient Essence Potion",
-                log: "Rare flora safely turned in to the apothecary."
-            }
-        ];
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+            body.classList.toggle('is-chamber-fullscreen');
 
-        function initCinematicGuild() {
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                fsBtn.title = "Exit Fullscreen";
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                fsBtn.title = "Toggle Fullscreen Mode";
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+
+        function initCinematicExperience() {
+            // Retrieve and sync from Local Storage on load
             const saved = localStorage.getItem('imperial_sanctuary_user');
             if (saved) {
-                const parsed = JSON.parse(saved);
-                hubState.coins = parsed.coins !== undefined ? parsed.coins : 500;
-                hubState.treasuryTaxCollected = parsed.treasuryTaxCollected || 0;
-                hubState.questsCompleted = parsed.questsCompleted || 0;
-                hubState.inventory = parsed.inventory || [];
+                let parsed = JSON.parse(saved);
+                playerState.coins = parsed.coins !== undefined ? parsed.coins : 500;
+                playerState.treasuryTaxCollected = parsed.treasuryTaxCollected || 0;
+                playerState.adventurerName = parsed.adventurerName || "";
+                playerState.inventory = parsed.inventory || [];
             }
-            updateHubDOM();
-            renderQuestBoard();
+
+            document.getElementById('ui-coins').innerText = playerState.coins;
+            document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
+
+            if (playerState.adventurerName) {
+                document.getElementById('ui-adventurer').innerText = playerState.adventurerName;
+            }
         }
 
-        function updateHubDOM() {
-            document.getElementById('hub-coins').innerText = hubState.coins;
-            document.getElementById('hub-tax').innerText = hubState.treasuryTaxCollected;
-            document.getElementById('hub-quests-done').innerText = hubState.questsCompleted;
+        function onCinematicFinished() {
+            document.getElementById('stage-container').style.display = 'none';
+            document.getElementById('interactive-panel').style.display = 'block';
 
-            const saved = localStorage.getItem('imperial_sanctuary_user');
-            let parsed = saved ? JSON.parse(saved) : {};
-            parsed.coins = hubState.coins;
-            parsed.treasuryTaxCollected = hubState.treasuryTaxCollected;
-            parsed.questsCompleted = hubState.questsCompleted;
-            parsed.inventory = hubState.inventory;
-            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
+            // Play soft lullaby background music
+            const audio = document.getElementById('chamber-lullaby-audio');
+            if (audio) {
+                audio.volume = 0.35;
+                audio.play().catch(e => {});
+            }
+
+            // Check local storage state for registration name
+            if (!playerState.adventurerName) {
+                document.getElementById('registration-modal').style.display = 'flex';
+            }
         }
 
-        function renderQuestBoard() {
-            let html = '';
-            uniqueQuests.forEach(quest => {
-                let tax = Math.floor(quest.grossReward * 0.10);
-                let net = quest.grossReward - tax;
-                html += `
-                    <button class="action-btn" onclick="completeQuest(${quest.id})">
-                        <strong>⚔️ ${quest.title}</strong><br>
-                        <span style="font-size: 0.72rem; color: #a0deca;">Giver: ${quest.npc} — ${quest.description}</span><br>
-                        <span style="font-size: 0.72rem; color: var(--theme-color);">Net Payout: ${net} Coins (Gross ${quest.grossReward} - ${tax} Royal Tax) + [${quest.rewardItem}]</span>
-                    </button>
-                `;
-            });
-            document.getElementById('quest-board-list').innerHTML = html;
-        }
+        function replayCinematic() {
+            const audio = document.getElementById('chamber-lullaby-audio');
+            if (audio) { audio.pause(); }
 
-        function completeQuest(questId) {
-            let quest = uniqueQuests.find(q => q.id === questId);
-            if (!quest) return;
-
-            let taxAmount = Math.floor(quest.grossReward * 0.10);
-            let netReward = quest.grossReward - taxAmount;
-
-            hubState.coins += netReward;
-            hubState.treasuryTaxCollected += taxAmount;
-            hubState.questsCompleted++;
-            hubState.inventory.push(quest.rewardItem);
-
-            updateHubDOM();
-
-            document.getElementById('contract-title-display').innerText = quest.title;
-            document.getElementById('contract-dialogue-display').innerText = `"${quest.log}"`;
-            document.getElementById('hub-log').innerHTML = `[Contract Fulfilled]: "${quest.title}" <br> Net Payout: +${netReward} Coins | Tax Vault: +${taxAmount} Coins | Item: ${quest.rewardItem}`;
+            document.getElementById('interactive-panel').style.display = 'none';
+            const stage = document.getElementById('stage-container');
+            stage.style.display = 'flex';
             
-            alert(`✦ Contract Fulfilled: "${quest.title}" ✦\n\n- Gross Reward: ${quest.grossReward} Coins\n- Royal Tax (10% to Treasury): -${taxAmount} Coins\n- Net Payout to Wallet: ${netReward} Coins\n- Unique Item Secured: ${quest.rewardItem}`);
+            const video = document.getElementById('master-cinematic-video');
+            video.currentTime = 0;
+            video.play();
+        }
+
+        function saveRegistration() {
+            let nameInput = document.getElementById('adventurer-name-input').value.trim();
+            if (nameInput) {
+                playerState.adventurerName = nameInput;
+                document.getElementById('ui-adventurer').innerText = nameInput;
+                document.getElementById('registration-modal').style.display = 'none';
+                syncStorage(); // Save immediately to local storage
+                alert(`✦ Welcome, ${nameInput}! Registration complete. Saved to Local Storage. ✦`);
+            } else {
+                alert("Please enter a valid adventurer name.");
+            }
+        }
+
+        function openGuildMasterDialog() {
+            document.getElementById('dynamic-quest-view').innerHTML = `
+                <h3 style="color: var(--theme-color); margin-top:0;">👑 Guild Master Vane's Official Contracts</h3>
+                <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem;">"Welcome to the high table, Sovereign. Eliminate highway bandits threatening our regional supply caravans by heading into the <a href='battle.html' style='color:#ffd700;'>Battle Chambers</a>."</p>
+                <button class="royal-btn" onclick="acceptContract('Clearing the Border Outlaws', 350, 'Mercenary Honor Badge')">⚔️ Accept: Clearing the Border Outlaws (Gross: 350 | Tax: -35 | Net: 315 Coins + Badge)</button>
+            `;
+        }
+
+        function openVillagerDialog() {
+            document.getElementById('dynamic-quest-view').innerHTML = `
+                <h3 style="color: #79ff9c; margin-top:0;">🧑‍🌾 Visiting Villager's Personal Plea</h3>
+                <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem;">"Please, brave traveler! Our northern homesteads survived the frost, but we need emergency provisions gathered from the <a href='shop.html' style='color:#79ff9c;'>Market Stalls</a> or foraged in the <a href='wilderness.html' style='color:#79ff9c;'>Wilderness Forest</a>."</p>
+                <button class="royal-btn" onclick="acceptContract('The Frost Provision Shortage', 200, 'Winter Fur Pelt')" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">📦 Accept: Provision Relief (Gross: 200 | Tax: -20 | Net: 180 Coins + Pelt)</button>
+            `;
+        }
+
+        function acceptContract(title, gross, item) {
+            let tax = Math.floor(gross * 0.10);
+            let net = gross - tax;
+            playerState.coins += net;
+            playerState.treasuryTaxCollected += tax;
+            if(!playerState.inventory) playerState.inventory = [];
+            playerState.inventory.push(item);
+            
+            syncStorage(); // Save updated wallet, tax vault, and inventory to local storage
+            
+            document.getElementById('ui-coins').innerText = playerState.coins;
+            document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
+
+            alert(`✦ Contract Fulfilled: "${title}" ✦\n\n- Gross Payout: ${gross} Coins\n- Royal Tax (10% to Vault): -${tax} Coins\n- Net Payout to Wallet: ${net} Coins\n- Unique Item Secured: ${item}\n\n[Local Storage Updated]`);
+        }
+
+        function syncStorage() {
+            let saved = localStorage.getItem('imperial_sanctuary_user');
+            let parsed = saved ? JSON.parse(saved) : {};
+            parsed.coins = playerState.coins;
+            parsed.treasuryTaxCollected = playerState.treasuryTaxCollected;
+            parsed.adventurerName = playerState.adventurerName;
+            parsed.inventory = playerState.inventory;
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
         }
     </script>
 </body>
