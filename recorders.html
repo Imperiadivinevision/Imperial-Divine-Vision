@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Empire: Recorders' Chamber Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-bright: #ffe875;
+            --text-light: #f5f2eb;
+            --glow-gold: 0 0 50px rgba(212, 175, 55, 1);
+            --glow-emerald: 0 0 40px rgba(0, 255, 150, 0.9);
+        }
+
+        @keyframes emeraldBlueBreathing {
+            0% { background-color: #030b14; }
+            50% { background-color: #021a14; }
+            100% { background-color: #030b14; }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            animation: emeraldBlueBreathing 12s ease infinite;
+            color: var(--text-light);
+            font-family: 'Cinzel', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 12px;
+            width: 100%;
+            background: linear-gradient(180deg, #18221e, #0b0f0e);
+            border-bottom: 3px ridge var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+        }
+
+        header h1 {
+            color: var(--gold);
+            margin: 0;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            background: rgba(11, 15, 14, 0.95);
+            padding: 8px;
+            gap: 20px;
+            width: 100%;
+            border-bottom: 2px solid var(--gold);
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-bar a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .nav-bar a:hover { color: var(--gold); text-shadow: 0 0 12px var(--gold); }
+
+        .chamber-container {
+            max-width: 900px;
+            width: 92%;
+            margin: 25px auto;
+            background: rgba(10, 15, 13, 0.94);
+            border: 3px ridge var(--gold);
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+        }
+
+        .chamber-container h2 {
+            color: var(--gold);
+            text-align: center;
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+        }
+
+        .chamber-container p {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: #d0e8ff;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .social-feed-card {
+            background: rgba(0, 20, 15, 0.85);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 15px;
+            text-align: left;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+        }
+
+        .social-feed-card h4 {
+            color: var(--gold-bright);
+            margin: 0 0 6px 0;
+            font-size: 0.95rem;
+        }
+
+        .social-feed-card p {
+            font-size: 0.82rem;
+            color: #d0e8ff;
+            margin: 0 0 10px 0;
+            text-align: left;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .comment-section {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 10px;
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 0.75rem;
+            color: #b5d8c5;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .comment-input-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .comment-input-row input {
+            flex: 1;
+            background: #0b0f0e;
+            border: 1px solid var(--gold);
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--gold), #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.5);
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+        }
+        .btn:hover { background: #fff; color: #0b0f0e; box-shadow: 0 0 25px var(--gold); transform: scale(1.05); }
+
+        .top-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 40, 25, 0.8);
+            border: 1px solid var(--gold);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sovereign Empire: Recorders' Chamber Hub</h1>
+    </header>
+
+    <div class="nav-bar">
+        <a href="gameplay.html">⚔️ Battle Arena</a>
+        <a href="shop.html">🪙 Shop & Supplies</a>
+        <a href="index.html">🏠 Sanctuary Home</a>
+        <a href="map.html">🗺️ Map</a>
+    </div>
+
+    <div class="chamber-container">
+        <h2>🎥 The Recorders' Social Archive</h2>
+        <p>Explore community tutorials, watch epic fight replays, drop likes, and post your comments below!</p>
+
+        <div class="top-action-bar">
+            <div>Gold Wallet: <strong id="hub-coins" style="color: var(--gold-bright);">500</strong> 🪙</div>
+            <button class="btn" onclick="recordNewTutorial()" style="background: linear-gradient(135deg, #00ffaa, #008855); color: #000;">🎥 Record & Post Tutorial (+100 🪙)</button>
+        </div>
+
+        <div id="hub-social-feed">
+            <!-- Dynamically loaded posts -->
+        </div>
+    </div>
+
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        document.addEventListener('click', () => {
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        }, { once: true });
+
+        let game = {
+            coins: parseInt(localStorage.getItem('sovereign_coins')) || 500,
+            socialPosts: JSON.parse(localStorage.getItem('sovereign_social_posts')) || [
+                { id: 1, author: "Sovereign Master Tegra", title: "Stage 1 Tactical Tutorial", desc: "How to chain kicks and shields against the Vanguard AI.", likes: 14, comments: ["Amazing tutorial!", "This helped me clear Stage 1 easily!"] },
+                { id: 2, author: "Guardian Alliance", title: "Smart AI Counter Strategy", desc: "Timing your Phoenix Eagle strike for maximum combo heat.", likes: 8, comments: ["Genius strategy!"] }
+            ]
+        };
+
+        window.onload = function() {
+            updateHubDOM();
+            renderHubFeed();
+        };
+
+        function updateHubDOM() {
+            document.getElementById('hub-coins').innerText = game.coins;
+            localStorage.setItem('sovereign_coins', game.coins);
+            localStorage.setItem('sovereign_social_posts', JSON.stringify(game.socialPosts));
+        }
+
+        function renderHubFeed() {
+            const container = document.getElementById('hub-social-feed');
+            let html = '';
+
+            game.socialPosts.forEach(post => {
+                let commentsHtml = post.comments.map(c => `<div>> ${c}</div>`).join('');
+                html += `
+                    <div class="social-feed-card">
+                        <h4>🎥 ${post.title} <span style="font-size: 0.7rem; color: #a0deca;">by ${post.author}</span></h4>
+                        <p>${post.desc}</p>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                            <button class="btn" onclick="likeHubPost(${post.id})" style="padding: 5px 10px; font-size: 0.7rem;">❤️ Like (${post.likes})</button>
+                        </div>
+                        <div class="comment-section">
+                            ${commentsHtml}
+                        </div>
+                        <div class="comment-input-row">
+                            <input type="text" id="hub-input-${post.id}" placeholder="Leave a comment..." />
+                            <button class="btn" onclick="addHubComment(${post.id})" style="padding: 5px 10px; font-size: 0.7rem;">Send</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function likeHubPost(postId) {
+            let post = game.socialPosts.find(p => p.id === postId);
+            if (post) {
+                post.likes++;
+                updateHubDOM();
+                renderHubFeed();
+            }
+        }
+
+        function addHubComment(postId) {
+            const inputEl = document.getElementById(`hub-input-${postId}`);
+            let txt = inputEl.value.trim();
+            if (txt) {
+                let post = game.socialPosts.find(p => p.id === postId);
+                if (post) {
+                    post.comments.push(`Tegra: ${txt}`);
+                    inputEl.value = '';
+                    updateHubDOM();
+                    renderHubFeed();
+                }
+            }
+        }
+
+        function recordNewTutorial() {
+            game.coins += 100;
+            let newPost = {
+                id: Date.now(),
+                author: "Sovereign Tegra",
+                title: "Official Strategy Guide & Replay",
+                desc: "A masterclass recording on how to conquer higher stages with smart combo pacing.",
+                likes: 1,
+                comments: ["Brilliant guide! Thanks for sharing."]
+            };
+            game.socialPosts.unshift(newPost);
+            updateHubDOM();
+            renderHubFeed();
+            alert("🎥 Tutorial recorded and posted successfully! +100 Gold Coins added to your wallet.");
+        }
+    </script>
+</body>
+</html>
