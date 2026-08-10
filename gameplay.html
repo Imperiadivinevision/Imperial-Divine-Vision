@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Thunderous Card Mastery Arena</title>
+    <title>Sovereign Empire: Sovereign Blue Master Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,8 +14,7 @@
             --dark-bg: #070908;
             --text-light: #f5f2eb;
             --glow-gold: 0 0 40px rgba(212, 175, 55, 0.9);
-            --glow-blue: 0 0 30px rgba(51, 187, 255, 0.7);
-            --glow-thunder: 0 0 40px rgba(255, 230, 0, 0.9);
+            --glow-blue: 0 0 35px rgba(0, 119, 255, 0.8);
         }
 
         @keyframes bgShift {
@@ -111,8 +110,9 @@
             height: calc(100vh - 100px);
         }
 
+        /* Deep Sovereign Blue Left Deck with distinct borders */
         .left-cards-deck {
-            background: rgba(17, 23, 21, 0.95);
+            background: linear-gradient(145deg, #030b14, #010408);
             border: 2px solid var(--gold);
             border-radius: 10px;
             padding: 12px;
@@ -134,27 +134,27 @@
         }
 
         .blueprint-card {
-            background: linear-gradient(145deg, #0d2333, #071520);
+            background: linear-gradient(145deg, #004488, #002244);
             border: 2px solid var(--gold);
             border-radius: 8px;
             padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(51, 187, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
             position: relative;
         }
 
         .blueprint-card:hover {
             transform: translateY(-5px) scale(1.02);
-            background: linear-gradient(145deg, #14354c, #0d2333);
+            background: linear-gradient(145deg, #0055aa, #003366);
             box-shadow: var(--glow-blue), var(--glow-gold);
-            border-color: #33bbff;
+            border-color: #fff;
         }
 
         .blueprint-card h4 { color: var(--gold-bright); margin: 0 0 2px 0; font-size: 0.8rem; text-transform: uppercase; }
-        .blueprint-card p { font-size: 0.65rem; color: #a0c4de; margin: 0; font-family: 'Playfair Display', serif; }
-        .blueprint-card .card-icon { font-size: 1.5rem; margin-bottom: 2px; display: block; filter: drop-shadow(0 0 8px #33bbff); }
+        .blueprint-card p { font-size: 0.65rem; color: #d0e8ff; margin: 0; font-family: 'Playfair Display', serif; }
+        .blueprint-card .card-icon { font-size: 1.5rem; margin-bottom: 2px; display: block; filter: drop-shadow(0 0 8px #fff); }
 
         .right-arena-panel {
             display: flex;
@@ -189,11 +189,10 @@
             overflow: hidden;
         }
 
-        /* Cinematic Visual Effect Overlays */
         .arena-flash-shield {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(51,187,255,0.5) 0%, rgba(212,175,55,0.3) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(0,119,255,0.5) 0%, rgba(212,175,55,0.3) 60%, transparent 100%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -212,7 +211,6 @@
         }
         .arena-flash-strike.active { opacity: 1; }
 
-        /* Thunder & Lightning Flash */
         .arena-flash-thunder {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -272,32 +270,38 @@
         }
 
         .fighter-block {
-            width: 105px;
-            height: 135px;
-            background: linear-gradient(135deg, #33bbff, #005588);
-            border: 3px solid #fff;
-            border-radius: 10px;
+            width: 110px;
+            height: 140px;
+            background: linear-gradient(135deg, #0066cc, #002244);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
             margin: 0 auto;
             box-shadow: var(--glow-blue);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+            position: relative;
         }
+        .fighter-block span { font-size: 0.65rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
 
         .boss-block {
-            width: 105px;
-            height: 135px;
-            background: linear-gradient(135deg, #ff4d4d, #880000);
-            border: 3px solid #fff;
-            border-radius: 10px;
+            width: 110px;
+            height: 140px;
+            background: linear-gradient(135deg, #cc0000, #440000);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
             margin: 0 auto;
             box-shadow: 0 0 30px rgba(255, 77, 77, 0.8);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+            position: relative;
         }
+        .boss-block span { font-size: 0.65rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
 
         .health-bar-container {
             width: 100%;
@@ -316,7 +320,7 @@
             transition: width 0.3s ease;
         }
 
-        .player-hp { background: linear-gradient(90deg, #33bbff, #0088cc) !important; }
+        .player-hp { background: linear-gradient(90deg, #33bbff, #005588) !important; }
 
         .vs-badge {
             font-size: 2.2rem;
@@ -365,7 +369,7 @@
         }
         .btn:hover { background: #fff; color: #0b0f0e; box-shadow: 0 0 15px var(--gold); }
 
-        #modal-overlay {
+        #modal-overlay, #guide-modal-overlay {
             display: flex;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -377,28 +381,29 @@
             backdrop-filter: blur(6px);
         }
 
-        #modal-content {
-            background: linear-gradient(135deg, #181205, #2c220a);
+        #modal-content, #guide-modal-content {
+            background: linear-gradient(135deg, #081a2d, #030a14);
             border: 3px solid var(--gold);
             padding: 30px;
             text-align: center;
             border-radius: 14px;
-            max-width: 520px;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.7);
+            max-width: 540px;
+            box-shadow: 0 0 60px rgba(0, 119, 255, 0.6);
         }
 
-        #modal-content h1 { font-size: 1.8rem; margin: 0 0 12px 0; color: var(--gold); text-transform: uppercase; }
-        #modal-content p { font-size: 0.9rem; line-height: 1.5; color: var(--text-light); font-family: 'Playfair Display', serif; margin-bottom: 15px; }
+        #modal-content h1, #guide-modal-content h1 { font-size: 1.6rem; margin: 0 0 10px 0; color: var(--gold); text-transform: uppercase; }
+        #modal-content p, #guide-modal-content p { font-size: 0.85rem; line-height: 1.5; color: var(--text-light); font-family: 'Playfair Display', serif; margin-bottom: 12px; text-align: left; }
 
         .allocation-box {
             background: rgba(0,0,0,0.6);
             border: 1px solid var(--gold);
             padding: 10px;
             border-radius: 6px;
-            margin: 10px 0;
+            margin: 8px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 0.8rem;
         }
 
         @keyframes shake {
@@ -416,15 +421,36 @@
 
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
 
-    <div id="modal-overlay">
+    <!-- How To Play Guide Modal -->
+    <div id="guide-modal-overlay">
+        <div id="guide-modal-content">
+            <h1>📜 Sovereign Arena: How to Play</h1>
+            <p>
+                <strong>Welcome to the Sovereign Arena!</strong> Manage your tactical cards and conquer campaign tiers:
+            </p>
+            <p>
+                1. <strong>Stance & Weapon Switching:</strong> Cards like <em>Kick Strike</em> (Sword ⚔️), <em>Deploy Shield</em> (Shield 🛡️), or <em>Phoenix Eagle</em> (Eagle 🦅) transform your Sovereign Guardian's stance in real-time.
+            </p>
+            <p>
+                2. <strong>Touch & Clash Combat:</strong> Clicking a card sends your block marching forward to physically touch and clash with the enemy.
+            </p>
+            <p>
+                3. <strong>Shop & Local Storage:</strong> All progress, stats, and gold coins are automatically saved to local storage. If you need more coins, visit the shop!
+            </p>
+            <button class="btn" onclick="closeGuideModal()" style="margin-top: 10px; padding: 10px 25px; font-size: 0.85rem;">Proceed to Point Allocation 🛡️</button>
+        </div>
+    </div>
+
+    <!-- Pre-Battle Point Allocation Modal -->
+    <div id="modal-overlay" style="display: none;">
         <div id="modal-content">
             <h1>🛡️ Pre-Battle Point Allocation</h1>
-            <p>
-                Strengthen your Sovereign Guardian before confronting the enemy! Allocate your gold strategically to dominate the arena.
+            <p style="text-align: center;">
+                Strengthen your Sovereign Guardian before confronting the enemy! Invest your gold coins wisely.
             </p>
             <div id="allocation-controls">
                 <div class="allocation-box">
-                    <span>Available Gold: <strong id="alloc-coins" style="color: var(--gold-bright);">1615</strong> 🪙</span>
+                    <span>Available Gold: <strong id="alloc-coins" style="color: var(--gold-bright);">2115</strong> 🪙</span>
                 </div>
                 <div class="allocation-box">
                     <span>Reinforce Shield Power (+30) [Cost: 60 Gold]</span>
@@ -434,37 +460,43 @@
                     <span>Reinforce NPC Life Span (+40 HP) [Cost: 60 Gold]</span>
                     <button class="btn" onclick="allocatePoints('hp', 60, 40)">Invest</button>
                 </div>
+                <div class="allocation-box">
+                    <span>Need More Gold? Visit the Shop 🪙</span>
+                    <a href="shop.html" class="btn">Open Shop</a>
+                </div>
             </div>
-            <button class="btn" onclick="startBattleFromAllocation()" style="margin-top: 15px; padding: 12px 25px; font-size: 0.9rem;">Enter Arena ⚔️</button>
+            <button class="btn" onclick="startBattleFromAllocation()" style="margin-top: 12px; padding: 12px 25px; font-size: 0.9rem;">Enter Arena ⚔️</button>
         </div>
     </div>
 
     <header>
-        <h1>Sovereign Empire: Thunderous Card Mastery Arena</h1>
+        <h1>Sovereign Empire: Sovereign Blue Master Edition</h1>
     </header>
 
     <div class="nav-bar">
-        <a href="battle.html">⚔️ Return to Battle Hub</a>
+        <a href="battle.html">⚔️ Battle Hub</a>
+        <a href="shop.html">🪙 Shop</a>
         <a href="index.html">🏠 Sanctuary Home</a>
         <a href="map.html">🗺️ Map</a>
+        <a href="#" onclick="openGuideModal(); return false;">❓ How to Play</a>
     </div>
 
     <div class="blueprint-container">
         
-        <!-- Left Deck with Unlocked Cards -->
+        <!-- Deep Sovereign Blue Left Deck -->
         <div class="left-cards-deck" id="left-cards-container">
             <h3>Sovereign Cards</h3>
             
             <div class="blueprint-card" onclick="playerAction('kick')">
                 <span class="card-icon">⚔️</span>
                 <h4>Kick Strike</h4>
-                <p>March forward & slash enemy energy.</p>
+                <p>March forward with Sword stance.</p>
             </div>
 
             <div class="blueprint-card" onclick="playerAction('shield')">
                 <span class="card-icon">🛡️</span>
                 <h4>Deploy Shield</h4>
-                <p>Activate light barrier to absorb damage.</p>
+                <p>Switch to Shield guard stance.</p>
             </div>
 
             <div class="blueprint-card" onclick="playerAction('dodge')">
@@ -476,7 +508,7 @@
             <div class="blueprint-card" onclick="playerAction('phoenix')" style="border-color: #ff9933;">
                 <span class="card-icon">🦅</span>
                 <h4>Phoenix Eagle</h4>
-                <p>Unleash blazing sacred fire strike.</p>
+                <p>Transform into soaring Eagle stance.</p>
             </div>
 
             <div class="blueprint-card" onclick="playerAction('soul')" style="border-color: #9933ff;">
@@ -490,9 +522,9 @@
         <div class="right-arena-panel">
             
             <div class="top-light-bar">
-                <div>Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Temple of Echoes</span></div>
-                <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">1615</span> 🪙</div>
-                <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">240</span> 🛡️</div>
+                <div>Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Storm Peak</span></div>
+                <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">2115</span> 🪙 (<a href="shop.html" style="color: var(--gold);">Shop</a>)</div>
+                <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">365</span> 🛡️</div>
                 <div><a href="battle.html" class="btn" style="padding: 4px 8px; font-size: 0.65rem;">Hub</a></div>
             </div>
 
@@ -504,20 +536,20 @@
                 <div class="arena-header-status">
                     <div class="combatant-status-box">
                         <h4 id="player-name-lbl" style="color: #33bbff; margin: 0; font-size: 0.85rem;">Sovereign Guardian</h4>
-                        <div style="font-size: 0.7rem; color: #f5f2eb;">HP: <span id="player-hp-text">40</span>/100</div>
+                        <div style="font-size: 0.7rem; color: #f5f2eb;">HP: <span id="player-hp-text">28</span>/100</div>
                         <div class="health-bar-container">
-                            <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 40%;"></div>
+                            <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 28%;"></div>
                         </div>
                     </div>
 
                     <div style="text-align: center;">
-                        <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 0.8rem; text-transform: uppercase;">Corrupted Mage</h2>
-                        <div id="boss-intent" style="font-size: 0.65rem; color: #ff9933; font-family: 'Playfair Display', serif;">⚡ Preparing Mystic Surge</div>
+                        <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 0.8rem; text-transform: uppercase;">Border Marauder</h2>
+                        <div id="boss-intent" style="font-size: 0.65rem; color: #ff9933; font-family: 'Playfair Display', serif;">🛡️ Enemy Stance: Shield Guard</div>
                     </div>
 
                     <div class="combatant-status-box">
-                        <h4 id="boss-name-lbl" style="color: #ff6666; margin: 0; font-size: 0.85rem;">Corrupted Mage</h4>
-                        <div style="font-size: 0.7rem; color: #f5f2eb;">Energy: <span id="boss-hp-text">205</span>/205</div>
+                        <h4 id="boss-name-lbl" style="color: #ff6666; margin: 0; font-size: 0.85rem;">Border Marauder</h4>
+                        <div style="font-size: 0.7rem; color: #f5f2eb;">Energy: <span id="boss-hp-text">235</span>/160</div>
                         <div class="health-bar-container">
                             <div class="health-bar-fill" id="boss-hp-bar" style="width: 100%;"></div>
                         </div>
@@ -526,22 +558,28 @@
                 
                 <div class="combatants-widescreen">
                     <div class="fighter-lane" id="player-lane" style="transform: translateX(0px);">
-                        <div class="fighter-block" id="player-avatar-block">⚔️</div>
+                        <div class="fighter-block" id="player-avatar-block">
+                            ⚔️
+                            <span id="player-stance-label">Sword Stance</span>
+                        </div>
                     </div>
 
                     <div class="vs-badge">VS</div>
 
                     <div class="fighter-lane" id="boss-lane" style="transform: translateX(0px);">
-                        <div class="boss-block" id="boss-avatar-block">🛡️</div>
+                        <div class="boss-block" id="boss-avatar-block">
+                            🛡️
+                            <span id="boss-stance-label">Shield Guard</span>
+                        </div>
                     </div>
                 </div>
 
                 <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.75rem; z-index: 5;" id="arena-action-status">
-                    Thunderous arena active. Conquer bosses to unlock legendary custom skills!
+                    Sovereign Blue master deck active. Click cards to make blocks touch and clash!
                 </div>
 
                 <div class="battle-log" id="gameplay-log">
-                    [Thunder Mastery Chamber Ready]: Victory card rewards online!
+                    [Master Edition Synchronized]: Saved to local storage successfully.
                 </div>
 
                 <div class="credits-footer">
@@ -609,12 +647,12 @@
         }
 
         let game = {
-            stage: parseInt(localStorage.getItem('sovereign_stage')) || 7,
-            coins: parseInt(localStorage.getItem('sovereign_coins')) || 1615,
-            playerHp: parseInt(localStorage.getItem('sovereign_life')) || 40,
-            shieldPower: parseInt(localStorage.getItem('sovereign_shield')) || 240,
-            bossMaxHp: 205,
-            bossHp: parseInt(localStorage.getItem('sovereign_bosshp')) || 205,
+            stage: parseInt(localStorage.getItem('sovereign_stage')) || 9,
+            coins: parseInt(localStorage.getItem('sovereign_coins')) || 2115,
+            playerHp: parseInt(localStorage.getItem('sovereign_life')) || 28,
+            shieldPower: parseInt(localStorage.getItem('sovereign_shield')) || 365,
+            bossMaxHp: 235,
+            bossHp: parseInt(localStorage.getItem('sovereign_bosshp')) || 235,
             maxStages: 50,
             unlockedCards: JSON.parse(localStorage.getItem('sovereign_unlocked')) || []
         };
@@ -639,13 +677,26 @@
             initStage();
             renderUnlockedCards();
             updateDOM();
-            openAllocationModal();
         };
+
+        function closeGuideModal() {
+            playSound('click');
+            document.getElementById('guide-modal-overlay').style.display = 'none';
+            openAllocationModal();
+        }
+
+        function openGuideModal() {
+            playSound('click');
+            document.getElementById('guide-modal-overlay').style.display = 'flex';
+        }
+
+        function openAllocationModal() {
+            document.getElementById('alloc-coins').innerText = game.coins;
+            document.getElementById('modal-overlay').style.display = 'flex';
+        }
 
         function renderUnlockedCards() {
             const container = document.getElementById('left-cards-container');
-            // Keep default cards, append unlocked ones
-            // Remove previously added dynamic cards first to avoid duplicates
             document.querySelectorAll('.dynamic-card').forEach(el => el.remove());
 
             game.unlockedCards.forEach(cardId => {
@@ -665,11 +716,6 @@
             });
         }
 
-        function openAllocationModal() {
-            document.getElementById('alloc-coins').innerText = game.coins;
-            document.getElementById('modal-overlay').style.display = 'flex';
-        }
-
         function allocatePoints(type, cost, value) {
             playSound('click');
             if (game.coins >= cost) {
@@ -686,7 +732,8 @@
                 document.getElementById('alloc-coins').innerText = game.coins;
                 updateDOM();
             } else {
-                alert("Insufficient Gold Coins for allocation!");
+                alert("Insufficient Gold Coins! Redirecting to the Shop...");
+                window.location.href = 'shop.html';
             }
         }
 
@@ -775,6 +822,14 @@
             setTimeout(() => floatEl.remove(), 800);
         }
 
+        function setPlayerStance(icon, label) {
+            document.getElementById('player-avatar-block').innerHTML = `${icon}<span id="player-stance-label">${label}</span>`;
+        }
+
+        function setBossStance(icon, label) {
+            document.getElementById('boss-avatar-block').innerHTML = `${icon}<span id="boss-stance-label">${label}</span>`;
+        }
+
         function animateTouchAndClash() {
             const playerLane = document.getElementById('player-lane');
             const bossLane = document.getElementById('boss-lane');
@@ -782,12 +837,12 @@
             
             playerLane.style.transform = 'translateX(140px)';
             bossLane.style.transform = 'translateX(-140px)';
-            statusLbl.innerText = "⚡ Thunderous clash! Blocks collide with overwhelming power!";
+            statusLbl.innerText = "⚡ Dynamic stance clash! Blocks collide with weapon impact!";
             
             setTimeout(() => {
                 playerLane.style.transform = 'translateX(0px)';
                 bossLane.style.transform = 'translateX(0px)';
-                statusLbl.innerText = "Thunderous arena active. Unleash your master skills!";
+                statusLbl.innerText = "Sovereign Blue master deck active. Click cards to make blocks touch and clash!";
             }, 450);
         }
 
@@ -802,36 +857,40 @@
             if (type === 'kick') {
                 playSound('hit');
                 triggerVisualEffect('strike');
+                setPlayerStance('⚔️', 'Sword Stance');
                 animateTouchAndClash();
                 playerDmg += 10;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg}`, false);
-                logMsg(`Kick Strike executed! Dealt -${playerDmg} DMG.`);
+                logMsg(`Kick Strike executed with Sword Stance! Dealt -${playerDmg} DMG.`);
             } else if (type === 'shield') {
                 playSound('shield');
                 triggerVisualEffect('shield');
+                setPlayerStance('🛡️', 'Shield Stance');
                 game.shieldPower += 20;
                 showFloatingDmg(`+20 Shield`, true);
-                logMsg(`Shield deployed! Defense reinforced to ${game.shieldPower}.`);
+                logMsg(`Switched to Shield Stance! Defense reinforced to ${game.shieldPower}.`);
             } else if (type === 'dodge') {
                 playSound('hit');
                 triggerVisualEffect('strike');
-                animateTouchAndClash();
+                setPlayerStance('💨', 'Dodge Stance');
                 playerDmg = 18;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg}`, false);
-                logMsg(`Tactical Dodge & counter dealt -${playerDmg} DMG.`);
+                logMsg(`Tactical Dodge stance active & counter dealt -${playerDmg} DMG.`);
             } else if (type === 'phoenix') {
                 playSound('divine');
                 triggerVisualEffect('strike');
+                setPlayerStance('🦅', 'Eagle Stance');
                 animateTouchAndClash();
                 playerDmg = 45 + (game.stage * 4);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg} 🔥`, false);
-                logMsg(`🦅 Phoenix Eagle invoked! Blazing fire strike dealt -${playerDmg} DMG!`);
+                logMsg(`🦅 Phoenix Eagle Stance invoked! Blazing fire strike dealt -${playerDmg} DMG!`);
             } else if (type === 'soul') {
                 playSound('divine');
                 triggerVisualEffect('shield');
+                setPlayerStance('✨', 'Divine Stance');
                 let healAmt = 50;
                 game.playerHp = Math.min(100, game.playerHp + healAmt);
                 showFloatingDmg(`+${healAmt} HP ✨`, true);
@@ -839,6 +898,7 @@
             } else if (type === 'thunder') {
                 playSound('thunder');
                 triggerVisualEffect('thunder');
+                setPlayerStance('⚡', 'Thunder Stance');
                 animateTouchAndClash();
                 playerDmg = 70 + (game.stage * 5);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
@@ -847,6 +907,7 @@
             } else if (type === 'solar') {
                 playSound('divine');
                 triggerVisualEffect('strike');
+                setPlayerStance('☀️', 'Solar Stance');
                 animateTouchAndClash();
                 playerDmg = 60 + (game.stage * 4);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
@@ -855,6 +916,7 @@
             } else if (type === 'frost') {
                 playSound('shield');
                 triggerVisualEffect('shield');
+                setPlayerStance('❄️', 'Glacial Stance');
                 game.shieldPower += 40;
                 showFloatingDmg(`+40 Shield ❄️`, true);
                 logMsg(`❄️ Glacial Aegis froze incoming threats! Shield increased to ${game.shieldPower}.`);
@@ -865,18 +927,15 @@
                 let reward = 90 * game.stage;
                 game.coins += reward;
                 
-                // Pick a random unowned card unlock
                 let unowned = possibleUnlocks.filter(c => !game.unlockedCards.includes(c.id));
-                let rewardMsg = "";
                 if (unowned.length > 0) {
                     let earnedCard = unowned[Math.floor(Math.random() * unowned.length)];
                     game.unlockedCards.push(earnedCard.id);
-                    rewardMsg = `\n🎁 NEW SKILL UNLOCKED: ${earnedCard.name}!`;
                     logMsg(`🎉 LEGENDARY REWARD: Unlocked card skill [${earnedCard.name}]!`);
                 }
 
                 logMsg(`🎉 Campaign Tier Conquered! Earned +${reward} Gold Coins.`);
-                alert(`👑 EPIC VICTORY! Boss Defeated! Earned +${reward} Gold Coins.${reward} Coins & New Skills! ✦`);
+                alert(`👑 EPIC VICTORY! Boss Defeated! Earned +${reward} Gold Coins & New Stance Skills! ✦`);
                 
                 if (game.stage < game.maxStages) {
                     game.stage++;
@@ -894,28 +953,31 @@
                 }
             } else {
                 setTimeout(() => {
-                    let bossSkills = ['Mystic Surge 🔥', 'Shadow Void Slash ⚔️', 'Imperium Tempest ⚡', 'Corrupted Smash 🛡️'];
-                    let chosenSkill = bossSkills[Math.floor(Math.random() * bossSkills.length)];
+                    let bossStances = [
+                        { icon: '⚔️', label: 'Sword Stance', name: 'Void Slash ⚔️' },
+                        { icon: '🛡️', label: 'Shield Stance', name: 'Iron Guard 🛡️' },
+                        { icon: '🦅', label: 'Eagle Stance', name: 'Hellfire Surge 🔥' }
+                    ];
+                    let chosenStance = bossStances[Math.floor(Math.random() * bossStances.length)];
+                    setBossStance(chosenStance.icon, chosenStance.label);
+
                     let bossDmg = 15 + (game.stage * 3);
 
                     if (type === 'shield' || type === 'frost') {
                         bossDmg = Math.max(4, bossDmg - game.shieldPower);
-                        logMsg(`Boss used ${chosenSkill}, but your Shield absorbed the blow (-${bossDmg} HP).`);
+                        logMsg(`Boss switched to ${chosenStance.label} and used ${chosenStance.name}, but your Shield absorbed it (-${bossDmg} HP).`);
                     } else {
-                        logMsg(`⚠️ Boss executed ${chosenSkill}! You took -${bossDmg} damage.`);
+                        logMsg(`⚠️ Boss switched to ${chosenStance.label} and executed ${chosenStance.name}! You took -${bossDmg} damage.`);
                     }
                     game.playerHp = Math.max(0, game.playerHp - bossDmg);
                     showFloatingDmg(`-${bossDmg}`, true);
                     updateDOM();
 
-                    let intents = ["⚡ Preparing Mystic Surge", "⚔️ Charging Void Slash", "🔥 Gathering Hellfire", "🛡️ Raising Iron Guard"];
-                    document.getElementById('boss-intent').innerText = intents[Math.floor(Math.random() * intents.length)];
+                    document.getElementById('boss-intent').innerText = `🛡️ Enemy Stance: ${chosenStance.label}`;
 
                     if (game.playerHp <= 0) {
-                        alert("💀 DEFEAT! Your NPC life span has fallen. Use Divine Soul or Pharmacy to recover.");
-                        game.playerHp = 100;
-                        updateDOM();
-                        openAllocationModal();
+                        alert("💀 DEFEAT! Your NPC life span has fallen. Visit the Shop to recover or upgrade!");
+                        window.location.href = 'shop.html';
                     }
                 }, 500);
             }
