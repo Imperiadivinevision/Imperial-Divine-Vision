@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: 3D Canvas Master Edition</title>
+    <title>Sovereign Empire: Recorders' Social Chamber</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -95,7 +95,7 @@
             justify-content: center;
             background: rgba(11, 15, 14, 0.95);
             padding: 6px;
-            gap: 20px;
+            gap: 15px;
             border-bottom: 2px solid var(--gold);
             font-size: 0.75rem;
             font-weight: bold;
@@ -147,7 +147,6 @@
             padding-bottom: 4px;
         }
 
-        /* 3D Rotating & Tilting Blueprint Cards */
         .blueprint-card {
             background: linear-gradient(145deg, #004488, #002244);
             border: 2px solid var(--gold);
@@ -192,7 +191,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
 
-        /* 3D Perspective Arena Screen & Interactive Canvas Layer */
         .massive-arena-screen {
             flex: 1;
             background: rgba(10, 15, 13, 0.92);
@@ -206,10 +204,6 @@
             box-shadow: inset 0 0 60px rgba(0,0,0,0.9), 0 15px 40px rgba(0,0,0,0.8);
             overflow: hidden;
             transform: perspective(1000px) rotateX(2deg);
-            transition: transform 0.3s ease;
-        }
-        .massive-arena-screen:hover {
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
         }
 
         #particle-canvas {
@@ -299,7 +293,6 @@
             transition: transform 0.25s ease-in-out;
         }
 
-        /* 3D Fighter Cards */
         .fighter-block {
             width: 90px;
             height: 125px;
@@ -446,7 +439,7 @@
             100% { background: linear-gradient(135deg, #031a14, #010b08); border-color: #D4AF37; }
         }
 
-        #modal-overlay, #guide-modal-overlay, #defeat-modal-overlay, #victory-modal-overlay {
+        #modal-overlay, #guide-modal-overlay, #defeat-modal-overlay, #victory-modal-overlay, #recorders-modal-overlay {
             display: flex;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -458,19 +451,21 @@
             backdrop-filter: blur(10px);
         }
 
-        #modal-content, #guide-modal-content, #defeat-modal-content, #victory-modal-content {
+        #modal-content, #guide-modal-content, #defeat-modal-content, #victory-modal-content, #recorders-modal-content {
             animation: modalBgShift 8s ease infinite;
             border: 3px solid var(--gold);
-            padding: 35px;
+            padding: 30px;
             text-align: center;
             border-radius: 16px;
-            max-width: 580px;
+            max-width: 620px;
             width: 90%;
             box-shadow: 0 0 60px rgba(0, 255, 150, 0.4);
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
-        #modal-content h1, #guide-modal-content h1, #defeat-modal-content h1, #victory-modal-content h1 { font-size: 1.6rem; margin: 0 0 10px 0; color: var(--gold); text-transform: uppercase; }
-        #modal-content p, #guide-modal-content p, #defeat-modal-content p, #victory-modal-content p { font-size: 0.85rem; line-height: 1.5; color: var(--text-light); font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: left; }
+        #modal-content h1, #guide-modal-content h1, #defeat-modal-content h1, #victory-modal-content h1, #recorders-modal-content h1 { font-size: 1.5rem; margin: 0 0 8px 0; color: var(--gold); text-transform: uppercase; }
+        #modal-content p, #guide-modal-content p, #defeat-modal-content p, #victory-modal-content p, #recorders-modal-content p { font-size: 0.8rem; line-height: 1.4; color: var(--text-light); font-family: 'Playfair Display', serif; margin-bottom: 10px; text-align: left; }
 
         .current-status-dashboard {
             display: flex;
@@ -478,8 +473,8 @@
             background: rgba(0, 50, 35, 0.8);
             border: 1px solid var(--gold);
             border-radius: 10px;
-            padding: 14px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
         }
 
@@ -489,14 +484,14 @@
             align-items: center;
         }
         .status-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #a0deca;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             font-weight: bold;
         }
         .status-value {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 900;
             color: var(--gold-bright);
             transition: color 0.3s ease, transform 0.3s ease;
@@ -509,21 +504,72 @@
         .allocation-box {
             background: rgba(0, 15, 12, 0.75);
             border: 2px solid rgba(212, 175, 55, 0.5);
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-radius: 8px;
-            margin: 10px 0;
+            margin: 8px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
         }
         .allocation-box:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-3px) scale(1.02);
             background: rgba(0, 45, 30, 0.95);
             border-color: #00ffaa;
             box-shadow: 0 0 25px rgba(0, 255, 170, 0.6);
+        }
+
+        .social-feed-card {
+            background: rgba(0, 20, 15, 0.85);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .social-feed-card h4 {
+            color: var(--gold-bright);
+            margin: 0 0 4px 0;
+            font-size: 0.8rem;
+        }
+
+        .social-feed-card p {
+            font-size: 0.75rem;
+            color: #d0e8ff;
+            margin: 0 0 8px 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .comment-section {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 6px;
+            padding: 6px;
+            margin-top: 6px;
+            max-height: 80px;
+            overflow-y: auto;
+            font-size: 0.68rem;
+            color: #b5d8c5;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .comment-input-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .comment-input-row input {
+            flex: 1;
+            background: #0b0f0e;
+            border: 1px solid var(--gold);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-family: 'Cinzel', serif;
         }
 
         @keyframes shake {
@@ -541,10 +587,29 @@
 
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
 
+    <!-- Recorders' Social Chamber Modal -->
+    <div id="recorders-modal-overlay" style="display: none;">
+        <div id="recorders-modal-content">
+            <h1>🎥 Recorders' Social Chamber</h1>
+            <p style="text-align: center;">
+                Explore community fight tutorials, drop a like, and leave comments on epic victories! Record your own fight to earn **+100 Gold Coins**.
+            </p>
+            
+            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                <button class="btn" onclick="recordAndPostFight()" style="padding: 8px 16px; background: linear-gradient(135deg, #00ffaa, #008855); color: #000;">🎥 Record & Post Fight (+100 🪙)</button>
+                <button class="btn" onclick="closeRecordersModal()" style="padding: 8px 16px;">Close ⚔️</button>
+            </div>
+
+            <div id="social-feed-container">
+                <!-- Dynamically populated recorded fight posts with likes & comments -->
+            </div>
+        </div>
+    </div>
+
     <!-- Defeat Modal Popup -->
     <div id="defeat-modal-overlay" style="display: none;">
         <div id="defeat-modal-content">
-            <h1 style="color: #ff4d4d; font-size: 2rem; text-shadow: 0 0 20px #ff0000;">YOU FAILED! TRY AGAIN</h1>
+            <h1 style="color: #ff4d4d; font-size: 1.8rem; text-shadow: 0 0 20px #ff0000;">YOU FAILED! TRY AGAIN</h1>
             <p style="text-align: center;">
                 The smart enemy AI calculated your movements and overcame your defenses. Use your local coin reserves to revive right here, or return to invest!
             </p>
@@ -555,9 +620,9 @@
                 </div>
             </div>
             <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
-                <button class="btn" onclick="reviveWithCoins()" style="padding: 10px 20px; font-size: 0.85rem; background: linear-gradient(135deg, #00ffaa, #008855); color: #000;">Revive (+50 HP) [Cost: 100 Gold] ✨</button>
-                <button class="btn" onclick="openAllocationModalFromDefeat()" style="padding: 10px 20px; font-size: 0.85rem;">Invest & Retry 🛡️</button>
-                <a href="shop.html" class="btn" style="padding: 10px 20px; font-size: 0.85rem;">Go to Shop 🪙</a>
+                <button class="btn" onclick="reviveWithCoins()" style="padding: 8px 16px; background: linear-gradient(135deg, #00ffaa, #008855); color: #000;">Revive (+50 HP) [Cost: 100 Gold] ✨</button>
+                <button class="btn" onclick="openAllocationModalFromDefeat()" style="padding: 8px 16px;">Invest & Retry 🛡️</button>
+                <a href="shop.html" class="btn" style="padding: 8px 16px;">Go to Shop 🪙</a>
             </div>
         </div>
     </div>
@@ -565,9 +630,9 @@
     <!-- Victory Modal Popup -->
     <div id="victory-modal-overlay" style="display: none;">
         <div id="victory-modal-content">
-            <h1 style="color: var(--gold-bright); font-size: 2rem; text-shadow: 0 0 25px var(--gold);">✨ VICTORY! EPIC TRIUMPH ✨</h1>
-            <p style="text-align: center;">
-                Your tactical brilliance in 3D space triumphed over the smart enemy AI! Proceed smoothly to the next stage.
+            <h1 style="color: var(--gold-bright); font-size: 1.8rem; text-shadow: 0 0 25px var(--gold);">✨ VICTORY! EPIC TRIUMPH ✨</h1>
+            <p style="text-align: center;" id="victory-taunt-text">
+                Incredible co-op synergy! We crushed the smart AI alliance together!
             </p>
             <div class="current-status-dashboard">
                 <div class="status-item">
@@ -579,9 +644,10 @@
                     <span class="status-value" id="victory-total-coins">0 🪙</span>
                 </div>
             </div>
-            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
-                <button class="btn" onclick="openAllocationModalFromVictory()" style="padding: 10px 20px; font-size: 0.85rem; background: linear-gradient(135deg, #00ffaa, #008855); color: #000;">Invest Status 🛡️</button>
-                <button class="btn" onclick="advanceToNextStage()" style="padding: 10px 25px; font-size: 0.9rem;">Proceed to Next Stage ⚔️</button>
+            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+                <button class="btn" onclick="recordAndPostFromVictory()" style="padding: 8px 16px; background: linear-gradient(135deg, #00ffaa, #008855); color: #000;">🎥 Record & Post (+100 🪙)</button>
+                <button class="btn" onclick="openAllocationModalFromVictory()" style="padding: 8px 16px;">Invest Status 🛡️</button>
+                <button class="btn" onclick="advanceToNextStage()" style="padding: 8px 16px;">Next Stage ⚔️</button>
             </div>
         </div>
     </div>
@@ -589,15 +655,15 @@
     <!-- How To Play Guide Modal -->
     <div id="guide-modal-overlay">
         <div id="guide-modal-content">
-            <h1>📜 Sovereign Arena: 3D Master Edition</h1>
+            <h1>📜 Sovereign Arena: Social Edition</h1>
             <p>
-                <strong>Welcome to the 3D Perspective Chamber!</strong> Experience true depth with tiltable cards, dynamic particle bursts on every strike, and expanding card slots as you level up!
+                <strong>Welcome, Sovereign!</strong> Share your fight tutorials in the Recorders' Social Chamber, like community replays, and leave comments!
             </p>
             <p>
-                1. <strong>3D Tilt Perspective:</strong> Hover over cards and arenas to view them in 3D space.
+                1. <strong>Social Chamber:</strong> Like, comment, and post battle tutorials to earn bonus gold coins.
             </p>
             <p>
-                2. <strong>Canvas Particle Engine:</strong> Magic spark effects trigger automatically on attacks.
+                2. <strong>Combo Multipliers:</strong> Chain card attacks to maximize your striking power.
             </p>
             <button class="btn" onclick="closeGuideModal()" style="margin-top: 10px; padding: 10px 25px; font-size: 0.85rem;">Enter the Arena ⚔️</button>
         </div>
@@ -607,7 +673,7 @@
     <div id="modal-overlay" style="display: none;">
         <div id="modal-content">
             <h1>🛡️ Pre-Battle Point Allocation</h1>
-            <p style="text-align: center; margin-bottom: 15px;">
+            <p style="text-align: center; margin-bottom: 12px;">
                 Strengthen your Sovereign Guardian against the smart enemy AI! Stats save locally.
             </p>
 
@@ -643,12 +709,12 @@
                     <a href="shop.html" class="btn" onclick="event.stopPropagation();">Open Shop</a>
                 </div>
             </div>
-            <button class="btn" onclick="startBattleFromAllocation()" style="margin-top: 15px; padding: 12px 25px; font-size: 0.9rem;">Enter Arena ⚔️</button>
+            <button class="btn" onclick="startBattleFromAllocation()" style="margin-top: 12px; padding: 10px 20px; font-size: 0.85rem;">Enter Arena ⚔️</button>
         </div>
     </div>
 
     <header>
-        <h1>Sovereign Empire: 3D Canvas Master Edition</h1>
+        <h1>Sovereign Empire: Recorders' Social Chamber</h1>
     </header>
 
     <div class="nav-bar">
@@ -656,6 +722,7 @@
         <a href="shop.html">🪙 Shop & Supplies</a>
         <a href="index.html">🏠 Sanctuary Home</a>
         <a href="map.html">🗺️ Map</a>
+        <a href="#" onclick="openRecordersModal(); return false;">🎥 Recorders' Chamber</a>
         <a href="#" onclick="openGuideModal(); return false;">❓ How to Play</a>
     </div>
 
@@ -700,12 +767,11 @@
             <div class="top-light-bar">
                 <div>Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Whispering Shadows</span></div>
                 <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">500</span> 🪙 (<a href="shop.html" style="color: var(--gold);">Shop</a>)</div>
-                <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">25</span> 🛡️</div>
+                <div>Combo Heat: <span id="lbl-combo" style="color: #ff9933; font-weight: 900;">x1.0</span> 🔥</div>
                 <div><a href="battle.html" class="btn" style="padding: 4px 8px; font-size: 0.65rem;">Hub</a></div>
             </div>
 
             <div class="massive-arena-screen" id="main-arena-box">
-                <!-- Particle Canvas Layer for 2.5D Magic Explosions -->
                 <canvas id="particle-canvas"></canvas>
 
                 <div class="arena-flash-shield" id="flash-shield"></div>
@@ -722,7 +788,7 @@
 
                     <div style="text-align: center;">
                         <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 0.8rem; text-transform: uppercase;">Vanguard Rebel</h2>
-                        <div id="boss-intent" style="font-size: 0.65rem; color: #ff9933; font-family: 'Playfair Display', serif;">🧠 Smart 3D AI Calculator</div>
+                        <div id="boss-intent" style="font-size: 0.65rem; color: #ff9933; font-family: 'Playfair Display', serif;">🎥 Social Feed Chamber Active</div>
                     </div>
 
                     <div class="combatant-status-box">
@@ -741,15 +807,15 @@
                 </div>
 
                 <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.75rem; z-index: 5;" id="arena-action-status">
-                    3D Perspective & Canvas Particle Engine active. Click cards to trigger magical FX!
+                    Record your fights, share tutorials, and interact with community likes & comments!
                 </div>
 
                 <div class="battle-log" id="gameplay-log">
-                    [3D Master Edition Synchronized]: Particle engine and perspective chamber online.
+                    [Recorders' Social Chamber Online]: Like, comment, and post fight tutorials.
                 </div>
 
                 <div class="credits-footer">
-                    👑 Sovereign Empire Original Game Style | Scripted and Directed by <strong>Tegra</strong> | Generated by <strong>Gemini</strong>
+                    👑 Sovereign Empire Original Game Style | Scripted and Directed by <strong>Tegra</strong> & <strong>Gemini</strong>
                 </div>
             </div>
 
@@ -766,7 +832,6 @@
             }
         }, { once: true });
 
-        // Canvas Particle Engine for 2.5D Magic Explosions
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -784,8 +849,8 @@
                 this.y = y;
                 this.color = color;
                 this.size = Math.random() * 5 + 2;
-                this.speedX = (Math.random() - 0.5) * 10;
-                this.speedY = (Math.random() - 0.5) * 10;
+                this.speedX = (Math.random() - 0.5) * 12;
+                this.speedY = (Math.random() - 0.5) * 12;
                 this.life = 1.0;
                 this.decay = Math.random() * 0.03 + 0.02;
             }
@@ -811,7 +876,7 @@
             const y = canvas.height * 0.5;
             const color = type === 'shield' ? '#00ffaa' : (type === 'thunder' ? '#ffe600' : '#ff4d4d');
             
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 40; i++) {
                 particles.push(new Particle(x, y, color));
             }
         }
@@ -930,8 +995,13 @@
             shieldPower: parseInt(localStorage.getItem('sovereign_shield')) || 25,
             bossMaxHp: parseInt(localStorage.getItem('sovereign_bossmaxhp')) || 160,
             bossHp: parseInt(localStorage.getItem('sovereign_bosshp')) || 160,
+            comboMultiplier: 1.0,
             maxStages: 99,
-            unlockedCards: JSON.parse(localStorage.getItem('sovereign_unlocked')) || ['thunder']
+            unlockedCards: JSON.parse(localStorage.getItem('sovereign_unlocked')) || ['thunder'],
+            socialPosts: JSON.parse(localStorage.getItem('sovereign_social_posts')) || [
+                { id: 1, author: "Sovereign Master Tegra", title: "Stage 1 Tactical Tutorial", desc: "How to chain kicks and shields against the Vanguard AI.", likes: 14, comments: ["Amazing tutorial!", "This helped me clear Stage 1 easily!"] },
+                { id: 2, author: "Guardian Alliance", title: "Smart AI Counter Strategy", desc: "Timing your Phoenix Eagle strike for maximum combo heat.", likes: 8, comments: ["Genius strategy!"] }
+            ]
         };
 
         const tierNames = [
@@ -1025,6 +1095,91 @@
         function openGuideModal() {
             playSound('click');
             document.getElementById('guide-modal-overlay').style.display = 'flex';
+        }
+
+        function openRecordersModal() {
+            playSound('click');
+            renderSocialFeed();
+            document.getElementById('recorders-modal-overlay').style.display = 'flex';
+        }
+
+        function closeRecordersModal() {
+            playSound('click');
+            document.getElementById('recorders-modal-overlay').style.display = 'none';
+        }
+
+        function renderSocialFeed() {
+            const container = document.getElementById('social-feed-container');
+            let html = '';
+
+            game.socialPosts.forEach(post => {
+                let commentsHtml = post.comments.map(c => `<div>> ${c}</div>`).join('');
+                html += `
+                    <div class="social-feed-card">
+                        <h4>🎥 ${post.title} <span style="font-size: 0.65rem; color: #a0deca;">by ${post.author}</span></h4>
+                        <p>${post.desc}</p>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 6px;">
+                            <button class="btn" onclick="likePost(${post.id})" style="padding: 4px 8px; font-size: 0.65rem;">❤️ Like (${post.likes})</button>
+                        </div>
+                        <div class="comment-section" id="comments-${post.id}">
+                            ${commentsHtml}
+                        </div>
+                        <div class="comment-input-row">
+                            <input type="text" id="input-comment-${post.id}" placeholder="Write a comment..." />
+                            <button class="btn" onclick="addComment(${post.id})" style="padding: 4px 8px; font-size: 0.65rem;">Send</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function likePost(postId) {
+            playSound('click');
+            let post = game.socialPosts.find(p => p.id === postId);
+            if (post) {
+                post.likes++;
+                updateDOM();
+                renderSocialFeed();
+            }
+        }
+
+        function addComment(postId) {
+            playSound('click');
+            const inputEl = document.getElementById(`input-comment-${postId}`);
+            let txt = inputEl.value.trim();
+            if (txt) {
+                let post = game.socialPosts.find(p => p.id === postId);
+                if (post) {
+                    post.comments.push(`Tegra: ${txt}`);
+                    inputEl.value = '';
+                    updateDOM();
+                    renderSocialFeed();
+                }
+            }
+        }
+
+        function recordAndPostFight() {
+            playSound('victory');
+            game.coins += 100;
+            let newPost = {
+                id: Date.now(),
+                author: "Sovereign Tegra",
+                title: `Stage ${game.stage} Epic Victory Tutorial`,
+                desc: `Recorded battle replay showcasing flawless tactical execution!`,
+                likes: 1,
+                comments: ["Epic fight! Thanks for the tutorial!"]
+            };
+            game.socialPosts.unshift(newPost);
+            updateDOM();
+            renderSocialFeed();
+            alert("🎥 Fight recorded and posted to the Recorders' Chamber! +100 Gold Coins earned!");
+        }
+
+        function recordAndPostFromVictory() {
+            recordAndPostFight();
+            document.getElementById('victory-modal-overlay').style.display = 'none';
+            openAllocationModal();
         }
 
         function openAllocationModal() {
@@ -1134,13 +1289,14 @@
             document.getElementById('boss-name-lbl').innerText = `${currentBossTitle} Smart AI`;
             
             setupBattleFieldLayout();
-            logMsg(`Stage ${game.stage} engaged. Active Player Cards: ${getPlayerCardCount()}`);
+            logMsg(`Stage ${game.stage} engaged. Social Recorders' Chamber ready!`);
             updateDOM();
         }
 
         function updateDOM() {
             document.getElementById('lbl-coins').innerText = game.coins;
             document.getElementById('lbl-shield').innerText = game.shieldPower;
+            document.getElementById('lbl-combo').innerText = `x${game.comboMultiplier.toFixed(1)}`;
             
             document.getElementById('player-hp-text').innerText = game.playerHp;
             document.getElementById('player-hp-bar').style.width = `${Math.max(0, game.playerHp)}%`;
@@ -1155,6 +1311,7 @@
             localStorage.setItem('sovereign_shield', game.shieldPower);
             localStorage.setItem('sovereign_bossmaxhp', game.bossMaxHp);
             localStorage.setItem('sovereign_bosshp', game.bossHp);
+            localStorage.setItem('sovereign_social_posts', JSON.stringify(game.socialPosts));
             localStorage.setItem('sovereign_unlocked', JSON.stringify(game.unlockedCards));
         }
 
@@ -1246,7 +1403,8 @@
                     triggerVisualEffect('strike');
                     triggerParticleBurst(true, 'thunder');
                     baseAiDmg += 18;
-                    logMsg(`🧠 Smart AI pierced your shield for -${baseAiDmg} DMG!`);
+                    logMsg(`🧠 Smart AI pierced your shield for -${baseAiDmg} DMG! Combo reset!`);
+                    game.comboMultiplier = 1.0;
                 } else if (aiActionType < 0.5) {
                     playSound('hit');
                     triggerVisualEffect('strike');
@@ -1275,7 +1433,9 @@
             arena.classList.add('shake-fx');
             setTimeout(() => arena.classList.remove('shake-fx'), 400);
 
-            let playerDmg = 25 + (game.stage * 3);
+            game.comboMultiplier = Math.min(3.0, game.comboMultiplier + 0.3);
+            let baseDmg = 25 + (game.stage * 3);
+            let playerDmg = Math.floor(baseDmg * game.comboMultiplier);
 
             if (type === 'kick') {
                 playSound('hit');
@@ -1283,8 +1443,8 @@
                 triggerParticleBurst(false, 'hit');
                 playerDmg += 15;
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                showFloatingDmg(`-${playerDmg}`, false);
-                logMsg(`Kick Strike dealt -${playerDmg} DMG.`);
+                showFloatingDmg(`-${playerDmg} (x${game.comboMultiplier.toFixed(1)})`, false);
+                logMsg(`Kick Strike dealt -${playerDmg} DMG with Combo x${game.comboMultiplier.toFixed(1)}!`);
             } else if (type === 'shield') {
                 playSound('shield');
                 triggerVisualEffect('shield');
@@ -1306,7 +1466,7 @@
                 playSound('divine');
                 triggerVisualEffect('strike');
                 triggerParticleBurst(false, 'thunder');
-                playerDmg = 50 + (game.stage * 4);
+                playerDmg = Math.floor((50 + (game.stage * 4)) * game.comboMultiplier);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg} 🔥`, false);
                 logMsg(`🦅 Phoenix Eagle strike burned enemy for -${playerDmg} DMG!`);
@@ -1322,7 +1482,7 @@
                 playSound('thunder');
                 triggerVisualEffect('thunder');
                 triggerParticleBurst(false, 'thunder');
-                playerDmg = 70 + (game.stage * 5);
+                playerDmg = Math.floor((70 + (game.stage * 5)) * game.comboMultiplier);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
                 showFloatingDmg(`-${playerDmg} ⚡`, false);
                 logMsg(`⚡ Thunder God's Wrath struck for -${playerDmg} DMG!`);
@@ -1334,10 +1494,12 @@
                 playSound('victory');
                 let reward = 100 * game.stage;
                 game.coins += reward;
+                game.comboMultiplier = 1.0;
                 updateDOM();
 
                 document.getElementById('victory-reward').innerText = `+${reward} 🪙`;
                 document.getElementById('victory-total-coins').innerText = `${game.coins} 🪙`;
+                document.getElementById('victory-taunt-text').innerText = `Amazing victory! Record your tutorial in the social chamber to earn +100 bonus coins!`;
                 document.getElementById('victory-modal-overlay').style.display = 'flex';
                 logMsg(`🎉 Stage Conquered! Earned +${reward} Gold Coins.`);
             } else {
