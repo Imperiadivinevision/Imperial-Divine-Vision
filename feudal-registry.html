@@ -3,134 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help a Traveler - Alpha Empire</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Feudal Registry & Sovereign Master Chambers | Imperial Divine Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --royal-purple: #1a0822;
-            --imperial-crimson: #36080e;
-            --gold-accent: #f3e5ab;
-            --gold-shine: #ffd700;
-            --dark-bg: #07040a;
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(14, 20, 18, 0.96);
+            --theme-color: #ffd700;
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
         }
 
-        * { box-sizing: border-box; }
-
         body {
-            background-color: var(--dark-bg);
-            color: var(--gold-accent);
-            font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #07040a, #1a0822, #36080e, #07040a);
-            background-size: 400% 400%;
-            animation: ancientFloor 18s ease infinite;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            background: var(--bg-dark);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav { 
+            padding: 12px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+        nav a:hover { color: var(--theme-color); }
+
+        .registry-wrapper {
+            max-width: 950px;
+            width: 92%;
+            margin: 35px auto;
+            background: var(--panel-bg);
+            border: 4px ridge var(--theme-color);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 0 70px rgba(0,0,0,0.95);
             text-align: center;
         }
 
-        @keyframes ancientFloor {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
+        h1 { color: var(--theme-color); font-size: 2.2rem; margin-top: 0; text-transform: uppercase; letter-spacing: 2px; }
+        p.subtitle { font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
 
-        .top-nav-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(7, 4, 10, 0.92);
-            border-bottom: 2px double var(--gold-shine);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            padding: 15px 20px;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .top-nav-bar a {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .top-nav-bar a:hover {
-            color: var(--gold-shine);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-            transform: scale(1.05);
-        }
-
-        .chamber-container {
-            max-width: 800px;
-            margin: 140px auto 60px auto;
-            background: rgba(28, 24, 20, 0.95);
-            border: 2px solid var(--gold-shine);
-            padding: 40px;
+        .portal-box, .chamber-view-panel {
+            background: rgba(5, 12, 10, 0.92);
+            border: 2px solid rgba(255, 215, 0, 0.5);
             border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+            padding: 30px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+            text-align: left;
         }
 
-        h1 {
-            font-family: 'Cinzel Decorative', serif;
-            color: var(--gold-shine);
-            letter-spacing: 3px;
-            margin-top: 0;
-        }
-
-        p {
-            color: #e6d5c3;
+        .portal-box input {
+            width: 75%;
+            padding: 12px;
+            background: #040605;
+            border: 1px solid var(--theme-color);
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            border-radius: 6px;
+            margin: 15px 0;
+            text-align: center;
             font-size: 1.1rem;
-            line-height: 1.6;
         }
 
         .royal-btn {
-            background: #181410;
-            color: var(--gold-shine);
-            border: 1px solid var(--gold-shine);
-            padding: 12px 20px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 1rem;
+            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 10px 22px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            margin-top: 25px;
-            border-radius: 4px;
-            text-transform: uppercase;
+            border-radius: 6px;
             text-decoration: none;
-            display: block;
-            box-sizing: border-box;
-            transition: 0.3s;
+            transition: 0.2s;
+            display: inline-block;
+            margin: 5px;
+        }
+        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .royal-btn:hover {
-            background: var(--gold-shine);
-            color: #12100e;
-            font-weight: bold;
-            box-shadow: 0 0 15px var(--gold-shine);
+        .room-card {
+            background: linear-gradient(135deg, #16261f, #09120e);
+            border: 1px solid var(--theme-color);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
         }
+        .room-card:hover {
+            background: var(--theme-color);
+            color: #0b0f0e;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--theme-color);
+        }
+
+        textarea {
+            width: 100%;
+            height: 140px;
+            background: #040605;
+            border: 1px solid var(--theme-color);
+            color: #79ff9c;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .chamber-view-panel { display: none; }
     </style>
 </head>
-<body>
+<body onload="initFeudalPortal()">
 
-    <nav class="top-nav-bar">
-        <a href="index.html">Home 🏛️</a>
-        <a href="character-workshop.html">Workshop 👤</a>
-        <a href="feudal-registry.html">Registry 🏰</a>
-        <a href="room-youth.html">Proving Grounds 🛡️</a>
+    <nav> 
+        <a href="index.html">🏠 Home</a>
+        <a href="library.html">📚 Library</a>
+        <a href="map.html">🗺️ Empire Map</a>
+        <a href="help-traveler.html">🤝 Help a Traveler</a>
+        <a href="feudal-registry.html">🏰 Feudal Registry</a>
     </nav>
 
-    <div class="chamber-container">
-        <h1>Help a Traveler</h1>
-        <p>Rare grace-triggered missions unfold here. Every traveler who enters your domain carries an opportunity to show mercy, offer a helping hand, and unlock secret paths within the empire.</p>
-        <p><em>Your heart is light. The path of grace provides.</em></p>
-        <a href="room-youth.html" class="royal-btn">Return to Proving Grounds</a>
+    <div class="registry-wrapper">
+        <h1>Feudal Land Registry</h1>
+        <p class="subtitle">Secure portal for territory landowners and Sovereign master review.</p>
+
+        <!-- Login Portal -->
+        <div class="portal-box" id="registry-login-screen" style="text-align: center;">
+            <h3 style="color: var(--theme-color); text-transform: uppercase;">🔑 Enter Territory Access Code</h3>
+            <p style="font-family: 'Playfair Display', serif; color: #d0e8ff; font-size: 0.9rem;">
+                Enter your individual land code, or input the Master Sovereign Key to review all 5 territory chambers.
+            </p>
+            <input type="password" id="access-code-input" placeholder="Enter Code or Master Key..." />
+            <br>
+            <button class="royal-btn" onclick="verifyAccessCode()">Access Territory 🛡️</button>
+        </div>
+
+        <!-- Master Sovereign Dashboard (Shows All 5 Rooms for You) -->
+        <div class="chamber-view-panel" id="master-dashboard-panel">
+            <h3 style="color: var(--theme-color); text-transform: uppercase;">👑 Sovereign Master Control Dashboard</h3>
+            <p style="font-family: 'Playfair Display', serif; color: #a0deca;">
+                Welcome back, Sovereign. Here are all 5 active territory chambers. Select any room to review player requests, adjust designs, or write custom code.
+            </p>
+            <div class="room-grid" id="master-rooms-list">
+                <!-- Dynamically loaded 5 rooms -->
+            </div>
+            <button class="royal-btn" onclick="logoutFeudal()" style="background: linear-gradient(to bottom, #cc0000, #660000); margin-top: 25px;">🔒 Lock Sovereign Portal</button>
+        </div>
+
+        <!-- Individual Player Chamber (Shows When a Player Enters Their Specific Code) -->
+        <div class="chamber-view-panel" id="player-chamber-panel">
+            <h3 style="color: var(--theme-color); text-transform: uppercase;" id="player-room-title">🏰 Private Territory Room</h3>
+            <p style="font-family: 'Playfair Display', serif; color: #d0e8ff; font-size: 0.9rem;" id="player-room-desc">
+                Welcome to your designated plot. Manage your coin balance, submit design requests to Sovereign Tegra, and track your territory supplies.
+            </p>
+            
+            <div class="village-hud" style="display: flex; justify-content: space-around; background: rgba(0, 40, 25, 0.85); border: 1px solid var(--theme-color); padding: 10px; border-radius: 6px; margin: 15px 0; font-size: 0.85rem;">
+                <div>Room Wallet: <span id="room-coins" style="color:#ffe875; font-weight:bold;">500</span> 🪙</div>
+                <div>Status: <span style="color:#79ff9c; font-weight:bold;">Active Secure Chamber</span></div>
+            </div>
+
+            <label style="font-size: 0.8rem; color: var(--theme-color); font-weight: bold;">YOUR TERRITORY DESIGN REQUESTS & CUSTOM CODE:</label>
+            <br>
+            <textarea id="player-room-manifest" placeholder="Type what you want added, designed, or coded for your territory here..."></textarea>
+            <br>
+            <button class="royal-btn" onclick="savePlayerManifest()">💾 Send Request / Save Manifest</button>
+            <button class="royal-btn" onclick="logoutFeudal()" style="background: linear-gradient(to bottom, #cc0000, #660000);">🔒 Exit Room</button>
+        </div>
     </div>
 
+    <script>
+        // 5 Territory Rooms Database
+        const feudalRooms = {
+            "ROOM-01": { id: "ROOM-01", name: "Territory Chamber 1: Frost Valley", owner: "Unassigned Landowner" },
+            "ROOM-02": { id: "ROOM-02", name: "Territory Chamber 2: Golden Outpost", owner: "Unassigned Landowner" },
+            "ROOM-03": { id: "ROOM-03", name: "Territory Chamber 3: Shadow Ridge", owner: "Unassigned Landowner" },
+            "ROOM-04": { id: "ROOM-04", name: "Territory Chamber 4: Whispering Woods", owner: "Unassigned Landowner" },
+            "ROOM-05": { id: "ROOM-05", name: "Territory Chamber 5: Sovereign Citadel", owner: "Unassigned Landowner" }
+        };
+
+        const MASTER_SOVEREIGN_KEY = "TEGRA-MASTER-KEY"; // Your secret master code
+
+        function initFeudalPortal() {
+            let sessionType = localStorage.getItem('feudal_session_type');
+            let sessionTarget = localStorage.getItem('feudal_session_target');
+
+            if (sessionType === 'master') {
+                showMasterDashboard();
+            } else if (sessionType === 'player' && sessionTarget && feudalRooms[sessionTarget]) {
+                showPlayerChamber(sessionTarget);
+            }
+        }
+
+        function verifyAccessCode() {
+            let input = document.getElementById('access-code-input').value.trim();
+
+            if (input === MASTER_SOVEREIGN_KEY) {
+                localStorage.setItem('feudal_session_type', 'master');
+                showMasterDashboard();
+                alert("👑 Sovereign Master Access Granted: All 5 chambers unlocked.");
+            } else if (feudalRooms[input]) {
+                localStorage.setItem('feudal_session_type', 'player');
+                localStorage.setItem('feudal_session_target', input);
+                showPlayerChamber(input);
+                alert(`✦ Welcome to ${feudalRooms[input].name}! ✦`);
+            } else {
+                alert("⛔ Access Denied: Invalid territory code or master key.");
+            }
+        }
+
+        function showMasterDashboard() {
+            document.getElementById('registry-login-screen').style.display = 'none';
+            document.getElementById('player-chamber-panel').style.display = 'none';
+            document.getElementById('master-dashboard-panel').style.display = 'block';
+
+            let html = '';
+            Object.keys(feudalRooms).forEach(code => {
+                let room = feudalRooms[code];
+                let preview = localStorage.getItem(`room_manifest_${code}`) || "No design notes yet...";
+                if (preview.length > 50) preview = preview.substring(0, 50) + "...";
+
+                html += `
+                    <div class="room-card" onclick="enterRoomAsMaster('${code}')">
+                        <strong style="color: var(--theme-color); font-size: 1rem;">🏰 ${room.name}</strong><br>
+                        <span style="font-size: 0.75rem; color: #a0deca;">Code: ${code}</span><br>
+                        <p style="font-size: 0.8rem; font-family: 'Courier New', monospace; color: #ffe875; margin: 8px 0 0 0;">"${preview}"</p>
+                    </div>
+                `;
+            });
+            document.getElementById('master-rooms-list').innerHTML = html;
+        }
+
+        function enterRoomAsMaster(code) {
+            localStorage.setItem('feudal_session_type', 'player');
+            localStorage.setItem('feudal_session_target', code);
+            showPlayerChamber(code);
+        }
+
+        function showPlayerChamber(code) {
+            document.getElementById('registry-login-screen').style.display = 'none';
+            document.getElementById('master-dashboard-panel').style.display = 'none';
+            document.getElementById('player-chamber-panel').style.display = 'block';
+
+            let room = feudalRooms[code];
+            document.getElementById('player-room-title').innerText = `🏰 ${room.name} [Access Code: ${code}]`;
+            
+            let savedNotes = localStorage.getItem(`room_manifest_${code}`) || "";
+            document.getElementById('player-room-manifest').value = savedNotes;
+        }
+
+        function savePlayerManifest() {
+            let code = localStorage.getItem('feudal_session_target');
+            let notes = document.getElementById('player-room-manifest').value;
+            if (code) {
+                localStorage.setItem(`room_manifest_${code}`, notes);
+                alert("💾 Territory design request and code manifest saved securely!");
+            }
+        }
+
+        function logoutFeudal() {
+            localStorage.removeItem('feudal_session_type');
+            localStorage.removeItem('feudal_session_target');
+            document.getElementById('master-dashboard-panel').style.display = 'none';
+            document.getElementById('player-chamber-panel').style.display = 'none';
+            document.getElementById('registry-login-screen').style.display = 'block';
+            document.getElementById('access-code-input').value = "";
+            alert("🔒 Portal locked.");
+        }
+    </script>
 </body>
 </html>
