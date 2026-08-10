@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Ultimate Master Edition</title>
+    <title>Sovereign Empire: Emerald-Blue Master Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,21 +15,20 @@
             --text-light: #f5f2eb;
             --glow-gold: 0 0 50px rgba(212, 175, 55, 1);
             --glow-blue: 0 0 40px rgba(0, 150, 255, 0.9);
-            --glow-red: 0 0 40px rgba(255, 50, 50, 0.9);
-            --glow-green: 0 0 40px rgba(50, 255, 120, 0.9);
+            --glow-emerald: 0 0 40px rgba(0, 255, 150, 0.9);
         }
 
-        @keyframes bgShift {
-            0% { background-color: #070908; }
-            33% { background-color: #0d0a1a; }
-            66% { background-color: #040e18; }
-            100% { background-color: #070908; }
+        /* Breathing Emerald-Blue Background Shifting */
+        @keyframes emeraldBlueBreathing {
+            0% { background-color: #030b14; }
+            50% { background-color: #021a14; }
+            100% { background-color: #030b14; }
         }
 
         body {
             margin: 0;
             padding: 0;
-            animation: bgShift 12s ease infinite;
+            animation: emeraldBlueBreathing 12s ease infinite;
             color: var(--text-light);
             font-family: 'Cinzel', serif;
             overflow: hidden;
@@ -114,7 +113,7 @@
         }
 
         .left-cards-deck {
-            background: linear-gradient(145deg, #030b14, #010408);
+            background: linear-gradient(145deg, #030b14, #01140c);
             border: 2px solid var(--gold);
             border-radius: 10px;
             padding: 12px;
@@ -194,7 +193,7 @@
         .arena-flash-shield {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,150,255,0.6) 0%, rgba(212,175,55,0.4) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(0,255,150,0.5) 0%, rgba(0,150,255,0.3) 60%, transparent 100%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -282,7 +281,6 @@
             justify-content: center;
             font-size: 2.2rem;
             position: relative;
-            animation: pulseBlock 3s infinite ease-in-out;
         }
         .fighter-block.gold-shield {
             background: linear-gradient(135deg, #d4af37, #664400);
@@ -292,7 +290,7 @@
         .fighter-block.red-green {
             background: linear-gradient(135deg, #cc0000, #006622);
             border-color: #55ff88;
-            box-shadow: var(--glow-green);
+            box-shadow: var(--glow-emerald);
         }
         .fighter-block span { font-size: 0.65rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
 
@@ -310,20 +308,13 @@
             justify-content: center;
             font-size: 2.2rem;
             position: relative;
-            animation: pulseBlock 3s infinite ease-in-out;
         }
         .boss-block.red-green-enemy {
             background: linear-gradient(135deg, #aa0000, #005511);
             border-color: #33ff77;
-            box-shadow: var(--glow-red);
+            box-shadow: var(--glow-emerald);
         }
         .boss-block span { font-size: 0.65rem; color: var(--gold-bright); margin-top: 4px; text-transform: uppercase; font-weight: bold; }
-
-        @keyframes pulseBlock {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-            100% { transform: scale(1); }
-        }
 
         .health-bar-container {
             width: 100%;
@@ -349,11 +340,6 @@
             font-weight: 900;
             color: var(--gold);
             text-shadow: 0 0 25px var(--gold);
-            animation: vsGlow 2s infinite alternate;
-        }
-        @keyframes vsGlow {
-            0% { text-shadow: 0 0 10px var(--gold); transform: scale(1); }
-            100% { text-shadow: 0 0 30px var(--gold-bright), 0 0 50px #ffea00; transform: scale(1.1); }
         }
 
         .battle-log {
@@ -389,18 +375,28 @@
             border-radius: 6px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: 0.3s;
+            transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(212,175,55,0.5);
             font-family: 'Cinzel', serif;
             text-decoration: none;
         }
         .btn:hover { background: #fff; color: #0b0f0e; box-shadow: 0 0 25px var(--gold); transform: scale(1.05); }
 
+        /* Pop & Color Change Animation when Invested */
+        @keyframes btnInvestPulse {
+            0% { transform: scale(1); background: var(--gold); }
+            50% { transform: scale(1.15); background: #00ffaa; color: #000; box-shadow: 0 0 30px #00ffaa; }
+            100% { transform: scale(1); background: linear-gradient(135deg, var(--gold), #aa820a); }
+        }
+        .invested-pop {
+            animation: btnInvestPulse 0.4s ease;
+        }
+
         #modal-overlay, #guide-modal-overlay, #warning-modal-overlay {
             display: flex;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 8, 7, 0.94);
+            background: rgba(3, 15, 12, 0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -409,13 +405,13 @@
         }
 
         #modal-content, #guide-modal-content, #warning-modal-content {
-            background: linear-gradient(135deg, #081a2d, #030a14);
+            background: linear-gradient(135deg, #031a14, #010b08);
             border: 3px solid var(--gold);
             padding: 30px;
             text-align: center;
             border-radius: 14px;
             max-width: 540px;
-            box-shadow: 0 0 70px rgba(0, 119, 255, 0.8);
+            box-shadow: 0 0 70px rgba(0, 255, 150, 0.5);
         }
 
         #modal-content h1, #guide-modal-content h1, #warning-modal-content h1 { font-size: 1.6rem; margin: 0 0 10px 0; color: var(--gold); text-transform: uppercase; }
@@ -424,7 +420,7 @@
         .current-status-dashboard {
             display: flex;
             justify-content: space-around;
-            background: rgba(0, 34, 68, 0.7);
+            background: rgba(0, 40, 30, 0.7);
             border: 1px solid var(--gold);
             border-radius: 8px;
             padding: 12px;
@@ -438,7 +434,7 @@
         }
         .status-label {
             font-size: 0.65rem;
-            color: #a0c4de;
+            color: #a0deca;
             text-transform: uppercase;
             margin-bottom: 4px;
             font-weight: bold;
@@ -447,6 +443,11 @@
             font-size: 1.1rem;
             font-weight: 900;
             color: var(--gold-bright);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .stat-bump {
+            color: #00ffaa !important;
+            transform: scale(1.2);
         }
 
         .allocation-box {
@@ -495,10 +496,10 @@
                 <strong>Welcome to the Sovereign Arena!</strong> Manage your tactical cards and conquer campaign tiers:
             </p>
             <p>
-                1. <strong>Enemy Surprises:</strong> At higher stages (Stage 10+), enemies deploy multi-colored units (Red, Green, Gold). Defeat them to earn and unlock these soldiers for your own screen!
+                1. <strong>Interactive Investments:</strong> Clicking invest buttons pops up confirmation colors, plays audio chimes, and updates your stats instantly with visual pulses.
             </p>
             <p>
-                2. <strong>Supply Maintenance & Shop:</strong> Higher-tier soldiers require supplies to maintain. Use gold coins in the shop to purchase supplies or recruit new multi-color soldiers.
+                2. <strong>Supply Maintenance & Shop:</strong> Higher-tier soldiers require supplies. Use gold coins in the shop to purchase supplies or recruit new multi-color soldiers.
             </p>
             <p>
                 3. <strong>Local Storage:</strong> All unlocked soldiers, stages, and gold coins are saved automatically.
@@ -536,11 +537,11 @@
                 </div>
                 <div class="allocation-box">
                     <span>Reinforce Shield Power (+30) [Cost: 60 Gold]</span>
-                    <button class="btn" onclick="allocatePoints('shield', 60, 30)">Invest</button>
+                    <button class="btn" id="btn-invest-shield" onclick="allocatePoints('shield', 60, 30, event)">Invest</button>
                 </div>
                 <div class="allocation-box">
                     <span>Reinforce NPC Life Span (+40 HP) [Cost: 60 Gold]</span>
-                    <button class="btn" onclick="allocatePoints('hp', 60, 40)">Invest</button>
+                    <button class="btn" id="btn-invest-hp" onclick="allocatePoints('hp', 60, 40, event)">Invest</button>
                 </div>
                 <div class="allocation-box">
                     <span>Buy Supplies / Recruit Soldiers 🪙</span>
@@ -552,7 +553,7 @@
     </div>
 
     <header>
-        <h1>Sovereign Empire: Ultimate Master Edition</h1>
+        <h1>Sovereign Empire: Emerald-Blue Master Edition</h1>
     </header>
 
     <div class="nav-bar">
@@ -658,11 +659,11 @@
                 </div>
 
                 <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.75rem; z-index: 5;" id="arena-action-status">
-                    Ultimate master edition active. Unleash multi-color soldier combos!
+                    Emerald-blue master edition active. Interactive investment chimes online!
                 </div>
 
                 <div class="battle-log" id="gameplay-log">
-                    [Master Edition Synchronized]: Special visual effects online.
+                    [Master Edition Synchronized]: Audio sound effects & breathing background active.
                 </div>
 
                 <div class="credits-footer">
@@ -676,6 +677,25 @@
 
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Ambient soft music generator (Plays soothing chimes on load)
+        function playAmbientMusic() {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            [523.25, 659.25, 783.99].forEach((freq, index) => {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (index * 0.3));
+                gain.gain.setValueAtTime(0.03, audioCtx.currentTime + (index * 0.3));
+                gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + (index * 0.3) + 0.8);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(audioCtx.currentTime + (index * 0.3));
+                osc.stop(audioCtx.currentTime + (index * 0.3) + 0.8);
+            });
+        }
+
         function playSound(type) {
             if (!audioCtx) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -691,6 +711,15 @@
                 gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
                 gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
                 osc.start(); osc.stop(audioCtx.currentTime + 0.08);
+            } else if (type === 'invest') {
+                // Happy confirmation chime when investing
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.35);
             } else if (type === 'hit') {
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(160, audioCtx.currentTime);
@@ -758,6 +787,7 @@
         ];
 
         window.onload = function() {
+            playAmbientMusic();
             initStage();
             renderUnlockedCards();
             updateDOM();
@@ -869,16 +899,33 @@
             });
         }
 
-        function allocatePoints(type, cost, value) {
-            playSound('click');
+        // Interactive Invest with Sound, Color Change Pop, and Stat Bumps
+        function allocatePoints(type, cost, value, event) {
+            playSound('invest');
+            
+            // Pop & color change effect on clicked button
+            const btn = event.target;
+            btn.classList.add('invested-pop');
+            setTimeout(() => btn.classList.remove('invested-pop'), 400);
+
             if (game.coins >= cost) {
                 game.coins -= cost;
                 if (type === 'shield') {
                     game.shieldPower += value;
                     triggerVisualEffect('shield');
+                    
+                    // Stat bump visual feedback
+                    const shieldEl = document.getElementById('alloc-shield');
+                    shieldEl.classList.add('stat-bump');
+                    setTimeout(() => shieldEl.classList.remove('stat-bump'), 400);
                 } else if (type === 'hp') {
                     game.playerHp = Math.min(100, game.playerHp + value);
                     triggerVisualEffect('shield');
+                    
+                    // Stat bump visual feedback
+                    const hpEl = document.getElementById('alloc-hp');
+                    hpEl.classList.add('stat-bump');
+                    setTimeout(() => hpEl.classList.remove('stat-bump'), 400);
                 }
                 
                 document.getElementById('alloc-coins').innerText = game.coins;
