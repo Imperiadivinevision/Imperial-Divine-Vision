@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Empire: Active Walking Combat Arena</title>
+    <title>Sovereign Empire: Blueprint Tactical Arena</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -29,7 +29,7 @@
             animation: bgShift 15s ease infinite;
             color: var(--text-light);
             font-family: 'Cinzel', serif;
-            overflow-x: hidden;
+            overflow: hidden;
             user-select: none;
             height: 100vh;
             display: flex;
@@ -62,18 +62,9 @@
             box-shadow: 0 0 25px var(--gold);
         }
 
-        body.is-chamber-fullscreen header,
-        body.is-chamber-fullscreen .nav-bar {
-            display: none !important;
-        }
-        body.is-chamber-fullscreen .widescreen-container {
-            height: 98vh !important;
-            padding: 10px !important;
-        }
-
         header {
             text-align: center;
-            padding: 10px;
+            padding: 8px;
             background: linear-gradient(180deg, #18221e, #0b0f0e);
             border-bottom: 3px ridge var(--gold);
             box-shadow: 0 4px 20px rgba(0,0,0,0.9);
@@ -82,7 +73,7 @@
         header h1 {
             color: var(--gold);
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
@@ -92,10 +83,10 @@
             display: flex;
             justify-content: center;
             background: rgba(11, 15, 14, 0.95);
-            padding: 8px;
+            padding: 6px;
             gap: 20px;
             border-bottom: 2px solid var(--gold);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -107,26 +98,82 @@
         }
         .nav-bar a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
-        .widescreen-container {
+        /* Blueprint Layout: Left Deck + Right Cinematic Arena */
+        .blueprint-container {
             flex: 1;
-            max-width: 1450px;
-            width: 96%;
-            margin: 10px auto;
+            max-width: 1550px;
+            width: 98%;
+            margin: 8px auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 15px;
+            box-sizing: border-box;
+            height: calc(100vh - 100px);
+        }
+
+        /* Left Side Tactical Cards Deck */
+        .left-cards-deck {
+            background: var(--card-bg);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            box-sizing: border-box;
+            gap: 10px;
+            overflow-y: auto;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+        }
+
+        .left-cards-deck h3 {
+            color: var(--gold);
+            margin: 0 0 5px 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 5px;
+        }
+
+        .blueprint-card {
+            background: linear-gradient(145deg, #18221e, #0e1412);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .blueprint-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            background: linear-gradient(145deg, #22302a, #141c19);
+            box-shadow: var(--glow-gold);
+            border-color: #fff;
+        }
+
+        .blueprint-card h4 { color: var(--gold-bright); margin: 0 0 4px 0; font-size: 0.85rem; text-transform: uppercase; }
+        .blueprint-card p { font-size: 0.7rem; color: #c5b59b; margin: 0; font-family: 'Playfair Display', serif; }
+        .blueprint-card .card-icon { font-size: 1.8rem; margin-bottom: 4px; display: block; }
+
+        /* Right Side: Cinematic Arena & Status */
+        .right-arena-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
         }
 
         .top-light-bar {
             background: var(--card-bg);
             border: 2px solid var(--gold);
             border-radius: 8px;
-            padding: 10px 20px;
+            padding: 8px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
 
@@ -135,13 +182,12 @@
             background: rgba(10, 15, 13, 0.96);
             border: 3px ridge var(--gold);
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
-            min-height: 280px;
             overflow: hidden;
         }
 
@@ -172,9 +218,9 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            padding: 0 50px;
+            padding: 0 40px;
             z-index: 5;
-            height: 180px;
+            flex: 1;
         }
 
         .fighter-lane {
@@ -184,43 +230,41 @@
         }
 
         .fighter-block {
-            width: 70px;
-            height: 90px;
+            width: 80px;
+            height: 110px;
             background: linear-gradient(135deg, #33bbff, #005588);
             border: 3px solid #fff;
             border-radius: 8px;
-            margin: 10px auto;
-            box-shadow: 0 0 20px rgba(51, 187, 255, 0.6);
+            margin: 8px auto;
+            box-shadow: 0 0 25px rgba(51, 187, 255, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            position: relative;
+            font-size: 2rem;
         }
 
         .boss-block {
-            width: 70px;
-            height: 90px;
+            width: 80px;
+            height: 110px;
             background: linear-gradient(135deg, #ff4d4d, #880000);
             border: 3px solid #fff;
             border-radius: 8px;
-            margin: 10px auto;
-            box-shadow: 0 0 20px rgba(255, 77, 77, 0.6);
+            margin: 8px auto;
+            box-shadow: 0 0 25px rgba(255, 77, 77, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            position: relative;
+            font-size: 2rem;
         }
 
         .health-bar-container {
             width: 200px;
             background: #222;
             border: 2px solid var(--gold);
-            height: 16px;
+            height: 15px;
             border-radius: 4px;
             overflow: hidden;
-            margin: 5px auto 0 auto;
+            margin: 4px auto 0 auto;
         }
 
         .health-bar-fill {
@@ -233,56 +277,17 @@
         .player-hp { background: linear-gradient(90deg, #33bbff, #0088cc) !important; }
 
         .vs-badge {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 900;
             color: var(--gold);
-            text-shadow: 0 0 20px var(--gold);
+            text-shadow: 0 0 25px var(--gold);
         }
-
-        .bottom-action-panel {
-            background: var(--card-bg);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.8);
-            z-index: 5;
-        }
-
-        .action-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-        }
-
-        .action-card {
-            background: linear-gradient(145deg, #18221e, #0e1412);
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        }
-
-        .action-card:hover {
-            transform: translateY(-3px) scale(1.02);
-            background: linear-gradient(145deg, #22302a, #141c19);
-            box-shadow: var(--glow-gold);
-            border-color: #fff;
-        }
-
-        .action-card h4 { color: var(--gold-bright); margin: 0 0 3px 0; font-size: 0.8rem; text-transform: uppercase; }
-        .action-card p { font-size: 0.65rem; color: #c5b59b; margin: 0; font-family: 'Playfair Display', serif; }
 
         .battle-log {
             background: #040605;
             border: 1px solid var(--gold);
             padding: 6px 10px;
-            height: 45px;
+            height: 50px;
             overflow-y: auto;
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.7rem;
@@ -293,21 +298,20 @@
 
         .credits-footer {
             text-align: center;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #c5b59b;
             font-family: 'Playfair Display', serif;
             font-style: italic;
             border-top: 1px dashed var(--gold);
-            padding-top: 4px;
-            margin-top: 2px;
+            padding-top: 3px;
         }
 
         .btn {
             background: linear-gradient(135deg, var(--gold), #aa820a);
             color: #0b0f0e;
             border: 1px solid #fff;
-            padding: 8px 15px;
-            font-size: 0.75rem;
+            padding: 6px 12px;
+            font-size: 0.7rem;
             font-weight: 900;
             border-radius: 6px;
             cursor: pointer;
@@ -370,11 +374,12 @@
 
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen">⤢</button>
 
+    <!-- Pre-Battle Point Allocation Modal -->
     <div id="modal-overlay">
         <div id="modal-content">
             <h1>🛡️ Pre-Battle Point Allocation</h1>
             <p>
-                Allocate your Gold Coins to strengthen your forces before the enemy approaches! Choose wisely to survive the encounter.
+                Allocate your Gold Coins to strengthen your forces before facing the Villain General! Choose wisely to survive the encounter.
             </p>
             <div id="allocation-controls">
                 <div class="allocation-box">
@@ -394,7 +399,7 @@
     </div>
 
     <header>
-        <h1>Sovereign Empire: Active Walking Combat Arena</h1>
+        <h1>Sovereign Empire: Blueprint Tactical Arena</h1>
     </header>
 
     <div class="nav-bar">
@@ -403,79 +408,97 @@
         <a href="map.html">🗺️ Map</a>
     </div>
 
-    <div class="widescreen-container">
+    <!-- Blueprint Widescreen Layout -->
+    <div class="blueprint-container">
         
-        <div class="top-light-bar">
-            <div>Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Whispering Shadows</span></div>
-            <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">1000</span> 🪙</div>
-            <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">50</span> 🛡️</div>
-            <div><a href="battle.html" class="btn" style="padding: 5px 10px; font-size: 0.7rem;">Arena Hub</a></div>
-        </div>
-
-        <div class="massive-arena-screen" id="main-arena-box">
-            <div class="arena-flash-shield" id="flash-shield"></div>
-            <div class="arena-flash-strike" id="flash-strike"></div>
-
-            <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 1.1rem; text-transform: uppercase; text-align: center; z-index: 5;">Campaign Battle Arena</h2>
+        <!-- Left Side: Interactive Tactical Cards Deck -->
+        <div class="left-cards-deck">
+            <h3>Tactical Cards</h3>
             
-            <div class="combatants-widescreen">
-                <div class="fighter-lane" id="player-lane" style="transform: translateX(0px);">
-                    <h4 id="player-name-lbl" style="color: var(--gold); margin: 0;">Sovereign Guardian</h4>
-                    <div class="fighter-block" id="player-avatar-block">⚔️</div>
-                    <div style="font-size: 0.8rem; color: #55bbff;">HP: <span id="player-hp-text">100</span>/100</div>
-                    <div class="health-bar-container">
-                        <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 100%;"></div>
-                    </div>
-                </div>
-
-                <div class="vs-badge">VS</div>
-
-                <div class="fighter-lane" id="boss-lane" style="transform: translateX(0px);">
-                    <h4 id="boss-name-lbl" style="color: var(--gold); margin: 0;">Rebel Vanguard</h4>
-                    <div class="boss-block" id="boss-avatar-block">🛡️</div>
-                    <div style="font-size: 0.8rem; color: #ff6666;">Energy: <span id="boss-hp-text">100</span>/100</div>
-                    <div class="health-bar-container">
-                        <div class="health-bar-fill" id="boss-hp-bar" style="width: 100%;"></div>
-                    </div>
-                </div>
+            <div class="blueprint-card" onclick="playerAction('kick')">
+                <span class="card-icon">⚔️</span>
+                <h4>Kick Strike</h4>
+                <p>March forward & slash enemy energy.</p>
             </div>
 
-            <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.8rem; z-index: 5;" id="arena-action-status">
-                Arena active. Blocks are marching and ready for combat!
+            <div class="blueprint-card" onclick="playerAction('shield')">
+                <span class="card-icon">🛡️</span>
+                <h4>Deploy Shield</h4>
+                <p>Activate light barrier to absorb damage.</p>
+            </div>
+
+            <div class="blueprint-card" onclick="playerAction('dodge')">
+                <span class="card-icon">💨</span>
+                <h4>Tactical Dodge</h4>
+                <p>Evade incoming blows & counter.</p>
+            </div>
+
+            <div class="blueprint-card" onclick="playerAction('phoenix')" style="border-color: #ff9933;">
+                <span class="card-icon">🦅</span>
+                <h4>Phoenix Eagle</h4>
+                <p>Unleash blazing sacred fire strike.</p>
+            </div>
+
+            <div class="blueprint-card" onclick="playerAction('soul')" style="border-color: #9933ff;">
+                <span class="card-icon">✨</span>
+                <h4>Divine Soul</h4>
+                <p>Invoke holy grace for massive healing.</p>
             </div>
         </div>
 
-        <div class="bottom-action-panel">
-            <div class="action-cards-grid">
-                <div class="action-card" onclick="playerAction('kick')">
-                    <h4>⚔️ Kick Strike</h4>
-                    <p>Walk & attack enemy.</p>
+        <!-- Right Side: Cinematic Arena & Status -->
+        <div class="right-arena-panel">
+            
+            <div class="top-light-bar">
+                <div>Campaign Tier: <span id="lbl-stage-name" style="color: var(--gold); font-weight: 900;">Border Marches</span></div>
+                <div>Gold Coins: <span id="lbl-coins" style="color: var(--gold-bright); font-weight: 900;">1000</span> 🪙</div>
+                <div>Shield Power: <span id="lbl-shield" style="color: #55bbff; font-weight: 900;">50</span> 🛡️</div>
+                <div><a href="battle.html" class="btn" style="padding: 4px 8px; font-size: 0.65rem;">Hub</a></div>
+            </div>
+
+            <div class="massive-arena-screen" id="main-arena-box">
+                <div class="arena-flash-shield" id="flash-shield"></div>
+                <div class="arena-flash-strike" id="flash-strike"></div>
+
+                <h2 id="boss-title" style="color: var(--gold); margin: 0; font-size: 1rem; text-transform: uppercase; text-align: center; z-index: 5;">Campaign Tier: Border Marches — Facing Rebellion General</h2>
+                
+                <div class="combatants-widescreen">
+                    <!-- Player Active Marching Block -->
+                    <div class="fighter-lane" id="player-lane" style="transform: translateX(0px);">
+                        <h4 id="player-name-lbl" style="color: var(--gold); margin: 0; font-size: 0.9rem;">Sovereign Guardian</h4>
+                        <div class="fighter-block" id="player-avatar-block">⚔️</div>
+                        <div style="font-size: 0.75rem; color: #55bbff;">HP: <span id="player-hp-text">100</span>/100</div>
+                        <div class="health-bar-container">
+                            <div class="health-bar-fill player-hp" id="player-hp-bar" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="vs-badge">VS</div>
+
+                    <!-- Villain General Active Block -->
+                    <div class="fighter-lane" id="boss-lane" style="transform: translateX(0px);">
+                        <h4 id="boss-name-lbl" style="color: var(--gold); margin: 0; font-size: 0.9rem;">Rebellion General</h4>
+                        <div class="boss-block" id="boss-avatar-block">🛡️</div>
+                        <div style="font-size: 0.75rem; color: #ff6666;">Energy: <span id="boss-hp-text">100</span>/100</div>
+                        <div class="health-bar-container">
+                            <div class="health-bar-fill" id="boss-hp-bar" style="width: 100%;"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="action-card" onclick="playerAction('shield')">
-                    <h4>🛡️ Deploy Shield</h4>
-                    <p>Block damage surge.</p>
+
+                <div style="text-align: center; font-family: 'Playfair Display', serif; font-style: italic; color: #c5b59b; font-size: 0.75rem; z-index: 5;" id="arena-action-status">
+                    Blueprint arena active. Click cards on the left to fight the Villain General!
                 </div>
-                <div class="action-card" onclick="playerAction('dodge')">
-                    <h4>💨 Tactical Dodge</h4>
-                    <p>Evade & counter.</p>
+
+                <div class="battle-log" id="gameplay-log">
+                    [Blueprint Chamber Synchronized]: Left-deck cards active. Ready for fair combat!
                 </div>
-                <div class="action-card" onclick="playerAction('phoenix')" style="border-color: #ff9933;">
-                    <h4>🦅 Phoenix Eagle</h4>
-                    <p>Unleash fire strike.</p>
-                </div>
-                <div class="action-card" onclick="playerAction('soul')" style="border-color: #9933ff;">
-                    <h4>✨ Divine Soul</h4>
-                    <p>God's sacred heal.</p>
+
+                <div class="credits-footer">
+                    👑 Sovereign Empire Original Game Style | Scripted and Directed by <strong>Tegra</strong> | Generated by <strong>Gemini</strong>
                 </div>
             </div>
 
-            <div class="battle-log" id="gameplay-log">
-                [Active Walking Arena Ready]: LocalStorage and automated marching synchronized!
-            </div>
-
-            <div class="credits-footer">
-                👑 Sovereign Empire Original Game Style | Scripted and Directed by <strong>Tegra</strong> | Generated by <strong>Gemini</strong>
-            </div>
         </div>
 
     </div>
@@ -529,29 +552,23 @@
         }
 
         let game = {
-            stage: parseInt(localStorage.getItem('sovereign_stage')) || 1,
-            coins: parseInt(localStorage.getItem('sovereign_coins')) || 1000,
+            stage: parseInt(localStorage.getItem('sovereign_stage')) || 4,
+            coins: parseInt(localStorage.getItem('sovereign_coins')) || 1165,
             playerHp: parseInt(localStorage.getItem('sovereign_life')) || 100,
             shieldPower: 50,
-            bossMaxHp: 100,
-            bossHp: 100,
+            bossMaxHp: 160,
+            bossHp: 160,
             maxStages: 50
         };
 
         const tierNames = [
             "Whispering Shadows", "Iron Citadel", "The Crimson Pass", "Border Marches", "Shattered Valley",
-            "Obsidian Keep", "Temple of Echoes", "Ebon Gate", "Storm Peak", "The Unknown Throne",
-            "Void Outpost", "Abyssal Trench", "Titan's Rest", "Solar Bastion", "Dreadnought Hull",
-            "Rebel Stronghold", "Shadow Spire", "Eclipse Ridge", "Inferno Forge", "The Final Apex"
+            "Obsidian Keep", "Temple of Echoes", "Ebon Gate", "Storm Peak", "The Unknown Throne"
         ];
 
         const bossNames = [
             "Vanguard Rebel", "Shadow Enforcer", "District Warlord", "Rebellion General", "Iron Vanguard",
-            "Shattered Knight", "Corrupted Mage", "Sentinel Commander", "Border Marauder", "Dark Vanguard",
-            "Crimson Zealot", "Void Lieutenant", "Abyssal Guard", "Obsidian Brute", "Ebon Champion",
-            "Dreadnought Sentinel", "Rebel Overlord", "Phantom Assassin", "Titan Guardian", "Stormbringer",
-            "Infernal General", "Solar Eclipse Boss", "Royal Traitor", "Imperial Warlord", "Supreme Rebel Leader",
-            "Dark Sovereign", "Shadow Monarch", "Apocalypse Herald", "Eternal Reaver", "World Breaker", "The Eternal Sovereign Boss"
+            "Shattered Knight", "Corrupted Mage", "Sentinel Commander", "Border Marauder", "Dark Vanguard"
         ];
 
         window.onload = function() {
@@ -605,7 +622,7 @@
         }
 
         function initStage() {
-            game.bossMaxHp = 80 + (game.stage * 20);
+            game.bossMaxHp = 100 + (game.stage * 15);
             game.bossHp = game.bossMaxHp;
             let currentBossTitle = bossNames[(game.stage - 1) % bossNames.length];
             let tierTitle = tierNames[(game.stage - 1) % tierNames.length];
@@ -614,7 +631,7 @@
             document.getElementById('boss-title').innerText = `Campaign Tier: ${tierTitle} — Facing ${currentBossTitle}`;
             document.getElementById('boss-name-lbl').innerText = currentBossTitle;
             
-            logMsg(`Entering Stage ${game.stage} (${tierTitle}): Facing ${currentBossTitle}!`);
+            logMsg(`Entering ${tierTitle}: Facing ${currentBossTitle}!`);
             updateDOM();
         }
 
@@ -671,7 +688,7 @@
                 setTimeout(() => playerLane.style.transform = 'translateX(0px)', 400);
             } else if (actionType === 'shield') {
                 statusLbl.innerText = "Shield deployed! Energy barrier shimmering with light.";
-                setTimeout(() => statusLbl.innerText = "Arena active. Blocks are marching and ready for combat!", 1500);
+                setTimeout(() => statusLbl.innerText = "Blueprint arena active. Click cards on the left to fight!", 1500);
             }
         }
 
@@ -689,7 +706,7 @@
                 animateWalkingCombat('forward');
                 playerDmg = 18 + (game.stage * 2);
                 game.bossHp = Math.max(0, game.bossHp - playerDmg);
-                logMsg(`Player block walked forward & executed Kick Strike! Dealt -${playerDmg} DMG.`);
+                logMsg(`Player executed Kick Strike! Dealt -${playerDmg} DMG.`);
             } else if (type === 'shield') {
                 playSound('shield');
                 triggerVisualEffect('shield');
@@ -720,32 +737,32 @@
 
             if (game.bossHp <= 0) {
                 playSound('victory');
-                let reward = 50 * game.stage;
+                let reward = 60 * game.stage;
                 game.coins += reward;
                 logMsg(`🎉 Campaign Tier Conquered! Earned +${reward} Gold Coins.`);
-                alert(`✦ VICTORY! Boss Defeated! Earned +${reward} Gold Coins. ✦`);
+                alert(`✦ VICTORY! Villain General Defeated! Earned +${reward} Gold Coins. ✦`);
                 
                 if (game.stage < game.maxStages) {
                     game.stage++;
                     initStage();
                     openAllocationModal();
                 } else {
-                    alert("👑 MAGNIFICENT VICTORY! You have conquered all 50 mystical tiers and saved the Sovereign Empire!");
+                    alert("👑 MAGNIFICENT VICTORY! You have conquered all mystical tiers and saved the Sovereign Empire!");
                     game.stage = 1;
                     initStage();
                     openAllocationModal();
                 }
             } else {
                 setTimeout(() => {
-                    let bossSkills = ['Divine Flame Surge 🔥', 'Shadow Strike ⚔️', 'Imperium Tempest ⚡', 'Rebel Crush 🛡️'];
+                    let bossSkills = ['Villain Flame Surge 🔥', 'Rebel Shadow Strike ⚔️', 'Imperium Tempest ⚡', 'General Crush 🛡️'];
                     let chosenSkill = bossSkills[Math.floor(Math.random() * bossSkills.length)];
-                    let bossDmg = 10 + (game.stage * 3);
+                    let bossDmg = 12 + (game.stage * 3);
 
                     if (type === 'shield') {
                         bossDmg = Math.max(3, bossDmg - game.shieldPower);
-                        logMsg(`Boss used ${chosenSkill}, but your Shield absorbed the heavy blow (-${bossDmg} HP).`);
+                        logMsg(`Villain General used ${chosenSkill}, but your Shield absorbed the blow (-${bossDmg} HP).`);
                     } else {
-                        logMsg(`⚠️ Boss auto-executed ${chosenSkill}! You took -${bossDmg} damage.`);
+                        logMsg(`⚠️ Villain General executed ${chosenSkill}! You took -${bossDmg} damage.`);
                     }
                     game.playerHp = Math.max(0, game.playerHp - bossDmg);
                     updateDOM();
@@ -760,14 +777,6 @@
             }
             updateDOM();
         }
-
-        window.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft' || e.key === 'a') playerAction('kick');
-            else if (e.key === 'ArrowRight' || e.key === 'd') playerAction('dodge');
-            else if (e.key === 'ArrowUp' || e.key === 'w') playerAction('shield');
-            else if (e.key === 'p' || e.key === 'P') playerAction('phoenix');
-            else if (e.key === 's' || e.key === 'S') playerAction('soul');
-        });
     </script>
 </body>
 </html>
