@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Guild & Village Chambers | Sovereign Empire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f0e;
+            --panel-bg: rgba(14, 20, 18, 0.96);
+            --theme-color: #ffd700;
+            --text-main: #f5f2eb;
+            --text-muted: #c5b59b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
+            background: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav { 
+            padding: 12px 20px; 
+            background: var(--panel-bg);
+            border-bottom: 2px solid var(--theme-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+        nav a:hover { color: var(--theme-color); }
+
+        .village-wrapper {
+            max-width: 1050px;
+            width: 92%;
+            margin: 25px auto;
+            background: var(--panel-bg);
+            border: 4px ridge var(--theme-color);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 0 70px rgba(0,0,0,0.95), inset 0 0 30px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        h1 { color: var(--theme-color); font-size: 2.2rem; margin-top: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(255,215,0,0.5); }
+        p.subtitle { font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
+
+        .village-hud {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 40, 25, 0.85);
+            border: 2px solid var(--theme-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 0.82rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .village-hud span { color: #ffe875; font-weight: bold; }
+
+        /* Cinematic Guild Table Presentation */
+        .cinematic-guild-table {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            background: rgba(5, 12, 10, 0.92);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+            text-align: left;
+            align-items: center;
+        }
+
+        .npc-portrait-frame {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #1b2e25, #0a1410);
+            border: 3px ridge var(--theme-color);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .npc-portrait-frame span {
+            font-size: 0.75rem;
+            color: var(--theme-color);
+            text-transform: uppercase;
+            margin-top: 8px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .dialogue-content-box h3 {
+            color: var(--theme-color);
+            margin: 0 0 10px 0;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+        }
+
+        .dialogue-content-box p {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0 0 15px 0;
+        }
+
+        .action-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #16261f, #09120e);
+            border: 1px solid var(--theme-color);
+            color: var(--text-main);
+            padding: 12px 16px;
+            text-align: left;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+        .action-btn:hover { background: var(--theme-color); color: #0b0f0e; transform: scale(1.01); box-shadow: 0 0 20px var(--theme-color); }
+
+        .royal-btn {
+            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
+            color: #0b0f0e;
+            border: 1px solid #fff;
+            padding: 10px 22px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; }
+
+        .quest-log-status {
+            margin-top: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            color: #79ff9c;
+            background: #040605;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #335544;
+            text-align: left;
+        }
+
+        @media(max-width: 800px) {
+            .cinematic-guild-table { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body onload="initCinematicGuild()">
+
+    <nav> 
+        <a href="index.html">🏠 Home</a>
+        <a href="library.html">📚 Library</a>
+        <a href="map.html">🗺️ Empire Map</a>
+        <a href="battle.html">⚔️ Battle</a>
+        <a href="shop.html">🪙 Imperial Shop</a>
+    </nav>
+
+    <div class="village-wrapper">
+        <h1>Cinematic Guild & Village Chamber</h1>
+        <p class="subtitle">Sit at the heavy oak table with Guild Master Vane and regional leaders to review active sovereign contracts.</p>
+
+        <div class="village-hud">
+            <div>Imperial Wallet: <span id="hub-coins">0</span> 🪙</div>
+            <div>Royal Treasury Tax Vault: <span id="hub-tax">0</span> 🪙</div>
+            <div>Contracts Fulfilled: <span id="hub-quests-done">0</span></div>
+        </div>
+
+        <!-- Cinematic NPC Table Presentation -->
+        <div class="cinematic-guild-table">
+            <div class="npc-portrait-frame">
+                📜
+                <span id="npc-role-label">Guild Master Vane</span>
+            </div>
+            <div class="dialogue-content-box">
+                <h3 id="contract-title-display">The Frost Provision Shortage</h3>
+                <p id="contract-dialogue-display">
+                    "Welcome to the Guild table, Sovereign. We have active regional contracts requiring your prompt intervention. Review the terms below and choose your decree."
+                </p>
+                <div class="action-options" id="quest-board-list">
+                    <!-- Dynamically populated unique contracts -->
+                </div>
+            </div>
+        </div>
+
+        <div class="quest-log-status" id="hub-log">
+            [Cinematic Chamber Initialized]: Seated at Guild Table. Awaiting Sovereign decree...
+        </div>
+
+        <div style="margin-top: 25px;">
+            <a href="map.html" class="royal-btn">🗺️ Return to Empire Map</a>
+        </div>
+    </div>
+
+    <script>
+        let hubState = {
+            coins: 500,
+            treasuryTaxCollected: 0,
+            questsCompleted: 0,
+            inventory: []
+        };
+
+        const uniqueQuests = [
+            {
+                id: 1,
+                title: "The Frost Provision Shortage",
+                npc: "Elder Thomas (North Village)",
+                description: "Deliver vital winter supplies to the northern homesteads.",
+                grossReward: 200,
+                rewardItem: "Winter Fur Pelt",
+                log: "Provisions delivered successfully. Earned a unique Winter Fur Pelt!"
+            },
+            {
+                id: 2,
+                title: "Clearing the Border Outlaws",
+                npc: "Guild Master Vane",
+                description: "Eliminate highway bandits threatening regional trade caravans.",
+                grossReward: 350,
+                rewardItem: "Mercenary Honor Badge",
+                log: "Outlaws neutralized. Guild contract fulfilled with honors!"
+            },
+            {
+                id: 3,
+                title: "Rare Apothecary Flora Gathering",
+                npc: "Apothecary Selena",
+                description: "Harvest glowing medicinal roots from the deep shadows of the wilderness.",
+                grossReward: 250,
+                rewardItem: "Ancient Essence Potion",
+                log: "Rare flora safely turned in to the apothecary."
+            }
+        ];
+
+        function initCinematicGuild() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                hubState.coins = parsed.coins !== undefined ? parsed.coins : 500;
+                hubState.treasuryTaxCollected = parsed.treasuryTaxCollected || 0;
+                hubState.questsCompleted = parsed.questsCompleted || 0;
+                hubState.inventory = parsed.inventory || [];
+            }
+            updateHubDOM();
+            renderQuestBoard();
+        }
+
+        function updateHubDOM() {
+            document.getElementById('hub-coins').innerText = hubState.coins;
+            document.getElementById('hub-tax').innerText = hubState.treasuryTaxCollected;
+            document.getElementById('hub-quests-done').innerText = hubState.questsCompleted;
+
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            let parsed = saved ? JSON.parse(saved) : {};
+            parsed.coins = hubState.coins;
+            parsed.treasuryTaxCollected = hubState.treasuryTaxCollected;
+            parsed.questsCompleted = hubState.questsCompleted;
+            parsed.inventory = hubState.inventory;
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(parsed));
+        }
+
+        function renderQuestBoard() {
+            let html = '';
+            uniqueQuests.forEach(quest => {
+                let tax = Math.floor(quest.grossReward * 0.10);
+                let net = quest.grossReward - tax;
+                html += `
+                    <button class="action-btn" onclick="completeQuest(${quest.id})">
+                        <strong>⚔️ ${quest.title}</strong><br>
+                        <span style="font-size: 0.72rem; color: #a0deca;">Giver: ${quest.npc} — ${quest.description}</span><br>
+                        <span style="font-size: 0.72rem; color: var(--theme-color);">Net Payout: ${net} Coins (Gross ${quest.grossReward} - ${tax} Royal Tax) + [${quest.rewardItem}]</span>
+                    </button>
+                `;
+            });
+            document.getElementById('quest-board-list').innerHTML = html;
+        }
+
+        function completeQuest(questId) {
+            let quest = uniqueQuests.find(q => q.id === questId);
+            if (!quest) return;
+
+            let taxAmount = Math.floor(quest.grossReward * 0.10);
+            let netReward = quest.grossReward - taxAmount;
+
+            hubState.coins += netReward;
+            hubState.treasuryTaxCollected += taxAmount;
+            hubState.questsCompleted++;
+            hubState.inventory.push(quest.rewardItem);
+
+            updateHubDOM();
+
+            document.getElementById('contract-title-display').innerText = quest.title;
+            document.getElementById('contract-dialogue-display').innerText = `"${quest.log}"`;
+            document.getElementById('hub-log').innerHTML = `[Contract Fulfilled]: "${quest.title}" <br> Net Payout: +${netReward} Coins | Tax Vault: +${taxAmount} Coins | Item: ${quest.rewardItem}`;
+            
+            alert(`✦ Contract Fulfilled: "${quest.title}" ✦\n\n- Gross Reward: ${quest.grossReward} Coins\n- Royal Tax (10% to Treasury): -${taxAmount} Coins\n- Net Payout to Wallet: ${netReward} Coins\n- Unique Item Secured: ${quest.rewardItem}`);
+        }
+    </script>
+</body>
+</html>
