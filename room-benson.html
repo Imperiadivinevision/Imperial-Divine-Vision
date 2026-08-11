@@ -532,7 +532,7 @@
         </div>
 
         <!-- FATHER BONDING LOCKER -->
-        <div class="locker-section" id="father-locker-section" style="display:none;">
+        <div class="locker-section" id="father-locker-section" style="display:block;">
             <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Father Bonding Area</div>
             <button class="locker-btn" id="father-locker-btn" onclick="triggerFatherBonding()">Spend Time w/ Dad (<span id="father-uses">3</span> left)</button>
             <div id="father-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
@@ -620,7 +620,7 @@
             const lockerSection = document.getElementById('sister-locker-section');
             if (lockerSection.style.display === 'none') {
                 lockerSection.style.display = 'flex';
-                alert("✦ SISTER BONDING LOCKER UNLOCKED! ✦\nSanctuary Blessing: You can now use this option on the left panel to spend time with your sister, earn favor, and exchange it for coins!");
+                alert("✦ SISTER BONDING LOCKER UNLOCKED! ✦\nSanctuary Blessing: You can now use this option on the left panel to spend time with your sister, earn affection, and gain 10 coins!");
             }
         }
 
@@ -628,7 +628,7 @@
             const lockerSection = document.getElementById('father-locker-section');
             if (lockerSection.style.display === 'none') {
                 lockerSection.style.display = 'flex';
-                alert("✦ FATHER BONDING AREA UNLOCKED! ✦\nSanctuary Blessing: You can now click the Father Bonding Area on the left panel to learn how to walk with Dad, earn affection, and gain coins!");
+                alert("✦ FATHER BONDING AREA UNLOCKED! ✦\nSanctuary Blessing: You can now click the Father Bonding Area on the left panel to spend time with dad to earn affection and gain 10 coins!");
             }
         }
 
@@ -655,10 +655,10 @@
                 const display = document.getElementById('story-display');
 
                 heading.innerText = "✦ Sister Bonding Session ✦";
-                videoElem.src = "more-bonding-time-with-sister-prince-ian-cinematic.mp4";
+                videoElem.src = "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4";
                 videoElem.load();
                 videoElem.play();
-                display.innerText = "[Sanctuary Event: You spend peaceful time walking through the palace gardens with your sister and her maid, deepening your unbreakable bond and earning favor.]";
+                display.innerText = "[Sanctuary Event: Spend time with sister to earn us affection! You earned 10 coins.]";
 
                 if (sisterUsesLeft === 0) {
                     setTimeout(() => {
@@ -666,7 +666,7 @@
                         videoElem.src = "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4";
                         videoElem.load();
                         videoElem.play();
-                        display.innerText = "❤️ [Sanctuary Milestone: You have spent time with your sister three times! You earned sister favor and coins. A 4-minute cooldown has now begun before you can use this option again.] ❤️";
+                        display.innerText = "❤️ [Sanctuary Milestone: You have spent time with your sister three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can use this option again.] ❤️";
                         startSisterCooldown();
                     }, 2000);
                 }
@@ -705,7 +705,7 @@
             if (motherUsesLeft > 0) {
                 motherUsesLeft--;
                 stats.mother += 15;
-                stats.coins += 15;
+                stats.coins += 10;
                 updateHUD();
                 document.getElementById('mother-uses').innerText = motherUsesLeft;
 
@@ -717,7 +717,7 @@
                 videoElem.src = "bonding-time-with-mom-cinematic.mp4";
                 videoElem.load();
                 videoElem.play();
-                display.innerText = "[Sanctuary Event: Mother walks along the palace grounds while cradling baby Prince Ian in her arms, surrounded by gentle attendants.]";
+                display.innerText = "[Sanctuary Event: Spend time with mom to earn affection and 10 coins!]";
 
                 if (motherUsesLeft === 0) {
                     setTimeout(() => {
@@ -725,7 +725,7 @@
                         videoElem.src = "you-earn-extra-point-for-more-time-with-mom-cinematic.mp4";
                         videoElem.load();
                         videoElem.play();
-                        display.innerText = "👑 [Sanctuary Milestone: You have earned favor with mother after spending time with her three times! You can exchange this favor for coins or use it to buy gifts. A 4-minute cooldown has now begun before you can bond with mom again.] 👑";
+                        display.innerText = "👑 [Sanctuary Milestone: You have spent time with mom three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can bond with mom again.] 👑";
                         startMotherCooldown();
                     }, 2500);
                 }
@@ -764,7 +764,7 @@
             if (fatherUsesLeft > 0) {
                 fatherUsesLeft--;
                 stats.father += 20;
-                stats.coins += 15;
+                stats.coins += 10;
                 updateHUD();
                 document.getElementById('father-uses').innerText = fatherUsesLeft;
 
@@ -772,19 +772,19 @@
                 const heading = document.getElementById('scene-heading');
                 const display = document.getElementById('story-display');
 
-                heading.innerText = "✦ Father Bonding: Learning How to Walk ✦";
-                videoElem.src = "learn-how-to-walk-with-dad-cinematic.mp4";
+                heading.innerText = "✦ Father Bonding: Spend Time with Dad ✦";
+                videoElem.src = "spent-time-with-dad-to-earn-affection-cinematic.mp4";
                 videoElem.load();
                 videoElem.play();
-                display.innerText = "[Sanctuary Event: King Benson guides his young son step by step through the magnificent halls, teaching him how to walk with strength and royal pride.]";
+                display.innerText = "[Sanctuary Event: Spend time with dad to earn affection and 10 coins!]";
 
                 if (fatherUsesLeft === 0) {
                     setTimeout(() => {
-                        heading.innerText = "✦ Congratulation! You Have Learned at Work ✦";
-                        videoElem.src = "congratulation-you-learn-how-to-walk-cinematic.mp4";
+                        heading.innerText = "✦ Father Affection Milestone ✦";
+                        videoElem.src = "spent-time-with-dad-to-earn-affection-cinematic-1.mp4";
                         videoElem.load();
                         videoElem.play();
-                        display.innerText = "🎉 [Sanctuary Milestone: Congratulations, Traveler! You have learned at work with your father 3 times. You earned affection and coins. The game can now be replayed from the beginning with your newfound wisdom, and a 4-minute cooldown has started!] 🎉";
+                        display.innerText = "🎉 [Sanctuary Milestone: You have spent time with dad three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can bond with dad again.] 🎉";
                         startFatherCooldown();
                     }, 2500);
                 }
