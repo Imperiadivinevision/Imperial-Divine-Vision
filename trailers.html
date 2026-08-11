@@ -160,7 +160,6 @@
 
         nav a:hover { color: var(--theme-color); text-shadow: 0 0 10px var(--glow-strength); }
 
-        /* 3D Elevated Chamber Container */
         .chamber-container {
             max-width: 1350px;
             margin: 40px auto;
@@ -225,7 +224,6 @@
 
         @media(max-width: 1050px) { .chamber-grid { grid-template-columns: 1fr; } }
 
-        /* 3D Sidebars */
         .sidebar-left, .sidebar-right { 
             background: rgba(10, 14, 12, 0.92); 
             border: 1px solid var(--theme-color); 
@@ -249,7 +247,6 @@
             letter-spacing: 1px; 
         }
 
-        /* 3D Elevated Buttons */
         .royal-btn { 
             background: linear-gradient(135deg, var(--theme-color), #8b7322); 
             color: #050807; 
@@ -277,7 +274,6 @@
             transform: translateZ(25px) translateY(-3px); 
         }
 
-        /* 3D Center Stage & Video */
         .center-stage { 
             display: flex; 
             flex-direction: column; 
@@ -314,7 +310,6 @@
             transform: translateZ(20px);
         }
 
-        /* 3D Trailer List Items */
         .trailer-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
         .trailer-item { 
             background: rgba(20, 28, 25, 0.95); 
@@ -348,11 +343,9 @@
 </head>
 <body onmousemove="shineLight(event)">
 
-    <!-- MOVING FLOWER GARDEN BACKGROUND -->
     <div class="moving-bg-layer"></div>
     <div class="shine-overlay" id="shine-layer"></div>
 
-    <!-- FULLSCREEN TOGGLE BUTTON IN TOP-LEFT CORNER -->
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
 
     <audio id="royal-audio" loop preload="auto">
@@ -383,7 +376,7 @@
                 <div style="margin-top: 25px;">
                     <h3>🏛️ Sovereign Quests</h3>
                     <p style="font-size: 0.82rem; color: var(--text-muted); font-family: 'Playfair Display', serif; line-height: 1.5;">
-                        Explore our complete master chronicle and interact with the royal family records.
+                        Explore our complete 149-page master chronicle and interact with the royal family records.
                     </p>
                     <a href="library.html" class="royal-btn" style="text-align: center;">📖 Open Library</a>
                 </div>
@@ -391,9 +384,9 @@
 
             <div class="center-stage">
                 <div class="video-container">
-                    <iframe id="active-video-frame" src="https://www.youtube.com/embed/VPe3yihhuXU?autoplay=0" title="Sovereign Cinematic Trailer" allowfullscreen></iframe>
+                    <iframe id="active-video-frame" src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID_1?autoplay=0" title="Sovereign Cinematic Trailer" allowfullscreen></iframe>
                 </div>
-                <div class="now-playing-title" id="video-title-display">Now Playing: Song of Rosanna and The Evil King Official Trailer 3</div>
+                <div class="now-playing-title" id="video-title-display">Now Playing: The Song of Rosanna Official Cinematic Trailer 1</div>
             </div>
 
             <div class="sidebar-right">
@@ -402,14 +395,14 @@
                     Select any trailer below to load it instantly onto center stage:
                 </p>
                 <div class="trailer-list">
-                    <div class="trailer-item active" onclick="switchTrailer('VPe3yihhuXU', 'Song of Rosanna and The Evil King Official Trailer 3', this)">
-                        🎬 Trailer 3: Official Trailer 3
-                    </div>
-                    <div class="trailer-item" onclick="switchTrailer('YOUR_YOUTUBE_ID_1', 'The Song of Rosanna Official Cinematic Trailer 1', this)">
+                    <div class="trailer-item active" onclick="switchTrailer('YOUR_YOUTUBE_ID_1', 'The Song of Rosanna Official Cinematic Trailer 1', this)">
                         🎬 Trailer 1: The Awakening of Rosanna
                     </div>
                     <div class="trailer-item" onclick="switchTrailer('YOUR_YOUTUBE_ID_2', 'The Song of Rosanna Official Cinematic Trailer 2', this)">
                         🎬 Trailer 2: Clash at the Imperial Throne
+                    </div>
+                    <div class="trailer-item" onclick="switchTrailer('YOUR_YOUTUBE_ID_3', 'The Song of Rosanna Official Cinematic Trailer 3', this)">
+                        🎬 Trailer 3: Season Two Preview & Family
                     </div>
                 </div>
             </div>
@@ -449,33 +442,50 @@
             let y = (event.clientY / window.innerHeight) * 100;
             layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.3) 0%, transparent 65%)";
             layer.style.opacity = "1";
+
+            if (!musicStarted) {
+                let audio = document.getElementById('royal-audio');
+                if (audio) {
+                    audio.volume = 0.4;
+                    audio.play().then(() => {
+                        musicStarted = true;
+                    }).catch(e => {});
+                }
+            }
         }
 
         function playMelody() {
             let audio = document.getElementById('royal-audio');
             if (audio && !musicStarted) {
                 audio.volume = 0.4;
-                audio.play().then(() => { musicStarted = true; }).catch(e => {});
+                audio.play().then(() => {
+                    musicStarted = true;
+                }).catch(e => {});
             }
         }
 
+        let isPlaying = false;
         function toggleAudio() {
             const audio = document.getElementById('royal-audio');
             const btn = document.getElementById('audio-toggle-btn');
             if (!audio) return;
-            if (!audio.paused) {
+            if (isPlaying) {
                 audio.pause();
                 btn.innerText = "🎵 Play Ambiance";
+                isPlaying = false;
             } else {
                 audio.volume = 0.4;
-                audio.play();
-                btn.innerText = "🔇 Pause Ambiance";
+                audio.play().then(() => {
+                    btn.innerText = "🔇 Pause Ambiance";
+                    isPlaying = true;
+                }).catch(e => {});
             }
         }
 
         function switchTrailer(videoId, titleText, element) {
             document.getElementById('active-video-frame').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
             document.getElementById('video-title-display').innerText = "Now Playing: " + titleText;
+            
             let items = document.querySelectorAll('.trailer-item');
             items.forEach(item => item.classList.remove('active'));
             element.classList.add('active');
