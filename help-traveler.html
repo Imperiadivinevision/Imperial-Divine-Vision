@@ -195,9 +195,9 @@
 
     <!-- Cinematic Stage with Video & Bottom Overlay Bar -->
     <div class="cinematic-stage" id="stage-container">
-        <!-- Starts playing the plea video -->
+        <!-- Starts playing the plea video using exact repository filename -->
         <video id="traveler-video" autoplay controls onended="onVideoFullyFinished()">
-            <source src="villager please.mp4" type="video/mp4">
+            <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -285,9 +285,9 @@
             document.getElementById('ui-coins').innerText = playerState.coins;
             document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
 
-            // Seamlessly switch video to the grateful thank-you video!
+            // Seamlessly switch video to the grateful thank-you video using exact repository filename!
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'villager thank you.mp4';
+            videoElement.src = 'village-thank-you.mp4';
             videoElement.load();
             videoElement.play();
 
@@ -314,7 +314,7 @@
 
         function replayTravelerVideo() {
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'villager please.mp4';
+            videoElement.src = 'village-plea.mp4';
             videoElement.load();
             videoElement.play();
             
