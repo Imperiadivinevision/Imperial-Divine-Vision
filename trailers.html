@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0b0f0e;
-            --panel-bg: rgba(17, 23, 21, 0.95);
+            --bg-dark: #050807;
+            --panel-bg: rgba(14, 20, 18, 0.96);
             --theme-color: #d4af37;
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
-            --glow-strength: rgba(212, 175, 55, 0.5);
+            --glow-strength: rgba(212, 175, 55, 0.6);
         }
 
         body {
@@ -27,9 +26,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            perspective: 1200px;
         }
 
-        /* EXACT MOVING FLOWER GARDEN BACKGROUND (UNTOUCHED) */
         .moving-bg-layer {
             position: fixed;
             top: 0;
@@ -51,20 +50,71 @@
             100% { background-size: 390px auto; background-position: center bottom; }
         }
 
-        /* Interactive Light / Shine Layer on Mouse Move */
         .shine-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Clean Top Navigation Bar */
+        /* Fullscreen Toggle Button in Top-Left Corner */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 25px;
+            background: rgba(14, 20, 18, 0.95);
+            border: 2px solid var(--theme-color);
+            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 5000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9), 0 0 15px var(--glow-strength);
+            transition: all 0.3s ease;
+            transform: translateZ(30px);
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: translateZ(50px) scale(1.1);
+            background: var(--theme-color);
+            color: #050807;
+            box-shadow: 0 0 30px var(--theme-color);
+        }
+
+        body.is-chamber-fullscreen .sidebar-left,
+        body.is-chamber-fullscreen .sidebar-right,
+        body.is-chamber-fullscreen nav,
+        body.is-chamber-fullscreen footer {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .chamber-container {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 15px !important;
+            box-shadow: none !important;
+        }
+        body.is-chamber-fullscreen .chamber-grid {
+            grid-template-columns: 1fr !important;
+            height: 90vh !important;
+        }
+        body.is-chamber-fullscreen .video-container {
+            height: 75vh !important;
+            aspect-ratio: unset !important;
+        }
+
         nav { 
-            padding: 14px 20px; 
+            padding: 14px 20px 14px 80px; 
             background: var(--panel-bg);
             border-bottom: 2px solid var(--theme-color);
             position: sticky;
@@ -74,26 +124,29 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.9);
             flex-wrap: wrap;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
         }
 
         .nav-module {
-            background: rgba(22, 30, 27, 0.85);
+            background: rgba(22, 30, 27, 0.9);
             border: 1px solid var(--theme-color);
-            padding: 8px 14px;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(15px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         .nav-module:hover {
-            background: rgba(30, 42, 38, 0.95);
-            box-shadow: 0 0 15px var(--glow-strength);
-            transform: translateY(-2px);
+            background: rgba(35, 48, 43, 0.95);
+            box-shadow: 0 10px 25px var(--glow-strength);
+            transform: translateZ(35px) translateY(-3px);
         }
 
         nav a { 
@@ -105,221 +158,207 @@
             text-transform: uppercase;
         }
 
-        nav a:hover {
-            color: var(--theme-color);
-            text-shadow: 0 0 8px var(--glow-strength);
-        }
+        nav a:hover { color: var(--theme-color); text-shadow: 0 0 10px var(--glow-strength); }
 
-        /* Main Chamber Container */
+        /* 3D Elevated Chamber Container */
         .chamber-container {
             max-width: 1350px;
             margin: 40px auto;
             background: var(--panel-bg);
             border: 3px double var(--theme-color);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.9), 0 0 45px var(--glow-strength);
+            box-shadow: 0 35px 90px rgba(0,0,0,0.95), 0 0 60px rgba(212, 175, 55, 0.4), inset 0 0 30px rgba(212, 175, 55, 0.1);
             box-sizing: border-box;
             width: 92%;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+            transition: transform 0.5s ease;
         }
 
-        /* Top Header Content */
-        .chamber-title {
-            font-size: 2.5rem;
-            color: var(--theme-color);
-            margin: 0 0 10px 0;
-            text-shadow: 0 0 15px var(--glow-strength);
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .chamber-container:hover {
+            transform: translateZ(35px);
         }
 
-        .chamber-quote {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 15px;
+        .chamber-title { 
+            font-size: 2.6rem; 
+            color: var(--theme-color); 
+            margin: 0 0 10px 0; 
+            text-shadow: 0 4px 20px var(--glow-strength); 
+            letter-spacing: 2.5px; 
+            text-transform: uppercase; 
+            transform: translateZ(25px);
         }
 
-        .acoustic-badge {
-            display: inline-block;
-            border: 1px dashed var(--theme-color);
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: var(--text-main);
-            background: rgba(212, 175, 55, 0.08);
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+        .chamber-quote { 
+            font-family: 'Playfair Display', serif; 
+            font-style: italic; 
+            color: var(--text-muted); 
+            font-size: 1.1rem; 
+            margin-bottom: 15px; 
+            transform: translateZ(15px);
         }
 
-        /* Elevated Layout: Left/Right Split with Big Central Video */
-        .chamber-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr 280px;
-            gap: 25px;
-            align-items: start;
-            margin-top: 20px;
+        .acoustic-badge { 
+            display: inline-block; 
+            border: 1px dashed var(--theme-color); 
+            padding: 8px 20px; 
+            border-radius: 8px; 
+            font-size: 0.85rem; 
+            color: var(--text-main); 
+            background: rgba(212, 175, 55, 0.1); 
+            margin-bottom: 30px; 
+            letter-spacing: 1px; 
+            transform: translateZ(15px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        @media(max-width: 1050px) {
-            .chamber-grid {
-                grid-template-columns: 1fr;
-            }
+        .chamber-grid { 
+            display: grid; 
+            grid-template-columns: 280px 1fr 280px; 
+            gap: 25px; 
+            align-items: start; 
+            margin-top: 20px; 
+            transform-style: preserve-3d;
         }
 
-        /* Left Column: Music & Ambiance Controls */
-        .sidebar-left {
-            background: rgba(11, 15, 14, 0.9);
-            border: 1px solid var(--theme-color);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: left;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        @media(max-width: 1050px) { .chamber-grid { grid-template-columns: 1fr; } }
+
+        /* 3D Sidebars */
+        .sidebar-left, .sidebar-right { 
+            background: rgba(10, 14, 12, 0.92); 
+            border: 1px solid var(--theme-color); 
+            border-radius: 12px; 
+            padding: 22px; 
+            text-align: left; 
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.6); 
+            transform: translateZ(25px);
+            transition: transform 0.3s ease;
+        }
+        .sidebar-left:hover, .sidebar-right:hover {
+            transform: translateZ(40px);
         }
 
-        .sidebar-left h3 {
-            font-size: 1.1rem;
-            color: var(--theme-color);
-            margin-top: 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 8px;
-            letter-spacing: 1px;
+        .sidebar-left h3, .sidebar-right h3 { 
+            font-size: 1.1rem; 
+            color: var(--theme-color); 
+            margin-top: 0; 
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3); 
+            padding-bottom: 8px; 
+            letter-spacing: 1px; 
         }
 
-        .audio-player-box {
-            margin-top: 15px;
+        /* 3D Elevated Buttons */
+        .royal-btn { 
+            background: linear-gradient(135deg, var(--theme-color), #8b7322); 
+            color: #050807; 
+            border: 1px solid #fff; 
+            padding: 12px 18px; 
+            font-family: 'Cinzel', serif; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            display: block; 
+            width: 100%; 
+            box-sizing: border-box; 
+            letter-spacing: 1px; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7), 0 0 15px var(--glow-strength); 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            text-align: center; 
+            margin-top: 12px; 
+            transform: translateZ(10px);
+        }
+        .royal-btn:hover { 
+            background: linear-gradient(135deg, #fff, var(--theme-color)); 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.9), 0 0 25px #ffd700; 
+            transform: translateZ(25px) translateY(-3px); 
         }
 
-        .royal-btn {
-            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
-            color: #0b0f0e;
-            border: 1px solid #fff;
-            padding: 10px 15px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px var(--glow-strength);
-            transition: 0.2s;
-            text-align: center;
-            margin-top: 10px;
+        /* 3D Center Stage & Video */
+        .center-stage { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%; 
+            transform: translateZ(35px);
         }
 
-        .royal-btn:hover {
-            background: linear-gradient(to bottom, #fff, var(--theme-color));
-            box-shadow: 0 0 20px #ffd700;
+        .video-container { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 16 / 9; 
+            background: #000; 
+            border: 3px solid var(--theme-color); 
+            border-radius: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 50px var(--glow-strength); 
+            transform: translateZ(20px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .video-container:hover {
+            transform: translateZ(45px);
+            box-shadow: 0 35px 80px rgba(0,0,0,0.95), 0 0 70px #ffd700;
         }
 
-        /* Middle Column: Full Size Immersive Video */
-        .center-stage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
+        .now-playing-title { 
+            margin-top: 18px; 
+            font-size: 1.2rem; 
+            color: var(--text-main); 
+            letter-spacing: 1px; 
+            text-shadow: 0 4px 10px rgba(0,0,0,0.9); 
+            transform: translateZ(20px);
         }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border: 3px solid var(--theme-color);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.95), 0 0 40px var(--glow-strength);
+        /* 3D Trailer List Items */
+        .trailer-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
+        .trailer-item { 
+            background: rgba(20, 28, 25, 0.95); 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            padding: 14px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            font-size: 0.85rem; 
+            color: var(--text-main); 
+            text-align: left; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            transform: translateZ(10px);
+        }
+        .trailer-item:hover, .trailer-item.active { 
+            background: rgba(212, 175, 55, 0.3); 
+            border-color: var(--theme-color); 
+            box-shadow: 0 8px 22px var(--glow-strength); 
+            transform: translateZ(25px) translateX(5px); 
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .now-playing-title {
-            margin-top: 15px;
-            font-size: 1.15rem;
-            color: var(--text-main);
-            letter-spacing: 1px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-        }
-
-        /* Right Column: Trailer Selection & Story Chapters */
-        .sidebar-right {
-            background: rgba(11, 15, 14, 0.9);
-            border: 1px solid var(--theme-color);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: left;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        .sidebar-right h3 {
-            font-size: 1.1rem;
-            color: var(--theme-color);
-            margin-top: 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .trailer-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .trailer-item {
-            background: rgba(22, 30, 27, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            color: var(--text-main);
-            text-align: left;
-        }
-
-        .trailer-item:hover, .trailer-item.active {
-            background: rgba(212, 175, 55, 0.25);
-            border-color: var(--theme-color);
-            box-shadow: 0 0 15px var(--glow-strength);
-            transform: translateX(3px);
-        }
-
-        /* Professional Footer */
-        .footer-sanctuary {
-            background: var(--panel-bg);
-            border-top: 2px solid var(--theme-color);
-            padding: 25px;
-            margin-top: auto;
+        .footer-sanctuary { 
+            background: var(--panel-bg); 
+            border-top: 2px solid var(--theme-color); 
+            padding: 30px; 
+            margin-top: auto; 
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+            transform: translateZ(10px);
         }
     </style>
 </head>
 <body onmousemove="shineLight(event)">
 
-    <!-- MOVING FLOWER GARDEN BACKGROUND (UNTOUCHED) -->
+    <!-- MOVING FLOWER GARDEN BACKGROUND -->
     <div class="moving-bg-layer"></div>
     <div class="shine-overlay" id="shine-layer"></div>
 
-    <!-- Peaceful Melody Audio -->
+    <!-- FULLSCREEN TOGGLE BUTTON IN TOP-LEFT CORNER -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
+
     <audio id="royal-audio" loop preload="auto">
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
     </audio>
 
-    <!-- Top Navigation Bar -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Sanctuary Home</a></div>
         <div class="nav-module"><a href="trailers.html" style="color: #ffd700;">🎬 Trailer Chamber</a></div>
@@ -327,16 +366,12 @@
         <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
     </nav>
 
-    <!-- Chamber Main Wrapper -->
     <div class="chamber-container" onclick="playMelody()">
         <h1 class="chamber-title">The Sovereign Trailer Chamber</h1>
         <div class="chamber-quote">“Every room is a sanctuary; every corner holds a victory.”</div>
         <div class="acoustic-badge">✨ Co-Authored Acoustic Chamber: Tuned to the Rosanna Galaxy Master Take ✨</div>
 
-        <!-- Elevated 3-Column Layout -->
         <div class="chamber-grid">
-            
-            <!-- Left Column: Music & Ambiance Controls -->
             <div class="sidebar-left">
                 <h3>🎵 Sanctuary Ambiance</h3>
                 <p style="font-size: 0.85rem; color: var(--text-muted); font-family: 'Playfair Display', serif; line-height: 1.5;">
@@ -348,45 +383,39 @@
                 <div style="margin-top: 25px;">
                     <h3>🏛️ Sovereign Quests</h3>
                     <p style="font-size: 0.82rem; color: var(--text-muted); font-family: 'Playfair Display', serif; line-height: 1.5;">
-                        Explore our complete 149-page master chronicle and interact with the royal family records.
+                        Explore our complete master chronicle and interact with the royal family records.
                     </p>
                     <a href="library.html" class="royal-btn" style="text-align: center;">📖 Open Library</a>
                 </div>
             </div>
 
-            <!-- Middle Column: Full Size Immersive Video Center Stage -->
             <div class="center-stage">
                 <div class="video-container">
-                    <!-- Default loaded with Trailer 1 (Replace 'YOUR_YOUTUBE_ID_1' with your actual YouTube video code) -->
-                    <iframe id="active-video-frame" src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID_1?autoplay=0" title="Sovereign Cinematic Trailer" allowfullscreen></iframe>
+                    <iframe id="active-video-frame" src="https://www.youtube.com/embed/VPe3yihhuXU?autoplay=0" title="Sovereign Cinematic Trailer" allowfullscreen></iframe>
                 </div>
-                <div class="now-playing-title" id="video-title-display">Now Playing: The Song of Rosanna Official Cinematic Trailer 1</div>
+                <div class="now-playing-title" id="video-title-display">Now Playing: Song of Rosanna and The Evil King Official Trailer 3</div>
             </div>
 
-            <!-- Right Column: Trailer Selection & Story Chapters -->
             <div class="sidebar-right">
                 <h3>📜 Cinematic Archives</h3>
                 <p style="font-size: 0.82rem; color: var(--text-muted); font-family: 'Playfair Display', serif; margin-bottom: 12px;">
                     Select any trailer below to load it instantly onto center stage:
                 </p>
                 <div class="trailer-list">
-                    <!-- Replace YOUR_YOUTUBE_ID_1, 2, 3 with your real YouTube video IDs -->
-                    <div class="trailer-item active" onclick="switchTrailer('YOUR_YOUTUBE_ID_1', 'The Song of Rosanna Official Cinematic Trailer 1', this)">
+                    <div class="trailer-item active" onclick="switchTrailer('VPe3yihhuXU', 'Song of Rosanna and The Evil King Official Trailer 3', this)">
+                        🎬 Trailer 3: Official Trailer 3
+                    </div>
+                    <div class="trailer-item" onclick="switchTrailer('YOUR_YOUTUBE_ID_1', 'The Song of Rosanna Official Cinematic Trailer 1', this)">
                         🎬 Trailer 1: The Awakening of Rosanna
                     </div>
                     <div class="trailer-item" onclick="switchTrailer('YOUR_YOUTUBE_ID_2', 'The Song of Rosanna Official Cinematic Trailer 2', this)">
                         🎬 Trailer 2: Clash at the Imperial Throne
                     </div>
-                    <div class="trailer-item" onclick="switchTrailer('YOUR_YOUTUBE_ID_3', 'The Song of Rosanna Official Cinematic Trailer 3', this)">
-                        🎬 Trailer 3: Season Two Preview & Family
-                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- Professional Footer -->
     <footer class="footer-sanctuary">
         <div style="color: var(--theme-color); font-size: 1rem; letter-spacing: 2px;">Imperial Divine Vision</div>
         <a href="mailto:imperialdivinevision@gmail.com" style="color: var(--text-main); font-size: 0.85rem; text-decoration: none; display:inline-block; margin-top:5px;">✉️ imperialdivinevision@gmail.com</a>
@@ -396,57 +425,57 @@
     <script>
         let musicStarted = false;
 
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
+            } else {
+                fsBtn.innerHTML = '⤢';
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
+                }
+            }
+        }
+
         function shineLight(event) {
             let layer = document.getElementById('shine-layer');
             let x = (event.clientX / window.innerWidth) * 100;
             let y = (event.clientY / window.innerHeight) * 100;
-            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.25) 0%, transparent 60%)";
+            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.3) 0%, transparent 65%)";
             layer.style.opacity = "1";
-
-            if (!musicStarted) {
-                let audio = document.getElementById('royal-audio');
-                if (audio) {
-                    audio.volume = 0.4;
-                    audio.play().then(() => {
-                        musicStarted = true;
-                    }).catch(e => {});
-                }
-            }
         }
 
         function playMelody() {
             let audio = document.getElementById('royal-audio');
             if (audio && !musicStarted) {
                 audio.volume = 0.4;
-                audio.play().then(() => {
-                    musicStarted = true;
-                }).catch(e => {});
+                audio.play().then(() => { musicStarted = true; }).catch(e => {});
             }
         }
 
-        let isPlaying = false;
         function toggleAudio() {
             const audio = document.getElementById('royal-audio');
             const btn = document.getElementById('audio-toggle-btn');
             if (!audio) return;
-            if (isPlaying) {
+            if (!audio.paused) {
                 audio.pause();
                 btn.innerText = "🎵 Play Ambiance";
-                isPlaying = false;
             } else {
                 audio.volume = 0.4;
-                audio.play().then(() => {
-                    btn.innerText = "🔇 Pause Ambiance";
-                    isPlaying = true;
-                }).catch(e => {});
+                audio.play();
+                btn.innerText = "🔇 Pause Ambiance";
             }
         }
 
         function switchTrailer(videoId, titleText, element) {
             document.getElementById('active-video-frame').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
             document.getElementById('video-title-display').innerText = "Now Playing: " + titleText;
-            
-            // Highlight active selection
             let items = document.querySelectorAll('.trailer-item');
             items.forEach(item => item.classList.remove('active'));
             element.classList.add('active');
@@ -454,5 +483,3 @@
     </script>
 </body>
 </html>
-
-
