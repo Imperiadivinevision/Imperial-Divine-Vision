@@ -305,6 +305,7 @@
             align-items: center;
             margin: 0 auto;
             transform: translateZ(30px);
+            position: relative;
         }
 
         .video-wrapper video {
@@ -312,6 +313,7 @@
             height: 100%;
             object-fit: contain;
             display: block;
+            transition: opacity 0.4s ease-in-out;
         }
 
         .story-text {
@@ -326,6 +328,7 @@
             text-align: left;
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3);
             transform: translateZ(20px);
+            transition: opacity 0.3s ease-in-out;
         }
 
         .choices-area {
@@ -518,8 +521,8 @@
         </div>
         
         <!-- SISTER BONDING LOCKER -->
-        <div class="locker-section" id="sister-locker-section" style="display:none;">
-            <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Sister Locker</div>
+        <div class="locker-section" id="sister-locker-section" style="display:block;">
+            <div style="font-size:0.65rem; color:var(--gold); text-align:center; font-weight:bold; text-transform:uppercase;">Sister Bonding Area</div>
             <button class="locker-btn" id="sister-locker-btn" onclick="triggerSisterBonding()">Spend Time w/ Sister (<span id="sister-uses">3</span> left)</button>
             <div id="sister-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
         </div>
@@ -552,7 +555,7 @@
             <div class="chapter-title" id="scene-heading">✦ Stage I: The Birth of Prince Ian ✦</div>
             
             <div class="video-wrapper">
-                <video id="scene-video" autoplay loop controls playsinline>
+                <video id="scene-video" autoplay loop muted playsinline preload="auto">
                     <source src="the-birth-of-prince-ian.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -616,19 +619,40 @@
             document.getElementById('hud-coins').innerText = stats.coins + ' Coins';
         }
 
+        // SMOOTH VIDEO TRANSITION ENGINE
+        function transitionVideo(newSrc, newHeading, newText) {
+            const videoElem = document.getElementById('scene-video');
+            const heading = document.getElementById('scene-heading');
+            const display = document.getElementById('story-display');
+
+            // Soft fade-out effect
+            videoElem.style.opacity = '0';
+            display.style.opacity = '0';
+
+            setTimeout(() => {
+                heading.innerText = newHeading;
+                videoElem.src = newSrc;
+                videoElem.load();
+                videoElem.play().catch(e => console.log("Autoplay prevented:", e));
+                display.innerText = newText;
+
+                // Soft fade-in effect
+                videoElem.style.opacity = '1';
+                display.style.opacity = '1';
+            }, 300);
+        }
+
         function unlockSisterLocker() {
             const lockerSection = document.getElementById('sister-locker-section');
             if (lockerSection.style.display === 'none') {
-                lockerSection.style.display = 'flex';
-                alert("✦ SISTER BONDING LOCKER UNLOCKED! ✦\nSanctuary Blessing: You can now use this option on the left panel to spend time with your sister, earn affection, and gain 10 coins!");
+                lockerSection.style.display = 'block';
             }
         }
 
         function unlockFatherLocker() {
             const lockerSection = document.getElementById('father-locker-section');
             if (lockerSection.style.display === 'none') {
-                lockerSection.style.display = 'flex';
-                alert("✦ FATHER BONDING AREA UNLOCKED! ✦\nSanctuary Blessing: You can now click the Father Bonding Area on the left panel to spend time with dad to earn affection and gain 10 coins!");
+                lockerSection.style.display = 'block';
             }
         }
 
@@ -636,7 +660,6 @@
             const lockerSection = document.getElementById('relationship-locker-section');
             if (lockerSection.style.display === 'none') {
                 lockerSection.style.display = 'flex';
-                alert("✦ RELATIONSHIP AREA UNLOCKED! ✦\nSanctuary Blessing: You can now click 'Talk to Siblings' on the left panel to build relationships and make friends in the palace courtyard!");
             }
         }
 
@@ -650,25 +673,21 @@
                 updateHUD();
                 document.getElementById('sister-uses').innerText = sisterUsesLeft;
 
-                const videoElem = document.getElementById('scene-video');
-                const heading = document.getElementById('scene-heading');
-                const display = document.getElementById('story-display');
-
-                heading.innerText = "✦ Sister Bonding Session ✦";
-                videoElem.src = "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4";
-                videoElem.load();
-                videoElem.play();
-                display.innerText = "[Sanctuary Event: Spend time with sister to earn us affection! You earned 10 coins.]";
+                transitionVideo(
+                    "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4",
+                    "✦ Sister Bonding Session ✦",
+                    "[Sanctuary Event: Spend time with sister to earn affection and 10 coins!]"
+                );
 
                 if (sisterUsesLeft === 0) {
                     setTimeout(() => {
-                        heading.innerText = "✦ Sister Bonding Milestone ✦";
-                        videoElem.src = "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4";
-                        videoElem.load();
-                        videoElem.play();
-                        display.innerText = "❤️ [Sanctuary Milestone: You have spent time with your sister three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can use this option again.] ❤️";
+                        transitionVideo(
+                            "you-earn-point-for-spending-more-time-with-sister-cinematic.mp4",
+                            "✦ Sister Bonding Milestone ✦",
+                            "❤️ [Sanctuary Milestone: You have spent time with your sister three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can use this option again.] ❤️"
+                        );
                         startSisterCooldown();
-                    }, 2000);
+                    }, 2500);
                 }
             }
         }
@@ -709,23 +728,19 @@
                 updateHUD();
                 document.getElementById('mother-uses').innerText = motherUsesLeft;
 
-                const videoElem = document.getElementById('scene-video');
-                const heading = document.getElementById('scene-heading');
-                const display = document.getElementById('story-display');
-
-                heading.innerText = "✦ Spending Time with Mother ✦";
-                videoElem.src = "bonding-time-with-mom-cinematic.mp4";
-                videoElem.load();
-                videoElem.play();
-                display.innerText = "[Sanctuary Event: Spend time with mom to earn affection and 10 coins!]";
+                transitionVideo(
+                    "bonding-time-with-mom-cinematic.mp4",
+                    "✦ Spending Time with Mother ✦",
+                    "[Sanctuary Event: Spend time with mom to earn affection and 10 coins!]"
+                );
 
                 if (motherUsesLeft === 0) {
                     setTimeout(() => {
-                        heading.innerText = "✦ Mother Favor Milestone ✦";
-                        videoElem.src = "you-earn-extra-point-for-more-time-with-mom-cinematic.mp4";
-                        videoElem.load();
-                        videoElem.play();
-                        display.innerText = "👑 [Sanctuary Milestone: You have spent time with mom three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can bond with mom again.] 👑";
+                        transitionVideo(
+                            "you-earn-extra-point-for-more-time-with-mom-cinematic.mp4",
+                            "✦ Mother Favor Milestone ✦",
+                            "👑 [Sanctuary Milestone: You have spent time with mom three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can bond with mom again.] 👑"
+                        );
                         startMotherCooldown();
                     }, 2500);
                 }
@@ -768,23 +783,19 @@
                 updateHUD();
                 document.getElementById('father-uses').innerText = fatherUsesLeft;
 
-                const videoElem = document.getElementById('scene-video');
-                const heading = document.getElementById('scene-heading');
-                const display = document.getElementById('story-display');
-
-                heading.innerText = "✦ Father Bonding: Spend Time with Dad ✦";
-                videoElem.src = "spent-time-with-dad-to-earn-affection-cinematic.mp4";
-                videoElem.load();
-                videoElem.play();
-                display.innerText = "[Sanctuary Event: Spend time with dad to earn affection and 10 coins!]";
+                transitionVideo(
+                    "spent-time-with-dad-to-earn-affection-cinematic.mp4",
+                    "✦ Father Bonding: Spend Time with Dad ✦",
+                    "[Sanctuary Event: Spend time with dad to earn affection and 10 coins!]"
+                );
 
                 if (fatherUsesLeft === 0) {
                     setTimeout(() => {
-                        heading.innerText = "✦ Father Affection Milestone ✦";
-                        videoElem.src = "spent-time-with-dad-to-earn-affection-cinematic-1.mp4";
-                        videoElem.load();
-                        videoElem.play();
-                        display.innerText = "🎉 [Sanctuary Milestone: You have spent time with dad three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can bond with dad again.] 🎉";
+                        transitionVideo(
+                            "spent-time-with-dad-to-earn-affection-cinematic-1.mp4",
+                            "✦ Father Affection Milestone ✦",
+                            "🎉 [Sanctuary Milestone: You have spent time with dad three times to earn affection and 10 coins! A 4-minute cooldown has now begun before you can bond with dad again.] 🎉"
+                        );
                         startFatherCooldown();
                     }, 2500);
                 }
@@ -827,15 +838,11 @@
                 updateHUD();
                 document.getElementById('relationship-uses').innerText = relationshipUsesLeft;
 
-                const videoElem = document.getElementById('scene-video');
-                const heading = document.getElementById('scene-heading');
-                const display = document.getElementById('story-display');
-
-                heading.innerText = "✦ Making Friends & Building Relationships ✦";
-                videoElem.src = "make-friend-build-relationship-kids-palace-cinematic.mp4";
-                videoElem.load();
-                videoElem.play();
-                display.innerText = "[Sanctuary Event: You are talking to your siblings and making friends in the palace gardens, strengthening the royal family bonds and earning palace favor.]";
+                transitionVideo(
+                    "make-friend-build-relationship-kids-palace-cinematic.mp4",
+                    "✦ Making Friends & Building Relationships ✦",
+                    "[Sanctuary Event: You are talking to your siblings and making friends in the palace gardens, strengthening the royal family bonds and earning palace favor.]"
+                );
 
                 if (relationshipUsesLeft === 0) {
                     setTimeout(() => {
@@ -872,82 +879,75 @@
             }, 1000);
         }
 
-        // Sanctuary Game Progression Engine
+        // Sanctuary Game Progression Engine with Smooth Transitions
         function handleChoice(stage, choiceType) {
-            const videoElem = document.getElementById('scene-video');
-            const heading = document.getElementById('scene-heading');
-            const display = document.getElementById('story-display');
             const choices = document.getElementById('choices-box');
 
             if (stage === 'baby-reaction') {
                 if (choiceType === 'smile') {
                     stats.mother += 15;
-                    display.innerText = "[Sanctuary Choice: Your sweet smile fills your mother's heart with boundless joy, tightening the unbreakable bond between mother and son.]";
                 } else if (choiceType === 'cry') {
                     stats.mother += 5;
-                    display.innerText = "[Sanctuary Choice: Your spirited cry makes the midwife chuckle as she gently wraps you in fine silk.]";
                 } else {
                     stats.mother += 10;
-                    display.innerText = "[Sanctuary Choice: Your calm, perceptive gaze impresses the attendants, sensing an old soul within the infant prince.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "prince-ian-beganing-2-cinematic.mp4",
+                    "✦ Scene II: The Attendants & The Watchful Sister ✦",
+                    "[Sanctuary Narrative: Your young sister peers over the edge of the bed with wide, curious eyes, eager to welcome her baby brother into the royal household.]"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene II: The Attendants & The Watchful Sister ✦";
-                    videoElem.src = "prince-ian-beganing-2-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Narrative: Your young sister peers over the edge of the bed with wide, curious eyes, eager to welcome her baby brother into the royal household.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('sister-interaction', 'reach')">1. Reach out tiny fingers toward your sister to welcome her.</button>
                         <button class="choice-btn" onclick="handleChoice('sister-interaction', 'stare')">2. Stare up with bright, intelligent eyes as she giggles with delight.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'sister-interaction') {
                 if (choiceType === 'reach') {
                     stats.mother += 10;
-                    display.innerText = "[Sanctuary Reaction: Your sister gasps with delight, gently holding your tiny hand and pledging her lifelong loyalty to protect you.]";
                 } else {
                     stats.pride += 10;
-                    display.innerText = "[Sanctuary Reaction: Your calm focus makes your sister smile warmly, whispering that you will grow to be a great protector.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "the-birth-of-prince-ian-3-cinematic.mp4",
+                    "✦ Scene III: The Conqueror Approaches ✦",
+                    "[Sanctuary Narrative: The heavy velvet draperies part. The mighty conqueror father steps into the chamber, adorned in royal purple and gold, casting his powerful gaze over the newborn.]"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene III: The Conqueror Approaches ✦";
-                    videoElem.src = "the-birth-of-prince-ian-3-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Narrative: The heavy velvet draperies part. The mighty conqueror father steps into the chamber, adorned in royal purple and gold, casting his powerful gaze over the newborn.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('king-entrance', 'smile-king')">1. Smile brightly at the conqueror, welcoming his fierce gaze.</button>
                         <button class="choice-btn" onclick="handleChoice('king-entrance', 'brave-stare')">2. Meet your father's intense eyes with unwavering, brave calm.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'king-entrance') {
                 if (choiceType === 'smile-king') {
                     stats.father += 20;
                     stats.pride += 15;
-                    display.innerText = "[Sanctuary Reaction: The conqueror king lets out a booming, proud laugh, deeply impressed by your fearless spirit.]";
                 } else {
                     stats.pride += 25;
-                    display.innerText = "[Sanctuary Reaction: The king nods slowly with a fierce smirk, recognizing the unmistakable fire of a true sovereign in your eyes.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "the-birth-of-prince-ian-4-cinematic.mp4",
+                    "✦ Scene IV: The Royal Blessing & Inspection ✦",
+                    "[Sanctuary Narrative: The midwife carefully presents you as the king steps closer to the bedside, resting his hand upon the golden covers as he prepares for the naming ceremony.]"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene IV: The Royal Blessing & Inspection ✦";
-                    videoElem.src = "the-birth-of-prince-ian-4-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Narrative: The midwife carefully presents you as the king steps closer to the bedside, resting his hand upon the golden covers as he prepares for the naming ceremony.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('naming-prep', 'giggle')">1. Let out a joyful baby giggle as your father reaches down.</button>
                         <button class="choice-btn" onclick="handleChoice('naming-prep', 'grasp')">2. Grasp firmly onto the edge of the royal sash.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'naming-prep') {
                 if (choiceType === 'giggle') {
@@ -957,198 +957,187 @@
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "the-naming-ritual.mp4",
+                    "✦ Scene V: The Naming Ritual ✦",
+                    "[Sanctuary Climax: The king holds you close during the sacred naming ritual, proclaiming with absolute majesty: 'Your name is Prince Ian, my third son, born for the crown!']"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene V: The Naming Ritual ✦";
-                    videoElem.src = "the-naming-ritual.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Climax: The king holds you close during the sacred naming ritual, proclaiming with absolute majesty: 'Your name is Prince Ian, my third son, born for the crown!']";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('naming-reaction', 'smile')">1. Smile warmly at your father, filling his heart with pride.</button>
                         <button class="choice-btn" onclick="handleChoice('naming-reaction', 'quiet')">2. Stay quiet and observe with calm, watchful eyes.</button>
                         <button class="choice-btn" onclick="handleChoice('naming-reaction', 'cry')">3. Let out a tender, natural baby cry of emotion.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'naming-reaction') {
                 if (choiceType === 'smile') {
                     stats.father += 25;
                     stats.pride += 15;
-                    display.innerText = "[Sanctuary Reaction: Your radiant smile fills the king with overwhelming joy and deep paternal pride as he embraces your destiny as Prince Ian.]";
                 } else if (choiceType === 'quiet') {
                     stats.pride += 10;
-                    display.innerText = "[Sanctuary Reaction: You remain calm and quiet in your father's arms, observing the sacred ritual with a wise and peaceful gaze that commands respect.]";
                 } else {
                     stats.mother += 15;
-                    display.innerText = "[Sanctuary Reaction: Your gentle baby cry echoes softly through the chamber, bringing a tender smile to your mother's lips as the naming ritual concludes.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "sister-bonding-time-prince-ian-1.mp4",
+                    "✦ Scene VI: Sister's Visit & Bonding ✦",
+                    "[Sanctuary Visit: Your sister steps forward, wanting to bond and create a deep relationship with her baby brother. The Sister Bonding Area is now active on your left panel!]"
+                );
+                unlockSisterLocker();
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene VI: Sister's Visit & Bonding ✦";
-                    videoElem.src = "sister-bonding-time-prince-ian-1.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Visit: Your sister steps forward, wanting to bond and create a deep relationship with her baby brother. Do you wish to build this bond?]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('sister-bond-choice', 'yes')">1. Yes, embrace the sisterly bond and welcome her love.</button>
                         <button class="choice-btn" onclick="handleChoice('sister-bond-choice', 'no')">2. Remain distant and watch cautiously.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'sister-bond-choice') {
                 if (choiceType === 'yes') {
                     stats.favor += 30;
                     stats.coins += 15;
-                    unlockSisterLocker();
-                    display.innerText = "[Sanctuary Reward: You enthusiastically accept the sisterly bond! The Sister Bonding Locker is now unlocked on your left panel.]";
-                } else {
-                    display.innerText = "[Sanctuary Reaction: You remain quiet, though your sister's warm smile remains undeterred as family ties begin to weave.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "learn-how-to-walk-with-dad-cinematic.mp4",
+                    "✦ Scene VII: Father Bonding & Learning at Work ✦",
+                    "[Sanctuary Guidance: The player works alongside their father to learn at work! The Father Bonding Area is now active on your left panel.]"
+                );
+                unlockFatherLocker();
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene VII: Father Bonding & Learning at Work ✦";
-                    videoElem.src = "learn-how-to-walk-with-dad-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    unlockFatherLocker();
-                    display.innerText = "[Sanctuary Guidance: The player works alongside their father to learn at work! The Father Bonding Area is now unlocked on your left panel.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('father-work-choice', 'learn')">1. Learn how to walk and work with Dad, embracing his guidance.</button>
                         <button class="choice-btn" onclick="handleChoice('father-work-choice', 'rest')">2. Observe your father's grand work with calm, wise eyes.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'father-work-choice') {
                 if (choiceType === 'learn') {
                     stats.father += 25;
                     stats.coins += 15;
-                    display.innerText = "[Sanctuary Reaction: You successfully learn at work with your father! Father affection and coins increased.]";
                 } else {
                     stats.father += 15;
-                    display.innerText = "[Sanctuary Reaction: You watch your father work diligently, absorbing valuable royal knowledge.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "make-friend-build-relationship-kids-palace-cinematic.mp4",
+                    "✦ Scene VIII: Building Relationships & Talking to Siblings ✦",
+                    "[Sanctuary Courtyard: You need to build relationships and talk to your siblings! The Relationship Building option is now open on your left panel.]"
+                );
+                unlockRelationshipLocker();
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Scene VIII: Building Relationships & Talking to Siblings ✦";
-                    videoElem.src = "make-friend-build-relationship-kids-palace-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    unlockRelationshipLocker();
-                    display.innerText = "[Sanctuary Courtyard: You need to build relationships and talk to your siblings! The Relationship Building option is now open on your left panel.]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('relationship-choice', 'talk')">1. Click here to build relationships and talk with your siblings.</button>
                         <button class="choice-btn" onclick="handleChoice('relationship-choice', 'explore')">2. Explore the palace gardens independently.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'relationship-choice') {
                 if (choiceType === 'talk') {
                     stats.pride += 20;
                     stats.coins += 15;
-                    display.innerText = "[Sanctuary Reaction: You connect deeply with your siblings, forming lasting friendships and strengthening the royal bloodline!]";
                 } else {
                     stats.pride += 10;
-                    display.innerText = "[Sanctuary Reaction: You take time to explore the vast palace gardens in quiet contemplation.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "versta-accused-of-adultery-temple-ian-escape-cinematic.mp4",
+                    "✦ EMERGENCY: Palace Betrayal & Accusation ✦",
+                    "[SANCTUARY EMERGENCY! Prince Ian's mother (Versta) has been falsely accused of adultery by Grand Empress Yuri and the other concubines! Palace guards are seizing her to take her to the temple, and Yuri is coming to take Prince Ian! Does Prince Ian wish to escape or stay?]"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ EMERGENCY: Palace Betrayal & Accusation ✦";
-                    videoElem.src = "versta-accused-of-adultery-temple-ian-escape-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[SANCTUARY EMERGENCY! Prince Ian's mother (Versta) has been falsely accused of adultery by Grand Empress Yuri and the other concubines! Palace guards are seizing her to take her to the temple, and Yuri is coming to take Prince Ian! Does Prince Ian wish to escape or stay?]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('emergency-choice', 'escape')">1. Escape into the night to protect yourself and your destiny.</button>
                         <button class="choice-btn" onclick="handleChoice('emergency-choice', 'stay')">2. Stay and face the fate of the palace.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'emergency-choice') {
                 if (choiceType === 'escape') {
                     stats.pride += 25;
-                    display.innerText = "[Sanctuary Fate: You choose to escape, slipping away from Yuri's clutches into the shadows of destiny!]";
                 } else {
                     stats.mother += 15;
-                    display.innerText = "[Sanctuary Fate: You stand your ground, weathering the immediate storm of palace betrayal!]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "prince-ian-lost-in-the-slave-village-cinematic.mp4",
+                    "✦ Exile: Lost in the Slave Village of Hikmid ✦",
+                    "[Sanctuary Fate: Prince Ian has been transported to the slave village in Hikmid. Prince Ian is lost in the bustling market. Does the player wish to explore the slave village market?]"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ Exile: Lost in the Slave Village of Hikmid ✦";
-                    videoElem.src = "prince-ian-lost-in-the-slave-village-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Fate: Prince Ian has been transported to the slave village in Hikmid. Prince Ian is lost in the bustling market. Does the player wish to explore the slave village market?]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('market-explore', 'explore')">1. Explore the slave village market and discover hidden secrets.</button>
                         <button class="choice-btn" onclick="handleChoice('market-explore', 'hide')">2. Find a quiet corner to hide and rest.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'market-explore') {
                 if (choiceType === 'explore') {
                     stats.coins += 25;
-                    display.innerText = "[Sanctuary Exploration: You navigate the bustling market stalls of Hikmid, gathering vital resources and uncovering clues about your royal heritage!]";
                 } else {
                     stats.pride += 15;
-                    display.innerText = "[Sanctuary Exploration: You remain hidden and safe, plotting your triumphant return to the throne from the shadows of Hikmid.]";
                 }
                 updateHUD();
 
+                transitionVideo(
+                    "prince-ian-the-call-of-destiny-1-cinematic.mp4",
+                    "✦ The Call of Destiny: The Sea ✦",
+                    "[Sanctuary Destiny: Prince Ian finds himself at the edge of the vast sea—seeing so much open water for the first time after growing up within the capital. The sea is calling him!]"
+                );
+
                 setTimeout(() => {
-                    heading.innerText = "✦ The Call of Destiny: The Sea ✦";
-                    videoElem.src = "prince-ian-the-call-of-destiny-1-cinematic.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Destiny: Prince Ian finds himself at the edge of the vast sea—seeing so much open water for the first time after growing up within the capital. The sea is calling him!]";
                     choices.innerHTML = `
                         <button class="choice-btn" onclick="handleChoice('sea-explore', 'jump')">1. Jump into the water and start playing with the waves, venturing a little too deep.</button>
                         <button class="choice-btn" onclick="handleChoice('sea-explore', 'watch')">2. Watch the rolling tides safely from the shore.</button>
                     `;
-                }, 1200);
+                }, 300);
 
             } else if (stage === 'sea-explore') {
                 if (choiceType === 'jump') {
                     stats.pride += 30;
-                    display.innerText = "[Sanctuary Destiny: You jump into the sparkling water, playing joyfully with the waves as the current pulls you deeper!]";
                 } else {
                     stats.pride += 15;
-                    display.innerText = "[Sanctuary Destiny: You stand mesmerized by the infinite horizon, listening to the mysterious voice of the ocean.]";
                 }
                 updateHUD();
 
-                setTimeout(() => {
-                    heading.innerText = "✦ The Accomplishment of the Prophecy ✦";
-                    videoElem.src = "the-accomplishment-of-the-prophecy-1-cinematic-1.mp4";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Prophecy: As you go too deep into the water, a brave little girl spots you and instantly rushes into the waves to save you, fulfilling the ancient prophecy of destiny!]";
+                transitionVideo(
+                    "the-accomplishment-of-the-prophecy-1-cinematic-1.mp4",
+                    "✦ The Accomplishment of the Prophecy ✦",
+                    "[Sanctuary Prophecy: As you go too deep into the water, a brave little girl spots you and instantly rushes into the waves to save you, fulfilling the ancient prophecy of destiny!]"
+                );
 
-                    setTimeout(() => {
-                        heading.innerText = "✦ CONGRATULATIONS: STAGE I COMPLETE! ✦";
-                        videoElem.src = "rosanna-and-the-evil-king-began.mp4";
-                        videoElem.load();
-                        videoElem.play();
-                        display.innerText = "🎉 Sanctuary Announcement: Congratulations! You have successfully finished Part One of the game! Prince Ian's journey in the slave village has begun, and a new destiny awaits with Rosanna. 🎉";
-                        
-                        choices.innerHTML = `
-                            <button class="choice-btn" onclick="handleChoice('finale', 'recap')">1. View Stage One Recap (prince-ian-recap.gif)</button>
-                            <button class="choice-btn" onclick="handleChoice('finale', 'home')">2. Return to Homepage & Try a Different Character</button>
-                        `;
-                    }, 4000);
-                }, 1500);
+                setTimeout(() => {
+                    transitionVideo(
+                        "rosanna-and-the-evil-king-began.mp4",
+                        "✦ CONGRATULATIONS: STAGE I COMPLETE! ✦",
+                        "🎉 Sanctuary Announcement: Congratulations! You have successfully finished Part One of the game! Prince Ian's journey in the slave village has begun, and a new destiny awaits with Rosanna. 🎉"
+                    );
+                    
+                    choices.innerHTML = `
+                        <button class="choice-btn" onclick="handleChoice('finale', 'recap')">1. View Stage One Recap (prince-ian-recap.gif)</button>
+                        <button class="choice-btn" onclick="handleChoice('finale', 'home')">2. Return to Homepage & Try a Different Character</button>
+                    `;
+                }, 3500);
 
             } else if (stage === 'finale') {
                 if (choiceType === 'recap') {
-                    heading.innerText = "✦ Stage One Recap ✦";
-                    videoElem.src = "prince-ian-recap.gif";
-                    videoElem.load();
-                    videoElem.play();
-                    display.innerText = "[Sanctuary Recap: Relive the magnificent journey of Prince Ian from the imperial chambers, family bonding, palace betrayal, exile in Hikmid, and the prophetic rescue by the sea.]";
+                    transitionVideo(
+                        "prince-ian-recap.gif",
+                        "✦ Stage One Recap ✦",
+                        "[Sanctuary Recap: Relive the magnificent journey of Prince Ian from the imperial chambers, family bonding, palace betrayal, exile in Hikmid, and the prophetic rescue by the sea.]"
+                    );
                     choices.innerHTML = `
                         <a href="index.html" class="choice-btn" style="text-align:center; text-decoration:none; background:var(--gold-deep); color:#030105; font-weight:bold; display:block;">🏠 Return to Homepage & Try Different Character</a>
                     `;
