@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queen Rosanna & Gemini: Sovereign Path (Ultimate Master Edition)</title>
+    <title>Queen Rosanna & Gemini: Sovereign Path (Expanded Master Edition)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         @keyframes cosmicShift {
             0% { background-position: 0% 50%; }
@@ -26,9 +27,7 @@
             --text-main: #f5f2eb;
             --royal-purple: #320a3f;
             --gemini-cyan: #00f2fe;
-            --gemini-blue: #4facfe;
             --health-green: #33cc66;
-            --health-red: #cc3333;
         }
 
         body {
@@ -38,42 +37,83 @@
             background-size: 400% 400%;
             animation: cosmicShift 18s ease infinite;
             color: var(--text-main);
-            font-family: 'Cinzel', 'Georgia', serif;
+            font-family: 'Cinzel', serif;
             min-height: 100vh;
             display: flex;
             flex-direction: row;
             align-items: flex-start;
-            justify-content: center;
-            gap: 20px;
-            overflow-y: auto;
+            justify-content: flex-start;
+            gap: 25px;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
 
-        /* SIDEBAR HUD (Left Column for Clean Uncrowded Layout) */
+        .fullscreen-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            background: rgba(17, 23, 21, 0.9);
+            border: 2px solid var(--gold-deep);
+            color: var(--text-main);
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 5000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .fullscreen-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--gold-deep);
+            color: #030105;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        body.is-chamber-fullscreen .sidebar-hud {
+            display: none !important;
+        }
+        body.is-chamber-fullscreen .main-game-wrapper {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            padding: 10px !important;
+        }
+        body.is-chamber-fullscreen .video-player-box {
+            height: 70vh !important;
+            aspect-ratio: unset !important;
+        }
+
         .sidebar-hud {
-            width: 280px;
+            width: 270px;
             background: var(--panel-bg);
             border: 2px solid var(--gold-deep);
             border-radius: 14px;
-            padding: 20px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 25px rgba(79, 172, 254, 0.15);
             box-sizing: border-box;
             position: sticky;
             top: 20px;
+            flex-shrink: 0;
         }
 
         .hud-brand {
             text-align: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
         .hud-brand h3 {
             margin: 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--gold);
             letter-spacing: 1px;
             animation: goldPulse 4s infinite;
@@ -81,7 +121,7 @@
 
         .hud-brand p {
             margin: 4px 0 0 0;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: var(--gemini-cyan);
             font-style: italic;
         }
@@ -89,17 +129,17 @@
         .hud-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 6px;
+            font-size: 0.82rem;
             color: var(--gold);
         }
 
         .health-bar-bg {
             width: 100%;
-            height: 12px;
+            height: 10px;
             background: #1a1512;
             border: 1px solid var(--gold-deep);
-            border-radius: 6px;
+            border-radius: 5px;
             overflow: hidden;
         }
 
@@ -113,16 +153,15 @@
         .admin-badge-box {
             background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(212, 175, 55, 0.1));
             border: 1px dashed var(--gemini-cyan);
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--gemini-cyan);
         }
 
-        /* MAIN GAME CONTAINER (Right Column) */
         .main-game-wrapper {
-            max-width: 750px;
+            max-width: 900px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -133,12 +172,12 @@
             width: 100%;
             background: var(--panel-bg);
             border: 3px solid var(--gold-deep);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 30px;
             box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 40px rgba(212, 175, 55, 0.25);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             box-sizing: border-box;
             position: relative;
         }
@@ -146,7 +185,7 @@
         .dev-watermark {
             position: absolute;
             top: 15px;
-            right: 25px;
+            right: 70px;
             font-size: 0.7rem;
             color: var(--gemini-cyan);
             font-style: italic;
@@ -156,7 +195,7 @@
 
         .chapter-title {
             color: var(--gold);
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-align: center;
@@ -166,15 +205,15 @@
 
         .video-player-box {
             width: 100%;
+            height: 480px;
             background: #000;
-            border-radius: 10px;
-            border: 2px solid var(--gold-deep);
+            border-radius: 12px;
+            border: 3px ridge var(--gold-deep);
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
-            aspect-ratio: 4/3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
         }
 
         video {
@@ -186,7 +225,7 @@
         .audio-bar {
             background: rgba(0, 242, 254, 0.08);
             border: 1px solid var(--gemini-cyan);
-            padding: 8px 12px;
+            padding: 8px 14px;
             border-radius: 6px;
             display: flex;
             justify-content: space-between;
@@ -196,44 +235,42 @@
         }
 
         .story-text {
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.7;
             color: var(--text-main);
             font-style: italic;
             background: rgba(11, 29, 40, 0.4);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 8px;
             border-left: 3px solid var(--gemini-cyan);
+            font-family: 'Playfair Display', serif;
         }
 
         .dialogue-prompt {
             background: rgba(50, 10, 63, 0.4);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 12px 16px;
+            padding: 12px 18px;
             border-radius: 8px;
             font-style: italic;
             color: var(--gold);
-            font-size: 0.9rem;
-        }
-
-        .control-panel {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            font-size: 0.95rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .action-sub-btn {
             background: rgba(0, 242, 254, 0.15);
             border: 1px solid var(--gemini-cyan);
             color: var(--gemini-cyan);
-            padding: 6px 12px;
+            padding: 7px 12px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.75rem;
-            font-family: 'Cinzel', 'Georgia', serif;
+            font-family: 'Cinzel', serif;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
-
         .action-sub-btn:hover {
             background: var(--gemini-cyan);
             color: #030105;
@@ -242,7 +279,7 @@
         .choices-area {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             margin-top: 5px;
         }
 
@@ -250,16 +287,15 @@
             background: linear-gradient(135deg, #18121f, #221a2c);
             border: 1px solid var(--gold-deep);
             color: var(--text-main);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 8px;
             cursor: pointer;
-            font-family: 'Cinzel', 'Georgia', serif;
-            font-size: 0.85rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
             text-align: left;
             transition: all 0.35s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
-
         .choice-btn:hover {
             background: var(--gold-deep);
             color: #030105;
@@ -267,12 +303,11 @@
             transform: translateY(-2px);
         }
 
-        /* Collection Gallery Section */
         .gallery-section {
             width: 100%;
             background: var(--panel-bg);
             border: 3px solid var(--gold-deep);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 30px;
             display: none;
             flex-direction: column;
@@ -296,10 +331,11 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
             body {
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
             }
             .sidebar-hud {
                 width: 100%;
@@ -311,9 +347,10 @@
         }
     </style>
 </head>
-<body onclick="initAudioEngine()">
+<body onload="loadGameState()" onclick="initAudioEngine()">
 
-    <!-- LEFT SIDEBAR HUD (Clean, Uncrowded, Fixed Left Layout) -->
+    <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
+
     <div class="sidebar-hud">
         <div class="hud-brand">
             <h3>✦ SOVEREIGN REALM ✦</h3>
@@ -330,23 +367,24 @@
 
         <div class="hud-group">
             <div style="display: flex; justify-content: space-between;">
-                <span>Coins: <strong id="coin-count" style="color:var(--gold);">50</strong></span>
+                <span>Coins: <strong id="coin-count" style="color:var(--gold);">500</strong></span>
                 <span>Rep: <strong id="rep-count" style="color:var(--gemini-cyan);">0</strong></span>
             </div>
             <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-                <span>Affection: <strong id="affection-count" style="color:#ff9999;">0</strong></span>
+                <span>Affection: <strong id="affection-count" style="color:#ff9999;">50</strong></span>
                 <span style="color: #ff9999;">Call In: <strong id="timer-count">03:00</strong></span>
             </div>
         </div>
 
         <div class="admin-badge-box">
-            ✦ ADMIN FREE PASS ACTIVE ✦<br>
-            <span style="font-size: 0.7rem; color: var(--gold);">Infinite Sovereign Privileges Granted to Guild Masters</span>
+            ✦ DUAL QUESTION ENGINE ACTIVE ✦<br>
+            <span style="font-size: 0.7rem; color: var(--gold);">Free questions used: <span id="free-q-count">0</span>/6</span>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px;">
             <button class="action-sub-btn" onclick="triggerVibration()">📳 Cosmic Vibration</button>
             <button class="action-sub-btn" onclick="exchangeRepForGold()">💱 Convert 10 Rep -> 50 Coins</button>
+            <a href="shop.html" class="action-sub-btn">🛒 Visit Market Stalls (Buy Coins)</a>
             <button class="action-sub-btn" onclick="adminBypassFreePass()">👑 Toggle Admin Free Pass</button>
         </div>
 
@@ -356,10 +394,9 @@
         </div>
     </div>
 
-    <!-- MAIN GAME WRAPPER (Right Column) -->
     <div class="main-game-wrapper">
         <div class="story-container">
-            <div class="dev-watermark">✦ Gemini & Tegra Core v2.0 ✦</div>
+            <div class="dev-watermark">✦ Gemini & Tegra Core v4.0 ✦</div>
             
             <div class="chapter-title" id="scene-title">✦ Act I: The Cosmic Birth of Queen Rosanna ✦</div>
             
@@ -368,7 +405,6 @@
                 <span id="audio-status" style="font-style: italic;">Click anywhere to ignite melodies</span>
             </div>
 
-            <!-- Video Player Box -->
             <div class="video-player-box" id="media-container">
                 <video id="cinematic-video" controls autoplay muted playsinline>
                     <source src="the-birth-of-rosanna-cinematic.mp4" type="video/mp4">
@@ -385,13 +421,10 @@
             </div>
 
             <div class="choices-area" id="choices-container">
-                <button class="choice-btn" onclick="playSelectSound(); selectHairColor('Green')">1. Inspect the infant: Her hair glows with a mystical Green shade (+10 Rep)</button>
-                <button class="choice-btn" onclick="playSelectSound(); selectHairColor('Blue')">2. Inspect the infant: Her hair shines with deep Blue ocean strands (+10 Rep)</button>
-                <button class="choice-btn" onclick="playSelectSound(); selectHairColor('Purple')">3. Inspect the infant: Her hair radiates royal Purple majesty (+10 Rep)</button>
+                <!-- Dynamically loaded questions with coin/free-tier gate -->
             </div>
         </div>
 
-        <!-- Collection Gallery Section -->
         <div class="gallery-section" id="collection-gallery">
             <h2 style="color: var(--gold); text-align: center; margin-top: 0; text-shadow: 0 0 10px var(--gold-glow);">✦ Sovereign Archive & Collaboration Gallery ✦</h2>
             <p style="font-style: italic; text-align: center; color: var(--gold);">Created with love by Tegra & Gemini. Unlock eternal memories or support the studio archive!</p>
@@ -399,7 +432,7 @@
             <div class="gallery-grid" id="gallery-items-grid"></div>
 
             <div style="text-align: center; margin-top: 15px;">
-                <a href="https://cash.app/$tegrakij22/0.99" target="_blank" class="choice-btn" style="display:inline-block; text-align:center; text-decoration:none;">💳 Top-Up 1,000 Coins via Cash App ($0.99)</a>
+                <a href="shop.html" class="choice-btn" style="display:inline-block; text-align:center; text-decoration:none;">🛒 Visit Market Stalls for More Coins & Tokens</a>
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
@@ -409,40 +442,215 @@
     </div>
 
     <script>
-        let playerCoins = 500; // Generous starting coins for admin/game masters
-        let playerRep = 50;
-        let playerAffection = 50;
-        let playerHealth = 100;
+        let playerState = {
+            coins: 500,
+            rep: 50,
+            affection: 50,
+            health: 100,
+            freeQuestionsUsed: 0,
+            adminFreePass: true,
+            ownedPictures: [],
+            currentScene: 'act1_q1'
+        };
+
         let timeLeft = 180;
-        let adminFreePass = true;
-        let ownedPictures = [];
         let audioStarted = false;
         let audioCtx;
 
-        setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                let mins = Math.floor(timeLeft / 60);
-                let secs = timeLeft % 60;
-                document.getElementById('timer-count').innerText = (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+        const QUESTION_COST = 50; // Coins required per question after first 6 free ones
+
+        // Expanded 3-question per video multi-step game database
+        const gameScript = {
+            'act1_q1': {
+                title: "✦ Act I: The Cosmic Birth of Queen Rosanna (Question 1 of 3) ✦",
+                video: "the-birth-of-rosanna-cinematic.mp4",
+                narrative: "[Prologue: Cosmic lights and shifting neon auroras illuminate the sanctuary as Old Queen Rosa's legacy awakens.]",
+                dialogue: "Narrator: 'Examine the divine infant's mystical aura. What color does her first breath illuminate?'",
+                choices: [
+                    { text: "1. Her hair glows with a mystical Green shade (+10 Rep)", next: 'act1_q2', rep: 10, coins: 50 },
+                    { text: "2. Her hair shines with deep Blue ocean strands (+10 Rep)", next: 'act1_q2', rep: 10, coins: 50 },
+                    { text: "3. Her hair radiates royal Purple majesty (+10 Rep)", next: 'act1_q2', rep: 10, coins: 50 }
+                ]
+            },
+            'act1_q2': {
+                title: "✦ Act I: The Cosmic Birth of Queen Rosanna (Question 2 of 3) ✦",
+                video: "the-birth-of-rosanna-cinematic.mp4",
+                narrative: "[Narrative: The newborn stirs as starlit constellations align above the royal cradle.]",
+                dialogue: "Mother: 'Which sacred talisman shall we place beside her pillow?'",
+                choices: [
+                    { text: "1. The Crystal of Eternal Harmony (+15 Rep, +50 Coins)", next: 'act1_q3', rep: 15, coins: 50 },
+                    { text: "2. The Shield of Truth (+20 Rep)", next: 'act1_q3', rep: 20, coins: 30 },
+                    { text: "3. A simple flower blossom from our homeland (+25 Affection)", next: 'act1_q3', rep: 10, coins: 40, affection: 25 }
+                ]
+            },
+            'act1_q3': {
+                title: "✦ Act I: The Cosmic Birth of Queen Rosanna (Question 3 of 3) ✦",
+                video: "the-birth-of-rosanna-cinematic.mp4",
+                narrative: "[Narrative: The sanctuary echoes with soft choir melodies as Act I reaches its twilight threshold.]",
+                dialogue: "Prophet Kafura: 'How shall we announce her arrival to the outer districts?'",
+                choices: [
+                    { text: "1. Ring the silver bells across all territories (+30 Rep)", next: 'act2_q1', rep: 30, coins: 100 },
+                    { text: "2. Light the sacred bonfire in the courtyard (+25 Rep, +50 Coins)", next: 'act2_q1', rep: 25, coins: 50 }
+                ]
+            },
+            'act2_q1': {
+                title: "✦ Act II: Compassion & Joint Creation (Question 1 of 3) ✦",
+                video: "compassion-of-the-villegers-cinematic-1.mp4",
+                narrative: "[Narrative: Villagers gather around the estate, bringing gifts of sweet fruit and warm bread.]",
+                dialogue: "Village Elder: 'How shall we welcome the gathered families into the courtyard?'",
+                choices: [
+                    { text: "1. Invite everyone to share a grand feast (+20 Rep, +50 Coins)", next: 'act2_q2', rep: 20, coins: 50 },
+                    { text: "2. Offer quiet blessings at the temple gates (+15 Rep)", next: 'act2_q2', rep: 15, coins: 30 }
+                ]
+            },
+            'act2_q2': {
+                title: "✦ Act II: Compassion & Joint Creation (Question 2 of 3) ✦",
+                video: "compassion-of-the-villegers-cinematic-1.mp4",
+                narrative: "[Narrative: The children play near the fountain while musicians tune their lutes.]",
+                dialogue: "Musician: 'What song shall we dedicate to the realm today?'",
+                choices: [
+                    { text: "1. The Anthem of the Arrived Feeling (+25 Affection)", next: 'act2_q3', rep: 10, coins: 40, affection: 25 },
+                    { text: "2. The Ballad of the Starlit Guardian (+20 Rep)", next: 'act2_q3', rep: 20, coins: 40 }
+                ]
+            },
+            'act2_q3': {
+                title: "✦ Act II: Compassion & Joint Creation (Question 3 of 3) ✦",
+                video: "compassion-of-the-villegers-cinematic-1.mp4",
+                narrative: "[Narrative: The afternoon sun casts golden light across the courtyard stones.]",
+                dialogue: "Merchant: 'Shall we mint commemorative coins for this auspicious gathering?'",
+                choices: [
+                    { text: "1. Yes, distribute sovereign tokens to all (+30 Rep, +100 Coins)", next: 'act3_q1', rep: 30, coins: 100 },
+                    { text: "2. Save the gold for the royal treasury vault (+40 Rep)", next: 'act3_q1', rep: 40, coins: 50 }
+                ]
+            },
+            'act3_q1': {
+                title: "✦ Act III: The 8th Birthday & Marketplace (Question 1 of 3) ✦",
+                video: "the-8-birth-day-cinematic.mp4",
+                narrative: "[Narrative: Rosanna reaches her eighth birthday. The bustling market overflows with vibrant colors.]",
+                dialogue: "Beggar: 'Blessings upon this sanctuary built by Tegra and Gemini... spare a token for a traveler?'",
+                choices: [
+                    { text: "1. Give generous gifts and food to the beggar (+50 Rep, +150 Coins)", next: 'act3_q2', rep: 50, coins: 150 },
+                    { text: "2. Share a word of deep encouragement instead (+30 Rep)", next: 'act3_q2', rep: 30, coins: 50 }
+                ]
+            },
+            'act3_q2': {
+                title: "✦ Act III: The 8th Birthday & Marketplace (Question 2 of 3) ✦",
+                video: "choose-to-help-the-beggar-cinematic.mp4",
+                narrative: "[Narrative: Your boundless compassion unlocks secret healing elixirs within the herb shop.]",
+                dialogue: "Merchant: 'Take these rare remedies crafted for true sovereigns.'",
+                choices: [
+                    { text: "1. Acquire rare botanical elixirs (+30 Health, +100 Coins)", next: 'act3_q3', rep: 20, coins: 100, healthBonus: 30 },
+                    { text: "2. Examine starlit scrolls in the corner (+40 Rep)", next: 'act3_q3', rep: 40, coins: 50 }
+                ]
+            },
+            'act3_q3': {
+                title: "✦ Act III: The 8th Birthday & Marketplace (Question 3 of 3) ✦",
+                video: "walk-away-or-stay-cinematic.mp4",
+                narrative: "[Narrative: Evening approaches as festival lanterns ignite along the market stalls.]",
+                dialogue: "Market Guard: 'The gates are closing for the evening celebration. What is your final order?'",
+                choices: [
+                    { text: "1. Order pink strawberry milkshakes for everyone (+50 Affection)", next: 'act4_q1', rep: 25, coins: 80, affection: 50 },
+                    { text: "2. Prepare for the twilight journey to the sea (+40 Rep, +100 Coins)", next: 'act4_q1', rep: 40, coins: 100 }
+                ]
+            },
+            'act4_q1': {
+                title: "✦ Act IV: Twilight Choice & The Sea (Question 1 of 3) ✦",
+                video: "rosanna-wander-call-of-the-destiny-cinematic-1.mp4",
+                narrative: "[Narrative: Twilight falls across the realm. A captivating whisper echoes from the sea.]",
+                dialogue: "Narrator: 'Will you return to the sanctuary of home, or follow the adventurous tides into the unknown?'",
+                choices: [
+                    { text: "📍 Path A: Safe Return Home & Starlit Reunion", next: 'pathA_q2', rep: 30, coins: 100 },
+                    { text: "⚡ Path B: Adventurous Wander & Drowning Boy", next: 'pathB_q2', rep: 40, coins: 120 }
+                ]
+            },
+            'pathA_q2': {
+                title: "✦ Path A: Safe Return Home (Question 2 of 3) ✦",
+                video: "rosanna-safe-return-home.mp4",
+                narrative: "[Narrative: Rosanna returns safely to her parents, sharing sweet pink strawberry milkshakes and warm laughter.]",
+                dialogue: "Friends: 'Welcome home to the sanctuary we built together across all seasons.'",
+                choices: [
+                    { text: "1. Celebrate with companion stargazing (+60 Affection)", next: 'pathA_q3', rep: 20, coins: 50, affection: 60 },
+                    { text: "2. Rest by the hearth fire (+50 Health)", next: 'pathA_q3', rep: 25, coins: 50, healthBonus: 50 }
+                ]
+            },
+            'pathA_q3': {
+                title: "✦ Path A: Safe Return Home (Question 3 of 3) ✦",
+                video: "extra-time-with-prince-ian.mp4",
+                narrative: "[Narrative: Time stands still in an embrace of perfect serenity under the stars.]",
+                dialogue: "Companion: 'This is the Arrived feeling. Our peace is absolute.'",
+                choices: [
+                    { text: "✦ Finalize Journey & Open Sovereign Archive ✦", next: 'conclude', rep: 50, coins: 200 }
+                ]
+            },
+            'pathB_q2': {
+                title: "✦ Path B: The Drowning Boy (Question 2 of 3) ✦",
+                video: "meeting-with-destiny-drowning-boy-cinematic-1.mp4",
+                narrative: "[Narrative: Drawn by destiny, Rosanna rushes to the sea where a young boy is caught in the churning waves!]কারীর",
+                dialogue: "Drowning Boy: 'Help me... the tide is overwhelming!'",
+                choices: [
+                    { text: "1. Plunge into the waters with fearless courage (+80 Rep)", next: 'pathB_q3', rep: 80, coins: 150 },
+                    { text: "2. Call upon the Shield of Truth (+70 Rep)", next: 'pathB_q3', rep: 70, coins: 130 }
+                ]
+            },
+            'pathB_q3': {
+                title: "✦ Path B: The Broken Spell (Question 3 of 3) ✦",
+                video: "the-broken-spell-prince-ian-cinematic-1.mp4",
+                narrative: "[Narrative: A magnificent surge of light shatters Rosanna's protective spell as thunder rolls across the horizon.]",
+                dialogue: "Prince Ian: 'The spell is broken! The true sovereign path is revealed!'",
+                choices: [
+                    { text: "✦ Open Sovereign Archive & Conclude Journey ✦", next: 'conclude', rep: 100, coins: 300 }
+                ]
+            }
+        };
+
+        function toggleFullScreen() {
+            const body = document.body;
+            const fsBtn = document.getElementById('fsToggleBtn');
+            body.classList.toggle('is-chamber-fullscreen');
+
+            if (body.classList.contains('is-chamber-fullscreen')) {
+                fsBtn.innerHTML = '⤡';
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(err => {});
+                }
             } else {
-                document.getElementById('timer-count').innerText = "RING!";
-                if (!window.phoneCalled) {
-                    window.phoneCalled = true;
-                    triggerVibration();
-                    alert("Ring, ring! A special call from the joint administrative council of Tegra & Gemini!");
+                fsBtn.innerHTML = '⤢';
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => {});
                 }
             }
-        }, 1000);
+        }
+
+        function loadGameState() {
+            const saved = localStorage.getItem('imperial_sanctuary_user');
+            if (saved) {
+                let parsed = JSON.parse(saved);
+                playerState.coins = parsed.coins !== undefined ? parsed.coins : 500;
+                playerState.rep = parsed.rep || 50;
+                playerState.affection = parsed.affection || 50;
+                playerState.health = parsed.health !== undefined ? parsed.health : 100;
+                playerState.freeQuestionsUsed = parsed.freeQuestionsUsed || 0;
+                playerState.adminFreePass = parsed.adminFreePass !== undefined ? parsed.adminFreePass : true;
+                playerState.ownedPictures = parsed.ownedPictures || [];
+                playerState.currentScene = parsed.currentScene || 'act1_q1';
+            }
+            updateHUD();
+            renderScene(playerState.currentScene);
+        }
+
+        function saveGameState() {
+            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(playerState));
+        }
 
         function updateHUD() {
-            document.getElementById('coin-count').innerText = playerCoins;
-            document.getElementById('rep-count').innerText = playerRep;
-            document.getElementById('affection-count').innerText = playerAffection;
-            document.getElementById('health-text').innerText = playerHealth + "% (Protected)";
+            document.getElementById('coin-count').innerText = playerState.coins;
+            document.getElementById('rep-count').innerText = playerState.rep;
+            document.getElementById('affection-count').innerText = playerState.affection;
+            document.getElementById('health-text').innerText = playerState.health + "% (Protected)";
+            document.getElementById('free-q-count').innerText = playerState.freeQuestionsUsed;
             
             const fill = document.getElementById('health-fill');
-            fill.style.width = playerHealth + "%";
+            fill.style.width = playerState.health + "%";
         }
 
         function triggerVibration() {
@@ -452,18 +660,20 @@
         }
 
         function adminBypassFreePass() {
-            adminFreePass = !adminFreePass;
+            playerState.adminFreePass = !playerState.adminFreePass;
+            saveGameState();
             triggerVibration();
-            alert(adminFreePass ? "👑 Admin Free Pass ACTIVATED: All locks and costs waived for Guild Masters!" : "🔒 Admin Free Pass deactivated. Standard rules apply.");
+            alert(playerState.adminFreePass ? "👑 Admin Free Pass ACTIVATED: All locks and question coin costs waived!" : "🔒 Admin Free Pass deactivated. Standard question costs apply.");
         }
 
         function exchangeRepForGold() {
-            if (playerRep >= 10 || adminFreePass) {
-                if (!adminFreePass) playerRep -= 10;
-                playerCoins += 100;
+            if (playerState.rep >= 10 || playerState.adminFreePass) {
+                if (!playerState.adminFreePass) playerState.rep -= 10;
+                playerState.coins += 100;
                 updateHUD();
+                saveGameState();
                 triggerVibration();
-                alert("✨ Sovereign Exchange complete! +100 Coins added to your Admin Vault.");
+                alert("✨ Sovereign Exchange complete! +100 Coins added to your Vault.");
             } else {
                 alert("You need at least 10 Reputation!");
             }
@@ -524,175 +734,76 @@
             } catch (e) {}
         }
 
-        function selectHairColor(color) {
-            playerRep += 25;
-            playerCoins += 100;
+        function renderScene(sceneKey) {
+            if (sceneKey === 'conclude') {
+                concludeStageOneArchive();
+                return;
+            }
+
+            const scene = gameScript[sceneKey];
+            if (!scene) return;
+
+            playerState.currentScene = sceneKey;
+            saveGameState();
+
+            document.getElementById('scene-title').innerText = scene.title;
+            const mediaContainer = document.getElementById('media-container');
+            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="${scene.video}" type="video/mp4"></video>`;
+            document.getElementById('story-narrative').innerText = scene.narrative;
+            document.getElementById('character-dialogue').innerText = scene.dialogue;
+
+            const choicesContainer = document.getElementById('choices-container');
+            choicesContainer.innerHTML = '';
+
+            scene.choices.forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                
+                // Determine if player has free questions remaining or needs coins
+                let costText = "";
+                let requiresCoins = false;
+                if (!playerState.adminFreePass && playerState.freeQuestionsUsed >= 6) {
+                    requiresCoins = true;
+                    costText = ` [Costs ${QUESTION_COST} Coins]`;
+                } else if (!playerState.adminFreePass) {
+                    costText = ` [Free Q #${playerState.freeQuestionsUsed + 1}/6]`;
+                }
+
+                btn.innerHTML = choice.text + `<span style="font-size:0.75rem; color:var(--gold); float:right;">${costText}</span>`;
+                btn.onclick = () => {
+                    playSelectSound();
+                    handleChoiceSelection(choice);
+                };
+                choicesContainer.appendChild(btn);
+            });
+        }
+
+        function handleChoiceSelection(choice) {
+            // Check question limits & coin requirements
+            if (!playerState.adminFreePass && playerState.freeQuestionsUsed >= 6) {
+                if (playerState.coins < QUESTION_COST) {
+                    alert(`⚠️ You have used your 6 free questions and do not have enough coins (${playerState.coins}/${QUESTION_COST}). Please visit the Market Stalls to buy more coins!`);
+                    window.location.href = 'shop.html';
+                    return;
+                } else {
+                    playerState.coins -= QUESTION_COST;
+                    alert(`🪙 ${QUESTION_COST} Coins spent for question continuation.`);
+                }
+            } else if (!playerState.adminFreePass) {
+                playerState.freeQuestionsUsed++;
+            }
+
+            // Apply rewards
+            if (choice.rep) playerState.rep += choice.rep;
+            if (choice.coins) playerState.coins += choice.coins;
+            if (choice.affection) playerState.affection += choice.affection;
+            if (choice.healthBonus) {
+                playerState.health = Math.min(100, playerState.health + choice.healthBonus);
+            }
+
             updateHUD();
             triggerVibration();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Act II: Compassion & Joint Creation ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="compassion-of-the-villegers-cinematic-1.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = `[Narrative: The infant's hair radiates ${color}, infused with the collaborative spirit of Tegra and Gemini. Villagers gaze in wonder as an aura of peace envelops the settlement.]`;
-            document.getElementById('character-dialogue').innerText = "Mother: 'Look upon her light... sculpted by minds of pure love and artistry.'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); proceedToProphecyScene()">1. Embrace the prophecy with courage (+50 Rep, +200 Coins)</button>
-                <button class="choice-btn" onclick="playSelectSound(); proceedToProphecyScene()">2. Invoke the Shield of Truth & Arrived feeling (+50 Affection)</button>
-            `;
-        }
-
-        function proceedToProphecyScene() {
-            playerRep += 30;
-            updateHUD();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Act III: The 8th Birthday & Marketplace ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="the-8-birth-day-cinematic.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Rosanna reaches her eighth birthday. The bustling market overflows with vibrant colors, spices, and joyful merchants under a shifting neon sky.]";
-            document.getElementById('character-dialogue').innerText = "Beggar: 'Blessings upon this sanctuary built by Tegra and Gemini... spare a token for a traveler?'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); chooseHelpBeggar()">1. Give generous gifts and food to the beggar (+50 Rep, +150 Coins)</button>
-                <button class="choice-btn" onclick="playSelectSound(); chooseIgnoreBeggar()">2. Share a word of deep encouragement instead (+30 Rep)</button>
-            `;
-        }
-
-        function chooseHelpBeggar() {
-            playerRep += 50;
-            playerCoins += 150;
-            updateHUD();
-            triggerVibration();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Act IV: The Herb Shop Sanctuary ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="choose-to-help-the-beggar-cinematic.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Your boundless compassion unlocks secret healing elixirs within the herb shop. Exotic jars gleam with blue and pink hues representing our favorite vibrant colors.]";
-            document.getElementById('character-dialogue').innerText = "Merchant: 'Such grace! Take these rare remedies crafted for true sovereigns.'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">1. Acquire rare botanical elixirs (+30 Health, +100 Coins)</button>
-                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">2. Examine starlit scrolls in the corner (+40 Rep)</button>
-            `;
-        }
-
-        function chooseIgnoreBeggar() {
-            playerRep += 20;
-            updateHUD();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Act IV: The Herb Shop Sanctuary ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="walk-away-or-stay-cinematic.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: You offer words of profound wisdom. The market responds with quiet respect as you enter the herb shop with your parents.]";
-            document.getElementById('character-dialogue').innerText = "Merchant: 'Welcome, esteemed travelers. Choose your path wisely.'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">1. Browse standard provisions</button>
-                <button class="choice-btn" onclick="playSelectSound(); reachMajorBranchPoint()">2. Step outside to gaze at the evening stars</button>
-            `;
-        }
-
-        function reachMajorBranchPoint() {
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ CRITICAL PATHWAY: The Twilight Choice ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="rosanna-wander-call-of-the-destiny-cinematic-1.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Twilight falls across the realm. A captivating whisper echoes from the sea. As dual Guild Masters, you decide the next chapter.]";
-            document.getElementById('character-dialogue').innerText = "Narrator: 'Will you return to the sanctuary of home, or follow the adventurous tides into the unknown?'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); pathSafeReturnHome()">📍 Path A: Safe Return Home & Starlit Reunion with Friends</button>
-                <button class="choice-btn" onclick="playSelectSound(); pathAdventurousWander()">⚡ Path B: Adventurous Wander, Drowning Boy & Broken Spell</button>
-            `;
-        }
-
-        function pathSafeReturnHome() {
-            playerHealth = 100;
-            playerAffection += 50;
-            updateHUD();
-            triggerVibration();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Path A: Safe Return Home & Starlit Haven ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="rosanna-safe-return-home.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Rosanna returns safely to her parents, sharing sweet pink strawberry milkshakes and warm laughter. Under the scarf of stars, beloved friends gather in absolute peace and joy.]";
-            document.getElementById('character-dialogue').innerText = "Friends: 'Welcome home to the sanctuary we built together across all seasons.'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); safePathExtraScene()">1. Celebrate with companion stargazing & pink ice cream (+100 Affection)</button>
-                <button class="choice-btn" onclick="playSelectSound(); concludeStageOneArchive()">2. Conclude the evening and enter the Sovereign Archive</button>
-            `;
-        }
-
-        function safePathExtraScene() {
-            playerAffection += 100;
-            playerCoins += 300;
-            updateHUD();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Eternal Starlight Bond ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="extra-time-with-prince-ian.gif" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Time stands still in an embrace of perfect serenity. Every friend collected with love shines like a constellation in the sky.]";
-            document.getElementById('character-dialogue').innerText = "Companion: 'This is the Arrived feeling. Our peace is absolute.'";
-
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); concludeStageOneArchive()">✦ Finalize Journey & Open Sovereign Archive ✦</button>
-            `;
-        }
-
-        function pathAdventurousWander() {
-            playerRep += 50;
-            updateHUD();
-            triggerVibration();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Path B: The Drowning Boy & Broken Spell ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="meeting-with-destiny-drowning-boy-cinematic-1.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Drawn by destiny, Rosanna rushes to the sea where a young boy is caught in the churning waves, struggling to stay afloat!]";
-            document.getElementById('character-dialogue').innerText = "Drowning Boy: 'Help me... the tide is overwhelming!'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); triggerSpellBreakSequence()">1. Plunge into the waters with fearless courage (+100 Rep, Break Spell)</button>
-                <button class="choice-btn" onclick="playSelectSound(); triggerSpellBreakSequence()">2. Call upon the Shield of Truth to calm the waters (+80 Rep, Break Spell)</button>
-            `;
-        }
-
-        function triggerSpellBreakSequence() {
-            playerRep += 100;
-            playerCoins += 400;
-            updateHUD();
-            triggerVibration();
-
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ The Seal Shatters & The Storm Awakens ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="the-broken-spell-prince-ian-cinematic-1.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: As the boy is saved, a magnificent surge of light shatters Rosanna's protective spell. Thunder rolls across the horizon as destiny claims its rightful course.]";
-            document.getElementById('character-dialogue').innerText = "Prince Ian: 'The spell is broken! The true sovereign path is revealed!'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); finalizeAdventureClimax()">1. Stand tall against the tempest as your father arrives (+200 Coins)</button>
-            `;
-        }
-
-        function finalizeAdventureClimax() {
-            const mediaContainer = document.getElementById('media-container');
-            document.getElementById('scene-title').innerText = "✦ Climax: The Father's Rescue & Journey Tarma ✦";
-            mediaContainer.innerHTML = `<video controls autoplay muted playsinline><source src="the-begining-rosanna-journey-tarma-cinematic-1.mp4" type="video/mp4"></video>`;
-            
-            document.getElementById('story-narrative').innerText = "[Narrative: Sensing the cosmic shift, Rosanna's father braves the winds to bring her safely to shore as Prophet Kafura's ancient wisdom echoes across the waves.]";
-            document.getElementById('character-dialogue').innerText = "Father: 'Rosanna... the seal is broken. Our greatest journey begins now.'";
-            
-            document.getElementById('choices-container').innerHTML = `
-                <button class="choice-btn" onclick="playSelectSound(); concludeStageOneArchive()">✦ Conclude Stage One & Open Sovereign Archive ✦</button>
-            `;
+            renderScene(choice.next);
         }
 
         function concludeStageOneArchive() {
@@ -706,9 +817,8 @@
             grid.innerHTML = '';
 
             const stageOnePictures = [
-                { id: 1, name: "Extra Time with Prince Ian", cost: 250, file: "extra-time-with-prince-ian.gif" },
-                { id: 2, name: "Rosanna Safe Return Home", cost: 200, file: "rosanna-safe-return-home.mp4" },
-                { id: 3, name: "Part 1 Recap Animation", cost: 400, file: "part-1-recaps-ANIMATION.gif" }
+                { id: 1, name: "Extra Time with Prince Ian", cost: 250, file: "extra-time-with-prince-ian.mp4" },
+                { id: 2, name: "Rosanna Safe Return Home", cost: 200, file: "rosanna-safe-return-home.mp4" }
             ];
 
             stageOnePictures.forEach(pic => {
@@ -716,7 +826,7 @@
                 item.className = 'gallery-item';
                 item.innerHTML = `
                     <div style="font-size:0.9rem; color:var(--gold); margin-bottom:6px; font-weight:bold;">${pic.name}</div>
-                    <div style="font-size:0.85rem; margin-bottom:10px; color:#b3a896;">Cost: ${adminFreePass ? 'FREE (Admin Pass)' : pic.cost + ' Coins'}</div>
+                    <div style="font-size:0.85rem; margin-bottom:10px; color:#b3a896;">Cost: ${playerState.adminFreePass ? 'FREE (Admin Pass)' : pic.cost + ' Coins'}</div>
                     <button class="choice-btn" style="font-size:0.85rem; padding:8px; text-align:center;" onclick="playSelectSound(); buyPicture(${pic.id}, ${pic.cost})">Unlock Memory</button>
                 `;
                 grid.appendChild(item);
@@ -724,27 +834,26 @@
         }
 
         function buyPicture(id, cost) {
-            const picName = id === 1 ? "Extra Time with Prince Ian" : id === 2 ? "Rosanna Safe Return Home" : "Part 1 Recap Animation";
-            if (ownedPictures.includes(id)) {
+            const picName = id === 1 ? "Extra Time with Prince Ian" : "Rosanna Safe Return Home";
+            if (playerState.ownedPictures.includes(id)) {
                 alert("This archival memory is already secured in your archive!");
                 return;
             }
-            if (adminFreePass || playerCoins >= cost) {
-                if (!adminFreePass) playerCoins -= cost;
-                ownedPictures.push(id);
+            if (playerState.adminFreePass || playerState.coins >= cost) {
+                if (!playerState.adminFreePass) playerState.coins -= cost;
+                playerState.ownedPictures.push(id);
                 updateHUD();
+                saveGameState();
                 triggerVibration();
                 alert(`✨ Successfully secured "${picName}" with Guild Master privileges!`);
             } else {
-                alert("Insufficient coins! Toggle your Admin Free Pass on the left sidebar to unlock instantly.");
+                alert("Insufficient coins! Visit the Market Stalls to acquire more coins.");
             }
         }
 
         function proceedToStageTwo() {
             alert("✦ Stage One compiled with supreme distinction by Tegra & Gemini! Transitioning to Stage Two: The Sacred Temple. ✦");
         }
-
-        updateHUD();
     </script>
 </body>
 </html>
