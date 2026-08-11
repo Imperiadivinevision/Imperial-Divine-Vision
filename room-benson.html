@@ -625,7 +625,6 @@
             const heading = document.getElementById('scene-heading');
             const display = document.getElementById('story-display');
 
-            // Soft fade-out effect
             videoElem.style.opacity = '0';
             display.style.opacity = '0';
 
@@ -636,7 +635,6 @@
                 videoElem.play().catch(e => console.log("Autoplay prevented:", e));
                 display.innerText = newText;
 
-                // Soft fade-in effect
                 videoElem.style.opacity = '1';
                 display.style.opacity = '1';
             }, 300);
@@ -644,21 +642,21 @@
 
         function unlockSisterLocker() {
             const lockerSection = document.getElementById('sister-locker-section');
-            if (lockerSection.style.display === 'none') {
+            if (lockerSection) {
                 lockerSection.style.display = 'block';
             }
         }
 
         function unlockFatherLocker() {
             const lockerSection = document.getElementById('father-locker-section');
-            if (lockerSection.style.display === 'none') {
+            if (lockerSection) {
                 lockerSection.style.display = 'block';
             }
         }
 
         function unlockRelationshipLocker() {
             const lockerSection = document.getElementById('relationship-locker-section');
-            if (lockerSection.style.display === 'none') {
+            if (lockerSection) {
                 lockerSection.style.display = 'flex';
             }
         }
@@ -846,6 +844,7 @@
 
                 if (relationshipUsesLeft === 0) {
                     setTimeout(() => {
+                        const display = document.getElementById('story-display');
                         display.innerText = "🌟 [Sanctuary Milestone: You have successfully built relationships with your siblings three times! A 4-minute cooldown has now begun before you can talk and build relationships again.] 🌟";
                         startRelationshipCooldown();
                     }, 2500);
@@ -1135,7 +1134,7 @@
                 if (choiceType === 'recap') {
                     transitionVideo(
                         "prince-ian-recap.gif",
-                        "✦ Stage One Recap ✦",
+                        "✦ Stage One Recap 4✦",
                         "[Sanctuary Recap: Relive the magnificent journey of Prince Ian from the imperial chambers, family bonding, palace betrayal, exile in Hikmid, and the prophetic rescue by the sea.]"
                     );
                     choices.innerHTML = `
