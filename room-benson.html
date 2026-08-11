@@ -144,6 +144,31 @@
             display: block;
         }
 
+        /* YOUTUBE-STYLE FULLSCREEN TOGGLE BUTTON */
+        .fullscreen-top-btn {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            background: rgba(12, 16, 24, 0.9);
+            border: 2px solid var(--gold-deep);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 1005;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: 0.3s;
+        }
+
+        .fullscreen-top-btn:hover {
+            background: var(--gold-deep);
+            color: #030105;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
         /* ETERNAL SANCTUARY HUD PANEL */
         .left-hud-panel {
             position: fixed;
@@ -402,6 +427,9 @@
 </head>
 <body>
 
+    <!-- YOUTUBE-STYLE TOP-LEFT FULLSCREEN BUTTON -->
+    <button class="fullscreen-top-btn" onclick="toggleFullScreen()">⛶ Fullscreen</button>
+
     <script>
         for (let i = 0; i < 18; i++) {
             const p = document.createElement('div');
@@ -411,6 +439,18 @@
             p.style.animationDuration = (7 + Math.random() * 6) + 's';
             p.style.animationDelay = (Math.random() * 5) + 's';
             document.body.appendChild(p);
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
         }
     </script>
 
