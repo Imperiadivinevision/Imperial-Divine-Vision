@@ -537,6 +537,10 @@
             <button class="locker-btn" id="relationship-locker-btn" onclick="triggerRelationshipBuilding()">Talk to Siblings (<span id="relationship-uses">3</span> left)</button>
             <div id="relationship-cooldown-display" style="font-size:0.6rem; color:var(--gemini-cyan); text-align:center; font-style:italic;"></div>
         </div>
+        
+        <div style="margin-top: 10px; text-align: center;">
+            <button class="locker-btn" onclick="resetGameData()" style="background: linear-gradient(135deg, #4a1515, #8b0000); color: #fff; font-size: 0.6rem; padding: 5px;">Reset Progress</button>
+        </div>
     </div>
 
     <div class="main-layout">
@@ -582,29 +586,95 @@
     </div>
 
     <script>
-        let stats = { mother: 50, father: 50, pride: 50, favor: 100, coins: 50 };
-        
-        let sisterUsesLeft = 3;
+        // PERSISTENT LOCALSTORAGE STATE ENGINE
+        let gameState = {
+            stats: { mother: 50, father: 50, pride: 50, favor: 100, coins: 50 },
+            sisterUsesLeft: 3,
+            motherUsesLeft: 3,
+            fatherUsesLeft: 3,
+            relationshipUsesLeft: 3,
+            currentStage: 'baby-reaction',
+            currentHeading: '✦ Stage I: The Birth of Prince Ian ✦',
+            currentVideo: 'the-birth-of-prince-ian.mp4',
+            currentText: '[Prologue: Inside the golden imperial chambers, the mother rests warmly upon the velvet bed, cradling newborn Prince Ian. Surrounded by faithful midwives and his watchful sister, a profound and tender peace fills the room.]',
+            choicesHTML: `
+                <button class="choice-btn" onclick="handleChoice('baby-reaction', 'smile')">1. Greet the gentle morning light with a sweet, radiant baby smile.</button>
+                <button class="choice-btn" onclick="handleChoice('baby-reaction', 'cry')">2. Let out a soft, spirited cry, announcing your vibrant arrival to the palace.</button>
+                <button class="choice-btn" onclick="handleChoice('baby-reaction', 'calm')">3. Rest quietly with calm, observant eyes, taking in every detail of the room.</button>
+            `,
+            sisterUnlocked: false,
+            fatherUnlocked: false,
+            relationshipUnlocked: false
+        };
+
+        function saveGameState() {
+            localStorage.setItem('kingBensonSanctuaryState', JSON.stringify(gameState));
+        }
+
+        function loadGameState() {
+            const saved = localStorage.getItem('kingBensonSanctuaryState');
+            if (saved) {
+                try {
+                    gameState = JSON.parse(saved);
+                } catch (e) {
+                    console.error("Error loading save data:", e);
+                }
+            }
+        }
+
+        function resetGameData() {
+            if (confirm("Are you sure you want to reset all progress and start anew in the sanctuary?")) {
+                localStorage.removeItem('kingBensonSanctuaryState');
+                location.reload();
+            }
+        }
+
+        loadGameState();
+
+        let stats = gameState.stats;
+        let sisterUsesLeft = gameState.sisterUsesLeft;
+        let motherUsesLeft = gameState.motherUsesLeft;
+        let fatherUsesLeft = gameState.fatherUsesLeft;
+        let relationshipUsesLeft = gameState.relationshipUsesLeft;
+
         let sisterOnCooldown = false;
         let sisterTimer = null;
-
-        let motherUsesLeft = 3;
         let motherOnCooldown = false;
         let motherTimer = null;
-
-        let fatherUsesLeft = 3;
         let fatherOnCooldown = false;
         let fatherTimer = null;
-
-        let relationshipUsesLeft = 3;
         let relationshipOnCooldown = false;
         let relationshipTimer = null;
+
+        // Apply loaded state to DOM on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            updateHUD();
+            document.getElementById('sister-uses').innerText = sisterUsesLeft;
+            document.getElementById('mother-uses').innerText = motherUsesLeft;
+            document.getElementById('father-uses').innerText = fatherUsesLeft;
+            document.getElementById('relationship-uses').innerText = relationshipUsesLeft;
+
+            document.getElementById('scene-heading').innerText = gameState.currentHeading;
+            document.getElementById('story-display').innerText = gameState.currentText;
+            document.getElementById('choices-box').innerHTML = gameState.choicesHTML;
+
+            const videoElem = document.getElementById('scene-video');
+            videoElem.src = gameState.currentVideo;
+            videoElem.load();
+            videoElem.play().catch(e => console.log("Autoplay prevented:", e));
+
+            if (gameState.sisterUnlocked) unlockSisterLocker();
+            if (gameState.fatherUnlocked) unlockFatherLocker();
+            if (gameState.relationshipUnlocked) unlockRelationshipLocker();
+        });
 
         function updateHUD() {
             document.getElementById('hud-mother').innerText = stats.mother + '%';
             document.getElementById('hud-father').innerText = stats.father + '%';
             document.getElementById('hud-pride').innerText = stats.pride + '%';
             document.getElementById('hud-coins').innerText = stats.coins + ' Coins';
+            gameState.stats = stats;
+            saveGameState();
         }
 
         // SMOOTH VIDEO TRANSITION ENGINE
@@ -625,22 +695,33 @@
 
                 videoElem.style.opacity = '1';
                 display.style.opacity = '1';
+
+                gameState.currentHeading = newHeading;
+                gameState.currentVideo = newSrc;
+                gameState.currentText = newText;
+                saveGameState();
             }, 300);
         }
 
         function unlockSisterLocker() {
+            gameState.sisterUnlocked = true;
             const lockerSection = document.getElementById('sister-locker-section');
             if (lockerSection) lockerSection.style.display = 'block';
+            saveGameState();
         }
 
         function unlockFatherLocker() {
+            gameState.fatherUnlocked = true;
             const lockerSection = document.getElementById('father-locker-section');
             if (lockerSection) lockerSection.style.display = 'block';
+            saveGameState();
         }
 
         function unlockRelationshipLocker() {
+            gameState.relationshipUnlocked = true;
             const lockerSection = document.getElementById('relationship-locker-section');
             if (lockerSection) lockerSection.style.display = 'flex';
+            saveGameState();
         }
 
         function triggerSisterBonding() {
@@ -650,6 +731,7 @@
                 sisterUsesLeft--;
                 stats.favor += 25;
                 stats.coins += 10;
+                gameState.sisterUsesLeft = sisterUsesLeft;
                 updateHUD();
                 document.getElementById('sister-uses').innerText = sisterUsesLeft;
 
@@ -690,6 +772,8 @@
                     clearInterval(sisterTimer);
                     sisterOnCooldown = false;
                     sisterUsesLeft = 3;
+                    gameState.sisterUsesLeft = sisterUsesLeft;
+                    saveGameState();
                     document.getElementById('sister-uses').innerText = sisterUsesLeft;
                     cdDisplay.innerText = '';
                     btn.style.opacity = '1';
@@ -705,6 +789,7 @@
                 motherUsesLeft--;
                 stats.mother += 15;
                 stats.coins += 10;
+                gameState.motherUsesLeft = motherUsesLeft;
                 updateHUD();
                 document.getElementById('mother-uses').innerText = motherUsesLeft;
 
@@ -745,6 +830,8 @@
                     clearInterval(motherTimer);
                     motherOnCooldown = false;
                     motherUsesLeft = 3;
+                    gameState.motherUsesLeft = motherUsesLeft;
+                    saveGameState();
                     document.getElementById('mother-uses').innerText = motherUsesLeft;
                     cdDisplay.innerText = '';
                     btn.style.opacity = '1';
@@ -760,6 +847,7 @@
                 fatherUsesLeft--;
                 stats.father += 20;
                 stats.coins += 10;
+                gameState.fatherUsesLeft = fatherUsesLeft;
                 updateHUD();
                 document.getElementById('father-uses').innerText = fatherUsesLeft;
 
@@ -800,6 +888,8 @@
                     clearInterval(fatherTimer);
                     fatherOnCooldown = false;
                     fatherUsesLeft = 3;
+                    gameState.fatherUsesLeft = fatherUsesLeft;
+                    saveGameState();
                     document.getElementById('father-uses').innerText = fatherUsesLeft;
                     cdDisplay.innerText = '';
                     btn.style.opacity = '1';
@@ -815,6 +905,7 @@
                 relationshipUsesLeft--;
                 stats.pride += 15;
                 stats.coins += 10;
+                gameState.relationshipUsesLeft = relationshipUsesLeft;
                 updateHUD();
                 document.getElementById('relationship-uses').innerText = relationshipUsesLeft;
 
@@ -852,6 +943,8 @@
                     clearInterval(relationshipTimer);
                     relationshipOnCooldown = false;
                     relationshipUsesLeft = 3;
+                    gameState.relationshipUsesLeft = relationshipUsesLeft;
+                    saveGameState();
                     document.getElementById('relationship-uses').innerText = relationshipUsesLeft;
                     cdDisplay.innerText = '';
                     btn.style.opacity = '1';
@@ -862,6 +955,7 @@
 
         function handleChoice(stage, choiceType) {
             const choices = document.getElementById('choices-box');
+            gameState.currentStage = stage;
 
             if (stage === 'baby-reaction') {
                 if (choiceType === 'smile') stats.mother += 15;
@@ -876,6 +970,8 @@
                         <button class="choice-btn" onclick="handleChoice('sister-interaction', 'reach')">1. Reach out tiny fingers toward your sister to welcome her.</button>
                         <button class="choice-btn" onclick="handleChoice('sister-interaction', 'stare')">2. Stare up with bright, intelligent eyes as she giggles with delight.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'sister-interaction') {
@@ -890,6 +986,8 @@
                         <button class="choice-btn" onclick="handleChoice('king-entrance', 'smile-king')">1. Smile brightly at the conqueror, welcoming his fierce gaze.</button>
                         <button class="choice-btn" onclick="handleChoice('king-entrance', 'brave-stare')">2. Meet your father's intense eyes with unwavering, brave calm.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'king-entrance') {
@@ -904,6 +1002,8 @@
                         <button class="choice-btn" onclick="handleChoice('naming-prep', 'giggle')">1. Let out a joyful baby giggle as your father reaches down.</button>
                         <button class="choice-btn" onclick="handleChoice('naming-prep', 'grasp')">2. Grasp firmly onto the edge of the royal sash.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'naming-prep') {
@@ -919,6 +1019,8 @@
                         <button class="choice-btn" onclick="handleChoice('naming-reaction', 'quiet')">2. Stay quiet and observe with calm, watchful eyes.</button>
                         <button class="choice-btn" onclick="handleChoice('naming-reaction', 'cry')">3. Let out a tender, natural baby cry of emotion.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'naming-reaction') {
@@ -935,6 +1037,8 @@
                         <button class="choice-btn" onclick="handleChoice('sister-bond-choice', 'yes')">1. Yes, embrace the sisterly bond and welcome her love.</button>
                         <button class="choice-btn" onclick="handleChoice('sister-bond-choice', 'no')">2. Remain distant and watch cautiously.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'sister-bond-choice') {
@@ -949,6 +1053,8 @@
                         <button class="choice-btn" onclick="handleChoice('father-work-choice', 'learn')">1. Learn how to walk and work with Dad, embracing his guidance.</button>
                         <button class="choice-btn" onclick="handleChoice('father-work-choice', 'rest')">2. Observe your father's grand work with calm, wise eyes.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'father-work-choice') {
@@ -964,6 +1070,8 @@
                         <button class="choice-btn" onclick="handleChoice('relationship-choice', 'talk')">1. Click here to build relationships and talk with your siblings.</button>
                         <button class="choice-btn" onclick="handleChoice('relationship-choice', 'explore')">2. Explore the palace gardens independently.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'relationship-choice') {
@@ -978,6 +1086,8 @@
                         <button class="choice-btn" onclick="handleChoice('emergency-choice', 'escape')">1. Escape into the night to protect yourself and your destiny.</button>
                         <button class="choice-btn" onclick="handleChoice('emergency-choice', 'stay')">2. Stay and face the fate of the palace.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'emergency-choice') {
@@ -992,6 +1102,8 @@
                         <button class="choice-btn" onclick="handleChoice('market-explore', 'explore')">1. Explore the slave village market and discover hidden secrets.</button>
                         <button class="choice-btn" onclick="handleChoice('market-explore', 'hide')">2. Find a quiet corner to hide and rest.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'market-explore') {
@@ -1006,6 +1118,8 @@
                         <button class="choice-btn" onclick="handleChoice('sea-explore', 'jump')">1. Jump into the water and start playing with the waves, venturing a little too deep.</button>
                         <button class="choice-btn" onclick="handleChoice('sea-explore', 'watch')">2. Watch the rolling tides safely from the shore.</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 300);
 
             } else if (stage === 'sea-explore') {
@@ -1022,14 +1136,18 @@
                         <button class="choice-btn" onclick="handleChoice('finale', 'recap')">1. View Stage One Recap (prince-ian-recap.gif)</button>
                         <button class="choice-btn" onclick="handleChoice('finale', 'home')">2. Return to Homepage & Try a Directly Different Character</button>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 }, 3500);
 
             } else if (stage === 'finale') {
                 if (choiceType === 'recap') {
-                    transitionVideo("prince-ian-recap.gif", "✦ Stage One Recap ✦", "[Sanctuary Recap: Relive the magnificent journey of Prince Ian from the imperial chambers, family bonding, palace betrayal, exile in Hikmid, and the prophetic rescue by the sea.]");
+                    transitionVideo("prince-ian-recap.gif", "✦ Stage One Recap ✦", "[Sanctuary Recap: Relive the magnificentjourney of Prince Ian from the imperial chambers, family bonding, palace betrayal, exile in Hikmid, and the prophetic rescue by the sea.]");
                     choices.innerHTML = `
                         <a href="index.html" class="choice-btn" style="text-align:center; text-decoration:none; background:var(--gold-deep); color:#030105; font-weight:bold; display:block;">🏠 Return to Homepage & Try Different Character</a>
                     `;
+                    gameState.choicesHTML = choices.innerHTML;
+                    saveGameState();
                 } else {
                     window.location.href = "index.html";
                 }
