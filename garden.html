@@ -2,424 +2,484 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Forest Garden Chambers - Sovereign Sanctuary</title>
+    <title>The Forest Garden Chambers | Eternal Sanctuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+        @keyframes cosmicBreath {
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4)); }
+            50% { transform: scale(1.015); filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4)); }
+        }
 
-        body { 
-            background: linear-gradient(135deg, #050807, #0f1a14, #080e0a); 
+        @keyframes aetherGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatingDust {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-25px) rotate(180deg); opacity: 0.85; }
+            100% { transform: translateY(0px) rotate(360deg); opacity: 0.3; }
+        }
+
+        @keyframes goldPulse {
+            0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(0, 242, 254, 0.3); }
+            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 1), 0 0 50px rgba(0, 242, 254, 0.8), 0 0 70px rgba(212, 175, 55, 0.7); }
+            100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(0, 242, 254, 0.3); }
+        }
+
+        :root {
+            --bg-dark: #030105;
+            --panel-bg: rgba(8, 12, 20, 0.98);
+            --gold: #f3e5ab;
+            --gold-deep: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.9);
+            --text-main: #f5f2eb;
+            --gemini-cyan: #00f2fe;
+            --eternal-amber: #ffaa00;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, #02050a, #0b1a12, #050b14, #010408);
             background-size: 400% 400%;
-            animation: flow 25s infinite alternate;
-            color: #f3e5ab; 
-            font-family: 'Cinzel', 'Georgia', serif; 
-            margin: 0; padding: 20px; 
+            animation: aetherGlow 25s ease infinite;
+            color: var(--text-main);
+            font-family: 'Cinzel', serif;
             text-align: center;
             overflow-x: hidden;
-        }
-        @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-        
-        .sanctuary-header {
-            background: linear-gradient(135deg, rgba(20, 50, 30, 0.9), rgba(10, 30, 15, 0.95));
-            color: #ffd700;
-            padding: 40px;
-            border-radius: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.2);
-            border: 2px solid #d4af37;
-            position: relative;
-            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .imperial-box { 
-            border: 3px solid #d4af37; 
-            padding: 35px; 
-            background: rgba(12, 20, 15, 0.92); 
-            border-radius: 30px; 
-            margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 15px rgba(76,175,80,0.1);
-            position: relative;
-            z-index: 2;
+        .ambient-particle {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 16px var(--gold), 0 0 24px var(--gemini-cyan);
+            animation: floatingDust 9s infinite ease-in-out;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .comfort-btn {
-            background: linear-gradient(to bottom, #d4af37, #aa820a);
-            color: #0b0f0e;
-            border: 1px solid #fff;
-            padding: 14px 28px;
-            font-size: 15px;
-            font-family: 'Cinzel', serif;
+        nav { 
+            padding: 12px 20px; 
+            background: rgba(3, 5, 8, 0.96);
+            border-bottom: 2px solid var(--gold-deep);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav a { 
+            color: #f5f2eb; 
+            text-decoration: none; 
+            font-size: 1rem; 
             font-weight: bold;
-            border-radius: 10px;
+            transition: 0.3s; 
+        }
+
+        nav a:hover { 
+            color: var(--gold); 
+            text-shadow: 0 0 15px var(--gold-deep);
+        }
+
+        /* FULL SIZE LUSH GARDEN CONTAINER */
+        .garden-container {
+            max-width: 1200px;
+            width: 95%;
+            background: var(--panel-bg);
+            border: 2px solid var(--gold-deep);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 40px 120px rgba(0,0,0,0.95), 0 0 80px rgba(46, 139, 87, 0.3);
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            z-index: 10;
+        }
+
+        /* TOP NAVIGATION & FULLSCREEN CONTROLS */
+        .top-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .nav-links-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .royal-btn {
+            background: linear-gradient(135deg, var(--gold-deep), #8b7322);
+            border: 2px solid var(--gold);
+            color: #050406;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 10px 6px;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            font-family: 'Cinzel', serif;
+            font-size: 0.82rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
-        }
-        .comfort-btn:hover {
-            background: linear-gradient(to bottom, #fff, #d4af37);
-            box-shadow: 0 0 25px #ffd700;
-            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.4);
         }
 
-        /* Extraordinary Cinematic Video Garden Stage with Dynamic Weather */
-        .cinematic-garden-stage {
-            width: 100%;
-            height: 540px;
-            border: 3px solid #d4af37;
-            border-radius: 24px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 20px;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.7), 0 20px 40px rgba(0,0,0,0.9);
-            background: #000;
+        .royal-btn:hover {
+            background: var(--gold);
+            box-shadow: 0 0 25px var(--gold-glow), inset 0 2px 4px rgba(255,255,255,0.6);
+            transform: translateY(-2px);
         }
 
-        .garden-video-bg {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            transition: filter 2s ease-in-out;
+        /* FULLSCREEN TOGGLE BUTTON ON TOP */
+        .fullscreen-top-btn {
+            background: linear-gradient(135deg, #122030, #1f3a5f);
+            border: 2px solid var(--gemini-cyan);
+            color: var(--gemini-cyan);
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.82rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            transition: 0.3s;
         }
 
-        /* Weather Special Effects Styling */
-        .weather-layer {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 3;
-            transition: background 2s ease;
+        .fullscreen-top-btn:hover {
+            background: var(--gemini-cyan);
+            color: #030105;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.8);
+            transform: translateY(-2px);
         }
 
-        /* Rain Particle */
-        .raindrop {
-            position: absolute;
-            background: linear-gradient(transparent, rgba(174, 219, 255, 0.8));
-            width: 1px;
-            height: 20px;
-            opacity: 0.7;
-            animation: fallRain 0.8s linear infinite;
-        }
-        @keyframes fallRain {
-            0% { transform: translateY(-20px); }
-            100% { transform: translateY(560px); }
+        /* HEADER SECTION */
+        .garden-header {
+            text-align: center;
         }
 
-        /* Snow Particle */
-        .snowflake {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            opacity: 0.9;
-            box-shadow: 0 0 8px #fff;
-            animation: fallSnow 4s linear infinite;
-        }
-        @keyframes fallSnow {
-            0% { transform: translateY(-10px) translateX(0); }
-            50% { transform: translateY(270px) translateX(15px); }
-            100% { transform: translateY(550px) translateX(-10px); }
+        .chapter-title {
+            font-size: 2.3rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0 0 8px 0;
+            animation: goldPulse 5s infinite;
         }
 
-        /* Storm Lightning Flash */
-        .lightning-flash {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0);
-            pointer-events: none;
-            z-index: 4;
-        }
-        @keyframes flashLightning {
-            0% { background: rgba(255,255,255,0); }
-            10% { background: rgba(255,255,255,0.7); }
-            20% { background: rgba(255,255,255,0); }
-            30% { background: rgba(255,255,255,0.5); }
-            50% { background: rgba(255,255,255,0); }
-            100% { background: rgba(255,255,255,0); }
+        .chapter-subtitle {
+            font-size: 1rem;
+            color: var(--text-main);
+            font-style: italic;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* Floating Magic Particles */
-        .magic-particle {
-            position: absolute;
-            width: 8px; height: 8px;
-            background: radial-gradient(circle, #fff, #ffd700);
-            border-radius: 50%;
-            box-shadow: 0 0 12px #ffd700, 0 0 20px #ff77ff;
-            animation: floatParticle 8s infinite ease-in-out;
-            pointer-events: none;
-            z-index: 3;
-        }
-        @keyframes floatParticle {
-            0% { transform: translateY(500px) scale(0.5); opacity: 0; }
-            50% { opacity: 0.9; }
-            100% { transform: translateY(-50px) scale(1.2); opacity: 0; }
-        }
-
-        .garden-display {
-            background: rgba(10, 20, 12, 0.95);
-            border: 2px solid #4caf50;
+        /* UPRIGHT GARDEN DISPLAY / VIDEO STAGE (TOP & LARGER) */
+        .featured-video-section {
+            background: rgba(4, 10, 8, 0.9);
+            border: 2px solid var(--gold-deep);
+            border-radius: 14px;
             padding: 22px;
-            border-radius: 18px;
-            margin-top: 20px;
-            font-size: 1.15rem;
-            color: #d1e7d2;
-            box-shadow: inset 0 0 25px rgba(76,175,80,0.3);
-            font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 2;
+            box-shadow: inset 0 0 40px rgba(46, 139, 87, 0.25), 0 15px 45px rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .chat-input {
+        .weather-banner {
+            background: linear-gradient(135deg, rgba(16, 45, 32, 0.95), rgba(8, 25, 18, 0.95));
+            border: 2px solid var(--gemini-cyan);
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            color: var(--gold);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: bold;
+        }
+
+        .video-wrapper-fullscreen {
             width: 100%;
-            max-width: 420px;
-            padding: 14px;
-            background: rgba(15, 22, 17, 0.9);
-            border: 1px solid #d4af37;
-            color: #fff;
+            height: 540px; /* Expansive, highly visible height */
+            max-height: 650px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--gold-deep);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.95), inset 0 0 30px rgba(212, 175, 55, 0.4);
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .video-wrapper-fullscreen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* BOTTOM CREATIVE SECTIONS */
+        .bottom-sections-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        @media(max-width: 850px) {
+            .bottom-sections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-box {
+            background: rgba(12, 20, 32, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .section-box h3 {
+            color: var(--eternal-amber);
+            font-size: 1.15rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .plant-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(3, 5, 8, 0.9);
+            border: 1px solid var(--gold-deep);
+            color: var(--text-main);
             border-radius: 8px;
             font-family: 'Cinzel', serif;
-            margin: 10px 0;
-            outline: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-        }
-        .chat-input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+            box-sizing: border-box;
         }
 
-        .royal-branding {
-            position: fixed;
-            bottom: 20px; right: 20px;
-            width: 120px;
-            z-index: 1000;
-            opacity: 0.9;
-            pointer-events: none;
-            filter: drop-shadow(0 0 8px rgba(212,175,55,0.6));
+        /* WATER THE GARDEN AT THE BOTTOM */
+        .water-action-area {
+            text-align: center;
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(8, 24, 36, 0.9), rgba(12, 36, 32, 0.9));
+            border: 2px solid var(--gemini-cyan);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
         }
 
-        .audio-status {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid #d4af37;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #ffd700;
-            margin-bottom: 15px;
+        .water-btn {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border: 2px solid #fff;
+            color: #030105;
+            padding: 14px 32px;
+            border-radius: 35px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.7);
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .water-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 45px rgba(0, 242, 254, 1);
+        }
+
+        .royal-footer {
+            margin: 20px auto;
+            color: #b3a896;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            font-style: italic;
         }
     </style>
 </head>
-<body onclick="initializeGardenExperience()">
-
-    <audio id="gardenMusic" loop preload="auto">
-        <source src="rosanna-music-galary.m4a" type="audio/mp4">
-        <source src="https://actions.google.com/sounds/v1/ambiences/daytime_forest_bonfire.ogg" type="audio/ogg">
-    </audio>
-    <audio id="windSound" loop preload="auto">
-        <source src="https://actions.google.com/sounds/v1/weather/wind_heavy.ogg" type="audio/ogg">
-    </audio>
-    <audio id="insectSound" loop preload="auto">
-        <source src="https://actions.google.com/sounds/v1/environments/summer_forest_birds.ogg" type="audio/ogg">
-    </audio>
-
-    <div class="sanctuary-header">
-        <h1 style="margin:0 0 10px 0; font-size: 2.5rem; text-shadow: 0 0 15px rgba(212,175,55,0.8);">🌸 The Forest Garden Chambers 🌿</h1>
-        <p style="margin:0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: #f7f3e9;">"A living sanctuary where the weather shifts dynamically between golden sunbeams, gentle breeze, soft rain, serene snowfall, and dramatic storms."</p>
-    </div>
-
-    <div style="margin-bottom: 25px; position:relative; z-index:2;">
-        <a href="room-elder.html" class="comfort-btn">🏛️ Return to Sovereign Sanctuary</a>
-        <a href="index.html" class="comfort-btn">🏠 Return to Home</a>
-    </div>
-
-    <div class="imperial-box">
-        <div class="audio-status" id="audioStatusBadge">🎵 Click anywhere to awaken background music & dynamic weather cycles</div>
-        <h2 style="color: #ffd700; margin-top:0; font-size: 1.8rem;">✨ Sovereign Living Weather Stage</h2>
-        <p style="color: #c5b59b; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">The garden automatically shifts its atmosphere every few minutes—cycling through Sun, Breeze, Rain, Snow, and Storms! You can also click below to manually trigger water.</p>
-        
-        <button class="comfort-btn" style="background: linear-gradient(to bottom, #2196f3, #0d47a1); color: white; font-size: 1.05rem; position: relative; z-index: 5;" onclick="waterGardenStage(event)">Water the Garden 🚿💧</button>
-        
-        <div class="cinematic-garden-stage" id="gardenStage">
-            <video autoplay muted loop playsinline class="garden-video-bg" id="gardenVideo">
-                <source src="forest-garden-cinematic.mp4" type="video/mp4">
-            </video>
-            <div class="weather-layer" id="weatherLayer"></div>
-            <div class="lightning-flash" id="lightningFlash"></div>
-        </div>
-
-        <div id="garden-screen" class="garden-display">
-            🌿 Current Weather: <b id="weatherName" style="color:#ffd700;">Golden Sun & Gentle Breeze</b>. Cycling automatically every few minutes!
-        </div>
-    </div>
-
-    <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0; font-size: 1.8rem;">🌹 Plant a New Flower in the Sanctuary</h2>
-        <p style="color: #c5b59b; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">Add custom flowers in pristine white, royal purple, pink, or gold to your everlasting sanctuary archives.</p>
-        
-        <input type="text" id="flowerInput" class="chat-input" placeholder="e.g., White Jasmine, Purple Wisteria, Velvet Rose...">
-        <br>
-        <button class="comfort-btn" onclick="submitFlowerRequest()">Submit Flower Request 🌷</button>
-        
-        <div id="flower-request-log" style="margin-top: 20px; font-style: italic; color: #e6d5b8; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;">
-            <b>Recent Sanctuary Plantings:</b> Pristine White Lilies, Royal Purple Wisterias, Golden Marigolds, Sacred Red Roses.
-        </div>
-    </div>
-
-    <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+<body>
 
     <script>
-        let audioStarted = false;
-        let weatherTimer = null;
-        const weatherStates = ['sun', 'breeze', 'rain', 'snow', 'storm'];
+        for (let i = 0; i < 18; i++) {
+            const p = document.createElement('div');
+            p.className = 'ambient-particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.animationDuration = (7 + Math.random() * 6) + 's';
+            p.style.animationDelay = (Math.random() * 5) + 's';
+            document.body.appendChild(p);
+        }
+
+        function toggleFullScreen() {
+            if (!document.documentElement.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Fullscreen mode error: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+
+    <nav>
+        <a href="index.html">🏠 Sanctuary Home</a>
+        <a href="room-adult.html">✨ Sovereign Chamber</a>
+        <a href="library.html">📚 Library & Book Lore</a>
+    </nav>
+
+    <div class="garden-container">
+        
+        <!-- TOP: NAVIGATION & FULLSCREEN EXPAND BUTTON -->
+        <div class="top-nav-buttons">
+            <div class="nav-links-group">
+                <a href="room-adult.html" class="royal-btn">🏛️ Return to Sovereign Sanctuary</a>
+                <a href="index.html" class="royal-btn">🏠 Return to Home</a>
+            </div>
+            <button class="fullscreen-top-btn" onclick="toggleFullScreen()">⛶ Expand Garden Screen (Fullscreen)</button>
+        </div>
+
+        <!-- TITLE OF THE FOREST GARDEN -->
+        <div class="garden-header">
+            <h1 class="chapter-title">🌸 The Forest Garden Chambers 🌿</h1>
+            <p class="chapter-subtitle">"A lush, living sanctuary infused with the enchanting scent of pristine white lilies and royal velvet roses. Here, the weather shifts dynamically between golden sunbeams, gentle breeze, soft rain, serene snowfall, and dramatic storms."</p>
+        </div>
+
+        <!-- TOP & LARGER VISUAL GARDEN DISPLAY / VIDEO STAGE -->
+        <div class="featured-video-section">
+            <div class="weather-banner" id="weather-status-banner">
+                <span>Current Atmosphere:</span> <span id="weather-text">☀️ Radiant Sun & Warm Light. Cycling automatically every few minutes!</span>
+            </div>
+            
+            <div class="video-wrapper-fullscreen" id="garden-stage-box">
+                <video id="garden-video" autoplay loop muted playsinline preload="auto">
+                    <source src="the-birth-of-prince-ian.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <!-- BOTTOM CREATIVE SECTIONS -->
+        <div class="bottom-sections-grid">
+            
+            <!-- PLANT A NEW FLOWER SECTION -->
+            <div class="section-box">
+                <h3>🌹 Plant a New Flower in the Sanctuary</h3>
+                <p style="font-size: 0.85rem; font-style: italic; margin: 0; opacity: 0.9;">Add custom blossoms in pristine white, royal purple, pink, or gold to your everlasting sanctuary archives.</p>
+                <input type="text" class="plant-input" placeholder="E.G., White Lilies, Royal Purple Roses, Velvet Jasmine...">
+                <button class="royal-btn" style="width: 100%;">Submit Flower Request</button>
+                <div style="font-size: 0.75rem; color: var(--gold); font-style: italic;">
+                    Recent Sanctuary Plantings: Pristine White Lilies, Royal Purple Wisterias, Golden Marigolds, Sacred Red Roses.
+                </div>
+            </div>
+
+            <!-- GARDEN LORE & WHISPERS -->
+            <div class="section-box">
+                <h3>📜 Sanctuary Floral Lore</h3>
+                <p style="font-size: 0.88rem; font-style: italic; line-height: 1.6; margin: 0; opacity: 0.95;">
+                    "Every petal within the Forest Garden breathes with peace and devotion. As the weather cycles from soft morning rain to radiant sunset glow, the scent of lilies and roses deepens, wrapping every visitor in divine tranquility."
+                </p>
+                <div style="font-size: 0.78rem; color: var(--gemini-cyan); font-style: italic; margin-top: auto;">
+                    ✦ Bound in Eternal Peace &amp; Sovereign Light ✦
+                </div>
+            </div>
+
+            <!-- WATER THE GARDEN MOVED TO BOTTOM -->
+            <div class="section-box water-action-area">
+                <h3 style="text-align: center; color: var(--gemini-cyan);">💧 Sovereign Living Water Stage</h3>
+                <p style="font-size: 0.9rem; font-style: italic; margin: 0 0 10px 0;">Nurture the lush flora of your forest garden with sacred living waters to make the blooms shine with vibrant splendor.</p>
+                <div>
+                    <button class="water-btn" onclick="triggerWateringEffect()">Water the Garden 💧</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="royal-footer">
+        The Forest Garden Chambers &copy; 2026 &bull; Eternal Sanctuary Edition &bull; All Rights Reserved
+    </div>
+
+    <script>
+        // Dynamic Weather Cycling Engine for the Garden
+        const weatherCycles = [
+            { text: "☀️ Radiant Sun & Warm Light illuminating the blooming roses.", video: "the-birth-of-prince-ian.mp4" },
+            { text: "🍃 Gentle Breeze whispering through the sacred lilies and wisterias.", video: "prince-ian-beganing-2-cinematic.mp4" },
+            { text: "🌧️ Soft Rain nourishing the vibrant forest garden flora.", video: "the-birth-of-prince-ian-3-cinematic.mp4" },
+            { text: "❄️ Serene Snowfall resting softly upon the eternal sanctuary petals.", video: "the-birth-of-prince-ian-4-cinematic.mp4" },
+            { text: "⚡ Dramatic Storm sweeping across the flourishing green valleys.", video: "the-naming-ritual.mp4" }
+        ];
+
         let currentWeatherIndex = 0;
 
-        function initializeGardenExperience() {
-            if (!audioStarted) {
-                let music = document.getElementById('gardenMusic');
-                let wind = document.getElementById('windSound');
-                let insects = document.getElementById('insectSound');
-                let badge = document.getElementById('audioStatusBadge');
-
-                if (music) { music.volume = 0.35; music.play().catch(e => {}); }
-                if (wind) { wind.volume = 0.2; wind.play().catch(e => {}); }
-                if (insects) { insects.volume = 0.25; insects.play().catch(e => {}); }
-
-                if (badge) {
-                    badge.innerHTML = "🎶 Smooth background music & dynamic weather engine active ✨";
-                    badge.style.borderColor = "#4caf50";
-                    badge.style.color = "#81c784";
-                }
-
-                audioStarted = true;
-                spawnFloatingParticles();
-                startWeatherCycle();
-            }
-        }
-
-        function spawnFloatingParticles() {
-            const stage = document.getElementById('gardenStage');
-            for (let i = 0; i < 15; i++) {
-                let particle = document.createElement('div');
-                particle.className = 'magic-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (6 + Math.random() * 6) + 's';
-                particle.style.animationDelay = (Math.random() * 5) + 's';
-                stage.appendChild(particle);
-            }
-        }
-
-        function startWeatherCycle() {
-            // Cycle weather every 60 seconds (or change as desired)
-            applyWeather(weatherStates[currentWeatherIndex]);
-            weatherTimer = setInterval(() => {
-                currentWeatherIndex = (currentWeatherIndex + 1) % weatherStates.length;
-                applyWeather(weatherStates[currentWeatherIndex]);
-            }, 60000); 
-        }
-
-        function applyWeather(type) {
-            const layer = document.getElementById('weatherLayer');
-            const screenText = document.getElementById('weatherName');
-            const video = document.getElementById('gardenVideo');
-            layer.innerHTML = ''; // clear old weather
-
-            if (type === 'sun') {
-                screenText.innerHTML = "☀️ Radiant Sun & Warm Light";
-                video.style.filter = "brightness(1.1) contrast(1.1) saturate(1.2)";
-                layer.style.background = "radial-gradient(circle at 50% 20%, rgba(255,215,0,0.2), transparent 70%)";
-            } else if (type === 'breeze') {
-                screenText.innerHTML = "🍃 Fresh Breezy Day & Whispering Wind";
-                video.style.filter = "brightness(1.0) contrast(1.05)";
-                layer.style.background = "linear-gradient(45deg, rgba(255,255,255,0.05), transparent)";
-            } else if (type === 'rain') {
-                screenText.innerHTML = "🌧️ Gentle Spring Rain & Nourishing Mist";
-                video.style.filter = "brightness(0.85) contrast(1.1) saturate(0.9)";
-                layer.style.background = "rgba(20, 40, 60, 0.25)";
-                // Generate raindrops
-                for (let i = 0; i < 50; i++) {
-                    let drop = document.createElement('div');
-                    drop.className = 'raindrop';
-                    drop.style.left = Math.random() * 100 + '%';
-                    drop.style.animationDuration = (0.5 + Math.random() * 0.5) + 's';
-                    drop.style.animationDelay = (Math.random() * 2) + 's';
-                    layer.appendChild(drop);
-                }
-            } else if (type === 'snow') {
-                screenText.innerHTML = "❄️ Serene Winter Snowfall & Pristine Frost";
-                video.style.filter = "brightness(0.95) contrast(1.1) hue-rotate(10deg)";
-                layer.style.background = "rgba(230, 240, 255, 0.2)";
-                // Generate snowflakes
-                for (let i = 0; i < 40; i++) {
-                    let flake = document.createElement('div');
-                    flake.className = 'snowflake';
-                    let size = (4 + Math.random() * 6) + 'px';
-                    flake.style.width = size;
-                    flake.style.height = size;
-                    flake.style.left = Math.random() * 100 + '%';
-                    flake.style.animationDuration = (3 + Math.random() * 3) + 's';
-                    flake.style.animationDelay = (Math.random() * 3) + 's';
-                    layer.appendChild(flake);
-                }
-            } else if (type === 'storm') {
-                screenText.innerHTML = "⚡ Dramatic Thunderstorm & Electric Skies";
-                video.style.filter = "brightness(0.6) contrast(1.3) grayscale(0.2)";
-                layer.style.background = "rgba(10, 15, 25, 0.5)";
-                // Add heavy rain
-                for (let i = 0; i < 70; i++) {
-                    let drop = document.createElement('div');
-                    drop.className = 'raindrop';
-                    drop.style.left = Math.random() * 100 + '%';
-                    drop.style.animationDuration = (0.3 + Math.random() * 0.3) + 's';
-                    layer.appendChild(drop);
-                }
-                // Trigger lightning loop
-                triggerLightning();
-            }
-        }
-
-        function triggerLightning() {
-            const flash = document.getElementById('lightningFlash');
-            function flashEffect() {
-                flash.style.animation = 'flashLightning 1s ease';
-                setTimeout(() => { flash.style.animation = ''; }, 1000);
-            }
-            flashEffect();
-            window.lightningInterval = setInterval(flashEffect, 8000);
-        }
-
-        function waterGardenStage(event) {
-            event.stopPropagation();
-            initializeGardenExperience();
-
-            let screen = document.getElementById('garden-screen');
-            screen.innerHTML = "🚿 <i>Pshhhhh...</i> Crystal-clear water cascades down your cinematic video forest canopy! 💧<br><br>🤍💜🌹✨ <b>The soil drinks deep, flowers bloom with extra radiance, and the sovereign sanctuary thrives in absolute peace!</b> ✨";
+        function cycleWeather() {
+            currentWeatherIndex = (currentWeatherIndex + 1) % weatherCycles.length;
+            const weather = weatherCycles[currentWeatherIndex];
+            document.getElementById('weather-text').innerText = weather.text;
             
-            const stage = document.getElementById('gardenStage');
-            for (let i = 0; i < 8; i++) {
-                let sparkle = document.createElement('div');
-                sparkle.className = 'magic-particle';
-                sparkle.style.left = (40 + Math.random() * 20) + '%';
-                sparkle.style.top = (40 + Math.random() * 20) + '%';
-                sparkle.style.animationDuration = '2s';
-                stage.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 2000);
-            }
+            const videoElem = document.getElementById('garden-video');
+            videoElem.style.opacity = '0.2';
+            setTimeout(() => {
+                videoElem.src = weather.video;
+                videoElem.load();
+                videoElem.play().catch(e => console.log("Autoplay handled:", e));
+                videoElem.style.opacity = '1';
+            }, 400);
         }
 
-        function submitFlowerRequest() {
-            let input = document.getElementById('flowerInput');
-            let val = input.value.trim();
-            if (!val) {
-                alert("Please type the name of a flower you would like to add.");
-                return;
-            }
-            let log = document.getElementById('flower-request-log');
-            log.innerHTML += `<br>✨ <b>Newly Planted:</b> ${val} (Permanently Added to Sovereign Sanctuary Archives)`;
-            input.value = "";
-            alert("🌷 Your flower has been successfully planted into the sanctuary garden!");
+        // Auto shift weather atmosphere every 45 seconds
+        setInterval(cycleWeather, 45000);
+
+        function triggerWateringEffect() {
+            const banner = document.getElementById('weather-status-banner');
+            banner.style.background = 'linear-gradient(135deg, #00f2fe, #03658c)';
+            document.getElementById('weather-text').innerText = "💧 The garden has been blessed with living water! Every leaf and blossom glows with renewed life.";
+            setTimeout(() => {
+                banner.style.background = 'linear-gradient(135deg, rgba(16, 45, 32, 0.95), rgba(8, 25, 18, 0.95))';
+            }, 4500);
         }
     </script>
 </body>
