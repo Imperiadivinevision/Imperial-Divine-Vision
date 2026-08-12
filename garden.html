@@ -315,7 +315,6 @@
             cursor: pointer;
             font-family: 'Cinzel', serif;
             font-size: 1rem;
-            font-weight: button;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -410,9 +409,9 @@
             </div>
             
             <div class="video-wrapper-fullscreen" id="garden-stage-box">
-                <!-- Seamless looping lush nature videos -->
+                <!-- Exact file locked in: forest-garden-cinematic.mp4 -->
                 <video id="garden-video" autoplay loop muted playsinline preload="auto">
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-5296-large.mp4" type="video/mp4">
+                    <source src="forest-garden-cinematic.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -460,13 +459,13 @@
     </div>
 
     <script>
-        // Dynamic Weather & Seamless Garden Video Cycling Engine
+        // Weather cycles correctly updating the exact forest-garden-cinematic.mp4 video file
         const weatherCycles = [
-            { text: "☀️ Radiant Sun & Warm Light illuminating the blooming roses.", video: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-5296-large.mp4" },
-            { text: "🍃 Gentle Breeze whispering through the sacred lilies and wisterias.", video: "https://assets.mixkit.co/videos/preview/mixkit-sunlight-through-the-trees-of-a-forest-4395-large.mp4" },
-            { text: "🌧️ Soft Rain nourishing the vibrant forest garden flora.", video: "https://assets.mixkit.co/videos/preview/mixkit-raindrops-falling-on-water-during-the-day-15857-large.mp4" },
-            { text: "❄️ Serene Snowfall resting softly upon the eternal sanctuary petals.", video: "https://assets.mixkit.co/videos/preview/mixkit-winter-forest-with-snow-falling-41846-large.mp4" },
-            { text: "⚡ Dramatic Storm sweeping across the flourishing green valleys.", video: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-wind-during-a-storm-43257-large.mp4" }
+            { text: "☀️ Radiant Sun & Warm Light illuminating the blooming roses.", video: "forest-garden-cinematic.mp4" },
+            { text: "🍃 Gentle Breeze whispering through the sacred lilies and wisterias.", video: "forest-garden-cinematic.mp4" },
+            { text: "🌧️ Soft Rain nourishing the vibrant forest garden flora.", video: "forest-garden-cinematic.mp4" },
+            { text: "❄️ Serene Snowfall resting softly upon the eternal sanctuary petals.", video: "forest-garden-cinematic.mp4" },
+            { text: "⚡ Dramatic Storm sweeping across the flourishing green valleys.", video: "forest-garden-cinematic.mp4" }
         ];
 
         let currentWeatherIndex = 0;
@@ -486,8 +485,8 @@
             }, 400);
         }
 
-        // Auto shift weather atmosphere every 45 seconds
-        setInterval(cycleWeather, 45000);
+        // Auto shift weather text and atmospheric state every 30 seconds
+        setInterval(cycleWeather, 30000);
 
         function triggerWateringEffect() {
             const banner = document.getElementById('weather-status-banner');
