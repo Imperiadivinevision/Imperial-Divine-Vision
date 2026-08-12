@@ -113,7 +113,7 @@
             z-index: 10;
         }
 
-        /* TOP NAVIGATION & FULLSCREEN CONTROLS */
+        /* TOP NAVIGATION & CONTROLS */
         .top-nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -153,7 +153,6 @@
             transform: translateY(-2px);
         }
 
-        /* FULLSCREEN TOGGLE BUTTON ON TOP */
         .fullscreen-top-btn {
             background: linear-gradient(135deg, #122030, #1f3a5f);
             border: 2px solid var(--gemini-cyan);
@@ -201,7 +200,7 @@
             line-height: 1.6;
         }
 
-        /* UPRIGHT GARDEN DISPLAY / VIDEO STAGE (TOP & LARGER) */
+        /* UPRIGHT GARDEN DISPLAY / VIDEO STAGE */
         .featured-video-section {
             background: rgba(4, 10, 8, 0.9);
             border: 2px solid var(--gold-deep);
@@ -230,7 +229,7 @@
 
         .video-wrapper-fullscreen {
             width: 100%;
-            height: 540px; /* Expansive, highly visible height */
+            height: 540px;
             max-height: 650px;
             border-radius: 12px;
             overflow: hidden;
@@ -297,7 +296,6 @@
             box-sizing: border-box;
         }
 
-        /* WATER THE GARDEN AT THE BOTTOM */
         .water-action-area {
             text-align: center;
             grid-column: 1 / -1;
@@ -317,6 +315,7 @@
             cursor: pointer;
             font-family: 'Cinzel', serif;
             font-size: 1rem;
+            font-weight: button;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -341,6 +340,13 @@
 </head>
 <body>
 
+    <!-- BACKGROUND AMBIENT MUSIC AUDIO ENGINE -->
+    <audio id="sanctuary-audio" loop preload="auto">
+        <source src="https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg" type="audio/ogg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=gentle-forest-110594.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
         for (let i = 0; i < 18; i++) {
             const p = document.createElement('div');
@@ -353,7 +359,7 @@
         }
 
         function toggleFullScreen() {
-            if (!document.documentElement.fullscreenElement) {
+            if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
                     alert(`Fullscreen mode error: ${err.message}`);
                 });
@@ -363,6 +369,15 @@
                 }
             }
         }
+
+        // Auto-unlock background music on first interaction
+        window.addEventListener('click', () => {
+            const audio = document.getElementById('sanctuary-audio');
+            if (audio && audio.paused) {
+                audio.volume = 0.4;
+                audio.play().catch(e => console.log("Audio play blocked:", e));
+            }
+        }, { once: true });
     </script>
 
     <nav>
@@ -379,7 +394,7 @@
                 <a href="room-adult.html" class="royal-btn">🏛️ Return to Sovereign Sanctuary</a>
                 <a href="index.html" class="royal-btn">🏠 Return to Home</a>
             </div>
-            <button class="fullscreen-top-btn" onclick="toggleFullScreen()">⛶ Expand Garden Screen (Fullscreen)</button>
+            <button class="fullscreen-top-btn" onclick="toggleFullScreen()">⛶ Expand / Exit Fullscreen</button>
         </div>
 
         <!-- TITLE OF THE FOREST GARDEN -->
@@ -395,8 +410,9 @@
             </div>
             
             <div class="video-wrapper-fullscreen" id="garden-stage-box">
+                <!-- Seamless looping lush nature videos -->
                 <video id="garden-video" autoplay loop muted playsinline preload="auto">
-                    <source src="the-birth-of-prince-ian.mp4" type="video/mp4">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-5296-large.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -444,13 +460,13 @@
     </div>
 
     <script>
-        // Dynamic Weather Cycling Engine for the Garden
+        // Dynamic Weather & Seamless Garden Video Cycling Engine
         const weatherCycles = [
-            { text: "☀️ Radiant Sun & Warm Light illuminating the blooming roses.", video: "the-birth-of-prince-ian.mp4" },
-            { text: "🍃 Gentle Breeze whispering through the sacred lilies and wisterias.", video: "prince-ian-beganing-2-cinematic.mp4" },
-            { text: "🌧️ Soft Rain nourishing the vibrant forest garden flora.", video: "the-birth-of-prince-ian-3-cinematic.mp4" },
-            { text: "❄️ Serene Snowfall resting softly upon the eternal sanctuary petals.", video: "the-birth-of-prince-ian-4-cinematic.mp4" },
-            { text: "⚡ Dramatic Storm sweeping across the flourishing green valleys.", video: "the-naming-ritual.mp4" }
+            { text: "☀️ Radiant Sun & Warm Light illuminating the blooming roses.", video: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-5296-large.mp4" },
+            { text: "🍃 Gentle Breeze whispering through the sacred lilies and wisterias.", video: "https://assets.mixkit.co/videos/preview/mixkit-sunlight-through-the-trees-of-a-forest-4395-large.mp4" },
+            { text: "🌧️ Soft Rain nourishing the vibrant forest garden flora.", video: "https://assets.mixkit.co/videos/preview/mixkit-raindrops-falling-on-water-during-the-day-15857-large.mp4" },
+            { text: "❄️ Serene Snowfall resting softly upon the eternal sanctuary petals.", video: "https://assets.mixkit.co/videos/preview/mixkit-winter-forest-with-snow-falling-41846-large.mp4" },
+            { text: "⚡ Dramatic Storm sweeping across the flourishing green valleys.", video: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-wind-during-a-storm-43257-large.mp4" }
         ];
 
         let currentWeatherIndex = 0;
