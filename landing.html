@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Divine Vision | Support Our Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Include QR Code Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax5/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            background-color: #0b0f0e;
+            color: #f5f2eb;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: rgba(17, 23, 21, 0.95);
+            border: 2px solid #c5b59b;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(197, 181, 155, 0.2);
+        }
+        h1 { color: #c5b59b; font-size: 1.5rem; margin-bottom: 10px; }
+        p { font-family: 'Playfair Display', serif; font-size: 0.95rem; line-height: 1.6; color: #d4c5ab; }
+        .btn {
+            display: block;
+            background: linear-gradient(to bottom, #c5b59b, #aa820a);
+            color: #0b0f0e;
+            padding: 12px;
+            margin: 12px 0;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .btn:hover { background: #fff; box-shadow: 0 0 15px #c5b59b; }
+        .signature { margin-top: 20px; font-style: italic; color: #c5b59b; }
+        
+        /* QR Code Box Styling */
+        #qrcode-box {
+            background: #fff;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 6px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        #qrcode-box img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Imperial Divine Vision</h1>
+        <p>Thank you so much for supporting our vision! If you would like to donate to support our journey, please feel free to contribute supplies, funds, or anything that can help bring this epic story to life. Thank you from the bottom of our hearts for believing in us.</p>
+        
+        <div class="signature">
+            With all my love and gratitude,<br>
+            <strong>— By Tegra Kij</strong>
+        </div>
+
+        <!-- This section will automatically generate the scannable QR Code -->
+        <div style="margin-top: 20px;">
+            <p style="font-size: 0.85rem; color: #c5b59b; margin-bottom: 8px;">Scan to open Support & Vision Hub:</p>
+            <div id="qrcode-box"></div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #c5b59b; margin: 25px 0;">
+
+        <a href="https://www.google.com/search?q=Imperial+Divine+Vision" class="btn" target="_blank">🔍 Find Imperial Divine Vision on Google</a>
+        <a href="https://cash.app/$tegrakij22" class="btn">💚 Support via Cash App ($tegrakij22)</a>
+        <a href="https://www.youtube.com/@ImperialDivineVision" class="btn">🎬 Watch on YouTube</a>
+        <a href="https://www.tiktok.com/@imperial.divine.v" class="btn">🎵 Follow on TikTok</a>
+        <a href="https://www.instagram.com/imperialdivinevision_official" class="btn">📸 Follow on Instagram</a>
+        
+        <br>
+        <a href="index.html" style="color: #c5b59b; text-decoration: none; font-size: 0.85rem;">← Return to Sanctuary Home</a>
+    </div>
+
+    <script>
+        // Automatically generate the QR code pointing to this page or your GitHub URL
+        window.onload = function() {
+            // Uses the current page URL or you can replace it with your GitHub Pages link string
+            let targetUrl = window.location.href; 
+            
+            new QRCode(document.getElementById("qrcode-box"), {
+                text: targetUrl,
+                width: 150,
+                height: 150,
+                colorDark : "#0b0f0e",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        };
+    </script>
+</body>
+</html>
