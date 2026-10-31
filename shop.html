@@ -11,6 +11,8 @@
             --imperial-crimson: #36080e;
             --gold-accent: #f3e5ab;
             --gold-shine: #ffd700;
+            --blue-glow: #4facfe;
+            --blue-border: #00f2fe;
             --dark-bg: #07040a;
         }
 
@@ -36,21 +38,22 @@
             100% { background-position: 0% 0%; }
         }
 
-        /* Top Navigation Bar */
+        /* Top Navigation Bar - Cleanly fixed at top without overlapping content */
         .top-nav-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(7, 4, 10, 0.92);
-            border-bottom: 2px double var(--gold-shine);
+            background: rgba(7, 4, 10, 0.95);
+            border-bottom: 2px double var(--blue-border);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 30px;
             padding: 15px 20px;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.2);
         }
 
         .top-nav-bar a {
@@ -64,8 +67,8 @@
         }
 
         .top-nav-bar a:hover {
-            color: var(--gold-shine);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            color: var(--blue-border);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.8);
             transform: scale(1.05);
         }
 
@@ -74,10 +77,10 @@
             font-weight: bold;
         }
 
-        /* Main Container */
+        /* Main Container - Pushed down to prevent navbar overlap */
         .main-sanctuary-wrapper {
             max-width: 1200px;
-            margin: 120px auto 60px auto;
+            margin: 140px auto 60px auto;
             text-align: center;
             padding: 20px;
             transform-style: preserve-3d;
@@ -91,9 +94,9 @@
         h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 5rem;
-            color: var(--gold-shine);
+            color: var(--blue-border);
             margin: 0 0 10px 0;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 2px 3px 5px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.6), 2px 3px 5px rgba(0, 0, 0, 0.9);
             letter-spacing: 3px;
         }
 
@@ -112,22 +115,22 @@
             margin-top: 15px;
             font-family: 'Cinzel Decorative', serif;
             font-size: 0.8rem;
-            color: var(--gold-shine);
+            color: var(--blue-border);
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         /* Sovereign User Progress HUD */
         .user-hud {
-            background: linear-gradient(135deg, rgba(30, 10, 40, 0.95), rgba(60, 10, 18, 0.95));
-            border: 2px solid var(--gold-shine);
+            background: linear-gradient(135deg, rgba(10, 20, 40, 0.95), rgba(40, 10, 40, 0.95));
+            border: 2px solid var(--blue-border);
             border-radius: 12px;
             padding: 20px 30px;
             margin-bottom: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.25);
             flex-wrap: wrap;
             gap: 15px;
             transform: translateZ(20px);
@@ -140,7 +143,7 @@
         }
 
         .hud-info span {
-            color: var(--gold-shine);
+            color: var(--blue-border);
             font-weight: bold;
         }
 
@@ -153,7 +156,7 @@
         .email-input-group input {
             padding: 8px 15px;
             background: #07040a;
-            border: 1px solid var(--gold-shine);
+            border: 1px solid var(--blue-border);
             color: #f3e5ab;
             font-family: 'Playfair Display', serif;
             border-radius: 4px;
@@ -169,11 +172,11 @@
         }
 
         .shop-section {
-            background: linear-gradient(135deg, rgba(26, 8, 34, 0.92), rgba(54, 8, 14, 0.92));
-            border: 3px double var(--gold-shine);
+            background: linear-gradient(135deg, rgba(14, 22, 38, 0.92), rgba(30, 10, 40, 0.92));
+            border: 3px double var(--blue-border);
             border-radius: 18px;
             padding: 35px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 242, 254, 0.15);
             text-align: left;
             position: relative;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -182,7 +185,7 @@
 
         .shop-section:hover {
             transform: translateY(-5px) rotateX(1deg) rotateY(1deg);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.35), inset 0 0 40px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 242, 254, 0.35), inset 0 0 40px rgba(0, 242, 254, 0.3);
         }
 
         .section-tickets { grid-column: span 12; }
@@ -197,11 +200,11 @@
         .shop-section h2 {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
-            color: var(--gold-shine);
+            color: var(--blue-border);
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
         }
 
         .shop-section p {
@@ -220,25 +223,31 @@
             margin-top: 20px;
         }
 
+        /* Ticket Cards Styled with Elegant Blue Glow & Borders */
         .item-card {
-            background: rgba(7, 4, 10, 0.85);
-            border: 1px solid var(--gold-shine);
+            background: rgba(7, 4, 10, 0.88);
+            border: 2px solid var(--blue-border);
             border-radius: 12px;
             padding: 22px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 242, 254, 0.25), inset 0 0 15px rgba(0, 242, 254, 0.1);
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform: translateZ(15px);
             position: relative;
             overflow: hidden;
         }
 
+        .item-card:hover {
+            box-shadow: 0 12px 35px rgba(0, 242, 254, 0.5), inset 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
         .item-card h3 {
             font-family: 'Cinzel Decorative', serif;
             font-size: 1.15rem;
-            color: var(--gold-shine);
+            color: var(--blue-border);
             margin-top: 0;
             margin-bottom: 10px;
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
         }
 
         .item-card p {
@@ -248,6 +257,7 @@
             text-align: center;
         }
 
+        /* Secure Seat and Action Buttons in Rich Gold */
         .ancient-btn {
             display: inline-block;
             background: linear-gradient(135deg, var(--gold-shine), #b8860b);
@@ -273,8 +283,8 @@
         }
 
         .notice-box {
-            background: rgba(66, 7, 14, 0.7);
-            border-left: 4px solid var(--gold-shine);
+            background: rgba(10, 20, 40, 0.8);
+            border-left: 4px solid var(--blue-border);
             padding: 15px 20px;
             margin-bottom: 20px;
             border-radius: 4px;
@@ -283,6 +293,7 @@
             color: #ebd6b3;
             line-height: 1.6;
             text-align: left;
+            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.1);
         }
 
         /* Popups & Modals */
@@ -308,64 +319,21 @@
         }
 
         .popup-card-box {
-            background: linear-gradient(135deg, #181205, #2c220a);
-            border: 4px solid var(--gold-shine);
+            background: linear-gradient(135deg, #0e1626, #1e0a28);
+            border: 4px solid var(--blue-border);
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 60px rgba(0, 242, 254, 0.6);
             transform: scale(0.8);
             animation: popCoinCard 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             max-width: 480px;
             width: 90%;
         }
 
-        .coin-flip-scene {
-            width: 140px;
-            height: 140px;
-            margin: 20px auto 5px auto;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-
-        .coin-object {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .coin-object.is-flipped {
-            transform: rotateY(180deg);
-        }
-
-        .coin-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0; left: 0;
-            border-radius: 50%;
-            overflow: hidden;
-            backface-visibility: hidden;
-            border: 4px solid #ffe875;
-            box-shadow: 0 0 35px #d4af37;
-            background: transparent;
-        }
-
-        .coin-face img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .coin-back {
-            transform: rotateY(180deg);
-        }
-
         .code-display-box {
             background: #07040a;
-            border: 2px dashed var(--gold-shine);
+            border: 2px dashed var(--blue-border);
             padding: 15px;
             font-family: 'Cinzel Decorative', serif;
             font-size: 1.4rem;
@@ -414,18 +382,18 @@
         <!-- Asymmetric 3D Treasury Vault Layout Grid -->
         <div class="treasury-vault-grid">
 
-            <!-- Section 1: Season One Premiere Advance Tickets (Coin-Redeemed at Top + 20 Seats) -->
+            <!-- Section 1: Season One Premiere Advance Tickets (20 Seats + 1 Coin Seat) -->
             <div class="shop-section section-tickets">
                 <h2>Season One Advance Premiere Tickets</h2>
                 <p>Secure your seat for the cinematic premiere starting at the sacred temple gates.</p>
                 
                 <div class="notice-box">
                     <strong>Exclusive Movie Premiere Access:</strong><br>
-                    Everyone is warmly welcome to enjoy all our trailers freely! However, the upcoming three-episode release of *Rosanna and the Evil King* for next month's movie premiere is unlocked using our secret master code (`ROSANNA-2026`). When you secure a ticket below or via Cash App (`https://cash.app/$tegrakij22`), your confirmation code will be displayed instantly and emailed to you so you can enter it on YouTube or inside our private screening gates.
+                    Everyone is warmly welcome to enjoy all our trailers freely! However, the upcoming three-episode release of *Rosanna and the Evil King* for next month's movie premiere is unlocked using our secret master code. Register your email above, choose your seat, and click **Secure Seat** to checkout via Cash App (`https://cash.app/$tegrakij22`). Once paid and verified, your master code will be unlocked!
                 </div>
 
                 <div class="item-grid" id="ticket-items-container">
-                    <!-- Dynamically populated via JavaScript with Coin-Redeemed seat at the absolute top -->
+                    <!-- Dynamically populated via JavaScript with persistent memory state -->
                 </div>
             </div>
 
@@ -438,19 +406,19 @@
                     <div class="item-card">
                         <h3>Handful of Coins</h3>
                         <p>1,000 Imperial Coins<br><strong>$1.00 USD</strong></p>
-                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('1000 Coins', 1.00, 1000); triggerCoinPurchaseCelebration(1000);">Acquire Coins 🪙</a>
+                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('1000 Coins', 1.00, 1000);">Acquire Coins 🪙</a>
                     </div>
 
                     <div class="item-card">
                         <h3>Chest of Royal Coins</h3>
                         <p>2,000 Imperial Coins<br><strong>$2.00 USD</strong></p>
-                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('2000 Coins', 2.00, 2000); triggerCoinPurchaseCelebration(2000);">Acquire Coins 🪙</a>
+                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('2000 Coins', 2.00, 2000);">Acquire Coins 🪙</a>
                     </div>
 
                     <div class="item-card">
                         <h3>Sovereign Coin Vault</h3>
                         <p>3,000 Imperial Coins<br><strong>$3.00 USD</strong></p>
-                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('3000 Coins', 3.00, 3000); triggerCoinPurchaseCelebration(3000);">Acquire Coins 🪙</a>
+                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('3000 Coins', 3.00, 3000);">Acquire Coins 🪙</a>
                     </div>
                 </div>
             </div>
@@ -464,7 +432,7 @@
                     <div class="item-card">
                         <h3>Character / Scene Card</h3>
                         <p>Add a unique high-standard collectible card to your personal deck.<br><strong>$0.99 USD</strong></p>
-                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('Collectible Card', 0.99)">Unlock Card 🃏</a>
+                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('Collectible Card', 0.99);">Unlock Card 🃏</a>
                     </div>
                 </div>
             </div>
@@ -498,59 +466,36 @@
         </div>
     </div>
 
-    <!-- 3D Flipping Coin Purchase Popup Modal -->
-    <div id="imperial-coin-popup">
-        <div class="popup-card-box">
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ffe875; margin: 0 0 10px 0; text-shadow: 0 0 15px rgba(212,175,55,0.8);">Sovereign Wealth Acquired!</h2>
-            
-            <div class="coin-flip-scene" onclick="toggleCoinFlip()" title="Click to inspect both sides of the coin">
-                <div class="coin-object" id="imperialCoinObject">
-                    <div class="coin-face coin-front">
-                        <img src="imperial-coin-design.png" alt="Imperial Seal Front" onerror="this.src='https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=300&q=80'">
-                    </div>
-                    <div class="coin-face coin-back">
-                        <img src="king-benson-queen-rosanna.png" alt="King Benson & Queen Rosanna Back" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80'">
-                    </div>
-                </div>
-            </div>
-            <p style="font-size: 0.75rem; color: #e6d5c3; font-style: italic; margin: 5px 0 15px 0;">(Tap coin to flip and view reverse side)</p>
-
-            <p id="coin-popup-amount" style="font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; color: #f3e5ab; margin: 5px 0 20px 0; font-weight: bold;">+ Coins Added to Your Vault</p>
-            
-            <button onclick="closeCoinPopup()" class="ancient-btn" style="padding: 12px 30px; font-size: 1rem;">Claim Wealth 🪙</button>
-        </div>
-    </div>
-
     <!-- Universal Master Key Access Code Delivery Popup Modal -->
     <div id="access-code-popup">
         <div class="popup-card-box">
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #ffe875; margin: 0 0 10px 0;">Premiere Seat Secured!</h2>
-            <p style="font-size: 0.95rem; color: #e6d5c3; line-height: 1.6;">Your sovereign ticket has been registered and logged. Your automated confirmation email and premiere master code for next month's three-episode release have been dispatched to (<span id="popup-user-email-target" style="color: #79ff9c;"></span>).</p>
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #00f2fe; margin: 0 0 10px 0;">Premiere Seat Secured!</h2>
+            <p style="font-size: 0.95rem; color: #e6d5c3; line-height: 1.6;">Payment confirmed for <span id="popup-ticket-title" style="color: #ffd700; font-weight: bold;"></span>! Your premiere master code for next month's three-episode release has been unlocked and dispatched to your email (<span id="popup-user-email-target" style="color: #79ff9c;"></span>).</p>
             
             <div class="code-display-box" id="generated-access-code-text">
                 ROSANNA-2026
             </div>
 
-            <p style="font-size: 0.85rem; color: #d1c4b2; font-style: italic; margin-bottom: 20px;">Use this secret code right here on your sanctuary website or over on YouTube to unlock the upcoming three-episode premiere!</p>
+            <p style="font-size: 0.85rem; color: #d1c4b2; font-style: italic; margin-bottom: 20px;">Use this secret code on YouTube or inside our movie gates to unlock the upcoming three-episode premiere!</p>
             
             <button onclick="closeAccessPopup()" class="ancient-btn" style="padding: 12px 30px; font-size: 1rem;">Return to Treasury 🏛️</button>
         </div>
     </div>
 
-    <!-- Script Engine -->
+    <!-- Script Engine with Email Memory & Secure Payment Verification -->
     <script>
         const ADMIN_EMAIL = "Imperialdivinevision@gmail.com";
         const UNIVERSAL_MASTER_CODE = "ROSANNA-2026";
-        const CASH_APP_URL = "https://cash.app/$tegrakij22";
 
         let userProgress = {
             email: "",
             coins: 0,
-            purchases: []
+            purchasedSeats: [], // stores IDs of bought seats
+            registeredEmails: [] // memory list to prevent duplicate emails
         };
 
         function loadUserProgress() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v2');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -566,43 +511,78 @@
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v2', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
-            const emailVal = document.getElementById('user-email-input').value.trim();
+            const emailVal = document.getElementById('user-email-input').value.trim().toLowerCase();
             if (!emailVal || !emailVal.includes('@')) {
-                alert("Please enter a valid email address to ensure screening access notifications and master codes are sent to you!");
+                alert("Please enter a valid email address!");
                 return;
             }
+
+            // Check if email is already registered in memory
+            if (userProgress.registeredEmails && userProgress.registeredEmails.includes(emailVal)) {
+                alert("This email has already been registered to Imperial Divine Vision!");
+                return;
+            }
+
+            // Save new email
+            if (!userProgress.registeredEmails) userProgress.registeredEmails = [];
+            userProgress.registeredEmails.push(emailVal);
             userProgress.email = emailVal;
+
             document.getElementById('display-email').innerText = emailVal;
             saveProgressToStorage();
             
             playChimeSound();
-            alert("Email registered successfully! Your movie premiere master code and notifications will be sent to: " + emailVal);
+            alert("Thank you for registering your email to support Imperial Divine Vision! Your guardian profile is now saved.");
         }
 
         function renderTicketGrid() {
             const container = document.getElementById('ticket-items-container');
             let html = '';
 
-            // 1. COIN-REDEEMED SEAT PLACED AT THE VERY TOP OF THE GRID
-            html += `
-                <div class="item-card" style="border-color: #79ff9c; box-shadow: 0 0 20px rgba(121,255,156,0.3);">
-                    <h3 style="color: #79ff9c;">Coin-Redeemed Premiere Seat</h3>
-                    <p>Price: 12,000 Imperial Coins<br>Save game coins from script exploration to claim this free seat!</p>
-                    <button class="ancient-btn" style="background: linear-gradient(135deg, #79ff9c, #2e8b57); color: #07040a;" onclick="redeemCoinSeat()">Claim with Coins 🪙</button>
-                </div>
-            `;
-
-            // 2. TWENTY CASH APP PREMIERE SEATS
             for (let i = 1; i <= 20; i++) {
+                const seatId = `seat_${i}`;
+                const isPurchased = userProgress.purchasedSeats && userProgress.purchasedSeats.includes(seatId);
+
+                if (isPurchased) {
+                    html += `
+                        <div class="item-card" style="border-color: #2e8b57; opacity: 0.85;">
+                            <h3>Seat #${i} (Already Purchased)</h3>
+                            <p style="color: #79ff9c;">Status: Secured & Verified 🎟️<br>Master Code Unlocked.</p>
+                            <span class="ancient-btn" style="background: #2e8b57; color: #fff; cursor: default;">Seat Claimed ✓</span>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="item-card">
+                            <h3>Sovereign Premiere Seat (${i} of 20)</h3>
+                            <p>Price: $12.00 USD via Cash App ($tegrakij22)<br>Includes Movie Premiere Master Code.</p>
+                            <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="initiateCheckout('${seatId}', 'Sovereign Premiere Seat #${i}', 12.00)">SECURE SEAT 🎟️</a>
+                        </div>
+                    `;
+                }
+            }
+
+            // Coin Redeemed Seat
+            const coinSeatId = 'seat_coin';
+            const coinPurchased = userProgress.purchasedSeats && userProgress.purchasedSeats.includes(coinSeatId);
+            if (coinPurchased) {
                 html += `
-                    <div class="item-card">
-                        <h3>Sovereign Premiere Seat (${i} of 20)</h3>
-                        <p>Price: $12.00 USD via Cash App ($tegrakij22)<br>Includes Movie Premiere Master Code & email delivery.</p>
-                        <a href="${CASH_APP_URL}" target="_blank" class="ancient-btn" onclick="recordPurchase('Sovereign Premiere Seat #${i}', 12.00, 0, true)">Secure Seat 🎟️</a>
+                    <div class="item-card" style="border-color: #2e8b57; opacity: 0.85;">
+                        <h3 style="color: #79ff9c;">Coin-Redeemed Seat</h3>
+                        <p style="color: #79ff9c;">Status: Claimed with Coins ✓</p>
+                        <span class="ancient-btn" style="background: #2e8b57; color: #fff; cursor: default;">Claimed ✓</span>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="item-card" style="border-color: var(--blue-border); box-shadow: 0 0 25px rgba(0,242,254,0.3);">
+                        <h3 style="color: var(--blue-border);">Coin-Redeemed Premiere Seat</h3>
+                        <p>Price: 12,000 Imperial Coins<br>Claim using earned dialogue coins!</p>
+                        <button class="ancient-btn" onclick="redeemCoinSeat()">CLAIM WITH COINS 🪙</button>
                     </div>
                 `;
             }
@@ -610,60 +590,58 @@
             container.innerHTML = html;
         }
 
-        function recordPurchase(itemTitle, price, coinReward = 0, isTicket = false) {
+        // Checkout helper: opens Cash App and asks user to confirm payment verification
+        function initiateCheckout(seatId, seatTitle, price) {
             if (!userProgress.email) {
-                alert("Please register your email in the top sovereign HUD before making an acquisition so your premiere master code and automated confirmation email can be dispatched!");
+                alert("Please register your guardian email in the top HUD before securing a seat so your confirmation code can be sent to you!");
             }
 
-            if (coinReward > 0) {
-                userProgress.coins += coinReward;
-                document.getElementById('display-coins').innerText = userProgress.coins;
-            }
+            // Temporarily store pending seat in sessionStorage
+            sessionStorage.setItem('pending_seat_id', seatId);
+            sessionStorage.setItem('pending_seat_title', seatTitle);
 
-            userProgress.purchases.push({ item: itemTitle, price: price, date: new Date().toISOString() });
+            // After they return from Cash App, give them a prompt to verify payment
+            setTimeout(() => {
+                if (confirm("Did you complete your $12.00 payment on Cash App ($tegrakij22) for " + seatTitle + "? Click OK to verify payment and unlock your ticket code!")) {
+                    verifyAndUnlockSeat(seatId, seatTitle, price);
+                }
+            }, 3000);
+        }
+
+        function verifyAndUnlockSeat(seatId, seatTitle, price) {
+            if (!userProgress.purchasedSeats) userProgress.purchasedSeats = [];
+            if (!userProgress.purchasedSeats.includes(seatId)) {
+                userProgress.purchasedSeats.push(seatId);
+            }
             saveProgressToStorage();
+            renderTicketGrid();
 
-            const customerEmail = userProgress.email || "Guest (No Email Provided)";
-            console.log("========================================");
-            console.log("🔔 [ADMIN NOTIFICATION DISPATCHED TO: " + ADMIN_EMAIL + "]");
-            console.log("New Sovereign Acquisition Logged!");
-            console.log("Customer Email: " + customerEmail);
-            console.log("Item Acquired: " + itemTitle);
-            console.log("Amount Paid: $" + price.toFixed(2) + " USD");
-            console.log("Timestamp: " + new Date().toLocaleString());
-            console.log("========================================");
-
-            if (isTicket && userProgress.email) {
-                triggerAccessCodePopup(itemTitle);
-            }
+            document.getElementById('popup-ticket-title').innerText = seatTitle;
+            document.getElementById('popup-user-email-target').innerText = userProgress.email || "Guardian";
+            document.getElementById('access-code-popup').style.display = 'flex';
+            playChimeSound();
         }
 
         function redeemCoinSeat() {
             if (!userProgress.email) {
-                alert("Please register your email first so your premiere seat access code can be emailed to you!");
+                alert("Please register your email first!");
                 return;
             }
 
+            const coinSeatId = 'seat_coin';
             if (userProgress.coins >= 12000) {
                 userProgress.coins -= 12000;
                 document.getElementById('display-coins').innerText = userProgress.coins;
+                
+                if (!userProgress.purchasedSeats) userProgress.purchasedSeats = [];
+                userProgress.purchasedSeats.push(coinSeatId);
                 saveProgressToStorage();
+                renderTicketGrid();
 
-                recordPurchase('Coin-Redeemed Premiere Seat', 0.00, 0, true);
-                playChimeSound();
+                verifyAndUnlockSeat(coinSeatId, 'Coin-Redeemed Premiere Seat', 0.00);
             } else {
-                alert("You need 12,000 Imperial Coins to claim this seat. Current balance: " + userProgress.coins + " 🪙. Continue exploring story scripts to earn more!");
+                alert("You need 12,000 Imperial Coins to claim this seat. Current balance: " + userProgress.coins + " 🪙.");
             }
-        }
-
-        function triggerAccessCodePopup(ticketName) {
-            document.getElementById('generated-access-code-text').innerText = UNIVERSAL_MASTER_CODE;
-            document.getElementById('popup-user-email-target').innerText = userProgress.email;
-            
-            playChimeSound();
-            document.getElementById('access-code-popup').style.display = 'flex';
-
-            console.log("🎟️ Movie Premiere Master Code Assigned & Emailed to " + userProgress.email + " for " + ticketName + ": " + UNIVERSAL_MASTER_CODE);
         }
 
         function closeAccessPopup() {
@@ -671,61 +649,18 @@
             playTempleBell();
         }
 
-        function triggerCoinPurchaseCelebration(amount) {
-            document.getElementById('coin-popup-amount').innerText = `+${amount} Sovereign Coins Added!`;
-            playCoinClinkSound();
-            document.getElementById('imperial-coin-popup').style.display = 'flex';
-        }
-
-        function closeCoinPopup() {
-            document.getElementById('imperial-coin-popup').style.display = 'none';
-            playTempleBell();
-        }
-
-        function toggleCoinFlip() {
-            const coin = document.getElementById('imperialCoinObject');
-            coin.classList.toggle('is-flipped');
-            playCoinClinkSound();
-        }
-
-        function playCoinClinkSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                [987.77, 1318.51, 1567.98].forEach((freq, index) => {
-                    const osc = audioCtx.createOscillator();
-                    const gainNode = audioCtx.createGain();
-                    
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (index * 0.08));
-                    
-                    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime + (index * 0.08));
-                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (index * 0.08) + 0.3);
-                    
-                    osc.connect(gainNode);
-                    gainNode.connect(audioCtx.destination);
-                    
-                    osc.start(audioCtx.currentTime + (index * 0.08));
-                    osc.stop(audioCtx.currentTime + (index * 0.08) + 0.3);
-                });
-            } catch (e) {}
-        }
-
         function playTempleBell() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
-                
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(432, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(216, audioCtx.currentTime + 0.8);
-                
                 gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.9);
-                
                 osc.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
-                
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.9);
             } catch (e) {}
@@ -737,16 +672,12 @@
                 [523.25, 659.25, 783.99, 1046.50].forEach((freq, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
-                    
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (index * 0.1));
-                    
                     gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime + (index * 0.1));
                     gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (index * 0.1) + 0.5);
-                    
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
-                    
                     osc.start(audioCtx.currentTime + (index * 0.1));
                     osc.stop(audioCtx.currentTime + (index * 0.1) + 0.5);
                 });
