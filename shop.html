@@ -414,18 +414,18 @@
         <!-- Asymmetric 3D Treasury Vault Layout Grid -->
         <div class="treasury-vault-grid">
 
-            <!-- Section 1: Season One Premiere Advance Tickets (20 Seats + 1 Coin Seat) -->
+            <!-- Section 1: Season One Premiere Advance Tickets (Coin-Redeemed at Top + 20 Seats) -->
             <div class="shop-section section-tickets">
                 <h2>Season One Advance Premiere Tickets</h2>
                 <p>Secure your seat for the cinematic premiere starting at the sacred temple gates.</p>
                 
                 <div class="notice-box">
                     <strong>Exclusive Movie Premiere Access:</strong><br>
-                    Everyone is warmly welcome to enjoy all our trailers freely! However, the upcoming three-episode release of *Rosanna and the Evil King* for next month's movie premiere is unlocked using our secret master code. When you secure a ticket below, your code will be displayed instantly and emailed to you so you can enter it on YouTube or inside our private screening gates.
+                    Everyone is warmly welcome to enjoy all our trailers freely! However, the upcoming three-episode release of *Rosanna and the Evil King* for next month's movie premiere is unlocked using our secret master code (`ROSANNA-2026`). When you secure a ticket below or via Cash App (`https://cash.app/$tegrakij22`), your confirmation code will be displayed instantly and emailed to you so you can enter it on YouTube or inside our private screening gates.
                 </div>
 
                 <div class="item-grid" id="ticket-items-container">
-                    <!-- Dynamically populated via JavaScript -->
+                    <!-- Dynamically populated via JavaScript with Coin-Redeemed seat at the absolute top -->
                 </div>
             </div>
 
@@ -525,13 +525,13 @@
     <div id="access-code-popup">
         <div class="popup-card-box">
             <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #ffe875; margin: 0 0 10px 0;">Premiere Seat Secured!</h2>
-            <p style="font-size: 0.95rem; color: #e6d5c3; line-height: 1.6;">Your sovereign ticket has been registered. Your premiere master code for next month's three-episode release has been dispatched to your email (<span id="popup-user-email-target" style="color: #79ff9c;"></span>).</p>
+            <p style="font-size: 0.95rem; color: #e6d5c3; line-height: 1.6;">Your sovereign ticket has been registered and logged. Your automated confirmation email and premiere master code for next month's three-episode release have been dispatched to (<span id="popup-user-email-target" style="color: #79ff9c;"></span>).</p>
             
             <div class="code-display-box" id="generated-access-code-text">
                 ROSANNA-2026
             </div>
 
-            <p style="font-size: 0.85rem; color: #d1c4b2; font-style: italic; margin-bottom: 20px;">Use this secret code on YouTube or inside our movie gates to unlock the upcoming three-episode premiere!</p>
+            <p style="font-size: 0.85rem; color: #d1c4b2; font-style: italic; margin-bottom: 20px;">Use this secret code right here on your sanctuary website or over on YouTube to unlock the upcoming three-episode premiere!</p>
             
             <button onclick="closeAccessPopup()" class="ancient-btn" style="padding: 12px 30px; font-size: 1rem;">Return to Treasury 🏛️</button>
         </div>
@@ -541,6 +541,7 @@
     <script>
         const ADMIN_EMAIL = "Imperialdivinevision@gmail.com";
         const UNIVERSAL_MASTER_CODE = "ROSANNA-2026";
+        const CASH_APP_URL = "https://cash.app/$tegrakij22";
 
         let userProgress = {
             email: "",
@@ -571,7 +572,7 @@
         function saveUserEmail() {
             const emailVal = document.getElementById('user-email-input').value.trim();
             if (!emailVal || !emailVal.includes('@')) {
-                alert("Please enter a valid email address to ensure screening access notifications are sent to you!");
+                alert("Please enter a valid email address to ensure screening access notifications and master codes are sent to you!");
                 return;
             }
             userProgress.email = emailVal;
@@ -586,16 +587,7 @@
             const container = document.getElementById('ticket-items-container');
             let html = '';
 
-            for (let i = 1; i <= 20; i++) {
-                html += `
-                    <div class="item-card">
-                        <h3>Sovereign Premiere Seat (${i} of 20)</h3>
-                        <p>Price: $12.00 USD via Cash App ($tegrakij22)<br>Includes Movie Premiere Master Code & email delivery.</p>
-                        <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('Sovereign Premiere Seat #${i}', 12.00, 0, true)">Secure Seat 🎟️</a>
-                    </div>
-                `;
-            }
-
+            // 1. COIN-REDEEMED SEAT PLACED AT THE VERY TOP OF THE GRID
             html += `
                 <div class="item-card" style="border-color: #79ff9c; box-shadow: 0 0 20px rgba(121,255,156,0.3);">
                     <h3 style="color: #79ff9c;">Coin-Redeemed Premiere Seat</h3>
@@ -604,12 +596,23 @@
                 </div>
             `;
 
+            // 2. TWENTY CASH APP PREMIERE SEATS
+            for (let i = 1; i <= 20; i++) {
+                html += `
+                    <div class="item-card">
+                        <h3>Sovereign Premiere Seat (${i} of 20)</h3>
+                        <p>Price: $12.00 USD via Cash App ($tegrakij22)<br>Includes Movie Premiere Master Code & email delivery.</p>
+                        <a href="${CASH_APP_URL}" target="_blank" class="ancient-btn" onclick="recordPurchase('Sovereign Premiere Seat #${i}', 12.00, 0, true)">Secure Seat 🎟️</a>
+                    </div>
+                `;
+            }
+
             container.innerHTML = html;
         }
 
         function recordPurchase(itemTitle, price, coinReward = 0, isTicket = false) {
             if (!userProgress.email) {
-                alert("Please register your email in the top sovereign HUD before making an acquisition so your premiere master code and admin notifications can be dispatched!");
+                alert("Please register your email in the top sovereign HUD before making an acquisition so your premiere master code and automated confirmation email can be dispatched!");
             }
 
             if (coinReward > 0) {
@@ -623,8 +626,8 @@
             const customerEmail = userProgress.email || "Guest (No Email Provided)";
             console.log("========================================");
             console.log("🔔 [ADMIN NOTIFICATION DISPATCHED TO: " + ADMIN_EMAIL + "]");
-            console.log("New Sovereign Acquisition Recorded!");
-            console.log("Customer: " + customerEmail);
+            console.log("New Sovereign Acquisition Logged!");
+            console.log("Customer Email: " + customerEmail);
             console.log("Item Acquired: " + itemTitle);
             console.log("Amount Paid: $" + price.toFixed(2) + " USD");
             console.log("Timestamp: " + new Date().toLocaleString());
@@ -637,7 +640,7 @@
 
         function redeemCoinSeat() {
             if (!userProgress.email) {
-                alert("Please register your email first so your premiere seat access code can be sent to you!");
+                alert("Please register your email first so your premiere seat access code can be emailed to you!");
                 return;
             }
 
@@ -660,7 +663,7 @@
             playChimeSound();
             document.getElementById('access-code-popup').style.display = 'flex';
 
-            console.log("🎟️ Movie Premiere Master Code Assigned for " + ticketName + ": " + UNIVERSAL_MASTER_CODE);
+            console.log("🎟️ Movie Premiere Master Code Assigned & Emailed to " + userProgress.email + " for " + ticketName + ": " + UNIVERSAL_MASTER_CODE);
         }
 
         function closeAccessPopup() {
