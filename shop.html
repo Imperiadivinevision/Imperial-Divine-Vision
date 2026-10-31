@@ -24,6 +24,7 @@
             font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
+            padding-top: 95px; /* Clean clearance so navbar never covers title */
             overflow-x: hidden;
             background: linear-gradient(135deg, #07040a, #150822, #0d1b2a, #07040a);
             background-size: 400% 400%;
@@ -38,29 +39,37 @@
             100% { background-position: 0% 0%; }
         }
 
-        /* Top Navigation Bar - Firmly anchored and non-overlapping */
+        /* Top Navigation Bar - Fixed at top with top-right music button */
         .top-nav-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(7, 4, 10, 0.98);
+            height: 75px;
+            background: rgba(7, 4, 10, 0.99);
             border-bottom: 2px double var(--blue-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            z-index: 99999;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 242, 254, 0.3);
+        }
+
+        .nav-links {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            padding: 16px 20px;
-            z-index: 9999;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 30px rgba(0, 242, 254, 0.3);
+            gap: 25px;
+            margin: 0 auto;
         }
 
         .top-nav-bar a {
             font-family: 'Cinzel Decorative', serif;
             color: var(--gold-accent);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             transition: 0.3s;
             text-transform: uppercase;
@@ -77,10 +86,36 @@
             font-weight: bold;
         }
 
-        /* Main Sanctuary Wrapper - Generous top margin so title is never covered */
+        /* Top Right Harp & Pipa Music Button */
+        .top-music-btn {
+            background: linear-gradient(135deg, var(--blue-border), #4facfe);
+            color: #07040a;
+            border: 1px solid #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: bold;
+            font-size: 0.75rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: absolute;
+            right: 25px;
+        }
+
+        .top-music-btn:hover {
+            transform: scale(1.08);
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.9);
+        }
+
+        /* Main Sanctuary Wrapper */
         .main-sanctuary-wrapper {
             max-width: 1200px;
-            margin: 180px auto 60px auto;
+            margin: 20px auto 60px auto;
             text-align: center;
             padding: 20px;
             transform-style: preserve-3d;
@@ -282,7 +317,7 @@
             background: linear-gradient(135deg, #fff, var(--gold-shine));
         }
 
-        /* Dedicated Featured Row for the Coin-Redeemed Seat */
+        /* Featured Row for the Coin-Redeemed Seat */
         .featured-coin-row {
             margin-bottom: 25px;
             display: flex;
@@ -356,14 +391,17 @@
 </head>
 <body onload="initializeSanctuary()">
 
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar with Top-Right Harp & Pipa Music Button -->
     <nav class="top-nav-bar">
-        <a href="index.html" onclick="playTempleBell()">Home 🏛️</a>
-        <a href="library.html" onclick="playTempleBell()">Library 📖</a>
-        <a href="trailers.html" onclick="playTempleBell()">Trailers 🎬</a>
-        <a href="community.html" onclick="playTempleBell()">Community 👥</a>
-        <a href="vip.html" onclick="playTempleBell()">VIP 👑</a>
-        <a href="shop.html" class="shop-nav-highlight" onclick="playTempleBell()">Imperial Shop 🪙</a>
+        <div class="nav-links">
+            <a href="index.html">Home 🏛️</a>
+            <a href="library.html">Library 📖</a>
+            <a href="trailers.html">Trailers 🎬</a>
+            <a href="community.html">Community 👥</a>
+            <a href="vip.html">VIP 👑</a>
+            <a href="shop.html" class="shop-nav-highlight">Imperial Shop 🪙</a>
+        </div>
+        <button class="top-music-btn" onclick="toggleHarpPipaMelody()">🎵 Play Sanctuary Harp</button>
     </nav>
 
     <!-- Main Sanctuary Wrapper -->
@@ -388,11 +426,6 @@
                 <button class="ancient-btn" onclick="saveUserEmail()">Register Email ✉️</button>
             </div>
             
-            <!-- Audio Play Control Button -->
-            <div style="width: 100%; text-align: center; margin-top: 10px; border-top: 1px solid rgba(0,242,254,0.3); padding-top: 12px;">
-                <button class="ancient-btn" onclick="toggleAmbientMelody()" style="background: linear-gradient(135deg, #00f2fe, #4facfe); color: #07040a;">Play Sanctuary Melody 🎵</button>
-            </div>
-
             <!-- Admin Subscriber Viewer Panel -->
             <div class="subscribers-panel">
                 <div style="font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; color: #00f2fe; margin-bottom: 5px;">📜 Registered Guardian Email Log (For Premiere Notifications):</div>
@@ -477,7 +510,7 @@
         </div>
     </div>
 
-    <!-- Script Engine -->
+    <!-- Script Engine with Harp & Pipa Ambient Melody Generator -->
     <script>
         const ADMIN_EMAIL = "Imperialdivinevision@gmail.com";
         const UNIVERSAL_MASTER_CODE = "ROSANNA-2026";
@@ -489,8 +522,11 @@
             registeredEmails: []
         };
 
+        let ambientAudioInterval = null;
+        let isMusicPlaying = false;
+
         function initializeSanctuary() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user_v5');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v7');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -503,11 +539,10 @@
             }
             renderTicketGrid();
             updateSubscriberDisplay();
-            playTempleBell();
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user_v5', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v7', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
@@ -530,7 +565,6 @@
             saveProgressToStorage();
             updateSubscriberDisplay();
             
-            playChimeSound();
             alert("Thank you for registering your email to support Imperial Divine Vision! You are successfully added to our premiere notification list.");
         }
 
@@ -548,7 +582,6 @@
         }
 
         function renderTicketGrid() {
-            // 1. Render Coin-Redeemed Seat separately in its own top row
             const coinContainer = document.getElementById('coin-seat-container');
             const coinSeatId = 'seat_coin';
             const coinPurchased = userProgress.purchasedSeats && userProgress.purchasedSeats.includes(coinSeatId);
@@ -571,7 +604,6 @@
                 `;
             }
 
-            // 2. Render Sovereign Seats 1 to 20 in the grid below
             const container = document.getElementById('ticket-items-container');
             let html = '';
 
@@ -624,7 +656,6 @@
             document.getElementById('popup-ticket-title').innerText = seatTitle;
             document.getElementById('popup-user-email-target').innerText = userProgress.email || "Guardian";
             document.getElementById('access-code-popup').style.display = 'flex';
-            playChimeSound();
         }
 
         function redeemCoinSeat() {
@@ -660,64 +691,57 @@
 
         function closeAccessPopup() {
             document.getElementById('access-code-popup').style.display = 'none';
-            playTempleBell();
         }
 
-        function playTempleBell() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(432, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(216, audioCtx.currentTime + 0.8);
-                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.9);
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.9);
-            } catch (e) {}
-        }
+        /* Continuous Harp & Pipa Plucked Melody Engine */
+        function toggleHarpPipaMelody() {
+            const btn = document.querySelector('.top-music-btn');
+            if (isMusicPlaying) {
+                if (ambientAudioInterval) clearInterval(ambientAudioInterval);
+                isMusicPlaying = false;
+                btn.innerText = "🎵 Play Sanctuary Harp";
+                return;
+            }
 
-        function playChimeSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                [523.25, 659.25, 783.99, 1046.50].forEach((freq, index) => {
-                    const osc = audioCtx.createOscillator();
-                    const gainNode = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (index * 0.1));
-                    gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime + (index * 0.1));
-                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (index * 0.1) + 0.5);
-                    osc.connect(gainNode);
-                    gainNode.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + (index * 0.1));
-                    osc.stop(audioCtx.currentTime + (index * 0.1) + 0.5);
-                });
-            } catch (e) {}
-        }
+            isMusicPlaying = true;
+            btn.innerText = "🎶 Sanctuary Harp Active";
 
-        // Toggleable Ambient Melody button to satisfy browser audio policies
-        function toggleAmbientMelody() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const now = audioCtx.currentTime;
-                [220, 329.63, 440, 554.37].forEach(freq => {
+                
+                // Pentatonic and modal scale notes evoking ancient harp & pipa plucks (F# minor / traditional modal tuning)
+                const scaleNotes = [293.66, 349.23, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
+
+                function playPluck() {
+                    if (!isMusicPlaying) return;
+                    const now = audioCtx.currentTime;
+                    const freq = scaleNotes[Math.floor(Math.random() * scaleNotes.length)];
+
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
+
+                    // Triangle/sine blend gives a warm, wooden plucked harp/pipa resonance
                     osc.type = 'triangle';
                     osc.frequency.setValueAtTime(freq, now);
-                    gain.gain.setValueAtTime(0.04, now);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 5.0);
+
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
+
                     osc.start(now);
-                    osc.stop(now + 5.0);
-                });
-                alert("Sanctuary melody playing. Welcome to peace and rest.");
-            } catch(e) {
-                alert("Audio enabled.");
+                    osc.stop(now + 2.8);
+                }
+
+                // Play first note immediately, then loop rhythmically back and forth
+                playPluck();
+                ambientAudioInterval = setInterval(() => {
+                    playPluck();
+                }, 900); // Gentle plucking cadence while exploring
+
+            } catch (e) {
+                alert("Harp melody initialized.");
             }
         }
     </script>
