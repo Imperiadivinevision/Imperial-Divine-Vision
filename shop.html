@@ -38,22 +38,22 @@
             100% { background-position: 0% 0%; }
         }
 
-        /* Top Navigation Bar - Permanently anchored with classical elegance */
+        /* Top Navigation Bar - Firmly anchored and non-overlapping */
         .top-nav-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(7, 4, 10, 0.96);
+            background: rgba(7, 4, 10, 0.98);
             border-bottom: 2px double var(--blue-border);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 30px;
-            padding: 18px 20px;
-            z-index: 3000;
+            padding: 16px 20px;
+            z-index: 9999;
             backdrop-filter: blur(12px);
-            box-shadow: 0 4px 30px rgba(0, 242, 254, 0.25);
+            box-shadow: 0 4px 30px rgba(0, 242, 254, 0.3);
         }
 
         .top-nav-bar a {
@@ -77,10 +77,10 @@
             font-weight: bold;
         }
 
-        /* Main Sanctuary Wrapper - Clean margin to ensure header is never covered */
+        /* Main Sanctuary Wrapper - Generous top margin so title is never covered */
         .main-sanctuary-wrapper {
             max-width: 1200px;
-            margin: 160px auto 60px auto;
+            margin: 180px auto 60px auto;
             text-align: center;
             padding: 20px;
             transform-style: preserve-3d;
@@ -192,7 +192,6 @@
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 242, 254, 0.15);
             text-align: left;
             position: relative;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .shop-section h2 {
@@ -283,14 +282,24 @@
             background: linear-gradient(135deg, #fff, var(--gold-shine));
         }
 
-        /* Deep Royal Blue Designation for the Coin-Redeemed Seat */
+        /* Dedicated Featured Row for the Coin-Redeemed Seat */
+        .featured-coin-row {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
         .coin-seat-card {
-            background: linear-gradient(135deg, rgba(15, 40, 80, 0.96), rgba(7, 24, 48, 0.96)) !important;
+            background: linear-gradient(135deg, rgba(15, 40, 80, 0.98), rgba(7, 24, 48, 0.98)) !important;
             border: 3px solid #00f2fe !important;
-            box-shadow: 0 12px 40px rgba(0, 242, 254, 0.45), inset 0 0 25px rgba(0, 242, 254, 0.25) !important;
+            box-shadow: 0 15px 45px rgba(0, 242, 254, 0.5), inset 0 0 30px rgba(0, 242, 254, 0.3) !important;
+            max-width: 360px;
+            width: 100%;
+            padding: 30px;
         }
         .coin-seat-card h3 {
             color: #79ff9c !important;
+            font-size: 1.3rem !important;
             text-shadow: 0 0 12px rgba(121, 255, 156, 0.7) !important;
         }
 
@@ -379,6 +388,11 @@
                 <button class="ancient-btn" onclick="saveUserEmail()">Register Email ✉️</button>
             </div>
             
+            <!-- Audio Play Control Button -->
+            <div style="width: 100%; text-align: center; margin-top: 10px; border-top: 1px solid rgba(0,242,254,0.3); padding-top: 12px;">
+                <button class="ancient-btn" onclick="toggleAmbientMelody()" style="background: linear-gradient(135deg, #00f2fe, #4facfe); color: #07040a;">Play Sanctuary Melody 🎵</button>
+            </div>
+
             <!-- Admin Subscriber Viewer Panel -->
             <div class="subscribers-panel">
                 <div style="font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; color: #00f2fe; margin-bottom: 5px;">📜 Registered Guardian Email Log (For Premiere Notifications):</div>
@@ -389,7 +403,7 @@
         <!-- Treasury Vault Grid Layout -->
         <div class="treasury-vault-grid">
 
-            <!-- Section 1: Season One Premiere Advance Tickets (Coin Seat First + 20 Seats) -->
+            <!-- Section 1: Season One Premiere Advance Tickets -->
             <div class="shop-section section-tickets" style="grid-column: span 12;">
                 <h2>Season One Advance Premiere Tickets</h2>
                 <p>Secure your seat for the cinematic premiere starting at the sacred temple gates.</p>
@@ -399,8 +413,14 @@
                     Everyone is warmly welcome to enjoy all our trailers freely! However, the upcoming three-episode release of *Rosanna and the Evil King* for next month's movie premiere is unlocked using our secret master code. Register your email above, choose your seat, and click **SECURE SEAT** to checkout via Cash App (`https://cash.app/$tegrakij22`). Once paid and verified, your master code will be unlocked!
                 </div>
 
+                <!-- Featured Top Row: Coin-Redeemed Seat sitting completely alone -->
+                <div class="featured-coin-row" id="coin-seat-container">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Sovereign Seats 1 to 20 -->
                 <div class="item-grid" id="ticket-items-container">
-                    <!-- Dynamically populated via JavaScript: Coin Seat first, then 20 Sovereign Seats -->
+                    <!-- Populated via JS -->
                 </div>
             </div>
 
@@ -457,7 +477,7 @@
         </div>
     </div>
 
-    <!-- Script Engine with Ambient Melody & Persistent Memory -->
+    <!-- Script Engine -->
     <script>
         const ADMIN_EMAIL = "Imperialdivinevision@gmail.com";
         const UNIVERSAL_MASTER_CODE = "ROSANNA-2026";
@@ -470,7 +490,7 @@
         };
 
         function initializeSanctuary() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user_v4');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v5');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -484,11 +504,10 @@
             renderTicketGrid();
             updateSubscriberDisplay();
             playTempleBell();
-            startAmbientMelody();
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user_v4', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v5', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
@@ -529,14 +548,13 @@
         }
 
         function renderTicketGrid() {
-            const container = document.getElementById('ticket-items-container');
-            let html = '';
-
-            // 1. Coin-Redeemed Seat FIRST in row (Deep Royal Blue)
+            // 1. Render Coin-Redeemed Seat separately in its own top row
+            const coinContainer = document.getElementById('coin-seat-container');
             const coinSeatId = 'seat_coin';
             const coinPurchased = userProgress.purchasedSeats && userProgress.purchasedSeats.includes(coinSeatId);
+            
             if (coinPurchased) {
-                html += `
+                coinContainer.innerHTML = `
                     <div class="item-card coin-seat-card" style="opacity: 0.85;">
                         <h3 style="color: #79ff9c;">Coin-Redeemed Seat</h3>
                         <p style="color: #79ff9c;">Status: Claimed with Coins ✓</p>
@@ -544,7 +562,7 @@
                     </div>
                 `;
             } else {
-                html += `
+                coinContainer.innerHTML = `
                     <div class="item-card coin-seat-card">
                         <h3>Coin-Redeemed Premiere Seat</h3>
                         <p>Price: 12,000 Imperial Coins<br>Claim using earned dialogue coins!</p>
@@ -553,7 +571,10 @@
                 `;
             }
 
-            // 2. Sovereign Premiere Seats (1 to 20)
+            // 2. Render Sovereign Seats 1 to 20 in the grid below
+            const container = document.getElementById('ticket-items-container');
+            let html = '';
+
             for (let i = 1; i <= 20; i++) {
                 const seatId = `seat_${i}`;
                 const isPurchased = userProgress.purchasedSeats && userProgress.purchasedSeats.includes(seatId);
@@ -677,26 +698,27 @@
             } catch (e) {}
         }
 
-        // Ambient soothing background chord loop for financial sanctuary trust
-        function startAmbientMelody() {
-            document.addEventListener('click', function ambientPlay() {
-                try {
-                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    const now = audioCtx.currentTime;
-                    [220, 329.63, 440].forEach(freq => {
-                        const osc = audioCtx.createOscillator();
-                        const gain = audioCtx.createGain();
-                        osc.type = 'triangle';
-                        osc.frequency.setValueAtTime(freq, now);
-                        gain.gain.setValueAtTime(0.03, now);
-                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.0);
-                        osc.connect(gain);
-                        gain.connect(audioCtx.destination);
-                        osc.start(now);
-                        osc.stop(now + 4.0);
-                    });
-                } catch(e) {}
-            }, { once: true });
+        // Toggleable Ambient Melody button to satisfy browser audio policies
+        function toggleAmbientMelody() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioCtx.currentTime;
+                [220, 329.63, 440, 554.37].forEach(freq => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now);
+                    gain.gain.setValueAtTime(0.04, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 5.0);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 5.0);
+                });
+                alert("Sanctuary melody playing. Welcome to peace and rest.");
+            } catch(e) {
+                alert("Audio enabled.");
+            }
         }
     </script>
 </body>
