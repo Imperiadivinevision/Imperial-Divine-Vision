@@ -9,13 +9,13 @@
         :root {
             --champagne-gold: #d4af37;
             --muted-gold: #c5a059;
-            --dark-glass: rgba(4, 12, 9, 0.88);
+            --dark-glass: rgba(4, 14, 11, 0.88);
             --border-subtle: rgba(212, 175, 55, 0.28);
         }
 
         * { box-sizing: border-box; }
 
-        /* Living, Flowing Silk Satin Background with Deep Emerald, Purple, and Amber Waves */
+        /* Refined Luminous Silk Satin Background: Vibrant Emerald, Pearlescent Light, and Warm Amber Gold */
         body {
             background-color: #030705;
             color: #e6dfd3;
@@ -24,37 +24,36 @@
             padding: 0;
             padding-top: 95px;
             overflow-x: hidden;
-            background: linear-gradient(120deg, #020906, #091a13, #150a21, #1f1406, #081a13, #020906);
-            background-size: 500% 500%;
-            animation: flowingSatin 25s ease infinite;
+            background: linear-gradient(135deg, #041f18, #0e3b30, #2c163b, #4a350e, #0e3b30, #041f18);
+            background-size: 400% 400%;
+            animation: luminousSilkWaves 20s ease infinite;
             min-height: 100vh;
             position: relative;
         }
 
-        @keyframes flowingSatin {
+        @keyframes luminousSilkWaves {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Secondary Satin Sheen Wave Overlay for Real Fabric Movement */
+        /* Luminous Highlight Sheen Overlay to give that glowing fabric depth */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
-                        radial-gradient(circle at 70% 80%, rgba(16, 6, 24, 0.6) 0%, transparent 70%);
+            background: radial-gradient(circle at 40% 30%, rgba(255, 235, 150, 0.12) 0%, transparent 55%),
+                        radial-gradient(circle at 75% 70%, rgba(30, 120, 95, 0.2) 0%, transparent 60%);
             pointer-events: none;
             z-index: 1;
-            animation: sheenWave 18s ease-in-out infinite alternate;
+            animation: sheenGlow 14s ease-in-out infinite alternate;
         }
 
-        @keyframes sheenWave {
-            0% { transform: translateY(-20px) scale(1); opacity: 0.7; }
-            100% { transform: translateY(20px) scale(1.05); opacity: 1; }
+        @keyframes sheenGlow {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); }
         }
 
-        /* Ensure all main content sits cleanly above the animated background */
         .top-nav-bar, .main-sanctuary-wrapper, #access-code-popup {
             position: relative;
             z-index: 10;
@@ -67,7 +66,7 @@
             left: 0;
             width: 100%;
             height: 70px;
-            background: rgba(3, 7, 5, 0.95);
+            background: rgba(3, 10, 8, 0.95);
             border-bottom: 1px solid var(--border-subtle);
             display: flex;
             justify-content: space-between;
@@ -269,7 +268,7 @@
 
         /* Ticket Cards */
         .item-card {
-            background: rgba(3, 7, 5, 0.92);
+            background: rgba(4, 12, 9, 0.92);
             border: 1px solid var(--border-subtle);
             border-radius: 8px;
             padding: 20px;
@@ -332,7 +331,7 @@
         }
 
         .coin-seat-card {
-            background: linear-gradient(135deg, rgba(8, 35, 25, 0.95), rgba(3, 12, 9, 0.95)) !important;
+            background: linear-gradient(135deg, rgba(10, 45, 35, 0.95), rgba(4, 16, 12, 0.95)) !important;
             border: 1px solid var(--champagne-gold) !important;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important;
             max-width: 340px;
@@ -345,7 +344,7 @@
         }
 
         .notice-box {
-            background: rgba(5, 20, 15, 0.85);
+            background: rgba(5, 22, 16, 0.85);
             border-left: 3px solid var(--champagne-gold);
             padding: 14px 18px;
             margin-bottom: 25px;
@@ -360,7 +359,7 @@
         #access-code-popup {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 7, 5, 0.88);
+            background: rgba(3, 10, 8, 0.88);
             z-index: 99999;
             display: none;
             justify-content: center;
@@ -370,7 +369,7 @@
         }
 
         .popup-card-box {
-            background: #06120d;
+            background: #061510;
             border: 1px solid var(--champagne-gold);
             padding: 35px;
             border-radius: 12px;
@@ -525,7 +524,7 @@
         let isMusicPlaying = false;
 
         function initializeSanctuary() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user_v12');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v13');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -541,7 +540,7 @@
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user_v12', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v13', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
