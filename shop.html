@@ -7,54 +7,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --imperial-marble: #07040a;
-            --roman-purple: #180a22;
             --gold-accent: #f3e5ab;
             --gold-shine: #ffd700;
             --blue-glow: #4facfe;
             --blue-border: #00f2fe;
-            --deep-royal-blue: #0f2027;
         }
 
         * { box-sizing: border-box; }
 
+        /* Flowing Silk & Molten Gold Background Masterpiece */
         body {
-            background-color: var(--imperial-marble);
+            background-color: #07040a;
             color: var(--gold-accent);
             font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            padding-top: 95px; /* Clean clearance so navbar never covers title */
+            padding-top: 95px;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #07040a, #150822, #0d1b2a, #07040a);
+            background: linear-gradient(135deg, #07040a, #0b2d26, #134e44, #1b3a32, #07040a);
             background-size: 400% 400%;
-            animation: ancientFloor 20s ease infinite;
+            animation: silkWaves 16s ease infinite;
             min-height: 100vh;
             perspective: 1200px;
         }
 
-        @keyframes ancientFloor {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+        @keyframes silkWaves {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Top Navigation Bar - Fixed at top with top-right music button */
+        /* Radiating Molten Gold Border Frame around the screen */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            border: 4px solid rgba(255, 215, 0, 0.45);
+            box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.3), 0 0 30px rgba(255, 215, 0, 0.25);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Top Navigation Bar */
         .top-nav-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 75px;
-            background: rgba(7, 4, 10, 0.99);
-            border-bottom: 2px double var(--blue-border);
+            background: rgba(7, 4, 10, 0.95);
+            border-bottom: 2px double var(--gold-shine);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 25px;
-            z-index: 99999;
+            z-index: 99998;
             backdrop-filter: blur(12px);
-            box-shadow: 0 4px 30px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 4px 30px rgba(255, 215, 0, 0.2);
         }
 
         .nav-links {
@@ -76,8 +85,8 @@
         }
 
         .top-nav-bar a:hover {
-            color: var(--blue-border);
-            text-shadow: 0 0 12px rgba(0, 242, 254, 0.9);
+            color: var(--gold-shine);
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.9);
             transform: scale(1.05);
         }
 
@@ -88,7 +97,7 @@
 
         /* Top Right Harp & Pipa Music Button */
         .top-music-btn {
-            background: linear-gradient(135deg, var(--blue-border), #4facfe);
+            background: linear-gradient(135deg, var(--gold-shine), #b8860b);
             color: #07040a;
             border: 1px solid #fff;
             padding: 8px 14px;
@@ -97,7 +106,7 @@
             font-weight: bold;
             font-size: 0.75rem;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -109,7 +118,7 @@
             transform: scale(1.08);
             background: #fff;
             color: #000;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.9);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
         }
 
         /* Main Sanctuary Wrapper */
@@ -128,10 +137,10 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 5.2rem;
-            color: var(--blue-border);
+            font-size: 5.4rem;
+            color: var(--gold-shine);
             margin: 0 0 10px 0;
-            text-shadow: 0 0 25px rgba(0, 242, 254, 0.6), 2px 3px 6px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 2px 3px 6px rgba(0, 0, 0, 0.9);
             letter-spacing: 3px;
         }
 
@@ -150,22 +159,22 @@
             margin-top: 15px;
             font-family: 'Cinzel Decorative', serif;
             font-size: 0.8rem;
-            color: var(--blue-border);
+            color: var(--gold-shine);
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         /* Sovereign HUD & Subscriber Ledger */
         .user-hud {
-            background: linear-gradient(135deg, rgba(13, 27, 42, 0.95), rgba(30, 10, 40, 0.95));
-            border: 2px solid var(--blue-border);
+            background: linear-gradient(135deg, rgba(11, 45, 38, 0.92), rgba(30, 10, 40, 0.92));
+            border: 2px solid var(--gold-shine);
             border-radius: 14px;
             padding: 25px 30px;
             margin-bottom: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
             flex-wrap: wrap;
             gap: 20px;
             transform: translateZ(20px);
@@ -178,7 +187,7 @@
         }
 
         .hud-info span {
-            color: var(--blue-border);
+            color: var(--gold-shine);
             font-weight: bold;
         }
 
@@ -192,7 +201,7 @@
         .email-input-group input {
             padding: 10px 15px;
             background: #07040a;
-            border: 1px solid var(--blue-border);
+            border: 1px solid var(--gold-shine);
             color: #f3e5ab;
             font-family: 'Playfair Display', serif;
             border-radius: 6px;
@@ -201,7 +210,7 @@
 
         .subscribers-panel {
             background: rgba(7, 4, 10, 0.92);
-            border: 1px dashed var(--blue-border);
+            border: 1px dashed var(--gold-shine);
             padding: 15px 20px;
             border-radius: 8px;
             margin-top: 15px;
@@ -220,11 +229,11 @@
         }
 
         .shop-section {
-            background: linear-gradient(135deg, rgba(13, 27, 42, 0.94), rgba(24, 10, 34, 0.94));
-            border: 3px double var(--blue-border);
+            background: linear-gradient(135deg, rgba(11, 45, 38, 0.94), rgba(24, 10, 34, 0.94));
+            border: 3px double var(--gold-shine);
             border-radius: 18px;
             padding: 35px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 242, 254, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 215, 0, 0.15);
             text-align: left;
             position: relative;
         }
@@ -232,11 +241,11 @@
         .shop-section h2 {
             font-family: 'Great Vibes', cursive;
             font-size: 3.2rem;
-            color: var(--blue-border);
+            color: var(--gold-shine);
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
         .shop-section p {
@@ -258,11 +267,11 @@
         /* Ticket Cards with 3D Pop-Out Hover Effect */
         .item-card {
             background: rgba(7, 4, 10, 0.9);
-            border: 2px solid var(--blue-border);
+            border: 2px solid var(--gold-shine);
             border-radius: 12px;
             padding: 24px;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 242, 254, 0.2), inset 0 0 15px rgba(0, 242, 254, 0.1);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2), inset 0 0 15px rgba(255, 215, 0, 0.1);
             transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform: translateZ(15px);
             position: relative;
@@ -272,17 +281,17 @@
 
         .item-card:hover {
             transform: translateY(-10px) scale(1.04) translateZ(30px);
-            box-shadow: 0 22px 50px rgba(0, 242, 254, 0.6), inset 0 0 25px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 22px 50px rgba(255, 215, 0, 0.6), inset 0 0 25px rgba(255, 215, 0, 0.3);
             border-color: #fff;
         }
 
         .item-card h3 {
             font-family: 'Cinzel Decorative', serif;
             font-size: 1.15rem;
-            color: var(--blue-border);
+            color: var(--gold-shine);
             margin-top: 0;
             margin-bottom: 10px;
-            text-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
 
         .item-card p {
@@ -325,22 +334,22 @@
         }
 
         .coin-seat-card {
-            background: linear-gradient(135deg, rgba(15, 40, 80, 0.98), rgba(7, 24, 48, 0.98)) !important;
-            border: 3px solid #00f2fe !important;
-            box-shadow: 0 15px 45px rgba(0, 242, 254, 0.5), inset 0 0 30px rgba(0, 242, 254, 0.3) !important;
+            background: linear-gradient(135deg, rgba(11, 60, 48, 0.98), rgba(7, 30, 24, 0.98)) !important;
+            border: 3px solid var(--gold-shine) !important;
+            box-shadow: 0 15px 45px rgba(255, 215, 0, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.25) !important;
             max-width: 360px;
             width: 100%;
             padding: 30px;
         }
         .coin-seat-card h3 {
-            color: #79ff9c !important;
+            color: var(--gold-shine) !important;
             font-size: 1.3rem !important;
-            text-shadow: 0 0 12px rgba(121, 255, 156, 0.7) !important;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.7) !important;
         }
 
         .notice-box {
-            background: rgba(13, 27, 42, 0.85);
-            border-left: 4px solid var(--blue-border);
+            background: rgba(11, 45, 38, 0.85);
+            border-left: 4px solid var(--gold-shine);
             padding: 16px 22px;
             margin-bottom: 25px;
             border-radius: 6px;
@@ -349,7 +358,7 @@
             color: #ebd6b3;
             line-height: 1.6;
             text-align: left;
-            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.1);
+            box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.1);
         }
 
         /* Popups & Modals */
@@ -366,19 +375,19 @@
         }
 
         .popup-card-box {
-            background: linear-gradient(135deg, #0d1b2a, #1b0a2a);
-            border: 4px solid var(--blue-border);
+            background: linear-gradient(135deg, #0b2d26, #1b0a2a);
+            border: 4px solid var(--gold-shine);
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 0 70px rgba(0, 242, 254, 0.7);
+            box-shadow: 0 0 70px rgba(255, 215, 0, 0.7);
             max-width: 480px;
             width: 90%;
         }
 
         .code-display-box {
             background: #07040a;
-            border: 2px dashed var(--blue-border);
+            border: 2px dashed var(--gold-shine);
             padding: 15px;
             font-family: 'Cinzel Decorative', serif;
             font-size: 1.4rem;
@@ -428,7 +437,7 @@
             
             <!-- Admin Subscriber Viewer Panel -->
             <div class="subscribers-panel">
-                <div style="font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; color: #00f2fe; margin-bottom: 5px;">📜 Registered Guardian Email Log (For Premiere Notifications):</div>
+                <div style="font-family: 'Cinzel Decorative', serif; font-size: 0.8rem; color: var(--gold-shine); margin-bottom: 5px;">📜 Registered Guardian Email Log (For Premiere Notifications):</div>
                 <div id="subscriber-list-display" style="font-size: 0.85rem; color: #f3e5ab; font-family: monospace;">No guardians registered yet.</div>
             </div>
         </section>
@@ -497,8 +506,8 @@
     <!-- Universal Master Key Access Code Delivery Popup Modal -->
     <div id="access-code-popup">
         <div class="popup-card-box">
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #00f2fe; margin: 0 0 10px 0;">Premiere Seat Secured!</h2>
-            <p style="font-size: 0.95rem; color: #e6d5c3; line-height: 1.6;">Payment confirmed for <span id="popup-ticket-title" style="color: #ffd700; font-weight: bold;"></span>! Your premiere master code for next month's release has been unlocked and dispatched to <span id="popup-user-email-target" style="color: #79ff9c;"></span>.</p>
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--gold-shine); margin: 0 0 10px 0;">Premiere Seat Secured!</h2>
+            <p style="font-size: 0.95rem; color: #e6d5c3; line-height: 1.6;">Payment confirmed for <span id="popup-ticket-title" style="color: var(--gold-shine); font-weight: bold;"></span>! Your premiere master code for next month's release has been unlocked and dispatched to <span id="popup-user-email-target" style="color: #79ff9c;"></span>.</p>
             
             <div class="code-display-box" id="generated-access-code-text">
                 ROSANNA-2026
@@ -510,7 +519,7 @@
         </div>
     </div>
 
-    <!-- Script Engine with Harp & Pipa Ambient Melody Generator -->
+    <!-- Script Engine with Local Storage Seat Memory & Harp/Pipa Melody -->
     <script>
         const ADMIN_EMAIL = "Imperialdivinevision@gmail.com";
         const UNIVERSAL_MASTER_CODE = "ROSANNA-2026";
@@ -526,7 +535,7 @@
         let isMusicPlaying = false;
 
         function initializeSanctuary() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user_v7');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v8');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -542,7 +551,7 @@
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user_v7', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v8', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
@@ -591,7 +600,7 @@
                     <div class="item-card coin-seat-card" style="opacity: 0.85;">
                         <h3 style="color: #79ff9c;">Coin-Redeemed Seat</h3>
                         <p style="color: #79ff9c;">Status: Claimed with Coins ✓</p>
-                        <span class="ancient-btn" style="background: #2e8b57; color: #fff; cursor: default;">Claimed ✓</span>
+                        <span class="ancient-btn" style="background: #2e8b57; color: #fff; cursor: default;">Seat Claimed ✓</span>
                     </div>
                 `;
             } else {
@@ -708,8 +717,6 @@
 
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Pentatonic and modal scale notes evoking ancient harp & pipa plucks (F# minor / traditional modal tuning)
                 const scaleNotes = [293.66, 349.23, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
 
                 function playPluck() {
@@ -720,7 +727,6 @@
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
 
-                    // Triangle/sine blend gives a warm, wooden plucked harp/pipa resonance
                     osc.type = 'triangle';
                     osc.frequency.setValueAtTime(freq, now);
 
@@ -734,11 +740,10 @@
                     osc.stop(now + 2.8);
                 }
 
-                // Play first note immediately, then loop rhythmically back and forth
                 playPluck();
                 ambientAudioInterval = setInterval(() => {
                     playPluck();
-                }, 900); // Gentle plucking cadence while exploring
+                }, 900);
 
             } catch (e) {
                 alert("Harp melody initialized.");
