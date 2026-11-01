@@ -4,96 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperial Divine Vision | Support Our Journey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <!-- Include QR Code Generator Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body {
-            background-color: #0b0f0e;
-            color: #f5f2eb;
-            font-family: 'Cinzel', serif;
-            text-align: center;
-            padding: 20px;
+        :root {
+            --primary-gold: #f3e5ab;
+            --deep-gold: #d4af37;
+            --text-light: #f9f6ee;
+            --dark-card: rgba(16, 7, 28, 0.90);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
         }
-        .container {
-            max-width: 500px;
-            margin: 40px auto;
-            background: rgba(17, 23, 21, 0.95);
-            border: 2px solid #c5b59b;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(197, 181, 155, 0.2);
+
+        body {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-color: #0b0214;
         }
-        h1 { color: #c5b59b; font-size: 1.5rem; margin-bottom: 10px; }
-        p { font-family: 'Playfair Display', serif; font-size: 0.95rem; line-height: 1.6; color: #d4c5ab; }
-        .btn {
-            display: block;
-            background: linear-gradient(to bottom, #c5b59b, #aa820a);
-            color: #0b0f0e;
-            padding: 12px;
-            margin: 12px 0;
+
+        /* Top Navigation Bar */
+        .top-nav {
+            background: rgba(10, 5, 20, 0.96);
+            border-bottom: 1px solid var(--deep-gold);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+
+        .top-nav a {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-gold);
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: 0.2s;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
         }
-        .btn:hover { background: #fff; box-shadow: 0 0 15px #c5b59b; }
-        .signature { margin-top: 20px; font-style: italic; color: #c5b59b; }
-        
+
+        .top-nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px var(--deep-gold);
+        }
+
+        /* Breathing silk background animation using shop.png */
+        .animated-silk-bg {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120vw;
+            height: 120vh;
+            background: url('shop.png') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+            animation: silkBreath 18s ease-in-out infinite alternate, royalColorShift 22s ease-in-out infinite alternate;
+        }
+
+        .silk-shimmer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(59, 130, 246, 0.14), rgba(236, 72, 153, 0.1), rgba(212, 175, 55, 0.16));
+            mix-blend-mode: overlay;
+            z-index: -1;
+            pointer-events: none;
+            animation: lightPulse 9s ease-in-out infinite alternate;
+        }
+
+        @keyframes silkBreath {
+            0% { transform: scale(1) translateY(0) translateX(0); }
+            50% { transform: scale(1.05) translateY(-15px) translateX(6px); }
+            100% { transform: scale(1.02) translateY(10px) translateX(-6px); }
+        }
+
+        @keyframes royalColorShift {
+            0% { filter: brightness(1) saturate(1.1) hue-rotate(0deg); }
+            33% { filter: brightness(1.12) saturate(1.25) hue-rotate(25deg); }
+            66% { filter: brightness(1.05) saturate(1.2) hue-rotate(-15deg); }
+            100% { filter: brightness(1.15) saturate(1.3) hue-rotate(10deg); }
+        }
+
+        @keyframes lightPulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.85; }
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem 0.5rem 1rem;
+        }
+
+        .audio-container {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0.4rem;
+            padding: 0.4rem 1.2rem;
+            background: rgba(20, 10, 35, 0.88);
+            border: 1px solid var(--deep-gold);
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7), inset 0 0 12px rgba(212, 175, 55, 0.25);
+        }
+
+        audio {
+            height: 26px;
+            filter: sepia(40%) hue-rotate(190deg) saturate(250%);
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 540px;
+            margin: 2rem auto 3rem auto;
+            background: var(--dark-card);
+            border: 2px solid var(--deep-gold);
+            padding: 2.2rem;
+            border-radius: 12px;
+            box-shadow: 0 16px 45px rgba(0,0,0,0.85), inset 0 0 20px rgba(212, 175, 55, 0.22);
+            backdrop-filter: blur(12px);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: #dcd6d0;
+            margin-bottom: 1.2rem;
+        }
+
+        .signature {
+            margin-top: 1.5rem;
+            font-style: italic;
+            color: var(--primary-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
         /* QR Code Box Styling */
         #qrcode-box {
             background: #fff;
-            padding: 15px;
+            padding: 12px;
             display: inline-block;
-            border-radius: 6px;
-            margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            border: 2px solid var(--deep-gold);
         }
+
         #qrcode-box img {
             display: block;
             margin: 0 auto;
         }
+
+        .btn {
+            display: block;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #11051d;
+            padding: 0.8rem 1rem;
+            margin: 12px 0;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #f3e5ab, #d4af37);
+            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.75);
+            transform: scale(1.03);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+            background: linear-gradient(to top, rgba(10,5,20,0.96), transparent);
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="library.html">Library</a>
+        <a href="youth.html">Youth</a>
+        <a href="shop.html">Imperial Shop</a>
+        <a href="support.html">Support Vision</a>
+        <a href="community.html">Community</a>
+    </nav>
+
+    <div class="animated-silk-bg"></div>
+    <div class="silk-shimmer"></div>
+
+    <header>
+        <div class="audio-container">
+            <audio controls loop autoplay>
+                <source src="milele.m4a" type="audio/mp4">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </header>
+
     <div class="container">
         <h1>Imperial Divine Vision</h1>
         <p>Thank you so much for supporting our vision! If you would like to donate to support our journey, please feel free to contribute supplies, funds, or anything that can help bring this epic story to life. Thank you from the bottom of our hearts for believing in us.</p>
         
         <div class="signature">
             With all my love and gratitude,<br>
-            <strong>— By Tegra Kij</strong>
+            <strong style="font-size: 1.05rem; color: #f3e5ab;">— By Tegra Kij</strong>
         </div>
 
-        <!-- This section will automatically generate the scannable QR Code -->
+        <!-- Scannable QR Code Section -->
         <div style="margin-top: 20px;">
-            <p style="font-size: 0.85rem; color: #c5b59b; margin-bottom: 8px;">Scan to open Support & Vision Hub:</p>
+            <p style="font-size: 0.85rem; color: var(--primary-gold); margin-bottom: 8px; font-family: 'Cinzel', serif; letter-spacing: 1px;">Scan to open Support & Vision Hub:</p>
             <div id="qrcode-box"></div>
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #c5b59b; margin: 25px 0;">
+        <hr style="border: 0; border-top: 1px solid rgba(212, 175, 55, 0.4); margin: 25px 0;">
 
         <a href="https://www.google.com/search?q=Imperial+Divine+Vision" class="btn" target="_blank">🔍 Find Imperial Divine Vision on Google</a>
-        <a href="https://cash.app/$tegrakij22" class="btn">💚 Support via Cash App ($tegrakij22)</a>
-        <a href="https://www.youtube.com/@ImperialDivineVision" class="btn">🎬 Watch on YouTube</a>
-        <a href="https://www.tiktok.com/@imperial.divine.v" class="btn">🎵 Follow on TikTok</a>
-        <a href="https://www.instagram.com/imperialdivinevision_official" class="btn">📸 Follow on Instagram</a>
+        <a href="https://cash.app/$tegrakij22" class="btn" target="_blank">💚 Support via Cash App ($tegrakij22)</a>
+        <a href="https://www.youtube.com/@ImperialDivineVision" class="btn" target="_blank">🎬 Watch on YouTube</a>
+        <a href="https://www.tiktok.com/@imperial.divine.v" class="btn" target="_blank">🎵 Follow on TikTok</a>
+        <a href="https://www.instagram.com/imperialdivinevision_official" class="btn" target="_blank">📸 Follow on Instagram</a>
         
         <br>
-        <a href="index.html" style="color: #c5b59b; text-decoration: none; font-size: 0.85rem;">← Return to Sanctuary Home</a>
+        <a href="index.html" style="color: var(--primary-gold); text-decoration: none; font-size: 0.85rem; font-family: 'Cinzel', serif; letter-spacing: 1px;">← Return to Sanctuary Home</a>
     </div>
 
+    <footer>
+        &copy; 2026 Imperial Divine Vision. All Royal Rights Reserved. Master Code: ROSANNA-2026
+    </footer>
+
     <script>
-        // Automatically generate the QR code pointing to this page or your GitHub URL
         window.onload = function() {
             let targetUrl = window.location.href; 
             
             new QRCode(document.getElementById("qrcode-box"), {
                 text: targetUrl,
-                width: 150,
-                height: 150,
-                colorDark : "#0b0f0e",
+                width: 140,
+                height: 140,
+                colorDark : "#0b0214",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
