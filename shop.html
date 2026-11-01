@@ -10,7 +10,7 @@
             --primary-gold: #f3e5ab;
             --deep-gold: #d4af37;
             --text-light: #f9f6ee;
-            --dark-card: rgba(20, 10, 35, 0.85);
+            --dark-card: rgba(18, 8, 30, 0.82);
         }
 
         * {
@@ -28,7 +28,7 @@
             background-color: #0b0214;
         }
 
-        /* Breathing, shifting, light-reflecting silk background animation using your new shop.png */
+        /* Breathing, shifting, light-reflecting silk background animation using your exact shop.png */
         .animated-silk-bg {
             position: fixed;
             top: -10%;
@@ -41,13 +41,14 @@
             animation: silkBreath 18s ease-in-out infinite alternate, royalColorShift 22s ease-in-out infinite alternate;
         }
 
+        /* Shimmering satin lighting overlay matching purple, blue, and gold reflections */
         .silk-shimmer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(59, 130, 246, 0.15), rgba(236, 72, 153, 0.12), rgba(212, 175, 55, 0.18));
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(59, 130, 246, 0.14), rgba(236, 72, 153, 0.1), rgba(212, 175, 55, 0.16));
             mix-blend-mode: overlay;
             z-index: -1;
             pointer-events: none;
@@ -56,44 +57,46 @@
 
         @keyframes silkBreath {
             0% { transform: scale(1) translateY(0) translateX(0); }
-            50% { transform: scale(1.06) translateY(-18px) translateX(8px); }
-            100% { transform: scale(1.03) translateY(12px) translateX(-8px); }
+            50% { transform: scale(1.05) translateY(-15px) translateX(6px); }
+            100% { transform: scale(1.02) translateY(10px) translateX(-6px); }
         }
 
         @keyframes royalColorShift {
             0% { filter: brightness(1) saturate(1.1) hue-rotate(0deg); }
-            33% { filter: brightness(1.12) saturate(1.25) hue-rotate(30deg); } /* Deep royal blue & purple shift */
-            66% { filter: brightness(1.06) saturate(1.2) hue-rotate(-20deg); } /* Strong majestic purple */
-            100% { filter: brightness(1.15) saturate(1.3) hue-rotate(15deg); }
+            33% { filter: brightness(1.12) saturate(1.25) hue-rotate(25deg); } /* Deep royal blue & purple shift */
+            66% { filter: brightness(1.05) saturate(1.2) hue-rotate(-15deg); } /* Strong majestic purple */
+            100% { filter: brightness(1.15) saturate(1.3) hue-rotate(10deg); }
         }
 
         @keyframes lightPulse {
-            0% { opacity: 0.45; }
+            0% { opacity: 0.4; }
             100% { opacity: 0.85; }
         }
 
         header {
             text-align: center;
-            padding: 3rem 1rem 1.5rem 1rem;
-            background: linear-gradient(to bottom, rgba(10,5,20,0.85), transparent);
+            padding: 2.5rem 1rem 1rem 1rem;
+            background: linear-gradient(to bottom, rgba(10,5,20,0.8), transparent);
         }
 
+        /* Perfectly positioned below the crown in your shop.png background */
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 3rem;
+            font-size: 2.6rem;
             color: var(--primary-gold);
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.7), 0 2px 5px rgba(0,0,0,0.9);
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 2px 6px rgba(0,0,0,0.95);
             letter-spacing: 3px;
-            margin-bottom: 0.4rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-style: italic;
             color: #e2d9c5;
             letter-spacing: 1px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-            margin-bottom: 1rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            margin-bottom: 0.8rem;
         }
 
         /* Milélé Audio Player Bar */
@@ -101,32 +104,33 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 0.8rem;
+            margin-top: 0.5rem;
         }
 
         audio {
-            height: 32px;
+            height: 30px;
             filter: sepia(40%) hue-rotate(190deg) saturate(250%);
-            opacity: 0.9;
+            opacity: 0.85;
         }
 
+        /* Perfectly organized grid resting on the clean middle satin folds */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem 2rem 2.5rem 2rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 1.8rem;
         }
 
         .card {
             background: var(--dark-card);
             border: 2px solid var(--deep-gold);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.8rem;
             text-align: center;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.75), inset 0 0 15px rgba(212, 175, 55, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -134,39 +138,41 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 18px 45px rgba(212, 175, 55, 0.45), inset 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         .card h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             margin-bottom: 0.8rem;
             letter-spacing: 1px;
         }
 
         .card p {
-            margin-bottom: 1.2rem;
-            line-height: 1.6;
+            margin-bottom: 1rem;
+            line-height: 1.5;
             color: #dcd6d0;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
         .inventory-status {
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #f3e5ab;
             margin-bottom: 1rem;
-            background: rgba(212, 175, 55, 0.1);
-            padding: 0.4rem;
-            border-radius: 4px;
-            border: 1px dashed var(--deep-gold);
+            background: rgba(212, 175, 55, 0.15);
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--deep-gold);
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .price {
             font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: var(--deep-gold);
             margin-bottom: 1.2rem;
             font-weight: bold;
@@ -177,8 +183,8 @@
             background: linear-gradient(135deg, #d4af37, #aa7c11);
             color: #11051d;
             border: none;
-            padding: 0.8rem 1.5rem;
-            font-size: 0.95rem;
+            padding: 0.75rem 1.4rem;
+            font-size: 0.9rem;
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
@@ -194,42 +200,50 @@
             transform: scale(1.03);
         }
 
-        /* Registration modal / section */
+        /* Proactive Verification Vault framed above the bottom golden emblem */
         .registry-section {
-            max-width: 600px;
-            margin: 1rem auto 3rem auto;
+            max-width: 580px;
+            margin: 0.5rem auto 2.5rem auto;
             background: var(--dark-card);
             border: 2px solid var(--deep-gold);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.8rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.75);
+            backdrop-filter: blur(10px);
         }
 
         .registry-section h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 1.3rem;
+        }
+
+        .registry-section p {
+            font-size: 0.9rem;
+            color: #dcd6d0;
+            margin-bottom: 1rem;
         }
 
         .registry-section input {
             padding: 0.7rem;
-            width: 70%;
-            border-radius: 4px;
+            width: 80%;
+            border-radius: 6px;
             border: 1px solid var(--deep-gold);
             background: rgba(10,5,20,0.9);
             color: var(--text-light);
             font-family: 'Playfair Display', serif;
-            margin-right: 0.5rem;
+            margin-bottom: 0.7rem;
         }
 
         footer {
             text-align: center;
-            padding: 2.5rem;
+            padding: 2rem;
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--primary-gold);
-            background: linear-gradient(to top, rgba(10,5,20,0.9), transparent);
+            background: linear-gradient(to top, rgba(10,5,20,0.95), transparent);
             letter-spacing: 1px;
         }
     </style>
@@ -240,10 +254,11 @@
     <div class="silk-shimmer"></div>
 
     <header>
+        <!-- Perfectly positioned right below your Canva background crown -->
         <h1>Imperial Treasury & Shop</h1>
         <p class="subtitle">The Song of Rosanna and the Evil King • Premiere Collection</p>
         
-        <!-- Milélé Background Theme Song -->
+        <!-- Milélé Theme Song Audio Player -->
         <div class="audio-container">
             <audio controls loop autoplay>
                 <source src="milélé.m4a" type="audio/mp4">
@@ -254,12 +269,12 @@
     </header>
 
     <main class="container">
-        <!-- Item 1: Sovereign Premiere Seats with 20-seat inventory & Cash App checkout -->
+        <!-- Single Sovereign Premiere Ticket Card with Live 1-of-20 Counter -->
         <div class="card">
             <div>
                 <h3>Sovereign Premiere Seat</h3>
                 <p>Secure your exclusive entry ticket for the grand 3-episode cinematic release.</p>
-                <div class="inventory-status" id="seat-counter">Available Seats: 20 / 20</div>
+                <div class="inventory-status" id="seat-counter">1 out of 20 Tickets Claimed</div>
                 <div class="price">$12.00 USD / 12,000 Coins</div>
             </div>
             <button class="btn" onclick="acquireTicket()">Acquire Ticket</button>
@@ -286,13 +301,14 @@
         </div>
     </main>
 
-    <!-- Email Registration / Duplicate Prevention Vault -->
+    <!-- Proactive Verification & Notification Pass -->
     <section class="registry-section">
-        <h3>Register Your Imperial Pass</h3>
-        <p>Enter your email to secure your purchase verification and prevent duplicate claims.</p>
-        <div style="margin-top: 1rem;">
-            <input type="email" id="user-email" placeholder="Enter your email address...">
-            <button class="btn" onclick="registerEmail()">Register</button>
+        <h3>Imperial Verification Pass</h3>
+        <p>Enter your details after sending your Cash App payment to `$tegrakij22` to notify the treasury instantly.</p>
+        <div>
+            <input type="email" id="user-email" placeholder="Your email address..."><br>
+            <input type="text" id="user-cashapp" placeholder="Your Cash App handle (e.g. $YourTag)..."><br>
+            <button class="btn" style="margin-top: 0.3rem;" onclick="submitVerification()">Submit For Verification</button>
         </div>
         <p id="registry-msg" style="margin-top: 0.8rem; font-size: 0.85rem; color: #d4af37;"></p>
     </section>
@@ -302,18 +318,22 @@
     </footer>
 
     <script>
-        // Inventory and Checkout Logic with Master Code ROSANNA-2026
+        function updateDisplay(claimedCount) {
+            let displayCount = Math.min(Math.max(claimedCount, 0), 20);
+            document.getElementById('seat-counter').innerText = `${displayCount} out of 20 Tickets Claimed`;
+        }
+
         function acquireTicket() {
-            let code = prompt("Enter Master Code or verification token (Hint: ROSANNA-2026):");
+            let code = prompt("Enter Master Code (Hint: ROSANNA-2026):");
             if (code === "ROSANNA-2026") {
-                let seats = localStorage.getItem('available_seats') ? parseInt(localStorage.getItem('available_seats')) : 20;
-                if (seats > 0) {
-                    seats--;
-                    localStorage.setItem('available_seats', seats);
-                    document.getElementById('seat-counter').innerText = `Available Seats: ${seats} / 20`;
-                    alert("Success! Master code verified. Please complete your $12.00 USD payment via Cash App to $tegrakij22. Seat secured!");
+                let claimed = localStorage.getItem('tickets_claimed') ? parseInt(localStorage.getItem('tickets_claimed')) : 1;
+                if (claimed < 20) {
+                    claimed++;
+                    localStorage.setItem('tickets_claimed', claimed);
+                    updateDisplay(claimed);
+                    alert(`Master code verified! Ticket #${claimed} marked in the treasury. Please send $12.00 USD via Cash App to $tegrakij22 and submit your email below.`);
                 } else {
-                    alert("All 20 Sovereign Premiere Seats are currently claimed!");
+                    alert("All 20 Sovereign Premiere Seats have been claimed!");
                 }
             } else if (code !== null) {
                 alert("Invalid Master Code. Please use ROSANNA-2026.");
@@ -323,37 +343,45 @@
         function openVault() {
             let code = prompt("Enter Master Code for Coin Vault ($3.00 USD via Cash App $tegrakij22):");
             if (code === "ROSANNA-2026") {
-                alert("Coin Vault unlocked! 3,000 Imperial Coins added to your session.");
+                alert("Coin Vault unlocked! 3,000 Imperial Coins added.");
             } else if (code !== null) {
                 alert("Invalid Master Code.");
             }
         }
 
         function claimCard() {
-            alert("Collectible Card Set added to your cart ($0.99 USD via Cash App $tegrakij22). Master code: ROSANNA-2026");
+            alert("Collectible Card Set added ($0.99 USD via Cash App $tegrakij22). Master code: ROSANNA-2026");
         }
 
-        function registerEmail() {
+        function submitVerification() {
             let email = document.getElementById('user-email').value;
-            if (!email || !email.includes('@')) {
-                alert("Please enter a valid email address.");
+            let cashapp = document.getElementById('user-cashapp').value;
+            if (!email || !email.includes('@') || !cashapp) {
+                alert("Please provide both a valid email and your Cash App handle for verification.");
                 return;
             }
+            
+            let subject = encodeURIComponent("New Imperial Treasury Ticket Verification Request");
+            let body = encodeURIComponent(`Royal Guardian,\n\nA new user has submitted payment verification.\n\nEmail: ${email}\nCash App Tag: ${cashapp}\n\nPlease check your Cash App ($tegrakij22) for payment confirmation and reply to issue their ticket pass.`);
+            
+            window.location.href = `mailto:imperialdivinevision@gmail.com?subject=${subject}&body=${body}`;
+            
             let registeredEmails = JSON.parse(localStorage.getItem('treasury_emails') || '[]');
-            if (registeredEmails.includes(email)) {
-                document.getElementById('registry-msg').innerText = "This email is already registered in the Imperial Treasury!";
-            } else {
+            if (!registeredEmails.includes(email)) {
                 registeredEmails.push(email);
                 localStorage.setItem('treasury_emails', JSON.stringify(registeredEmails));
-                document.getElementById('registry-msg').innerText = "Registration successful! Welcome to the Imperial Inner Circle.";
             }
+            
+            document.getElementById('registry-msg').innerText = "Verification request submitted! Your email client has opened to notify the Imperial Treasury.";
         }
 
-        // Load saved seat counter on start
         window.onload = function() {
-            let savedSeats = localStorage.getItem('available_seats');
-            if (savedSeats !== null) {
-                document.getElementById('seat-counter').innerText = `Available Seats: ${savedSeats} / 20`;
+            let savedClaimed = localStorage.getItem('tickets_claimed');
+            if (savedClaimed !== null) {
+                document.getElementById('seat-counter').innerText = `${savedClaimed} out of 20 Tickets Claimed`;
+            } else {
+                localStorage.setItem('tickets_claimed', '1');
+                document.getElementById('seat-counter').innerText = `1 out of 20 Tickets Claimed`;
             }
         };
     </script>
