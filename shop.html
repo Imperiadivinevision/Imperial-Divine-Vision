@@ -209,10 +209,12 @@
 </head>
 <body onload="initializeSanctuary()">
 
+    <!-- Official Recorded Anthem: Milélé (milele.m4a) -->
     <audio id="milere-anthem" loop>
         <source src="milele.m4a" type="audio/mp4">
     </audio>
 
+    <!-- Top Navigation Bar -->
     <nav class="top-nav-bar">
         <div class="nav-links">
             <a href="index.html">Home 🏛️</a>
@@ -225,6 +227,7 @@
         <button class="top-music-btn" onclick="toggleMilereAnthem()">🎵 Play Milélé Anthem</button>
     </nav>
 
+    <!-- Main Sanctuary Wrapper -->
     <main class="main-sanctuary-wrapper">
         <header>
             <h1>Imperial Treasury & Shop</h1>
@@ -234,6 +237,7 @@
             </div>
         </header>
 
+        <!-- Sovereign HUD & Subscriber Ledger -->
         <section class="user-hud">
             <div class="hud-info">
                 <div>Guardian Email: <span id="display-email">Not Registered</span></div>
@@ -251,20 +255,27 @@
             </div>
         </section>
 
+        <!-- Treasury Vault Grid Layout -->
         <div class="treasury-vault-grid">
+
+            <!-- Section 1: Season One Advance Premiere Tickets -->
             <div class="shop-section section-tickets" style="grid-column: span 12;">
                 <h2>Season One Advance Premiere Tickets</h2>
                 <p>Secure your seat for the cinematic premiere starting at the sacred temple gates.</p>
                 
                 <div class="notice-box">
-                    <strong>Global Live Inventory & Premiere Access:</strong><br>
-                    Welcome to the global premiere registration for *The Song of Rosanna and the Evil King*! Seats purchased anywhere in the world sync instantly across all devices. Register your email, click **SECURE SEAT** to complete your $12.00 payment via Cash App (<a href="https://cash.app/$tegrakij22" target="_blank" style="color: var(--champagne-gold);">`$tegrakij22`</a>), and verify your tag to unlock your master access code!
+                    <strong>Exclusive Movie Premiere Access:</strong><br>
+                    Everyone is warmly welcome to enjoy all our trailers freely! However, the upcoming three-episode release of *Rosanna and the Evil King* for next month's movie premiere is unlocked using our secret master code. Register your email above, choose your seat, and click **SECURE SEAT** to checkout via Cash App (<a href="https://cash.app/$tegrakij22" target="_blank" style="color: var(--champagne-gold);">`$tegrakij22`</a>). Once paid and verified, your master code will be unlocked!
                 </div>
 
+                <!-- Featured Top Row: Coin-Redeemed Seat -->
                 <div class="featured-coin-row" id="coin-seat-container"></div>
+
+                <!-- Sovereign Seats 1 to 20 -->
                 <div class="item-grid" id="ticket-items-container"></div>
             </div>
 
+            <!-- Section 2: Imperial Coin Vault -->
             <div id="coin-exchange" class="shop-section section-coins" style="grid-column: span 7;">
                 <h2>The Imperial Coin Vault</h2>
                 <p>Acquire game coins to continue your dialogue scripts, unlock paths, and save up for future merchandise.</p>
@@ -275,6 +286,7 @@
                         <p>1,000 Imperial Coins<br><strong>$1.00 USD</strong></p>
                         <a href="https://cash.app/$tegrakij22" target="_blank" class="ancient-btn" onclick="recordPurchase('1000 Coins', 1.00, 1000);">Acquire 🪙</a>
                     </div>
+
                     <div class="item-card">
                         <h3>Chest of Royal Coins</h3>
                         <p>2,000 Imperial Coins<br><strong>$2.00 USD</strong></p>
@@ -283,9 +295,11 @@
                 </div>
             </div>
 
+            <!-- Section 3: Digital Collectible Cards -->
             <div class="shop-section section-cards" style="grid-column: span 5;">
                 <h2>Digital Collectible Cards</h2>
                 <p>Build your personal savings deck.</p>
+                
                 <div class="item-grid">
                     <div class="item-card">
                         <h3>Character Card</h3>
@@ -294,9 +308,11 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
+    <!-- Secure Payment Verification Modal -->
     <div id="checkout-modal">
         <div class="popup-card-box">
             <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.4rem; color: var(--champagne-gold); margin: 0 0 10px 0;">Verify Cash App Payment</h2>
@@ -311,6 +327,7 @@
         </div>
     </div>
 
+    <!-- Universal Master Key Access Code Delivery Popup Modal -->
     <div id="access-code-popup">
         <div class="popup-card-box">
             <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: var(--champagne-gold); margin: 0 0 10px 0;">Premiere Seat Secured!</h2>
@@ -326,6 +343,7 @@
         </div>
     </div>
 
+    <!-- Script Engine -->
     <script>
         const BIN_URL = "https://api.jsonbin.io/v3/b/6724135ae41b4d34e44534f2"; 
         const BIN_MASTER_KEY = "$2a$10$7Z...public_read_write_key";
@@ -343,7 +361,7 @@
         let isAnthemPlaying = false;
 
         async function initializeSanctuary() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user_v17');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v19');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -387,7 +405,7 @@
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user_v17', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v19', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
@@ -575,7 +593,7 @@
                 audioEl.play().then(() => {
                     isAnthemPlaying = true;
                     btn.innerText = "🎶 Milélé Anthem Active";
-                }.catch(e => {
+                }).catch(e => {
                     alert("Please click anywhere on the page first, then click the anthem button!");
                 });
             }
