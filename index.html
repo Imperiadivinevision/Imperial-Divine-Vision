@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperial Divine Vision | Sanctuary Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         @keyframes cosmicShift {
             0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
@@ -14,12 +14,13 @@
         }
 
         :root {
-            --bg-dark: #0b0f0e;
-            --panel-bg: rgba(17, 23, 21, 0.95);
-            --theme-color: #c5b59b; 
-            --text-main: #f5f2eb;
-            --text-muted: #c5b59b;
-            --glow-strength: rgba(197, 181, 155, 0.2);
+            --bg-dark: #0b0214;
+            --panel-bg: rgba(18, 8, 30, 0.90);
+            --theme-color: #f3e5ab; 
+            --deep-gold: #d4af37;
+            --text-main: #f9f6ee;
+            --text-muted: #e2d9c5;
+            --glow-strength: rgba(212, 175, 55, 0.35);
         }
 
         body {
@@ -33,7 +34,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: #0b0f0e;
             transition: background 0.8s ease;
         }
 
@@ -43,7 +43,7 @@
             animation: cosmicShift 22s ease infinite alternate;
         }
 
-        /* Independent Moving Flowering Background */
+        /* Independent Moving Flowering Garden Background */
         .moving-bg-layer {
             position: fixed;
             top: 0;
@@ -56,7 +56,7 @@
             background-image: url('garden_border_pattern.png');
             z-index: -2;
             pointer-events: none;
-            opacity: 0.35;
+            opacity: 0.45;
         }
 
         body.animated-vibe .moving-bg-layer {
@@ -69,11 +69,11 @@
             100% { background-size: 390px auto; background-position: center bottom; }
         }
 
-        /* Interactive Light / Shine Layer on Mouse Move */
+        /* Interactive Shine Layer on Mouse Move */
         .shine-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(197, 181, 155, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
@@ -85,12 +85,12 @@
             position: fixed;
             top: 15px;
             right: 20px;
-            background: rgba(17, 23, 21, 0.9);
-            border: 2px solid var(--theme-color);
+            background: rgba(18, 8, 30, 0.9);
+            border: 2px solid var(--deep-gold);
             color: var(--text-main);
             width: 40px;
             height: 40px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             z-index: 3000;
             display: flex;
@@ -102,9 +102,9 @@
         }
         .fullscreen-toggle-btn:hover {
             transform: scale(1.1);
-            background: var(--theme-color);
-            color: #0b0f0e;
-            box-shadow: 0 0 20px var(--theme-color);
+            background: var(--deep-gold);
+            color: #11051d;
+            box-shadow: 0 0 20px var(--deep-gold);
         }
 
         /* Global Fullscreen Chamber Mode */
@@ -119,18 +119,14 @@
             justify-content: center !important;
             min-height: 100vh !important;
         }
-        body.is-chamber-fullscreen .real-book-container {
-            width: 420px !important;
-            height: 600px !important;
-        }
 
-        /* Floating Royal Scroll Button (Tutorial & Navigation Guide) */
+        /* Floating Royal Scroll Button */
         .royal-scroll-trigger {
             position: fixed;
             bottom: 25px;
             left: 25px;
             background: linear-gradient(135deg, #2b1035, #4a0e17);
-            border: 2px solid var(--theme-color);
+            border: 2px solid var(--deep-gold);
             color: #ffe875;
             padding: 10px 18px;
             border-radius: 30px;
@@ -146,7 +142,7 @@
         }
         .royal-scroll-trigger:hover {
             transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 0 25px var(--theme-color);
+            box-shadow: 0 0 25px var(--deep-gold);
         }
 
         /* Unrolling Parchment Scroll Modal */
@@ -171,7 +167,6 @@
             max-height: 85vh;
             overflow-y: auto;
             text-align: left;
-            position: relative;
             box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
             animation: unrollScroll 0.5s ease-out;
         }
@@ -217,54 +212,39 @@
 
         /* Professional Navigation Hub */
         nav { 
-            padding: 14px 20px; 
+            padding: 0.8rem 1rem; 
             background: var(--panel-bg);
-            border-bottom: 2px solid var(--theme-color);
+            border-bottom: 2px solid var(--deep-gold);
             position: sticky;
             top: 0;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 1.5rem;
             box-shadow: 0 4px 25px rgba(0,0,0,0.85);
             flex-wrap: wrap;
-            backdrop-filter: blur(8px);
-            transition: border-color 0.5s ease;
+            backdrop-filter: blur(12px);
         }
 
         .nav-module {
-            background: rgba(22, 30, 27, 0.85);
-            border: 1px solid var(--theme-color);
-            padding: 8px 14px;
-            border-radius: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
             position: relative;
         }
 
-        .nav-module:hover {
-            background: rgba(30, 42, 38, 0.95);
-            box-shadow: 0 0 15px var(--glow-strength);
-            transform: translateY(-2px);
-        }
-
         nav a { 
-            color: var(--text-main); 
+            font-family: 'Cinzel', serif;
+            color: var(--theme-color); 
             text-decoration: none; 
             font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: 0.2s;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--theme-color);
-            text-shadow: 0 0 8px var(--glow-strength);
+            color: #ffffff;
+            text-shadow: 0 0 10px var(--deep-gold);
         }
 
         /* Library Sub-Menu Popup Bar */
@@ -272,29 +252,30 @@
             display: none;
             position: absolute;
             top: 100%;
-            left: 0;
-            background: rgba(17, 23, 21, 0.98);
-            border: 1px solid var(--theme-color);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(18, 8, 30, 0.98);
+            border: 1px solid var(--deep-gold);
             border-radius: 6px;
-            margin-top: 6px;
+            margin-top: 8px;
             padding: 8px;
             flex-direction: column;
             gap: 6px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.9);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
             z-index: 1100;
             min-width: 150px;
-            text-align: left;
+            text-align: center;
         }
 
         .library-dropdown a {
-            font-size: 0.75rem;
-            padding: 4px 8px;
+            font-size: 0.78rem;
+            padding: 6px 10px;
             display: block;
             border-radius: 4px;
         }
 
         .library-dropdown a:hover {
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.2);
         }
 
         /* Live Color Theme Switcher Bar */
@@ -302,19 +283,18 @@
             display: flex;
             gap: 8px;
             justify-content: center;
-            margin: 15px 0;
+            margin: 1rem auto;
             flex-wrap: wrap;
-            background: rgba(11, 15, 14, 0.75);
-            padding: 8px;
-            border-radius: 6px;
+            background: rgba(11, 2, 20, 0.75);
+            padding: 8px 15px;
+            border-radius: 8px;
             max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .color-btn {
-            background: #111715;
+            background: #11051d;
             border: 1px solid rgba(212, 175, 55, 0.4);
             color: var(--text-main);
             padding: 4px 10px;
@@ -339,16 +319,16 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 30px 20px;
+            padding: 2.5rem 1rem;
         }
 
         /* 3D Real Book Container */
         .real-book-container {
-            width: 340px;
-            height: 480px;
+            width: 320px;
+            height: 460px;
             position: relative;
             perspective: 1200px;
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
             cursor: pointer;
             animation: floatBook 4s infinite alternate ease-in-out;
             transition: all 0.4s ease;
@@ -365,21 +345,21 @@
             position: absolute;
             transform-style: preserve-3d;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
-            border-radius: 4px 12px 12px 4px;
-            box-shadow: -15px 20px 40px rgba(0,0,0,0.8), 0 0 45px var(--glow-strength);
+            border-radius: 6px 14px 14px 6px;
+            box-shadow: -15px 20px 45px rgba(0,0,0,0.85), 0 0 50px var(--glow-strength);
         }
 
         .real-book-container:hover .real-book {
             transform: scale(1.03) rotateY(0deg) rotateX(0deg);
-            box-shadow: -20px 25px 60px rgba(0,0,0,0.9), 0 0 70px var(--theme-color);
+            box-shadow: -20px 25px 65px rgba(0,0,0,0.95), 0 0 80px var(--deep-gold);
         }
 
         .real-book::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 25px; height: 100%;
+            top: 0; left: 0; width: 28px; height: 100%;
             background: linear-gradient(90deg, #112618, #1b3b28, #0b140f);
-            border-radius: 4px 0 0 4px;
+            border-radius: 6px 0 0 6px;
             box-shadow: inset -3px 0 6px rgba(0,0,0,0.7);
             z-index: 10;
         }
@@ -398,82 +378,64 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 4px 12px 12px 4px;
-            border: 4px solid var(--theme-color);
+            border-radius: 6px 14px 14px 6px;
+            border: 3px solid var(--deep-gold);
             box-sizing: border-box;
             position: relative;
             z-index: 5;
-            transition: border-color 0.5s ease;
+        }
+
+        .hero-section h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--text-main);
+            margin: 0.5rem 0 0.8rem 0;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
         }
 
         .royal-subtitle {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-style: italic;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            max-width: 650px;
+            line-height: 1.65;
+            margin-bottom: 1.8rem;
             text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+            padding: 0 1rem;
         }
 
         .royal-btn {
-            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
-            color: #0b0f0e;
-            border: 1px solid #fff;
-            padding: 12px 25px;
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #11051d;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 0.92rem;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
             display: inline-block;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px var(--glow-strength);
-            transition: 0.2s;
+            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.45);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
         }
         .royal-btn:hover {
-            background: linear-gradient(to bottom, #fff, var(--theme-color));
-            box-shadow: 0 0 25px var(--theme-color);
-        }
-
-        /* Universal Scroll Down Indicator */
-        #global-scroll-indicator {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(17, 23, 21, 0.9);
-            border: 1px solid var(--theme-color);
-            color: var(--text-main);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            z-index: 2000;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            animation: floatIndicator 2s infinite ease-in-out;
-            transition: opacity 0.3s ease;
-        }
-        @keyframes floatIndicator {
-            0% { transform: translate(-50%, 0px); }
-            50% { transform: translate(-50%, 6px); }
-            100% { transform: translate(-50%, 0px); }
+            background: linear-gradient(135deg, #f3e5ab, #d4af37);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.8);
+            transform: scale(1.04);
         }
 
         /* Professional Footer */
         .footer-sanctuary {
             background: var(--panel-bg);
-            border-top: 2px solid var(--theme-color);
-            padding: 25px 20px;
+            border-top: 2px solid var(--deep-gold);
+            padding: 2rem 1rem;
             margin-top: auto;
             box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
-            transition: border-color 0.5s ease;
+            backdrop-filter: blur(12px);
         }
         .footer-content {
             max-width: 800px;
@@ -481,11 +443,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .footer-title {
+            font-family: 'Cinzel', serif;
             color: var(--theme-color);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             letter-spacing: 2px;
             text-shadow: 0 0 10px var(--glow-strength);
         }
@@ -494,12 +457,14 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
             text-decoration: none;
+            font-family: 'Playfair Display', serif;
         }
         .footer-copy {
             color: var(--text-muted);
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             letter-spacing: 1px;
-            margin-top: 5px;
+            margin-top: 4px;
+            font-family: 'Cinzel', serif;
         }
 
         /* Community Chat Modal */
@@ -507,31 +472,32 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(4, 10, 8, 0.85);
+            background: rgba(4, 10, 8, 0.88);
             z-index: 2000;
             justify-content: center;
             align-items: center;
         }
         .modal-box {
-            background: rgba(20, 27, 24, 0.98);
-            border: 2px solid var(--theme-color);
-            padding: 30px;
-            border-radius: 8px;
+            background: var(--panel-bg);
+            border: 2px solid var(--deep-gold);
+            padding: 2.2rem;
+            border-radius: 12px;
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
-            box-shadow: 0 0 30px var(--glow-strength);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(15px);
         }
         .gate-input {
             width: 100%;
-            padding: 10px;
-            background: #0b0f0e;
-            border: 1px solid var(--theme-color);
+            padding: 0.75rem;
+            background: #0b0214;
+            border: 1px solid var(--deep-gold);
             color: #fff;
             font-family: 'Cinzel', serif;
-            margin: 15px 0;
+            margin: 1rem 0;
             box-sizing: border-box;
-            border-radius: 4px;
+            border-radius: 6px;
         }
     </style>
 </head>
@@ -587,25 +553,19 @@
     <div class="moving-bg-layer"></div>
     <div class="shine-overlay" id="shine-layer"></div>
 
-    <!-- Universal Floating Scroll Down Indicator -->
-    <div id="global-scroll-indicator" onclick="window.scrollBy({ top: 400, behavior: 'smooth' })">
-        <span>Scroll Down for More</span>
-        <span>↓</span>
-    </div>
-
     <!-- Community Chat Modal -->
     <div class="modal-overlay" id="communityModal">
         <div class="modal-box">
-            <h3 style="color: var(--theme-color); margin-top: 0;">💬 Community Chat</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem;">Enter your date of birth to enter the authorized community room:</p>
+            <h3 style="color: var(--theme-color); margin-top: 0; font-family: 'Cinzel', serif;">💬 Community Chat</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; font-family: 'Playfair Display', serif;">Enter your date of birth to enter the authorized community room:</p>
             <input type="text" id="user-birthday" class="gate-input" placeholder="MM/DD/YYYY">
-            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:8px 15px;">Enter Chamber</button>
+            <button class="royal-btn" onclick="routeByBirthday()" style="margin-top:5px; padding:0.6rem 1.2rem;">Enter Chamber</button>
             <br>
-            <button style="background:transparent; border:none; color:#9e9382; margin-top:15px; cursor:pointer; font-family:'Cinzel';" onclick="closeModal()">Close</button>
+            <button style="background:transparent; border:none; color:#e2d9c5; margin-top:1rem; cursor:pointer; font-family:'Cinzel'; font-size:0.8rem;" onclick="closeModal()">Close</button>
         </div>
     </div>
 
-    <!-- Navigation Bar with Library Submenu & Support Link -->
+    <!-- Navigation Bar with Library Submenu -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Home</a></div>
         
@@ -625,10 +585,10 @@
         <div class="nav-module"><a href="#" onclick="openModal(); return false;">💬 Community</a></div>
     </nav>
 
-    <!-- Live Color Theme Switcher Bar with No Color Option -->
+    <!-- Live Color Theme Switcher Bar -->
     <div class="theme-switcher-bar">
-        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted);">Vibe Theme:</span>
-        <button class="color-btn" style="border-color: #8c8c8c; color: #8c8c8c;" onclick="setTheme('reset', '#c5b59b', 'rgba(197, 181, 155, 0.2)')">No Color</button>
+        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted); font-family: 'Cinzel', serif;">Vibe Theme:</span>
+        <button class="color-btn" style="border-color: #f3e5ab; color: #f3e5ab;" onclick="setTheme('reset', '#f3e5ab', 'rgba(212, 175, 55, 0.35)')">No Color</button>
         <button class="color-btn" style="border-color: #ff69b4; color: #ff69b4;" onclick="setTheme('active', '#ff69b4', 'rgba(255, 105, 180, 0.5)')">Pink</button>
         <button class="color-btn" style="border-color: #d4af37; color: #d4af37;" onclick="setTheme('active', '#d4af37', 'rgba(212, 175, 55, 0.5)')">Gold</button>
         <button class="color-btn" style="border-color: #4169e1; color: #4169e1;" onclick="setTheme('active', '#4169e1', 'rgba(65, 105, 225, 0.5)')">Blue</button>
@@ -644,7 +604,7 @@
             </div>
         </div>
 
-        <h3 style="color: var(--text-main); margin: 5px 0; font-size: 1.2rem; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">The Song of Rosanna and the Evil King</h3>
+        <h3>The Song of Rosanna and the Evil King</h3>
         <p class="royal-subtitle">
             “An ancient sanctuary of boundless royalty, power, wealth, and eternal love. Step into the timeless narrative where courage meets grace.”
         </p>
@@ -657,18 +617,17 @@
         <div class="footer-content">
             <div class="footer-title">Imperial Divine Vision</div>
             <a href="mailto:imperialdivinevision@gmail.com" class="footer-contact">✉️ imperialdivinevision@gmail.com</a>
-            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Rights Reserved.</div>
+            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Royal Rights Reserved. Master Code: ROSANNA-2026</div>
         </div>
     </footer>
 
     <script>
         let musicStarted = false;
 
-        // Theme Switcher
         function setTheme(mode, color, glow) {
             if (mode === 'reset') {
                 document.body.classList.remove('animated-vibe');
-                document.documentElement.style.setProperty('--theme-color', '#c5b59b');
+                document.documentElement.style.setProperty('--theme-color', '#f3e5ab');
                 document.documentElement.style.setProperty('--glow-strength', glow);
             } else {
                 document.body.classList.add('animated-vibe');
@@ -677,12 +636,10 @@
             }
         }
 
-        // Library Submenu Toggle
         function toggleLibraryMenu(show) {
             document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
         }
 
-        // Fullscreen YouTube-Style Toggle / Chamber Expansion Engine
         function toggleFullScreen() {
             const body = document.body;
             const fsBtn = document.getElementById('fsToggleBtn');
@@ -704,7 +661,6 @@
             }
         }
 
-        // Unrolling Scroll Modal
         function openScrollTutorial() {
             document.getElementById('scrollModal').style.display = 'flex';
         }
@@ -712,12 +668,11 @@
             document.getElementById('scrollModal').style.display = 'none';
         }
 
-        // Mouse Shine Effect & Auto-Audio Start
         function shineLight(event) {
             let layer = document.getElementById('shine-layer');
             let x = (event.clientX / window.innerWidth) * 100;
             let y = (event.clientY / window.innerHeight) * 100;
-            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(197, 181, 155, 0.2) 0%, transparent 60%)";
+            layer.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(212, 175, 55, 0.15) 0%, transparent 60%)";
             layer.style.opacity = "1";
 
             if (!musicStarted) {
@@ -741,7 +696,6 @@
             }
         }
 
-        // Community Modal
         function openModal() {
             document.getElementById('communityModal').style.display = 'flex';
         }
@@ -749,27 +703,6 @@
             document.getElementById('communityModal').style.display = 'none';
         }
 
-        // Scroll Down Indicator Logic
-        window.addEventListener('DOMContentLoaded', () => {
-            const indicator = document.getElementById('global-scroll-indicator');
-            if (document.documentElement.scrollHeight > window.innerHeight + 100) {
-                indicator.style.display = 'flex';
-            } else {
-                indicator.style.display = 'none';
-            }
-
-            window.addEventListener('scroll', () => {
-                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80) {
-                    indicator.style.opacity = '0';
-                    indicator.style.pointerEvents = 'none';
-                } else {
-                    indicator.style.opacity = '1';
-                    indicator.style.pointerEvents = 'auto';
-                }
-            });
-        });
-
-        // Birthday Router for Community
         function routeByBirthday() {
             let bdayInput = document.getElementById('user-birthday').value.trim();
             if (!bdayInput) {
