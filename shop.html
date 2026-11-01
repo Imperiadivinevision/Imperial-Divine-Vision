@@ -15,7 +15,7 @@
 
         * { box-sizing: border-box; }
 
-        /* Refined Luminous Silk Satin Background: Vibrant Emerald, Pearlescent Light, and Warm Amber Gold */
+        /* Living, Flowing Silk Satin Background with Deep Emerald, Purple, and Amber Waves */
         body {
             background-color: #030705;
             color: #e6dfd3;
@@ -24,34 +24,34 @@
             padding: 0;
             padding-top: 95px;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #041f18, #0e3b30, #2c163b, #4a350e, #0e3b30, #041f18);
-            background-size: 400% 400%;
-            animation: luminousSilkWaves 20s ease infinite;
+            background: linear-gradient(120deg, #020906, #091a13, #150a21, #1f1406, #081a13, #020906);
+            background-size: 500% 500%;
+            animation: flowingSatin 25s ease infinite;
             min-height: 100vh;
             position: relative;
         }
 
-        @keyframes luminousSilkWaves {
+        @keyframes flowingSatin {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Luminous Highlight Sheen Overlay to give that glowing fabric depth */
+        /* Luminous Highlight Sheen Overlay for Fabric Depth */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 40% 30%, rgba(255, 235, 150, 0.12) 0%, transparent 55%),
-                        radial-gradient(circle at 75% 70%, rgba(30, 120, 95, 0.2) 0%, transparent 60%);
+            background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 80%, rgba(16, 6, 24, 0.6) 0%, transparent 70%);
             pointer-events: none;
             z-index: 1;
-            animation: sheenGlow 14s ease-in-out infinite alternate;
+            animation: sheenWave 18s ease-in-out infinite alternate;
         }
 
-        @keyframes sheenGlow {
-            0% { opacity: 0.6; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.04); }
+        @keyframes sheenWave {
+            0% { transform: translateY(-20px) scale(1); opacity: 0.7; }
+            100% { transform: translateY(20px) scale(1.05); opacity: 1; }
         }
 
         .top-nav-bar, .main-sanctuary-wrapper, #access-code-popup {
@@ -104,7 +104,7 @@
             font-weight: bold;
         }
 
-        /* Top Right Music Button */
+        /* Top Right Milélé Anthem Button */
         .top-music-btn {
             background: transparent;
             color: var(--champagne-gold);
@@ -268,7 +268,7 @@
 
         /* Ticket Cards */
         .item-card {
-            background: rgba(4, 12, 9, 0.92);
+            background: rgba(4, 14, 11, 0.92);
             border: 1px solid var(--border-subtle);
             border-radius: 8px;
             padding: 20px;
@@ -394,6 +394,11 @@
 </head>
 <body onload="initializeSanctuary()">
 
+    <!-- Official Recorded Anthem: Milélé (milele.m4a) -->
+    <audio id="milere-anthem" loop>
+        <source src="milele.m4a" type="audio/mp4">
+    </audio>
+
     <!-- Top Navigation Bar -->
     <nav class="top-nav-bar">
         <div class="nav-links">
@@ -404,7 +409,7 @@
             <a href="vip.html">VIP 👑</a>
             <a href="shop.html" class="shop-nav-highlight">Imperial Shop 🪙</a>
         </div>
-        <button class="top-music-btn" onclick="toggleHarpPipaMelody()">🎵 Harp Melody</button>
+        <button class="top-music-btn" onclick="toggleMilereAnthem()">🎵 Play Milélé Anthem</button>
     </nav>
 
     <!-- Main Sanctuary Wrapper -->
@@ -508,7 +513,7 @@
         </div>
     </div>
 
-    <!-- Script Engine -->
+    <!-- Script Engine with Persistent Local Storage & Milélé Audio Player -->
     <script>
         const ADMIN_EMAIL = "Imperialdivinevision@gmail.com";
         const UNIVERSAL_MASTER_CODE = "ROSANNA-2026";
@@ -520,11 +525,10 @@
             registeredEmails: []
         };
 
-        let ambientAudioInterval = null;
-        let isMusicPlaying = false;
+        let isAnthemPlaying = false;
 
         function initializeSanctuary() {
-            const savedData = localStorage.getItem('imperial_sanctuary_user_v13');
+            const savedData = localStorage.getItem('imperial_sanctuary_user_v14');
             if (savedData) {
                 try {
                     userProgress = JSON.parse(savedData);
@@ -540,7 +544,7 @@
         }
 
         function saveProgressToStorage() {
-            localStorage.setItem('imperial_sanctuary_user_v13', JSON.stringify(userProgress));
+            localStorage.setItem('imperial_sanctuary_user_v14', JSON.stringify(userProgress));
         }
 
         function saveUserEmail() {
@@ -691,51 +695,22 @@
             document.getElementById('access-code-popup').style.display = 'none';
         }
 
-        /* Continuous Harp Melody Engine */
-        function toggleHarpPipaMelody() {
+        /* Milélé Anthem Audio Toggle Engine */
+        function toggleMilereAnthem() {
+            const audioEl = document.getElementById('milere-anthem');
             const btn = document.querySelector('.top-music-btn');
-            if (isMusicPlaying) {
-                if (ambientAudioInterval) clearInterval(ambientAudioInterval);
-                isMusicPlaying = false;
-                btn.innerText = "🎵 Harp Melody";
-                return;
-            }
 
-            isMusicPlaying = true;
-            btn.innerText = "🎶 Harp Active";
-
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const scaleNotes = [293.66, 349.23, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
-
-                function playPluck() {
-                    if (!isMusicPlaying) return;
-                    const now = audioCtx.currentTime;
-                    const freq = scaleNotes[Math.floor(Math.random() * scaleNotes.length)];
-
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, now);
-
-                    gain.gain.setValueAtTime(0.05, now);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
-
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-
-                    osc.start(now);
-                    osc.stop(now + 2.5);
-                }
-
-                playPluck();
-                ambientAudioInterval = setInterval(() => {
-                    playPluck();
-                }, 1000);
-
-            } catch (e) {
-                alert("Harp melody initialized.");
+            if (isAnthemPlaying) {
+                audioEl.pause();
+                isAnthemPlaying = false;
+                btn.innerText = "🎵 Play Milélé Anthem";
+            } else {
+                audioEl.play().then(() => {
+                    isAnthemPlaying = true;
+                    btn.innerText = "🎶 Milélé Anthem Active";
+                }).catch(e => {
+                    alert("Please click anywhere on the page first, then click the anthem button!");
+                });
             }
         }
     </script>
