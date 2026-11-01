@@ -10,7 +10,6 @@
             --primary-gold: #f3e5ab;
             --deep-gold: #d4af37;
             --text-light: #f9f6ee;
-            --overlay-dark: rgba(10, 5, 20, 0.75);
         }
 
         * {
@@ -28,7 +27,7 @@
             background-color: #0b0214;
         }
 
-        /* Breathing, shifting, light-reflecting silk background animation */
+        /* Fully dynamic silk-shifting and breathing background */
         .animated-silk-bg {
             position: fixed;
             top: -10%;
@@ -38,92 +37,109 @@
             background: url('shop.png') no-repeat center center;
             background-size: cover;
             z-index: -2;
-            animation: silkBreath 18s ease-in-out infinite alternate, colorShift 24s ease-in-out infinite alternate;
+            animation: silkBreath 16s ease-in-out infinite alternate, royalColorShift 20s ease-in-out infinite alternate;
         }
 
-        /* Dynamic lighting shimmer overlay */
+        /* Shimmering light overlay matching pinkish, blue, and royal purple hues */
         .silk-shimmer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(59, 130, 246, 0.1), rgba(212, 175, 55, 0.12), rgba(16, 185, 129, 0.1));
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(59, 130, 246, 0.18), rgba(236, 72, 153, 0.15), rgba(212, 175, 55, 0.2));
             mix-blend-mode: overlay;
             z-index: -1;
             pointer-events: none;
-            animation: lightPulse 10s ease-in-out infinite alternate;
+            animation: lightPulse 8s ease-in-out infinite alternate;
         }
 
         @keyframes silkBreath {
             0% {
-                transform: scale(1) translateY(0) rotate(0deg);
+                transform: scale(1) translateY(0) translateX(0);
             }
             50% {
-                transform: scale(1.06) translateY(-25px) rotate(0.5deg);
+                transform: scale(1.07) translateY(-20px) translateX(10px);
             }
             100% {
-                transform: scale(1.03) translateY(15px) rotate(-0.5deg);
+                transform: scale(1.03) translateY(15px) translateX(-10px);
             }
         }
 
-        @keyframes colorShift {
+        /* Deep royal blue, strong purple, lighter purple, and pinkish hue rotations */
+        @keyframes royalColorShift {
             0% {
-                filter: brightness(1) saturate(1) hue-rotate(0deg);
+                filter: brightness(1) saturate(1.1) hue-rotate(0deg);
             }
-            33% {
-                filter: brightness(1.1) saturate(1.2) hue-rotate(25deg); /* Rich royal blue-purple shift */
+            25% {
+                filter: brightness(1.12) saturate(1.3) hue-rotate(35deg); /* Deep royal blue transition */
             }
-            66% {
-                filter: brightness(1.05) saturate(1.15) hue-rotate(-20deg); /* Deep majestic emerald-purple shift */
+            50% {
+                filter: brightness(1.08) saturate(1.25) hue-rotate(-15deg); /* Strong royal purple */
+            }
+            75% {
+                filter: brightness(1.15) saturate(1.35) hue-rotate(-35deg); /* Lighter purple / pinkish silk highlight */
             }
             100% {
-                filter: brightness(1.15) saturate(1.25) hue-rotate(10deg);
+                filter: brightness(1.1) saturate(1.2) hue-rotate(15deg);
             }
         }
 
         @keyframes lightPulse {
-            0% { opacity: 0.4; }
-            100% { opacity: 0.85; }
+            0% { opacity: 0.5; }
+            100% { opacity: 0.9; }
         }
 
         header {
             text-align: center;
-            padding: 3rem 1rem 2rem 1rem;
-            background: linear-gradient(to bottom, rgba(10,5,20,0.85), transparent);
+            padding: 3rem 1rem 1.5rem 1.5rem;
+            background: linear-gradient(to bottom, rgba(10,5,20,0.8), transparent);
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--primary-gold);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 2px 4px rgba(0,0,0,0.9);
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.7), 0 2px 5px rgba(0,0,0,0.9);
             letter-spacing: 3px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-style: italic;
             color: #e2d9c5;
             letter-spacing: 1px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
+        /* Audio Player Bar */
+        .audio-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        audio {
+            height: 35px;
+            filter: sepia(50%) hue-rotate(200deg) saturate(300%);
+            opacity: 0.85;
+        }
+
+        /* Perfectly organized multi-carriage layout */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem 2rem 3rem 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
         }
 
         .card {
-            background: rgba(20, 10, 35, 0.8);
+            background: rgba(20, 10, 35, 0.78);
             border: 2px solid var(--deep-gold);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.8rem 1.5rem;
             text-align: center;
             backdrop-filter: blur(8px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(212, 175, 55, 0.2);
@@ -138,22 +154,23 @@
         .card h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
             letter-spacing: 1px;
         }
 
         .card p {
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
             color: #dcd6d0;
         }
 
         .price {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: var(--deep-gold);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             font-weight: bold;
         }
 
@@ -162,8 +179,8 @@
             background: linear-gradient(135deg, #d4af37, #aa7c11);
             color: #11051d;
             border: none;
-            padding: 0.8rem 1.8rem;
-            font-size: 1rem;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
@@ -181,7 +198,7 @@
 
         footer {
             text-align: center;
-            padding: 3rem;
+            padding: 2.5rem;
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
             color: var(--primary-gold);
@@ -198,10 +215,18 @@
     <header>
         <h1>Imperial Treasury & Shop</h1>
         <p class="subtitle">The Song of Rosanna and the Evil King • Premiere Collection</p>
+        
+        <!-- Restored Milélé Background Music Player -->
+        <div class="audio-container">
+            <audio controls loop autoplay>
+                <source src="https://actions.google.com/sounds/v1/ambiences/fantasy_harp.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </header>
 
     <main class="container">
-        <!-- Item 1 -->
+        <!-- Carriage 1 -->
         <div class="card">
             <h3>Sovereign Premiere Seat</h3>
             <p>Secure your exclusive entry ticket for the grand 3-episode cinematic release.</p>
@@ -209,7 +234,7 @@
             <button class="btn" onclick="alert('Use Cash App $tegrakij22 with master code ROSANNA-2026')">Acquire Ticket</button>
         </div>
 
-        <!-- Item 2 -->
+        <!-- Carriage 2 -->
         <div class="card">
             <h3>Imperial Coin Vault (3,000)</h3>
             <p>Stock your royal treasury coin balance instantly for digital art and artifacts.</p>
@@ -217,12 +242,20 @@
             <button class="btn" onclick="alert('Vault purchase unlocked with code ROSANNA-2026')">Open Vault</button>
         </div>
 
-        <!-- Item 3 -->
+        <!-- Carriage 3 -->
         <div class="card">
             <h3>Collectible Card Set</h3>
             <p>A pristine digital keepsake card featuring Rosanna, Rica, and King Benson.</p>
             <div class="price">$0.99 USD</div>
             <button class="btn" onclick="alert('Collectible card added to your treasury!')">Claim Card</button>
+        </div>
+
+        <!-- Carriage 4 -->
+        <div class="card">
+            <h3>Royal Scroll Access</h3>
+            <p>Unlock behind-the-scenes poetry, script scenes, and secret character lore.</p>
+            <div class="price">$1.99 USD / 2,000 Coins</div>
+            <button class="btn" onclick="alert('Royal scroll unlocked with code ROSANNA-2026')">Read Scroll</button>
         </div>
     </main>
 
