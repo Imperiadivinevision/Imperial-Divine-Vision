@@ -10,7 +10,7 @@
             --primary-gold: #f3e5ab;
             --deep-gold: #d4af37;
             --text-light: #f9f6ee;
-            --dark-card: rgba(18, 8, 30, 0.85);
+            --dark-card: rgba(18, 8, 30, 0.88);
         }
 
         * {
@@ -47,7 +47,7 @@
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
             text-decoration: none;
-            font-size: 0.855rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
             transition: color 0.3s ease;
         }
@@ -57,7 +57,7 @@
             text-shadow: 0 0 8px var(--deep-gold);
         }
 
-        /* Breathing, shifting silk background animation using your shop.png */
+        /* Breathing, shifting silk background animation using shop.png */
         .animated-silk-bg {
             position: fixed;
             top: -10%;
@@ -126,18 +126,23 @@
             margin-bottom: 0.6rem;
         }
 
-        /* Milele Theme Song Audio Player */
+        /* Beautiful Custom Border Container for Milele Theme Song */
         .audio-container {
-            display: flex;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin-top: 0.4rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(20, 10, 35, 0.85);
+            border: 1px solid var(--deep-gold);
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         audio {
             height: 28px;
             filter: sepia(40%) hue-rotate(190deg) saturate(250%);
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         /* Main layout grid */
@@ -256,6 +261,8 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -277,7 +284,7 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar for exploring all chambers -->
+    <!-- Top Navigation Bar -->
     <nav class="top-nav">
         <a href="index.html">Home</a>
         <a href="library.html">Library</a>
@@ -294,7 +301,7 @@
         <h1>Imperial Treasury & Shop</h1>
         <p class="subtitle">The Song of Rosanna and the Evil King • Premiere Collection</p>
         
-        <!-- Milele Theme Song Audio Player -->
+        <!-- Custom Border Container for Milele Theme Song -->
         <div class="audio-container">
             <audio controls loop autoplay>
                 <source src="milele.m4a" type="audio/mp4">
@@ -306,7 +313,7 @@
     <!-- Priority Verification Section Placed Right At The Top -->
     <section class="registry-section">
         <h3>Imperial Verification Pass</h3>
-        <p>Send your Cash App payment to <strong>$tegrakij22</strong>, then enter your details below for instant treasury notification.</p>
+        <p>Send your payment to Cash App <strong>$tegrakij22</strong>, then submit your details below so the treasury can verify and issue your pass.</p>
         <div>
             <input type="email" id="user-email" placeholder="Your email address...">
             <input type="text" id="user-cashapp" placeholder="Cash App handle ($YourTag)..."><br>
@@ -317,15 +324,15 @@
 
     <!-- Main Shop Inventory Cards -->
     <main class="container">
-        <!-- Sovereign Premiere Seat Card (1 coin / 1 ticket mode with live counter) -->
+        <!-- Sovereign Premiere Seat Card with Direct Cash App Secure Link -->
         <div class="card">
             <div>
                 <h3>Sovereign Premiere Seat</h3>
                 <p>Secure your exclusive entry ticket for the grand 3-episode cinematic release.</p>
                 <div class="inventory-status" id="seat-counter">1 out of 20 Tickets Claimed</div>
-                <div class="price">1 Coin / $12.00 USD</div>
+                <div class="price">$12.00 USD</div>
             </div>
-            <button class="btn" onclick="acquireTicket()">Acquire Ticket</button>
+            <a href="https://cash.app/$tegrakij22/12" target="_blank" class="btn">Proceed to Secure Checkout</a>
         </div>
 
         <!-- Coin Vault -->
@@ -335,17 +342,17 @@
                 <p>Stock your royal treasury coin balance instantly for digital art and artifacts.</p>
                 <div class="price">$3.00 USD</div>
             </div>
-            <button class="btn" onclick="openVault()">Open Vault</button>
+            <a href="https://cash.app/$tegrakij22/3" target="_blank" class="btn">Open Vault</a>
         </div>
 
-        <!-- Collectible Cards -->
+        <!-- Imperial Donation Chamber -->
         <div class="card">
             <div>
-                <h3>Collectible Card Set</h3>
-                <p>A pristine digital keepsake card featuring Rosanna, Rica, and King Benson.</p>
-                <div class="price">$0.99 USD</div>
+                <h3>Imperial Donation Chamber</h3>
+                <p>Freely support the artistic vision, cinematic production, and future of our kingdom.</p>
+                <div class="price">Freewill Offering</div>
             </div>
-            <button class="btn" onclick="claimCard()">Claim Card</button>
+            <a href="https://cash.app/$tegrakij22" target="_blank" class="btn">Support the Vision</a>
         </div>
     </main>
 
@@ -359,36 +366,6 @@
             document.getElementById('seat-counter').innerText = `${displayCount} out of 20 Tickets Claimed`;
         }
 
-        function acquireTicket() {
-            let code = prompt("Enter Master Code or Coin token (Hint: ROSANNA-2026):");
-            if (code === "ROSANNA-2026") {
-                let claimed = localStorage.getItem('tickets_claimed') ? parseInt(localStorage.getItem('tickets_claimed')) : 1;
-                if (claimed < 20) {
-                    claimed++;
-                    localStorage.setItem('tickets_claimed', claimed);
-                    updateDisplay(claimed);
-                    alert(`Master code verified! Ticket #${claimed} marked in the treasury. Please complete your payment via Cash App to $tegrakij22.`);
-                } else {
-                    alert("All 20 Sovereign Premiere Seats have been claimed!");
-                }
-            } else if (code !== null) {
-                alert("Invalid Master Code. Please use ROSANNA-2026.");
-            }
-        }
-
-        function openVault() {
-            let code = prompt("Enter Master Code for Coin Vault ($3.00 USD via Cash App $tegrakij22):");
-            if (code === "ROSANNA-2026") {
-                alert("Coin Vault unlocked! 3,000 Imperial Coins added.");
-            } else if (code !== null) {
-                alert("Invalid Master Code.");
-            }
-        }
-
-        function claimCard() {
-            alert("Collectible Card Set added ($0.99 USD via Cash App $tegrakij22). Master code: ROSANNA-2026");
-        }
-
         function submitVerification() {
             let email = document.getElementById('user-email').value;
             let cashapp = document.getElementById('user-cashapp').value;
@@ -396,19 +373,28 @@
                 alert("Please provide both a valid email and your Cash App handle for verification.");
                 return;
             }
+
+            let registeredEmails = JSON.parse(localStorage.getItem('treasury_emails') || '[]');
+            if (registeredEmails.includes(email)) {
+                document.getElementById('registry-msg').innerText = "This email is already registered in the Imperial Treasury!";
+                return;
+            }
+
+            let claimed = localStorage.getItem('tickets_claimed') ? parseInt(localStorage.getItem('tickets_claimed')) : 1;
+            if (claimed < 20) {
+                claimed++;
+                localStorage.setItem('tickets_claimed', claimed);
+                updateDisplay(claimed);
+            }
+
+            registeredEmails.push(email);
+            localStorage.setItem('treasury_emails', JSON.stringify(registeredEmails));
             
-            let subject = encodeURIComponent("New Imperial Treasury Ticket Verification Request");
-            let body = encodeURIComponent(`Royal Guardian,\n\nA new user has submitted payment verification.\n\nEmail: ${email}\nCash App Tag: ${cashapp}\n\nPlease check your Cash App ($tegrakij22) for payment confirmation and reply to issue their ticket pass.`);
+            let subject = encodeURIComponent("New Imperial Treasury Payment Verification");
+            let body = encodeURIComponent(`Royal Guardian,\n\nNew payment verification submitted:\n\nEmail: ${email}\nCash App Tag: ${cashapp}\n\nPlease check Cash App ($tegrakij22) to confirm and issue pass.`);
             
             window.location.href = `mailto:imperialdivinevision@gmail.com?subject=${subject}&body=${body}`;
-            
-            let registeredEmails = JSON.parse(localStorage.getItem('treasury_emails') || '[]');
-            if (!registeredEmails.includes(email)) {
-                registeredEmails.push(email);
-                localStorage.setItem('treasury_emails', JSON.stringify(registeredEmails));
-            }
-            
-            document.getElementById('registry-msg').innerText = "Verification request submitted! Your email client has opened to notify the Imperial Treasury.";
+            document.getElementById('registry-msg').innerText = "Verification submitted successfully! Treasury notified.";
         }
 
         window.onload = function() {
