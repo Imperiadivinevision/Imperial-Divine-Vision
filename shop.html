@@ -10,7 +10,7 @@
             --primary-gold: #f3e5ab;
             --deep-gold: #d4af37;
             --text-light: #f9f6ee;
-            --dark-card: rgba(18, 8, 30, 0.88);
+            --dark-card: rgba(16, 7, 28, 0.90);
         }
 
         * {
@@ -30,7 +30,7 @@
 
         /* Top Navigation Bar */
         .top-nav {
-            background: rgba(10, 5, 20, 0.95);
+            background: rgba(10, 5, 20, 0.96);
             border-bottom: 1px solid var(--deep-gold);
             padding: 0.8rem 1rem;
             display: flex;
@@ -40,7 +40,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .top-nav a {
@@ -54,10 +54,10 @@
 
         .top-nav a:hover {
             color: #ffffff;
-            text-shadow: 0 0 8px var(--deep-gold);
+            text-shadow: 0 0 10px var(--deep-gold);
         }
 
-        /* Breathing, shifting silk background animation using shop.png */
+        /* Breathing silk background animation using shop.png */
         .animated-silk-bg {
             position: fixed;
             top: -10%;
@@ -103,13 +103,13 @@
 
         header {
             text-align: center;
-            padding: 2rem 1rem 1rem 1rem;
-            background: linear-gradient(to bottom, rgba(10,5,20,0.75), transparent);
+            padding: 2.2rem 1rem 1rem 1rem;
+            background: linear-gradient(to bottom, rgba(10,5,20,0.8), transparent);
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             color: var(--primary-gold);
             text-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 2px 6px rgba(0,0,0,0.95);
             letter-spacing: 3px;
@@ -118,25 +118,24 @@
         }
 
         .subtitle {
-            font-size: 1.1rem;
+            font-size: 1.12rem;
             font-style: italic;
             color: #e2d9c5;
             letter-spacing: 1px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
         }
 
-        /* Beautiful Custom Border Container for Milele Theme Song */
         .audio-container {
             display: inline-flex;
             justify-content: center;
             align-items: center;
             margin-top: 0.5rem;
-            padding: 0.5rem 1.2rem;
-            background: rgba(20, 10, 35, 0.85);
+            padding: 0.5rem 1.4rem;
+            background: rgba(20, 10, 35, 0.88);
             border: 1px solid var(--deep-gold);
             border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 0 10px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7), inset 0 0 12px rgba(212, 175, 55, 0.25);
         }
 
         audio {
@@ -145,48 +144,46 @@
             opacity: 0.9;
         }
 
-        /* Main layout grid */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 1rem 2rem 2.5rem 2rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
 
-        /* Priority Verification Section Placed Right at the Top */
         .registry-section {
             max-width: 700px;
-            margin: 1rem auto 1.5rem auto;
+            margin: 1.2rem auto 1.5rem auto;
             background: var(--dark-card);
             border: 2px solid var(--deep-gold);
             border-radius: 12px;
-            padding: 1.5rem 2rem;
+            padding: 1.6rem 2rem;
             text-align: center;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.75);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.8);
+            backdrop-filter: blur(12px);
         }
 
         .registry-section h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
             margin-bottom: 0.4rem;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
         }
 
         .registry-section p {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: #dcd6d0;
             margin-bottom: 0.8rem;
         }
 
         .registry-section input {
-            padding: 0.6rem;
+            padding: 0.7rem;
             width: 45%;
             border-radius: 6px;
             border: 1px solid var(--deep-gold);
-            background: rgba(10,5,20,0.9);
+            background: rgba(10,5,20,0.92);
             color: var(--text-light);
             font-family: 'Playfair Display', serif;
             margin: 0.3rem;
@@ -196,10 +193,10 @@
             background: var(--dark-card);
             border: 2px solid var(--deep-gold);
             border-radius: 12px;
-            padding: 1.6rem;
+            padding: 1.8rem;
             text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.75), inset 0 0 15px rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.8), inset 0 0 18px rgba(212, 175, 55, 0.22);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -207,32 +204,32 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 45px rgba(212, 175, 55, 0.45), inset 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5), inset 0 0 22px rgba(212, 175, 55, 0.4);
         }
 
         .card h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             margin-bottom: 0.6rem;
             letter-spacing: 1px;
         }
 
         .card p {
-            margin-bottom: 0.8rem;
-            line-height: 1.5;
+            margin-bottom: 0.9rem;
+            line-height: 1.55;
             color: #dcd6d0;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
 
         .inventory-status {
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: #f3e5ab;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.9rem;
             background: rgba(212, 175, 55, 0.15);
-            padding: 0.4rem;
+            padding: 0.5rem;
             border-radius: 6px;
             border: 1px solid var(--deep-gold);
             font-weight: bold;
@@ -241,9 +238,9 @@
 
         .price {
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--deep-gold);
-            margin-bottom: 1rem;
+            margin-bottom: 1.1rem;
             font-weight: bold;
         }
 
@@ -252,12 +249,12 @@
             background: linear-gradient(135deg, #d4af37, #aa7c11);
             color: #11051d;
             border: none;
-            padding: 0.7rem 1.3rem;
-            font-size: 0.85rem;
+            padding: 0.75rem 1.4rem;
+            font-size: 0.88rem;
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.45);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -267,24 +264,34 @@
 
         .btn:hover {
             background: linear-gradient(135deg, #f3e5ab, #d4af37);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7);
-            transform: scale(1.03);
+            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.75);
+            transform: scale(1.04);
+        }
+
+        .admin-panel {
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            background: rgba(10, 3, 20, 0.96);
+            border: 2px dashed var(--deep-gold);
+            border-radius: 12px;
+            padding: 1.4rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 2.2rem;
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--primary-gold);
-            background: linear-gradient(to top, rgba(10,5,20,0.95), transparent);
+            background: linear-gradient(to top, rgba(10,5,20,0.96), transparent);
             letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
     <nav class="top-nav">
         <a href="index.html">Home</a>
         <a href="library.html">Library</a>
@@ -301,7 +308,6 @@
         <h1>Imperial Treasury & Shop</h1>
         <p class="subtitle">The Song of Rosanna and the Evil King • Premiere Collection</p>
         
-        <!-- Custom Border Container for Milele Theme Song -->
         <div class="audio-container">
             <audio controls loop autoplay>
                 <source src="milele.m4a" type="audio/mp4">
@@ -310,21 +316,27 @@
         </div>
     </header>
 
-    <!-- Priority Verification Section Placed Right At The Top -->
+    <!-- Priority Verification Section -->
     <section class="registry-section">
         <h3>Imperial Verification Pass</h3>
-        <p>Send your payment to Cash App <strong>$tegrakij22</strong>, then submit your details below so the treasury can verify and issue your pass.</p>
+        <p>Send your payment to Cash App <strong>$tegrakij22</strong>, then submit your details below. Your order will be marked as <strong>Pending</strong> until verified.</p>
         <div>
             <input type="email" id="user-email" placeholder="Your email address...">
             <input type="text" id="user-cashapp" placeholder="Cash App handle ($YourTag)..."><br>
             <button class="btn" style="margin-top: 0.5rem;" onclick="submitVerification()">Submit For Verification</button>
         </div>
-        <p id="registry-msg" style="margin-top: 0.6rem; font-size: 0.82rem; color: #d4af37;"></p>
+        <p id="registry-msg" style="margin-top: 0.6rem; font-size: 0.85rem; color: #d4af37;"></p>
     </section>
+
+    <!-- Admin Approval Panel -->
+    <div class="admin-panel">
+        <h4 style="font-family: 'Cinzel', serif; color: var(--primary-gold); margin-bottom: 0.5rem;">👑 Royal Guardian Admin Controls</h4>
+        <p style="font-size: 0.82rem; color: #ccc; margin-bottom: 0.7rem;">Verified payment on Cash App? Click below to approve the pending ticket, advance the live counter, and issue the pass.</p>
+        <button class="btn" onclick="approvePendingTicket()" style="font-size: 0.78rem; padding: 0.55rem 1.1rem;">Approve Pending Ticket & Issue Pass</button>
+    </div>
 
     <!-- Main Shop Inventory Cards -->
     <main class="container">
-        <!-- Sovereign Premiere Seat Card with Direct Cash App Secure Link -->
         <div class="card">
             <div>
                 <h3>Sovereign Premiere Seat</h3>
@@ -335,7 +347,6 @@
             <a href="https://cash.app/$tegrakij22/12" target="_blank" class="btn">Proceed to Secure Checkout</a>
         </div>
 
-        <!-- Coin Vault -->
         <div class="card">
             <div>
                 <h3>Imperial Coin Vault (3,000)</h3>
@@ -345,7 +356,6 @@
             <a href="https://cash.app/$tegrakij22/3" target="_blank" class="btn">Open Vault</a>
         </div>
 
-        <!-- Imperial Donation Chamber -->
         <div class="card">
             <div>
                 <h3>Imperial Donation Chamber</h3>
@@ -380,21 +390,34 @@
                 return;
             }
 
-            let claimed = localStorage.getItem('tickets_claimed') ? parseInt(localStorage.getItem('tickets_claimed')) : 1;
-            if (claimed < 20) {
-                claimed++;
-                localStorage.setItem('tickets_claimed', claimed);
-                updateDisplay(claimed);
-            }
-
-            registeredEmails.push(email);
-            localStorage.setItem('treasury_emails', JSON.stringify(registeredEmails));
+            localStorage.setItem('pending_email', email);
+            localStorage.setItem('pending_cashapp', cashapp);
             
-            let subject = encodeURIComponent("New Imperial Treasury Payment Verification");
-            let body = encodeURIComponent(`Royal Guardian,\n\nNew payment verification submitted:\n\nEmail: ${email}\nCash App Tag: ${cashapp}\n\nPlease check Cash App ($tegrakij22) to confirm and issue pass.`);
+            let subject = encodeURIComponent("New Imperial Treasury Payment Verification (Pending Approval)");
+            let body = encodeURIComponent(`Royal Guardian,\n\nA new user has submitted payment verification and is PENDING APPROVAL:\n\nEmail: ${email}\nCash App Tag: ${cashapp}\n\nPlease check your Cash App ($tegrakij22). Once confirmed, open your shop admin panel to approve the ticket pass!`);
             
             window.location.href = `mailto:imperialdivinevision@gmail.com?subject=${subject}&body=${body}`;
-            document.getElementById('registry-msg').innerText = "Verification submitted successfully! Treasury notified.";
+            document.getElementById('registry-msg').innerText = "Status: PENDING ROYAL APPROVAL. Your email notification has been triggered.";
+        }
+
+        function approvePendingTicket() {
+            let code = prompt("Enter Master Code to authorize approval (Hint: ROSANNA-2026):");
+            if (code === "ROSANNA-2026") {
+                let claimed = localStorage.getItem('tickets_claimed') ? parseInt(localStorage.getItem('tickets_claimed')) : 1;
+                if (claimed < 20) {
+                    claimed++;
+                    localStorage.setItem('tickets_claimed', claimed);
+                    updateDisplay(claimed);
+                    
+                    let pendingEmail = localStorage.getItem('pending_email') || "Supporter";
+                    alert(`Success! Pending status cleared for ${pendingEmail}. Ticket counter advanced to ${claimed} out of 20. Pass officially issued!`);
+                    document.getElementById('registry-msg').innerText = `Status: APPROVED! Welcome to the Sovereign Premiere Seat.`;
+                } else {
+                    alert("All 20 seats are already claimed!");
+                }
+            } else if (code !== null) {
+                alert("Invalid Master Code.");
+            }
         }
 
         window.onload = function() {
