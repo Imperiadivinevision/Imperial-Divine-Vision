@@ -8,14 +8,12 @@
     <style>
         :root {
             --bg-dark: #030806;
-            --panel-bg: rgba(6, 17, 11, 0.7); /* Made more transparent */
+            --panel-bg: rgba(6, 17, 11, 0.85);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
-            --royal-purple: #8a2be2;
             --text-main: #f5f2eb;
             --text-muted: #a3b8aa;
-            --ambient-glow: rgba(212, 175, 55, 0.4);
         }
 
         body {
@@ -27,11 +25,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Hide scrollbars on full-screen experience */
+            overflow: hidden;
             box-sizing: border-box;
         }
 
-        /* Full-Screen Immersive Palace Environment (Video Background) */
+        /* Full-Screen Immersive Palace Environment */
         #bg-video {
             position: fixed;
             right: 0;
@@ -42,8 +40,7 @@
             height: auto;
             z-index: -100;
             background-size: cover;
-            /* Subtle blur to create depth of field, keeping the king sharp */
-            filter: brightness(0.85) blur(1px); 
+            filter: brightness(0.85);
         }
 
         /* Nav Hub */
@@ -52,7 +49,7 @@
             background: rgba(4, 12, 7, 0.7);
             backdrop-filter: blur(12px);
             border-bottom: 2px solid var(--gold);
-            position: relative; /* Not sticky, integrates with flow */
+            position: relative;
             z-index: 500;
             display: flex;
             justify-content: center;
@@ -83,12 +80,12 @@
 
         /* Sovereign Title Banner */
         .page-banner {
-            background: transparent; /* Clean, no background, just text */
+            background: transparent;
             border-top: 2px solid var(--gold);
             border-bottom: 2px solid var(--gold);
             text-align: center;
             padding: 10px 20px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             backdrop-filter: blur(8px);
             position: relative;
             z-index: 500;
@@ -123,49 +120,48 @@
             display: flex;
             flex: 1;
             width: 100%;
-            height: calc(100vh - 110px); /* Fill screen below header */
+            height: calc(100vh - 105px);
             box-sizing: border-box;
             position: relative;
             background: transparent;
             overflow: hidden;
         }
 
-        /* Center Stage: King Benson integrated into the Palace */
+        /* Center Stage: King Benson standing naturally in the hall */
         .character-stage {
             flex: 2;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: flex-end; /* Stand him on the floor */
+            align-items: center;
             position: relative;
-            padding-bottom: 40px; /* Some breathing room at the bottom */
-            z-index: 10; /* Above video background */
+            padding: 20px;
+            z-index: 10;
             background: transparent;
         }
 
+        /* Scaled down cleanly with object-fit: contain so his whole body & face show */
         .king-cinematic-media {
-            width: auto;
-            height: 90%; /* He is 90% of the screen height */
+            width: 100%;
+            max-width: 500px;
+            height: 72vh;
             object-fit: contain;
-            object-position: center bottom;
+            object-position: center center;
             display: block;
             position: relative;
             z-index: 15;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.9));
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.95));
         }
 
-        /* Integrated Media Caption (Text on the floor) */
         .king-caption {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 10px;
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-align: center;
             font-family: 'Cinzel', serif;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
             z-index: 20;
         }
 
@@ -173,14 +169,14 @@
         .control-sidebar {
             width: 380px;
             background: var(--panel-bg);
-            backdrop-filter: blur(15px); /* Strong blur to isolate panel */
+            backdrop-filter: blur(15px);
             border-left: 2px solid var(--gold);
             display: flex;
             flex-direction: column;
             padding: 20px;
             gap: 15px;
             box-sizing: border-box;
-            z-index: 100; /* Topmost */
+            z-index: 100;
             box-shadow: -10px 0 25px rgba(0,0,0,0.8);
         }
 
@@ -312,9 +308,8 @@
 </head>
 <body>
 
-    <!-- The Full-Screen Immersive Palace Environment (Your living wavy video background) -->
+    <!-- Full-Screen Wavy Palace Background Video -->
     <video autoplay loop muted playsinline id="bg-video">
-        <!-- Replace 'imperial-palace-alive.mp4' with your actual video file -->
         <source src="imperial-palace-alive.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -338,10 +333,9 @@
     </div>
 
     <div class="container" id="mainContainer">
-        <!-- Center Stage: King Benson integrated into the Palace Hall -->
+        <!-- Center Stage: King Benson Standing Cleanly in the Palace -->
         <div class="character-stage">
-            <!-- The Main Cinematic Avatar/Video is now a full-height element on the stage -->
-            <video id="media-video" class="king-cinematic-media" autoplay loop controls>
+            <video id="media-video" class="king-cinematic-media" autoplay loop controls style="display: block;">
                 <source id="video-source" src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
