@@ -2,26 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Imperial Temple Gate • Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        @keyframes royalSilkFlow {
-            0% { transform: scale(1); filter: brightness(1) saturate(1.1); }
-            50% { transform: scale(1.03); filter: brightness(1.12) saturate(1.25); }
-            100% { transform: scale(1); filter: brightness(1) saturate(1.1); }
+        /* Smooth Breathing Color-Shifting Background moving through royal tones */
+        @keyframes royalColorShift {
+            0% { background: #1e0533; }
+            20% { background: #3b0764; }
+            40% { background: #1e1b4b; }
+            60% { background: #4a1d5e; }
+            80% { background: #2e1065; }
+            100% { background: #1e0533; }
         }
 
         @keyframes lightGlow {
-            0% { opacity: 0.2; }
-            50% { opacity: 0.5; }
-            100% { opacity: 0.2; }
+            0% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.02); }
+            100% { opacity: 0.2; transform: scale(1); }
         }
 
-        /* Realistic Metallic Gold Shimmer for Seals and Accents */
         @keyframes metallicShine {
             0% { filter: drop-shadow(0 0 10px rgba(191, 149, 63, 0.5)); }
-            50% { filter: drop-shadow(0 0 20px rgba(252, 246, 186, 0.8)); }
+            50% { filter: drop-shadow(0 0 22px rgba(252, 246, 186, 0.85)); }
             100% { filter: drop-shadow(0 0 10px rgba(191, 149, 63, 0.5)); }
         }
 
@@ -30,45 +33,86 @@
             margin: 0; 
             min-height: 100vh; 
             color: #f4f0ea;
-            background: url('community.png') no-repeat center center fixed;
-            background-size: cover;
-            animation: royalSilkFlow 26s ease-in-out infinite alternate;
+            animation: royalColorShift 25s ease-in-out infinite;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            overflow-x: hidden;
             overflow-y: auto;
             position: relative;
-            padding: 40px 15px;
         }
 
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 25%, rgba(191, 149, 63, 0.12), rgba(8, 2, 15, 0.85));
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.12), rgba(15, 3, 30, 0.85));
             pointer-events: none;
             z-index: 1;
             animation: lightGlow 12s ease-in-out infinite alternate;
         }
 
-        /* The Imperial Obsidian & Burnished Gold Stele */
+        /* Imperial Top Navigation Bar harmonizing with shop.html */
+        .imperial-nav {
+            width: 100%;
+            background: rgba(10, 4, 18, 0.95);
+            border-bottom: 2px solid #bf953f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 15px;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            box-sizing: border-box;
+        }
+
+        .imperial-nav a {
+            font-family: 'Cinzel', serif;
+            color: #fcf6ba;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .imperial-nav a:hover, .imperial-nav a.active {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(191, 149, 63, 0.8);
+        }
+
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 15px;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        /* Single Unique Royal Shield Card Shape */
         .container { 
             position: relative;
-            z-index: 10;
-            background: rgba(12, 5, 22, 0.94);
-            /* Realistic Multi-Stitched Metallic Gold Border */
+            background: rgba(14, 6, 26, 0.95);
             border: 2px solid transparent;
             border-image: linear-gradient(to bottom, #fcf6ba, #bf953f, #b38728, #aa771c, #533f03) 1;
-            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95), inset 0 0 40px rgba(191, 149, 63, 0.18);
-            padding: 45px 35px; 
-            border-radius: 8px; 
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.95), inset 0 0 45px rgba(191, 149, 63, 0.2);
+            padding: 45px 30px 35px 30px; 
+            border-radius: 24px; 
             text-align: center; 
-            max-width: 500px;
+            max-width: 480px;
             width: 100%;
-            backdrop-filter: blur(18px);
+            box-sizing: border-box;
+            backdrop-filter: blur(20px);
             animation: gateReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            margin: auto;
         }
 
         @keyframes gateReveal {
@@ -76,55 +120,51 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Realistic Metallic Gold Seal Badge */
+        /* Sculptural Metallic Crest Badge */
         .imperial-seal-badge {
-            width: 76px;
-            height: 76px;
-            margin: -68px auto 16px auto;
+            width: 72px;
+            height: 72px;
+            margin: -72px auto 16px auto;
             background: linear-gradient(135deg, #fcf6ba 0%, #bf953f 40%, #b38728 70%, #533f03 100%);
             border: 2px solid #fff3cd;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.7rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), inset 0 0 15px rgba(255, 255, 255, 0.6);
             animation: metallicShine 5s ease-in-out infinite;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            /* Realistic Metallic Gold Text Gradient */
+            font-size: 1.5rem;
             background: linear-gradient(135deg, #fcf6ba 0%, #d4af37 50%, #aa771c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            filter: drop-shadow(0 2px 8px rgba(170, 119, 28, 0.4));
+            letter-spacing: 2.5px;
         }
 
         p {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: #d2ccc6;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             line-height: 1.6;
         }
 
-        /* Stored Rewards Live Preview with Metallic Gold Edge */
         .rewards-preview {
-            background: rgba(191, 149, 63, 0.08);
-            border: 1px dashed rgba(191, 149, 63, 0.45);
+            background: rgba(191, 149, 63, 0.1);
+            border: 1px dashed rgba(191, 149, 63, 0.5);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 20px;
             font-family: 'Cinzel', serif;
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             color: #fcf6ba;
             letter-spacing: 1px;
             display: none;
-            box-shadow: inset 0 0 10px rgba(191, 149, 63, 0.15);
         }
 
         .input-group {
@@ -132,24 +172,27 @@
             flex-direction: column;
             gap: 14px;
             align-items: center;
+            width: 100%;
         }
 
         label {
             font-family: 'Cinzel', serif;
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             color: #e2d9cd;
         }
 
         input {
-            width: 88%;
+            width: 100%;
+            max-width: 380px;
             padding: 12px;
+            box-sizing: border-box;
             background: rgba(8, 3, 15, 0.96);
             border: 1px solid #997322;
-            border-radius: 4px;
+            border-radius: 6px;
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             text-align: center;
             outline: none;
             transition: all 0.3s ease;
@@ -161,22 +204,23 @@
             box-shadow: 0 0 15px rgba(252, 246, 186, 0.4);
         }
 
-        /* Stunning Burnished Metallic Gold Button */
         button {
-            margin-top: 8px;
+            margin-top: 6px;
             font-family: 'Cinzel', serif;
             background: linear-gradient(135deg, #fcf6ba 0%, #bf953f 35%, #aa771c 100%);
             color: #12051a;
             border: 1px solid #fff3cd;
-            padding: 13px 35px;
-            font-size: 0.9rem;
+            padding: 13px 30px;
+            font-size: 0.88rem;
             font-weight: 700;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
             box-shadow: 0 5px 20px rgba(170, 119, 28, 0.45);
+            width: 100%;
+            max-width: 380px;
         }
 
         button:hover {
@@ -194,16 +238,15 @@
 
         .royal-branding { 
             position: fixed; 
-            bottom: 20px; 
-            right: 20px; 
-            width: 90px; 
+            bottom: 15px; 
+            right: 15px; 
+            width: 75px; 
             z-index: 100; 
             pointer-events: none;
             opacity: 0.85;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
         }
 
-        /* Immersive Gate Opening Transition Effect */
         .gate-opening {
             transform: scale(1.05);
             opacity: 0;
@@ -211,60 +254,86 @@
             transition: all 0.9s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        @media (max-width: 600px) {
-            body { padding: 20px 10px; }
-            .container { padding: 30px 20px; width: 95%; }
+        /* Universal Mobile Adjustments for All Phones */
+        @media (max-width: 768px) {
+            .imperial-nav { gap: 10px; padding: 10px 8px; justify-content: space-around; }
+            .imperial-nav a { font-size: 0.65rem; letter-spacing: 1px; }
+            .main-wrapper { padding: 20px 10px; }
+            .container { padding: 35px 18px 25px 18px; width: 95%; }
+            h1 { font-size: 1.3rem; }
+            p { font-size: 0.84rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Imperial Obsidian & Burnished Gold Stele -->
-    <div class="container" id="gateContainer">
-        <div class="imperial-seal-badge">👑</div>
-        
-        <h1>Worldwide Sanctuary</h1>
-        <p>Present your <strong>Email</strong> and <strong>Birth Year</strong> to unlock the gate and claim your stored rewards and global vault:</p>
-        
-        <!-- Live Stored Rewards Preview -->
-        <div class="rewards-preview" id="rewardsPreview">
-            ✨ Stored Vault Found! Coins: <span id="previewCoins">0</span> 🪙 | Total Spent: $<span id="previewSpent">0.00</span>
-        </div>
+    <!-- Imperial Top Navigation Bar -->
+    <nav class="imperial-nav">
+        <a href="index.html">Home</a>
+        <a href="library.html">Library</a>
+        <a href="youth.html">Youth</a>
+        <a href="shop.html">Imperial Shop</a>
+        <a href="support.html">Support Vision</a>
+        <a href="community.html" class="active">Community</a>
+    </nav>
 
-        <form id="ageGateForm">
-            <div class="input-group">
-                <label for="userEmail">Your Account Email:</label>
-                <input type="email" id="userEmail" placeholder="name@example.com" required oninput="checkStoredRewards(this.value)">
-
-                <label for="birthYear">Birth Year:</label>
-                <input type="number" id="birthYear" placeholder="YYYY" min="1900" max="2026" required>
-
-                <div class="error-msg" id="errorMsg">Please verify your credentials.</div>
-                <button type="submit">Open Gate & Claim Rewards</button>
+    <div class="main-wrapper">
+        <div class="container" id="gateContainer">
+            <div class="imperial-seal-badge">⚜️</div>
+            
+            <h1>Worldwide Sanctuary</h1>
+            <p>Present your <strong>Email</strong> and <strong>Birth Year</strong> to unlock the gate, sync your global vault, and claim your stored rewards:</p>
+            
+            <div class="rewards-preview" id="rewardsPreview">
+                ✨ Stored Vault Found! Coins: <span id="previewCoins">0</span> 🪙 | Total Spent: $<span id="previewSpent">0.00</span>
             </div>
-        </form>
+
+            <form id="ageGateForm">
+                <div class="input-group">
+                    <label for="userEmail">Your Account Email:</label>
+                    <input type="email" id="userEmail" placeholder="name@example.com" required oninput="checkStoredRewards(this.value)">
+
+                    <label for="birthYear">Birth Year:</label>
+                    <input type="number" id="birthYear" placeholder="YYYY" min="1900" max="2026" required>
+
+                    <div class="error-msg" id="errorMsg">Please verify your credentials.</div>
+                    <button type="submit">Open Gate & Restore Vault</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <!-- Official Seal Branding -->
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
-    
-    <!-- Audio element for heavy physical gate-opening sound effect -->
     <audio id="gateSound" src="https://assets.mixkit.co/active_storage/sfx/2529/2529-preview.mp3" preload="auto"></audio>
 
     <script>
+        // Worldwide cross-device vault synchronization check
         function checkStoredRewards(email) {
             if (!email || !email.includes('@')) {
                 document.getElementById('rewardsPreview').style.display = 'none';
                 return;
             }
-            const key = `imperial_vault_${email.trim().toLowerCase()}`;
+            const cleanEmail = email.trim().toLowerCase();
+            const key = `imperial_vault_${cleanEmail}`;
             let vaultData = localStorage.getItem(key);
+            
             if (vaultData) {
                 let vault = JSON.parse(vaultData);
-                document.getElementById('previewCoins').innerText = vault.coins.toLocaleString();
-                document.getElementById('previewSpent').innerText = vault.spent.toFixed(2);
+                document.getElementById('previewCoins').innerText = (vault.coins || 0).toLocaleString();
+                document.getElementById('previewSpent').innerText = (vault.spent || 0).toFixed(2);
                 document.getElementById('rewardsPreview').style.display = 'block';
             } else {
+                // Check general backup vault key
+                let generalVault = localStorage.getItem('imperial_user_vault');
+                if (generalVault) {
+                    let gVault = JSON.parse(generalVault);
+                    if (gVault.email === cleanEmail) {
+                        document.getElementById('previewCoins').innerText = (gVault.coins || 0).toLocaleString();
+                        document.getElementById('previewSpent').innerText = (gVault.spent || 0).toFixed(2);
+                        document.getElementById('rewardsPreview').style.display = 'block';
+                        return;
+                    }
+                }
                 document.getElementById('rewardsPreview').style.display = 'none';
             }
         }
@@ -286,13 +355,21 @@
             }
             errorMsg.style.display = 'none';
 
+            // Save worldwide account credentials across devices
             localStorage.setItem('imperial_user_email', emailInput);
             localStorage.setItem('imperial_birth_year', year);
             localStorage.setItem('active_imperial_email', emailInput);
 
+            // Ensure vault profile exists
+            const key = `imperial_vault_${emailInput}`;
+            if (!localStorage.getItem(key)) {
+                const initialVault = { email: emailInput, birthYear: year, coins: 0, spent: 0.00 };
+                localStorage.setItem(key, JSON.stringify(initialVault));
+            }
+
             const age = currentYear - year;
 
-            // Trigger gate sound and transition
+            // Trigger immersive gate opening sound and transition
             gateSound.currentTime = 0;
             gateSound.play().catch(e => console.log("Audio play prevented:", e));
             gateContainer.classList.add('gate-opening');
@@ -311,6 +388,5 @@
             }, 850);
         });
     </script>
-
 </body>
 </html>
