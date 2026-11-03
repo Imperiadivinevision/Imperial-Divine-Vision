@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Imperial Divine Vision | Sanctuary Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
@@ -15,7 +15,7 @@
 
         :root {
             --bg-dark: #0b0214;
-            --panel-bg: rgba(18, 8, 30, 0.90);
+            --panel-bg: rgba(18, 8, 30, 0.92);
             --theme-color: #f3e5ab; 
             --deep-gold: #d4af37;
             --text-main: #f9f6ee;
@@ -34,6 +34,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
             transition: background 0.8s ease;
         }
 
@@ -43,7 +44,7 @@
             animation: cosmicShift 22s ease infinite alternate;
         }
 
-        /* Independent Moving Flowering Garden Background */
+        /* Independent Moving Flowering Garden Background Layer */
         .moving-bg-layer {
             position: fixed;
             top: 0;
@@ -80,7 +81,7 @@
             pointer-events: none;
         }
 
-        /* YouTube-Style Fullscreen Button in Upper-Right Corner */
+        /* YouTube-Style Fullscreen Button */
         .fullscreen-toggle-btn {
             position: fixed;
             top: 15px;
@@ -88,15 +89,15 @@
             background: rgba(18, 8, 30, 0.9);
             border: 2px solid var(--deep-gold);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 8px;
             cursor: pointer;
             z-index: 3000;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
             transition: all 0.3s ease;
         }
@@ -107,7 +108,6 @@
             box-shadow: 0 0 20px var(--deep-gold);
         }
 
-        /* Global Fullscreen Chamber Mode */
         body.is-chamber-fullscreen nav,
         body.is-chamber-fullscreen .theme-switcher-bar,
         body.is-chamber-fullscreen .royal-scroll-trigger,
@@ -123,21 +123,21 @@
         /* Floating Royal Scroll Button */
         .royal-scroll-trigger {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            bottom: 20px;
+            left: 20px;
             background: linear-gradient(135deg, #2b1035, #4a0e17);
             border: 2px solid var(--deep-gold);
             color: #ffe875;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 30px;
             cursor: pointer;
             z-index: 2500;
             font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             box-shadow: 0 5px 20px rgba(0,0,0,0.8);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
         }
         .royal-scroll-trigger:hover {
@@ -154,29 +154,26 @@
             z-index: 4000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
+            box-sizing: border-box;
         }
         .scroll-parchment {
             background: linear-gradient(135deg, #f4ecd8, #e5d3b3);
             border: 4px double #5c3a21;
             color: #2c1810;
-            padding: 40px;
+            padding: 30px 25px;
             border-radius: 12px;
-            max-width: 700px;
+            max-width: 650px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
             text-align: left;
             box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
-            animation: unrollScroll 0.5s ease-out;
-        }
-        @keyframes unrollScroll {
-            0% { transform: scaleY(0.1); opacity: 0; }
-            100% { transform: scaleY(1); opacity: 1; }
+            box-sizing: border-box;
         }
         .scroll-parchment h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 2.6rem;
             color: #5c3a21;
             margin-top: 0;
             text-align: center;
@@ -186,14 +183,15 @@
             color: #7b4b2a;
             border-bottom: 1px solid #c8b08c;
             padding-bottom: 4px;
-            margin-top: 20px;
+            margin-top: 18px;
             text-transform: uppercase;
+            font-size: 0.95rem;
         }
         .scroll-parchment p {
             font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             line-height: 1.6;
-            margin: 8px 0;
+            margin: 6px 0;
         }
         .close-scroll-btn {
             background: #5c3a21;
@@ -205,7 +203,7 @@
             border-radius: 4px;
             cursor: pointer;
             display: block;
-            margin: 25px auto 0 auto;
+            margin: 20px auto 0 auto;
             transition: 0.2s;
         }
         .close-scroll-btn:hover { background: #3d2514; }
@@ -225,6 +223,8 @@
             box-shadow: 0 4px 25px rgba(0,0,0,0.85);
             flex-wrap: wrap;
             backdrop-filter: blur(12px);
+            box-sizing: border-box;
+            width: 100%;
         }
 
         .nav-module {
@@ -235,11 +235,12 @@
             font-family: 'Cinzel', serif;
             color: var(--theme-color); 
             text-decoration: none; 
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: color 0.3s ease;
+            white-space: nowrap;
         }
 
         nav a:hover {
@@ -247,7 +248,7 @@
             text-shadow: 0 0 10px var(--deep-gold);
         }
 
-        /* Library Sub-Menu Popup Bar */
+        /* Library Sub-Menu */
         .library-dropdown {
             display: none;
             position: absolute;
@@ -268,7 +269,7 @@
         }
 
         .library-dropdown a {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             padding: 6px 10px;
             display: block;
             border-radius: 4px;
@@ -288,9 +289,11 @@
             background: rgba(11, 2, 20, 0.75);
             padding: 8px 15px;
             border-radius: 8px;
-            max-width: 650px;
+            max-width: 620px;
+            width: 90%;
             border: 1px solid rgba(212, 175, 55, 0.3);
             backdrop-filter: blur(10px);
+            box-sizing: border-box;
         }
 
         .color-btn {
@@ -300,7 +303,7 @@
             padding: 4px 10px;
             border-radius: 4px;
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
@@ -319,16 +322,18 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem;
+            box-sizing: border-box;
+            width: 100%;
         }
 
-        /* 3D Real Book Container */
+        /* 3D Real Book Container - Fully Responsive */
         .real-book-container {
-            width: 320px;
-            height: 460px;
+            width: min(290px, 80vw);
+            height: min(420px, 115vw);
             position: relative;
             perspective: 1200px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             cursor: pointer;
             animation: floatBook 4s infinite alternate ease-in-out;
             transition: all 0.4s ease;
@@ -336,7 +341,7 @@
 
         @keyframes floatBook {
             0% { transform: translateY(0px) rotateY(-5deg) rotateX(3deg); }
-            100% { transform: translateY(-12px) rotateY(-2deg) rotateX(1deg); }
+            100% { transform: translateY(-10px) rotateY(-2deg) rotateX(1deg); }
         }
 
         .real-book {
@@ -346,18 +351,18 @@
             transform-style: preserve-3d;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             border-radius: 6px 14px 14px 6px;
-            box-shadow: -15px 20px 45px rgba(0,0,0,0.85), 0 0 50px var(--glow-strength);
+            box-shadow: -12px 18px 40px rgba(0,0,0,0.85), 0 0 45px var(--glow-strength);
         }
 
         .real-book-container:hover .real-book {
-            transform: scale(1.03) rotateY(0deg) rotateX(0deg);
-            box-shadow: -20px 25px 65px rgba(0,0,0,0.95), 0 0 80px var(--deep-gold);
+            transform: scale(1.02) rotateY(0deg) rotateX(0deg);
+            box-shadow: -18px 22px 60px rgba(0,0,0,0.95), 0 0 70px var(--deep-gold);
         }
 
         .real-book::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 28px; height: 100%;
+            top: 0; left: 0; width: 26px; height: 100%;
             background: linear-gradient(90deg, #112618, #1b3b28, #0b140f);
             border-radius: 6px 0 0 6px;
             box-shadow: inset -3px 0 6px rgba(0,0,0,0.7);
@@ -367,10 +372,10 @@
         .real-book::after {
             content: '';
             position: absolute;
-            top: 4px; right: -12px; width: 12px; height: calc(100% - 8px);
+            top: 4px; right: -10px; width: 10px; height: calc(100% - 8px);
             background: linear-gradient(90deg, #e6d5b8, #fff, #c5b59b, #a39378);
             transform: skewY(45deg);
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.5);
             border-radius: 0 2px 2px 0;
         }
 
@@ -388,21 +393,23 @@
         .hero-section h3 {
             font-family: 'Cinzel', serif;
             color: var(--text-main);
-            margin: 0.5rem 0 0.8rem 0;
-            font-size: 1.6rem;
-            letter-spacing: 2px;
+            margin: 0.4rem 0 0.6rem 0;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            letter-spacing: 1.5px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            padding: 0 10px;
         }
 
         .royal-subtitle {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.05rem);
             font-style: italic;
-            max-width: 650px;
-            line-height: 1.65;
-            margin-bottom: 1.8rem;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
             text-shadow: 0 2px 5px rgba(0,0,0,0.9);
             padding: 0 1rem;
+            box-sizing: border-box;
         }
 
         .royal-btn {
@@ -410,8 +417,8 @@
             background: linear-gradient(135deg, #d4af37, #aa7c11);
             color: #11051d;
             border: none;
-            padding: 0.8rem 1.8rem;
-            font-size: 0.92rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.88rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
@@ -432,10 +439,12 @@
         .footer-sanctuary {
             background: var(--panel-bg);
             border-top: 2px solid var(--deep-gold);
-            padding: 2rem 1rem;
+            padding: 1.8rem 1rem;
             margin-top: auto;
             box-shadow: 0 -4px 25px rgba(0,0,0,0.85);
             backdrop-filter: blur(12px);
+            box-sizing: border-box;
+            width: 100%;
         }
         .footer-content {
             max-width: 800px;
@@ -443,25 +452,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            box-sizing: border-box;
         }
         .footer-title {
             font-family: 'Cinzel', serif;
             color: var(--theme-color);
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             letter-spacing: 2px;
             text-shadow: 0 0 10px var(--glow-strength);
         }
         .footer-contact {
             color: var(--text-main);
-            font-size: 0.9rem;
+            font-size: 0.86rem;
             letter-spacing: 1px;
             text-decoration: none;
             font-family: 'Playfair Display', serif;
         }
         .footer-copy {
             color: var(--text-muted);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             letter-spacing: 1px;
             margin-top: 4px;
             font-family: 'Cinzel', serif;
@@ -476,17 +486,20 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
         }
         .modal-box {
             background: var(--panel-bg);
             border: 2px solid var(--deep-gold);
-            padding: 2.2rem;
+            padding: 2rem 1.5rem;
             border-radius: 12px;
             width: 90%;
-            max-width: 420px;
+            max-width: 400px;
             text-align: center;
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
             backdrop-filter: blur(15px);
+            box-sizing: border-box;
         }
         .gate-input {
             width: 100%;
@@ -498,6 +511,16 @@
             margin: 1rem 0;
             box-sizing: border-box;
             border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Worldwide Universal Mobile Adjustments */
+        @media (max-width: 768px) {
+            nav { gap: 12px; padding: 10px; justify-content: space-around; }
+            nav a { font-size: 0.7rem; letter-spacing: 0.5px; }
+            .theme-switcher-bar { padding: 6px 10px; gap: 6px; }
+            .color-btn { font-size: 0.65rem; padding: 3px 8px; }
         }
     </style>
 </head>
@@ -515,12 +538,12 @@
     <div class="scroll-modal-overlay" id="scrollModal">
         <div class="scroll-parchment">
             <h2>Imperial Sanctuary Guide</h2>
-            <p style="text-align: center; font-style: italic; color: #5c3a21; margin-bottom: 20px;">
+            <p style="text-align: center; font-style: italic; color: #5c3a21; margin-bottom: 15px;">
                 Welcome to your sovereign map. Discover the purpose of every chamber within our empire.
             </p>
 
             <h4>🏠 Home (`index.html`)</h4>
-            <p>Your sanctuary root. Features the 3D living book, ambient background melody, and the Live Vibe Theme switcher (choose Pink, Gold, Blue, Green, Orange, or No Color).</p>
+            <p>Your sanctuary root. Features the 3D living book, ambient background melody, and the Live Vibe Theme switcher.</p>
 
             <h4>📚 Library & Sub-tabs (`library.html`)</h4>
             <p>Hover or click Library in the navigation to reveal sub-tabs. Read the sacred book, explore Trailers, visit the Garden, or enter the Elder Sanctuary.</p>
@@ -587,7 +610,7 @@
 
     <!-- Live Color Theme Switcher Bar -->
     <div class="theme-switcher-bar">
-        <span style="align-self: center; font-size: 0.75rem; color: var(--text-muted); font-family: 'Cinzel', serif;">Vibe Theme:</span>
+        <span style="align-self: center; font-size: 0.72rem; color: var(--text-muted); font-family: 'Cinzel', serif;">Vibe Theme:</span>
         <button class="color-btn" style="border-color: #f3e5ab; color: #f3e5ab;" onclick="setTheme('reset', '#f3e5ab', 'rgba(212, 175, 55, 0.35)')">No Color</button>
         <button class="color-btn" style="border-color: #ff69b4; color: #ff69b4;" onclick="setTheme('active', '#ff69b4', 'rgba(255, 105, 180, 0.5)')">Pink</button>
         <button class="color-btn" style="border-color: #d4af37; color: #d4af37;" onclick="setTheme('active', '#d4af37', 'rgba(212, 175, 55, 0.5)')">Gold</button>
@@ -612,12 +635,12 @@
         <a href="library.html" class="royal-btn">📖 Read Book in Library</a>
     </div>
 
-    <!-- Professional Footer -->
+    <!-- Professional Footer (Secret Master Code Secured) -->
     <footer class="footer-sanctuary">
         <div class="footer-content">
             <div class="footer-title">Imperial Divine Vision</div>
             <a href="mailto:imperialdivinevision@gmail.com" class="footer-contact">✉️ imperialdivinevision@gmail.com</a>
-            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Royal Rights Reserved. Master Code: ROSANNA-2026</div>
+            <div class="footer-copy">&copy; 2026 Imperial Divine Vision. All Royal Rights Reserved.</div>
         </div>
     </footer>
 
