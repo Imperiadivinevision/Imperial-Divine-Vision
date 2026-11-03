@@ -7,15 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Rich Royal Green, Shiny Orange silk, and Obsidian with intense Gold trim */
-            --bg-dark: #030a06;
-            --panel-bg: rgba(6, 17, 11, 0.97);
+            /* Base colors adjusted for high contrast against the vibrant hall */
+            --bg-dark: #030806;
+            /* Panels must be semi-transparent to see the background */
+            --panel-bg: rgba(6, 17, 11, 0.86);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
+            --royal-purple: #8a2be2;
             --text-main: #f5f2eb;
             --text-muted: #a3b8aa;
-            --ambient-glow: rgba(212, 175, 55, 0.35);
+            --ambient-glow: rgba(212, 175, 55, 0.4);
         }
 
         body {
@@ -29,13 +31,31 @@
             flex-direction: column;
             overflow-x: hidden;
             box-sizing: border-box;
-            background-image: radial-gradient(circle at center, rgba(14, 38, 22, 0.4) 0%, #030a06 90%);
+            /* Prevents scrollbar from appearing on top of the full-screen video */
+            overflow-y: auto;
         }
 
-        /* Nav Hub with Imperial Trims */
+        /* Full-Screen Animated Video Background (The Wavy Hall) */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100; /* Places it behind everything */
+            background-size: cover;
+            /* Optional: a subtle dark overlay to make text pop */
+            filter: brightness(0.85);
+        }
+
+        /* Nav Hub */
         nav { 
             padding: 0.8rem 1rem; 
-            background: linear-gradient(180deg, #091a10 0%, #040c07 100%);
+            /* More transparent background-blur to show the hall */
+            background: rgba(4, 12, 7, 0.7);
+            backdrop-filter: blur(8px);
             border-bottom: 3px solid var(--gold);
             position: sticky;
             top: 0;
@@ -44,9 +64,8 @@
             justify-content: center;
             align-items: center;
             gap: 1.5rem;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.9);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.7);
             flex-wrap: wrap;
-            backdrop-filter: blur(12px);
             width: 100%;
             box-sizing: border-box;
         }
@@ -59,94 +78,115 @@
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
 
         nav a:hover {
             color: #ffffff;
-            text-shadow: 0 0 10px var(--gold), 0 0 20px var(--accent-orange);
+            text-shadow: 0 0 10px var(--gold);
         }
 
-        /* Grand Cinematic Sovereign Header */
+        /* Ornate Sovereign Header */
         .page-banner {
-            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.15) 50%, transparent 100%);
-            border-bottom: 1px solid var(--gold);
+            background: rgba(7, 23, 15, 0.75);
+            backdrop-filter: blur(5px);
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
             text-align: center;
-            padding: 15px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            padding: 16px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .filigree-scroll {
+            width: 120px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='%23d4af37'%3E%3Cpath d='M0 12c15 0 20-8 30-8s15 8 30 8 15-8 30-8 20 8 30 8v2c-12 0-18-7-28-7s-15 7-28 7-18-7-28-7-16 7-28 7v-2z' opacity='0.85'/%3E%3Cpath d='M10 12c10 0 14-5 20-5s10 5 20 5 10-5 20-5 14 5 20 5v1c-8 0-12-4-18-4s-10 4-18 4-12-4-18-4-10 4-18 4v-1z'/%3E%3Ccircle cx='60' cy='12' r='3' fill='%23ffdf7e'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.9;
+        }
+        .filigree-scroll.right {
+            transform: scaleX(-1);
         }
 
         .page-banner h1 {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             margin: 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 15px rgba(212, 175, 55, 0.5);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.6);
         }
 
+        @media (max-width: 768px) {
+            .filigree-scroll { display: none; }
+            .page-banner h1 { font-size: 1.2rem; letter-spacing: 2px; }
+        }
+
+        /* Main Content Container */
         .container {
             display: flex;
             flex: 1;
             width: 100%;
             box-sizing: border-box;
             position: relative;
-            background: radial-gradient(circle at 30% 30%, #0a2515 0%, #030c06 100%);
+            min-height: calc(100vh - 120px);
+            background: transparent; /* Now transparent to show the video background */
         }
 
         @media (max-width: 1024px) {
             .container { flex-direction: column; }
         }
 
-        /* Grand Cinematic Viewport (Left & Larger) */
+        /* Cinematic Viewport */
         .character-viewport {
-            flex: 1.5;
+            flex: 1.3;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 40px 30px;
+            padding: 30px;
             box-sizing: border-box;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            background-image: 
-                linear-gradient(rgba(3, 10, 6, 0.8), rgba(3, 10, 6, 0.85)),
-                url('imperial-palace.mp4'); /* Will blend beautifully with atmospheric lights */
-            background-size: cover;
-            background-position: center;
+            background: transparent;
         }
 
         .container.theater-mode .character-viewport {
-            flex: 3;
+            flex: 2.8;
         }
         .container.theater-mode .control-sidebar {
-            width: 340px;
+            width: 320px;
         }
 
-        /* Golden Framed Wrapper - Gold Money & Glory aesthetics */
         .media-frame-wrapper {
             position: relative;
             width: 100%;
-            max-width: 680px;
-            padding: 20px;
-            background: rgba(0,0,0,0.4);
+            max-width: 620px;
+            padding: 18px;
+            background: rgba(3, 10, 6, 0.7); /* Semi-transparent frame */
+            backdrop-filter: blur(5px);
             border-radius: 14px;
-            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.15);
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.2), 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        /* Beautiful Theater Expand Button */
         .viewport-expand-btn {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #091a10 0%, #040c07 100%);
+            top: 26px;
+            right: 26px;
+            background: #06110b;
             border: 2px solid var(--gold);
             color: var(--gold);
-            padding: 8px 12px;
+            padding: 6px 12px;
             font-family: 'Cinzel', serif;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             letter-spacing: 1px;
             border-radius: 4px;
             cursor: pointer;
@@ -158,28 +198,23 @@
             transition: all 0.3s ease;
         }
         .viewport-expand-btn:hover {
-            transform: scale(1.05);
             background: var(--gold);
             color: #030a06;
             box-shadow: 0 0 20px var(--gold);
         }
 
-        /* 3D Royal Decorative frame */
         .media-frame {
             width: 100%;
-            height: min(74vh, 680px);
-            border: 6px double var(--gold);
-            border-radius: 12px;
+            height: min(70vh, 620px);
+            border: 5px double var(--gold);
+            border-radius: 10px;
             overflow: hidden;
             background: #000;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 
-                0 0 0 2px rgba(3, 10, 6, 0.8),
-                0 25px 60px rgba(0,0,0,0.95), 
-                0 0 45px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.95);
         }
 
         .avatar-preview-media {
@@ -193,30 +228,30 @@
         }
 
         .media-caption {
-            margin-top: 18px;
+            margin-top: 14px;
             color: var(--gold);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-align: center;
             font-family: 'Cinzel', serif;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.9), 0 0 10px rgba(212, 175, 55, 0.4);
-            z-index: 10;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
         }
 
-        /* Control Sidebar (Vault of Wealth) */
+        /* Right Control Sidebar (Vibrant Imperial Vault) */
         .control-sidebar {
-            width: 480px;
+            width: 440px;
+            /* More transparent panel-bg-blur */
             background: var(--panel-bg);
+            backdrop-filter: blur(15px);
             border-left: 3px solid var(--gold);
             display: flex;
             flex-direction: column;
-            padding: 30px;
-            gap: 22px;
+            padding: 25px;
+            gap: 20px;
             box-sizing: border-box;
             z-index: 10;
             box-shadow: -15px 0 35px rgba(0,0,0,0.85);
-            transition: width 0.4s ease;
         }
 
         @media (max-width: 1024px) {
@@ -225,14 +260,13 @@
 
         .panel-title {
             color: var(--gold);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             font-family: 'Cinzel', serif;
             border-bottom: 2px solid rgba(212, 175, 55, 0.4);
-            padding-bottom: 10px;
-            margin-top: 5px;
+            padding-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -241,16 +275,16 @@
         .option-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
 
         .option-card {
-            background: #091a10;
-            border: 2px solid #284a37;
-            border-radius: 8px;
-            padding: 12px;
+            background: linear-gradient(135deg, #091a10 0%, #173627 100%);
+            border: 2px solid var(--gold);
+            border-radius: 6px;
+            padding: 10px;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             cursor: pointer;
             color: var(--text-muted);
             font-family: 'Cinzel', serif;
@@ -259,90 +293,90 @@
         }
 
         .option-card:hover, .option-card.selected {
-            border-color: var(--gold);
+            border-color: var(--accent-orange);
             color: var(--text-main);
-            background: #173627;
-            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.4), 0 0 15px rgba(255, 140, 0, 0.35);
+            background: linear-gradient(135deg, #173627 0%, #284a37 100%);
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.4), 0 0 12px rgba(255, 140, 0, 0.4);
             font-weight: bold;
-            transform: translateY(-1px);
         }
 
-        /* Ornate Wardrobe Grid Card */
+        .wardrobe-scroll-container {
+            max-height: 420px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 6px;
+        }
+
         .wardrobe-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-height: 440px;
-            overflow-y: auto;
-            padding-right: 8px;
+            gap: 12px;
         }
 
+        /* Wardrobe Card Styling */
         .wardrobe-card {
-            background: #091a10;
+            background: linear-gradient(135deg, #091a10 0%, #0d2218 100%);
             border: 2px solid #284a37;
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            position: relative;
+            gap: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .wardrobe-card img, .wardrobe-card video {
             width: 100%;
-            height: 105px;
+            height: 90px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 2px solid rgba(212, 175, 55, 0.5);
             background: #000;
         }
 
         .wardrobe-card span {
-            font-size: 0.76rem;
-            font-weight: 600;
-            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--gold);
             font-family: 'Cinzel', serif;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             width: 100%;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
         }
 
         .wardrobe-card:hover, .wardrobe-card.selected {
             border-color: var(--accent-orange);
-            background: #122a1c;
-            box-shadow: 
-                0 0 18px rgba(255, 140, 0, 0.5),
-                inset 0 0 10px rgba(212, 175, 55, 0.2);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, #122a1c 0%, #1f422f 100%);
+            box-shadow: 0 0 16px rgba(255, 140, 0, 0.6);
+            transform: translateY(-2px);
         }
 
         .wardrobe-card.selected span {
             color: var(--gold-hover);
-            font-weight: 700;
-            text-shadow: 0 0 12px rgba(255, 140, 0, 0.7);
+            text-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
         }
 
         .action-footer {
             margin-top: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .game-btn {
-            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 50%, #875c02 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
             color: #030a06;
             border: none;
-            padding: 15px 20px;
+            padding: 13px 20px;
             font-family: 'Cinzel', serif;
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             cursor: pointer;
             border-radius: 6px;
@@ -350,17 +384,24 @@
             text-decoration: none;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
         }
 
         .game-btn:hover {
-            background: linear-gradient(135deg, #ffdf7e, #d4af37, #aa7c11);
-            box-shadow: 0 0 25px rgba(255, 140, 0, 0.8);
+            background: linear-gradient(135deg, #ffdf7e, #d4af37);
+            box-shadow: 0 0 22px rgba(255, 140, 0, 0.8);
             transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
+
+    <!-- The New Live, Wavy Palace Hall Background -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <!-- Replace 'imperial-palace-alive.mp4' with your actual video file -->
+        <source src="imperial-palace-alive.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <!-- Unified Nav -->
     <nav> 
@@ -373,9 +414,11 @@
         <div class="nav-module"><a href="community.html">💬 Community</a></div>
     </nav>
 
-    <!-- Sovereign Title Banner -->
+    <!-- Sovereign Title Banner with Golden Filigree Scrolls -->
     <div class="page-banner">
+        <div class="filigree-scroll"></div>
         <h1>THE SOVEREIGN CHAMBERS</h1>
+        <div class="filigree-scroll right"></div>
     </div>
 
     <div class="container" id="mainContainer">
@@ -383,7 +426,7 @@
         <div class="character-viewport">
             <div class="media-frame-wrapper">
                 <button class="viewport-expand-btn" id="expandToggleBtn" onclick="toggleTheaterMode()" title="Toggle Theater Fullscreen">
-                    <span>Toggle Theater View</span> ⤢
+                    <span>Theater Mode</span> ⤢
                 </button>
                 <div class="media-frame" id="media-container">
                     <video id="media-video" class="avatar-preview-media" autoplay loop controls style="display: block;">
@@ -396,7 +439,7 @@
             <div id="media-caption" class="media-caption">Sovereign View</div>
         </div>
 
-        <!-- Ornate Right-side Controls -->
+        <!-- Ornate Right-side Controls with Panel Blur -->
         <div class="control-sidebar">
             <div class="panel-title">Sovereign Profile</div>
             <div class="option-grid">
@@ -407,9 +450,12 @@
 
             <div class="panel-title">
                 <span>WARDROBE GALLERY</span>
-                <span style="font-size: 0.72rem; color: var(--accent-orange); text-shadow: 0 0 5px var(--accent-orange);">💎 Imperial Vault</span>
+                <span style="font-size: 0.68rem; color: var(--accent-orange);">💎 Imperial Vault</span>
             </div>
-            <div class="wardrobe-grid" id="wardrobe-list"></div>
+            
+            <div class="wardrobe-scroll-container">
+                <div class="wardrobe-grid" id="wardrobe-list"></div>
+            </div>
 
             <div class="action-footer">
                 <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: none;">Return to Gateway</a>
@@ -418,6 +464,7 @@
     </div>
 
     <script>
+        /* Your existing JavaScript remains unchanged, just copy it here */
         const assets = {
             king: [
                 { name: "king-benson-imperial-CINEMATIC.mp4", type: "video" },
@@ -489,10 +536,10 @@
             const btn = document.getElementById('expandToggleBtn');
             container.classList.toggle('theater-mode');
             if(container.classList.contains('theater-mode')) {
-                btn.innerHTML = '<span>Exit Theater View</span> ⤡';
+                btn.innerHTML = '<span>Exit Theater</span> ⤡';
                 btn.title = "Exit Theater Mode";
             } else {
-                btn.innerHTML = '<span>Toggle Theater View</span> ⤢';
+                btn.innerHTML = '<span>Theater Mode</span> ⤢';
                 btn.title = "Toggle Theater Fullscreen";
             }
         }
@@ -562,15 +609,15 @@
         }
 
         function updateAmbientAura(name) {
-            let glowColor = "rgba(212, 175, 55, 0.35)";
+            let glowColor = "rgba(212, 175, 55, 0.4)";
             if (name.includes('pink') || name.includes('red')) {
-                glowColor = "rgba(255, 140, 0, 0.4)";
+                glowColor = "rgba(255, 140, 0, 0.45)";
             } else if (name.includes('purple') || name.includes('royal-purple')) {
-                glowColor = "rgba(138, 43, 226, 0.4)";
+                glowColor = "rgba(138, 43, 226, 0.45)";
             } else if (name.includes('green')) {
-                glowColor = "rgba(46, 139, 87, 0.4)";
+                glowColor = "rgba(46, 139, 87, 0.45)";
             } else if (name.includes('white')) {
-                glowColor = "rgba(240, 248, 255, 0.4)";
+                glowColor = "rgba(240, 248, 255, 0.45)";
             }
             document.documentElement.style.setProperty('--ambient-glow', glowColor);
         }
