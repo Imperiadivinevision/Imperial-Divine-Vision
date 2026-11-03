@@ -1,81 +1,232 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Age Verification - Imperial Divine Vision</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingdom Gateway Chamber - Imperial Divine Vision</title>
     <style>
-        /* Flowing, reflective imperial background */
-        body { 
-            font-family: 'Georgia', serif; 
-            margin: 0; 
-            min-height: 100vh; 
-            color: #2c3e50;
-            background: linear-gradient(135deg, #FFDAB9, #FFC0CB, #F5F5DC, #FFDAB9);
-            background-size: 400% 400%;
-            animation: flowBackground 15s ease infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes flowBackground {
+        /* Majestic, professional architectural palace background */
+        @keyframes ambientGlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        .container { 
-            background: rgba(255, 255, 255, 0.8); 
-            padding: 40px; 
-            border-radius: 20px; 
-            text-align: center; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        body { 
+            font-family: 'Georgia', serif; 
+            margin: 0; 
+            min-height: 100vh; 
+            color: #f3e8ff;
+            background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 60%, #030712 100%);
+            background-size: 200% 200%;
+            animation: ambientGlow 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
 
-        .royal-branding { position: fixed; bottom: 20px; right: 20px; width: 120px; z-index: 1000; pointer-events: none; }
+        /* Subtle atmospheric architectural lighting vignette */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(88, 28, 135, 0.2), rgba(3, 7, 18, 0.8));
+            pointer-events: none;
+        }
+
+        /* High-End Palace Gate Arch Container */
+        .container { 
+            position: relative;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid;
+            border-image: linear-gradient(to bottom, #fde047, #ca8a04, #713f12) 1;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(234, 179, 8, 0.15);
+            padding: 50px 40px; 
+            border-radius: 4px; 
+            text-align: center; 
+            max-width: 480px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            transform: scale(0.98);
+            animation: gateReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes gateReveal {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: #fde047;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(234, 179, 8, 0.4);
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #e2e8f0;
+        }
+
+        input[type="number"] {
+            width: 70%;
+            padding: 14px;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid #b45309;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.25rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        input[type="number"]:focus {
+            border-color: #fde047;
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
+        }
+
+        button {
+            margin-top: 10px;
+            background: linear-gradient(135deg, #ca8a04, #854d0e);
+            color: #fff;
+            border: 1px solid #fde047;
+            padding: 12px 35px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(202, 138, 4, 0.3);
+            font-family: 'Georgia', serif;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(234, 179, 8, 0.5);
+        }
+
+        .error-msg {
+            color: #f87171;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .royal-branding { 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            width: 100px; 
+            z-index: 100; 
+            pointer-events: none;
+            opacity: 0.85;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+        }
+
+        /* Cinematic Gate Opening Transition Effect */
+        .gate-opening {
+            animation: palaceGateOpen 0.9s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes palaceGateOpen {
+            0% { transform: scale(1); opacity: 1; filter: blur(0); }
+            40% { transform: scale(1.03); filter: blur(1px); opacity: 0.9; }
+            100% { transform: scale(1.15); opacity: 0; filter: blur(10px); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Welcome to the Kingdom Community Chat & School</h1>
-        <p>Please enter your birth year so we can guide you to the right chamber:</p>
+    <div class="container" id="gateContainer">
+        <h1>Kingdom Sanctuary</h1>
+        <p>You stand before the gates of <strong>Imperial Divine Vision</strong>. Enter your birth year to open the way:</p>
         
         <form id="ageGateForm">
-            <label for="birthYear">Enter your birth year:</label><br>
-            <input type="number" id="birthYear" required>
-            <button type="submit" style="margin-top: 10px;">Enter</button>
+            <div class="input-group">
+                <label for="birthYear">Enter your birth year:</label>
+                <input type="number" id="birthYear" placeholder="YYYY" min="1900" max="2026" required>
+                <div class="error-msg" id="errorMsg">Please enter a valid birth year.</div>
+                <button type="submit">Enter Gate</button>
+            </div>
         </form>
     </div>
 
+    <!-- Official Seal Branding -->
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
+
+    <!-- Heavy Physical Gate Opening Sound Effect -->
+    <audio id="gateSound" src="https://assets.mixkit.co/active_storage/sfx/2529/2529-preview.mp3" preload="auto"></audio>
 
     <script>
         document.getElementById('ageGateForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const year = parseInt(document.getElementById('birthYear').value);
-            const currentYear = new Date().getFullYear();
-            const age = currentYear - year;
+            const yearInput = document.getElementById('birthYear').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const gateContainer = document.getElementById('gateContainer');
+            const gateSound = document.getElementById('gateSound');
 
-            // Creator / Administrator Master Bypass & Adult Routing
-            if (year === 2000 || age >= 30) {
-                window.location.href = 'room-adult.html';
+            const year = parseInt(yearInput);
+            const currentYear = new Date().getFullYear();
+            
+            if (!year || isNaN(year) || year < 1900 || year > currentYear) {
+                errorMsg.style.display = 'block';
                 return;
             }
+            errorMsg.style.display = 'none';
 
-            // Age-based routing logic matching your exact files
-            if (age >= 8 && age <= 13) {
-                window.location.href = 'room-youth.html';
+            const age = currentYear - year;
+
+            // Play the immersive heavy gate opening sound effect
+            gateSound.play().catch(e => console.log("Audio play prevented:", e));
+
+            // Trigger majestic cinematic gate opening animation
+            gateContainer.classList.add('gate-opening');
+
+            // Determine correct destination based on your exact routing logic
+            let destination = 'room-kids.html';
+            if (year === 2000 || age >= 30) {
+                destination = 'room-adult.html';
+            } else if (age >= 8 && age <= 13) {
+                destination = 'room-youth.html';
             } else if (age >= 14 && age <= 29) {
-                window.location.href = 'room-elder.html';
-            } else {
-                window.location.href = 'room-kids.html';
+                destination = 'room-elder.html';
             }
+
+            // Redirect smoothly after the gate sound and visual unfold
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 850);
         });
     </script>
 
 </body>
 </html>
-
-```
