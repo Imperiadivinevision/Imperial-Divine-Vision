@@ -7,13 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0c0b0a;
-            --panel-bg: rgba(22, 19, 16, 0.95);
+            --bg-dark: #06120d;
+            --panel-bg: rgba(14, 26, 20, 0.96);
             --gold: #d4af37;
-            --gold-hover: #f3e5ab;
+            --gold-hover: #ffdf7e;
+            --accent-orange: #ff8c00;
             --text-main: #f5f2eb;
-            --text-muted: #9e9382;
-            --ambient-glow: rgba(212, 175, 55, 0.2);
+            --text-muted: #a3b8aa;
+            --ambient-glow: rgba(212, 175, 55, 0.28);
         }
 
         body {
@@ -30,10 +31,10 @@
             transition: background 1.5s ease;
         }
 
-        /* Harmonized Imperial Navigation Hub matching Shop & Home */
+        /* Harmonized Imperial Navigation Hub */
         nav { 
             padding: 0.8rem 1rem; 
-            background: rgba(18, 8, 30, 0.95);
+            background: rgba(10, 20, 15, 0.96);
             border-bottom: 2px solid var(--gold);
             position: sticky;
             top: 0;
@@ -77,7 +78,7 @@
             top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(18, 8, 30, 0.98);
+            background: rgba(14, 26, 20, 0.98);
             border: 1px solid var(--gold);
             border-radius: 6px;
             margin-top: 8px;
@@ -108,44 +109,71 @@
             width: 100%;
             box-sizing: border-box;
             position: relative;
-            min-height: calc(100vh - 50px);
+            min-height: calc(100vh - 55px);
+            background: linear-gradient(135deg, #06140e 0%, #0d2218 50%, #050d09 100%);
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             .container { flex-direction: column; }
         }
 
-        /* Breathing & Flowing Cinematic Viewport */
+        /* Cinematic Viewport */
         .character-viewport {
-            flex: 1;
+            flex: 1.4;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            background: radial-gradient(circle at center, var(--ambient-glow) 0%, #0c0b0a 85%);
-            padding: 25px 15px;
+            background: radial-gradient(circle at center, var(--ambient-glow) 0%, #06120d 85%);
+            padding: 30px 20px;
             box-sizing: border-box;
             overflow: hidden;
-            animation: backgroundBreathe 8s ease-in-out infinite alternate;
+            transition: all 0.4s ease;
         }
 
-        @keyframes backgroundBreathe {
-            0% { background: radial-gradient(circle at 40% 40%, var(--ambient-glow) 0%, #0c0b0a 80%); }
-            50% { background: radial-gradient(circle at 60% 60%, var(--ambient-glow) 20%, #0c0b0a 90%); }
-            100% { background: radial-gradient(circle at 40% 60%, var(--ambient-glow) 10%, #0c0b0a 85%); }
+        .container.theater-mode .character-viewport {
+            flex: 2.5;
+        }
+        .container.theater-mode .control-sidebar {
+            width: 340px;
         }
 
-        @keyframes frameFloat {
-            0% { transform: translateY(0); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px var(--ambient-glow); }
-            50% { transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 40px var(--ambient-glow); }
-            100% { transform: translateY(0); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px var(--ambient-glow); }
+        .media-frame-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 680px;
+        }
+
+        .viewport-expand-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(14, 26, 20, 0.85);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 30;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .viewport-expand-btn:hover {
+            transform: scale(1.1);
+            background: var(--gold);
+            color: #06120d;
+            box-shadow: 0 0 20px var(--gold);
         }
 
         .media-frame {
             width: 100%;
-            max-width: 500px;
-            height: min(70vh, 650px);
+            height: min(78vh, 750px);
             border: 2px solid var(--gold);
             border-radius: 10px;
             overflow: hidden;
@@ -154,7 +182,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: frameFloat 6s ease-in-out infinite;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px var(--ambient-glow);
         }
 
         .avatar-preview-media {
@@ -168,19 +196,19 @@
         }
 
         .media-caption {
-            margin-top: 12px;
+            margin-top: 14px;
             color: var(--gold);
-            font-size: 0.88rem;
-            letter-spacing: 1.5px;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
             text-align: center;
             font-family: 'Cinzel', serif;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
             z-index: 10;
         }
 
         /* Control Sidebar */
         .control-sidebar {
-            width: 440px;
+            width: 460px;
             background: var(--panel-bg);
             border-left: 2px solid var(--gold);
             display: flex;
@@ -189,21 +217,26 @@
             gap: 18px;
             box-sizing: border-box;
             z-index: 10;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+            transition: width 0.4s ease;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             .control-sidebar { width: 100%; border-left: none; border-top: 2px solid var(--gold); }
         }
 
         .panel-title {
             color: var(--gold);
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             text-transform: uppercase;
             letter-spacing: 2.5px;
             font-family: 'Cinzel', serif;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
             padding-bottom: 8px;
             margin-top: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .option-grid {
@@ -213,12 +246,12 @@
         }
 
         .option-card {
-            background: #1b1713;
-            border: 1px solid #3a3227;
+            background: #0f1f17;
+            border: 1px solid #284a37;
             border-radius: 6px;
             padding: 10px;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             cursor: pointer;
             color: var(--text-muted);
             font-family: 'Cinzel', serif;
@@ -228,45 +261,47 @@
         .option-card:hover, .option-card.selected {
             border-color: var(--gold);
             color: var(--text-main);
-            background: #26201a;
-            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.4), 0 0 8px rgba(212, 175, 55, 0.3);
+            background: #173627;
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.4), 0 0 10px rgba(255, 140, 0, 0.3);
             font-weight: bold;
         }
 
-        /* Upgraded Wardrobe Grid */
+        /* Wardrobe Grid */
         .wardrobe-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            max-height: 380px;
+            gap: 12px;
+            max-height: 440px;
             overflow-y: auto;
-            padding-right: 4px;
+            padding-right: 6px;
         }
 
         .wardrobe-card {
-            background: #1b1713;
-            border: 1px solid #3a3227;
-            border-radius: 6px;
-            padding: 8px;
+            background: #0f1f17;
+            border: 1px solid #284a37;
+            border-radius: 8px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            position: relative;
         }
 
         .wardrobe-card img, .wardrobe-card video {
             width: 100%;
-            height: 70px;
+            height: 95px;
             object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: #000;
         }
 
         .wardrobe-card span {
-            font-size: 0.72rem;
+            font-size: 0.74rem;
             color: var(--text-muted);
             font-family: 'Cinzel', serif;
             white-space: nowrap;
@@ -276,14 +311,16 @@
         }
 
         .wardrobe-card:hover, .wardrobe-card.selected {
-            border-color: var(--gold);
-            background: #26201a;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            border-color: var(--accent-orange);
+            background: #173627;
+            box-shadow: 0 0 18px rgba(255, 140, 0, 0.45);
+            transform: translateY(-2px);
         }
 
         .wardrobe-card.selected span {
             color: var(--gold-hover);
             font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
         }
 
         .action-footer {
@@ -294,25 +331,26 @@
         }
 
         .game-btn {
-            background: var(--gold);
-            color: var(--bg-dark);
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #06120d;
             border: none;
-            padding: 12px 20px;
+            padding: 13px 20px;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             text-decoration: none;
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
         }
 
         .game-btn:hover {
-            background: var(--gold-hover);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            background: linear-gradient(135deg, #ffdf7e, #d4af37);
+            box-shadow: 0 0 22px rgba(255, 140, 0, 0.7);
             transform: translateY(-1px);
         }
     </style>
@@ -339,15 +377,18 @@
         <div class="nav-module"><a href="community.html">💬 Community</a></div>
     </nav>
 
-    <div class="container">
-        <!-- Central Breathing Vertical Viewport -->
+    <div class="container" id="mainContainer">
+        <!-- Cinematic Viewport -->
         <div class="character-viewport">
-            <div class="media-frame" id="media-container">
-                <video id="media-video" class="avatar-preview-media" autoplay loop muted controls style="display: block;">
-                    <source id="video-source" src="" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <img id="media-image" class="avatar-preview-media" src="" alt="Royal Wardrobe Asset" style="display: none;">
+            <div class="media-frame-wrapper">
+                <button class="viewport-expand-btn" id="expandToggleBtn" onclick="toggleTheaterMode()" title="Toggle Theater Fullscreen">⤢</button>
+                <div class="media-frame" id="media-container">
+                    <video id="media-video" class="avatar-preview-media" autoplay loop muted controls style="display: block;">
+                        <source id="video-source" src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <img id="media-image" class="avatar-preview-media" src="" alt="Royal Wardrobe Asset" style="display: none;">
+                </div>
             </div>
             <div id="media-caption" class="media-caption">Loading...</div>
         </div>
@@ -361,7 +402,10 @@
                 <div class="option-card" onclick="setProfile('together')">Together</div>
             </div>
 
-            <div class="panel-title">Wardrobe Chamber (Cinematics First)</div>
+            <div class="panel-title">
+                <span>Wardrobe & Cinematics</span>
+                <span style="font-size: 0.7rem; color: var(--accent-orange);">✨ HD Previews</span>
+            </div>
             <div class="wardrobe-grid" id="wardrobe-list"></div>
 
             <div class="action-footer">
@@ -378,20 +422,20 @@
                 { name: "king-benson-step-mother-cinematic.mp4", type: "video" },
                 { name: "king-benson-sword-cinematic.mp4", type: "video" },
                 { name: "king-benson-white-CINEMATIC.mp4", type: "video" },
-                { name: "king-benson-hunting-clothes-meduim-1.png", type: "image" },
-                { name: "king-benson-hunting-clothes-meduim.png", type: "image" },
-                { name: "king-benson-mother-cinematic.png", type: "image" },
-                { name: "king-benson-on-horse-cinematic.png", type: "image" },
-                { name: "king-benson-on-horse.png", type: "image" },
-                { name: "king-benson-outfit-2.png", type: "image" },
-                { name: "king-benson-outfit-6.png", type: "image" },
+                { name: "king_benson.png", type: "image" },
+                { name: "king_benson-1.png", type: "image" },
+                { name: "king_benson-11.png", type: "image" },
                 { name: "king-benson-outfit-10.png", type: "image" },
                 { name: "king-benson-outfit-15.png", type: "image" },
                 { name: "king-benson-outift-7-1.png", type: "image" },
-                { name: "king-benson-outift-7.png", type: "image" },
-                { name: "king-benson-outift-9-1.png", type: "image" },
                 { name: "king-benson-outift-9.png", type: "image" },
+                { name: "king-benson-outift-9-1.png", type: "image" },
                 { name: "king-benson-outift-12.png", type: "image" },
+                { name: "king-benson-on-horse-cinematic.png", type: "image" },
+                { name: "king-benson-on-horse.png", type: "image" },
+                { name: "king-benson-hunting-clothes-meduim.png", type: "image" },
+                { name: "king-benson-hunting-clothes-meduim-1.png", type: "image" },
+                { name: "king-benson-mother-cinematic.png", type: "image" },
                 { name: "king-benson-queen-rosanna-hop-horse.png", type: "image" }
             ],
             queen: [
@@ -441,6 +485,19 @@
             document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
         }
 
+        function toggleTheaterMode() {
+            const container = document.getElementById('mainContainer');
+            const btn = document.getElementById('expandToggleBtn');
+            container.classList.toggle('theater-mode');
+            if(container.classList.contains('theater-mode')) {
+                btn.innerHTML = '⤡';
+                btn.title = "Exit Theater Mode";
+            } else {
+                btn.innerHTML = '⤢';
+                btn.title = "Toggle Theater Fullscreen";
+            }
+        }
+
         function setProfile(profile) {
             currentProfile = profile;
             localStorage.setItem('imperial_wardrobe_profile', profile);
@@ -459,7 +516,6 @@
             const items = assets[currentProfile];
             if (!items || items.length === 0) return;
 
-            // Restore last selected item if stored
             let lastAsset = localStorage.getItem(`imperial_last_asset_${currentProfile}`) || items[0].name;
             let activeItem = items.find(i => i.name === lastAsset) || items[0];
 
@@ -470,9 +526,9 @@
                 card.className = 'wardrobe-card' + (item.name === activeItem.name ? ' selected' : '');
                 
                 if (item.type === 'video') {
-                    card.innerHTML = `<video src="${item.name}" muted preload="metadata"></video><span>${item.name.replace(/-CINEMATIC\.mp4|\.mp4|\.png/gi, '')}</span>`;
+                    card.innerHTML = `<video src="${item.name}" muted preload="metadata"></video><span>${item.name.replace(/-CINEMATIC\.mp4|\.mp4/gi, '')}</span>`;
                 } else {
-                    card.innerHTML = `<img src="${item.name}" alt="asset"><span>${item.name.replace(/\.png/gi, '')}</span>`;
+                    card.innerHTML = `<img src="${item.name}" alt="asset" loading="lazy"><span>${item.name.replace(/\.png/gi, '')}</span>`;
                 }
 
                 card.onclick = () => {
@@ -507,20 +563,19 @@
         }
 
         function updateAmbientAura(name) {
-            let glowColor = "rgba(212, 175, 55, 0.2)";
+            let glowColor = "rgba(212, 175, 55, 0.28)";
             if (name.includes('pink') || name.includes('red')) {
-                glowColor = "rgba(219, 112, 147, 0.25)";
+                glowColor = "rgba(255, 140, 0, 0.35)";
             } else if (name.includes('purple') || name.includes('royal-purple')) {
-                glowColor = "rgba(138, 43, 226, 0.25)";
+                glowColor = "rgba(138, 43, 226, 0.35)";
             } else if (name.includes('green')) {
-                glowColor = "rgba(46, 139, 87, 0.25)";
+                glowColor = "rgba(46, 139, 87, 0.35)";
             } else if (name.includes('white')) {
-                glowColor = "rgba(240, 248, 255, 0.25)";
+                glowColor = "rgba(240, 248, 255, 0.35)";
             }
             document.documentElement.style.setProperty('--ambient-glow', glowColor);
         }
 
-        // Initialize state on load
         window.addEventListener('DOMContentLoaded', () => {
             setProfile(currentProfile);
         });
