@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Imperial Capital: Sovereign Wardrobe Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0c0b0a;
@@ -20,91 +21,98 @@
             padding: 0;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Georgia', serif;
-            height: 100vh;
+            font-family: 'Playfair Display', serif;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow-x: hidden;
+            box-sizing: border-box;
             transition: background 1.5s ease;
         }
 
-        /* Top Bar: Glorious, Reflective & Professional */
-        .game-top-bar {
-            height: 48px;
-            background: linear-gradient(90deg, #14110e 0%, #1f1a14 50%, #14110e 100%);
-            border-bottom: 1.5px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 25px;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-
-        .game-top-bar .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .game-top-bar a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            padding-bottom: 2px;
-        }
-
-        .game-top-bar a:hover {
-            color: var(--gold-hover);
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-        }
-
-        .game-top-bar span.active {
-            color: var(--gold);
+        /* Harmonized Imperial Navigation Hub matching Shop & Home */
+        nav { 
+            padding: 0.8rem 1rem; 
+            background: rgba(18, 8, 30, 0.95);
             border-bottom: 2px solid var(--gold);
-            height: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             display: flex;
+            justify-content: center;
             align-items: center;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            gap: 1.5rem;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            flex-wrap: wrap;
+            backdrop-filter: blur(12px);
+            box-sizing: border-box;
+            width: 100%;
         }
 
-        /* Glorious Header Link for Create Likeness */
-        .create-likeness-nav-btn {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
-            border: 1px solid var(--gold);
-            color: var(--gold) !important;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-weight: bold;
+        .nav-module {
+            position: relative;
+        }
+
+        nav a { 
+            font-family: 'Cinzel', serif;
+            color: #f3e5ab; 
+            text-decoration: none; 
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.2);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: color 0.3s ease;
+            white-space: nowrap;
         }
 
-        .create-likeness-nav-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark) !important;
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.8);
-            transform: translateY(-1px);
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px var(--gold);
         }
 
+        /* Library Sub-Menu */
+        .library-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(18, 8, 30, 0.98);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            margin-top: 8px;
+            padding: 8px;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
+            z-index: 1100;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .library-dropdown a {
+            font-size: 0.76rem;
+            padding: 6px 10px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .library-dropdown a:hover {
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Main Container layout */
         .container {
             display: flex;
             flex: 1;
-            height: calc(100vh - 48px);
             width: 100%;
             box-sizing: border-box;
             position: relative;
+            min-height: calc(100vh - 50px);
+        }
+
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
         }
 
         /* Breathing & Flowing Cinematic Viewport */
@@ -116,7 +124,7 @@
             align-items: center;
             position: relative;
             background: radial-gradient(circle at center, var(--ambient-glow) 0%, #0c0b0a 85%);
-            padding: 15px;
+            padding: 25px 15px;
             box-sizing: border-box;
             overflow: hidden;
             animation: backgroundBreathe 8s ease-in-out infinite alternate;
@@ -136,10 +144,10 @@
 
         .media-frame {
             width: 100%;
-            max-width: 540px;
-            height: 82vh;
+            max-width: 500px;
+            height: min(70vh, 650px);
             border: 2px solid var(--gold);
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             background: #000;
             position: relative;
@@ -149,7 +157,6 @@
             animation: frameFloat 6s ease-in-out infinite;
         }
 
-        /* Fully Un-zoomed & Proportional: Shows head to toe completely */
         .avatar-preview-media {
             width: 100%;
             height: 100%;
@@ -158,58 +165,63 @@
             display: block;
             position: relative;
             z-index: 2;
-            pointer-events: none;
         }
 
         .media-caption {
-            margin-top: 10px;
+            margin-top: 12px;
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             letter-spacing: 1.5px;
             text-align: center;
+            font-family: 'Cinzel', serif;
             text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             z-index: 10;
         }
 
         /* Control Sidebar */
         .control-sidebar {
-            width: 420px;
+            width: 440px;
             background: var(--panel-bg);
             border-left: 2px solid var(--gold);
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            gap: 15px;
-            overflow-y: auto;
+            padding: 25px;
+            gap: 18px;
             box-sizing: border-box;
             z-index: 10;
         }
 
+        @media (max-width: 900px) {
+            .control-sidebar { width: 100%; border-left: none; border-top: 2px solid var(--gold); }
+        }
+
         .panel-title {
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
+            font-family: 'Cinzel', serif;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 6px;
+            padding-bottom: 8px;
             margin-top: 5px;
         }
 
         .option-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 8px;
         }
 
         .option-card {
             background: #1b1713;
             border: 1px solid #3a3227;
-            border-radius: 4px;
-            padding: 8px;
+            border-radius: 6px;
+            padding: 10px;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             cursor: pointer;
             color: var(--text-muted);
+            font-family: 'Cinzel', serif;
             transition: all 0.3s ease;
         }
 
@@ -221,35 +233,57 @@
             font-weight: bold;
         }
 
-        .wardrobe-list {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            max-height: 320px;
+        /* Upgraded Wardrobe Grid */
+        .wardrobe-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-height: 380px;
             overflow-y: auto;
             padding-right: 4px;
         }
 
-        .wardrobe-item {
+        .wardrobe-card {
             background: #1b1713;
             border: 1px solid #3a3227;
-            border-radius: 4px;
-            padding: 9px 12px;
-            text-align: left;
-            font-size: 0.8rem;
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
             cursor: pointer;
-            color: var(--text-muted);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wardrobe-card img, .wardrobe-card video {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .wardrobe-card span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-family: 'Cinzel', serif;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
         }
 
-        .wardrobe-item:hover, .wardrobe-item.selected {
+        .wardrobe-card:hover, .wardrobe-card.selected {
             border-color: var(--gold);
-            color: var(--text-main);
             background: #26201a;
-            padding-left: 16px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .wardrobe-card.selected span {
+            color: var(--gold-hover);
+            font-weight: bold;
         }
 
         .action-footer {
@@ -264,13 +298,13 @@
             color: var(--bg-dark);
             border: none;
             padding: 12px 20px;
-            font-family: 'Georgia', serif;
+            font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-decoration: none;
             text-align: center;
             transition: all 0.3s ease;
@@ -285,40 +319,50 @@
 </head>
 <body>
 
-    <div class="game-top-bar">
-        <div class="nav-links">
-            <a href="gateway.html">Imperial Gateway</a>
-            <span class="active">Sovereign Wardrobe & Cinematics</span>
+    <!-- Unified Imperial Top Navigation Hub -->
+    <nav> 
+        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
+        
+        <div class="nav-module" onmouseenter="toggleLibraryMenu(true)" onmouseleave="toggleLibraryMenu(false)">
+            <a href="library.html">📚 Library ▾</a>
+            <div class="library-dropdown" id="libraryDropdown">
+                <a href="trailers.html">🎬 Trailers</a>
+                <a href="garden.html">🌸 Garden</a>
+                <a href="room-elder.html">🌿 Elder Sanctuary</a>
+            </div>
         </div>
-        <div>
-            <a href="create-likeness.html" class="create-likeness-nav-btn">✦ Create Likeness & Choose Character</a>
-        </div>
-    </div>
+
+        <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
+        <div class="nav-module"><a href="proving-grounds.html">🛡️ Youth</a></div>
+        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
+        <div class="nav-module"><a href="landing.html">🎁 Support Vision</a></div>
+        <div class="nav-module"><a href="community.html">💬 Community</a></div>
+    </nav>
 
     <div class="container">
-        <!-- Central Breathing Vertical Viewport (Fully Un-zoomed) -->
+        <!-- Central Breathing Vertical Viewport -->
         <div class="character-viewport">
             <div class="media-frame" id="media-container">
                 <video id="media-video" class="avatar-preview-media" autoplay loop muted controls style="display: block;">
-                    <source id="video-source" src="king-benson-imperial-CINEMATIC.mp4" type="video/mp4">
+                    <source id="video-source" src="" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <img id="media-image" class="avatar-preview-media" src="" alt="Royal Wardrobe Asset" style="display: none;">
             </div>
-            <div id="media-caption" class="media-caption">king-benson-imperial-CINEMATIC.mp4</div>
+            <div id="media-caption" class="media-caption">Loading...</div>
         </div>
 
         <!-- Control Sidebar -->
         <div class="control-sidebar">
             <div class="panel-title">Sovereign Profile</div>
-            <div class="option-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="option-grid">
                 <div class="option-card" onclick="setProfile('queen')">Queen</div>
                 <div class="option-card selected" onclick="setProfile('king')">King</div>
                 <div class="option-card" onclick="setProfile('together')">Together</div>
             </div>
 
             <div class="panel-title">Wardrobe Chamber (Cinematics First)</div>
-            <div class="wardrobe-list" id="wardrobe-list"></div>
+            <div class="wardrobe-grid" id="wardrobe-list"></div>
 
             <div class="action-footer">
                 <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Return to Gateway</a>
@@ -362,7 +406,6 @@
                 { name: "rosanna-imperial-outfit-CINEMATIC.mp4", type: "video" },
                 { name: "rosanna-imperial-read-CINEMATIC.mp4", type: "video" },
                 { name: "rosanna-imperial-white-CINEMATIC.mp4", type: "video" },
-                { name: "rosanna-pink-flower-crown-CINEMATIC.mp4", type: "video" },
                 { name: "rosanna-pink-CINEMATIC-1.mp4", type: "video" },
                 { name: "rosanna-pink-CINEMATIC.mp4", type: "video" },
                 { name: "rosanna-purple-CINEMATIC.mp4", type: "video" },
@@ -392,14 +435,21 @@
             ]
         };
 
-        let currentProfile = 'king';
+        let currentProfile = localStorage.getItem('imperial_wardrobe_profile') || 'king';
+
+        function toggleLibraryMenu(show) {
+            document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
+        }
 
         function setProfile(profile) {
             currentProfile = profile;
-            document.querySelectorAll('.control-sidebar .option-grid .option-card').forEach(c => c.classList.remove('selected'));
-            event.target.classList.add('selected');
+            localStorage.setItem('imperial_wardrobe_profile', profile);
+            
+            document.querySelectorAll('.control-sidebar .option-grid .option-card').forEach(c => {
+                c.classList.remove('selected');
+                if(c.textContent.toLowerCase() === profile) c.classList.add('selected');
+            });
             loadWardrobeList();
-            updateAmbientAura(assets[profile][0].name);
         }
 
         function loadWardrobeList() {
@@ -409,18 +459,29 @@
             const items = assets[currentProfile];
             if (!items || items.length === 0) return;
 
-            selectMedia(items[0].name, items[0].type);
+            // Restore last selected item if stored
+            let lastAsset = localStorage.getItem(`imperial_last_asset_${currentProfile}`) || items[0].name;
+            let activeItem = items.find(i => i.name === lastAsset) || items[0];
 
-            items.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = 'wardrobe-item' + (index === 0 ? ' selected' : '');
-                div.textContent = item.name;
-                div.onclick = () => {
-                    document.querySelectorAll('.wardrobe-item').forEach(i => i.classList.remove('selected'));
-                    div.classList.add('selected');
+            selectMedia(activeItem.name, activeItem.type);
+
+            items.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'wardrobe-card' + (item.name === activeItem.name ? ' selected' : '');
+                
+                if (item.type === 'video') {
+                    card.innerHTML = `<video src="${item.name}" muted preload="metadata"></video><span>${item.name.replace(/-CINEMATIC\.mp4|\.mp4|\.png/gi, '')}</span>`;
+                } else {
+                    card.innerHTML = `<img src="${item.name}" alt="asset"><span>${item.name.replace(/\.png/gi, '')}</span>`;
+                }
+
+                card.onclick = () => {
+                    document.querySelectorAll('.wardrobe-card').forEach(i => i.classList.remove('selected'));
+                    card.classList.add('selected');
+                    localStorage.setItem(`imperial_last_asset_${currentProfile}`, item.name);
                     selectMedia(item.name, item.type);
                 };
-                listContainer.appendChild(div);
+                listContainer.appendChild(card);
             });
         }
 
@@ -459,8 +520,10 @@
             document.documentElement.style.setProperty('--ambient-glow', glowColor);
         }
 
-        loadWardrobeList();
+        // Initialize state on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setProfile(currentProfile);
+        });
     </script>
 </body>
 </html>
-
