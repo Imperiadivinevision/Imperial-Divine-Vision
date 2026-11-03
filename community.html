@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Imperial Temple Gate - Imperial Divine Vision</title>
     <style>
-        /* Alive, breathing deep royal blue & purple silk-shifting animation moving upside-down and diagonally */
+        /* Alive, breathing deep royal blue & purple silk-shifting animation moving dynamically */
         @keyframes royalSilkFlow {
-            0% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Subtle waving motion for the main gate container */
+        @keyframes containerWave {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(1.002); }
+        }
+
+        /* Shimmering light reflex shifting across the frame */
+        @keyframes lightReflex {
+            0% { opacity: 0.3; filter: brightness(1); }
+            50% { opacity: 0.6; filter: brightness(1.2); }
+            100% { opacity: 0.3; filter: brightness(1); }
         }
 
         body { 
@@ -23,58 +30,57 @@
             margin: 0; 
             min-height: 100vh; 
             color: #f3e8ff;
-            /* Deep royal blues, rich imperial purples, and dark velvet obsidian blending dynamically */
             background: linear-gradient(135deg, #030712, #0f172a, #1e1b4b, #3b0764, #581c87, #1e1b4b, #030712);
             background-size: 400% 400%;
             animation: royalSilkFlow 18s ease infinite;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            justify-content: flex-start;
+            overflow-y: auto; /* Allows smooth scrolling up and down on all devices */
             position: relative;
+            padding: 40px 15px;
         }
 
-        /* Shimmering atmospheric lighting overlay to make the background feel alive and deep */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 30%, rgba(147, 51, 234, 0.15), rgba(3, 7, 18, 0.7));
+            background: radial-gradient(circle at 50% 30%, rgba(147, 51, 234, 0.18), rgba(3, 7, 18, 0.75));
             pointer-events: none;
             z-index: 1;
+            animation: lightReflex 8s ease-in-out infinite alternate;
         }
 
         .container { 
             position: relative;
             z-index: 10;
-            background: rgba(15, 23, 42, 0.88);
+            background: rgba(15, 23, 42, 0.90);
             border: 2px solid;
             border-image: linear-gradient(to bottom, #fde047, #ca8a04, #713f12) 1;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 0 35px rgba(234, 179, 8, 0.2);
-            padding: 35px; 
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 0 35px rgba(234, 179, 8, 0.22);
+            padding: 30px; 
             border-radius: 6px; 
             text-align: center; 
             max-width: 520px;
-            width: 90%;
+            width: 100%;
             backdrop-filter: blur(12px);
-            transform: scale(0.98);
-            animation: gateReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: containerWave 6s ease-in-out infinite, gateReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin: auto;
         }
 
         @keyframes gateReveal {
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* Your stunning community.png crown & purple silk banner */
         .gate-image-frame {
             width: 100%;
             height: 240px;
             border-radius: 4px;
             overflow: hidden;
-            border: 1px solid rgba(234, 179, 8, 0.6);
+            border: 1px solid rgba(234, 179, 8, 0.7);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
             margin-bottom: 20px;
             position: relative;
@@ -118,7 +124,7 @@
         }
 
         input {
-            width: 75%;
+            width: 85%;
             padding: 12px;
             background: rgba(30, 41, 59, 0.95);
             border: 1px solid #b45309;
@@ -170,23 +176,31 @@
             position: fixed; 
             bottom: 20px; 
             right: 20px; 
-            width: 100px; 
+            width: 90px; 
             z-index: 100; 
             pointer-events: none;
             opacity: 0.85;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
         }
 
+        /* Cinematic Gate Opening & Light Surge Transition Effect */
         .gate-opening .gate-image-frame img {
-            transform: scale(1.15);
-            filter: brightness(1.8) contrast(1.2) blur(1px);
+            transform: scale(1.18);
+            filter: brightness(1.9) contrast(1.25) blur(1px);
         }
 
         .gate-opening {
-            transform: scale(1.05);
+            transform: scale(1.04);
             opacity: 0;
             filter: blur(8px);
             transition: all 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            .container { padding: 20px 15px; }
+            .gate-image-frame { height: 190px; }
         }
     </style>
 </head>
@@ -194,7 +208,7 @@
 
     <div class="container" id="gateContainer">
         <div class="gate-image-frame">
-            <img src="watermarked_img_17831258556582071418.jpg" alt="Imperial Temple Gate">
+            <img src="community.png" alt="Imperial Temple Gate">
         </div>
 
         <h1>Worldwide Sanctuary</h1>
@@ -240,6 +254,7 @@
 
             const age = currentYear - year;
 
+            // Play heavy gate-opening sound
             gateSound.play().catch(e => console.log("Audio play prevented:", e));
             gateContainer.classList.add('gate-opening');
 
