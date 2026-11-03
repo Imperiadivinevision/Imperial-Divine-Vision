@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-dark: #030806;
-            --panel-bg: rgba(6, 17, 11, 0.86);
+            --panel-bg: rgba(6, 17, 11, 0.7); /* Made more transparent */
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
@@ -27,12 +27,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            overflow: hidden; /* Hide scrollbars on full-screen experience */
             box-sizing: border-box;
-            overflow-y: auto;
         }
 
-        /* Full-Screen Animated Video Background */
+        /* Full-Screen Immersive Palace Environment (Video Background) */
         #bg-video {
             position: fixed;
             right: 0;
@@ -43,23 +42,23 @@
             height: auto;
             z-index: -100;
             background-size: cover;
-            filter: brightness(0.85);
+            /* Subtle blur to create depth of field, keeping the king sharp */
+            filter: brightness(0.85) blur(1px); 
         }
 
         /* Nav Hub */
         nav { 
-            padding: 0.8rem 1rem; 
+            padding: 0.6rem 1rem; 
             background: rgba(4, 12, 7, 0.7);
-            backdrop-filter: blur(8px);
-            border-bottom: 3px solid var(--gold);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--gold);
+            position: relative; /* Not sticky, integrates with flow */
+            z-index: 500;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 1.5rem;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.7);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.9);
             flex-wrap: wrap;
             width: 100%;
             box-sizing: border-box;
@@ -69,7 +68,7 @@
             font-family: 'Cinzel', serif;
             color: #f3e5ab; 
             text-decoration: none; 
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -82,184 +81,118 @@
             text-shadow: 0 0 10px var(--gold);
         }
 
-        /* Ornate Sovereign Header */
+        /* Sovereign Title Banner */
         .page-banner {
-            background: rgba(7, 23, 15, 0.75);
-            backdrop-filter: blur(5px);
+            background: transparent; /* Clean, no background, just text */
             border-top: 2px solid var(--gold);
             border-bottom: 2px solid var(--gold);
             text-align: center;
-            padding: 16px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            backdrop-filter: blur(8px);
             position: relative;
-            z-index: 10;
+            z-index: 500;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
         }
 
         .filigree-scroll {
-            width: 120px;
-            height: 24px;
+            width: 100px;
+            height: 20px;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='%23d4af37'%3E%3Cpath d='M0 12c15 0 20-8 30-8s15 8 30 8 15-8 30-8 20 8 30 8v2c-12 0-18-7-28-7s-15 7-28 7-18-7-28-7-16 7-28 7v-2z' opacity='0.85'/%3E%3Cpath d='M10 12c10 0 14-5 20-5s10 5 20 5 10-5 20-5 14 5 20 5v1c-8 0-12-4-18-4s-10 4-18 4-12-4-18-4-10 4-18 4v-1z'/%3E%3Ccircle cx='60' cy='12' r='3' fill='%23ffdf7e'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0.9;
         }
-        .filigree-scroll.right {
-            transform: scaleX(-1);
-        }
+        .filigree-scroll.right { transform: scaleX(-1); }
 
         .page-banner h1 {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             margin: 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.6);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.7);
         }
 
-        @media (max-width: 768px) {
-            .filigree-scroll { display: none; }
-            .page-banner h1 { font-size: 1.2rem; letter-spacing: 2px; }
-        }
-
-        /* Main Content Container */
+        /* Main Layout Container */
         .container {
             display: flex;
             flex: 1;
             width: 100%;
+            height: calc(100vh - 110px); /* Fill screen below header */
             box-sizing: border-box;
             position: relative;
-            min-height: calc(100vh - 120px);
             background: transparent;
-        }
-
-        @media (max-width: 1024px) {
-            .container { flex-direction: column; }
-        }
-
-        /* Cinematic Viewport */
-        .character-viewport {
-            flex: 1.3;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 30px;
-            box-sizing: border-box;
-            background: transparent;
-        }
-
-        .container.theater-mode .character-viewport {
-            flex: 2.8;
-        }
-        .container.theater-mode .control-sidebar {
-            width: 320px;
-        }
-
-        /* Transparent Wrapper to remove the detached box look */
-        .media-frame-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 620px;
-            padding: 12px;
-            background: transparent;
-        }
-
-        .viewport-expand-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #06110b;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            padding: 6px 12px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            cursor: pointer;
-            z-index: 30;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            transition: all 0.3s ease;
-        }
-        .viewport-expand-btn:hover {
-            background: var(--gold);
-            color: #030a06;
-            box-shadow: 0 0 20px var(--gold);
-        }
-
-        .media-frame {
-            width: 100%;
-            height: min(70vh, 620px);
-            border: 5px double var(--gold);
-            border-radius: 10px;
             overflow: hidden;
-            background: #000;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.95);
         }
 
-        /* object-fit: cover eliminates letterbox bars and fills the frame seamlessly */
-        .avatar-preview-media {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            object-position: center center;
+        /* Center Stage: King Benson integrated into the Palace */
+        .character-stage {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Stand him on the floor */
+            position: relative;
+            padding-bottom: 40px; /* Some breathing room at the bottom */
+            z-index: 10; /* Above video background */
+            background: transparent;
+        }
+
+        .king-cinematic-media {
+            width: auto;
+            height: 90%; /* He is 90% of the screen height */
+            object-fit: contain;
+            object-position: center bottom;
             display: block;
             position: relative;
-            z-index: 2;
+            z-index: 15;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.9));
         }
 
-        .media-caption {
-            margin-top: 14px;
+        /* Integrated Media Caption (Text on the floor) */
+        .king-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             color: var(--gold);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-align: center;
             font-family: 'Cinzel', serif;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+            z-index: 20;
         }
 
-        /* Right Control Sidebar */
+        /* Ornate Right-side Control Panel */
         .control-sidebar {
-            width: 440px;
+            width: 380px;
             background: var(--panel-bg);
-            backdrop-filter: blur(15px);
-            border-left: 3px solid var(--gold);
+            backdrop-filter: blur(15px); /* Strong blur to isolate panel */
+            border-left: 2px solid var(--gold);
             display: flex;
             flex-direction: column;
-            padding: 25px;
-            gap: 20px;
+            padding: 20px;
+            gap: 15px;
             box-sizing: border-box;
-            z-index: 10;
-            box-shadow: -15px 0 35px rgba(0,0,0,0.85);
-        }
-
-        @media (max-width: 1024px) {
-            .control-sidebar { width: 100%; border-left: none; border-top: 3px solid var(--gold); }
+            z-index: 100; /* Topmost */
+            box-shadow: -10px 0 25px rgba(0,0,0,0.8);
         }
 
         .panel-title {
             color: var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2.5px;
             font-family: 'Cinzel', serif;
-            border-bottom: 2px solid rgba(212, 175, 55, 0.4);
-            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -268,16 +201,16 @@
         .option-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 6px;
         }
 
         .option-card {
             background: linear-gradient(135deg, #091a10 0%, #173627 100%);
-            border: 2px solid var(--gold);
-            border-radius: 6px;
-            padding: 10px;
+            border: 1.5px solid var(--gold);
+            border-radius: 4px;
+            padding: 8px;
             text-align: center;
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             cursor: pointer;
             color: var(--text-muted);
             font-family: 'Cinzel', serif;
@@ -289,49 +222,48 @@
             border-color: var(--accent-orange);
             color: var(--text-main);
             background: linear-gradient(135deg, #173627 0%, #284a37 100%);
-            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.4), 0 0 12px rgba(255, 140, 0, 0.4);
             font-weight: bold;
         }
 
         .wardrobe-scroll-container {
-            max-height: 420px;
+            max-height: 380px;
             overflow-y: auto;
             overflow-x: hidden;
-            padding-right: 6px;
+            padding-right: 4px;
         }
 
         .wardrobe-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         .wardrobe-card {
             background: linear-gradient(135deg, #091a10 0%, #0d2218 100%);
-            border: 2px solid #284a37;
-            border-radius: 8px;
-            padding: 10px;
+            border: 1.5px solid #284a37;
+            border-radius: 6px;
+            padding: 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            gap: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
 
         .wardrobe-card img, .wardrobe-card video {
             width: 100%;
-            height: 90px;
+            height: 75px;
             object-fit: cover;
-            border-radius: 6px;
-            border: 2px solid rgba(212, 175, 55, 0.5);
+            border-radius: 4px;
+            border: 1.5px solid rgba(212, 175, 55, 0.5);
             background: #000;
         }
 
         .wardrobe-card span {
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             font-weight: 700;
             color: var(--gold);
             font-family: 'Cinzel', serif;
@@ -339,61 +271,55 @@
             overflow: hidden;
             text-overflow: ellipsis;
             width: 100%;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
         }
 
         .wardrobe-card:hover, .wardrobe-card.selected {
             border-color: var(--accent-orange);
             background: linear-gradient(135deg, #122a1c 0%, #1f422f 100%);
-            box-shadow: 0 0 16px rgba(255, 140, 0, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .wardrobe-card.selected span {
-            color: var(--gold-hover);
-            text-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+            transform: translateY(-1px);
         }
 
         .action-footer {
             margin-top: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .game-btn {
             background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
             color: #030a06;
             border: none;
-            padding: 13px 20px;
+            padding: 10px 18px;
             font-family: 'Cinzel', serif;
             font-weight: 900;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 4px;
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
         }
 
         .game-btn:hover {
             background: linear-gradient(135deg, #ffdf7e, #d4af37);
-            box-shadow: 0 0 22px rgba(255, 140, 0, 0.8);
-            transform: translateY(-2px);
+            box-shadow: 0 0 18px rgba(255, 140, 0, 0.7);
         }
     </style>
 </head>
 <body>
 
+    <!-- The Full-Screen Immersive Palace Environment (Your living wavy video background) -->
     <video autoplay loop muted playsinline id="bg-video">
+        <!-- Replace 'imperial-palace-alive.mp4' with your actual video file -->
         <source src="imperial-palace-alive.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Unified Nav -->
+    <!-- Unified Nav Hub -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Home</a></div>
         <div class="nav-module"><a href="library.html">📚 Library ▾</a></div>
@@ -404,7 +330,7 @@
         <div class="nav-module"><a href="community.html">💬 Community</a></div>
     </nav>
 
-    <!-- Sovereign Title Banner -->
+    <!-- Ornate Sovereign Header -->
     <div class="page-banner">
         <div class="filigree-scroll"></div>
         <h1>THE SOVEREIGN CHAMBERS</h1>
@@ -412,21 +338,15 @@
     </div>
 
     <div class="container" id="mainContainer">
-        <!-- Expanded Left-side Sovereign Cinematic Player -->
-        <div class="character-viewport">
-            <div class="media-frame-wrapper">
-                <button class="viewport-expand-btn" id="expandToggleBtn" onclick="toggleTheaterMode()" title="Toggle Theater Fullscreen">
-                    <span>Theater Mode</span> ⤢
-                </button>
-                <div class="media-frame" id="media-container">
-                    <video id="media-video" class="avatar-preview-media" autoplay loop controls style="display: block;">
-                        <source id="video-source" src="" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <img id="media-image" class="avatar-preview-media" src="" alt="Royal Wardrobe Asset" style="display: none;">
-                </div>
-            </div>
-            <div id="media-caption" class="media-caption">Sovereign View</div>
+        <!-- Center Stage: King Benson integrated into the Palace Hall -->
+        <div class="character-stage">
+            <!-- The Main Cinematic Avatar/Video is now a full-height element on the stage -->
+            <video id="media-video" class="king-cinematic-media" autoplay loop controls>
+                <source id="video-source" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img id="media-image" class="king-cinematic-media" src="" alt="Royal Wardrobe Asset" style="display: none;">
+            <div id="media-caption" class="king-caption">Sovereign View</div>
         </div>
 
         <!-- Ornate Right-side Controls -->
@@ -440,7 +360,7 @@
 
             <div class="panel-title">
                 <span>WARDROBE GALLERY</span>
-                <span style="font-size: 0.68rem; color: var(--accent-orange);">💎 Imperial Vault</span>
+                <span style="font-size: 0.6rem; color: var(--accent-orange);">💎 Imperial Vault</span>
             </div>
             
             <div class="wardrobe-scroll-container">
@@ -448,7 +368,7 @@
             </div>
 
             <div class="action-footer">
-                <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: none;">Return to Gateway</a>
+                <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 1.5px solid var(--gold); box-shadow: none;">Return to Gateway</a>
             </div>
         </div>
     </div>
@@ -519,19 +439,6 @@
         };
 
         let currentProfile = localStorage.getItem('imperial_wardrobe_profile') || 'king';
-
-        function toggleTheaterMode() {
-            const container = document.getElementById('mainContainer');
-            const btn = document.getElementById('expandToggleBtn');
-            container.classList.toggle('theater-mode');
-            if(container.classList.contains('theater-mode')) {
-                btn.innerHTML = '<span>Exit Theater</span> ⤡';
-                btn.title = "Exit Theater Mode";
-            } else {
-                btn.innerHTML = '<span>Theater Mode</span> ⤢';
-                btn.title = "Toggle Theater Fullscreen";
-            }
-        }
 
         function setProfile(profile) {
             currentProfile = profile;
