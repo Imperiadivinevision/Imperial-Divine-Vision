@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Imperial Capital: Sovereign Wardrobe Gallery</title>
+    <title>Imperial Capital: The Sovereign Chambers</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #06120d;
-            --panel-bg: rgba(14, 26, 20, 0.96);
+            /* Rich Royal Green, Shiny Orange silk, and Obsidian with intense Gold trim */
+            --bg-dark: #030a06;
+            --panel-bg: rgba(6, 17, 11, 0.97);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
             --text-main: #f5f2eb;
             --text-muted: #a3b8aa;
-            --ambient-glow: rgba(212, 175, 55, 0.28);
+            --ambient-glow: rgba(212, 175, 55, 0.35);
         }
 
         body {
@@ -28,14 +29,14 @@
             flex-direction: column;
             overflow-x: hidden;
             box-sizing: border-box;
-            transition: background 1.5s ease;
+            background-image: radial-gradient(circle at center, rgba(14, 38, 22, 0.4) 0%, #030a06 90%);
         }
 
-        /* Harmonized Imperial Navigation Hub */
+        /* Nav Hub with Imperial Trims */
         nav { 
             padding: 0.8rem 1rem; 
-            background: rgba(10, 20, 15, 0.96);
-            border-bottom: 2px solid var(--gold);
+            background: linear-gradient(180deg, #091a10 0%, #040c07 100%);
+            border-bottom: 3px solid var(--gold);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -43,15 +44,11 @@
             justify-content: center;
             align-items: center;
             gap: 1.5rem;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.85);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.9);
             flex-wrap: wrap;
             backdrop-filter: blur(12px);
-            box-sizing: border-box;
             width: 100%;
-        }
-
-        .nav-module {
-            position: relative;
+            box-sizing: border-box;
         }
 
         nav a { 
@@ -59,130 +56,130 @@
             color: #f3e5ab; 
             text-decoration: none; 
             font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
-            white-space: nowrap;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         nav a:hover {
             color: #ffffff;
-            text-shadow: 0 0 10px var(--gold);
+            text-shadow: 0 0 10px var(--gold), 0 0 20px var(--accent-orange);
         }
 
-        /* Library Sub-Menu */
-        .library-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(14, 26, 20, 0.98);
-            border: 1px solid var(--gold);
-            border-radius: 6px;
-            margin-top: 8px;
-            padding: 8px;
-            flex-direction: column;
-            gap: 6px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.9);
-            z-index: 1100;
-            min-width: 150px;
+        /* Grand Cinematic Sovereign Header */
+        .page-banner {
+            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.15) 50%, transparent 100%);
+            border-bottom: 1px solid var(--gold);
             text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .library-dropdown a {
-            font-size: 0.76rem;
-            padding: 6px 10px;
-            display: block;
-            border-radius: 4px;
+        .page-banner h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.7rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
-        .library-dropdown a:hover {
-            background: rgba(212, 175, 55, 0.2);
-        }
-
-        /* Main Container layout */
         .container {
             display: flex;
             flex: 1;
             width: 100%;
             box-sizing: border-box;
             position: relative;
-            min-height: calc(100vh - 55px);
-            background: linear-gradient(135deg, #06140e 0%, #0d2218 50%, #050d09 100%);
+            background: radial-gradient(circle at 30% 30%, #0a2515 0%, #030c06 100%);
         }
 
         @media (max-width: 1024px) {
             .container { flex-direction: column; }
         }
 
-        /* Cinematic Viewport */
+        /* Grand Cinematic Viewport (Left & Larger) */
         .character-viewport {
-            flex: 1.4;
+            flex: 1.5;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            background: radial-gradient(circle at center, var(--ambient-glow) 0%, #06120d 85%);
-            padding: 30px 20px;
+            padding: 40px 30px;
             box-sizing: border-box;
             overflow: hidden;
             transition: all 0.4s ease;
+            background-image: 
+                linear-gradient(rgba(3, 10, 6, 0.8), rgba(3, 10, 6, 0.85)),
+                url('imperial-palace.mp4'); /* Will blend beautifully with atmospheric lights */
+            background-size: cover;
+            background-position: center;
         }
 
         .container.theater-mode .character-viewport {
-            flex: 2.5;
+            flex: 3;
         }
         .container.theater-mode .control-sidebar {
             width: 340px;
         }
 
+        /* Golden Framed Wrapper - Gold Money & Glory aesthetics */
         .media-frame-wrapper {
             position: relative;
             width: 100%;
             max-width: 680px;
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 14px;
+            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.15);
         }
 
+        /* Beautiful Theater Expand Button */
         .viewport-expand-btn {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(14, 26, 20, 0.85);
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #091a10 0%, #040c07 100%);
             border: 2px solid var(--gold);
             color: var(--gold);
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
+            padding: 8px 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
             cursor: pointer;
             z-index: 30;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 1.1rem;
+            gap: 6px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
             transition: all 0.3s ease;
         }
         .viewport-expand-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background: var(--gold);
-            color: #06120d;
+            color: #030a06;
             box-shadow: 0 0 20px var(--gold);
         }
 
+        /* 3D Royal Decorative frame */
         .media-frame {
             width: 100%;
-            height: min(78vh, 750px);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
+            height: min(74vh, 680px);
+            border: 6px double var(--gold);
+            border-radius: 12px;
             overflow: hidden;
             background: #000;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px var(--ambient-glow);
+            box-shadow: 
+                0 0 0 2px rgba(3, 10, 6, 0.8),
+                0 25px 60px rgba(0,0,0,0.95), 
+                0 0 45px rgba(212, 175, 55, 0.35);
         }
 
         .avatar-preview-media {
@@ -196,43 +193,45 @@
         }
 
         .media-caption {
-            margin-top: 14px;
+            margin-top: 18px;
             color: var(--gold);
-            font-size: 0.95rem;
-            letter-spacing: 2px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-align: center;
             font-family: 'Cinzel', serif;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+            text-shadow: 0 3px 6px rgba(0,0,0,0.9), 0 0 10px rgba(212, 175, 55, 0.4);
             z-index: 10;
         }
 
-        /* Control Sidebar */
+        /* Control Sidebar (Vault of Wealth) */
         .control-sidebar {
-            width: 460px;
+            width: 480px;
             background: var(--panel-bg);
-            border-left: 2px solid var(--gold);
+            border-left: 3px solid var(--gold);
             display: flex;
             flex-direction: column;
-            padding: 25px;
-            gap: 18px;
+            padding: 30px;
+            gap: 22px;
             box-sizing: border-box;
             z-index: 10;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+            box-shadow: -15px 0 35px rgba(0,0,0,0.85);
             transition: width 0.4s ease;
         }
 
         @media (max-width: 1024px) {
-            .control-sidebar { width: 100%; border-left: none; border-top: 2px solid var(--gold); }
+            .control-sidebar { width: 100%; border-left: none; border-top: 3px solid var(--gold); }
         }
 
         .panel-title {
             color: var(--gold);
-            font-size: 0.88rem;
+            font-size: 0.95rem;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 3px;
             font-family: 'Cinzel', serif;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
-            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 10px;
             margin-top: 5px;
             display: flex;
             justify-content: space-between;
@@ -242,19 +241,20 @@
         .option-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
 
         .option-card {
-            background: #0f1f17;
-            border: 1px solid #284a37;
-            border-radius: 6px;
-            padding: 10px;
+            background: #091a10;
+            border: 2px solid #284a37;
+            border-radius: 8px;
+            padding: 12px;
             text-align: center;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             cursor: pointer;
             color: var(--text-muted);
             font-family: 'Cinzel', serif;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
@@ -262,46 +262,49 @@
             border-color: var(--gold);
             color: var(--text-main);
             background: #173627;
-            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.4), 0 0 10px rgba(255, 140, 0, 0.3);
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.4), 0 0 15px rgba(255, 140, 0, 0.35);
             font-weight: bold;
+            transform: translateY(-1px);
         }
 
-        /* Wardrobe Grid */
+        /* Ornate Wardrobe Grid Card */
         .wardrobe-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 15px;
             max-height: 440px;
             overflow-y: auto;
-            padding-right: 6px;
+            padding-right: 8px;
         }
 
         .wardrobe-card {
-            background: #0f1f17;
-            border: 1px solid #284a37;
-            border-radius: 8px;
-            padding: 10px;
+            background: #091a10;
+            border: 2px solid #284a37;
+            border-radius: 10px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .wardrobe-card img, .wardrobe-card video {
             width: 100%;
-            height: 95px;
+            height: 105px;
             object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
             background: #000;
         }
 
         .wardrobe-card span {
-            font-size: 0.74rem;
+            font-size: 0.76rem;
+            font-weight: 600;
             color: var(--text-muted);
             font-family: 'Cinzel', serif;
             white-space: nowrap;
@@ -312,64 +315,57 @@
 
         .wardrobe-card:hover, .wardrobe-card.selected {
             border-color: var(--accent-orange);
-            background: #173627;
-            box-shadow: 0 0 18px rgba(255, 140, 0, 0.45);
-            transform: translateY(-2px);
+            background: #122a1c;
+            box-shadow: 
+                0 0 18px rgba(255, 140, 0, 0.5),
+                inset 0 0 10px rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px);
         }
 
         .wardrobe-card.selected span {
             color: var(--gold-hover);
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
+            font-weight: 700;
+            text-shadow: 0 0 12px rgba(255, 140, 0, 0.7);
         }
 
         .action-footer {
             margin-top: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .game-btn {
-            background: linear-gradient(135deg, #d4af37, #aa7c11);
-            color: #06120d;
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 50%, #875c02 100%);
+            color: #030a06;
             border: none;
-            padding: 13px 20px;
+            padding: 15px 20px;
             font-family: 'Cinzel', serif;
-            font-weight: bold;
-            font-size: 0.85rem;
+            font-weight: 900;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
             cursor: pointer;
             border-radius: 6px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
             text-decoration: none;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         .game-btn:hover {
-            background: linear-gradient(135deg, #ffdf7e, #d4af37);
-            box-shadow: 0 0 22px rgba(255, 140, 0, 0.7);
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #ffdf7e, #d4af37, #aa7c11);
+            box-shadow: 0 0 25px rgba(255, 140, 0, 0.8);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- Unified Imperial Top Navigation Hub -->
+    <!-- Unified Nav -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Home</a></div>
-        
-        <div class="nav-module" onmouseenter="toggleLibraryMenu(true)" onmouseleave="toggleLibraryMenu(false)">
-            <a href="library.html">📚 Library ▾</a>
-            <div class="library-dropdown" id="libraryDropdown">
-                <a href="trailers.html">🎬 Trailers</a>
-                <a href="garden.html">🌸 Garden</a>
-                <a href="room-elder.html">🌿 Elder Sanctuary</a>
-            </div>
-        </div>
-
+        <div class="nav-module"><a href="library.html">📚 Library ▾</a></div>
         <div class="nav-module"><a href="battle.html">⚔️ Battle</a></div>
         <div class="nav-module"><a href="proving-grounds.html">🛡️ Youth</a></div>
         <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
@@ -377,23 +373,30 @@
         <div class="nav-module"><a href="community.html">💬 Community</a></div>
     </nav>
 
+    <!-- Sovereign Title Banner -->
+    <div class="page-banner">
+        <h1>THE SOVEREIGN CHAMBERS</h1>
+    </div>
+
     <div class="container" id="mainContainer">
-        <!-- Cinematic Viewport -->
+        <!-- Expanded Left-side Sovereign Cinematic Player -->
         <div class="character-viewport">
             <div class="media-frame-wrapper">
-                <button class="viewport-expand-btn" id="expandToggleBtn" onclick="toggleTheaterMode()" title="Toggle Theater Fullscreen">⤢</button>
+                <button class="viewport-expand-btn" id="expandToggleBtn" onclick="toggleTheaterMode()" title="Toggle Theater Fullscreen">
+                    <span>Toggle Theater View</span> ⤢
+                </button>
                 <div class="media-frame" id="media-container">
-                    <video id="media-video" class="avatar-preview-media" autoplay loop muted controls style="display: block;">
+                    <video id="media-video" class="avatar-preview-media" autoplay loop controls style="display: block;">
                         <source id="video-source" src="" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <img id="media-image" class="avatar-preview-media" src="" alt="Royal Wardrobe Asset" style="display: none;">
                 </div>
             </div>
-            <div id="media-caption" class="media-caption">Loading...</div>
+            <div id="media-caption" class="media-caption">Sovereign View</div>
         </div>
 
-        <!-- Control Sidebar -->
+        <!-- Ornate Right-side Controls -->
         <div class="control-sidebar">
             <div class="panel-title">Sovereign Profile</div>
             <div class="option-grid">
@@ -403,13 +406,13 @@
             </div>
 
             <div class="panel-title">
-                <span>Wardrobe & Cinematics</span>
-                <span style="font-size: 0.7rem; color: var(--accent-orange);">✨ HD Previews</span>
+                <span>WARDROBE GALLERY</span>
+                <span style="font-size: 0.72rem; color: var(--accent-orange); text-shadow: 0 0 5px var(--accent-orange);">💎 Imperial Vault</span>
             </div>
             <div class="wardrobe-grid" id="wardrobe-list"></div>
 
             <div class="action-footer">
-                <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Return to Gateway</a>
+                <a href="gateway.html" class="game-btn" style="background: transparent; color: var(--gold); border: 2px solid var(--gold); box-shadow: none;">Return to Gateway</a>
             </div>
         </div>
     </div>
@@ -481,19 +484,15 @@
 
         let currentProfile = localStorage.getItem('imperial_wardrobe_profile') || 'king';
 
-        function toggleLibraryMenu(show) {
-            document.getElementById('libraryDropdown').style.display = show ? 'flex' : 'none';
-        }
-
         function toggleTheaterMode() {
             const container = document.getElementById('mainContainer');
             const btn = document.getElementById('expandToggleBtn');
             container.classList.toggle('theater-mode');
             if(container.classList.contains('theater-mode')) {
-                btn.innerHTML = '⤡';
+                btn.innerHTML = '<span>Exit Theater View</span> ⤡';
                 btn.title = "Exit Theater Mode";
             } else {
-                btn.innerHTML = '⤢';
+                btn.innerHTML = '<span>Toggle Theater View</span> ⤢';
                 btn.title = "Toggle Theater Fullscreen";
             }
         }
@@ -563,15 +562,15 @@
         }
 
         function updateAmbientAura(name) {
-            let glowColor = "rgba(212, 175, 55, 0.28)";
+            let glowColor = "rgba(212, 175, 55, 0.35)";
             if (name.includes('pink') || name.includes('red')) {
-                glowColor = "rgba(255, 140, 0, 0.35)";
+                glowColor = "rgba(255, 140, 0, 0.4)";
             } else if (name.includes('purple') || name.includes('royal-purple')) {
-                glowColor = "rgba(138, 43, 226, 0.35)";
+                glowColor = "rgba(138, 43, 226, 0.4)";
             } else if (name.includes('green')) {
-                glowColor = "rgba(46, 139, 87, 0.35)";
+                glowColor = "rgba(46, 139, 87, 0.4)";
             } else if (name.includes('white')) {
-                glowColor = "rgba(240, 248, 255, 0.35)";
+                glowColor = "rgba(240, 248, 255, 0.4)";
             }
             document.documentElement.style.setProperty('--ambient-glow', glowColor);
         }
