@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-dark: #030806;
-            --panel-bg: rgba(6, 17, 11, 0.85);
+            --panel-bg: rgba(6, 17, 11, 0.88);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
@@ -46,7 +46,7 @@
         /* Nav Hub */
         nav { 
             padding: 0.6rem 1rem; 
-            background: rgba(4, 12, 7, 0.7);
+            background: rgba(4, 12, 7, 0.75);
             backdrop-filter: blur(12px);
             border-bottom: 2px solid var(--gold);
             position: relative;
@@ -78,7 +78,7 @@
             text-shadow: 0 0 10px var(--gold);
         }
 
-        /* Sovereign Title Banner */
+        /* Sovereign Title Banner with Golden Filigree Scrolls */
         .page-banner {
             background: transparent;
             border-top: 2px solid var(--gold);
@@ -127,7 +127,7 @@
             overflow: hidden;
         }
 
-        /* Center Stage: King Benson standing naturally in the hall */
+        /* Center Stage: King Benson standing unboxed and naturally inside the hall */
         .character-stage {
             flex: 2;
             display: flex;
@@ -140,11 +140,11 @@
             background: transparent;
         }
 
-        /* Scaled down cleanly with object-fit: contain so his whole body & face show */
+        /* Perfectly proportioned, smaller, unboxed view showing head, crown, and full body */
         .king-cinematic-media {
             width: 100%;
-            max-width: 500px;
-            height: 72vh;
+            max-width: 440px;
+            height: 62vh;
             object-fit: contain;
             object-position: center center;
             display: block;
@@ -156,7 +156,7 @@
         .king-caption {
             margin-top: 10px;
             color: var(--gold);
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-align: center;
@@ -333,7 +333,7 @@
     </div>
 
     <div class="container" id="mainContainer">
-        <!-- Center Stage: King Benson Standing Cleanly in the Palace -->
+        <!-- Center Stage: King Benson Standing Unboxed in the Palace -->
         <div class="character-stage">
             <video id="media-video" class="king-cinematic-media" autoplay loop controls style="display: block;">
                 <source id="video-source" src="" type="video/mp4">
