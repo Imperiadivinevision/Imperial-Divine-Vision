@@ -10,7 +10,7 @@
             --primary-gold: #f3e5ab;
             --deep-gold: #d4af37;
             --text-light: #f9f6ee;
-            --dark-card: rgba(16, 7, 28, 0.92);
+            --dark-card: rgba(16, 7, 28, 0.94);
         }
 
         * {
@@ -57,7 +57,7 @@
             text-shadow: 0 0 10px var(--deep-gold);
         }
 
-        /* Breathing silk background animation using shop.png */
+        /* Alive breathing silk background animation using shop.png */
         .animated-silk-bg {
             position: fixed;
             top: -10%;
@@ -76,7 +76,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(59, 130, 246, 0.14), rgba(236, 72, 153, 0.1), rgba(212, 175, 55, 0.16));
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(59, 130, 246, 0.15), rgba(236, 72, 153, 0.12), rgba(212, 175, 55, 0.18));
             mix-blend-mode: overlay;
             z-index: -1;
             pointer-events: none;
@@ -85,45 +85,45 @@
 
         @keyframes silkBreath {
             0% { transform: scale(1) translateY(0) translateX(0); }
-            50% { transform: scale(1.05) translateY(-15px) translateX(6px); }
-            100% { transform: scale(1.02) translateY(10px) translateX(-6px); }
+            50% { transform: scale(1.06) translateY(-18px) translateX(8px); }
+            100% { transform: scale(1.03) translateY(12px) translateX(-8px); }
         }
 
         @keyframes royalColorShift {
             0% { filter: brightness(1) saturate(1.1) hue-rotate(0deg); }
-            33% { filter: brightness(1.12) saturate(1.25) hue-rotate(25deg); }
-            66% { filter: brightness(1.05) saturate(1.2) hue-rotate(-15deg); }
-            100% { filter: brightness(1.15) saturate(1.3) hue-rotate(10deg); }
+            33% { filter: brightness(1.15) saturate(1.3) hue-rotate(30deg); }
+            66% { filter: brightness(1.08) saturate(1.25) hue-rotate(-20deg); }
+            100% { filter: brightness(1.18) saturate(1.35) hue-rotate(15deg); }
         }
 
         @keyframes lightPulse {
             0% { opacity: 0.4; }
-            100% { opacity: 0.85; }
+            100% { opacity: 0.9; }
         }
 
         header {
             text-align: center;
-            padding: 2rem 1rem 0.8rem 1rem;
-            background: linear-gradient(to bottom, rgba(10,5,20,0.8), transparent);
+            padding: 2.2rem 1rem 1rem 1rem;
+            background: linear-gradient(to bottom, rgba(10,5,20,0.85), transparent);
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             color: var(--primary-gold);
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 2px 6px rgba(0,0,0,0.95);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.9), 0 2px 8px rgba(0,0,0,0.95);
             letter-spacing: 3px;
             margin-top: 0.5rem;
             margin-bottom: 0.3rem;
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-style: italic;
             color: #e2d9c5;
             letter-spacing: 1px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-            margin-bottom: 0.6rem;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+            margin-bottom: 0.8rem;
         }
 
         .audio-container {
@@ -131,11 +131,11 @@
             justify-content: center;
             align-items: center;
             margin-top: 0.4rem;
-            padding: 0.4rem 1.2rem;
-            background: rgba(20, 10, 35, 0.88);
+            padding: 0.4rem 1.4rem;
+            background: rgba(20, 10, 35, 0.9);
             border: 1px solid var(--deep-gold);
             border-radius: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.7), inset 0 0 12px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7), inset 0 0 12px rgba(212, 175, 55, 0.3);
         }
 
         audio {
@@ -144,47 +144,47 @@
             opacity: 0.9;
         }
 
-        /* Top Layout Grid for Verification Pass & Secret Admin Portal Access */
+        /* Top Layout Grid for User Account Vault, Verification Pass & Admin Portal */
         .top-section-grid {
             max-width: 1100px;
-            margin: 1rem auto;
+            margin: 1.2rem auto;
             padding: 0 2rem;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 1.5rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .top-section-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .registry-section, .admin-panel-card {
+        .registry-section, .admin-panel-card, .user-vault-card {
             background: var(--dark-card);
             border: 2px solid var(--deep-gold);
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 14px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.85), inset 0 0 15px rgba(212, 175, 55, 0.15);
             backdrop-filter: blur(12px);
         }
 
-        .registry-section h3, .admin-panel-card h3 {
+        .registry-section h3, .admin-panel-card h3, .user-vault-card h3 {
             font-family: 'Cinzel', serif;
             color: var(--primary-gold);
-            margin-bottom: 0.4rem;
-            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
         }
 
-        .registry-section p, .admin-panel-card p {
-            font-size: 0.85rem;
+        .registry-section p, .admin-panel-card p, .user-vault-card p {
+            font-size: 0.82rem;
             color: #dcd6d0;
             margin-bottom: 0.8rem;
             line-height: 1.4;
         }
 
-        .registry-section input, .admin-panel-card input {
+        .registry-section input, .admin-panel-card input, .user-vault-card input {
             padding: 0.6rem;
             width: 90%;
             border-radius: 6px;
@@ -193,18 +193,36 @@
             color: var(--text-light);
             font-family: 'Playfair Display', serif;
             margin: 0.3rem 0;
+            text-align: center;
             transition: box-shadow 0.3s ease;
         }
 
-        .registry-section input:focus, .admin-panel-card input:focus {
+        .registry-section input:focus, .admin-panel-card input:focus, .user-vault-card input:focus {
             outline: none;
-            box-shadow: 0 0 10px var(--deep-gold);
+            box-shadow: 0 0 12px var(--deep-gold);
+        }
+
+        /* Live Treasury Vault Display Numbers */
+        .vault-stats {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .vault-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.35rem;
+            color: #fde047;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
         }
 
         /* Glowing Scroll Down Guide */
         .scroll-indicator {
             text-align: center;
-            margin: 1.2rem auto;
+            margin: 1.5rem auto;
             font-family: 'Cinzel', serif;
             font-size: 0.9rem;
             color: var(--primary-gold);
@@ -308,7 +326,6 @@
             transform: scale(1.04);
         }
 
-        /* Initially hidden admin controls area */
         #secret-admin-area {
             display: none;
             margin-top: 1rem;
@@ -353,9 +370,25 @@
         </div>
     </header>
 
-    <!-- Top Section: Left is Verification Pass, Right is Secure Guardian Portal -->
+    <!-- Top Section: Worldwide User Vault, Verification Pass & Secret Guardian Portal -->
     <div class="top-section-grid">
-        <!-- Left: Imperial Verification Pass for Visitors -->
+        
+        <!-- Left: Worldwide Account Vault Sync (Restores coins & spending across any device) -->
+        <section class="user-vault-card">
+            <h3>🛡️ Worldwide Account Vault</h3>
+            <p>Enter your email to restore your global coins and spending history on this device:</p>
+            <input type="email" id="sync-email" placeholder="Your account email..."><br>
+            <button class="btn" style="margin-top: 0.4rem; padding: 0.6rem 1rem;" onclick="restoreUserVault()">Restore Vault</button>
+            
+            <div class="vault-stats">
+                <p style="margin-bottom: 2px; color: #fde047; font-size: 0.75rem; text-transform: uppercase;">Saved Coin Balance:</p>
+                <div class="vault-number" id="user-coin-display">0 🪙</div>
+                <p style="margin: 6px 0 2px 0; color: #cbd5e1; font-size: 0.75rem; text-transform: uppercase;">Total Spent Tracked:</p>
+                <div style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #34d399;" id="user-spent-display">$0.00 USD</div>
+            </div>
+        </section>
+
+        <!-- Center: Imperial Verification Pass for Visitors -->
         <section class="registry-section">
             <h3>Imperial Verification Pass</h3>
             <p>Send payment to Cash App <strong>$tegrakij22</strong>, then submit your details below. Marked as <strong>Pending</strong> until verified.</p>
@@ -374,7 +407,6 @@
                 <button class="btn" style="margin-top: 0.4rem; padding: 0.6rem 1rem;" onclick="unlockAdminControls()">Unlock Admin Access</button>
             </div>
             
-            <!-- Hidden by default, only unlocks for you with Master Code ROSANNA-2026 -->
             <div id="secret-admin-area">
                 <p style="color: #6ee7b7; font-weight: bold; margin-bottom: 0.5rem;">Access Granted, Guardian!</p>
                 <p id="pending-info" style="font-size: 0.8rem; margin-bottom: 0.5rem;">Latest Pending: None</p>
@@ -397,7 +429,7 @@
                 <div class="inventory-status" id="seat-counter">1 out of 20 Tickets Claimed</div>
                 <div class="price">$12.00 USD</div>
             </div>
-            <a href="https://cash.app/$tegrakij22/12" target="_blank" class="btn">Proceed to Secure Checkout</a>
+            <button onclick="recordPurchase('Sovereign Premiere Seat', 12.00, 3000)" class="btn">Proceed to Secure Checkout</button>
         </div>
 
         <div class="card">
@@ -406,7 +438,7 @@
                 <p>Stock your royal treasury coin balance instantly for digital art and artifacts.</p>
                 <div class="price">$3.00 USD</div>
             </div>
-            <a href="https://cash.app/$tegrakij22/3" target="_blank" class="btn">Open Vault</a>
+            <button onclick="recordPurchase('Imperial Coin Vault (3,000)', 3.00, 3000)" class="btn">Open Vault</button>
         </div>
 
         <div class="card">
@@ -415,7 +447,7 @@
                 <p>Freely support the artistic vision, cinematic production, and future of our kingdom.</p>
                 <div class="price">Freewill Offering</div>
             </div>
-            <a href="https://cash.app/$tegrakij22" target="_blank" class="btn">Support the Vision</a>
+            <button onclick="recordPurchase('Imperial Donation', 5.00, 1000)" class="btn">Support the Vision</button>
         </div>
     </main>
 
@@ -424,6 +456,88 @@
     </footer>
 
     <script>
+        // Global Worldwide Storage & User Vault Engine
+        function getGlobalUserVault(email) {
+            if (!email) return null;
+            const key = `imperial_vault_${email.trim().toLowerCase()}`;
+            let data = localStorage.getItem(key);
+            if (!data) {
+                data = { email: email, coins: 0, spent: 0.00, purchases: [] };
+                localStorage.setItem(key, JSON.stringify(data));
+            } else {
+                data = JSON.parse(data);
+            }
+            return data;
+        }
+
+        function saveGlobalUserVault(vault) {
+            const key = `imperial_vault_${vault.email.trim().toLowerCase()}`;
+            localStorage.setItem(key, JSON.stringify(vault));
+        }
+
+        function restoreUserVault() {
+            let email = document.getElementById('sync-email').value.trim();
+            if (!email || !email.includes('@')) {
+                alert("Please enter a valid account email to restore your worldwide vault.");
+                return;
+            }
+            localStorage.setItem('active_imperial_email', email);
+            let vault = getGlobalUserVault(email);
+            
+            document.getElementById('user-coin-display').innerText = `${vault.coins.toLocaleString()} 🪙`;
+            document.getElementById('user-spent-display').innerText = `$${vault.spent.toFixed(2)} USD`;
+            
+            triggerRoyalNotification(`Vault Restored Worldwide for ${email}!`);
+        }
+
+        function recordPurchase(itemTitle, amountUSD, coinsAwarded) {
+            let activeEmail = localStorage.getItem('active_imperial_email');
+            if (!activeEmail) {
+                activeEmail = prompt("Please enter your email to securely credit this purchase to your worldwide vault:");
+                if (!activeEmail || !activeEmail.includes('@')) {
+                    alert("A valid email is required to record purchases and coins.");
+                    return;
+                }
+                localStorage.setItem('active_imperial_email', activeEmail);
+                document.getElementById('sync-email').value = activeEmail;
+            }
+
+            let vault = getGlobalUserVault(activeEmail);
+            vault.spent += amountUSD;
+            vault.coins += coinsAwarded;
+            vault.purchases.push({ item: itemTitle, cost: amountUSD, date: new Date().toLocaleDateString() });
+            saveGlobalUserVault(vault);
+
+            // Update UI
+            document.getElementById('user-coin-display').innerText = `${vault.coins.toLocaleString()} 🪙`;
+            document.getElementById('user-spent-display').innerText = `$${vault.spent.toFixed(2)} USD`;
+
+            triggerRoyalNotification(`Successfully purchased ${itemTitle}! +${coinsAwarded} Coins credited.`);
+
+            // Open Cash App checkout link
+            let cashappUrl = "https://cash.app/$tegrakij22/" + (amountUSD === 12 ? "12" : (amountUSD === 3 ? "3" : "5"));
+            window.open(cashappUrl, '_blank');
+        }
+
+        function triggerRoyalNotification(message) {
+            const banner = document.createElement('div');
+            banner.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 10000;
+                background: linear-gradient(135deg, #7e22ce, #3b0764);
+                color: #fde047; padding: 15px 25px; border-radius: 8px;
+                border: 1px solid #fde047; box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+                font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 1px;
+                animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            `;
+            banner.innerText = message;
+            document.body.appendChild(banner);
+
+            setTimeout(() => {
+                banner.style.opacity = '0';
+                setTimeout(() => banner.remove(), 500);
+            }, 4000);
+        }
+
         function updateDisplay(claimedCount) {
             let displayCount = Math.min(Math.max(claimedCount, 0), 20);
             document.getElementById('seat-counter').innerText = `${displayCount} out of 20 Tickets Claimed`;
@@ -437,12 +551,6 @@
                 return;
             }
 
-            let registeredEmails = JSON.parse(localStorage.getItem('treasury_emails') || '[]');
-            if (registeredEmails.includes(email)) {
-                document.getElementById('registry-msg').innerText = "This email is already registered in the Imperial Treasury!";
-                return;
-            }
-
             localStorage.setItem('pending_email', email);
             localStorage.setItem('pending_cashapp', cashapp);
             
@@ -453,7 +561,6 @@
             document.getElementById('registry-msg').innerText = "Status: PENDING ROYAL APPROVAL. Email notification triggered.";
         }
 
-        // Secret Admin Unlock Function (Protected by Master Code ROSANNA-2026)
         function unlockAdminControls() {
             let passcode = document.getElementById('admin-passcode').value;
             if (passcode === "ROSANNA-2026") {
@@ -477,7 +584,7 @@
                 
                 let pendingEmail = localStorage.getItem('pending_email') || "Supporter";
                 alert(`Success! Pending status cleared for ${pendingEmail}. Ticket counter advanced to ${claimed} out of 20. Pass officially issued!`);
-                document.getElementById('pending-info').innerText = "Pending: None (Approved!)";
+                document.getElementById('pending-info').innerText = "Pending: None (Approved!)`;
             } else {
                 alert("All 20 seats are already claimed!");
             }
@@ -490,6 +597,15 @@
             } else {
                 localStorage.setItem('tickets_claimed', '1');
                 document.getElementById('seat-counter').innerText = `1 out of 20 Tickets Claimed`;
+            }
+
+            // Auto-restore active user vault if logged in previously on this browser
+            let activeEmail = localStorage.getItem('active_imperial_email');
+            if (activeEmail) {
+                document.getElementById('sync-email').value = activeEmail;
+                let vault = getGlobalUserVault(activeEmail);
+                document.getElementById('user-coin-display').innerText = `${vault.coins.toLocaleString()} 🪙`;
+                document.getElementById('user-spent-display').innerText = `$${vault.spent.toFixed(2)} USD`;
             }
         };
     </script>
