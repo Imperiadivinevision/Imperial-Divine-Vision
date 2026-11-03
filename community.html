@@ -3,150 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Imperial Temple Gate - Imperial Divine Vision</title>
+    <title>The Imperial Temple Gate • Imperial Divine Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        /* Alive, breathing motion for the grand purple velvet background */
-        @keyframes bgBreath {
+        @keyframes royalSilkFlow {
             0% { transform: scale(1); filter: brightness(1) saturate(1.1); }
-            50% { transform: scale(1.03); filter: brightness(1.1) saturate(1.25); }
+            50% { transform: scale(1.04); filter: brightness(1.15) saturate(1.3); }
             100% { transform: scale(1); filter: brightness(1) saturate(1.1); }
         }
 
-        /* Shimmering light reflex shifting across the royal stage */
         @keyframes lightGlow {
             0% { opacity: 0.25; }
-            50% { opacity: 0.55; }
+            50% { opacity: 0.6; }
             100% { opacity: 0.25; }
         }
 
+        @keyframes sealPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.7)); }
+            50% { transform: scale(1.06); filter: drop-shadow(0 0 22px rgba(234, 179, 8, 0.95)); }
+        }
+
         body { 
-            font-family: 'Georgia', serif; 
+            font-family: 'Playfair Display', serif; 
             margin: 0; 
             min-height: 100vh; 
-            color: #f3e8ff;
-            /* community.png as the grand full-screen background */
+            color: #f9f6ee;
             background: url('community.png') no-repeat center center fixed;
             background-size: cover;
-            animation: bgBreath 20s ease-in-out infinite alternate;
+            animation: royalSilkFlow 24s ease-in-out infinite alternate;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow-y: auto;
             position: relative;
-            padding: 30px 15px;
+            padding: 40px 15px;
         }
 
-        /* Royal lighting overlay to add depth and make the stage feel alive */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.15), rgba(11, 2, 20, 0.75));
+            background: radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.16), rgba(11, 2, 20, 0.82));
             pointer-events: none;
             z-index: 1;
-            animation: lightGlow 9s ease-in-out infinite alternate;
+            animation: lightGlow 10s ease-in-out infinite alternate;
         }
 
-        /* Floating Crystal Altar Container in the Center */
+        /* The Majestic Imperial Altar Reliquary */
         .container { 
             position: relative;
             z-index: 10;
-            background: rgba(15, 7, 28, 0.88);
-            border: 2px solid;
-            border-image: linear-gradient(to bottom, #fde047, #ca8a04, #713f12) 1;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(234, 179, 8, 0.25);
-            padding: 35px 30px; 
-            border-radius: 8px; 
+            background: rgba(14, 6, 26, 0.93);
+            border: 3px solid;
+            border-image: linear-gradient(to bottom, #fde047, #d4af37, #854d0e, #d4af37, #fde047) 1;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.95), inset 0 0 50px rgba(212, 175, 55, 0.3);
+            padding: 45px 35px; 
+            border-radius: 14px; 
             text-align: center; 
-            max-width: 480px;
+            max-width: 520px;
             width: 100%;
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
             animation: gateReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             margin: auto;
         }
 
         @keyframes gateReveal {
-            from { opacity: 0; transform: translateY(25px) scale(0.97); }
+            from { opacity: 0; transform: translateY(35px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* Ornate Crown Seal Badge */
+        .imperial-seal-badge {
+            width: 80px;
+            height: 80px;
+            margin: -72px auto 18px auto;
+            background: radial-gradient(circle, #fde047 0%, #ca8a04 70%, #713f12 100%);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), inset 0 0 18px rgba(255, 255, 255, 0.6);
+            animation: sealPulse 4s ease-in-out infinite;
+        }
+
         h1 {
-            font-size: 1.5rem;
-            color: #fde047;
+            font-family: 'Cinzel', serif;
+            font-size: 1.7rem;
+            color: #f3e5ab;
             margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            text-shadow: 0 2px 10px rgba(234, 179, 8, 0.5);
+            letter-spacing: 3px;
+            text-shadow: 0 2px 14px rgba(212, 175, 55, 0.75);
         }
 
         p {
-            font-size: 0.92rem;
-            color: #cbd5e1;
+            font-size: 0.95rem;
+            color: #dcd6d0;
+            margin-bottom: 26px;
+            line-height: 1.65;
+        }
+
+        /* Stored Rewards Live Preview */
+        .rewards-preview {
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px dashed rgba(212, 175, 55, 0.6);
+            border-radius: 8px;
+            padding: 14px;
             margin-bottom: 22px;
-            line-height: 1.6;
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            color: #fde047;
+            letter-spacing: 1px;
+            display: none;
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 15px;
             align-items: center;
         }
 
         label {
-            font-size: 0.75rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #e2e8f0;
+            color: #f3e5ab;
         }
 
         input {
-            width: 85%;
-            padding: 12px;
-            background: rgba(30, 41, 59, 0.95);
-            border: 1px solid #b45309;
-            border-radius: 4px;
+            width: 90%;
+            padding: 13px;
+            background: rgba(10, 5, 20, 0.96);
+            border: 1px solid #d4af37;
+            border-radius: 6px;
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.12rem;
             text-align: center;
             outline: none;
             transition: all 0.3s ease;
-            font-family: 'Georgia', serif;
+            font-family: 'Playfair Display', serif;
         }
 
         input:focus {
             border-color: #fde047;
-            box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.7);
         }
 
         button {
-            margin-top: 8px;
-            background: linear-gradient(135deg, #ca8a04, #854d0e);
-            color: #fff;
+            margin-top: 10px;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #11051d;
             border: 1px solid #fde047;
-            padding: 12px 35px;
+            padding: 14px 38px;
             font-size: 0.92rem;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 4px 18px rgba(202, 138, 4, 0.4);
-            font-family: 'Georgia', serif;
+            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.55);
         }
 
         button:hover {
-            background: linear-gradient(135deg, #eab308, #ca8a04);
+            background: linear-gradient(135deg, #f3e5ab, #d4af37);
             transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(234, 179, 8, 0.6);
+            box-shadow: 0 9px 28px rgba(212, 175, 55, 0.85);
         }
 
         .error-msg {
             color: #f87171;
-            font-size: 0.8rem;
-            margin-top: 2px;
+            font-size: 0.85rem;
+            margin-top: 4px;
             display: none;
         }
 
@@ -154,56 +189,79 @@
             position: fixed; 
             bottom: 20px; 
             right: 20px; 
-            width: 90px; 
+            width: 95px; 
             z-index: 100; 
             pointer-events: none;
-            opacity: 0.85;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+            opacity: 0.88;
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.6));
         }
 
-        /* Cinematic Gate Opening & Light Surge Transition Effect */
+        /* Immersive Gate Opening & Light Surge Transition Effect */
         .gate-opening {
-            transform: scale(1.05);
+            transform: scale(1.06);
             opacity: 0;
-            filter: blur(10px);
+            filter: blur(14px) brightness(1.6);
             transition: all 0.9s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* Mobile Responsive Adjustments */
         @media (max-width: 600px) {
-            body { padding: 15px 10px; }
-            .container { padding: 25px 15px; width: 95%; }
+            body { padding: 20px 10px; }
+            .container { padding: 35px 20px; width: 95%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Central Crystal Altar -->
+    <!-- Grand Imperial Altar Reliquary -->
     <div class="container" id="gateContainer">
-        <h1>Worldwide Sanctuary</h1>
-        <p>Enter your <strong>Email</strong> and <strong>Birth Year</strong> to restore your global account, coins, and purchases across any device:</p>
+        <div class="imperial-seal-badge">👑</div>
         
+        <h1>Worldwide Sanctuary</h1>
+        <p>Present your <strong>Email</strong> and <strong>Birth Year</strong> to unlock the gate and claim your stored rewards and global vault[cite: 5]:</p>
+        
+        <!-- Live Stored Rewards Preview -->
+        <div class="rewards-preview" id="rewardsPreview">
+            ✨ Stored Vault Found! Coins: <span id="previewCoins">0</span> 🪙 | Total Spent: $<span id="previewSpent">0.00</span>
+        </div>
+
         <form id="ageGateForm">
             <div class="input-group">
                 <label for="userEmail">Your Account Email:</label>
-                <input type="email" id="userEmail" placeholder="name@example.com" required>
+                <input type="email" id="userEmail" placeholder="name@example.com" required oninput="checkStoredRewards(this.value)">
 
                 <label for="birthYear">Birth Year:</label>
                 <input type="number" id="birthYear" placeholder="YYYY" min="1900" max="2026" required>
 
-                <div class="error-msg" id="errorMsg">Please verify your details.</div>
-                <button type="submit">Open Gate & Restore Vault</button>
+                <div class="error-msg" id="errorMsg">Please verify your credentials.</div>
+                <button type="submit">Open Gate & Claim Rewards</button>
             </div>
         </form>
     </div>
 
     <!-- Official Seal Branding -->
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
-
-    <!-- Heavy Physical Gate Opening Sound Effect -->
+    
+    <!-- Audio element for heavy physical gate-opening sound effect -->
     <audio id="gateSound" src="https://assets.mixkit.co/active_storage/sfx/2529/2529-preview.mp3" preload="auto"></audio>
 
     <script>
+        function checkStoredRewards(email) {
+            if (!email || !email.includes('@')) {
+                document.getElementById('rewardsPreview').style.display = 'none';
+                return;
+            }
+            const key = `imperial_vault_${email.trim().toLowerCase()}`;
+            let vaultData = localStorage.getItem(key);
+            if (vaultData) {
+                let vault = JSON.parse(vaultData);
+                document.getElementById('previewCoins').innerText = vault.coins.toLocaleString();
+                document.getElementById('previewSpent').innerText = vault.spent.toFixed(2);
+                document.getElementById('rewardsPreview').style.display = 'block';
+            } else {
+                document.getElementById('rewardsPreview').style.display = 'none';
+            }
+        }
+
         document.getElementById('ageGateForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const emailInput = document.getElementById('userEmail').value.trim().toLowerCase();
@@ -223,11 +281,13 @@
 
             localStorage.setItem('imperial_user_email', emailInput);
             localStorage.setItem('imperial_birth_year', year);
+            localStorage.setItem('active_imperial_email', emailInput);
 
             const age = currentYear - year;
 
-            // Play heavy gate opening sound effect
-            gateSound.play().catch(e => console.log("Audio play prevented:", e));
+            // INSTANTLY trigger the heavy gate-opening sound and visual opening transition
+            gateSound.currentTime = 0;
+            gateSound.play().catch(e => console.log("Audio play prevented by browser policy:", e));
             gateContainer.classList.add('gate-opening');
 
             let destination = 'room-kids.html';
@@ -239,6 +299,7 @@
                 destination = 'room-elder.html';
             }
 
+            // Smooth transition delay to let the sound play before redirecting to the chamber
             setTimeout(() => {
                 window.location.href = destination;
             }, 850);
