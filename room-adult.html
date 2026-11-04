@@ -40,14 +40,14 @@
             height: auto;
             z-index: -100;
             background-size: cover;
-            filter: brightness(0.82);
+            filter: brightness(0.85);
         }
 
         /* Top Nav Hub */
         nav { 
             padding: 0.6rem 1rem; 
-            background: rgba(4, 12, 7, 0.9);
-            backdrop-filter: blur(12px);
+            background: rgba(4, 12, 7, 0.92);
+            backdrop-filter: blur(14px);
             border-bottom: 3px solid var(--gold);
             position: relative;
             z-index: 500;
@@ -79,33 +79,47 @@
             text-shadow: 0 0 10px var(--gold);
         }
 
-        /* Sovereign Title Banner */
+        /* Sovereign Title Banner with Left & Right Orbs */
         .page-banner {
-            background: rgba(7, 23, 15, 0.88);
+            background: linear-gradient(180deg, rgba(7, 23, 15, 0.9) 0%, rgba(3, 8, 6, 0.95) 100%);
             backdrop-filter: blur(8px);
             border-bottom: 3px solid var(--gold);
             text-align: center;
-            padding: 10px 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            padding: 12px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.85);
             position: relative;
             z-index: 500;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .banner-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             width: 100%;
         }
 
+        /* Royal Orbs / Crest Accents on Banner Edges */
+        .royal-orb-crest {
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle, #ffdf7e 0%, #d4af37 60%, #8a6f22 100%);
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
         .filigree-scroll {
-            width: 100px;
+            width: 90px;
             height: 18px;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='%23d4af37'%3E%3Cpath d='M0 12c15 0 20-8 30-8s15 8 30 8 15-8 30-8 20 8 30 8v2c-12 0-18-7-28-7s-15 7-28 7-18-7-28-7-16 7-28 7v-2z' opacity='0.85'/%3E%3Ccircle cx='60' cy='12' r='3' fill='%23ffdf7e'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
@@ -117,14 +131,14 @@
         .page-banner h1 {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             font-weight: 900;
             letter-spacing: 3px;
             margin: 0;
             text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.7);
         }
 
-        /* Create Likeness Sub-bar nicely positioned below the title */
+        /* Create Likeness Sub-bar */
         .sub-banner-link {
             font-family: 'Cinzel', serif;
             font-size: 0.75rem;
@@ -136,31 +150,31 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 2px 12px;
-            border-radius: 12px;
-            background: rgba(212, 175, 55, 0.12);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 3px 14px;
+            border-radius: 14px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.5);
             transition: all 0.3s ease;
         }
         .sub-banner-link:hover {
-            background: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+            background: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
             color: #fff;
         }
 
-        /* Main Layout Container */
+        /* Main Container */
         .container {
             display: flex;
             flex: 1;
             width: 100%;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 125px);
             box-sizing: border-box;
             position: relative;
             background: transparent;
             overflow: hidden;
         }
 
-        /* Center Stage: Full-body character shifted right & centered */
+        /* Center Stage with Soft Vignette Blend */
         .character-stage {
             flex: 1;
             display: flex;
@@ -169,9 +183,9 @@
             align-items: center;
             position: relative;
             padding: 10px;
-            padding-left: 5vw;
+            padding-left: 6vw;
             z-index: 10;
-            background: transparent;
+            background: radial-gradient(circle at center, rgba(3, 12, 8, 0.35) 0%, rgba(3, 8, 6, 0.85) 85%);
         }
 
         /* Top-Right Fullscreen Expand Button */
@@ -202,7 +216,7 @@
             box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Unboxed Full-Body Character Display */
+        /* Smooth Edge-Blended Full-Body Character Display (No Hard Boxes) */
         .king-cinematic-media {
             width: 100%;
             max-width: 480px;
@@ -212,18 +226,21 @@
             display: block;
             position: relative;
             z-index: 15;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.95));
+            /* Advanced mask and shadow to softly merge edges with the background */
+            filter: drop-shadow(0 25px 50px rgba(0,0,0,0.95));
+            -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0.15) 100%);
+            mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0.15) 100%);
         }
 
         .king-caption {
-            margin-top: 8px;
+            margin-top: 10px;
             color: var(--gold);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-align: center;
             font-family: 'Cinzel', serif;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.95);
             z-index: 20;
         }
 
@@ -232,7 +249,7 @@
             width: 410px;
             min-width: 390px;
             background: var(--panel-bg);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(16px);
             border-left: 3px solid var(--gold);
             display: flex;
             flex-direction: column;
@@ -387,6 +404,12 @@
         Your browser does not support the video tag.
     </video>
 
+    <!-- Imperial Palace Ambient Sound Generator (Unmuted Audio Experience) -->
+    <audio id="royal-audio" autoplay loop>
+        <!-- Fallback synth harp atmosphere stream -->
+        <source src="https://actions.google.com/sounds/v1/ambiences/spa_music.ogg" type="audio/ogg">
+    </audio>
+
     <!-- Top Navigation Bar -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Home</a></div>
@@ -398,12 +421,14 @@
         <div class="nav-module"><a href="community.html">💬 Community</a></div>
     </nav>
 
-    <!-- Ornate Sovereign Header with Create Likeness Below Banner Line -->
+    <!-- Ornate Sovereign Header with Left/Right Orbs & Create Likeness -->
     <div class="page-banner">
         <div class="banner-row">
+            <div class="royal-orb-crest" title="Imperial Sovereign Crest">⚜️</div>
             <div class="filigree-scroll"></div>
             <h1>THE SOVEREIGN CHAMBERS</h1>
             <div class="filigree-scroll right"></div>
+            <div class="royal-orb-crest" title="Imperial Sovereign Crest">⚜️</div>
         </div>
         <div class="banner-row" style="margin-top: 4px;">
             <a href="create-likeness.html" class="sub-banner-link">✨ Create Likeness / Choose Character</a>
@@ -417,9 +442,9 @@
             <span>⤢ Fullscreen</span>
         </button>
 
-        <!-- Center Stage: Full-body Character View -->
+        <!-- Center Stage: Soft-Blended Full-Body Character View -->
         <div class="character-stage" id="stageContainer">
-            <video id="media-video" class="king-cinematic-media" autoplay loop controls style="display: block;">
+            <video id="media-video" class="king-cinematic-media" autoplay loop muted playsinline style="display: block;" onclick="toggleAudio()">
                 <source id="video-source" src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -512,7 +537,7 @@
                 { name: "imperial-palace.mp4", type: "video" },
                 { name: "imperial-palace-hallway.mp4", type: "video" },
                 { name: "imperial-palace-guess-room.mp4", type: "video" },
-                { name: "imperial-bedroom.mp4", type: "video" }
+                { name: "imperial-bedroom.mp4" , type: "video"}
             ]
         };
 
@@ -526,6 +551,15 @@
             } else {
                 if (document.exitFullscreen) document.exitFullscreen();
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            }
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('royal-audio');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
             }
         }
 
@@ -594,6 +628,11 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             setProfile(currentProfile);
+            // Attempt autoplay audio on user interaction
+            document.body.addEventListener('click', () => {
+                const audio = document.getElementById('royal-audio');
+                if(audio.paused) audio.play().catch(e => console.log('Audio autoplay waiting for gesture'));
+            }, { once: true });
         });
     </script>
 </body>
