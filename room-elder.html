@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-dark: #030806;
-            --panel-bg: rgba(6, 17, 11, 0.95);
+            --panel-bg: rgba(6, 17, 11, 0.92);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
@@ -17,9 +17,9 @@
         }
 
         body { 
-            background: linear-gradient(135deg, #030806, #091a10, #173627, #030806);
-            background-size: 400% 400%;
-            animation: flow 20s infinite alternate;
+            background: linear-gradient(135deg, #030806, #06180f, #123321, #06180f, #030806);
+            background-size: 500% 500%;
+            animation: imperialSweep 25s infinite alternate ease-in-out;
             color: var(--text-main); 
             font-family: 'Playfair Display', serif; 
             margin: 0; 
@@ -29,13 +29,18 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: opacity 0.5s ease;
         }
-        @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        @keyframes imperialSweep { 
+            0% { background-position: 0% 50%; } 
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; } 
+        }
         
         /* Top Navigation Hub */
         nav { 
             padding: 0.6rem 1rem; 
-            background: rgba(4, 12, 7, 0.92);
+            background: rgba(4, 12, 7, 0.95);
             backdrop-filter: blur(14px);
             border-bottom: 3px solid var(--gold);
             position: relative;
@@ -68,14 +73,14 @@
             text-shadow: 0 0 10px var(--gold);
         }
 
-        /* Cinematic Hero Header */
+        /* Cinematic Imperial Hero Header */
         .sanctuary-header {
-            background: linear-gradient(180deg, rgba(7, 23, 15, 0.95) 0%, rgba(3, 8, 6, 0.98) 100%);
-            backdrop-filter: blur(12px);
+            background: linear-gradient(180deg, rgba(7, 23, 15, 0.96) 0%, rgba(3, 8, 6, 0.99) 100%);
+            backdrop-filter: blur(14px);
             color: var(--gold);
             padding: 35px 20px 25px 20px;
             border-bottom: 3px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.85);
             text-align: center;
             position: relative;
         }
@@ -83,10 +88,10 @@
         .sanctuary-header h1 {
             font-family: 'Cinzel', serif;
             margin: 0 0 8px 0;
-            font-size: 2rem;
+            font-size: 2.1rem;
             font-weight: 900;
             letter-spacing: 3px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 22px rgba(212, 175, 55, 0.7);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 25px rgba(212, 175, 55, 0.7);
         }
 
         .sanctuary-header p {
@@ -97,12 +102,12 @@
             color: var(--text-muted);
         }
 
-        /* Interlinked Chamber Navigation Hub Bar */
+        /* Interlinked Chamber Navigation Hub (3D Pop-Out Effect) */
         .chamber-nav-bar {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            padding: 18px 20px 0 20px;
+            gap: 10px;
+            padding: 20px 20px 0 20px;
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
@@ -111,27 +116,29 @@
         }
 
         .chamber-link-btn {
-            background: rgba(6, 17, 11, 0.88);
+            background: linear-gradient(135deg, rgba(9, 26, 16, 0.95), rgba(4, 12, 7, 0.95));
             border: 2px solid rgba(212, 175, 55, 0.6);
             color: var(--text-muted);
-            padding: 12px 18px;
+            padding: 12px 20px;
             font-family: 'Cinzel', serif;
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 1.2px;
             border-radius: 8px 8px 0 0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .chamber-link-btn:hover, .chamber-link-btn.active {
-            background: var(--panel-bg);
+            background: linear-gradient(135deg, #173627, #091a10);
             border-color: var(--gold);
             color: var(--gold-hover);
-            box-shadow: 0 -4px 15px rgba(212, 175, 55, 0.35);
+            transform: translateY(-5px) scale(1.03); /* 3D Pop-Out Effect */
+            box-shadow: 0 8px 22px rgba(212, 175, 55, 0.4), 0 0 15px rgba(255, 140, 0, 0.3);
             text-shadow: 0 0 8px var(--gold);
         }
 
@@ -144,13 +151,34 @@
             box-sizing: border-box;
         }
 
+        /* Imperial Royal Board Frame */
         .imperial-box { 
-            border: 2px solid var(--gold); 
-            padding: 30px; 
+            border: 3px solid var(--gold); 
+            padding: 35px; 
             background: var(--panel-bg); 
-            backdrop-filter: blur(16px);
-            border-radius: 0 12px 12px 12px; 
-            box-shadow: 0 12px 35px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.06);
+            backdrop-filter: blur(18px);
+            border-radius: 0 14px 14px 14px; 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.85), inset 0 0 25px rgba(212,175,55,0.08);
+            position: relative;
+        }
+
+        .imperial-box::before {
+            content: '⚜️';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+        .imperial-box::after {
+            content: '⚜️';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            opacity: 0.7;
         }
 
         .comfort-btn {
@@ -209,7 +237,7 @@
         .status-dashboard {
             background: linear-gradient(135deg, #091a10 0%, #173627 100%);
             border: 2px solid var(--gold);
-            padding: 20px;
+            padding: 22px;
             border-radius: 12px;
             margin-bottom: 25px;
             display: flex;
@@ -217,18 +245,21 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
         .status-item {
             text-align: center;
             font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
         .status-item span {
             display: block;
             color: var(--gold-hover);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: bold;
             margin-top: 4px;
+            text-shadow: 0 0 8px rgba(212,175,55,0.4);
         }
 
         .royal-branding {
@@ -251,14 +282,19 @@
 </head>
 <body onload="initElderChamber()">
 
+    <!-- Imperial Background Music & Sound Generator -->
+    <audio id="royal-ambient" autoplay loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/spa_music.ogg" type="audio/ogg">
+    </audio>
+
     <!-- Top Navigation Bar -->
     <nav> 
-        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
-        <div class="nav-module"><a href="library.html">📚 Library ▾</a></div>
-        <div class="nav-module"><a href="room-adult.html">🏛️ Sovereign Chambers</a></div>
-        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
-        <div class="nav-module"><a href="landing.html">🎁 Support Vision</a></div>
-        <div class="nav-module"><a href="community.html">💬 Community</a></div>
+        <div class="nav-module"><a href="index.html" onclick="playGateSound()">🏠 Home</a></div>
+        <div class="nav-module"><a href="library.html" onclick="playGateSound()">📚 Library ▾</a></div>
+        <div class="nav-module"><a href="room-adult.html" onclick="playGateSound()">🏛️ Sovereign Chambers</a></div>
+        <div class="nav-module"><a href="shop.html" onclick="playGateSound()">🪙 Imperial Shop</a></div>
+        <div class="nav-module"><a href="landing.html" onclick="playGateSound()">🎁 Support Vision</a></div>
+        <div class="nav-module"><a href="community.html" onclick="playGateSound()">💬 Community</a></div>
     </nav>
 
     <!-- Cinematic Hero Header -->
@@ -267,14 +303,14 @@
         <p>"Universal Worldwide Passport & Interlinked Chamber Hub for Imperial Elders."</p>
     </div>
 
-    <!-- Interlinked Chamber Navigation Hub (Links to separate HTML room files) -->
+    <!-- Interlinked Chamber Navigation Hub with 3D Sound & Gate Transitions -->
     <div class="chamber-nav-bar">
-        <a href="room-elder.html" class="chamber-link-btn active">🛡️ Elder Hub</a>
-        <a href="vault-chamber.html" class="chamber-link-btn">🪙 Coin Vault</a>
-        <a href="vision-chamber.html" class="chamber-link-btn">👑 Shared Vision</a>
-        <a href="court-chamber.html" class="chamber-link-btn">⚖️ Tribunal Court</a>
-        <a href="study-chamber.html" class="chamber-link-btn">📖 Study Hall</a>
-        <a href="chat-chamber.html" class="chamber-link-btn">💬 Live Chat</a>
+        <a href="room-elder.html" class="chamber-link-btn active" onclick="transitionChamber(event, this.href)">🛡️ Elder Hub</a>
+        <a href="vault-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">🪙 Coin Vault</a>
+        <a href="vision-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">👑 Shared Vision</a>
+        <a href="court-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">⚖️ Tribunal Court</a>
+        <a href="study-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">📖 Study Hall</a>
+        <a href="chat-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">💬 Live Chat</a>
     </div>
 
     <div class="content-wrapper">
@@ -304,8 +340,8 @@
             <p style="color: var(--text-muted);">Enter your email address to sync your progress worldwide across all palace chambers. Your coins, points, tickets, and donations are permanently bound to your account.</p>
             
             <div style="margin: 20px 0; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-                <input type="email" id="globalEmail" class="chat-input" placeholder="Enter your email address...">
-                <button class="comfort-btn" style="margin:0;" onclick="syncGlobalPassport()">Sync Worldwide Passport 🗝️</button>
+                <input type="email" id="globalEmail" class="chat-input" placeholder="Enter your email address..." onfocus="playClickSound()">
+                <button class="comfort-btn" style="margin:0;" onclick="playClickSound(); syncGlobalPassport();">Sync Worldwide Passport 🗝️</button>
             </div>
 
             <div id="passport-status" class="action-display-box" style="margin-top:20px;">
@@ -319,6 +355,48 @@
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 
     <script>
+        // Web Audio API Sound Synthesizer for 3D Clicks and Gate Openings
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playClickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5 note chime
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        }
+
+        function playGateSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(300, audioCtx.currentTime + 0.3);
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
+        }
+
+        function transitionChamber(event, targetUrl) {
+            event.preventDefault();
+            playGateSound();
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 450); // Smooth gate-fade transition
+        }
+
         function initElderChamber() {
             let savedEmail = localStorage.getItem('imperial_global_email');
             let savedCoins = localStorage.getItem('imperial_user_coins');
@@ -334,6 +412,11 @@
             }
             document.getElementById('statusPoints').innerText = savedPoints;
             document.getElementById('statusDonated').innerText = savedDonated;
+
+            // Enable audio context on first user interaction
+            document.body.addEventListener('click', () => {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+            }, { once: true });
         }
 
         function syncGlobalPassport() {
