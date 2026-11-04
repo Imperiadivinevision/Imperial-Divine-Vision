@@ -29,17 +29,45 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: opacity 0.5s ease;
         }
         @keyframes imperialSweep { 
             0% { background-position: 0% 50%; } 
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; } 
         }
+
+        /* Top-Right Fullscreen Expand / Collapse Button */
+        .stage-expand-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            background: rgba(6, 17, 11, 0.88);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 14px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .stage-expand-btn:hover {
+            background: var(--gold);
+            color: #030a06;
+            box-shadow: 0 0 20px var(--gold);
+            transform: scale(1.05);
+        }
         
         /* Top Navigation Hub */
         nav { 
-            padding: 0.6rem 1rem; 
+            padding: 0.6rem 4.5rem 0.6rem 1rem; /* Added right padding so nav links don't crowd the fullscreen button */
             background: rgba(4, 12, 7, 0.95);
             backdrop-filter: blur(14px);
             border-bottom: 3px solid var(--gold);
@@ -137,7 +165,7 @@
             background: linear-gradient(135deg, #173627, #091a10);
             border-color: var(--gold);
             color: var(--gold-hover);
-            transform: translateY(-5px) scale(1.03); /* 3D Pop-Out Effect */
+            transform: translateY(-5px) scale(1.03);
             box-shadow: 0 8px 22px rgba(212, 175, 55, 0.4), 0 0 15px rgba(255, 140, 0, 0.3);
             text-shadow: 0 0 8px var(--gold);
         }
@@ -282,9 +310,15 @@
 </head>
 <body onload="initElderChamber()">
 
-    <!-- Imperial Background Music & Sound Generator -->
-    <audio id="royal-ambient" autoplay loop>
+    <!-- Top-Right Fullscreen Expand / Collapse Button -->
+    <button class="stage-expand-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+        <span id="fullscreen-icon">⤢</span> <span id="fullscreen-text">Fullscreen</span>
+    </button>
+
+    <!-- Peaceful Background Piano Audio Stream -->
+    <audio id="peaceful-piano" autoplay loop preload="auto">
         <source src="https://actions.google.com/sounds/v1/ambiences/spa_music.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
     </audio>
 
     <!-- Top Navigation Bar -->
@@ -303,14 +337,14 @@
         <p>"Universal Worldwide Passport & Interlinked Chamber Hub for Imperial Elders."</p>
     </div>
 
-    <!-- Interlinked Chamber Navigation Hub with 3D Sound & Gate Transitions -->
+    <!-- Interlinked Chamber Navigation Hub -->
     <div class="chamber-nav-bar">
-        <a href="room-elder.html" class="chamber-link-btn active" onclick="transitionChamber(event, this.href)">🛡️ Elder Hub</a>
-        <a href="vault-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">🪙 Coin Vault</a>
-        <a href="vision-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">👑 Shared Vision</a>
-        <a href="court-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">⚖️ Tribunal Court</a>
-        <a href="study-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">📖 Study Hall</a>
-        <a href="chat-chamber.html" class="chamber-link-btn" onclick="transitionChamber(event, this.href)">💬 Live Chat</a>
+        <a href="room-elder.html" class="chamber-link-btn active" onclick="playGateSound()">🛡️ Elder Hub</a>
+        <a href="vault-chamber.html" class="chamber-link-btn" onclick="playGateSound()">🪙 Coin Vault</a>
+        <a href="vision-chamber.html" class="chamber-link-btn" onclick="playGateSound()">👑 Shared Vision</a>
+        <a href="court-chamber.html" class="chamber-link-btn" onclick="playGateSound()">⚖️ Tribunal Court</a>
+        <a href="study-chamber.html" class="chamber-link-btn" onclick="playGateSound()">📖 Study Hall</a>
+        <a href="chat-chamber.html" class="chamber-link-btn" onclick="playGateSound()">💬 Live Chat</a>
     </div>
 
     <div class="content-wrapper">
@@ -388,13 +422,23 @@
             osc.stop(audioCtx.currentTime + 0.3);
         }
 
-        function transitionChamber(event, targetUrl) {
-            event.preventDefault();
-            playGateSound();
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 450); // Smooth gate-fade transition
+        function toggleFullscreen() {
+            playClickSound();
+            const elem = document.documentElement;
+            const textElem = document.getElementById('fullscreen-text');
+            const iconElem = document.getElementById('fullscreen-icon');
+
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) elem.requestFullscreen();
+                else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                textElem.textContent = "Collapse";
+                iconElem.textContent = "⤓";
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                textElem.textContent = "Fullscreen";
+                iconElem.textContent = "⤢";
+            }
         }
 
         function initElderChamber() {
@@ -413,9 +457,14 @@
             document.getElementById('statusPoints').innerText = savedPoints;
             document.getElementById('statusDonated').innerText = savedDonated;
 
-            // Enable audio context on first user interaction
+            // Ensure background piano and audio context start cleanly on first click
             document.body.addEventListener('click', () => {
                 if (audioCtx.state === 'suspended') audioCtx.resume();
+                let piano = document.getElementById('peaceful-piano');
+                if (piano && piano.paused) {
+                    piano.volume = 0.4;
+                    piano.play().catch(e => console.log('Audio waiting for interaction'));
+                }
             }, { once: true });
         }
 
