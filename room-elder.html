@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-dark: #030806;
-            --panel-bg: rgba(6, 17, 11, 0.92);
+            --panel-bg: rgba(6, 17, 11, 0.94);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
@@ -36,38 +36,38 @@
             100% { background-position: 0% 50%; } 
         }
 
-        /* Top-Right Fullscreen Expand / Collapse Button */
+        /* Top-Right Fullscreen Expand / Collapse Button - Guaranteed Fixed Position */
         .stage-expand-btn {
-            position: absolute;
+            position: fixed;
             top: 15px;
             right: 25px;
-            background: rgba(6, 17, 11, 0.88);
+            background: rgba(6, 17, 11, 0.95);
             border: 2px solid var(--gold);
             color: var(--gold);
-            padding: 6px 14px;
+            padding: 8px 16px;
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 1.5px;
             border-radius: 6px;
             cursor: pointer;
-            z-index: 600;
+            z-index: 9999;
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
             transition: all 0.3s ease;
         }
         .stage-expand-btn:hover {
             background: var(--gold);
             color: #030a06;
-            box-shadow: 0 0 20px var(--gold);
+            box-shadow: 0 0 22px var(--gold);
             transform: scale(1.05);
         }
         
         /* Top Navigation Hub */
         nav { 
-            padding: 0.6rem 4.5rem 0.6rem 1rem; /* Added right padding so nav links don't crowd the fullscreen button */
+            padding: 0.6rem 8rem 0.6rem 1rem; 
             background: rgba(4, 12, 7, 0.95);
             backdrop-filter: blur(14px);
             border-bottom: 3px solid var(--gold);
@@ -315,9 +315,9 @@
         <span id="fullscreen-icon">⤢</span> <span id="fullscreen-text">Fullscreen</span>
     </button>
 
-    <!-- Peaceful Background Piano Audio Stream -->
+    <!-- Peaceful Background Piano Audio Stream (Using reliable direct link) -->
     <audio id="peaceful-piano" autoplay loop preload="auto">
-        <source src="https://actions.google.com/sounds/v1/ambiences/spa_music.ogg" type="audio/ogg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db32c1404c.mp3?filename=gentle-piano-ambient-111154.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -389,7 +389,7 @@
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 
     <script>
-        // Web Audio API Sound Synthesizer for 3D Clicks and Gate Openings
+        // Web Audio API Sound Synthesizer for Clicks and Gate Openings
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playClickSound() {
@@ -397,7 +397,7 @@
             let osc = audioCtx.createOscillator();
             let gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5 note chime
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
             osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
             gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
@@ -457,13 +457,13 @@
             document.getElementById('statusPoints').innerText = savedPoints;
             document.getElementById('statusDonated').innerText = savedDonated;
 
-            // Ensure background piano and audio context start cleanly on first click
+            // Start audio and background piano on user click
             document.body.addEventListener('click', () => {
                 if (audioCtx.state === 'suspended') audioCtx.resume();
                 let piano = document.getElementById('peaceful-piano');
                 if (piano && piano.paused) {
-                    piano.volume = 0.4;
-                    piano.play().catch(e => console.log('Audio waiting for interaction'));
+                    piano.volume = 0.5;
+                    piano.play().catch(e => console.log('Audio autoplay prevented'));
                 }
             }, { once: true });
         }
