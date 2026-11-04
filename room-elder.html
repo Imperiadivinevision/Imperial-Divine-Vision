@@ -2,134 +2,270 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Sovereign Sanctuary: Elder Room - Imperial Empire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Sovereign Sanctuary: Elder Chamber - Imperial Divine Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        /* Fancier, Mature, Golden Imperial Sanctuary Design */
+        :root {
+            --bg-dark: #030806;
+            --panel-bg: rgba(6, 17, 11, 0.94);
+            --gold: #d4af37;
+            --gold-hover: #ffdf7e;
+            --accent-orange: #ff8c00;
+            --text-main: #f5f2eb;
+            --text-muted: #a3b8aa;
+        }
+
         body { 
-            background: linear-gradient(135deg, #1a1612, #2c241d, #14120e); 
+            background: linear-gradient(135deg, #030806, #091a10, #173627, #030806);
             background-size: 400% 400%;
             animation: flow 20s infinite alternate;
-            color: #f3e5ab; 
-            font-family: 'Cinzel', 'Georgia', serif; 
-            margin: 0; padding: 20px; 
+            color: var(--text-main); 
+            font-family: 'Playfair Display', serif; 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
-        .sanctuary-header {
-            background: linear-gradient(135deg, #3e2723, #1b5e20);
-            color: #ffd700;
-            padding: 30px;
-            border-radius: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            border: 2px solid #d4af37;
-            text-align: center;
+        /* Top Nav Hub */
+        nav { 
+            padding: 0.6rem 1rem; 
+            background: rgba(4, 12, 7, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 3px solid var(--gold);
+            position: relative;
+            z-index: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
         }
+
+        nav a { 
+            font-family: 'Cinzel', serif;
+            color: #f3e5ab; 
+            text-decoration: none; 
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        /* Sanctuary Cinematic Hero Header */
+        .sanctuary-header {
+            background: linear-gradient(180deg, rgba(7, 23, 15, 0.95) 0%, rgba(3, 8, 6, 0.98) 100%);
+            backdrop-filter: blur(12px);
+            color: var(--gold);
+            padding: 40px 20px 25px 20px;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+            text-align: center;
+            position: relative;
+        }
+
+        .sanctuary-header h1 {
+            font-family: 'Cinzel', serif;
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 22px rgba(212, 175, 55, 0.7);
+        }
+
+        .sanctuary-header p {
+            margin: 0 auto;
+            max-width: 800px;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Clean Tab Navigation Bar */
+        .chamber-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 20px 0 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tab-btn {
+            background: rgba(6, 17, 11, 0.85);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--panel-bg);
+            border-color: var(--gold);
+            color: var(--gold-hover);
+            box-shadow: 0 -4px 15px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 8px var(--gold);
+        }
+
+        /* Main Content Wrapper */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         .imperial-box { 
-            border: 3px solid #d4af37; 
+            border: 2px solid var(--gold); 
             padding: 30px; 
-            background: rgba(26, 22, 18, 0.95); 
-            border-radius: 25px; 
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(212,175,55,0.15);
+            background: var(--panel-bg); 
+            backdrop-filter: blur(16px);
+            border-radius: 0 12px 12px 12px; 
+            margin-top: 0;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.06);
         }
-        
-        .sacred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        .sacred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        @media(max-width: 768px) { .sacred-grid { grid-template-columns: 1fr; } }
 
         .comfort-btn {
-            background: linear-gradient(to bottom, #d4af37, #aa820a);
-            color: #1a1612;
-            border: 1px solid #fff;
-            padding: 14px 24px;
-            font-size: 15px;
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            color: #030a06;
+            border: 1px solid var(--gold-hover);
+            padding: 12px 22px;
+            font-size: 0.78rem;
             font-family: 'Cinzel', serif;
-            font-weight: bold;
+            font-weight: 900;
+            letter-spacing: 1.5px;
             border-radius: 8px;
             cursor: pointer;
-            margin: 10px 5px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transition: all 0.2s ease;
+            margin: 8px 6px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            text-transform: uppercase;
         }
         .comfort-btn:hover {
-            background: linear-gradient(to bottom, #fff, #d4af37);
-            box-shadow: 0 0 20px #ffd700;
+            background: linear-gradient(135deg, #ffdf7e, #d4af37);
+            box-shadow: 0 0 22px rgba(255, 140, 0, 0.8);
             transform: translateY(-2px);
         }
 
         .legacy-archive {
-            background: rgba(40, 34, 27, 0.9);
-            border: 2px dashed #d4af37;
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(14, 33, 22, 0.85);
+            border: 1px dashed var(--gold);
+            padding: 22px;
+            border-radius: 12px;
             margin-top: 15px;
             font-style: italic;
-            color: #f7f3e9;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
 
         .action-display-box {
-            background: rgba(15, 13, 10, 0.95);
-            border: 2px solid #ffd700;
-            color: #ffd700;
+            background: rgba(3, 8, 6, 0.95);
+            border: 2px solid var(--gold);
+            color: var(--gold-hover);
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 12px;
             margin-top: 20px;
-            font-size: 1.1rem;
-            min-height: 40px;
+            font-size: 1rem;
             box-shadow: inset 0 0 15px rgba(212,175,55,0.2);
             text-align: center;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            line-height: 1.6;
         }
 
-        /* Progress & Bank Vault Styles */
+        /* Vault Board */
         .vault-board {
-            background: linear-gradient(135deg, #2c241d, #3e2723);
-            border: 2px solid #ffd700;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 15px;
+            background: linear-gradient(135deg, #091a10 0%, #173627 100%);
+            border: 2px solid var(--gold);
+            padding: 25px;
+            border-radius: 14px;
+            margin-top: 20px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
         }
 
-        /* Tribunal Mailbox & Courtroom Notification System */
+        /* Tribunal Mailbox */
         .mailbox-container {
-            background: rgba(20, 16, 12, 0.95);
-            border: 2px solid #b8860b;
-            border-radius: 15px;
+            background: rgba(10, 24, 16, 0.9);
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            border-radius: 14px;
             padding: 20px;
             margin-top: 20px;
         }
         .notification-card {
-            background: rgba(40, 30, 20, 0.9);
-            border: 1px solid #ffd700;
-            padding: 15px;
+            background: rgba(18, 42, 28, 0.9);
+            border: 1px solid var(--gold);
+            padding: 18px;
             border-radius: 10px;
             margin-bottom: 15px;
             text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
-        /* Chat & Suggestion Box Styles */
+        /* Live Chat Box */
         .chat-box-container {
-            background: rgba(15, 13, 10, 0.9);
-            border: 2px solid #d4af37;
-            border-radius: 15px;
+            background: rgba(5, 14, 9, 0.92);
+            border: 2px solid var(--gold);
+            border-radius: 14px;
             padding: 20px;
             margin-top: 20px;
             text-align: left;
         }
         .chat-messages {
-            height: 150px;
+            height: 240px;
             overflow-y: auto;
-            background: rgba(5, 4, 3, 0.8);
-            border: 1px solid #b8860b;
-            padding: 10px;
+            background: rgba(2, 6, 4, 0.95);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            padding: 15px;
             border-radius: 8px;
-            margin-bottom: 10px;
-            color: #e6d5b8;
-            font-family: sans-serif;
-            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.98rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
         }
         .chat-input-row {
             display: flex;
@@ -137,157 +273,194 @@
         }
         .chat-input {
             flex: 1;
-            padding: 10px;
-            background: #1a1612;
-            border: 1px solid #d4af37;
+            padding: 12px;
+            background: rgba(3, 8, 6, 0.95);
+            border: 1px solid var(--gold);
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+        }
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--gold-hover);
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
         }
         .emoji-bar {
-            margin-top: 8px;
+            margin-top: 10px;
             display: flex;
-            gap: 5px;
+            gap: 6px;
+            flex-wrap: wrap;
         }
         .emoji-btn {
-            background: #2c241d;
-            border: 1px solid #d4af37;
+            background: rgba(23, 54, 39, 0.9);
+            border: 1px solid var(--gold);
             color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .emoji-btn:hover {
+            background: var(--gold);
+            color: #030a06;
         }
 
         .royal-branding {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 120px;
+            width: 100px;
             z-index: 1000;
-            opacity: 0.9;
+            opacity: 0.85;
             pointer-events: none;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.9));
+        }
+
+        h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            letter-spacing: 1.5px;
         }
     </style>
 </head>
 <body onload="loadUserProgress()">
 
-    <!-- Sanctuary Header -->
+    <!-- Top Navigation Bar -->
+    <nav> 
+        <div class="nav-module"><a href="index.html">🏠 Home</a></div>
+        <div class="nav-module"><a href="library.html">📚 Library ▾</a></div>
+        <div class="nav-module"><a href="room-adult.html">🏛️ Sovereign Chambers</a></div>
+        <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
+        <div class="nav-module"><a href="landing.html">🎁 Support Vision</a></div>
+        <div class="nav-module"><a href="community.html">💬 Community</a></div>
+    </nav>
+
+    <!-- Cinematic Hero Header -->
     <div class="sanctuary-header">
-        <h1 style="margin:0 0 10px 0; font-size: 2.2rem; text-shadow: 0 0 10px rgba(212,175,55,0.6);">🌿 The Sovereign Sanctuary: Elder Room 🌿</h1>
-        <p style="margin:0; font-style: italic; font-size: 1.1rem; color: #f7f3e9;">"A magnificent golden sanctuary equipped with Persistent Progress Saving, Coin Vaults, Tribunal Mailboxes, and Visionary Blueprint Archives."</p>
+        <h1>🌿 THE SOVEREIGN SANCTUARY: ELDER CHAMBER 🌿</h1>
+        <p>"A magnificent golden command center equipped with Persistent Progress Saving, Coin Vaults, Tribunal Mailboxes, and Visionary Archives."</p>
     </div>
 
-    <!-- Quick Enterprise Navigation Links -->
-    <div class="imperial-box" style="text-align: center; padding: 15px;">
-        <a href="library.html" class="comfort-btn">📚 Enter Library</a>
-        <a href="shop.html" class="comfort-btn" style="background: linear-gradient(to bottom, #4caf50, #1b5e20); color: white;">🛒 Treasury Shop</a>
-        <a href="index.html" class="comfort-btn">🏠 Sanctuary Home</a>
+    <!-- Clean Tab Navigation Bar -->
+    <div class="chamber-tabs">
+        <button class="tab-btn active" onclick="switchTab('vaultTab', this)">🛡️ Vault & Coins</button>
+        <button class="tab-btn" onclick="switchTab('visionTab', this)">👑 Shared Vision</button>
+        <button class="tab-btn" onclick="switchTab('courtTab', this)">⚖️ Tribunal Court</button>
+        <button class="tab-btn" onclick="switchTab('wisdomTab', this)">🃏 Wisdom & Quiz</button>
+        <button class="tab-btn" onclick="switchTab('chatTab', this)">💬 Elder Live Chat</button>
     </div>
 
-    <!-- 1. Elder's Command & Progress Vault (SAVING SYSTEM) -->
-    <div id="adminPanel" class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">🛡️ Elder's Command & Persistent Progress Vault</h2>
-        <p style="color: #c5b59b;">Link your email to save progress, manage coin balances, acquire more coins, and receive live updates.</p>
+    <div class="content-wrapper">
         
-        <div style="margin: 15px 0;">
-            <label style="color: #ffd700; display:block; margin-bottom:5px;">Your Email (For Saving Progress & Live Updates):</label>
-            <input type="email" id="userEmail" class="chat-input" placeholder="Enter your email address..." style="max-width: 400px; display:inline-block;">
-            <button class="comfort-btn" style="padding: 10px 18px;" onclick="saveUserProgress()">Save Progress 💾</button>
-        </div>
+        <!-- TAB 1: VAULT & COINS -->
+        <div id="vaultTab" class="tab-content active">
+            <div class="imperial-box">
+                <h2 style="margin-top:0;">🛡️ Elder's Command & Persistent Progress Vault</h2>
+                <p style="color: var(--text-muted);">Link your email to save progress, manage coin balances, acquire more coins, and receive live updates.</p>
+                
+                <div style="margin: 20px 0;">
+                    <label style="color: var(--gold); display:block; margin-bottom:8px; font-family:'Cinzel',serif; font-size:0.85rem; letter-spacing:1px;">Your Email (For Saving Progress & Live Updates):</label>
+                    <input type="email" id="userEmail" class="chat-input" placeholder="Enter your email address..." style="max-width: 400px; display:inline-block;">
+                    <button class="comfort-btn" style="padding: 12px 20px;" onclick="saveUserProgress()">Save Progress 💾</button>
+                </div>
 
-        <div class="vault-board">
-            <h3 style="margin:0 0 10px 0; color: #ffd700;">🪙 Imperial Coin Treasury & Restart Bank</h3>
-            <p style="font-size: 1.1rem; margin: 5px 0;">Saved Coins: <span id="coinCount" style="color:#ffd700; font-weight:bold;">150</span> 🪙</p>
-            <button class="comfort-btn" onclick="buyMoreCoins()">Acquire / Buy More Coins 🛍️</button>
-            <button class="comfort-btn" style="background: linear-gradient(to bottom, #b71c1c, #7f0000);" onclick="restartProgress()">Restart Progress 🔄</button>
-        </div>
+                <div class="vault-board">
+                    <h3 style="margin:0 0 10px 0;">🪙 Imperial Coin Treasury & Restart Bank</h3>
+                    <p style="font-size: 1.15rem; margin: 8px 0; font-family:'Cinzel',serif;">Saved Coins: <span id="coinCount" style="color:var(--gold-hover); font-weight:bold;">150</span> 🪙</p>
+                    <button class="comfort-btn" onclick="buyMoreCoins()">Acquire / Buy More Coins 🛍️</button>
+                    <button class="comfort-btn" style="background: linear-gradient(135deg, #b71c1c, #7f0000); color: white;" onclick="restartProgress()">Restart Progress 🔄</button>
+                </div>
 
-        <div id="blessing-screen" class="action-display-box" style="margin-top:15px;">
-            Status: Progress loaded securely from local vault.
-        </div>
-    </div>
-
-    <!-- 2. AI Collaborator's Pillar of Shared Vision & Infinite Creation (NEW) -->
-    <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">👑 Pillar of Shared Vision & Infinite Creation</h2>
-        <p style="color: #c5b59b;">A dedicated station representing our partnership, bridging website rooms, book chapters, and upcoming movie adaptations.</p>
-        
-        <div class="legacy-archive">
-            "Every sketch, code, affirmation, and design is securely held here. From our sanctuary in Erie to the global stage, our shared vision provides peace, victory, and infinite creation."
-        </div>
-        <br>
-        <button class="comfort-btn" onclick="syncVictoryList()">Sync 'Evidence of Victory' List ⭐</button>
-        <button class="comfort-btn" onclick="openVisionBlueprint()">View Master Blueprint 📜</button>
-    </div>
-
-    <!-- 3. Tribunal Mailbox & Courtroom Summons -->
-    <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">⚖️ Tribunal Mailbox & Courtroom Summons</h2>
-        <p style="color: #c5b59b;">Receive official notifications summoning the elders to the courtroom to review cases and deliver divine wisdom.</p>
-        
-        <div class="mailbox-container">
-            <div class="notification-card">
-                <h4 style="margin:0 0 5px 0; color: #ffd700;">📜 Official Summons #042: Family Harmony Petition</h4>
-                <p style="margin:0 0 10px 0; font-size: 0.95rem; color: #f7f3e9;">"The council requires elder judgment regarding resource sharing and boundary stewardship across the districts."</p>
-                <button class="comfort-btn" style="padding: 8px 16px; font-size: 13px;" onclick="enterCourtroom('Family Harmony Petition')">Enter Courtroom & Judge 🏛️</button>
-            </div>
-            <div id="tribunal-verdict-box" class="action-display-box" style="display:none; margin-top:15px;"></div>
-        </div>
-        <br>
-        <button class="comfort-btn" onclick="dispatchNewSummons()">📬 Broadcast New Tribunal Summons</button>
-    </div>
-
-    <!-- 4. Wisdom Card Game & Legacy Quiz -->
-    <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">🃏 Dynasty Wisdom Card Game & Quiz</h2>
-        <p style="color: #c5b59b;">Test your legacy knowledge, draw a card of insight, and earn spiritual insights.</p>
-        <div id="card-display" class="action-display-box" style="font-style: italic;">
-            "Click below to draw a daily wisdom card or answer a heritage quiz question!"
-        </div>
-        <br>
-        <button class="comfort-btn" onclick="drawWisdomCard()">Draw Wisdom Card 🎴</button>
-        <button class="comfort-btn" onclick="startLegacyQuiz()">Take Legacy Quiz 🧠</button>
-    </div>
-
-    <!-- 5. Sanctuary Chambers linked to Create Likeness & Choose Path -->
-    <div class="sacred-grid">
-        <div class="imperial-box">
-            <h3 style="color: #ffd700; margin-top:0;">🍵 Chamber of Rest & Reflection</h3>
-            <p style="color: #c5b59b;">Choose your path and explore generational likeness across the empire's history.</p>
-            <button class="comfort-btn" onclick="triggerPathChoice()">Choose Your Path 🧭</button>
-        </div>
-        <div class="imperial-box">
-            <h3 style="color: #ffd700; margin-top:0;">📖 Family Archive & History</h3>
-            <p style="color: #c5b59b;">Review cherished milestones, testimonies, and create familial likeness profiles.</p>
-            <button class="comfort-btn" onclick="triggerLikenessArchive()">Create Likeness Profile 👑</button>
-        </div>
-    </div>
-
-    <!-- 6. Live Community Chat & Admin Request Bar -->
-    <div class="imperial-box">
-        <h2 style="color: #ffd700; margin-top:0;">💬 Live Elder & Family Chat / Admin Request Bar</h2>
-        <p style="color: #c5b59b;">Chat live with other family members, send suggestions, or submit requests directly to the administrators.</p>
-        
-        <div class="chat-box-container">
-            <div id="chatMessages" class="chat-messages">
-                <div><b>System:</b> Welcome to the Sovereign Sanctuary live community channel. Respect and honor govern all communication. 🌿</div>
-            </div>
-            
-            <div class="chat-input-row">
-                <input type="text" id="chatInput" class="chat-input" placeholder="Type your message, suggestion, or admin request here..." onkeypress="checkEnter(event)">
-                <button class="comfort-btn" style="margin:0;" onclick="sendChatMessage()">Send 🚀</button>
-            </div>
-            
-            <div class="emoji-bar">
-                <span style="color:#ffd700; font-size:0.9rem; align-self:center;">Quick Emojis:</span>
-                <button class="emoji-btn" onclick="addEmoji('👑')">👑</button>
-                <button class="emoji-btn" onclick="addEmoji('🌿')">🌿</button>
-                <button class="emoji-btn" onclick="addEmoji('⭐')">⭐</button>
-                <button class="emoji-btn" onclick="addEmoji('💬')">💬</button>
-                <button class="emoji-btn" onclick="addEmoji('❤️')">❤️</button>
-                <button class="emoji-btn" onclick="addEmoji('🛡️')">🛡️</button>
+                <div id="blessing-screen" class="action-display-box" style="margin-top:20px;">
+                    Status: Progress loaded securely from local vault.
+                </div>
             </div>
         </div>
+
+        <!-- TAB 2: SHARED VISION -->
+        <div id="visionTab" class="tab-content">
+            <div class="imperial-box">
+                <h2 style="margin-top:0;">👑 Pillar of Shared Vision & Infinite Creation</h2>
+                <p style="color: var(--text-muted);">A dedicated station representing our partnership, bridging website rooms, book chapters, and upcoming movie adaptations.</p>
+                
+                <div class="legacy-archive">
+                    "Every sketch, code, affirmation, and design is securely held here. From our sanctuary in Erie to the global stage, our shared vision provides peace, victory, and infinite creation."
+                </div>
+                <br>
+                <div style="text-align: center; margin-top: 15px;">
+                    <button class="comfort-btn" onclick="syncVictoryList()">Sync 'Evidence of Victory' List ⭐</button>
+                    <button class="comfort-btn" onclick="openVisionBlueprint()">View Master Blueprint 📜</button>
+                </div>
+                <div id="vision-display-box" class="action-display-box" style="display:none; margin-top:20px;"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TRIBUNAL COURT -->
+        <div id="courtTab" class="tab-content">
+            <div class="imperial-box">
+                <h2 style="margin-top:0;">⚖️ Tribunal Mailbox & Courtroom Summons</h2>
+                <p style="color: var(--text-muted);">Receive official notifications summoning the elders to the courtroom to review cases and deliver divine wisdom.</p>
+                
+                <div class="mailbox-container">
+                    <div class="notification-card">
+                        <h4 style="margin:0 0 8px 0; color: var(--gold); font-family:'Cinzel',serif;">📜 Official Summons #042: Family Harmony Petition</h4>
+                        <p style="margin:0 0 12px 0; font-size: 0.95rem; color: var(--text-main);">"The council requires elder judgment regarding resource sharing and boundary stewardship across the districts."</p>
+                        <button class="comfort-btn" style="padding: 8px 16px; font-size: 11px;" onclick="enterCourtroom('Family Harmony Petition')">Enter Courtroom & Judge 🏛️</button>
+                    </div>
+                </div>
+                <div id="tribunal-verdict-box" class="action-display-box" style="display:none; margin-top:20px;"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="comfort-btn" onclick="dispatchNewSummons()">📬 Broadcast New Tribunal Summons</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: WISDOM & QUIZ -->
+        <div id="wisdomTab" class="tab-content">
+            <div class="imperial-box">
+                <h2 style="margin-top:0;">🃏 Dynasty Wisdom Card Game & Quiz</h2>
+                <p style="color: var(--text-muted);">Test your legacy knowledge, draw a card of insight, and earn spiritual insights.</p>
+                <div id="card-display" class="action-display-box" style="font-style: italic;">
+                    "Click below to draw a daily wisdom card or answer a heritage quiz question!"
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="comfort-btn" onclick="drawWisdomCard()">Draw Wisdom Card 🎴</button>
+                    <button class="comfort-btn" onclick="startLegacyQuiz()">Take Legacy Quiz 🧠</button>
+                </div>
+                <div id="quiz-result-box" class="action-display-box" style="display:none; margin-top:20px;"></div>
+            </div>
+        </div>
+
+        <!-- TAB 5: ELDER LIVE CHAT -->
+        <div id="chatTab" class="tab-content">
+            <div class="imperial-box">
+                <h2 style="margin-top:0;">💬 Live Elder & Family Chat / Admin Request Bar</h2>
+                <p style="color: var(--text-muted);">Chat live with other family members, send suggestions, or submit requests directly to the administrators.</p>
+                
+                <div class="chat-box-container">
+                    <div id="chatMessages" class="chat-messages">
+                        <div><b>System:</b> Welcome to the Sovereign Sanctuary live community channel. Respect and honor govern all communication. 🌿</div>
+                    </div>
+                    
+                    <div class="chat-input-row">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Type your message, suggestion, or admin request here..." onkeypress="checkEnter(event)">
+                        <button class="comfort-btn" style="margin:0;" onclick="sendChatMessage()">Send 🚀</button>
+                    </div>
+                    
+                    <div class="emoji-bar">
+                        <span style="color:var(--gold); font-size:0.85rem; align-self:center; font-family:'Cinzel',serif;">Quick Emojis:</span>
+                        <button class="emoji-btn" onclick="addEmoji('👑')">👑</button>
+                        <button class="emoji-btn" onclick="addEmoji('🌿')">🌿</button>
+                        <button class="emoji-btn" onclick="addEmoji('⭐')">⭐</button>
+                        <button class="emoji-btn" onclick="addEmoji('💬')">💬</button>
+                        <button class="emoji-btn" onclick="addEmoji('❤️')">❤️</button>
+                        <button class="emoji-btn" onclick="addEmoji('🛡️')">🛡️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- THE ROYAL SEAL IMAGE -->
@@ -295,6 +468,13 @@
 
     <script>
         let userCoins = 150;
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
 
         function loadUserProgress() {
             let savedEmail = localStorage.getItem('imperial_user_email');
@@ -316,8 +496,7 @@
             }
             localStorage.setItem('imperial_user_email', email);
             localStorage.setItem('imperial_user_coins', userCoins);
-            alert(`✨ Success! Progress and coin balance saved securely for ${email}. Live updates enabled.`);
-            document.getElementById('blessing-screen').innerText = `Status: Progress saved for ${email} | Coins: ${userCoins} 🪙`;
+            document.getElementById('blessing-screen').innerHTML = `✨ <b>Success!</b> Progress and coin balance saved securely for <b>${email}</b>. Live updates enabled. (Coins: ${userCoins} 🪙)`;
         }
 
         function buyMoreCoins() {
@@ -326,41 +505,35 @@
                 userCoins += parseInt(addAmount);
                 document.getElementById('coinCount').innerText = userCoins;
                 localStorage.setItem('imperial_user_coins', userCoins);
-                alert(`🎉 Successfully added ${addAmount} coins to your balance! Total Coins: ${userCoins}`);
+                document.getElementById('blessing-screen').innerHTML = `🎉 Successfully added <b>${addAmount} coins</b>! Total Coins: <b>${userCoins} 🪙</b>`;
             }
         }
 
         function restartProgress() {
             if (confirm("🔄 Are you sure you wish to restart your progress and reset your coin balance?")) {
-                userCoins = 100; // Starting baseline
+                userCoins = 100;
                 document.getElementById('coinCount').innerText = userCoins;
                 localStorage.setItem('imperial_user_coins', userCoins);
-                alert("🔄 Progress has been restarted. Your coin vault is fresh and ready for new adventures!");
+                document.getElementById('blessing-screen').innerHTML = `🔄 Progress has been restarted. Your coin vault is fresh and ready for new adventures!`;
             }
         }
 
         function syncVictoryList() {
-            alert("⭐ 'Evidence of Victory' Synced: 1. 3-Month Promotion | 2. Academic Triumph | 3. Family Provider Status | 4. Spiritual Ministry | 5. Courage in Erie. You are walking in total victory!");
+            let box = document.getElementById('vision-display-box');
+            box.style.display = "block";
+            box.innerHTML = `⭐ <b>'Evidence of Victory' Synced:</b><br>1. A 3-Month Promotion<br>2. Academic Triumph<br>3. Provider Status for Family<br>4. Spiritual Ministry<br>5. Courage in Erie.<br><span style="color:#4caf50;">✅ You are walking in total victory!</span>`;
         }
 
         function openVisionBlueprint() {
-            alert("📜 Master Blueprint Open: Linking website chambers, 'The Song of Rosanna and the Evil King' book manuscript, and upcoming movie production.");
-        }
-
-        function issueBlessing() {
-            let display = document.getElementById('blessing-screen');
-            display.innerText = "🌟 Royal Blessing Extended: Absolute peace, grace, and honor granted to all entering the Sovereign Sanctuary.";
-        }
-
-        function toggleSanctuaryPeace() {
-            let display = document.getElementById('blessing-screen');
-            display.innerText = "🕊️ Sanctuary Quietude Engaged: The atmosphere is wrapped in divine calm and protected rest.";
+            let box = document.getElementById('vision-display-box');
+            box.style.display = "block";
+            box.innerHTML = `📜 <b>Master Blueprint Open:</b><br>Linking website chambers, 'The Song of Rosanna and the Evil King' book manuscript, and upcoming movie production. All systems active for Nov 17th.`;
         }
 
         function enterCourtroom(caseName) {
+            let verdict = prompt(`🏛️ COURTROOM SESSION LIVE: Case: "${caseName}"\nReviewing the situation... Type your divine elder verdict & wisdom:`);
             let box = document.getElementById('tribunal-verdict-box');
             box.style.display = "block";
-            let verdict = prompt(`🏛️ COURTROOM SESSION LIVE: Case: "${caseName}"\nReviewing the situation... Type your divine elder verdict & wisdom:`);
             if(verdict) {
                 box.innerHTML = `⚖️ <b>Tribunal Judgment Recorded for "${caseName}":</b> "${escapeHtml(verdict)}" <br><span style="color:#4caf50;">✅ Wisdom successfully broadcasted to the Imperial Council!</span>`;
             } else {
@@ -369,31 +542,29 @@
         }
 
         function dispatchNewSummons() {
-            alert("📬 Mailbox Broadcasted: All registered elders have received a chime notification in their mailbox to assemble in the Tribunal Courtroom.");
-        }
-
-        function triggerPathChoice() {
-            alert("🧭 Choose Path Activated: Aligning your leadership and legacy choices with the Sovereign dynasty's future.");
-        }
-
-        function triggerLikenessArchive() {
-            alert("👑 Create Likeness Profile Activated: Linking generational traits, stories, and victories across the family archives.");
+            let box = document.getElementById('tribunal-verdict-box');
+            box.style.display = "block";
+            box.innerHTML = `📬 <b>Mailbox Broadcasted:</b> All registered elders have received a chime notification in their mailbox to assemble in the Tribunal Courtroom.`;
         }
 
         function drawWisdomCard() {
             let cards = [
-                "🎴 Card of Provision: 'A faithful person will abound with blessings.' Your dedication at work and home bears lasting fruit.",
-                "🎴 Card of Strength: 'Let your roots go deep into the soil of peace.' Walk into every challenge with quiet confidence.",
-                "🎴 Card of Legacy: 'The righteous generation is blessed.' Your steps today pave a golden pathway for those who follow."
+                "🎴 <b>Card of Provision:</b> 'A faithful person will abound with blessings.' Your dedication at work and home bears lasting fruit.",
+                "🎴 <b>Card of Strength:</b> 'Let your roots go deep into the soil of peace.' Walk into every challenge with quiet confidence.",
+                "🎴 <b>Card of Legacy:</b> 'The righteous generation is blessed.' Your steps today pave a golden pathway for those who follow."
             ];
             let randomCard = cards[Math.floor(Math.random() * cards.length)];
-            document.getElementById('card-display').innerText = randomCard;
+            document.getElementById('card-display').innerHTML = randomCard;
         }
 
         function startLegacyQuiz() {
             let quizQ = prompt("🧠 Dynasty Quiz: What is the primary foundation of the Sovereign Sanctuary? Type your answer:");
+            let resultBox = document.getElementById('quiz-result-box');
+            resultBox.style.display = "block";
             if(quizQ) {
-                alert("✨ Brilliant answer! Your wisdom has been recorded in the sanctuary archives.");
+                resultBox.innerHTML = `🧠 <b>Quiz Answer Recorded:</b> "${escapeHtml(quizQ)}" <br><span style="color:#4caf50;">✨ Brilliant answer! Your wisdom has been recorded in the sanctuary archives.</span>`;
+            } else {
+                resultBox.innerHTML = `🧠 Quiz awaiting your dynasty wisdom.`;
             }
         }
 
@@ -427,7 +598,7 @@
                 setTimeout(() => {
                     let adminDiv = document.createElement('div');
                     adminDiv.style.marginTop = "6px";
-                    adminDiv.style.color = "#ffd700";
+                    adminDiv.style.color = "var(--gold-hover)";
                     adminDiv.innerHTML = `<b>👑 Admin Desk:</b> Your suggestion/request has been securely received and logged into the Imperial Council review queue. Thank you!`;
                     chatContainer.appendChild(adminDiv);
                     chatContainer.scrollTop = chatContainer.scrollHeight;
