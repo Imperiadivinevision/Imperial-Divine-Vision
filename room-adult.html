@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-dark: #030806;
-            --panel-bg: rgba(6, 17, 11, 0.92);
+            --panel-bg: rgba(6, 17, 11, 0.94);
             --gold: #d4af37;
             --gold-hover: #ffdf7e;
             --accent-orange: #ff8c00;
@@ -43,7 +43,7 @@
             filter: brightness(0.82);
         }
 
-        /* Nav Hub with Create Likeness Fully Restored */
+        /* Top Nav Hub */
         nav { 
             padding: 0.6rem 1rem; 
             background: rgba(4, 12, 7, 0.9);
@@ -74,14 +74,14 @@
             white-space: nowrap;
         }
 
-        nav a:hover, nav a.highlight-link {
+        nav a:hover {
             color: var(--gold-hover);
             text-shadow: 0 0 10px var(--gold);
         }
 
         /* Sovereign Title Banner */
         .page-banner {
-            background: rgba(7, 23, 15, 0.85);
+            background: rgba(7, 23, 15, 0.88);
             backdrop-filter: blur(8px);
             border-bottom: 3px solid var(--gold);
             text-align: center;
@@ -90,9 +90,18 @@
             position: relative;
             z-index: 500;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 25px;
+            gap: 4px;
+        }
+
+        .banner-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
         }
 
         .filigree-scroll {
@@ -115,19 +124,43 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 20px rgba(212, 175, 55, 0.7);
         }
 
+        /* Create Likeness Sub-bar nicely positioned below the title */
+        .sub-banner-link {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: var(--gold-hover);
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 12px;
+            border-radius: 12px;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+        .sub-banner-link:hover {
+            background: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+            color: #fff;
+        }
+
         /* Main Layout Container */
         .container {
             display: flex;
             flex: 1;
             width: 100%;
-            height: calc(100vh - 100px);
+            height: calc(100vh - 120px);
             box-sizing: border-box;
             position: relative;
             background: transparent;
             overflow: hidden;
         }
 
-        /* Center Stage: Character Shifted Slightly Up and Centered in Hall */
+        /* Center Stage: Full-body character shifted right & centered */
         .character-stage {
             flex: 1;
             display: flex;
@@ -136,30 +169,30 @@
             align-items: center;
             position: relative;
             padding: 10px;
+            padding-left: 5vw;
             z-index: 10;
             background: transparent;
-            margin-top: -20px; /* Slight upward shift as requested */
         }
 
-        /* Universal Screen Scale / Fullscreen Expand Button */
+        /* Top-Right Fullscreen Expand Button */
         .stage-expand-btn {
             position: absolute;
             top: 15px;
-            left: 20px;
+            right: 25px;
             background: rgba(6, 17, 11, 0.85);
             border: 2px solid var(--gold);
             color: var(--gold);
-            padding: 5px 10px;
+            padding: 6px 14px;
             font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             border-radius: 4px;
             cursor: pointer;
-            z-index: 50;
+            z-index: 500;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
             transition: all 0.3s ease;
         }
@@ -169,13 +202,13 @@
             box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Unboxed Character Standing Cleanly in the Hall */
+        /* Unboxed Full-Body Character Display */
         .king-cinematic-media {
             width: 100%;
-            max-width: 420px;
-            height: 60vh;
+            max-width: 480px;
+            height: 72vh;
             object-fit: contain;
-            object-position: center center;
+            object-position: center bottom;
             display: block;
             position: relative;
             z-index: 15;
@@ -183,7 +216,7 @@
         }
 
         .king-caption {
-            margin-top: 10px;
+            margin-top: 8px;
             color: var(--gold);
             font-size: 0.85rem;
             font-weight: 700;
@@ -194,10 +227,10 @@
             z-index: 20;
         }
 
-        /* Ornate Right-side Control Panel with Horizontal & Vertical Scroll */
+        /* Ornate Right-side Control Panel */
         .control-sidebar {
-            width: 400px;
-            min-width: 380px;
+            width: 410px;
+            min-width: 390px;
             background: var(--panel-bg);
             backdrop-filter: blur(15px);
             border-left: 3px solid var(--gold);
@@ -254,10 +287,10 @@
             font-weight: bold;
         }
 
-        /* Scrollable Wardrobe Vault Container (Supports horizontal/vertical scrolling to prevent cut-offs) */
+        /* Wardrobe Scroll Vault */
         .wardrobe-scroll-container {
             flex: 1;
-            max-height: calc(100vh - 280px);
+            max-height: calc(100vh - 290px);
             overflow-y: auto;
             overflow-x: auto;
             padding-right: 4px;
@@ -354,7 +387,7 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- Unified Nav Hub with Create Likeness Restored -->
+    <!-- Top Navigation Bar -->
     <nav> 
         <div class="nav-module"><a href="index.html">🏠 Home</a></div>
         <div class="nav-module"><a href="library.html">📚 Library ▾</a></div>
@@ -363,22 +396,29 @@
         <div class="nav-module"><a href="shop.html">🪙 Imperial Shop</a></div>
         <div class="nav-module"><a href="landing.html">🎁 Support Vision</a></div>
         <div class="nav-module"><a href="community.html">💬 Community</a></div>
-        <div class="nav-module"><a href="create-likeness.html" class="highlight-link">✨ Create Likeness</a></div>
     </nav>
 
-    <!-- Ornate Sovereign Header -->
+    <!-- Ornate Sovereign Header with Create Likeness Below Banner Line -->
     <div class="page-banner">
-        <div class="filigree-scroll"></div>
-        <h1>THE SOVEREIGN CHAMBERS</h1>
-        <div class="filigree-scroll right"></div>
+        <div class="banner-row">
+            <div class="filigree-scroll"></div>
+            <h1>THE SOVEREIGN CHAMBERS</h1>
+            <div class="filigree-scroll right"></div>
+        </div>
+        <div class="banner-row" style="margin-top: 4px;">
+            <a href="create-likeness.html" class="sub-banner-link">✨ Create Likeness / Choose Character</a>
+        </div>
     </div>
 
+    <!-- Main Container -->
     <div class="container" id="mainContainer">
-        <!-- Center Stage: Perfectly Centered & Shifted Slightly Up -->
+        <!-- Top-Right Fullscreen Expand Button -->
+        <button class="stage-expand-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+            <span>⤢ Fullscreen</span>
+        </button>
+
+        <!-- Center Stage: Full-body Character View -->
         <div class="character-stage" id="stageContainer">
-            <button class="stage-expand-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
-                <span>⤢ Scale View</span>
-            </button>
             <video id="media-video" class="king-cinematic-media" autoplay loop controls style="display: block;">
                 <source id="video-source" src="" type="video/mp4">
                 Your browser does not support the video tag.
@@ -387,7 +427,7 @@
             <div id="media-caption" class="king-caption">Sovereign View</div>
         </div>
 
-        <!-- Ornate Right-side Controls with Full Scrolling Vault -->
+        <!-- Ornate Right-side Control Panel -->
         <div class="control-sidebar">
             <div class="panel-title">Sovereign Profile</div>
             <div class="option-grid">
@@ -479,7 +519,7 @@
         let currentProfile = localStorage.getItem('imperial_wardrobe_profile') || 'king';
 
         function toggleFullscreen() {
-            const elem = document.getElementById('mainContainer');
+            const elem = document.documentElement;
             if (!document.fullscreenElement) {
                 if (elem.requestFullscreen) elem.requestFullscreen();
                 else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
