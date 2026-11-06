@@ -8,14 +8,15 @@
     <style>
         @keyframes cosmicGlow {
             0% { filter: brightness(1) saturate(1); }
-            50% { filter: brightness(1.1) saturate(1.2); }
+            50% { filter: brightness(1.15) saturate(1.25); }
             100% { filter: brightness(1) saturate(1); }
         }
 
         :root {
-            --bg-dark: #0b0f0e;
-            --panel-bg: rgba(14, 20, 18, 0.96);
+            --bg-dark: #070b09;
+            --panel-bg: rgba(11, 18, 15, 0.96);
             --theme-color: #ffd700;
+            --theme-glow: rgba(255, 215, 0, 0.4);
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
         }
@@ -25,40 +26,41 @@
             padding: 0;
             color: var(--text-main);
             font-family: 'Cinzel', serif;
-            background: var(--bg-dark);
+            background: linear-gradient(135deg, #050a08, #0b1812, #160d26);
+            background-size: 400% 400%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            animation: cosmicGlow 12s ease-in-out infinite alternate;
+            animation: cosmicGlow 14s ease-in-out infinite alternate;
         }
 
-        /* YouTube-Style Fullscreen Toggle Button */
+        /* Fullscreen Toggle Button */
         .fullscreen-toggle-btn {
             position: fixed;
-            top: 15px;
-            right: 20px;
-            background: rgba(17, 23, 21, 0.9);
+            top: 20px;
+            right: 25px;
+            background: rgba(14, 22, 19, 0.95);
             border: 2px solid var(--theme-color);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
             cursor: pointer;
             z-index: 4000;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            font-size: 1.3rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.85);
             transition: all 0.3s ease;
         }
         .fullscreen-toggle-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.08);
             background: var(--theme-color);
-            color: #0b0f0e;
-            box-shadow: 0 0 20px var(--theme-color);
+            color: #070b09;
+            box-shadow: 0 0 25px var(--theme-color);
         }
 
         body.is-chamber-fullscreen nav,
@@ -77,7 +79,7 @@
         }
 
         nav { 
-            padding: 10px 20px; 
+            padding: 14px 25px; 
             background: var(--panel-bg);
             border-bottom: 2px solid var(--theme-color);
             position: sticky;
@@ -85,154 +87,260 @@
             z-index: 1000;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 25px;
             width: 100%;
             box-sizing: border-box;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-        nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
-        nav a:hover { color: var(--theme-color); }
+        nav a { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            letter-spacing: 1px;
+            text-transform: uppercase; 
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--theme-color); text-shadow: 0 0 10px var(--theme-glow); }
 
+        .page-title {
+            color: var(--theme-color);
+            font-size: 2.4rem;
+            margin: 25px 0 8px 0;
+            text-align: center;
+            text-shadow: 0 0 20px var(--theme-glow);
+            letter-spacing: 1.5px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        /* Cinematic Video Stage */
         .cinematic-stage {
             position: relative;
-            width: 100%;
-            max-width: 1200px;
-            height: 70vh;
-            margin: 20px auto;
+            width: 92%;
+            max-width: 1100px;
+            height: 62vh;
+            margin: 10px auto 30px auto;
             border: 4px ridge var(--theme-color);
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             background: #000;
-            box-shadow: 0 0 60px rgba(0,0,0,0.9);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.95);
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.4s ease;
         }
-
         .cinematic-stage video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
+        /* Interactive Hub Panel */
         .interactive-overlay-panel {
             display: none;
             max-width: 1050px;
             width: 92%;
-            margin: 20px auto;
+            margin: 10px auto 40px auto;
             background: var(--panel-bg);
             border: 4px ridge var(--theme-color);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 18px;
+            padding: 35px;
             text-align: center;
-            box-shadow: 0 0 70px rgba(0,0,0,0.95);
+            box-shadow: 0 15px 60px rgba(0,0,0,0.9);
+            box-sizing: border-box;
         }
 
+        /* HUD Display */
         .village-hud {
             display: flex;
             justify-content: space-around;
-            background: rgba(0, 40, 25, 0.85);
+            background: rgba(5, 30, 20, 0.9);
             border: 2px solid var(--theme-color);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            font-size: 0.82rem;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
         }
-        .village-hud span { color: #ffe875; font-weight: bold; }
+        .village-hud span { color: #ffe875; font-weight: bold; text-shadow: 0 0 8px rgba(255,232,117,0.4); }
 
+        /* Royal Buttons with 3D Depth */
         .royal-btn {
-            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
-            color: #0b0f0e;
+            background: linear-gradient(to bottom, var(--theme-color), #b8860b);
+            color: #070b09;
             border: 1px solid #fff;
-            padding: 10px 22px;
+            padding: 14px 26px;
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
-            transition: 0.2s;
+            transition: all 0.25s ease;
             display: inline-block;
-            margin: 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin: 8px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+            letter-spacing: 0.5px;
         }
-        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; transform: translateY(-1px); }
+        .royal-btn:hover {
+            background: #fff;
+            color: #070b09;
+            box-shadow: 0 0 20px var(--theme-color);
+            transform: translateY(-2px);
+        }
 
-        #registration-modal {
+        /* Quest View Card Container */
+        .quest-container {
+            background: rgba(6, 15, 12, 0.95);
+            border: 2px solid rgba(255,215,0,0.5);
+            padding: 28px;
+            border-radius: 14px;
+            text-align: left;
+            margin-top: 25px;
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.85);
+        }
+
+        /* Modals */
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(5, 12, 10, 0.94);
+            background: rgba(3, 8, 6, 0.96);
             z-index: 5000;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            backdrop-filter: blur(8px);
         }
-        .reg-box {
-            background: linear-gradient(135deg, #18221e, #0b0f0e);
+        .modal-box {
+            background: linear-gradient(135deg, #121c17, #070b09);
             border: 3px solid var(--theme-color);
-            padding: 35px;
-            border-radius: 14px;
-            max-width: 480px;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 520px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.45);
+            box-sizing: border-box;
         }
-        .reg-box input {
-            width: 80%;
-            padding: 10px;
-            background: #040605;
+        .modal-box input, .modal-box select {
+            width: 85%;
+            padding: 12px;
+            background: #030504;
             border: 1px solid var(--theme-color);
             color: #fff;
             font-family: 'Cinzel', serif;
-            border-radius: 4px;
-            margin: 15px 0;
+            border-radius: 6px;
+            margin: 18px 0;
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            outline: none;
+        }
+
+        .avatar-grid {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 22px 0;
+        }
+        .avatar-option {
+            border: 2px solid #444;
+            border-radius: 50%;
+            width: 75px;
+            height: 75px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: #0d1411;
+            transition: all 0.3s ease;
+        }
+        .avatar-option.selected, .avatar-option:hover {
+            border-color: var(--theme-color);
+            box-shadow: 0 0 20px var(--theme-color);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 1.8rem; }
+            .cinematic-stage { height: 45vh; width: 95%; }
+            .interactive-overlay-panel { padding: 20px; width: 95%; }
+            .village-hud { font-size: 0.8rem; padding: 10px; }
         }
     </style>
 </head>
 <body onload="initCinematicExperience()">
 
-    <!-- Soft Lullaby Audio Element -->
+    <!-- Ambient Music -->
     <audio id="chamber-lullaby-audio" loop>
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- YouTube-Style Fullscreen Expand / Decrease Button -->
+    <!-- Fullscreen Toggle -->
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
 
     <!-- Registration Modal -->
-    <div id="registration-modal">
-        <div class="reg-box">
-            <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.5rem;">📜 Guild Registration Desk</h2>
-            <p style="font-family: 'Playfair Display', serif; font-size: 0.88rem; line-height: 1.5; color: #d0e8ff;">
-                Welcome, adventurer. Enter your name to officially join the guild, acknowledge the 10% Sovereign Tax policy, and unlock daily contracts (5 max per day).
+    <div id="registration-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.7rem;">📜 Guild Registration Desk</h2>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.92rem; line-height: 1.6; color: #d0e8ff;">
+                Welcome, traveler. Enter your name to officially join the guild, acknowledge the 10% Sovereign Tax policy, and unlock daily contracts.
             </p>
             <input type="text" id="adventurer-name-input" placeholder="Enter Adventurer Name..." />
             <br>
-            <button class="royal-btn" onclick="saveRegistration()">Register & Begin Questing ⚔️</button>
+            <button class="royal-btn" onclick="playSoundFX('click'); proceedToProfileCreation()">Next: Design Profile 👤</button>
         </div>
     </div>
 
+    <!-- Profile & Avatar Creator Modal -->
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.7rem;">👤 Forge Your Avatar</h2>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.92rem; line-height: 1.6; color: #d0e8ff;">
+                Choose your champion style for the Imperial Proving Grounds:
+            </p>
+            <div class="avatar-grid">
+                <div class="avatar-option selected" onclick="playSoundFX('click'); selectAvatar('⚔️', this)" title="Warrior">⚔️</div>
+                <div class="avatar-option" onclick="playSoundFX('click'); selectAvatar('🛡️', this)" title="Guardian">🛡️</div>
+                <div class="avatar-option" onclick="playSoundFX('click'); selectAvatar('🏹', this)" title="Scout">🏹</div>
+                <div class="avatar-option" onclick="playSoundFX('click'); selectAvatar('👑', this)" title="Sovereign">👑</div>
+            </div>
+            <select id="avatar-class-select">
+                <option value="Royal Vanguard">Class: Royal Vanguard</option>
+                <option value="Forest Ranger">Class: Forest Ranger</option>
+                <option value="Imperial Scholar">Class: Imperial Scholar</option>
+            </select>
+            <br>
+            <button class="royal-btn" onclick="playSoundFX('click'); completeRegistrationAndEnter()">Enter the Kingdom ✨</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
     <nav> 
-        <a href="index.html">🏠 Home</a>
-        <a href="library.html">📚 Library</a>
-        <a href="map.html">🗺️ Empire Map</a>
-        <a href="battle.html">⚔️ Battle</a>
-        <a href="shop.html">🪙 Imperial Shop</a>
+        <a href="index.html" onclick="playSoundFX('click')">🏠 Home</a>
+        <a href="library.html" onclick="playSoundFX('click')">📚 Library</a>
+        <a href="map.html" onclick="playSoundFX('click')">🗺️ Empire Map</a>
+        <a href="battle.html" onclick="playSoundFX('click')">⚔️ Battle</a>
+        <a href="shop.html" onclick="playSoundFX('click')">🪙 Imperial Shop</a>
     </nav>
 
-    <h1 style="color: var(--theme-color); font-size: 2.2rem; margin: 15px 0 5px 0; text-shadow: 0 0 15px rgba(255,215,0,0.4);">Sovereign Guild & Village Chambers</h1>
-    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 15px;">
-        Experience the cinematic arrival sequence, then speak with Guild Master Vane or visiting villagers.
-    </p>
+    <h1 class="page-title">Sovereign Guild & Village Chambers</h1>
+    <p class="subtitle">Experience the cinematic arrival sequence, speak with Guild Master Vane or villagers, and complete interactive quests.</p>
 
-    <!-- Cinematic Video Sequence Stage -->
+    <!-- Cinematic Video Stage -->
     <div class="cinematic-stage" id="stage-container">
         <video id="master-cinematic-video" controls autoplay onended="onCinematicFinished()">
             <source src="village-to-guild-sequence.mp4" type="video/mp4">
@@ -240,46 +348,91 @@
         </video>
     </div>
 
-    <!-- Interactive Panel Unlocks After Video -->
+    <!-- Interactive Command Hub -->
     <div class="interactive-overlay-panel" id="interactive-panel">
-        <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.8rem; text-transform: uppercase;">Command & Contract Hub</h2>
+        <h2 style="color: var(--theme-color); margin-top: 0; font-size: 1.9rem; text-transform: uppercase; letter-spacing: 1px;">Command & Contract Hub</h2>
         
         <div class="village-hud">
-            <div>Adventurer: <span id="ui-adventurer">Traveler</span></div>
-            <div>Imperial Wallet: <span id="ui-coins">0</span> 🪙</div>
+            <div>Champion: <span id="ui-avatar-icon">⚔️</span> <span id="ui-adventurer">Traveler</span></div>
+            <div>Imperial Wallet: <span id="ui-coins">500</span> 🪙</div>
             <div>Royal Tax Vault: <span id="ui-tax">0</span> 🪙</div>
             <div>Daily Quests: <span id="ui-daily-count">0</span> / 5 Max</div>
         </div>
 
         <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
-            <button class="royal-btn" onclick="openGuildMasterDialog()">👑 Speak to Guild Master Vane (Official Contracts)</button>
-            <button class="royal-btn" onclick="openVillagerDialog()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">🧑‍🌾 Speak to Visiting Villager (Personal Plea)</button>
-            <button class="royal-btn" onclick="replayCinematic()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Cinematic Video</button>
+            <button class="royal-btn" onclick="playSoundFX('click'); playGuildMasterVideo()">👑 Speak to Guild Master Vane (Official Contracts)</button>
+            <button class="royal-btn" onclick="playSoundFX('click'); playVillagerVideo()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">🧑‍🌾 Speak to Visiting Villager (Personal Plea)</button>
+            <button class="royal-btn" onclick="playSoundFX('click'); replayCinematic()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Arrival Cinematic</button>
         </div>
 
-        <div id="dynamic-quest-view" style="background: rgba(4,10,8,0.92); border: 2px solid rgba(255,215,0,0.4); padding: 22px; border-radius: 10px; text-align: left; margin-top: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);">
-            <p style="color: #a0deca; font-family: 'Courier New', monospace; margin: 0;">[System Ready]: Click Guild Master Vane or the Visiting Villager above to review active mission contracts.</p>
+        <div id="dynamic-quest-view" class="quest-container">
+            <p style="color: #a0deca; font-family: 'Courier New', monospace; margin: 0;">[System Ready]: Click Guild Master Vane or the Visiting Villager above to view interactive video missions.</p>
         </div>
 
-        <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="shop.html" class="royal-btn" style="background: linear-gradient(135deg, #0066cc, #003366); font-size: 0.75rem;">🛒 Visit Market Stalls</a>
-            <a href="battle.html" class="royal-btn" style="background: linear-gradient(135deg, #cc0000, #660000); font-size: 0.75rem;">⚔️ Enter Battle Chambers</a>
-            <a href="wilderness.html" class="royal-btn" style="background: linear-gradient(135deg, #2e7d32, #1b5e20); font-size: 0.75rem;">🌲 Explore Wilderness Forest</a>
-            <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ Return to Empire Map</a>
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="shop.html" class="royal-btn" onclick="playSoundFX('click')" style="background: linear-gradient(135deg, #0066cc, #003366); font-size: 0.8rem;">🛒 Visit Market Stalls</a>
+            <a href="battle.html" class="royal-btn" onclick="playSoundFX('click')" style="background: linear-gradient(135deg, #cc0000, #660000); font-size: 0.8rem;">⚔️ Enter Battle Chambers</a>
+            <a href="map.html" class="royal-btn" onclick="playSoundFX('click')" style="font-size: 0.8rem;">🗺️ Return to Empire Map</a>
         </div>
     </div>
 
     <script>
+        // --- ARCADE SOUND EFFECTS (SFX) ENGINE ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSoundFX(type) {
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            let now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+                gainNode.gain.setValueAtTime(0.08, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now); osc.stop(now + 0.05);
+            } else if (type === 'coin') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(987.77, now);
+                osc.frequency.setValueAtTime(1318.51, now + 0.08);
+                gainNode.gain.setValueAtTime(0.12, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                osc.start(now); osc.stop(now + 0.25);
+            } else if (type === 'quest') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                gainNode.gain.setValueAtTime(0.1, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
+            }
+        }
+
+        // --- GAME STATE & STORAGE ---
         let playerState = {
             coins: 500,
             treasuryTaxCollected: 0,
             adventurerName: "",
+            avatarIcon: "⚔️",
+            avatarClass: "Royal Vanguard",
             inventory: [],
             dailyQuestsDone: 0,
             cooldownUntil: 0
         };
 
+        let selectedAvatarSymbol = "⚔️";
+        let activeQuest = null;
+
         function toggleFullScreen() {
+            playSoundFX('click');
             const body = document.body;
             const fsBtn = document.getElementById('fsToggleBtn');
             body.classList.toggle('is-chamber-fullscreen');
@@ -306,6 +459,8 @@
                 playerState.coins = parsed.coins !== undefined ? parsed.coins : 500;
                 playerState.treasuryTaxCollected = parsed.treasuryTaxCollected || 0;
                 playerState.adventurerName = parsed.adventurerName || "";
+                playerState.avatarIcon = parsed.avatarIcon || "⚔️";
+                playerState.avatarClass = parsed.avatarClass || "Royal Vanguard";
                 playerState.inventory = parsed.inventory || [];
                 playerState.dailyQuestsDone = parsed.dailyQuestsDone || 0;
                 playerState.cooldownUntil = parsed.cooldownUntil || 0;
@@ -317,6 +472,7 @@
 
             if (playerState.adventurerName) {
                 document.getElementById('ui-adventurer').innerText = playerState.adventurerName;
+                document.getElementById('ui-avatar-icon').innerText = playerState.avatarIcon;
             }
         }
 
@@ -335,6 +491,35 @@
             }
         }
 
+        function proceedToProfileCreation() {
+            let nameInput = document.getElementById('adventurer-name-input').value.trim();
+            if (nameInput) {
+                playerState.adventurerName = nameInput;
+                document.getElementById('registration-modal').style.display = 'none';
+                document.getElementById('profile-modal').style.display = 'flex';
+            } else {
+                alert("Please enter a valid adventurer name.");
+            }
+        }
+
+        function selectAvatar(symbol, element) {
+            document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedAvatarSymbol = symbol;
+        }
+
+        function completeRegistrationAndEnter() {
+            playerState.avatarIcon = selectedAvatarSymbol;
+            playerState.avatarClass = document.getElementById('avatar-class-select').value;
+            
+            document.getElementById('ui-adventurer').innerText = playerState.adventurerName;
+            document.getElementById('ui-avatar-icon').innerText = playerState.avatarIcon;
+            document.getElementById('profile-modal').style.display = 'none';
+            
+            syncStorage();
+            alert(`✦ Welcome to the Kingdom, ${playerState.adventurerName} (${playerState.avatarClass})! Profile saved worldwide. ✦`);
+        }
+
         function replayCinematic() {
             const audio = document.getElementById('chamber-lullaby-audio');
             if (audio) { audio.pause(); }
@@ -344,104 +529,148 @@
             stage.style.display = 'flex';
             
             const video = document.getElementById('master-cinematic-video');
+            video.src = "village-to-guild-sequence.mp4";
             video.currentTime = 0;
             video.play();
         }
 
-        function saveRegistration() {
-            let nameInput = document.getElementById('adventurer-name-input').value.trim();
-            if (nameInput) {
-                playerState.adventurerName = nameInput;
-                document.getElementById('ui-adventurer').innerText = nameInput;
-                document.getElementById('registration-modal').style.display = 'none';
-                syncStorage();
-                alert(`✦ Welcome, ${nameInput}! Registration complete and saved to Local Storage. ✦`);
-            } else {
-                alert("Please enter a valid adventurer name.");
-            }
+        function playGuildMasterVideo() {
+            document.getElementById('interactive-panel').style.display = 'none';
+            const stage = document.getElementById('stage-container');
+            stage.style.display = 'flex';
+
+            const video = document.getElementById('master-cinematic-video');
+            video.src = "guild-master-briefing.mp4"; 
+            video.onended = function() {
+                stage.style.display = 'none';
+                document.getElementById('interactive-panel').style.display = 'block';
+                showGuildMasterContracts();
+            };
+            video.play().catch(err => {
+                stage.style.display = 'none';
+                document.getElementById('interactive-panel').style.display = 'block';
+                showGuildMasterContracts();
+            });
+        }
+
+        function playVillagerVideo() {
+            document.getElementById('interactive-panel').style.display = 'none';
+            const stage = document.getElementById('stage-container');
+            stage.style.display = 'flex';
+
+            const video = document.getElementById('master-cinematic-video');
+            video.src = "villager-plea-mission.mp4";
+            video.onended = function() {
+                stage.style.display = 'none';
+                document.getElementById('interactive-panel').style.display = 'block';
+                showVillagerMissions();
+            };
+            video.play().catch(err => {
+                stage.style.display = 'none';
+                document.getElementById('interactive-panel').style.display = 'block';
+                showVillagerMissions();
+            });
         }
 
         function checkDailyLimit() {
             let now = Date.now();
             if (playerState.cooldownUntil && now < playerState.cooldownUntil) {
                 let remainingMins = Math.ceil((playerState.cooldownUntil - now) / 60000);
-                alert(`⏳ Daily Quest Limit Reached! You are on cooldown for ${remainingMins} more minute(s).\n\nTip: You can visit the Market Chambers shop and spend 50 coins to instantly reset your timer!`);
+                alert(`⏳ Daily Quest Limit Reached! Cooldown active for ${remainingMins} more minute(s).`);
                 return false;
             }
             if (playerState.dailyQuestsDone >= 5) {
-                // Set 5-minute timeout cooldown
-                playerState.cooldownUntil = now + (5 * 60 * 1000);
-                playerState.dailyQuestsDone = 0; // reset for next batch after cooldown
+                playerState.cooldownUntil = now + (30 * 60 * 1000); // 30 min cooldown
+                playerState.dailyQuestsDone = 0;
                 syncStorage();
-                alert(`⏳ You have completed all 5 daily quests! A 5-minute cooldown timer has initiated.\n\nSpend 50 coins at the Market Stalls to instantly refresh and take more quests right now!`);
+                alert(`⏳ You have completed all 5 daily quests! A 30-minute cooldown has initiated.`);
                 return false;
             }
             return true;
         }
 
-        function resetTimerWithCoins() {
-            if (playerState.coins >= 50) {
-                playerState.coins -= 50;
-                playerState.cooldownUntil = 0;
-                playerState.dailyQuestsDone = 0;
-                syncStorage();
-                initCinematicExperience();
-                alert("✦ Market Refresh Successful! Paid 50 coins. Cooldown timer reset. You may accept new quests! ✦");
-            } else {
-                alert("You need at least 50 coins to instantly refresh your quest timer at the market!");
-            }
-        }
-
-        function openGuildMasterDialog() {
-            if (!checkDailyLimit()) {
-                document.getElementById('dynamic-quest-view').innerHTML = `
-                    <h3 style="color: #ff6b6b; margin-top:0;">⏳ Guild Chamber on Cooldown</h3>
-                    <p style="font-family: 'Playfair Display', serif;">"Sovereign, your daily contracts are exhausted. Rest or pay a 50-coin refresh fee at the market."</p>
-                    <button class="royal-btn" onclick="resetTimerWithCoins()" style="background: linear-gradient(to bottom, #0066cc, #003366);">🪙 Pay 50 Coins to Instantly Reset Timer</button>
-                `;
-                return;
-            }
-
+        function showGuildMasterContracts() {
             document.getElementById('dynamic-quest-view').innerHTML = `
                 <h3 style="color: var(--theme-color); margin-top:0;">👑 Guild Master Vane's Official Contracts</h3>
-                <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem;">"Welcome to the high table, Sovereign. Eliminate highway bandits threatening our regional supply caravans by heading into the <a href='battle.html' style='color:#ffd700;'>Battle Chambers</a>."</p>
-                <button class="royal-btn" onclick="acceptContract('Clearing the Border Outlaws', 350, 'Mercenary Honor Badge')">⚔️ Accept: Clearing the Border Outlaws (Gross: 350 | Tax: -35 | Net: 315 Coins + Badge)</button>
+                <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem;">"Sovereign, your tactical briefing is complete. Select your mission:"</p>
+                <button class="royal-btn" onclick="playSoundFX('click'); acceptQuest('Clearing the Border Outlaws', 'High Risk', 350, 'Mercenary Honor Badge')">⚔️ Accept: Clearing the Border Outlaws (Gross: 350 | Tax: -35 | Net: 315 Coins + Badge)</button>
             `;
         }
 
-        function openVillagerDialog() {
-            if (!checkDailyLimit()) {
-                document.getElementById('dynamic-quest-view').innerHTML = `
-                    <h3 style="color: #ff6b6b; margin-top:0;">⏳ Guild Chamber on Cooldown</h3>
-                    <p style="font-family: 'Playfair Display', serif;">"Sovereign, daily pleas are paused. Pay a 50-coin refresh fee to take more requests."</p>
-                    <button class="royal-btn" onclick="resetTimerWithCoins()" style="background: linear-gradient(to bottom, #0066cc, #003366);">🪙 Pay 50 Coins to Instantly Reset Timer</button>
-                `;
+        function showVillagerMissions() {
+            document.getElementById('dynamic-quest-view').innerHTML = `
+                <h3 style="color: #79ff9c; margin-top:0;">🧑‍🌾 Visiting Villager's Interactive Quest</h3>
+                <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem;">"Choose your mission to help our villagers:"</p>
+                <button class="royal-btn" onclick="playSoundFX('click'); acceptQuest('Collect Fresh Vegetables in Wilderness', 'Moderate Risk', 200, 'Fresh Organic Vegetables')" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">🥕 Harvest Vegetables in Forest (Gross: 200 | Net: 180 Coins)</button>
+                <button class="royal-btn" onclick="playSoundFX('click'); acceptQuest('Buy Bread at Market Stalls', 'Low Risk', 150, 'Warm Artisan Bread')" style="background: linear-gradient(to bottom, #0066cc, #003366);">🍞 Buy Bread at Market Stalls (Gross: 150 | Net: 135 Coins)</button>
+            `;
+        }
+
+        function acceptQuest(title, riskLevel, grossReward, rewardItem) {
+            if (!checkDailyLimit()) return;
+
+            activeQuest = {
+                title: title,
+                risk: riskLevel,
+                gross: grossReward,
+                item: rewardItem,
+                status: 'in-progress'
+            };
+
+            document.getElementById('dynamic-quest-view').innerHTML = `
+                <h3 style="color: var(--theme-color); margin-top:0;">⚔️ Active Quest: ${title}</h3>
+                <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; line-height: 1.5;">
+                    <strong>Risk Level:</strong> ${riskLevel}<br>
+                    <strong>Objective:</strong> Complete the mission actions, gather your supplies, and submit to the guild.
+                </p>
+                <button class="royal-btn" onclick="submitActiveQuest()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">
+                    📦 Submit Quest & Claim Reward
+                </button>
+            `;
+        }
+
+        function submitActiveQuest() {
+            if (!activeQuest || activeQuest.status !== 'in-progress') {
+                alert("You have no active quest to submit!");
                 return;
             }
 
-            document.getElementById('dynamic-quest-view').innerHTML = `
-                <h3 style="color: #79ff9c; margin-top:0;">🧑‍🌾 Visiting Villager's Personal Plea</h3>
-                <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem;">"Please, brave traveler! Our northern homesteads survived the frost, but we need emergency provisions gathered from the <a href='shop.html' style='color:#79ff9c;'>Market Stalls</a> or foraged in the <a href='wilderness.html' style='color:#79ff9c;'>Wilderness Forest</a>."</p>
-                <button class="royal-btn" onclick="acceptContract('The Frost Provision Shortage', 200, 'Winter Fur Pelt')" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">📦 Accept: Provision Relief (Gross: 200 | Tax: -20 | Net: 180 Coins + Pelt)</button>
-            `;
-        }
+            let tax = Math.floor(activeQuest.gross * 0.10);
+            let netCoins = activeQuest.gross - tax;
 
-        function acceptContract(title, gross, item) {
-            let tax = Math.floor(gross * 0.10);
-            let net = gross - tax;
-            playerState.coins += net;
+            playerState.coins += netCoins;
             playerState.treasuryTaxCollected += tax;
             playerState.dailyQuestsDone++;
-            if(!playerState.inventory) playerState.inventory = [];
-            playerState.inventory.push(item);
             
+            if (!playerState.inventory) playerState.inventory = [];
+            playerState.inventory.push(activeQuest.item);
+
+            playSoundFX('quest');
+            playSoundFX('coin');
             syncStorage();
-            
+
             document.getElementById('ui-coins').innerText = playerState.coins;
             document.getElementById('ui-tax').innerText = playerState.treasuryTaxCollected;
             document.getElementById('ui-daily-count').innerText = playerState.dailyQuestsDone;
 
-            alert(`✦ Contract Fulfilled: "${title}" ✦\n\n- Gross Payout: ${gross} Coins\n- Royal Tax (10% to Vault): -${tax} Coins\n- Net Payout to Wallet: ${net} Coins\n- Unique Item Secured: ${item}\n- Daily Quests Completed: ${playerState.dailyQuestsDone}/5\n\n[Local Storage Synced]`);
+            document.getElementById('dynamic-quest-view').innerHTML = `
+                <h3 style="color: #79ff9c; margin-top:0;">✨ Quest Successfully Submitted! ✨</h3>
+                <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Mission:</strong> ${activeQuest.title}<br>
+                    <strong>Gross Reward:</strong> ${activeQuest.gross} Coins<br>
+                    <strong>Royal Tax (10% to Vault):</strong> -${tax} Coins<br>
+                    <strong>Net Payout to Wallet:</strong> <span style="color: #ffd700;">+${netCoins} Coins</span><br>
+                    <strong>Item Secured:</strong> ${activeQuest.item}<br><br>
+                    <em>Your coins are now safely stored in your vault for future premiere tickets and merch!</em>
+                </p>
+                <button class="royal-btn" onclick="playSoundFX('click'); openGuildMasterDialog()">Take Another Contract</button>
+            `;
+
+            activeQuest.status = 'completed';
+        }
+
+        function openGuildMasterDialog() {
+            showGuildMasterContracts();
         }
 
         function syncStorage() {
@@ -450,6 +679,8 @@
             parsed.coins = playerState.coins;
             parsed.treasuryTaxCollected = playerState.treasuryTaxCollected;
             parsed.adventurerName = playerState.adventurerName;
+            parsed.avatarIcon = playerState.avatarIcon;
+            parsed.avatarClass = playerState.avatarClass;
             parsed.inventory = playerState.inventory;
             parsed.dailyQuestsDone = playerState.dailyQuestsDone;
             parsed.cooldownUntil = playerState.cooldownUntil;
