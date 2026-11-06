@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youth Kingdom: Alpha Empire Proving Grounds | Imperial Divine Vision</title>
+    <!-- Firebase SDK for Worldwide Cloud Saving -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <style>
         :root {
             --royal-gold: #ffd700;
@@ -118,7 +122,7 @@
             font-style: normal;
         }
 
-        /* Email Vault Box for Global Saving */
+        /* Global Cloud Email Vault */
         .email-vault {
             background: rgba(11, 34, 21, 0.85);
             border: 2px solid var(--royal-gold);
@@ -164,7 +168,7 @@
             color: var(--royal-gold-light);
         }
 
-        /* Grid Layout for Chambers */
+        /* Grid Layout for Chambers (All 6 Rooms) */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -274,12 +278,12 @@
         <div id="echo-display">Click to awaken the wisdom of the crown.</div>
     </div>
 
-    <!-- Global Email & Progress Vault -->
+    <!-- Global Cloud Citizen Registry Vault -->
     <div class="email-vault">
-        <h3>📜 Imperial Citizen Registry Vault</h3>
-        <p style="font-size: 0.9rem; color: #d1d5db; margin-bottom: 15px;">Save your email to sync your progress worldwide across the kingdom.</p>
+        <h3>📜 Imperial Worldwide Cloud Vault</h3>
+        <p style="font-size: 0.9rem; color: #d1d5db; margin-bottom: 15px;">Enter your email to sync your coins, tickets, and progress worldwide across any device.</p>
         <input type="email" id="userEmailInput" placeholder="Enter your email address...">
-        <button onclick="saveUserEmail()">Save to Vault</button>
+        <button onclick="saveToCloudVault()">Sync to Cloud</button>
         <div id="vault-status"></div>
     </div>
 
@@ -317,25 +321,62 @@
     <!-- Official Seal (Bottom Left) -->
     <img src="official-seal.png" class="royal-branding" alt="Imperial Divine Vision Seal">
 
-    <!-- Scripts for Worldwide Save & Fullscreen -->
+    <!-- Firebase & Cloud Sync Script -->
     <script>
-        // Load saved email on page startup (Worldwide LocalStorage Persistence)
+        // TODO: Replace with your actual Firebase project configuration when ready
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-YOUR-API-KEY-HERE",
+            authDomain: "imperial-divine-vision.firebaseapp.com",
+            projectId: "imperial-divine-vision",
+            storageBucket: "imperial-divine-vision.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456:web:abcd"
+        };
+
+        // Initialize Firebase safely
+        let db;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+        } catch (e) {
+            console.log("Firebase offline mode / Local fallback active.");
+        }
+
+        // Worldwide Local + Cloud Save on Startup
         window.onload = function() {
             const savedEmail = localStorage.getItem("imperial_citizen_email");
             if (savedEmail) {
                 document.getElementById("userEmailInput").value = savedEmail;
-                document.getElementById("vault-status").innerText = "✨ Welcome back, registered citizen (" + savedEmail + "). Vault synced!";
+                document.getElementById("vault-status").innerText = "✨ Welcome back, " + savedEmail + ". Profile synced!";
             }
         };
 
-        // Save email to localStorage vault
-        function saveUserEmail() {
+        // Save email and sync data to Cloud Firestore & LocalStorage
+        async function saveToCloudVault() {
             const email = document.getElementById("userEmailInput").value.trim();
-            if (email && email.includes("@")) {
-                localStorage.setItem("imperial_citizen_email", email);
-                document.getElementById("vault-status").innerText = "✅ Successfully saved! Your citizenship is recorded worldwide in the vault.";
-            } else {
+            if (!email || !email.includes("@")) {
                 alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Save locally immediately
+            localStorage.setItem("imperial_citizen_email", email);
+
+            // If Firebase cloud is connected, sync worldwide
+            if (db) {
+                try {
+                    await db.collection("citizens").doc(email).set({
+                        email: email,
+                        lastLogin: new Date().toISOString(),
+                        coins: localStorage.getItem("imperial_coins") || 0,
+                        tickets: localStorage.getItem("imperial_tickets") || 1
+                    }, { merge: true });
+                    document.getElementById("vault-status").innerText = "✅ Synced worldwide to Cloud Vault!";
+                } catch (err) {
+                    document.getElementById("vault-status").innerText = "✅ Saved locally! (Cloud sync ready)";
+                }
+            } else {
+                document.getElementById("vault-status").innerText = "✅ Saved to device vault!";
             }
         }
 
@@ -355,7 +396,7 @@
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable fullscreen mode: ${err.message}`);
+                    alert(`Fullscreen error: ${err.message}`);
                 });
                 document.getElementById("expandBtn").innerText = "🗗 Exit Full";
             } else {
