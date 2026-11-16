@@ -24,6 +24,19 @@
             100% { transform: scale(0); opacity: 0; }
         }
 
+        /* Majestic Sun Glowing & Unfurling Scroll Animation */
+        @keyframes sunburstGlow {
+            0% { box-shadow: 0 0 20px #ffd700, 0 0 60px rgba(255,215,0,0.6), inset 0 0 30px rgba(255,215,0,0.4); transform: translate(-50%, -50%) scale(0.95); }
+            50% { box-shadow: 0 0 50px #ffd700, 0 0 120px rgba(255,215,0,0.9), inset 0 0 60px rgba(255,215,0,0.7); transform: translate(-50%, -50%) scale(1.02); }
+            100% { box-shadow: 0 0 20px #ffd700, 0 0 60px rgba(255,215,0,0.6), inset 0 0 30px rgba(255,215,0,0.4); transform: translate(-50%, -50%) scale(0.95); }
+        }
+
+        @keyframes scrollUnfurl {
+            0% { transform: translate(-50%, -50%) scaleY(0.05) scaleX(0.2); opacity: 0; }
+            60% { transform: translate(-50%, -50%) scaleY(1.05) scaleX(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scaleY(1) scaleX(1); opacity: 1; }
+        }
+
         :root {
             --bg-dark: #0b0f0e;
             --panel-bg: rgba(14, 20, 18, 0.96);
@@ -201,22 +214,36 @@
             pointer-events: none;
         }
 
-        /* Quest Scroll Modal */
+        /* Quest Scroll & Imperial Sunburst Victory Scroll Modals */
         .quest-modal {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 85%;
-            max-width: 500px;
-            background: rgba(11, 15, 14, 0.96);
-            border: 3px ridge var(--theme-color);
-            padding: 18px;
-            border-radius: 10px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.9);
-            z-index: 100;
+            max-width: 520px;
+            background: linear-gradient(135deg, #f4ecd8 0%, #e6d5b8 100%);
+            color: #2b1d0c;
+            border: 4px ridge #856508;
+            padding: 24px;
+            border-radius: 12px;
+            z-index: 200;
             text-align: center;
             display: none;
+            animation: scrollUnfurl 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Radiant Sunburst Glow for Victory Scroll */
+        .victory-scroll-sunburst {
+            animation: scrollUnfurl 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, sunburstGlow 3s ease-in-out infinite alternate !important;
+        }
+
+        .quest-modal h3 {
+            font-family: 'Cinzel', serif;
+            color: #5c3a0b;
+            border-bottom: 2px solid #b8860b;
+            padding-bottom: 8px;
+            margin-top: 0;
         }
     </style>
 </head>
@@ -227,6 +254,7 @@
     </audio>
 
     <audio id="collect-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+    <audio id="scroll-sound" src="https://actions.google.com/sounds/v1/foley/paper_pages_rustle.ogg"></audio>
     <audio id="success-sound" src="https://actions.google.com/sounds/v1/cartoon/success_bell.ogg"></audio>
     <audio id="fail-sound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
 
@@ -242,7 +270,7 @@
 
     <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 10px 0 3px 0; text-shadow: 0 0 15px rgba(255,215,0,0.4);">Help a Traveler — Village of Ikmid</h1>
     <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;">
-        Complete quests to earn compensation, stockpile inventory surplus, and advance to Level 2!
+        Complete quests to earn rich compensation, stockpile inventory surplus, and advance to Level 2!
     </p>
 
     <!-- Cinematic Stage -->
@@ -261,21 +289,37 @@
             <div class="gathering-hotspot" id="spot-wood" style="top: 50%; left: 25%;" onclick="gatherItem('Wood Sticks', 3, this)" title="Click to gather Wood">🪵</div>
         </div>
 
-        <!-- Quest Scroll Modal -->
+        <!-- Quest Scroll Modal (Start) -->
         <div class="quest-modal" id="questScrollModal">
-            <h3 style="color: var(--theme-color); margin-top: 0;">📜 Imperial Quest Decree: Ikmid Supply Run</h3>
-            <p style="font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--text-main);">
-                "Brave adventurer, journey into the Whispering Woods. Gather required provisions for the village and collect surplus loot for your own inventory. Complete 5 total quests to rank up to Level 2!"
+            <h3>📜 Imperial Quest Decree: Ikmid Supply Run</h3>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem; color: #3b2810; line-height: 1.5;">
+                "Brave adventurer, journey into the Whispering Woods. Gather required provisions for the village and collect surplus loot for your personal inventory. Complete 5 total quests to rank up to Level 2!"
             </p>
-            <div style="background: rgba(0,40,25,0.7); border: 1px solid var(--theme-color); padding: 8px; border-radius: 6px; text-align: left; font-size: 0.78rem; margin-bottom: 10px;">
+            <div style="background: rgba(184,134,11,0.15); border: 1px solid #b8860b; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.8rem; margin-bottom: 12px; color: #2b1d0c;">
                 <div>📋 <b>Required Quota & Surplus:</b></div>
-                <div>• Apples: <span id="chk-apple">0</span> / 3 (Surplus allowed!)</div>
-                <div>• Glowing Herbs: <span id="chk-herb">0</span> / 4 (Surplus allowed!)</div>
+                <div>• Apples: <span id="chk-apple">0</span> / 3 (+ Surplus)</div>
+                <div>• Glowing Herbs: <span id="chk-herb">0</span> / 4 (+ Surplus)</div>
                 <div>• Gold Coins: <span id="chk-coin">0</span> / 50</div>
-                <div>• Wood Sticks: <span id="chk-wood">0</span> / 3 (Surplus allowed!)</div>
-                <div style="margin-top: 4px; color: #ffd700;">🎁 <b>Compensation Payout:</b> 250 Coins</div>
+                <div>• Wood Sticks: <span id="chk-wood">0</span> / 3 (+ Surplus)</div>
+                <div style="margin-top: 6px; color: #856508; font-weight: bold;">🎁 Grand Compensation: 500 Gold Coins + 50 Imperial Vault Coins</div>
             </div>
-            <button class="royal-btn" onclick="closeScrollAndStartGathering()">⚔️ Enter Whispering Woods & Gather</button>
+            <button class="royal-btn" onclick="closeScrollAndStartGathering()" style="font-size: 0.85rem; padding: 10px 20px;">⚔️ Enter Whispering Woods & Gather</button>
+        </div>
+
+        <!-- Imperial Victory Scroll Modal (End with Sunburst Glow & Scroll Sound) -->
+        <div class="quest-modal victory-scroll-sunburst" id="victoryScrollModal">
+            <h3 style="color: #5c3a0b; font-size: 1.35rem;">📜 Imperial Decree of Victory ☀️</h3>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #3b2810; font-style: italic; line-height: 1.5;">
+                "To the valiant Guardian of Ikmid: Your mission in the Whispering Woods was a legendary success. You outsmarted the armored beasts, delivered all provisions, and secured magnificent riches for your valor."
+            </p>
+            <div style="background: rgba(184,134,11,0.18); border: 2px ridge #b8860b; padding: 12px; border-radius: 6px; text-align: left; font-size: 0.85rem; margin-bottom: 15px; color: #2b1d0c;">
+                <div>✨ <b>Main Compensation:</b> <span style="color: #b8860b; font-weight: bold;">+500 Gold Coins</span></div>
+                <div>🏛️ <b>Imperial Vault Bonus:</b> <span style="color: #b8860b; font-weight: bold;">+50 Tax Coins</span></div>
+                <div>🎒 <b>Surplus Loot Secured:</b> Added to Personal Inventory</div>
+                <div>⭐ <b>Progress:</b> Completed Quests: <span id="victory-quests-count" style="font-weight: bold;">1</span> / 5</div>
+                <div id="victory-rank-notice" style="margin-top: 6px; color: #006622; font-weight: bold; display: none;">🎉 Rank Up Achieved: Welcome to Level 2!</div>
+            </div>
+            <button class="royal-btn" onclick="collectVictoryRewards()" style="font-size: 1rem; padding: 12px 28px; background: linear-gradient(to bottom, #2e7d32, #1b5e20); color: #fff;">✨ Collect Riches & Supplies</button>
         </div>
 
         <!-- Bottom Overlay Prompt Bar -->
@@ -289,7 +333,7 @@
             
             <div id="overlay-dialogue-content">
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
-                    "Our community needs provisions. Gather supplies, avoid the Level 3 wolves, and earn your compensation!"
+                    "Our community needs provisions. Gather supplies, avoid the Level 3 wolves, and earn your grand compensation!"
                 </p>
                 <div class="choice-btn-group">
                     <button class="royal-btn" onclick="acceptTravelerQuest()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">✓ Accept Quest</button>
@@ -388,6 +432,11 @@
         function acceptTravelerQuest() {
             playerState.questAccepted = true;
             syncStorage();
+            
+            // Play parchment rustle sound when opening scroll
+            let scrollSound = document.getElementById('scroll-sound');
+            if(scrollSound) { scrollSound.currentTime = 0; scrollSound.play().catch(e => {}); }
+
             document.getElementById('questScrollModal').style.display = 'block';
         }
 
@@ -433,13 +482,11 @@
                 playerState.collectedWood += amount;
             }
 
-            // Add surplus items to personal inventory
             if(!playerState.inventory.includes(itemType + " (Surplus)")) {
                 playerState.inventory.push(itemType + " (Surplus)");
             }
             updateHUD();
 
-            // Check if minimum quota (3 apples, 4 herbs, 50 coins, 3 wood) is met
             if (playerState.collectedApples >= 3 && playerState.collectedHerbs >= 4 && playerState.collectedCoins >= 50 && playerState.collectedWood >= 3) {
                 setTimeout(transitionToPart2, 600);
             }
@@ -481,11 +528,7 @@
         function chooseHide() {
             playerState.missionStage = 'success';
             playerState.questsCompleted++;
-            
-            let reward = 250;
-            playerState.coins += reward;
 
-            // Level up check: 5 total quests completed advances to Level 2
             if (playerState.questsCompleted >= 5) {
                 playerState.level = 2;
             }
@@ -497,13 +540,40 @@
             videoElement.play();
             videoElement.onended = null;
 
+            document.getElementById('victory-quests-count').innerText = playerState.questsCompleted;
+            if (playerState.level >= 2) {
+                document.getElementById('victory-rank-notice').style.display = 'block';
+            }
+
+            // Unfurl Victory Scroll after 3 seconds with paper rustle sound & sunburst glow
+            setTimeout(() => {
+                let scrollSound = document.getElementById('scroll-sound');
+                if(scrollSound) { scrollSound.currentTime = 0; scrollSound.play().catch(e => {}); }
+
+                document.getElementById('victoryScrollModal').style.display = 'block';
+                let sSound = document.getElementById('success-sound');
+                if(sSound) sSound.play().catch(e => {});
+            }, 2500);
+
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #79ff9c; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
-                    ✦ Mission Success! Delivered quota + surplus. Earned <b>${reward} Coins Compensation</b>! (Quests: ${playerState.questsCompleted}/5 | ${playerState.level >= 2 ? '⭐ LEVEL 2 UNLOCKED!' : 'Level 1'}) ✦
+                    ✦ Mission Success! Unfurling Radiant Imperial Victory Scroll... ✦
                 </p>
             `;
-            let sSound = document.getElementById('success-sound');
-            if(sSound) sSound.play().catch(e => {});
+        }
+
+        function collectVictoryRewards() {
+            document.getElementById('victoryScrollModal').style.display = 'none';
+            let totalReward = 550; // 500 gold coins + 50 vault coins
+            playerState.coins += totalReward;
+            syncStorage();
+            updateHUD();
+
+            document.getElementById('overlay-dialogue-content').innerHTML = `
+                <p style="color: #79ff9c; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
+                    ✨ Grand Riches Claimed! +550 Coins added to wallet. Thank you, adventurer! Please come again for more quests.
+                </p>
+            `;
         }
 
         function chooseFight() {
