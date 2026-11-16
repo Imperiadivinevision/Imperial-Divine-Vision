@@ -180,7 +180,7 @@
             flex-wrap: wrap;
         }
 
-        /* Interactive Clickable Gathering Hotspots on Video with Glow */
+        /* Interactive Clickable Gathering Hotspots on Part 1 Video */
         .gathering-hotspot {
             position: absolute;
             width: 44px;
@@ -208,7 +208,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 85%;
-            max-width: 480px;
+            max-width: 500px;
             background: rgba(11, 15, 14, 0.96);
             border: 3px ridge var(--theme-color);
             padding: 18px;
@@ -226,7 +226,6 @@
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
     </audio>
 
-    <!-- Audio Effects for Gathering, Success, and Fail -->
     <audio id="collect-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
     <audio id="success-sound" src="https://actions.google.com/sounds/v1/cartoon/success_bell.ogg"></audio>
     <audio id="fail-sound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
@@ -243,7 +242,7 @@
 
     <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 10px 0 3px 0; text-shadow: 0 0 15px rgba(255,215,0,0.4);">Help a Traveler — Village of Ikmid</h1>
     <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;">
-        Accept quests, gather supplies in the Whispering Woods, and guide your Level 1 Adventurer to victory.
+        Complete quests to earn compensation, stockpile inventory surplus, and advance to Level 2!
     </p>
 
     <!-- Cinematic Stage -->
@@ -254,7 +253,7 @@
             Your browser does not support the video tag.
         </video>
 
-        <!-- Interactive Gathering Hotspots over save-collection.mp4 with Glow -->
+        <!-- Interactive Gathering Hotspots over Part 1 -->
         <div id="hotspot-container">
             <div class="gathering-hotspot" id="spot-apple" style="top: 45%; left: 75%;" onclick="gatherItem('Apples', 3, this)" title="Click to gather Apples">🍎</div>
             <div class="gathering-hotspot" id="spot-herb" style="top: 60%; left: 52%;" onclick="gatherItem('Glowing Herbs', 4, this)" title="Click to gather Herbs">🌿</div>
@@ -266,14 +265,15 @@
         <div class="quest-modal" id="questScrollModal">
             <h3 style="color: var(--theme-color); margin-top: 0;">📜 Imperial Quest Decree: Ikmid Supply Run</h3>
             <p style="font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--text-main);">
-                "Brave adventurer, journey into the Whispering Woods. Gather the requested provisions while avoiding the Level 3 Armored Wolves!"
+                "Brave adventurer, journey into the Whispering Woods. Gather required provisions for the village and collect surplus loot for your own inventory. Complete 5 total quests to rank up to Level 2!"
             </p>
             <div style="background: rgba(0,40,25,0.7); border: 1px solid var(--theme-color); padding: 8px; border-radius: 6px; text-align: left; font-size: 0.78rem; margin-bottom: 10px;">
-                <div>📋 <b>Objective Checklist:</b></div>
-                <div>• Apples: <span id="chk-apple">0</span> / 3</div>
-                <div>• Glowing Herbs: <span id="chk-herb">0</span> / 4</div>
+                <div>📋 <b>Required Quota & Surplus:</b></div>
+                <div>• Apples: <span id="chk-apple">0</span> / 3 (Surplus allowed!)</div>
+                <div>• Glowing Herbs: <span id="chk-herb">0</span> / 4 (Surplus allowed!)</div>
                 <div>• Gold Coins: <span id="chk-coin">0</span> / 50</div>
-                <div>• Wood Sticks: <span id="chk-wood">0</span> / 3</div>
+                <div>• Wood Sticks: <span id="chk-wood">0</span> / 3 (Surplus allowed!)</div>
+                <div style="margin-top: 4px; color: #ffd700;">🎁 <b>Compensation Payout:</b> 250 Coins</div>
             </div>
             <button class="royal-btn" onclick="closeScrollAndStartGathering()">⚔️ Enter Whispering Woods & Gather</button>
         </div>
@@ -281,7 +281,7 @@
         <!-- Bottom Overlay Prompt Bar -->
         <div class="video-quest-overlay" id="quest-overlay-bar">
             <div class="village-hud">
-                <div>Email: <span id="ui-email">traveler@imperial.vision</span></div>
+                <div>Rank: <span id="ui-level" style="color: #79ff9c;">Level 1</span> (<span id="ui-quests-done">0</span>/5 Quests)</div>
                 <div>Wallet: <span id="ui-coins">500</span> 🪙</div>
                 <div>Tries Left: <span id="ui-tries">2</span> / 2</div>
                 <div>Inventory: <span id="ui-inventory">Empty</span></div>
@@ -289,7 +289,7 @@
             
             <div id="overlay-dialogue-content">
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
-                    "Our community is in great need of supplies. Will you aid us?"
+                    "Our community needs provisions. Gather supplies, avoid the Level 3 wolves, and earn your compensation!"
                 </p>
                 <div class="choice-btn-group">
                     <button class="royal-btn" onclick="acceptTravelerQuest()" style="background: linear-gradient(to bottom, #2e7d32, #1b5e20);">✓ Accept Quest</button>
@@ -301,7 +301,7 @@
 
     <div class="footer-controls" style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
         <button class="royal-btn" onclick="replayPlea()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Plea</button>
-        <button class="royal-btn" onclick="promptEmailChange()" style="background: linear-gradient(to bottom, #0066cc, #003366);">📧 Sync Email Account</button>
+        <button class="royal-btn" onclick="promptEmailChange()" style="background: linear-gradient(to bottom, #0066cc, #003366);">📧 Sync Account Email</button>
         <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ World Map</a>
         <a href="shop.html" class="royal-btn" style="font-size: 0.75rem;">🛒 Market Stalls</a>
         <a href="village.html" class="royal-btn" style="font-size: 0.75rem;">🏛️ Guild Chambers</a>
@@ -311,6 +311,8 @@
         let playerState = {
             email: localStorage.getItem('imperial_user_email') || 'traveler@imperial.vision',
             coins: 500,
+            level: 1,
+            questsCompleted: 0,
             triesRemaining: 2,
             inventory: [],
             collectedApples: 0,
@@ -334,12 +336,12 @@
         }
 
         function promptEmailChange() {
-            let inputEmail = prompt("Enter your email address to load or sync your worldwide progress:", playerState.email);
+            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices:", playerState.email);
             if (inputEmail && inputEmail.includes('@')) {
                 playerState.email = inputEmail.trim();
                 localStorage.setItem('imperial_user_email', playerState.email);
                 loadUserData();
-                alert(`Account synced successfully for ${playerState.email}!`);
+                alert(`Worldwide account synced successfully for ${playerState.email}!`);
             }
         }
 
@@ -349,6 +351,8 @@
             if (saved) {
                 let parsed = JSON.parse(saved);
                 playerState.coins = parsed.coins !== undefined ? parsed.coins : 500;
+                playerState.level = parsed.level || 1;
+                playerState.questsCompleted = parsed.questsCompleted || 0;
                 playerState.triesRemaining = parsed.triesRemaining !== undefined ? parsed.triesRemaining : 2;
                 playerState.inventory = parsed.inventory || [];
                 playerState.collectedApples = parsed.collectedApples || 0;
@@ -368,6 +372,8 @@
         function updateHUD() {
             document.getElementById('ui-coins').innerText = playerState.coins;
             document.getElementById('ui-tries').innerText = playerState.triesRemaining;
+            document.getElementById('ui-level').innerText = playerState.level >= 2 ? "Level 2 (Veteran)" : "Level 1 (Adventurer)";
+            document.getElementById('ui-quests-done').innerText = playerState.questsCompleted;
             document.getElementById('ui-email').innerText = playerState.email;
             document.getElementById('ui-inventory').innerText = playerState.inventory.length > 0 ? playerState.inventory.join(', ') : 'Empty';
             
@@ -387,10 +393,10 @@
 
         function closeScrollAndStartGathering() {
             document.getElementById('questScrollModal').style.display = 'none';
-            playerState.missionStage = 'gathering';
+            playerState.missionStage = 'gathering-part1';
 
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection.mp4';
+            videoElement.src = 'save-collection-part1.mp4';
             videoElement.load();
             videoElement.play();
 
@@ -401,14 +407,13 @@
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
-                    "Whispering Woods: Click the glowing markers on screen to gather apples, herbs, coins, and wood!"
+                    "Whispering Woods (Part 1): Click glowing markers to gather required supplies and extra surplus inventory!"
                 </p>
             `;
             syncStorage();
         }
 
         function gatherItem(itemType, amount, element) {
-            // Play collecting sound effect and add burst glow animation
             let cSound = document.getElementById('collect-sound');
             if (cSound) {
                 cSound.currentTime = 0;
@@ -417,27 +422,51 @@
 
             element.classList.add('collected');
 
-            if (itemType === 'Apples' && playerState.collectedApples < 3) {
+            if (itemType === 'Apples') {
                 playerState.collectedApples += amount;
-            } else if (itemType === 'Glowing Herbs' && playerState.collectedHerbs < 4) {
+            } else if (itemType === 'Glowing Herbs') {
                 playerState.collectedHerbs += amount;
-            } else if (itemType === 'Gold Coins' && playerState.collectedCoins < 50) {
+            } else if (itemType === 'Gold Coins') {
                 playerState.collectedCoins += amount;
                 playerState.coins += amount;
-            } else if (itemType === 'Wood Sticks' && playerState.collectedWood < 3) {
+            } else if (itemType === 'Wood Sticks') {
                 playerState.collectedWood += amount;
             }
 
-            if(!playerState.inventory.includes(itemType)) playerState.inventory.push(itemType);
+            // Add surplus items to personal inventory
+            if(!playerState.inventory.includes(itemType + " (Surplus)")) {
+                playerState.inventory.push(itemType + " (Surplus)");
+            }
             updateHUD();
 
+            // Check if minimum quota (3 apples, 4 herbs, 50 coins, 3 wood) is met
             if (playerState.collectedApples >= 3 && playerState.collectedHerbs >= 4 && playerState.collectedCoins >= 50 && playerState.collectedWood >= 3) {
-                setTimeout(triggerWolfEncounter, 500);
+                setTimeout(transitionToPart2, 600);
             }
         }
 
-        function triggerWolfEncounter() {
+        function transitionToPart2() {
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
+            playerState.missionStage = 'gathering-part2';
+            syncStorage();
+
+            const videoElement = document.getElementById('traveler-video');
+            videoElement.src = 'save-collection-part2.mp4';
+            videoElement.load();
+            videoElement.play();
+
+            videoElement.onended = function() {
+                triggerWolfEncounter();
+            };
+
+            document.getElementById('overlay-dialogue-content').innerHTML = `
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
+                    "Quota secured with extra surplus! Heading deeper into the Whispering Woods..."
+                </p>
+            `;
+        }
+
+        function triggerWolfEncounter() {
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
                     ⚠️ Level 3 Armored Wolf spotted approaching! (Tries remaining: ${playerState.triesRemaining}/2) What will you do?
@@ -451,20 +480,26 @@
 
         function chooseHide() {
             playerState.missionStage = 'success';
+            playerState.questsCompleted++;
+            
+            let reward = 250;
+            playerState.coins += reward;
+
+            // Level up check: 5 total quests completed advances to Level 2
+            if (playerState.questsCompleted >= 5) {
+                playerState.level = 2;
+            }
             syncStorage();
 
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'mission-success.mp4';
             videoElement.load();
             videoElement.play();
-
-            let reward = 250;
-            playerState.coins += reward;
-            syncStorage();
+            videoElement.onended = null;
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #79ff9c; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
-                    ✦ Mission Success! Supplies delivered. Earned ${reward} Coins! ✦
+                    ✦ Mission Success! Delivered quota + surplus. Earned <b>${reward} Coins Compensation</b>! (Quests: ${playerState.questsCompleted}/5 | ${playerState.level >= 2 ? '⭐ LEVEL 2 UNLOCKED!' : 'Level 1'}) ✦
                 </p>
             `;
             let sSound = document.getElementById('success-sound');
@@ -480,6 +515,7 @@
             videoElement.src = 'mission-fail.mp4';
             videoElement.load();
             videoElement.play();
+            videoElement.onended = null;
 
             let fSound = document.getElementById('fail-sound');
             if(fSound) fSound.play().catch(e => {});
@@ -496,7 +532,7 @@
             } else {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
                     <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
-                        ❌ Mission Failed! You have exhausted your 2 free tries! Pay 30 Coins to reset and try again.
+                        ❌ Mission Failed! Exhausted 2 free tries! Pay 30 Coins to reset and try again.
                     </p>
                     <div class="choice-btn-group">
                         <button class="royal-btn" onclick="payCoinToRetry()" style="background: linear-gradient(to bottom, #b8860b, #573f05);">💰 Pay 30 Coins to Retry</button>
@@ -523,10 +559,10 @@
                 playerState.collectedCoins = 0;
                 playerState.collectedWood = 0;
                 syncStorage();
-                alert("30 Coins paid! Your tries have been reset to 2. Good luck!");
+                alert("30 Coins paid! Tries reset to 2. Good luck!");
                 closeScrollAndStartGathering();
             } else {
-                alert("You do not have enough coins! You need at least 30 coins in your wallet to retry.");
+                alert("You need at least 30 coins in your wallet to pay the retry fee.");
             }
         }
 
@@ -543,6 +579,7 @@
             videoElement.src = 'village-plea.mp4';
             videoElement.load();
             videoElement.play();
+            videoElement.onended = handleVideoEnded;
         }
 
         function handleVideoEnded() {
@@ -557,6 +594,8 @@
             let data = {
                 email: playerState.email,
                 coins: playerState.coins,
+                level: playerState.level,
+                questsCompleted: playerState.questsCompleted,
                 triesRemaining: playerState.triesRemaining,
                 inventory: playerState.inventory,
                 collectedApples: playerState.collectedApples,
