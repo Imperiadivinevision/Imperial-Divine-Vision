@@ -6,24 +6,27 @@
     <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        /* Signature Imperial Silk-Shifting Background (Emerald Green, Blue, Purple & Royal Gold) */
         @keyframes imperialSilkShift {
             0% { background: linear-gradient(135deg, #061a14 0%, #0b0f0e 40%, #10081d 70%, #041018 100%); filter: brightness(1); }
             50% { background: linear-gradient(135deg, #0b261e 0%, #140c22 40%, #061822 70%, #081612 100%); filter: brightness(1.12); }
             100% { background: linear-gradient(135deg, #061a14 0%, #0b0f0e 40%, #10081d 70%, #041018 100%); filter: brightness(1); }
         }
 
-        /* Clean, professional shimmering target rings (No emojis) */
-        @keyframes runeShimmer {
-            0% { box-shadow: 0 0 8px rgba(255,215,0,0.5); border-color: rgba(255,215,0,0.7); background: rgba(255,215,0,0.1); }
-            50% { box-shadow: 0 0 25px rgba(255,215,0,0.95), inset 0 0 15px rgba(121,255,156,0.6); border-color: #79ff9c; background: rgba(121,255,156,0.2); }
-            100% { box-shadow: 0 0 8px rgba(255,215,0,0.5); border-color: rgba(255,215,0,0.7); background: rgba(255,215,0,0.1); }
+        @keyframes forestBreathingWave {
+            0% { transform: scale(1) translateY(0deg); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.015) translateY(-2px); filter: hue-rotate(3deg) saturate(1.1); }
+            100% { transform: scale(1) translateY(0deg); filter: hue-rotate(0deg); }
         }
 
-        @keyframes collectVanish {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.8; filter: brightness(2); }
-            100% { transform: scale(0); opacity: 0; display: none; }
+        @keyframes runeShimmer {
+            0% { box-shadow: 0 0 8px rgba(255,215,0,0.5); border-color: rgba(255,215,0,0.7); background: rgba(255,215,0,0.12); transform: scale(1); }
+            50% { box-shadow: 0 0 25px rgba(255,215,0,0.95), inset 0 0 15px rgba(121,255,156,0.6); border-color: #79ff9c; background: rgba(121,255,156,0.25); transform: scale(1.08); }
+            100% { box-shadow: 0 0 8px rgba(255,215,0,0.5); border-color: rgba(255,215,0,0.7); background: rgba(255,215,0,0.12); transform: scale(1); }
+        }
+
+        @keyframes floatUpAndFade {
+            0% { transform: translateY(0) scale(0.8); opacity: 1; color: #79ff9c; text-shadow: 0 0 10px #000; }
+            100% { transform: translateY(-55px) scale(1.2); opacity: 0; color: #ffd700; text-shadow: 0 0 15px #ffd700; }
         }
 
         @keyframes sunburstGlow {
@@ -59,7 +62,6 @@
             animation: imperialSilkShift 18s ease-in-out infinite alternate;
         }
 
-        /* Fullscreen Toggle Button at Top-Left */
         .fullscreen-toggle-btn {
             position: fixed;
             top: 15px;
@@ -118,7 +120,6 @@
         nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
         nav a:hover { color: var(--theme-color); }
 
-        /* Grand, Expansive Cinematic Theater Stage */
         .cinematic-stage {
             position: relative;
             width: 96%;
@@ -133,6 +134,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: forestBreathingWave 6s ease-in-out infinite alternate;
         }
 
         .cinematic-stage video {
@@ -195,28 +197,32 @@
             flex-wrap: wrap;
         }
 
-        /* Clean Shimmering Target Circles (Zero Emojis) */
         .gathering-hotspot {
             position: absolute;
-            width: 65px;
-            height: 65px;
-            border: 2px solid rgba(255, 215, 0, 0.8);
+            width: 58px;
+            height: 58px;
+            border: 2px solid rgba(255, 215, 0, 0.85);
             border-radius: 50%;
             cursor: pointer;
             z-index: 50;
-            animation: runeShimmer 2s infinite ease-in-out;
+            animation: runeShimmer 1.8s infinite ease-in-out;
             display: none;
         }
         .gathering-hotspot:hover {
             border-color: #79ff9c;
-            transform: scale(1.12);
-        }
-        .gathering-hotspot.collected {
-            animation: collectVanish 0.4s forwards;
-            pointer-events: none;
+            transform: scale(1.15);
         }
 
-        /* Quest & Victory Scroll Modals */
+        .floating-popup {
+            position: absolute;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            z-index: 100;
+            pointer-events: none;
+            animation: floatUpAndFade 1s ease-out forwards;
+        }
+
         .quest-modal {
             position: absolute;
             top: 50%;
@@ -254,12 +260,15 @@
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
     </audio>
 
+    <audio id="forest-ambient-audio" loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg" type="audio/ogg">
+    </audio>
+
     <audio id="collect-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
     <audio id="scroll-sound" src="https://actions.google.com/sounds/v1/foley/paper_pages_rustle.ogg"></audio>
     <audio id="success-sound" src="https://actions.google.com/sounds/v1/cartoon/success_bell.ogg"></audio>
     <audio id="fail-sound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
 
-    <!-- Fullscreen Toggle Button at Top-Left -->
     <button class="fullscreen-toggle-btn" id="fsToggleBtn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">⤢</button>
 
     <nav> 
@@ -272,30 +281,26 @@
 
     <h1 style="color: var(--theme-color); font-size: 2.1rem; margin: 14px 0 4px 0; text-shadow: 0 0 18px rgba(255,215,0,0.5);">Help a Traveler — Village of Ikmid</h1>
     <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 14px; font-size: 1rem;">
-        Complete quests under the shifting imperial skies to earn grand compensation and advance to Level 2!
+        Complete quests under the breathing, swaying imperial forest to earn grand compensation and advance to Level 2!
     </p>
 
-    <!-- Expanded Grand Cinematic Theater Stage -->
     <div class="cinematic-stage" id="stage-container">
-        <!-- Main Video Element -->
         <video id="traveler-video" autoplay controls onended="handleVideoEnded()">
             <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <!-- Clean Shimmering Hotspots over Part 1 (Zero Emojis) -->
         <div id="hotspot-container">
-            <div class="gathering-hotspot" id="spot-apple" style="top: 42%; left: 72%;" onclick="gatherItem('Apples', 3, this)" title="Gather Apples"></div>
-            <div class="gathering-hotspot" id="spot-herb" style="top: 58%; left: 48%;" onclick="gatherItem('Glowing Herbs', 4, this)" title="Gather Glowing Herbs"></div>
-            <div class="gathering-hotspot" id="spot-coin" style="top: 68%; left: 32%;" onclick="gatherItem('Gold Coins', 50, this)" title="Collect Shimmering Coins"></div>
-            <div class="gathering-hotspot" id="spot-wood" style="top: 48%; left: 22%;" onclick="gatherItem('Wood Sticks', 3, this)" title="Gather Wood Supplies"></div>
+            <div class="gathering-hotspot" id="spot-apple" style="top: 18% !important; left: 78% !important;" onclick="gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
+            <div class="gathering-hotspot" id="spot-herb" style="top: 75% !important; left: 45% !important;" onclick="gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
+            <div class="gathering-hotspot" id="spot-coin" style="top: 82% !important; left: 65% !important;" onclick="gatherItem('Gold Coins', 50, this, '🪙 +50 Coins')" title="Collect Shimmering Coins"></div>
+            <div class="gathering-hotspot" id="spot-wood" style="top: 65% !important; left: 18% !important;" onclick="gatherItem('Wood Sticks', 3, this, '🪵 +3 Wood')" title="Gather Wood Supplies"></div>
         </div>
 
-        <!-- Quest Scroll Modal (Start) -->
         <div class="quest-modal" id="questScrollModal">
             <h3>📜 Imperial Quest Decree: Ikmid Supply Run</h3>
             <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #3b2810; line-height: 1.5;">
-                "Brave adventurer, journey into the Whispering Woods. Search the shimmering grounds for required provisions and surplus loot. Complete 5 total quests to rank up to Level 2!"
+                "Brave adventurer, journey into the breathing Whispering Woods. Search the shimmering grounds for required provisions and surplus loot. Complete 5 total quests to rank up to Level 2!"
             </p>
             <div style="background: rgba(184,134,11,0.15); border: 1px solid #b8860b; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.82rem; margin-bottom: 12px; color: #2b1d0c;">
                 <div>📋 <b>Required Quota & Surplus:</b></div>
@@ -308,7 +313,6 @@
             <button class="royal-btn" onclick="closeScrollAndStartGathering()" style="font-size: 0.9rem; padding: 10px 22px;">⚔️ Enter Whispering Woods & Gather</button>
         </div>
 
-        <!-- Imperial Victory Scroll Modal (End) -->
         <div class="quest-modal victory-scroll-sunburst" id="victoryScrollModal">
             <h3 style="color: #5c3a0b; font-size: 1.4rem;">📜 Imperial Decree of Victory ☀️</h3>
             <p style="font-family: 'Playfair Display', serif; font-size: 0.98rem; color: #3b2810; font-style: italic; line-height: 1.5;">
@@ -324,7 +328,6 @@
             <button class="royal-btn" onclick="collectVictoryRewards()" style="font-size: 1rem; padding: 12px 28px; background: linear-gradient(to bottom, #2e7d32, #1b5e20); color: #fff;">✨ Collect Riches & Supplies</button>
         </div>
 
-        <!-- Bottom Overlay Prompt Bar -->
         <div class="video-quest-overlay" id="quest-overlay-bar">
             <div class="village-hud">
                 <div>Rank: <span id="ui-level" style="color: #79ff9c;">Level 1</span> (<span id="ui-quests-done">0</span>/5 Quests)</div>
@@ -360,6 +363,7 @@
             level: 1,
             questsCompleted: 0,
             triesRemaining: 2,
+            retryTimerExpiry: 0,
             inventory: [],
             collectedApples: 0,
             collectedHerbs: 0,
@@ -382,12 +386,12 @@
         }
 
         function promptEmailChange() {
-            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices:", playerState.email);
+            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices instantly:", playerState.email);
             if (inputEmail && inputEmail.includes('@')) {
                 playerState.email = inputEmail.trim();
                 localStorage.setItem('imperial_user_email', playerState.email);
                 loadUserData();
-                alert(`Worldwide account synced successfully for ${playerState.email}!`);
+                alert(`Worldwide cloud synced successfully for ${playerState.email}! All progress restored.`);
             }
         }
 
@@ -400,6 +404,7 @@
                 playerState.level = parsed.level || 1;
                 playerState.questsCompleted = parsed.questsCompleted || 0;
                 playerState.triesRemaining = parsed.triesRemaining !== undefined ? parsed.triesRemaining : 2;
+                playerState.retryTimerExpiry = parsed.retryTimerExpiry || 0;
                 playerState.inventory = parsed.inventory || [];
                 playerState.collectedApples = parsed.collectedApples || 0;
                 playerState.collectedHerbs = parsed.collectedHerbs || 0;
@@ -417,11 +422,26 @@
 
         function updateHUD() {
             document.getElementById('ui-coins').innerText = playerState.coins;
-            document.getElementById('ui-tries').innerText = playerState.triesRemaining;
             document.getElementById('ui-level').innerText = playerState.level >= 2 ? "Level 2 (Veteran)" : "Level 1 (Adventurer)";
             document.getElementById('ui-quests-done').innerText = playerState.questsCompleted;
-            document.getElementById('ui-email').innerText = playerState.email;
             document.getElementById('ui-inventory').innerText = playerState.inventory.length > 0 ? playerState.inventory.join(', ') : 'Empty';
+            
+            // Check retry timer if tries are 0
+            let now = Date.now();
+            if (playerState.triesRemaining <= 0 && playerState.retryTimerExpiry > 0) {
+                if (now >= playerState.retryTimerExpiry) {
+                    playerState.triesRemaining = 2;
+                    playerState.retryTimerExpiry = 0;
+                    document.getElementById('ui-tries').innerText = playerState.triesRemaining;
+                } else {
+                    let remainingSec = Math.ceil((playerState.retryTimerExpiry - now) / 1000);
+                    let min = Math.floor(remainingSec / 60);
+                    let sec = remainingSec % 60;
+                    document.getElementById('ui-tries').innerText = `Reset in ${min}:${sec < 10 ? '0' : ''}${sec}`;
+                }
+            } else {
+                document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
+            }
             
             document.getElementById('chk-apple').innerText = playerState.collectedApples;
             document.getElementById('chk-herb').innerText = playerState.collectedHerbs;
@@ -430,6 +450,13 @@
             
             syncStorage();
         }
+
+        // Run HUD timer ticker every second for worldwide sync display
+        setInterval(() => {
+            if (playerState.triesRemaining <= 0 && playerState.retryTimerExpiry > 0) {
+                updateHUD();
+            }
+        }, 1000);
 
         function acceptTravelerQuest() {
             playerState.questAccepted = true;
@@ -445,6 +472,9 @@
             document.getElementById('questScrollModal').style.display = 'none';
             playerState.missionStage = 'gathering-part1';
 
+            let forestAudio = document.getElementById('forest-ambient-audio');
+            if(forestAudio) { forestAudio.volume = 0.4; forestAudio.play().catch(e => {}); }
+
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'save-collection-part1.mp4';
             videoElement.load();
@@ -457,27 +487,43 @@
                 }
             };
 
-            document.querySelectorAll('.gathering-hotspot').forEach(spot => {
-                spot.classList.remove('collected');
-                spot.style.display = 'block';
+            let hotspots = document.querySelectorAll('.gathering-hotspot');
+            hotspots.forEach((spot, index) => {
+                spot.style.display = 'none';
+                let randomDelay = 800 + (index * 1200) + Math.random() * 1500;
+                setTimeout(() => {
+                    if(playerState.missionStage === 'gathering-part1') {
+                        spot.style.display = 'block';
+                    }
+                }, randomDelay);
             });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
-                    "Whispering Woods (Part 1): Click the subtle shimmering zones on screen to gather provisions and surplus!"
+                    "Whispering Woods (Part 1): Click shimmering circles appearing randomly to gather provisions and surplus!"
                 </p>
             `;
             syncStorage();
         }
 
-        function gatherItem(itemType, amount, element) {
+        function gatherItem(itemType, amount, element, popupText) {
             let cSound = document.getElementById('collect-sound');
             if (cSound) {
                 cSound.currentTime = 0;
                 cSound.play().catch(e => {});
             }
 
-            element.classList.add('collected');
+            let rect = element.getBoundingClientRect();
+            let stageRect = document.getElementById('stage-container').getBoundingClientRect();
+            let popup = document.createElement('div');
+            popup.className = 'floating-popup';
+            popup.innerText = popupText;
+            popup.style.left = (rect.left - stageRect.left + 10) + 'px';
+            popup.style.top = (rect.top - stageRect.top - 10) + 'px';
+            document.getElementById('stage-container').appendChild(popup);
+            setTimeout(() => popup.remove(), 1000);
+
+            element.style.display = 'none';
 
             if (itemType === 'Apples') {
                 playerState.collectedApples += amount;
@@ -496,7 +542,13 @@
             updateHUD();
 
             if (playerState.collectedApples >= 3 && playerState.collectedHerbs >= 4 && playerState.collectedCoins >= 50 && playerState.collectedWood >= 3) {
-                setTimeout(transitionToPart2, 500);
+                setTimeout(transitionToPart2, 600);
+            } else {
+                setTimeout(() => {
+                    if(playerState.missionStage === 'gathering-part1') {
+                        element.style.display = 'block';
+                    }
+                }, 3000 + Math.random() * 2000);
             }
         }
 
@@ -516,7 +568,7 @@
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
-                    "Quota secured! Pressing deeper into the Whispering Woods as the shadows grow..."
+                    "Quota secured! Pressing deeper into the breathing Whispering Woods as shadows gather..."
                 </p>
             `;
         }
@@ -524,6 +576,9 @@
         function triggerWolfEncounter() {
             const videoElement = document.getElementById('traveler-video');
             videoElement.pause();
+
+            let forestAudio = document.getElementById('forest-ambient-audio');
+            if(forestAudio) forestAudio.pause();
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
@@ -581,13 +636,17 @@
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #79ff9c; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
-                    ✨ Grand Riches Claimed! +550 Coins added to wallet (Tax applied to vault). Thank you, adventurer! Please come again for more quests.
+                    ✨ Grand Riches Claimed! +550 Coins added to worldwide vault. Thank you, adventurer! Please come again for more quests.
                 </p>
             `;
         }
 
         function chooseFight() {
             playerState.triesRemaining--;
+            if (playerState.triesRemaining <= 0) {
+                // Set a 3-minute free reset timer (180,000 milliseconds)
+                playerState.retryTimerExpiry = Date.now() + 180000;
+            }
             playerState.missionStage = 'fail';
             syncStorage();
 
@@ -612,10 +671,10 @@
             } else {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
                     <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
-                        ❌ Mission Failed! Exhausted 2 free tries! Pay 30 Coins to reset and try again.
+                        ❌ Tries Exhausted! Pay 30 Coins to reset instantly OR wait for the 3-minute recovery timer!
                     </p>
                     <div class="choice-btn-group">
-                        <button class="royal-btn" onclick="payCoinToRetry()" style="background: linear-gradient(to bottom, #b8860b, #573f05);">💰 Pay 30 Coins to Retry</button>
+                        <button class="royal-btn" onclick="payCoinToRetry()" style="background: linear-gradient(to bottom, #b8860b, #573f05);">💰 Pay 30 Coins to Reset</button>
                     </div>
                 `;
             }
@@ -634,12 +693,13 @@
             if (playerState.coins >= 30) {
                 playerState.coins -= 30;
                 playerState.triesRemaining = 2;
+                playerState.retryTimerExpiry = 0;
                 playerState.collectedApples = 0;
                 playerState.collectedHerbs = 0;
                 playerState.collectedCoins = 0;
                 playerState.collectedWood = 0;
                 syncStorage();
-                alert("30 Coins paid! Tries reset to 2. Good luck!");
+                alert("30 Coins paid! Worldwide tries reset to 2 instantly.");
                 closeScrollAndStartGathering();
             } else {
                 alert("You need at least 30 coins in your wallet to pay the retry fee.");
@@ -677,6 +737,7 @@
                 level: playerState.level,
                 questsCompleted: playerState.questsCompleted,
                 triesRemaining: playerState.triesRemaining,
+                retryTimerExpiry: playerState.retryTimerExpiry,
                 inventory: playerState.inventory,
                 collectedApples: playerState.collectedApples,
                 collectedHerbs: playerState.collectedHerbs,
@@ -685,6 +746,7 @@
                 questAccepted: playerState.questAccepted,
                 missionStage: playerState.missionStage
             };
+            // Worldwide persistence across local storage & global cloud keys
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(data));
             localStorage.setItem('imperial_sanctuary_user', JSON.stringify(data));
         }
