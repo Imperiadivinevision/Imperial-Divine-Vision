@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
+    <title>Help a Traveler — Village of HIkmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <!-- Firebase SDKs for Worldwide Cloud Sync -->
@@ -129,7 +129,7 @@
             margin: 4px;
             box-shadow: 0 4px 14px rgba(0,0,0,0.6);
         }
-        .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 20px #79ffe6; }
+        .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 20px #79ffe6; transform: scale(1.05); }
 
         .big-start-btn {
             background: radial-gradient(circle, #79ffe6, #0077b6);
@@ -195,7 +195,7 @@
     <h1 style="color: var(--theme-color); font-size: 1.7rem; margin: 10px 0 2px 0; text-align: center;">Help a Traveler — Village of Ikmid</h1>
     
     <div class="sync-bar">
-        <input type="email" id="userEmailSync" placeholder="Enter email for sync..." onchange="updatePlayerEmail()">
+        <input type="email" id="userEmailSync" placeholder="Enter email for worldwide sync..." onchange="updatePlayerEmail()">
         <button class="royal-btn" onclick="playClick(); syncToCloud();" style="padding: 6px 12px; font-size: 0.75rem;">☁️ Sync Cloud</button>
         <span id="syncStatus" style="font-size: 0.8rem; color: #ffd700; margin-left: 6px;"></span>
     </div>
@@ -235,6 +235,16 @@
     </div>
 
     <script>
+        // Bulletproof Firebase Database Connection with Fallback
+        let dbRef = null;
+        try {
+            const firebaseConfig = { databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com" };
+            if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+            dbRef = firebase.database().ref('imperial_traveler_players');
+        } catch(e) {
+            console.log("Using local storage sync fallback.");
+        }
+
         function playClick() {
             let sound = document.getElementById('click-sound');
             if (sound) { sound.currentTime = 0; sound.play().catch(e => {}); }
@@ -257,6 +267,7 @@
 
         function initTravelerExperience() {
             document.getElementById('userEmailSync').value = playerState.email;
+            loadFromCloud();
             speakText("Help a traveler. Our village traveler pleads for assistance. Do you accept this mission?");
         }
 
@@ -265,33 +276,90 @@
             if (inputEmail && inputEmail.includes('@')) {
                 playerState.email = inputEmail;
                 localStorage.setItem('imperial_user_email', inputEmail);
+                loadFromCloud();
             }
         }
 
         function syncToCloud() {
             updatePlayerEmail();
+            document.getElementById('syncStatus').innerText = "Syncing...";
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(playerState));
-            document.getElementById('syncStatus').innerText = "✅ Saved!";
+
+            if (dbRef) {
+                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
+                dbRef.child(safeKey).set(playerState).then(() => {
+                    document.getElementById('syncStatus').innerText = "✅ Saved Worldwide!";
+                    speakText("Cloud progress saved successfully!");
+                }).catch(err => {
+                    document.getElementById('syncStatus').innerText = "✅ Saved locally!";
+                });
+            } else {
+                document.getElementById('syncStatus').innerText = "✅ Saved locally!";
+            }
         }
 
-        // STEP 1: Accept Quest -> Plays village-thank-you.mp4[cite: 6]
-        function acceptQuest() {
-            speakText("Thank you, we are expecting your safe return!");
+        function loadFromCloud() {
+            let localSaved = localStorage.getItem('imperial_user_' + playerState.email);
+            if (localSaved) {
+                try {
+                    let parsed = JSON.parse(localSaved);
+                    playerState = parsed;
+                    document.getElementById('ui-coins').innerText = playerState.coins;
+                    document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
+                } catch(e){}
+            }
 
+            if (dbRef) {
+                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
+                dbRef.child(safeKey).once('value').then(snapshot => {
+                    let data = snapshot.val();
+                    if (data) {
+                        playerState = data;
+                        document.getElementById('ui-coins').innerText = playerState.coins;
+                        document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
+                    }
+                }).catch(err => {});
+            }
+        }
+
+        // Helper to smoothly load and play any video file without freezing
+        function playCinematicVideo(filename, onEndedCallback) {
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'village-thank-you.mp4';[cite: 6]
+            videoElement.pause();
+            videoElement.src = filename;
             videoElement.load();
-            videoElement.play().catch(e => console.log("Autoplay restriction"));
+            
+            let playPromise = videoElement.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay policy restricted, enabling muted fallback for:", filename);
+                    videoElement.muted = true;
+                    videoElement.play();
+                });
+            }
 
             videoElement.onended = function() {
-                showQuestBriefingModal();
+                if (typeof onEndedCallback === 'function') {
+                    onEndedCallback();
+                }
             };
+        }
+
+        // STEP 1: Accept Quest -> Plays village-thank-you.mp4 safely[cite: 6]
+        function acceptQuest() {
+            playClick();
+            speakText("Thank you, we are expecting your safe return!");
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 10px 0; font-size: 1rem;">
                     “Thank you! We are expecting your safe return.”
                 </p>
             `;
+
+            playCinematicVideo('village-thank-you.mp4', () => {[cite: 6]
+                showQuestBriefingModal();
+            });
+            syncToCloud();
         }
 
         // STEP 2: Show Quest Modal & Reading
@@ -313,21 +381,16 @@
         function startPartOne() {
             speakText("Starting forest journey. Collect your supplies as the video plays.");
             
-            const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection-part1.mp4';[cite: 7]
-            videoElement.load();
-            videoElement.play().catch(e => console.log("Autoplay restriction"));
-
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
-            videoElement.onended = function() {
+            playCinematicVideo('save-collection-part1.mp4', () => {[cite: 7]
                 if (playerState.score >= 3.0) {
                     showStageTwoPrompt();
                 } else {
                     speakText("Video finished! Replaying Part 1 to finish gathering supplies.");
-                    videoElement.play();
+                    startPartOne();
                 }
-            };
+            });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
@@ -387,16 +450,11 @@
         function startStageTwo() {
             speakText("Proceeding to Stage Two. Traveling deeper into the Whispering Woods.");
             
-            const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection-part2.mp4';[cite: 7]
-            videoElement.load();
-            videoElement.play();
-
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
-            videoElement.onended = function() {
+            playCinematicVideo('save-collection-part2.mp4', () => {[cite: 7]
                 triggerWolfChoice();
-            };
+            });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
@@ -424,23 +482,16 @@
         // STEP 7: Safe Return (mission-success.mp4) vs Fight (mission-fail.mp4)[cite: 7]
         function chooseHide() {
             speakText("Staying safe and hiding. Returning home safely.");
-            const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-success.mp4';[cite: 7]
-            videoElement.load();
-            videoElement.play();
-            videoElement.onended = function() {
+            playCinematicVideo('mission-success.mp4', () => {[cite: 7]
+                syncToCloud();
                 alert("🎉 Mission Success! Returned home safely. Riches secured.");
                 window.location.href = "room-youth.html";
-            };
+            });
         }
 
         function chooseFight() {
             speakText("Mission failed! The wolf overpowered the adventurer.");
-            const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-fail.mp4';[cite: 7]
-            videoElement.load();
-            videoElement.play();
-            videoElement.onended = function() {
+            playCinematicVideo('mission-fail.mp4', () => {[cite: 7]
                 document.getElementById('overlay-dialogue-content').innerHTML = `
                     <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
                         ❌ Mission Failed!
@@ -449,7 +500,7 @@
                         <button class="royal-btn" onclick="playClick(); location.reload();">🔄 Try Again</button>
                     </div>
                 `;
-            };
+            });
         }
 
         function declineQuest() {
