@@ -131,6 +131,17 @@
         }
         .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 20px #79ffe6; }
 
+        .big-start-btn {
+            background: radial-gradient(circle, #79ffe6, #0077b6);
+            color: #051912;
+            border: 3px solid #ffd700;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            box-shadow: 0 0 25px rgba(121,255,230,0.8);
+            animation: emeraldRuneShimmer 2s infinite ease-in-out;
+        }
+
         .gathering-hotspot {
             position: absolute;
             width: 75px;
@@ -232,8 +243,7 @@
         let playerState = {
             email: localStorage.getItem('imperial_user_email') || 'traveler@imperial.vision',
             coins: 550,
-            score: 0.0,
-            currentStage: 'plea'
+            score: 0.0
         };
 
         function speakText(text) {
@@ -264,32 +274,64 @@
             document.getElementById('syncStatus').innerText = "✅ Saved!";
         }
 
+        // STEP 1: Accept Quest -> Plays village-thank-you.mp4[cite: 6]
         function acceptQuest() {
-            let briefing = "Quest accepted. Entering the Whispering Woods. Watch the video and collect supplies continuously.";
+            speakText("Thank you, we are expecting your safe return!");
+
+            const videoElement = document.getElementById('traveler-video');
+            videoElement.src = 'village-thank-you.mp4';[cite: 6]
+            videoElement.load();
+            videoElement.play().catch(e => console.log("Autoplay restriction"));
+
+            videoElement.onended = function() {
+                showQuestBriefingModal();
+            };
+
+            document.getElementById('overlay-dialogue-content').innerHTML = `
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 10px 0; font-size: 1rem;">
+                    “Thank you! We are expecting your safe return.”
+                </p>
+            `;
+        }
+
+        // STEP 2: Show Quest Modal & Reading
+        function showQuestBriefingModal() {
+            let briefing = "Quest briefing: Enter the Whispering Woods. Collect apples, glowing herbs, gold coins, and wood sticks. Click close quest and start game when ready.";
             speakText(briefing);
 
-            playerState.currentStage = 'part1';
+            document.getElementById('overlay-dialogue-content').innerHTML = `
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 8px 0; font-size: 0.9rem;">
+                    📜 **Quest Briefing:** Enter the Whispering Woods. Collect apples, glowing herbs, gold coins, and wood sticks throughout your journey.
+                </p>
+                <div class="choice-btn-group">
+                    <button class="royal-btn big-start-btn" onclick="playClick(); startPartOne();">⭐ Close Quest & Start Game ⭐</button>
+                </div>
+            `;
+        }
+
+        // STEP 3: Start Part 1 Forest Video & Hotspots (save-collection-part1.mp4)[cite: 7]
+        function startPartOne() {
+            speakText("Starting forest journey. Collect your supplies as the video plays.");
+            
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'save-collection-part1.mp4';[cite: 7]
             videoElement.load();
             videoElement.play().catch(e => console.log("Autoplay restriction"));
 
-            // Let Part 1 play completely to the end
+            document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
+
             videoElement.onended = function() {
                 if (playerState.score >= 3.0) {
-                    showStageTwoButton();
+                    showStageTwoPrompt();
                 } else {
-                    speakText("Video finished, but you need more supplies! Replaying Part 1 to gather more.");
+                    speakText("Video finished! Replaying Part 1 to finish gathering supplies.");
                     videoElement.play();
                 }
             };
 
-            // Show gathering hotspots during video playback
-            document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
-
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
-                    "Part 1 Playing: Watch the video and click the shimmering square zones repeatedly to gather supplies!"
+                    "Part 1 Playing: Watch the video and click shimmering zones to collect supplies (+0.1)!"
                 </p>
             `;
         }
@@ -305,7 +347,6 @@
             document.getElementById('stage-container').appendChild(popup);
             setTimeout(() => popup.remove(), 1000);
 
-            // Temporarily hide hotspot and respawn for more clicking
             element.style.display = 'none';
             setTimeout(() => { element.style.display = 'block'; }, 2000);
 
@@ -319,38 +360,38 @@
 
             syncToCloud();
 
-            // If score reaches quota and video has ended (or is ready)
             if (playerState.score >= 3.0) {
                 let vid = document.getElementById('traveler-video');
                 if (vid.ended) {
-                    showStageTwoButton();
+                    showStageTwoPrompt();
                 }
             }
         }
 
-        function showStageTwoButton() {
+        // STEP 4: Go to Next Stage prompt
+        function showStageTwoPrompt() {
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
-            speakText("Part One complete! You have gathered enough supplies. Click Continue to Stage Two.");
-            
+            speakText("Part One complete! Click go to next stage to proceed.");
+
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
-                    ✨ Part 1 Complete! Gear and provisions secure.
+                    ✨ Part 1 Complete! All gear and provisions secure.
                 </p>
                 <div class="choice-btn-group">
-                    <button class="royal-btn" onclick="playClick(); startStageTwo();">▶ Continue to Stage 2</button>
+                    <button class="royal-btn" onclick="playClick(); startStageTwo();">▶ Go to Next Stage</button>
                 </div>
             `;
         }
 
+        // STEP 5: Start Part 2 (save-collection-part2.mp4)[cite: 7]
         function startStageTwo() {
             speakText("Proceeding to Stage Two. Traveling deeper into the Whispering Woods.");
-            playerState.currentStage = 'part2';
+            
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'save-collection-part2.mp4';[cite: 7]
             videoElement.load();
             videoElement.play();
 
-            // Keep hotspots active during Part 2 for extra personal supplies
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
             videoElement.onended = function() {
@@ -359,34 +400,36 @@
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
-                    "Stage Two Playing: Continue collecting bonus supplies while traveling deeper..."
+                    "Stage Two Playing: Continue collecting bonus supplies..."
                 </p>
             `;
         }
 
+        // STEP 6: Wolf Encounter Choices
         function triggerWolfChoice() {
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
-            speakText("An armored wolf approaches on the path! What is your choice? Stay hiding or fight?");
-            
+            speakText("An armored wolf approaches on the path! Do you want to fight the wolf or stay safe and hide?");
+
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
                     ⚠️ An armored wolf blocks the path! Make your tactical choice:
                 </p>
                 <div class="choice-btn-group">
-                    <button class="royal-btn" onclick="playClick(); chooseHide();" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">🛡️ Stay Hiding (Safe)</button>
+                    <button class="royal-btn" onclick="playClick(); chooseHide();" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">🛡️ Stay Safe / Hide</button>
                     <button class="royal-btn" onclick="playClick(); chooseFight();" style="background: linear-gradient(to bottom, #cc0000, #660000);">⚔️ Fight the Wolf</button>
                 </div>
             `;
         }
 
+        // STEP 7: Safe Return (mission-success.mp4) vs Fight (mission-fail.mp4)[cite: 7]
         function chooseHide() {
-            speakText("Mission success! Returning safely to the village.");
+            speakText("Staying safe and hiding. Returning home safely.");
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'mission-success.mp4';[cite: 7]
             videoElement.load();
             videoElement.play();
             videoElement.onended = function() {
-                alert("🎉 Mission Success! Riches secured.");
+                alert("🎉 Mission Success! Returned home safely. Riches secured.");
                 window.location.href = "room-youth.html";
             };
         }
