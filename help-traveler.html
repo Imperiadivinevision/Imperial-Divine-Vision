@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
-    <!-- Firebase App & Realtime Database SDKs for Worldwide Cloud Sync -->
+    <!-- Firebase Cloud SDKs for Worldwide Cross-Device Sync -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
@@ -19,7 +19,7 @@
 
         @keyframes forestBreathingWave {
             0% { transform: scale(1) translateY(0deg); filter: hue-rotate(0deg); }
-            50% { transform: scale(1.015) translateY(-2px); filter: hue-rotate(3deg) saturate(1.1); }
+            50% { transform: scale(1.012) translateY(-1px); filter: hue-rotate(2deg) saturate(1.08); }
             100% { transform: scale(1) translateY(0deg); filter: hue-rotate(0deg); }
         }
 
@@ -47,7 +47,7 @@
         }
 
         :root {
-            --panel-bg: rgba(10, 18, 15, 0.92);
+            --panel-bg: rgba(10, 18, 15, 0.94);
             --theme-color: #79ffe6;
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
@@ -121,6 +121,7 @@
             width: 100%;
             box-sizing: border-box;
             backdrop-filter: blur(10px);
+            flex-wrap: wrap;
         }
         nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
         nav a:hover { color: var(--theme-color); }
@@ -129,8 +130,9 @@
             position: relative;
             width: 96%;
             max-width: 1550px;
-            height: 82vh;
-            margin: 18px auto;
+            height: 76vh;
+            min-height: 450px;
+            margin: 14px auto;
             border: 4px ridge var(--theme-color);
             border-radius: 16px;
             overflow: hidden;
@@ -155,7 +157,7 @@
             width: 100%;
             background: linear-gradient(to top, rgba(4, 14, 11, 0.98), rgba(4, 14, 11, 0.86));
             border-top: 2px solid var(--theme-color);
-            padding: 16px 28px;
+            padding: 14px 22px;
             box-sizing: border-box;
             text-align: center;
             backdrop-filter: blur(10px);
@@ -167,12 +169,12 @@
             justify-content: space-around;
             background: rgba(0, 45, 28, 0.9);
             border: 1px solid var(--theme-color);
-            padding: 8px 12px;
+            padding: 8px 10px;
             border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
         .village-hud span { color: #79ffe6; font-weight: bold; }
 
@@ -180,9 +182,9 @@
             background: linear-gradient(to bottom, #00b4d8, #0077b6);
             color: #fff;
             border: 1px solid #79ffe6;
-            padding: 10px 20px;
+            padding: 9px 18px;
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
@@ -197,15 +199,15 @@
         .choice-btn-group {
             display: flex;
             justify-content: center;
-            gap: 14px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 8px;
             flex-wrap: wrap;
         }
 
         .gathering-hotspot {
             position: absolute;
-            width: 80px;
-            height: 55px;
+            width: 75px;
+            height: 50px;
             border: 2px solid rgba(121, 255, 230, 0.85);
             border-radius: 8px;
             cursor: pointer;
@@ -222,7 +224,7 @@
             position: absolute;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             z-index: 100;
             pointer-events: none;
             animation: floatUpAndFade 1s ease-out forwards;
@@ -233,12 +235,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 85%;
-            max-width: 560px;
+            width: 88%;
+            max-width: 520px;
             background: linear-gradient(135deg, #f4ecd8 0%, #e6d5b8 100%);
             color: #2b1d0c;
             border: 4px ridge #0077b6;
-            padding: 26px;
+            padding: 22px;
             border-radius: 12px;
             z-index: 200;
             text-align: center;
@@ -254,7 +256,7 @@
             font-family: 'Cinzel', serif;
             color: #0077b6;
             border-bottom: 2px solid #00b4d8;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             margin-top: 0;
         }
     </style>
@@ -284,17 +286,18 @@
         <a href="help-traveler.html">🤝 Help a Traveler</a>
     </nav>
 
-    <h1 style="color: var(--theme-color); font-size: 2.1rem; margin: 14px 0 4px 0; text-shadow: 0 0 18px rgba(121,255,230,0.5);">Help a Traveler — Village of Ikmid</h1>
-    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 14px; font-size: 1rem;">
+    <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 12px 0 4px 0; text-align: center; text-shadow: 0 0 18px rgba(121,255,230,0.5);">Help a Traveler — Village of Ikmid</h1>
+    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem; text-align: center;">
         Complete quests under the breathing, swaying imperial forest to earn grand compensation and advance to Level 2!
     </p>
 
     <div class="cinematic-stage" id="stage-container">
-        <video id="traveler-video" autoplay controls onended="handleVideoEnded()">
+        <video id="traveler-video" autoplay controls playsinline onended="handleVideoEnded()">
             <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
+        <!-- Randomized Shimmering Square Target Zones (Apples on top right, grass on bottom, sides) -->
         <div id="hotspot-container">
             <div class="gathering-hotspot" id="spot-apple" style="top: 15% !important; left: 75% !important;" onclick="gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
             <div class="gathering-hotspot" id="spot-herb" style="top: 72% !important; left: 42% !important;" onclick="gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
@@ -304,33 +307,33 @@
 
         <div class="quest-modal" id="questScrollModal">
             <h3>📜 Imperial Quest Decree: Ikmid Supply Run</h3>
-            <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #2b1d0c; line-height: 1.5;">
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem; color: #2b1d0c; line-height: 1.4;">
                 "Brave adventurer, journey into the breathing Whispering Woods. Search the shimmering square zones near the upper apple trees and forest floor for required provisions and surplus loot. Complete 5 total quests to rank up to Level 2!"
             </p>
-            <div style="background: rgba(0,180,216,0.12); border: 1px solid #0077b6; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.82rem; margin-bottom: 12px; color: #2b1d0c;">
+            <div style="background: rgba(0,180,216,0.12); border: 1px solid #0077b6; padding: 8px; border-radius: 6px; text-align: left; font-size: 0.8rem; margin-bottom: 10px; color: #2b1d0c;">
                 <div>📋 <b>Required Quota & Surplus:</b></div>
                 <div>• Apples: <span id="chk-apple">0</span> / 3 (+ Surplus)</div>
                 <div>• Glowing Herbs: <span id="chk-herb">0</span> / 4 (+ Surplus)</div>
                 <div>• Gold Coins: <span id="chk-coin">0</span> / 50</div>
                 <div>• Wood Sticks: <span id="chk-wood">0</span> / 3 (+ Surplus)</div>
-                <div style="margin-top: 6px; color: #0077b6; font-weight: bold;">🎁 Grand Compensation: 500 Gold Coins + 50 Imperial Vault Coins</div>
+                <div style="margin-top: 4px; color: #0077b6; font-weight: bold;">🎁 Grand Compensation: 500 Gold Coins + 50 Imperial Vault Coins</div>
             </div>
-            <button class="royal-btn" onclick="closeScrollAndStartGathering()" style="font-size: 0.9rem; padding: 10px 22px;">⚔️ Enter Whispering Woods & Gather</button>
+            <button class="royal-btn" onclick="closeScrollAndStartGathering()" style="font-size: 0.85rem; padding: 9px 20px;">⚔️ Enter Whispering Woods & Gather</button>
         </div>
 
         <div class="quest-modal victory-scroll-sunburst" id="victoryScrollModal">
-            <h3 style="color: #0077b6; font-size: 1.4rem;">📜 Imperial Decree of Victory ☀️</h3>
-            <p style="font-family: 'Playfair Display', serif; font-size: 0.98rem; color: #2b1d0c; font-style: italic; line-height: 1.5;">
+            <h3 style="color: #0077b6; font-size: 1.3rem;">📜 Imperial Decree of Victory ☀️</h3>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.92rem; color: #2b1d0c; font-style: italic; line-height: 1.4;">
                 "To the valiant Guardian of Ikmid: Your mission in the Whispering Woods was a legendary success. You outsmarted the armored beasts, delivered all provisions, and secured magnificent riches for your valor."
             </p>
-            <div style="background: rgba(0,180,216,0.15); border: 2px ridge #0077b6; padding: 12px; border-radius: 6px; text-align: left; font-size: 0.88rem; margin-bottom: 15px; color: #2b1d0c;">
+            <div style="background: rgba(0,180,216,0.15); border: 2px ridge #0077b6; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.85rem; margin-bottom: 12px; color: #2b1d0c;">
                 <div>✨ <b>Main Compensation:</b> <span style="color: #0077b6; font-weight: bold;">+500 Gold Coins</span></div>
                 <div>🏛️ <b>Imperial Vault Tax Bonus:</b> <span style="color: #0077b6; font-weight: bold;">+50 Tax Coins</span></div>
                 <div>🎒 <b>Surplus Loot Secured:</b> Added to Personal Inventory</div>
                 <div>⭐ <b>Progress:</b> Completed Quests: <span id="victory-quests-count" style="font-weight: bold;">1</span> / 5</div>
-                <div id="victory-rank-notice" style="margin-top: 6px; color: #006622; font-weight: bold; display: none;">🎉 Rank Up Achieved: Welcome to Level 2!</div>
+                <div id="victory-rank-notice" style="margin-top: 4px; color: #006622; font-weight: bold; display: none;">🎉 Rank Up Achieved: Welcome to Level 2!</div>
             </div>
-            <button class="royal-btn" onclick="collectVictoryRewards()" style="font-size: 1rem; padding: 12px 28px; background: linear-gradient(to bottom, #2e7d32, #1b5e20); color: #fff;">✨ Collect Riches & Supplies</button>
+            <button class="royal-btn" onclick="collectVictoryRewards()" style="font-size: 0.9rem; padding: 10px 24px; background: linear-gradient(to bottom, #2e7d32, #1b5e20); color: #fff;">✨ Collect Riches & Supplies</button>
         </div>
 
         <div class="video-quest-overlay" id="quest-overlay-bar">
@@ -342,7 +345,7 @@
             </div>
             
             <div id="overlay-dialogue-content">
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 4px 0; font-size: 0.9rem;">
                     "Our community needs provisions. Gather supplies, avoid the Level 3 wolves, and earn your grand compensation!"
                 </p>
                 <div class="choice-btn-group">
@@ -353,7 +356,7 @@
         </div>
     </div>
 
-    <div class="footer-controls" style="margin-top: 18px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
+    <div class="footer-controls" style="margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;">
         <button class="royal-btn" onclick="replayPlea()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Plea</button>
         <button class="royal-btn" onclick="promptEmailChange()" style="background: linear-gradient(to bottom, #0066cc, #003366);">📧 Sync Account Email</button>
         <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ World Map</a>
@@ -398,7 +401,7 @@
         }
 
         function promptEmailChange() {
-            let inputEmail = prompt("Enter your email address to log in and sync your worldwide progress across all devices instantly:", playerState.email);
+            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices instantly:", playerState.email);
             if (inputEmail && inputEmail.includes('@')) {
                 playerState.email = inputEmail.trim().toLowerCase().replace(/[.#$\[\]]/g, "_");
                 localStorage.setItem('imperial_user_email', playerState.email);
@@ -407,7 +410,6 @@
             }
         }
 
-        // --- WORLDWIDE CLOUD SYNC FUNCTIONS ---
         function sanitizeEmailKey(email) {
             return email.trim().toLowerCase().replace(/[.#$\[\]]/g, "_");
         }
@@ -430,11 +432,10 @@
                     playerState.questAccepted = data.questAccepted || false;
                     playerState.missionStage = data.missionStage || 'plea';
                 } else {
-                    syncStorageToCloud(); // Save initial state if new player
+                    syncStorageToCloud();
                 }
                 updateHUD();
             }).catch((error) => {
-                console.log("Cloud load fallback to local storage:", error);
                 loadLocalFallback();
             });
         }
@@ -541,7 +542,7 @@
             });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
                     "Whispering Woods (Part 1): Click the shimmering square zones appearing randomly to gather provisions and surplus!"
                 </p>
             `;
@@ -609,7 +610,7 @@
             };
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
                     "Quota secured! Pressing deeper into the breathing Whispering Woods as shadows gather..."
                 </p>
             `;
@@ -623,7 +624,7 @@
             if(forestAudio) forestAudio.pause();
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
+                <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 4px 0; font-size: 0.9rem;">
                     ⚠️ Level 3 Armored Wolf spotted approaching! (Tries remaining: ${playerState.triesRemaining}/2) What will you do?
                 </p>
                 <div class="choice-btn-group">
@@ -643,7 +644,7 @@
             syncStorageToCloud();
 
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-success.mp4';
+            videoElement.src = 'mission-success.mp4'; // Triggers return, meeting lady, and coin payout!
             videoElement.load();
             videoElement.play();
             videoElement.onended = null;
@@ -663,7 +664,7 @@
             }, 2500);
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
                     ✦ Mission Success! Unfurling Radiant Imperial Victory Scroll... ✦
                 </p>
             `;
@@ -677,7 +678,7 @@
             updateHUD();
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
                     ✨ Grand Riches Claimed! +550 Coins added to worldwide vault. Thank you, adventurer! Please come again for more quests.
                 </p>
             `;
@@ -686,7 +687,7 @@
         function chooseFight() {
             playerState.triesRemaining--;
             if (playerState.triesRemaining <= 0) {
-                playerState.retryTimerExpiry = Date.now() + 180000; // 3-minute timer
+                playerState.retryTimerExpiry = Date.now() + 180000; // 3-minute recovery timer
             }
             playerState.missionStage = 'fail';
             syncStorageToCloud();
@@ -702,7 +703,7 @@
 
             if (playerState.triesRemaining > 0) {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
-                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
+                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 4px 0; font-size: 0.9rem;">
                         ❌ Mission Failed! Level 1 Adventurer is too weak against a Level 3 Wolf! Tries left: ${playerState.triesRemaining}.
                     </p>
                     <div class="choice-btn-group">
@@ -711,7 +712,7 @@
                 `;
             } else {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
-                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
+                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 4px 0; font-size: 0.9rem;">
                         ❌ Tries Exhausted! Pay 30 Coins to reset instantly OR wait for the 3-minute recovery timer!
                     </p>
                     <div class="choice-btn-group">
@@ -749,7 +750,7 @@
 
         function declineTravelerQuest() {
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
                     "May the road treat you well, traveler."
                 </p>
             `;
@@ -788,14 +789,12 @@
                 missionStage: playerState.missionStage
             };
             
-            // Save locally as immediate backup
             let userKey = sanitizeEmailKey(playerState.email);
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(data));
             localStorage.setItem('imperial_sanctuary_user', JSON.stringify(data));
 
-            // Save globally to Firebase Cloud Database so it's accessible worldwide on any device or link
             dbRef.child(userKey).set(data).catch((err) => {
-                console.log("Cloud sync note: running offline mode via local storage.");
+                console.log("Cloud sync note: offline fallback active.");
             });
         }
     </script>
