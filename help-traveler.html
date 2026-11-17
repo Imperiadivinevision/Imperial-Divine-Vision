@@ -74,14 +74,14 @@
             backdrop-filter: blur(10px);
             flex-wrap: wrap;
         }
-        nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         nav a:hover { color: var(--theme-color); }
 
         .cinematic-stage {
             position: relative;
             width: 96%;
             max-width: 1500px;
-            height: 72vh;
+            height: 70vh;
             min-height: 450px;
             margin: 15px auto;
             border: 4px ridge var(--theme-color);
@@ -132,9 +132,9 @@
             background: linear-gradient(to bottom, #00b4d8, #0077b6);
             color: #fff;
             border: 1px solid #79ffe6;
-            padding: 9px 18px;
+            padding: 10px 20px;
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
@@ -178,15 +178,15 @@
         }
 
         .sync-bar {
-            margin: 8px auto 15px auto;
+            margin: 6px auto 12px auto;
             text-align: center;
-            font-size: 0.85srem;
+            font-size: 0.85rem;
         }
         .sync-bar input {
-            padding: 6px 12px;
+            padding: 7px 14px;
             border-radius: 6px;
             border: 1px solid var(--theme-color);
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             color: white;
             font-family: 'Cinzel', serif;
             width: 260px;
@@ -197,22 +197,26 @@
 </head>
 <body onload="initTravelerExperience()">
 
+    <!-- Audio element for button click feedback -->
+    <audio id="click-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+
     <nav> 
-        <a href="room-youth.html">🏛️ Hub Menu</a>
-        <a href="map.html">🗺️ World Map</a>
-        <a href="shop.html">🛒 Market Stalls</a>
-        <a href="help-traveler.html" style="color: var(--theme-color);">🤝 Help a Traveler</a>
+        <a href="room-youth.html" onclick="playClick()">🏛️ Hub Menu</a>
+        <a href="map.html" onclick="playClick()">🗺️ World Map</a>
+        <a href="shop.html" onclick="playClick()">🛒 Market Stalls</a>
+        <a href="help-traveler.html" style="color: var(--theme-color);" onclick="playClick()">🤝 Help a Traveler</a>
     </nav>
 
-    <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 12px 0 2px 0; text-align: center; text-shadow: 0 0 18px rgba(121,255,230,0.5);">Help a Traveler — Village of Ikmid</h1>
+    <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 10px 0 2px 0; text-align: center; text-shadow: 0 0 18px rgba(121,255,230,0.5);">Help a Traveler — Village of Ikmid</h1>
     
     <div class="sync-bar">
         <input type="email" id="userEmailSync" placeholder="Enter email for worldwide sync..." onchange="updatePlayerEmail()">
-        <button class="royal-btn" onclick="syncToCloud()" style="padding: 6px 14px; font-size: 0.75rem;">☁️ Sync Cloud</button>
+        <button class="royal-btn" onclick="playClick(); syncToCloud();" style="padding: 7px 14px; font-size: 0.8rem;">☁️ Sync Cloud</button>
+        <span id="syncStatus" style="margin-left: 8px; font-size: 0.8rem; color: #ffd700;"></span>
     </div>
 
     <div class="cinematic-stage" id="stage-container">
-        <!-- Main Video Pipeline with Sound Enabled -->
+        <!-- Main Video Pipeline -->
         <video id="traveler-video" autoplay controls playsinline>
             <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -220,10 +224,10 @@
 
         <!-- Gathering Hotspots -->
         <div id="hotspot-container">
-            <div class="gathering-hotspot" id="spot-apple" style="top: 15% !important; left: 75% !important;" onclick="gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
-            <div class="gathering-hotspot" id="spot-herb" style="top: 72% !important; left: 42% !important;" onclick="gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
-            <div class="gathering-hotspot" id="spot-coin" style="top: 80% !important; left: 62% !important;" onclick="gatherItem('Gold Coins', 50, this, '🪙 +50 Coins')" title="Collect Shimmering Coins"></div>
-            <div class="gathering-hotspot" id="spot-wood" style="top: 60% !important; left: 15% !important;" onclick="gatherItem('Wood Sticks', 3, this, '🪵 +3 Wood')" title="Gather Wood Supplies"></div>
+            <div class="gathering-hotspot" id="spot-apple" style="top: 15% !important; left: 75% !important;" onclick="playClick(); gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
+            <div class="gathering-hotspot" id="spot-herb" style="top: 72% !important; left: 42% !important;" onclick="playClick(); gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
+            <div class="gathering-hotspot" id="spot-coin" style="top: 80% !important; left: 62% !important;" onclick="playClick(); gatherItem('Gold Coins', 50, this, '🪙 +50 Coins')" title="Collect Shimmering Coins"></div>
+            <div class="gathering-hotspot" id="spot-wood" style="top: 60% !important; left: 15% !important;" onclick="playClick(); gatherItem('Wood Sticks', 3, this, '🪵 +3 Wood')" title="Gather Wood Supplies"></div>
         </div>
 
         <div class="video-quest-overlay" id="quest-overlay-bar">
@@ -239,17 +243,32 @@
                     "Our village traveler pleads for assistance. Do you accept this mission to gather forest supplies?"
                 </p>
                 <div class="choice-btn-group" id="actionButtonContainer">
-                    <button class="royal-btn" onclick="acceptQuest()">✓ Accept Quest</button>
-                    <button class="royal-btn" onclick="declineQuest()" style="background: linear-gradient(to bottom, #cc0000, #660000);">✗ Decline</button>
+                    <button class="royal-btn" onclick="playClick(); acceptQuest();">✓ Accept Quest</button>
+                    <button class="royal-btn" onclick="playClick(); declineQuest();" style="background: linear-gradient(to bottom, #cc0000, #660000);">✗ Decline</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const firebaseConfig = { databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com" };
-        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-        const dbRef = firebase.database().ref('imperial_traveler_players');
+        // Click sound feedback function
+        function playClick() {
+            let sound = document.getElementById('click-sound');
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(e => {});
+            }
+        }
+
+        // Safe Firebase initialization with local fallback protection
+        let dbRef = null;
+        try {
+            const firebaseConfig = { databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com" };
+            if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+            dbRef = firebase.database().ref('imperial_traveler_players');
+        } catch (e) {
+            console.log("Running in local storage fallback mode.");
+        }
 
         let playerState = {
             email: localStorage.getItem('imperial_user_email') || 'traveler@imperial.vision',
@@ -269,8 +288,7 @@
                 let utterance = new SpeechSynthesisUtterance(text);
                 utterance.rate = 0.95;
                 utterance.pitch = 1.0;
-                // Slight delay so it never clashes instantly with video load
-                setTimeout(() => window.speechSynthesis.speak(utterance), 300);
+                setTimeout(() => window.speechSynthesis.speak(utterance), 250);
             }
         }
 
@@ -291,25 +309,50 @@
 
         function syncToCloud() {
             updatePlayerEmail();
-            let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
-            dbRef.child(safeKey).set(playerState).then(() => {
-                alert("✨ Worldwide progress successfully synced to cloud vault for " + playerState.email + "!");
-            }).catch(err => {
-                alert("Saved locally! Cloud sync ready.");
-            });
+            document.getElementById('syncStatus').innerText = "Syncing...";
+            
+            // Always save locally first so it's instantaneous
+            localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(playerState));
+
+            if (dbRef) {
+                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
+                dbRef.child(safeKey).set(playerState).then(() => {
+                    document.getElementById('syncStatus').innerText = "✅ Saved!";
+                    speakText("Email and progress saved successfully!");
+                }).catch(err => {
+                    document.getElementById('syncStatus').innerText = "✅ Saved locally!";
+                });
+            } else {
+                document.getElementById('syncStatus').innerText = "✅ Saved locally!";
+                speakText("Email saved successfully!");
+            }
         }
 
         function loadFromCloud() {
-            let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
-            dbRef.child(safeKey).once('value').then(snapshot => {
-                let data = snapshot.val();
-                if (data) {
-                    playerState = data;
-                    document.getElementById('ui-coins').innerText = playerState.coins;
-                    document.getElementById('ui-inventory').innerText = playerState.inventory.length ? playerState.inventory.join(', ') : 'Empty';
-                    document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
-                }
-            });
+            let localSaved = localStorage.getItem('imperial_user_' + playerState.email);
+            if (localSaved) {
+                try {
+                    playerState = JSON.parse(localSaved);
+                    updateHUD();
+                } catch(e){}
+            }
+
+            if (dbRef) {
+                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
+                dbRef.child(safeKey).once('value').then(snapshot => {
+                    let data = snapshot.val();
+                    if (data) {
+                        playerState = data;
+                        updateHUD();
+                    }
+                }).catch(err => {});
+            }
+        }
+
+        function updateHUD() {
+            document.getElementById('ui-coins').innerText = playerState.coins;
+            document.getElementById('ui-inventory').innerText = playerState.inventory.length ? playerState.inventory.join(', ') : 'Empty';
+            document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
         }
 
         function acceptQuest() {
@@ -317,9 +360,9 @@
             speakText(briefing);
 
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection-part1.mp4';[cite: 7]
+            videoElement.src = 'save-collection-part1.mp4';
             videoElement.load();
-            videoElement.play();
+            videoElement.play().catch(err => console.log("Video autoplay restricted:", err));
 
             videoElement.onended = function() {
                 videoElement.currentTime = 0;
@@ -358,9 +401,7 @@
                 playerState.inventory.push(itemType + " (Surplus)");
             }
 
-            document.getElementById('ui-coins').innerText = playerState.coins;
-            document.getElementById('ui-inventory').innerText = playerState.inventory.join(', ');
-
+            updateHUD();
             speakText("Collected " + itemType);
             syncToCloud();
 
@@ -372,7 +413,7 @@
         function transitionToPart2() {
             speakText("Quota secured! Pressing deeper into the woods. Watch out for the Level 3 Armored Wolf!");
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection-part2.mp4';[cite: 7]
+            videoElement.src = 'save-collection-part2.mp4';
             videoElement.load();
             videoElement.play();
 
@@ -391,8 +432,8 @@
                     ⚠️ Level 3 Armored Wolf spotted! What is your tactical choice?
                 </p>
                 <div class="choice-btn-group">
-                    <button class="royal-btn" onclick="chooseHide()" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">🛡️ Hide & Let Wolf Pass (Safe)</button>
-                    <button class="royal-btn" onclick="chooseFight()" style="background: linear-gradient(to bottom, #cc0000, #660000);">⚔️ Draw Sword & Fight</button>
+                    <button class="royal-btn" onclick="playClick(); chooseHide();" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">🛡️ Hide & Let Wolf Pass (Safe)</button>
+                    <button class="royal-btn" onclick="playClick(); chooseFight();" style="background: linear-gradient(to bottom, #cc0000, #660000);">⚔️ Draw Sword & Fight</button>
                 </div>
             `;
         }
@@ -400,12 +441,12 @@
         function chooseHide() {
             speakText("Mission success! Returning safely to the village with grand compensation.");
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-success.mp4';[cite: 7]
+            videoElement.src = 'mission-success.mp4';
             videoElement.load();
             videoElement.play();
             videoElement.onended = function() {
                 playerState.coins += 550;
-                document.getElementById('ui-coins').innerText = playerState.coins;
+                updateHUD();
                 syncToCloud();
                 alert("🎉 Mission Success! +550 Coins added to your worldwide vault!");
                 window.location.href = "room-youth.html";
@@ -416,7 +457,7 @@
             playerState.triesRemaining--;
             speakText("Mission failed! The traveler is overpowered by the Level 3 wolf.");
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-fail.mp4';[cite: 7]
+            videoElement.src = 'mission-fail.mp4';
             videoElement.load();
             videoElement.play();
             videoElement.onended = function() {
@@ -426,7 +467,7 @@
                         ❌ Mission Failed! Tries left: ${playerState.triesRemaining}.
                     </p>
                     <div class="choice-btn-group">
-                        <button class="royal-btn" onclick="location.reload()">🔄 Try Again</button>
+                        <button class="royal-btn" onclick="playClick(); location.reload();">🔄 Try Again</button>
                     </div>
                 `;
                 syncToCloud();
