@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help a Traveler — Village of HIkmid | Imperial Divine Vision</title>
+    <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <!-- Firebase SDKs for Worldwide Cloud Sync -->
@@ -131,15 +131,28 @@
         }
         .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 20px #79ffe6; transform: scale(1.05); }
 
-        .big-start-btn {
-            background: radial-gradient(circle, #79ffe6, #0077b6);
-            color: #051912;
-            border: 3px solid #ffd700;
-            padding: 16px 32px;
-            font-size: 1.1rem;
-            border-radius: 40px;
-            box-shadow: 0 0 25px rgba(121,255,230,0.8);
-            animation: emeraldRuneShimmer 2s infinite ease-in-out;
+        .imperial-scroll {
+            background: linear-gradient(135deg, #f5f2eb, #e6dec5);
+            color: #1a1a1a;
+            border: 4px ridge #c5a059;
+            border-radius: 12px;
+            padding: 16px 20px;
+            max-width: 650px;
+            margin: 0 auto;
+            box-shadow: 0 0 35px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+        .imperial-scroll h3 {
+            margin: 0 0 8px 0;
+            color: #0b2e1b;
+            font-family: 'Cinzel', serif;
+        }
+        .imperial-scroll p {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin: 0 0 12px 0;
+            color: #2c2c2c;
         }
 
         .gathering-hotspot {
@@ -207,19 +220,19 @@
             Your browser does not support the video tag.
         </video>
 
-        <!-- Gathering Hotspots -->
+        <!-- Gathering Hotspots with Randomized Values -->
         <div id="hotspot-container">
-            <div class="gathering-hotspot" id="spot-apple" style="top: 18% !important; left: 72% !important;" onclick="playClick(); gatherItem('Apples', 0.1, this, '🍎 +0.1 Apple')" title="Gather Apple"></div>
-            <div class="gathering-hotspot" id="spot-herb" style="top: 70% !important; left: 40% !important;" onclick="playClick(); gatherItem('Glowing Herbs', 0.1, this, '🌿 +0.1 Herb')" title="Gather Herb"></div>
-            <div class="gathering-hotspot" id="spot-coin" style="top: 78% !important; left: 65% !important;" onclick="playClick(); gatherItem('Gold Coins', 1, this, '🪙 +1 Coin')" title="Collect Coins"></div>
-            <div class="gathering-hotspot" id="spot-wood" style="top: 58% !important; left: 18% !important;" onclick="playClick(); gatherItem('Wood Sticks', 0.1, this, '🪵 +0.1 Wood')" title="Gather Wood"></div>
+            <div class="gathering-hotspot" id="spot-apple" style="top: 18% !important; left: 72% !important;" onclick="playClick(); gatherItem('Apples', 1.0, this, '🍎 +1.0 Apple')" title="Gather Apple (+1.0)"></div>
+            <div class="gathering-hotspot" id="spot-herb" style="top: 70% !important; left: 40% !important;" onclick="playClick(); gatherItem('Glowing Herbs', 0.5, this, '🌿 +0.5 Herb')" title="Gather Herb (+0.5)"></div>
+            <div class="gathering-hotspot" id="spot-coin" style="top: 78% !important; left: 65% !important;" onclick="playClick(); gatherItem('Gold Coins', 2.0, this, '🪙 +2.0 Coins')" title="Collect Coins (+2.0)"></div>
+            <div class="gathering-hotspot" id="spot-wood" style="top: 58% !important; left: 18% !important;" onclick="playClick(); gatherItem('Wood Sticks', 0.5, this, '🪵 +0.5 Wood')" title="Gather Wood (+0.5)"></div>
         </div>
 
         <div class="video-quest-overlay" id="quest-overlay-bar">
             <div class="village-hud">
                 <div>Rank: <span id="ui-level">Level 1</span></div>
                 <div>Wallet: <span id="ui-coins">550</span> 🪙</div>
-                <div>Supplies Score: <span id="ui-score">0.0</span> / 3.0 🌿</div>
+                <div>Supplies Score: <span id="ui-score">0.0</span> / 5.0 🌿</div>
             </div>
             
             <div id="overlay-dialogue-content">
@@ -235,7 +248,6 @@
     </div>
 
     <script>
-        // Bulletproof Firebase Database Connection with Fallback
         let dbRef = null;
         try {
             const firebaseConfig = { databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com" };
@@ -253,7 +265,8 @@
         let playerState = {
             email: localStorage.getItem('imperial_user_email') || 'traveler@imperial.vision',
             coins: 550,
-            score: 0.0
+            score: 0.0,
+            stage: 'start'
         };
 
         function speakText(text) {
@@ -266,6 +279,10 @@
         }
 
         function initTravelerExperience() {
+            let savedEmail = localStorage.getItem('imperial_user_email');
+            if (savedEmail) {
+                playerState.email = savedEmail;
+            }
             document.getElementById('userEmailSync').value = playerState.email;
             loadFromCloud();
             speakText("Help a traveler. Our village traveler pleads for assistance. Do you accept this mission?");
@@ -280,16 +297,18 @@
             }
         }
 
+        // Automatic background saving on every action
         function syncToCloud() {
             updatePlayerEmail();
             document.getElementById('syncStatus').innerText = "Syncing...";
+            
+            // Always save to browser memory instantly
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(playerState));
 
             if (dbRef) {
                 let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
                 dbRef.child(safeKey).set(playerState).then(() => {
                     document.getElementById('syncStatus').innerText = "✅ Saved Worldwide!";
-                    speakText("Cloud progress saved successfully!");
                 }).catch(err => {
                     document.getElementById('syncStatus').innerText = "✅ Saved locally!";
                 });
@@ -299,22 +318,33 @@
         }
 
         function loadFromCloud() {
-            let localSaved = localStorage.getItem('imperial_user_' + playerState.email);
+            let storageKey = 'imperial_user_' + playerState.email;
+            let localSaved = localStorage.getItem(storageKey);
+            
             if (localSaved) {
                 try {
                     let parsed = JSON.parse(localSaved);
-                    playerState = parsed;
-                    document.getElementById('ui-coins').innerText = playerState.coins;
-                    document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
-                } catch(e){}
+                    playerState.coins = parsed.coins !== undefined ? parsed.coins : 550;
+                    playerState.score = parsed.score !== undefined ? parseFloat(parsed.score) : 0.0;
+                    playerState.stage = parsed.stage || 'start';
+                } catch(e){
+                    playerState.score = 0.0;
+                }
+            } else {
+                playerState.score = 0.0;
             }
+
+            document.getElementById('ui-coins').innerText = playerState.coins;
+            document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
 
             if (dbRef) {
                 let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
                 dbRef.child(safeKey).once('value').then(snapshot => {
                     let data = snapshot.val();
                     if (data) {
-                        playerState = data;
+                        playerState.coins = data.coins !== undefined ? data.coins : 550;
+                        playerState.score = data.score !== undefined ? parseFloat(data.score) : 0.0;
+                        playerState.stage = data.stage || 'start';
                         document.getElementById('ui-coins').innerText = playerState.coins;
                         document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
                     }
@@ -322,7 +352,6 @@
             }
         }
 
-        // Non-blocking, bulletproof cinematic video loader
         function playCinematicVideo(filename, onEndedCallback) {
             const videoElement = document.getElementById('traveler-video');
             if (!videoElement) return;
@@ -338,9 +367,8 @@
                 let playPromise = videoElement.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(error => {
-                        console.log("Autoplay restricted, forcing muted playback:", error);
                         videoElement.muted = true;
-                        videoElement.play().catch(e => console.log("Muted play fallback active"));
+                        videoElement.play().catch(e => {});
                     });
                 }
 
@@ -352,10 +380,11 @@
             }, 50);
         }
 
-        // STEP 1: Accept Quest -> Plays village-thank-you.mp4 safely
         function acceptQuest() {
             playClick();
-            speakText("Thank you, we are expecting your safe return!");
+            speakText("Thank you! We are expecting your safe return.");
+            playerState.stage = 'thank_you';
+            syncToCloud();
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 10px 0; font-size: 1rem;">
@@ -364,35 +393,37 @@
             `;
 
             playCinematicVideo('village-thank-you.mp4', () => {
-                showQuestBriefingModal();
+                showQuestScrollModal();
             });
-            
-            syncToCloud();
         }
 
-        // STEP 2: Show Quest Modal & Reading
-        function showQuestBriefingModal() {
-            let briefing = "Quest briefing: Enter the Whispering Woods. Collect apples, glowing herbs, gold coins, and wood sticks. Click close quest and start game when ready.";
-            speakText(briefing);
-
+        function showQuestScrollModal() {
+            playerState.stage = 'scroll';
+            syncToCloud();
+            let questText = "Enter the Whispering Woods. Gather forest supplies including apples (+1.0), glowing herbs (+0.5), gold coins (+2.0), and wood sticks (+0.5) to reach a total score of 5.0 before proceeding deeper.";
+            
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 8px 0; font-size: 0.9rem;">
-                    📜 **Quest Briefing:** Enter the Whispering Woods. Collect apples, glowing herbs, gold coins, and wood sticks throughout your journey.
-                </p>
-                <div class="choice-btn-group">
-                    <button class="royal-btn big-start-btn" onclick="playClick(); startPartOne();">⭐ Close Quest & Start Game ⭐</button>
+                <div class="imperial-scroll">
+                    <h3>📜 Imperial Quest Scroll</h3>
+                    <p>${questText}</p>
+                    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                        <button class="royal-btn" onclick="playClick(); speakText('${questText}');">🔊 Read Quest</button>
+                        <button class="royal-btn" onclick="playClick(); startPartOne();" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">⭐ Close Quest & Start Game ⭐</button>
+                    </div>
                 </div>
             `;
+            speakText("Quest scroll received. Click read quest or close quest and start game.");
         }
 
-        // STEP 3: Start Part 1 Forest Video & Hotspots (save-collection-part1.mp4)
         function startPartOne() {
             speakText("Starting forest journey. Collect your supplies as the video plays.");
+            playerState.stage = 'part1';
+            syncToCloud();
             
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
             playCinematicVideo('save-collection-part1.mp4', () => {
-                if (playerState.score >= 3.0) {
+                if (playerState.score >= 5.0) {
                     showStageTwoPrompt();
                 } else {
                     speakText("Video finished! Replaying Part 1 to finish gathering supplies.");
@@ -402,7 +433,7 @@
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
-                    "Part 1 Playing: Watch the video and click shimmering zones to collect supplies (+0.1)!"
+                    "Part 1 Playing: Watch the video and click shimmering zones to collect supplies (+0.5, +1.0, +2.0)!"
                 </p>
             `;
         }
@@ -419,19 +450,21 @@
             setTimeout(() => popup.remove(), 1000);
 
             element.style.display = 'none';
-            setTimeout(() => { element.style.display = 'block'; }, 2000);
+            setTimeout(() => { element.style.display = 'block'; }, 1500);
 
+            if (isNaN(playerState.score)) { playerState.score = 0.0; }
             playerState.score = parseFloat((playerState.score + amount).toFixed(1));
             document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
 
             if (itemType === 'Gold Coins') {
-                playerState.coins += 10;
+                playerState.coins += 20;
                 document.getElementById('ui-coins').innerText = playerState.coins;
             }
 
+            // Automatically sync score and progress on every single item gathered!
             syncToCloud();
 
-            if (playerState.score >= 3.0) {
+            if (playerState.score >= 5.0) {
                 let vid = document.getElementById('traveler-video');
                 if (vid.ended) {
                     showStageTwoPrompt();
@@ -439,8 +472,9 @@
             }
         }
 
-        // STEP 4: Go to Next Stage prompt
         function showStageTwoPrompt() {
+            playerState.stage = 'stage2_ready';
+            syncToCloud();
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
             speakText("Part One complete! Click go to next stage to proceed.");
 
@@ -454,9 +488,10 @@
             `;
         }
 
-        // STEP 5: Start Part 2 (save-collection-part2.mp4)
         function startStageTwo() {
             speakText("Proceeding to Stage Two. Traveling deeper into the Whispering Woods.");
+            playerState.stage = 'part2';
+            syncToCloud();
             
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
@@ -466,13 +501,14 @@
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
-                    "Stage Two Playing: Continue collecting bonus supplies..."
+                    "Stage Two Playing: Continue collecting bonus supplies for your journey..."
                 </p>
             `;
         }
 
-        // STEP 6: Wolf Encounter Choices
         function triggerWolfChoice() {
+            playerState.stage = 'wolf_choice';
+            syncToCloud();
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
             speakText("An armored wolf approaches on the path! Do you want to fight the wolf or stay safe and hide?");
 
@@ -487,11 +523,11 @@
             `;
         }
 
-        // STEP 7: Safe Return (mission-success.mp4) vs Fight (mission-fail.mp4)
         function chooseHide() {
             speakText("Staying safe and hiding. Returning home safely.");
+            playerState.stage = 'success';
+            syncToCloud();
             playCinematicVideo('mission-success.mp4', () => {
-                syncToCloud();
                 alert("🎉 Mission Success! Returned home safely. Riches secured.");
                 window.location.href = "room-youth.html";
             });
@@ -499,6 +535,8 @@
 
         function chooseFight() {
             speakText("Mission failed! The wolf overpowered the adventurer.");
+            playerState.stage = 'fail';
+            syncToCloud();
             playCinematicVideo('mission-fail.mp4', () => {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
                     <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
