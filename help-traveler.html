@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help a Traveler — Village of HIkmid | Imperial Divine Vision</title>
+    <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <!-- Firebase SDKs for Worldwide Cloud Sync -->
@@ -322,30 +322,37 @@
             }
         }
 
-        // Helper to smoothly load and play any video file without freezing
+        // Non-blocking, bulletproof cinematic video loader
         function playCinematicVideo(filename, onEndedCallback) {
             const videoElement = document.getElementById('traveler-video');
-            videoElement.pause();
-            videoElement.src = filename;
-            videoElement.load();
-            
-            let playPromise = videoElement.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Autoplay policy restricted, enabling muted fallback for:", filename);
-                    videoElement.muted = true;
-                    videoElement.play();
-                });
-            }
+            if (!videoElement) return;
 
-            videoElement.onended = function() {
-                if (typeof onEndedCallback === 'function') {
-                    onEndedCallback();
+            videoElement.pause();
+            videoElement.removeAttribute('src');
+            videoElement.load();
+
+            setTimeout(() => {
+                videoElement.src = filename;
+                videoElement.load();
+                
+                let playPromise = videoElement.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay restricted, forcing muted playback:", error);
+                        videoElement.muted = true;
+                        videoElement.play().catch(e => console.log("Muted play fallback active"));
+                    });
                 }
-            };
+
+                videoElement.onended = function() {
+                    if (typeof onEndedCallback === 'function') {
+                        onEndedCallback();
+                    }
+                };
+            }, 50);
         }
 
-        // STEP 1: Accept Quest -> Plays village-thank-you.mp4 safely[cite: 6]
+        // STEP 1: Accept Quest -> Plays village-thank-you.mp4 safely
         function acceptQuest() {
             playClick();
             speakText("Thank you, we are expecting your safe return!");
@@ -356,9 +363,10 @@
                 </p>
             `;
 
-            playCinematicVideo('village-thank-you.mp4', () => {[cite: 6]
+            playCinematicVideo('village-thank-you.mp4', () => {
                 showQuestBriefingModal();
             });
+            
             syncToCloud();
         }
 
@@ -377,13 +385,13 @@
             `;
         }
 
-        // STEP 3: Start Part 1 Forest Video & Hotspots (save-collection-part1.mp4)[cite: 7]
+        // STEP 3: Start Part 1 Forest Video & Hotspots (save-collection-part1.mp4)
         function startPartOne() {
             speakText("Starting forest journey. Collect your supplies as the video plays.");
             
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
-            playCinematicVideo('save-collection-part1.mp4', () => {[cite: 7]
+            playCinematicVideo('save-collection-part1.mp4', () => {
                 if (playerState.score >= 3.0) {
                     showStageTwoPrompt();
                 } else {
@@ -446,13 +454,13 @@
             `;
         }
 
-        // STEP 5: Start Part 2 (save-collection-part2.mp4)[cite: 7]
+        // STEP 5: Start Part 2 (save-collection-part2.mp4)
         function startStageTwo() {
             speakText("Proceeding to Stage Two. Traveling deeper into the Whispering Woods.");
             
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
-            playCinematicVideo('save-collection-part2.mp4', () => {[cite: 7]
+            playCinematicVideo('save-collection-part2.mp4', () => {
                 triggerWolfChoice();
             });
 
@@ -479,10 +487,10 @@
             `;
         }
 
-        // STEP 7: Safe Return (mission-success.mp4) vs Fight (mission-fail.mp4)[cite: 7]
+        // STEP 7: Safe Return (mission-success.mp4) vs Fight (mission-fail.mp4)
         function chooseHide() {
             speakText("Staying safe and hiding. Returning home safely.");
-            playCinematicVideo('mission-success.mp4', () => {[cite: 7]
+            playCinematicVideo('mission-success.mp4', () => {
                 syncToCloud();
                 alert("🎉 Mission Success! Returned home safely. Riches secured.");
                 window.location.href = "room-youth.html";
@@ -491,7 +499,7 @@
 
         function chooseFight() {
             speakText("Mission failed! The wolf overpowered the adventurer.");
-            playCinematicVideo('mission-fail.mp4', () => {[cite: 7]
+            playCinematicVideo('mission-fail.mp4', () => {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
                     <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
                         ❌ Mission Failed!
