@@ -292,12 +292,12 @@
     </p>
 
     <div class="cinematic-stage" id="stage-container">
-        <video id="traveler-video" autoplay controls playsinline onended="handleVideoEnded()">
+        <video id="traveler-video" autoplay controls playsinline muted onended="handleVideoEnded()">
             <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <!-- Randomized Shimmering Square Target Zones (Apples on top right, grass on bottom, sides) -->
+        <!-- Shimmering Square Target Zones -->
         <div id="hotspot-container">
             <div class="gathering-hotspot" id="spot-apple" style="top: 15% !important; left: 75% !important;" onclick="gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
             <div class="gathering-hotspot" id="spot-herb" style="top: 72% !important; left: 42% !important;" onclick="gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
@@ -365,7 +365,6 @@
     </div>
 
     <script>
-        // --- FIREBASE WORLDWIDE CLOUD CONFIGURATION ---
         const firebaseConfig = {
             databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com"
         };
@@ -523,8 +522,9 @@
             videoElement.load();
             videoElement.play();
 
+            // Loop Part 1 smoothly in background while gathering instead of black screen
             videoElement.onended = function() {
-                if (playerState.collectedApples < 3 || playerState.collectedHerbs < 4 || playerState.collectedCoins < 50 || playerState.collectedWood < 3) {
+                if (playerState.missionStage === 'gathering-part1') {
                     videoElement.currentTime = 0;
                     videoElement.play();
                 }
@@ -591,7 +591,7 @@
                     if(playerState.missionStage === 'gathering-part1') {
                         element.style.display = 'block';
                     }
-                }, 3000 + Math.random() * 2000);
+                }, 2500 + Math.random() * 1500);
             }
         }
 
@@ -644,7 +644,7 @@
             syncStorageToCloud();
 
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-success.mp4'; // Triggers return, meeting lady, and coin payout!
+            videoElement.src = 'mission-success.mp4';
             videoElement.load();
             videoElement.play();
             videoElement.onended = null;
@@ -687,7 +687,7 @@
         function chooseFight() {
             playerState.triesRemaining--;
             if (playerState.triesRemaining <= 0) {
-                playerState.retryTimerExpiry = Date.now() + 180000; // 3-minute recovery timer
+                playerState.retryTimerExpiry = Date.now() + 180000;
             }
             playerState.missionStage = 'fail';
             syncStorageToCloud();
