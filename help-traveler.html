@@ -6,29 +6,34 @@
     <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        @keyframes cosmicGlow {
-            0% { filter: brightness(1) saturate(1); }
-            50% { filter: brightness(1.1) saturate(1.2); }
-            100% { filter: brightness(1) saturate(1); }
+        @keyframes imperialSilkShift {
+            0% { background: linear-gradient(135deg, #061a14 0%, #0b0f0e 40%, #10081d 70%, #041018 100%); filter: brightness(1); }
+            50% { background: linear-gradient(135deg, #0b261e 0%, #140c22 40%, #061822 70%, #081612 100%); filter: brightness(1.12); }
+            100% { background: linear-gradient(135deg, #061a14 0%, #0b0f0e 40%, #10081d 70%, #041018 100%); filter: brightness(1); }
         }
 
-        @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 0 10px #ffd700; }
-            50% { transform: scale(1.25); box-shadow: 0 0 30px #ffd700, 0 0 50px #79ff9c; background-color: #79ff9c; }
-            100% { transform: scale(1); box-shadow: 0 0 10px #ffd700; }
+        @keyframes forestBreathingWave {
+            0% { transform: scale(1) translateY(0deg); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.015) translateY(-2px); filter: hue-rotate(3deg) saturate(1.1); }
+            100% { transform: scale(1) translateY(0deg); filter: hue-rotate(0deg); }
         }
 
-        @keyframes collectBurst {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.6); opacity: 0.8; filter: brightness(1.5); }
-            100% { transform: scale(0); opacity: 0; }
+        /* Light Emerald Blue Shimmering Square Target Zones */
+        @keyframes emeraldRuneShimmer {
+            0% { box-shadow: 0 0 8px rgba(121,255,230,0.5); border-color: rgba(121,255,230,0.7); background: rgba(121,255,230,0.12); }
+            50% { box-shadow: 0 0 25px rgba(121,255,230,0.95), inset 0 0 15px rgba(121,255,156,0.6); border-color: #79ff9c; background: rgba(121,255,156,0.25); }
+            100% { box-shadow: 0 0 8px rgba(121,255,230,0.5); border-color: rgba(121,255,230,0.7); background: rgba(121,255,230,0.12); }
         }
 
-        /* Majestic Sun Glowing & Unfurling Scroll Animation */
+        @keyframes floatUpAndFade {
+            0% { transform: translateY(0) scale(0.8); opacity: 1; color: #79ff9c; text-shadow: 0 0 10px #000; }
+            100% { transform: translateY(-55px) scale(1.2); opacity: 0; color: #79ffe6; text-shadow: 0 0 15px #79ffe6; }
+        }
+
         @keyframes sunburstGlow {
-            0% { box-shadow: 0 0 20px #ffd700, 0 0 60px rgba(255,215,0,0.6), inset 0 0 30px rgba(255,215,0,0.4); transform: translate(-50%, -50%) scale(0.95); }
-            50% { box-shadow: 0 0 50px #ffd700, 0 0 120px rgba(255,215,0,0.9), inset 0 0 60px rgba(255,215,0,0.7); transform: translate(-50%, -50%) scale(1.02); }
-            100% { box-shadow: 0 0 20px #ffd700, 0 0 60px rgba(255,215,0,0.6), inset 0 0 30px rgba(255,215,0,0.4); transform: translate(-50%, -50%) scale(0.95); }
+            0% { box-shadow: 0 0 20px #79ffe6, 0 0 60px rgba(121,255,230,0.6), inset 0 0 30px rgba(121,255,230,0.4); transform: translate(-50%, -50%) scale(0.95); }
+            50% { box-shadow: 0 0 50px #79ffe6, 0 0 120px rgba(121,255,230,0.9), inset 0 0 60px rgba(121,255,230,0.7); transform: translate(-50%, -50%) scale(1.02); }
+            100% { box-shadow: 0 0 20px #79ffe6, 0 0 60px rgba(121,255,230,0.6), inset 0 0 30px rgba(121,255,230,0.4); transform: translate(-50%, -50%) scale(0.95); }
         }
 
         @keyframes scrollUnfurl {
@@ -38,9 +43,8 @@
         }
 
         :root {
-            --bg-dark: #0b0f0e;
-            --panel-bg: rgba(14, 20, 18, 0.96);
-            --theme-color: #ffd700;
+            --panel-bg: rgba(10, 18, 15, 0.92);
+            --theme-color: #79ffe6;
             --text-main: #f5f2eb;
             --text-muted: #c5b59b;
         }
@@ -50,24 +54,24 @@
             padding: 0;
             color: var(--text-main);
             font-family: 'Cinzel', serif;
-            background: var(--bg-dark);
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            animation: cosmicGlow 12s ease-in-out infinite alternate;
+            animation: imperialSilkShift 18s ease-in-out infinite alternate;
         }
 
         .fullscreen-toggle-btn {
             position: fixed;
             top: 15px;
-            right: 20px;
-            background: rgba(17, 23, 21, 0.9);
+            left: 20px;
+            background: rgba(14, 24, 20, 0.92);
             border: 2px solid var(--theme-color);
             color: var(--text-main);
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 8px;
             cursor: pointer;
             z-index: 4000;
@@ -75,11 +79,11 @@
             justify-content: center;
             align-items: center;
             font-size: 1.3rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            box-shadow: 0 4px 18px rgba(0,0,0,0.85);
             transition: all 0.3s ease;
         }
         .fullscreen-toggle-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.12);
             background: var(--theme-color);
             color: #0b0f0e;
             box-shadow: 0 0 25px var(--theme-color);
@@ -112,25 +116,26 @@
             gap: 15px;
             width: 100%;
             box-sizing: border-box;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
         nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
         nav a:hover { color: var(--theme-color); }
 
         .cinematic-stage {
             position: relative;
-            width: 100%;
-            max-width: 1100px;
-            height: 68vh;
-            margin: 15px auto;
+            width: 96%;
+            max-width: 1550px;
+            height: 82vh;
+            margin: 18px auto;
             border: 4px ridge var(--theme-color);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            background: #000;
-            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+            background: #020504;
+            box-shadow: 0 0 80px rgba(0,0,0,0.95), inset 0 0 40px rgba(0,40,25,0.4);
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: forestBreathingWave 6s ease-in-out infinite alternate;
         }
 
         .cinematic-stage video {
@@ -144,88 +149,93 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(to top, rgba(5, 12, 10, 0.98), rgba(5, 12, 10, 0.88));
+            background: linear-gradient(to top, rgba(4, 14, 11, 0.98), rgba(4, 14, 11, 0.86));
             border-top: 2px solid var(--theme-color);
-            padding: 12px 20px;
+            padding: 16px 28px;
             box-sizing: border-box;
             text-align: center;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(10px);
             z-index: 20;
         }
 
         .village-hud {
             display: flex;
             justify-content: space-around;
-            background: rgba(0, 40, 25, 0.85);
+            background: rgba(0, 45, 28, 0.9);
             border: 1px solid var(--theme-color);
-            padding: 6px;
+            padding: 8px 12px;
             border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 0.75rem;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 12px;
         }
-        .village-hud span { color: #ffe875; font-weight: bold; }
+        .village-hud span { color: #79ffe6; font-weight: bold; }
 
         .royal-btn {
-            background: linear-gradient(to bottom, var(--theme-color), #aa820a);
-            color: #0b0f0e;
-            border: 1px solid #fff;
-            padding: 8px 16px;
+            background: linear-gradient(to bottom, #00b4d8, #0077b6);
+            color: #fff;
+            border: 1px solid #79ffe6;
+            padding: 10px 20px;
             font-family: 'Cinzel', serif;
-            font-size: 0.78rem;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
             text-decoration: none;
             transition: 0.2s;
             display: inline-block;
-            margin: 3px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin: 4px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.6);
         }
-        .royal-btn:hover { background: #fff; box-shadow: 0 0 15px #ffd700; transform: translateY(-1px); }
+        .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 22px #79ffe6; transform: translateY(-1px); }
 
         .choice-btn-group {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 6px;
+            gap: 14px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
 
-        /* Interactive Clickable Gathering Hotspots on Part 1 Video */
+        /* Shimmering Square Target Zones */
         .gathering-hotspot {
             position: absolute;
-            width: 44px;
-            height: 44px;
-            background: radial-gradient(circle, #ffd700 0%, rgba(255,215,0,0.3) 70%, transparent 100%);
-            border: 2px solid #fff;
-            border-radius: 50%;
+            width: 80px;
+            height: 55px;
+            border: 2px solid rgba(121, 255, 230, 0.85);
+            border-radius: 8px;
             cursor: pointer;
             z-index: 50;
-            animation: pulseGlow 1.2s infinite;
+            animation: emeraldRuneShimmer 1.8s infinite ease-in-out;
             display: none;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem;
         }
-        .gathering-hotspot.collected {
-            animation: collectBurst 0.4s forwards;
-            pointer-events: none;
+        .gathering-hotspot:hover {
+            border-color: #79ff9c;
+            transform: scale(1.12);
         }
 
-        /* Quest Scroll & Imperial Sunburst Victory Scroll Modals */
+        .floating-popup {
+            position: absolute;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            z-index: 100;
+            pointer-events: none;
+            animation: floatUpAndFade 1s ease-out forwards;
+        }
+
         .quest-modal {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 85%;
-            max-width: 520px;
+            max-width: 560px;
             background: linear-gradient(135deg, #f4ecd8 0%, #e6d5b8 100%);
             color: #2b1d0c;
-            border: 4px ridge #856508;
-            padding: 24px;
+            border: 4px ridge #0077b6;
+            padding: 26px;
             border-radius: 12px;
             z-index: 200;
             text-align: center;
@@ -233,15 +243,14 @@
             animation: scrollUnfurl 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* Radiant Sunburst Glow for Victory Scroll */
         .victory-scroll-sunburst {
             animation: scrollUnfurl 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, sunburstGlow 3s ease-in-out infinite alternate !important;
         }
 
         .quest-modal h3 {
             font-family: 'Cinzel', serif;
-            color: #5c3a0b;
-            border-bottom: 2px solid #b8860b;
+            color: #0077b6;
+            border-bottom: 2px solid #00b4d8;
             padding-bottom: 8px;
             margin-top: 0;
         }
@@ -251,6 +260,10 @@
 
     <audio id="chamber-lullaby-audio" loop>
         <source src="rosanna-music-galary.m4a" type="audio/mp4">
+    </audio>
+
+    <audio id="forest-ambient-audio" loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/forest_birds.ogg" type="audio/ogg">
     </audio>
 
     <audio id="collect-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
@@ -268,53 +281,49 @@
         <a href="help-traveler.html">🤝 Help a Traveler</a>
     </nav>
 
-    <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 10px 0 3px 0; text-shadow: 0 0 15px rgba(255,215,0,0.4);">Help a Traveler — Village of Ikmid</h1>
-    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;">
-        Complete quests to earn rich compensation, stockpile inventory surplus, and advance to Level 2!
+    <h1 style="color: var(--theme-color); font-size: 2.1rem; margin: 14px 0 4px 0; text-shadow: 0 0 18px rgba(121,255,230,0.5);">Help a Traveler — Village of Ikmid</h1>
+    <p class="subtitle" style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); margin-bottom: 14px; font-size: 1rem;">
+        Complete quests under the breathing, swaying imperial forest to earn grand compensation and advance to Level 2!
     </p>
 
-    <!-- Cinematic Stage -->
     <div class="cinematic-stage" id="stage-container">
-        <!-- Main Video Element -->
         <video id="traveler-video" autoplay controls onended="handleVideoEnded()">
             <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <!-- Interactive Gathering Hotspots over Part 1 -->
+        <!-- Randomized Shimmering Square Target Zones (Apples on top right, grass on bottom, sides) -->
         <div id="hotspot-container">
-            <div class="gathering-hotspot" id="spot-apple" style="top: 45%; left: 75%;" onclick="gatherItem('Apples', 3, this)" title="Click to gather Apples">🍎</div>
-            <div class="gathering-hotspot" id="spot-herb" style="top: 60%; left: 52%;" onclick="gatherItem('Glowing Herbs', 4, this)" title="Click to gather Herbs">🌿</div>
-            <div class="gathering-hotspot" id="spot-coin" style="top: 70%; left: 35%;" onclick="gatherItem('Gold Coins', 50, this)" title="Click to collect Coins">🪙</div>
-            <div class="gathering-hotspot" id="spot-wood" style="top: 50%; left: 25%;" onclick="gatherItem('Wood Sticks', 3, this)" title="Click to gather Wood">🪵</div>
+            <div class="gathering-hotspot" id="spot-apple" style="top: 15% !important; left: 75% !important;" onclick="gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
+            <div class="gathering-hotspot" id="spot-herb" style="top: 72% !important; left: 42% !important;" onclick="gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
+            <div class="gathering-hotspot" id="spot-coin" style="top: 80% !important; left: 62% !important;" onclick="gatherItem('Gold Coins', 50, this, '🪙 +50 Coins')" title="Collect Shimmering Coins"></div>
+            <div class="gathering-hotspot" id="spot-wood" style="top: 60% !important; left: 15% !important;" onclick="gatherItem('Wood Sticks', 3, this, '🪵 +3 Wood')" title="Gather Wood Supplies"></div>
         </div>
 
-        <!-- Quest Scroll Modal (Start) -->
         <div class="quest-modal" id="questScrollModal">
             <h3>📜 Imperial Quest Decree: Ikmid Supply Run</h3>
-            <p style="font-family: 'Playfair Display', serif; font-size: 0.9rem; color: #3b2810; line-height: 1.5;">
-                "Brave adventurer, journey into the Whispering Woods. Gather required provisions for the village and collect surplus loot for your personal inventory. Complete 5 total quests to rank up to Level 2!"
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #2b1d0c; line-height: 1.5;">
+                "Brave adventurer, journey into the breathing Whispering Woods. Search the shimmering square zones near the upper apple trees and forest floor for required provisions and surplus loot. Complete 5 total quests to rank up to Level 2!"
             </p>
-            <div style="background: rgba(184,134,11,0.15); border: 1px solid #b8860b; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.8rem; margin-bottom: 12px; color: #2b1d0c;">
+            <div style="background: rgba(0,180,216,0.12); border: 1px solid #0077b6; padding: 10px; border-radius: 6px; text-align: left; font-size: 0.82rem; margin-bottom: 12px; color: #2b1d0c;">
                 <div>📋 <b>Required Quota & Surplus:</b></div>
                 <div>• Apples: <span id="chk-apple">0</span> / 3 (+ Surplus)</div>
                 <div>• Glowing Herbs: <span id="chk-herb">0</span> / 4 (+ Surplus)</div>
                 <div>• Gold Coins: <span id="chk-coin">0</span> / 50</div>
                 <div>• Wood Sticks: <span id="chk-wood">0</span> / 3 (+ Surplus)</div>
-                <div style="margin-top: 6px; color: #856508; font-weight: bold;">🎁 Grand Compensation: 500 Gold Coins + 50 Imperial Vault Coins</div>
+                <div style="margin-top: 6px; color: #0077b6; font-weight: bold;">🎁 Grand Compensation: 500 Gold Coins + 50 Imperial Vault Coins</div>
             </div>
-            <button class="royal-btn" onclick="closeScrollAndStartGathering()" style="font-size: 0.85rem; padding: 10px 20px;">⚔️ Enter Whispering Woods & Gather</button>
+            <button class="royal-btn" onclick="closeScrollAndStartGathering()" style="font-size: 0.9rem; padding: 10px 22px;">⚔️ Enter Whispering Woods & Gather</button>
         </div>
 
-        <!-- Imperial Victory Scroll Modal (End with Sunburst Glow & Scroll Sound) -->
         <div class="quest-modal victory-scroll-sunburst" id="victoryScrollModal">
-            <h3 style="color: #5c3a0b; font-size: 1.35rem;">📜 Imperial Decree of Victory ☀️</h3>
-            <p style="font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #3b2810; font-style: italic; line-height: 1.5;">
+            <h3 style="color: #0077b6; font-size: 1.4rem;">📜 Imperial Decree of Victory ☀️</h3>
+            <p style="font-family: 'Playfair Display', serif; font-size: 0.98rem; color: #2b1d0c; font-style: italic; line-height: 1.5;">
                 "To the valiant Guardian of Ikmid: Your mission in the Whispering Woods was a legendary success. You outsmarted the armored beasts, delivered all provisions, and secured magnificent riches for your valor."
             </p>
-            <div style="background: rgba(184,134,11,0.18); border: 2px ridge #b8860b; padding: 12px; border-radius: 6px; text-align: left; font-size: 0.85rem; margin-bottom: 15px; color: #2b1d0c;">
-                <div>✨ <b>Main Compensation:</b> <span style="color: #b8860b; font-weight: bold;">+500 Gold Coins</span></div>
-                <div>🏛️ <b>Imperial Vault Bonus:</b> <span style="color: #b8860b; font-weight: bold;">+50 Tax Coins</span></div>
+            <div style="background: rgba(0,180,216,0.15); border: 2px ridge #0077b6; padding: 12px; border-radius: 6px; text-align: left; font-size: 0.88rem; margin-bottom: 15px; color: #2b1d0c;">
+                <div>✨ <b>Main Compensation:</b> <span style="color: #0077b6; font-weight: bold;">+500 Gold Coins</span></div>
+                <div>🏛️ <b>Imperial Vault Tax Bonus:</b> <span style="color: #0077b6; font-weight: bold;">+50 Tax Coins</span></div>
                 <div>🎒 <b>Surplus Loot Secured:</b> Added to Personal Inventory</div>
                 <div>⭐ <b>Progress:</b> Completed Quests: <span id="victory-quests-count" style="font-weight: bold;">1</span> / 5</div>
                 <div id="victory-rank-notice" style="margin-top: 6px; color: #006622; font-weight: bold; display: none;">🎉 Rank Up Achieved: Welcome to Level 2!</div>
@@ -322,17 +331,16 @@
             <button class="royal-btn" onclick="collectVictoryRewards()" style="font-size: 1rem; padding: 12px 28px; background: linear-gradient(to bottom, #2e7d32, #1b5e20); color: #fff;">✨ Collect Riches & Supplies</button>
         </div>
 
-        <!-- Bottom Overlay Prompt Bar -->
         <div class="video-quest-overlay" id="quest-overlay-bar">
             <div class="village-hud">
-                <div>Rank: <span id="ui-level" style="color: #79ff9c;">Level 1</span> (<span id="ui-quests-done">0</span>/5 Quests)</div>
+                <div>Rank: <span id="ui-level" style="color: #79ffe6;">Level 1</span> (<span id="ui-quests-done">0</span>/5 Quests)</div>
                 <div>Wallet: <span id="ui-coins">500</span> 🪙</div>
-                <div>Tries Left: <span id="ui-tries">2</span> / 2</div>
+                <div>Tries Left: <span id="ui-tries">2 / 2</span></div>
                 <div>Inventory: <span id="ui-inventory">Empty</span></div>
             </div>
             
             <div id="overlay-dialogue-content">
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
                     "Our community needs provisions. Gather supplies, avoid the Level 3 wolves, and earn your grand compensation!"
                 </p>
                 <div class="choice-btn-group">
@@ -343,7 +351,7 @@
         </div>
     </div>
 
-    <div class="footer-controls" style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+    <div class="footer-controls" style="margin-top: 18px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
         <button class="royal-btn" onclick="replayPlea()" style="background: linear-gradient(to bottom, #4a148c, #311b92);">🎬 Replay Plea</button>
         <button class="royal-btn" onclick="promptEmailChange()" style="background: linear-gradient(to bottom, #0066cc, #003366);">📧 Sync Account Email</button>
         <a href="map.html" class="royal-btn" style="font-size: 0.75rem;">🗺️ World Map</a>
@@ -358,6 +366,7 @@
             level: 1,
             questsCompleted: 0,
             triesRemaining: 2,
+            retryTimerExpiry: 0,
             inventory: [],
             collectedApples: 0,
             collectedHerbs: 0,
@@ -380,12 +389,12 @@
         }
 
         function promptEmailChange() {
-            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices:", playerState.email);
+            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices instantly:", playerState.email);
             if (inputEmail && inputEmail.includes('@')) {
                 playerState.email = inputEmail.trim();
                 localStorage.setItem('imperial_user_email', playerState.email);
                 loadUserData();
-                alert(`Worldwide account synced successfully for ${playerState.email}!`);
+                alert(`Worldwide cloud synced successfully for ${playerState.email}! All progress restored.`);
             }
         }
 
@@ -398,6 +407,7 @@
                 playerState.level = parsed.level || 1;
                 playerState.questsCompleted = parsed.questsCompleted || 0;
                 playerState.triesRemaining = parsed.triesRemaining !== undefined ? parsed.triesRemaining : 2;
+                playerState.retryTimerExpiry = parsed.retryTimerExpiry || 0;
                 playerState.inventory = parsed.inventory || [];
                 playerState.collectedApples = parsed.collectedApples || 0;
                 playerState.collectedHerbs = parsed.collectedHerbs || 0;
@@ -415,11 +425,25 @@
 
         function updateHUD() {
             document.getElementById('ui-coins').innerText = playerState.coins;
-            document.getElementById('ui-tries').innerText = playerState.triesRemaining;
             document.getElementById('ui-level').innerText = playerState.level >= 2 ? "Level 2 (Veteran)" : "Level 1 (Adventurer)";
             document.getElementById('ui-quests-done').innerText = playerState.questsCompleted;
-            document.getElementById('ui-email').innerText = playerState.email;
             document.getElementById('ui-inventory').innerText = playerState.inventory.length > 0 ? playerState.inventory.join(', ') : 'Empty';
+            
+            let now = Date.now();
+            if (playerState.triesRemaining <= 0 && playerState.retryTimerExpiry > 0) {
+                if (now >= playerState.retryTimerExpiry) {
+                    playerState.triesRemaining = 2;
+                    playerState.retryTimerExpiry = 0;
+                    document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
+                } else {
+                    let remainingSec = Math.ceil((playerState.retryTimerExpiry - now) / 1000);
+                    let min = Math.floor(remainingSec / 60);
+                    let sec = remainingSec % 60;
+                    document.getElementById('ui-tries').innerText = `Reset in ${min}:${sec < 10 ? '0' : ''}${sec}`;
+                }
+            } else {
+                document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
+            }
             
             document.getElementById('chk-apple').innerText = playerState.collectedApples;
             document.getElementById('chk-herb').innerText = playerState.collectedHerbs;
@@ -429,11 +453,16 @@
             syncStorage();
         }
 
+        setInterval(() => {
+            if (playerState.triesRemaining <= 0 && playerState.retryTimerExpiry > 0) {
+                updateHUD();
+            }
+        }, 1000);
+
         function acceptTravelerQuest() {
             playerState.questAccepted = true;
             syncStorage();
             
-            // Play parchment rustle sound when opening scroll
             let scrollSound = document.getElementById('scroll-sound');
             if(scrollSound) { scrollSound.currentTime = 0; scrollSound.play().catch(e => {}); }
 
@@ -444,32 +473,58 @@
             document.getElementById('questScrollModal').style.display = 'none';
             playerState.missionStage = 'gathering-part1';
 
+            let forestAudio = document.getElementById('forest-ambient-audio');
+            if(forestAudio) { forestAudio.volume = 0.4; forestAudio.play().catch(e => {}); }
+
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'save-collection-part1.mp4';
             videoElement.load();
             videoElement.play();
 
-            document.querySelectorAll('.gathering-hotspot').forEach(spot => {
-                spot.classList.remove('collected');
-                spot.style.display = 'flex';
+            videoElement.onended = function() {
+                if (playerState.collectedApples < 3 || playerState.collectedHerbs < 4 || playerState.collectedCoins < 50 || playerState.collectedWood < 3) {
+                    videoElement.currentTime = 0;
+                    videoElement.play();
+                }
+            };
+
+            let hotspots = document.querySelectorAll('.gathering-hotspot');
+            hotspots.forEach((spot, index) => {
+                spot.style.display = 'none';
+                let randomDelay = 800 + (index * 1200) + Math.random() * 1500;
+                setTimeout(() => {
+                    if(playerState.missionStage === 'gathering-part1') {
+                        spot.style.display = 'block';
+                    }
+                }, randomDelay);
             });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
-                    "Whispering Woods (Part 1): Click glowing markers to gather required supplies and extra surplus inventory!"
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                    "Whispering Woods (Part 1): Click the shimmering square zones appearing randomly to gather provisions and surplus!"
                 </p>
             `;
             syncStorage();
         }
 
-        function gatherItem(itemType, amount, element) {
+        function gatherItem(itemType, amount, element, popupText) {
             let cSound = document.getElementById('collect-sound');
             if (cSound) {
                 cSound.currentTime = 0;
                 cSound.play().catch(e => {});
             }
 
-            element.classList.add('collected');
+            let rect = element.getBoundingClientRect();
+            let stageRect = document.getElementById('stage-container').getBoundingClientRect();
+            let popup = document.createElement('div');
+            popup.className = 'floating-popup';
+            popup.innerText = popupText;
+            popup.style.left = (rect.left - stageRect.left + 10) + 'px';
+            popup.style.top = (rect.top - stageRect.top - 10) + 'px';
+            document.getElementById('stage-container').appendChild(popup);
+            setTimeout(() => popup.remove(), 1000);
+
+            element.style.display = 'none';
 
             if (itemType === 'Apples') {
                 playerState.collectedApples += amount;
@@ -489,6 +544,12 @@
 
             if (playerState.collectedApples >= 3 && playerState.collectedHerbs >= 4 && playerState.collectedCoins >= 50 && playerState.collectedWood >= 3) {
                 setTimeout(transitionToPart2, 600);
+            } else {
+                setTimeout(() => {
+                    if(playerState.missionStage === 'gathering-part1') {
+                        element.style.display = 'block';
+                    }
+                }, 3000 + Math.random() * 2000);
             }
         }
 
@@ -507,15 +568,21 @@
             };
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
-                    "Quota secured with extra surplus! Heading deeper into the Whispering Woods..."
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                    "Quota secured! Pressing deeper into the breathing Whispering Woods as shadows gather..."
                 </p>
             `;
         }
 
         function triggerWolfEncounter() {
+            const videoElement = document.getElementById('traveler-video');
+            videoElement.pause();
+
+            let forestAudio = document.getElementById('forest-ambient-audio');
+            if(forestAudio) forestAudio.pause();
+
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
+                <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
                     ⚠️ Level 3 Armored Wolf spotted approaching! (Tries remaining: ${playerState.triesRemaining}/2) What will you do?
                 </p>
                 <div class="choice-btn-group">
@@ -545,7 +612,6 @@
                 document.getElementById('victory-rank-notice').style.display = 'block';
             }
 
-            // Unfurl Victory Scroll after 3 seconds with paper rustle sound & sunburst glow
             setTimeout(() => {
                 let scrollSound = document.getElementById('scroll-sound');
                 if(scrollSound) { scrollSound.currentTime = 0; scrollSound.play().catch(e => {}); }
@@ -556,7 +622,7 @@
             }, 2500);
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #79ff9c; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
+                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
                     ✦ Mission Success! Unfurling Radiant Imperial Victory Scroll... ✦
                 </p>
             `;
@@ -564,20 +630,23 @@
 
         function collectVictoryRewards() {
             document.getElementById('victoryScrollModal').style.display = 'none';
-            let totalReward = 550; // 500 gold coins + 50 vault coins
+            let totalReward = 550;
             playerState.coins += totalReward;
             syncStorage();
             updateHUD();
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #79ff9c; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
-                    ✨ Grand Riches Claimed! +550 Coins added to wallet. Thank you, adventurer! Please come again for more quests.
+                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
+                    ✨ Grand Riches Claimed! +550 Coins added to worldwide vault. Thank you, adventurer! Please come again for more quests.
                 </p>
             `;
         }
 
         function chooseFight() {
             playerState.triesRemaining--;
+            if (playerState.triesRemaining <= 0) {
+                playerState.retryTimerExpiry = Date.now() + 180000;
+            }
             playerState.missionStage = 'fail';
             syncStorage();
 
@@ -592,7 +661,7 @@
 
             if (playerState.triesRemaining > 0) {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
-                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
+                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
                         ❌ Mission Failed! Level 1 Adventurer is too weak against a Level 3 Wolf! Tries left: ${playerState.triesRemaining}.
                     </p>
                     <div class="choice-btn-group">
@@ -601,11 +670,11 @@
                 `;
             } else {
                 document.getElementById('overlay-dialogue-content').innerHTML = `
-                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 5px 0; font-size: 0.85rem;">
-                        ❌ Mission Failed! Exhausted 2 free tries! Pay 30 Coins to reset and try again.
+                    <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
+                        ❌ Tries Exhausted! Pay 30 Coins to reset instantly OR wait for the 3-minute recovery timer!
                     </p>
                     <div class="choice-btn-group">
-                        <button class="royal-btn" onclick="payCoinToRetry()" style="background: linear-gradient(to bottom, #b8860b, #573f05);">💰 Pay 30 Coins to Retry</button>
+                        <button class="royal-btn" onclick="payCoinToRetry()" style="background: linear-gradient(to bottom, #b8860b, #573f05);">💰 Pay 30 Coins to Reset</button>
                     </div>
                 `;
             }
@@ -624,12 +693,13 @@
             if (playerState.coins >= 30) {
                 playerState.coins -= 30;
                 playerState.triesRemaining = 2;
+                playerState.retryTimerExpiry = 0;
                 playerState.collectedApples = 0;
                 playerState.collectedHerbs = 0;
                 playerState.collectedCoins = 0;
                 playerState.collectedWood = 0;
                 syncStorage();
-                alert("30 Coins paid! Tries reset to 2. Good luck!");
+                alert("30 Coins paid! Worldwide tries reset to 2 instantly.");
                 closeScrollAndStartGathering();
             } else {
                 alert("You need at least 30 coins in your wallet to pay the retry fee.");
@@ -638,7 +708,7 @@
 
         function declineTravelerQuest() {
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.85rem;">
+                <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
                     "May the road treat you well, traveler."
                 </p>
             `;
@@ -667,6 +737,7 @@
                 level: playerState.level,
                 questsCompleted: playerState.questsCompleted,
                 triesRemaining: playerState.triesRemaining,
+                retryTimerExpiry: playerState.retryTimerExpiry,
                 inventory: playerState.inventory,
                 collectedApples: playerState.collectedApples,
                 collectedHerbs: playerState.collectedHerbs,
