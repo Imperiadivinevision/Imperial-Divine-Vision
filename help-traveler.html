@@ -13,36 +13,25 @@
     <style>
         @keyframes imperialSilkWave {
             0% { background-position: 0% 50%; filter: brightness(1); }
-            15% { background: linear-gradient(120deg, #07261d, #004d61, #082844, #120b22, #210c20); background-position: 25% 75%; }
-            30% { background: linear-gradient(140deg, #04140f, #001f30, #030f24, #18062b, #19081e); background-position: 50% 100%; }
-            45% { background: linear-gradient(160deg, #061c16, #09172e, #140b2e, #250a36, #1f0b24); background-position: 75% 25%; }
-            60% { background: linear-gradient(135deg, #082119, #0e1236, #210d33, #380d35, #2b1126); background-position: 100% 50%; }
-            80% { background: linear-gradient(110deg, #051912, #003042, #0a1733, #150726, #1e0a1f); background-position: 50% 25%; }
-            100% { background-position: 0% 50%; filter: brightness(1.1); }
-        }
-
-        @keyframes breathingPulse {
-            0% { transform: scale(1); filter: contrast(1); }
-            50% { transform: scale(1.01); filter: contrast(1.05); }
-            100% { transform: scale(1); filter: contrast(1); }
+            50% { background-position: 100% 50%; filter: brightness(1.1); }
+            100% { background-position: 0% 50%; filter: brightness(1); }
         }
 
         @keyframes emeraldRuneShimmer {
             0% { box-shadow: 0 0 8px rgba(121,255,230,0.5); border-color: rgba(121,255,230,0.7); background: rgba(121,255,230,0.12); }
-            50% { box-shadow: 0 0 25px rgba(121,255,230,0.95), inset 0 0 15px rgba(121,255,156,0.6); border-color: #79ff9c; background: rgba(121,255,156,0.25); }
+            50% { box-shadow: 0 0 25px rgba(121,255,230,0.95); border-color: #79ff9c; background: rgba(121,255,156,0.25); }
             100% { box-shadow: 0 0 8px rgba(121,255,230,0.5); border-color: rgba(121,255,230,0.7); background: rgba(121,255,230,0.12); }
         }
 
         @keyframes floatUpAndFade {
-            0% { transform: translateY(0) scale(0.8); opacity: 1; color: #79ff9c; text-shadow: 0 0 10px #000; }
-            100% { transform: translateY(-55px) scale(1.2); opacity: 0; color: #79ffe6; text-shadow: 0 0 15px #79ffe6; }
+            0% { transform: translateY(0) scale(0.8); opacity: 1; color: #79ff9c; }
+            100% { transform: translateY(-55px) scale(1.2); opacity: 0; color: #79ffe6; }
         }
 
         :root {
-            --panel-bg: rgba(10, 18, 15, 0.94);
+            --panel-bg: rgba(10, 18, 15, 0.95);
             --theme-color: #79ffe6;
             --text-main: #f5f2eb;
-            --text-muted: #c5b59b;
         }
 
         body {
@@ -50,9 +39,9 @@
             padding: 0;
             color: var(--text-main);
             font-family: 'Cinzel', serif;
-            background: linear-gradient(135deg, #051912, #002b3d, #0b1d3a, #1a082e, #2d0f28);
+            background: linear-gradient(135deg, #051912, #002b3d, #0b1d3a, #1a082e);
             background-size: 400% 400%;
-            animation: imperialSilkWave 18s ease infinite, breathingPulse 8s ease-in-out infinite alternate;
+            animation: imperialSilkWave 18s ease infinite;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -72,7 +61,6 @@
             width: 100%;
             box-sizing: border-box;
             backdrop-filter: blur(10px);
-            flex-wrap: wrap;
         }
         nav a { color: var(--text-main); text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         nav a:hover { color: var(--theme-color); }
@@ -80,15 +68,15 @@
         .cinematic-stage {
             position: relative;
             width: 96%;
-            max-width: 1500px;
-            height: 70vh;
-            min-height: 450px;
+            max-width: 1400px;
+            height: 68vh;
+            min-height: 420px;
             margin: 15px auto;
             border: 4px ridge var(--theme-color);
             border-radius: 16px;
             overflow: hidden;
-            background: #020504;
-            box-shadow: 0 0 80px rgba(0,0,0,0.95), inset 0 0 40px rgba(0,40,25,0.4);
+            background: #0b1411;
+            box-shadow: 0 0 60px rgba(0,0,0,0.9);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -98,6 +86,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            background: #0b1411;
         }
 
         .video-quest-overlay {
@@ -105,12 +94,11 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(to top, rgba(4, 14, 11, 0.98), rgba(4, 14, 11, 0.88));
+            background: rgba(4, 14, 11, 0.96);
             border-top: 2px solid var(--theme-color);
             padding: 14px 20px;
             box-sizing: border-box;
             text-align: center;
-            backdrop-filter: blur(10px);
             z-index: 20;
         }
 
@@ -119,12 +107,10 @@
             justify-content: space-around;
             background: rgba(0, 45, 28, 0.9);
             border: 1px solid var(--theme-color);
-            padding: 8px 10px;
+            padding: 8px;
             border-radius: 6px;
             margin-bottom: 8px;
             font-size: 0.8rem;
-            flex-wrap: wrap;
-            gap: 10px;
         }
         .village-hud span { color: #79ffe6; font-weight: bold; }
 
@@ -132,72 +118,60 @@
             background: linear-gradient(to bottom, #00b4d8, #0077b6);
             color: #fff;
             border: 1px solid #79ffe6;
-            padding: 10px 20px;
+            padding: 10px 22px;
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
-            text-decoration: none;
             transition: 0.2s;
             display: inline-block;
             margin: 4px;
             box-shadow: 0 4px 14px rgba(0,0,0,0.6);
         }
-        .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 22px #79ffe6; transform: translateY(-1px); }
-
-        .choice-btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
+        .royal-btn:hover { background: #79ffe6; color: #0b0f0e; box-shadow: 0 0 20px #79ffe6; }
 
         .gathering-hotspot {
             position: absolute;
-            width: 70px;
-            height: 48px;
+            width: 75px;
+            height: 50px;
             border: 2px solid rgba(121, 255, 230, 0.85);
             border-radius: 8px;
             cursor: pointer;
             z-index: 50;
             animation: emeraldRuneShimmer 1.8s infinite ease-in-out;
             display: none;
+            background: rgba(121, 255, 230, 0.15);
         }
-        .gathering-hotspot:hover { border-color: #79ff9c; transform: scale(1.12); }
+        .gathering-hotspot:hover { border-color: #79ff9c; transform: scale(1.1); }
 
         .floating-popup {
             position: absolute;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             z-index: 100;
             pointer-events: none;
             animation: floatUpAndFade 1s ease-out forwards;
         }
 
         .sync-bar {
-            margin: 6px auto 12px auto;
+            margin: 6px auto;
             text-align: center;
-            font-size: 0.85rem;
         }
         .sync-bar input {
-            padding: 7px 14px;
+            padding: 6px 12px;
             border-radius: 6px;
             border: 1px solid var(--theme-color);
             background: rgba(0,0,0,0.7);
             color: white;
             font-family: 'Cinzel', serif;
-            width: 260px;
-            max-width: 80%;
-            margin-right: 8px;
+            width: 240px;
         }
     </style>
 </head>
 <body onload="initTravelerExperience()">
 
-    <!-- Audio element for button click feedback -->
     <audio id="click-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
 
     <nav> 
@@ -207,40 +181,39 @@
         <a href="help-traveler.html" style="color: var(--theme-color);" onclick="playClick()">🤝 Help a Traveler</a>
     </nav>
 
-    <h1 style="color: var(--theme-color); font-size: 1.8rem; margin: 10px 0 2px 0; text-align: center; text-shadow: 0 0 18px rgba(121,255,230,0.5);">Help a Traveler — Village of Ikmid</h1>
+    <h1 style="color: var(--theme-color); font-size: 1.7rem; margin: 10px 0 2px 0; text-align: center;">Help a Traveler — Village of Ikmid</h1>
     
     <div class="sync-bar">
-        <input type="email" id="userEmailSync" placeholder="Enter email for worldwide sync..." onchange="updatePlayerEmail()">
-        <button class="royal-btn" onclick="playClick(); syncToCloud();" style="padding: 7px 14px; font-size: 0.8rem;">☁️ Sync Cloud</button>
-        <span id="syncStatus" style="margin-left: 8px; font-size: 0.8rem; color: #ffd700;"></span>
+        <input type="email" id="userEmailSync" placeholder="Enter email for sync..." onchange="updatePlayerEmail()">
+        <button class="royal-btn" onclick="playClick(); syncToCloud();" style="padding: 6px 12px; font-size: 0.75rem;">☁️ Sync Cloud</button>
+        <span id="syncStatus" style="font-size: 0.8rem; color: #ffd700; margin-left: 6px;"></span>
     </div>
 
     <div class="cinematic-stage" id="stage-container">
-        <!-- Main Video Pipeline -->
-        <video id="traveler-video" autoplay controls playsinline>
+        <!-- Main Video Element -->
+        <video id="traveler-video" autoplay playsinline controls>
             <source src="village-plea.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
         <!-- Gathering Hotspots -->
         <div id="hotspot-container">
-            <div class="gathering-hotspot" id="spot-apple" style="top: 15% !important; left: 75% !important;" onclick="playClick(); gatherItem('Apples', 3, this, '🍎 +3 Apples')" title="Gather Apples"></div>
-            <div class="gathering-hotspot" id="spot-herb" style="top: 72% !important; left: 42% !important;" onclick="playClick(); gatherItem('Glowing Herbs', 4, this, '🌿 +4 Herbs')" title="Gather Glowing Herbs"></div>
-            <div class="gathering-hotspot" id="spot-coin" style="top: 80% !important; left: 62% !important;" onclick="playClick(); gatherItem('Gold Coins', 50, this, '🪙 +50 Coins')" title="Collect Shimmering Coins"></div>
-            <div class="gathering-hotspot" id="spot-wood" style="top: 60% !important; left: 15% !important;" onclick="playClick(); gatherItem('Wood Sticks', 3, this, '🪵 +3 Wood')" title="Gather Wood Supplies"></div>
+            <div class="gathering-hotspot" id="spot-apple" style="top: 18% !important; left: 72% !important;" onclick="playClick(); gatherItem('Apples', 0.1, this, '🍎 +0.1 Apple')" title="Gather Apple"></div>
+            <div class="gathering-hotspot" id="spot-herb" style="top: 70% !important; left: 40% !important;" onclick="playClick(); gatherItem('Glowing Herbs', 0.1, this, '🌿 +0.1 Herb')" title="Gather Herb"></div>
+            <div class="gathering-hotspot" id="spot-coin" style="top: 78% !important; left: 65% !important;" onclick="playClick(); gatherItem('Gold Coins', 1, this, '🪙 +1 Coin')" title="Collect Coins"></div>
+            <div class="gathering-hotspot" id="spot-wood" style="top: 58% !important; left: 18% !important;" onclick="playClick(); gatherItem('Wood Sticks', 0.1, this, '🪵 +0.1 Wood')" title="Gather Wood"></div>
         </div>
 
         <div class="video-quest-overlay" id="quest-overlay-bar">
             <div class="village-hud">
                 <div>Rank: <span id="ui-level">Level 1</span></div>
                 <div>Wallet: <span id="ui-coins">550</span> 🪙</div>
-                <div>Tries Left: <span id="ui-tries">2 / 2</span></div>
-                <div>Inventory: <span id="ui-inventory">Empty</span></div>
+                <div>Supplies Score: <span id="ui-score">0.0</span> / 3.0 🌿</div>
             </div>
             
             <div id="overlay-dialogue-content">
                 <p id="spokenDialogue" style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
-                    "Our village traveler pleads for assistance. Do you accept this mission to gather forest supplies?"
+                    "Our village traveler pleads for assistance. Do you accept this mission?"
                 </p>
                 <div class="choice-btn-group" id="actionButtonContainer">
                     <button class="royal-btn" onclick="playClick(); acceptQuest();">✓ Accept Quest</button>
@@ -251,35 +224,16 @@
     </div>
 
     <script>
-        // Click sound feedback function
         function playClick() {
             let sound = document.getElementById('click-sound');
-            if (sound) {
-                sound.currentTime = 0;
-                sound.play().catch(e => {});
-            }
-        }
-
-        // Safe Firebase initialization with local fallback protection
-        let dbRef = null;
-        try {
-            const firebaseConfig = { databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com" };
-            if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-            dbRef = firebase.database().ref('imperial_traveler_players');
-        } catch (e) {
-            console.log("Running in local storage fallback mode.");
+            if (sound) { sound.currentTime = 0; sound.play().catch(e => {}); }
         }
 
         let playerState = {
             email: localStorage.getItem('imperial_user_email') || 'traveler@imperial.vision',
             coins: 550,
-            level: 1,
-            triesRemaining: 2,
-            inventory: [],
-            collectedApples: 0,
-            collectedHerbs: 0,
-            collectedCoins: 0,
-            collectedWood: 0
+            score: 0.0,
+            currentStage: 'plea'
         };
 
         function speakText(text) {
@@ -287,14 +241,12 @@
                 window.speechSynthesis.cancel();
                 let utterance = new SpeechSynthesisUtterance(text);
                 utterance.rate = 0.95;
-                utterance.pitch = 1.0;
                 setTimeout(() => window.speechSynthesis.speak(utterance), 250);
             }
         }
 
         function initTravelerExperience() {
             document.getElementById('userEmailSync').value = playerState.email;
-            loadFromCloud();
             speakText("Help a traveler. Our village traveler pleads for assistance. Do you accept this mission?");
         }
 
@@ -303,80 +255,43 @@
             if (inputEmail && inputEmail.includes('@')) {
                 playerState.email = inputEmail;
                 localStorage.setItem('imperial_user_email', inputEmail);
-                loadFromCloud();
             }
         }
 
         function syncToCloud() {
             updatePlayerEmail();
-            document.getElementById('syncStatus').innerText = "Syncing...";
-            
-            // Always save locally first so it's instantaneous
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(playerState));
-
-            if (dbRef) {
-                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
-                dbRef.child(safeKey).set(playerState).then(() => {
-                    document.getElementById('syncStatus').innerText = "✅ Saved!";
-                    speakText("Email and progress saved successfully!");
-                }).catch(err => {
-                    document.getElementById('syncStatus').innerText = "✅ Saved locally!";
-                });
-            } else {
-                document.getElementById('syncStatus').innerText = "✅ Saved locally!";
-                speakText("Email saved successfully!");
-            }
-        }
-
-        function loadFromCloud() {
-            let localSaved = localStorage.getItem('imperial_user_' + playerState.email);
-            if (localSaved) {
-                try {
-                    playerState = JSON.parse(localSaved);
-                    updateHUD();
-                } catch(e){}
-            }
-
-            if (dbRef) {
-                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
-                dbRef.child(safeKey).once('value').then(snapshot => {
-                    let data = snapshot.val();
-                    if (data) {
-                        playerState = data;
-                        updateHUD();
-                    }
-                }).catch(err => {});
-            }
-        }
-
-        function updateHUD() {
-            document.getElementById('ui-coins').innerText = playerState.coins;
-            document.getElementById('ui-inventory').innerText = playerState.inventory.length ? playerState.inventory.join(', ') : 'Empty';
-            document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
+            document.getElementById('syncStatus').innerText = "✅ Saved!";
         }
 
         function acceptQuest() {
-            let briefing = "Quest accepted. Entering the Whispering Woods. You are required to collect 3 apples, 4 glowing herbs, 50 gold coins, and 3 wood sticks.";
+            let briefing = "Quest accepted. Entering the Whispering Woods. Watch the video and collect supplies continuously.";
             speakText(briefing);
 
+            playerState.currentStage = 'part1';
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection-part1.mp4';
+            videoElement.src = 'save-collection-part1.mp4';[cite: 7]
             videoElement.load();
-            videoElement.play().catch(err => console.log("Video autoplay restricted:", err));
+            videoElement.play().catch(e => console.log("Autoplay restriction"));
 
+            // Let Part 1 play completely to the end
             videoElement.onended = function() {
-                videoElement.currentTime = 0;
-                videoElement.play(); 
+                if (playerState.score >= 3.0) {
+                    showStageTwoButton();
+                } else {
+                    speakText("Video finished, but you need more supplies! Replaying Part 1 to gather more.");
+                    videoElement.play();
+                }
             };
 
+            // Show gathering hotspots during video playback
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p id="spokenDialogue" style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.95rem;">
-                    "Whispering Woods (Part 1): Click the shimmering square zones to gather Apples (+3), Herbs (+4), Coins (+50), and Wood (+3)!"
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
+                    "Part 1 Playing: Watch the video and click the shimmering square zones repeatedly to gather supplies!"
                 </p>
             `;
-            syncToCloud();
         }
 
         function gatherItem(itemType, amount, element, popupText) {
@@ -390,87 +305,107 @@
             document.getElementById('stage-container').appendChild(popup);
             setTimeout(() => popup.remove(), 1000);
 
+            // Temporarily hide hotspot and respawn for more clicking
             element.style.display = 'none';
+            setTimeout(() => { element.style.display = 'block'; }, 2000);
 
-            if (itemType === 'Apples') playerState.collectedApples += amount;
-            if (itemType === 'Glowing Herbs') playerState.collectedHerbs += amount;
-            if (itemType === 'Gold Coins') { playerState.collectedCoins += amount; playerState.coins += amount; }
-            if (itemType === 'Wood Sticks') playerState.collectedWood += amount;
+            playerState.score = parseFloat((playerState.score + amount).toFixed(1));
+            document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
 
-            if(!playerState.inventory.includes(itemType + " (Surplus)")) {
-                playerState.inventory.push(itemType + " (Surplus)");
+            if (itemType === 'Gold Coins') {
+                playerState.coins += 10;
+                document.getElementById('ui-coins').innerText = playerState.coins;
             }
 
-            updateHUD();
-            speakText("Collected " + itemType);
             syncToCloud();
 
-            if (playerState.collectedApples >= 3 && playerState.collectedHerbs >= 4 && playerState.collectedCoins >= 50 && playerState.collectedWood >= 3) {
-                setTimeout(transitionToPart2, 800);
+            // If score reaches quota and video has ended (or is ready)
+            if (playerState.score >= 3.0) {
+                let vid = document.getElementById('traveler-video');
+                if (vid.ended) {
+                    showStageTwoButton();
+                }
             }
         }
 
-        function transitionToPart2() {
-            speakText("Quota secured! Pressing deeper into the woods. Watch out for the Level 3 Armored Wolf!");
+        function showStageTwoButton() {
+            document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
+            speakText("Part One complete! You have gathered enough supplies. Click Continue to Stage Two.");
+            
+            document.getElementById('overlay-dialogue-content').innerHTML = `
+                <p style="color: #79ffe6; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
+                    ✨ Part 1 Complete! Gear and provisions secure.
+                </p>
+                <div class="choice-btn-group">
+                    <button class="royal-btn" onclick="playClick(); startStageTwo();">▶ Continue to Stage 2</button>
+                </div>
+            `;
+        }
+
+        function startStageTwo() {
+            speakText("Proceeding to Stage Two. Traveling deeper into the Whispering Woods.");
+            playerState.currentStage = 'part2';
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'save-collection-part2.mp4';
+            videoElement.src = 'save-collection-part2.mp4';[cite: 7]
             videoElement.load();
             videoElement.play();
 
-            videoElement.onended = function() {
-                triggerWolfEncounter();
-            };
-        }
+            // Keep hotspots active during Part 2 for extra personal supplies
+            document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
-        function triggerWolfEncounter() {
-            const videoElement = document.getElementById('traveler-video');
-            videoElement.pause();
-            speakText("A Level 3 Armored Wolf approaches! Will you hide and let it pass safely, or draw your sword and fight?");
+            videoElement.onended = function() {
+                triggerWolfChoice();
+            };
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
+                    "Stage Two Playing: Continue collecting bonus supplies while traveling deeper..."
+                </p>
+            `;
+        }
+
+        function triggerWolfChoice() {
+            document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
+            speakText("An armored wolf approaches on the path! What is your choice? Stay hiding or fight?");
+            
+            document.getElementById('overlay-dialogue-content').innerHTML = `
                 <p style="color: #ff8585; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
-                    ⚠️ Level 3 Armored Wolf spotted! What is your tactical choice?
+                    ⚠️ An armored wolf blocks the path! Make your tactical choice:
                 </p>
                 <div class="choice-btn-group">
-                    <button class="royal-btn" onclick="playClick(); chooseHide();" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">🛡️ Hide & Let Wolf Pass (Safe)</button>
-                    <button class="royal-btn" onclick="playClick(); chooseFight();" style="background: linear-gradient(to bottom, #cc0000, #660000);">⚔️ Draw Sword & Fight</button>
+                    <button class="royal-btn" onclick="playClick(); chooseHide();" style="background: linear-gradient(to bottom, #1b5e20, #0a2e0e);">🛡️ Stay Hiding (Safe)</button>
+                    <button class="royal-btn" onclick="playClick(); chooseFight();" style="background: linear-gradient(to bottom, #cc0000, #660000);">⚔️ Fight the Wolf</button>
                 </div>
             `;
         }
 
         function chooseHide() {
-            speakText("Mission success! Returning safely to the village with grand compensation.");
+            speakText("Mission success! Returning safely to the village.");
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-success.mp4';
+            videoElement.src = 'mission-success.mp4';[cite: 7]
             videoElement.load();
             videoElement.play();
             videoElement.onended = function() {
-                playerState.coins += 550;
-                updateHUD();
-                syncToCloud();
-                alert("🎉 Mission Success! +550 Coins added to your worldwide vault!");
+                alert("🎉 Mission Success! Riches secured.");
                 window.location.href = "room-youth.html";
             };
         }
 
         function chooseFight() {
-            playerState.triesRemaining--;
-            speakText("Mission failed! The traveler is overpowered by the Level 3 wolf.");
+            speakText("Mission failed! The wolf overpowered the adventurer.");
             const videoElement = document.getElementById('traveler-video');
-            videoElement.src = 'mission-fail.mp4';
+            videoElement.src = 'mission-fail.mp4';[cite: 7]
             videoElement.load();
             videoElement.play();
             videoElement.onended = function() {
-                document.getElementById('ui-tries').innerText = playerState.triesRemaining + ' / 2';
                 document.getElementById('overlay-dialogue-content').innerHTML = `
                     <p style="color: #ff6b6b; font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.95rem;">
-                        ❌ Mission Failed! Tries left: ${playerState.triesRemaining}.
+                        ❌ Mission Failed!
                     </p>
                     <div class="choice-btn-group">
                         <button class="royal-btn" onclick="playClick(); location.reload();">🔄 Try Again</button>
                     </div>
                 `;
-                syncToCloud();
             };
         }
 
