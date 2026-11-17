@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help a Traveler — Village of Ikmid | Imperial Divine Vision</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Firebase App & Realtime Database SDKs for Worldwide Cloud Sync -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <style>
         @keyframes imperialSilkShift {
             0% { background: linear-gradient(135deg, #061a14 0%, #0b0f0e 40%, #10081d 70%, #041018 100%); filter: brightness(1); }
@@ -357,6 +362,13 @@
     </div>
 
     <script>
+        // --- FIREBASE WORLDWIDE CLOUD CONFIGURATION ---
+        const firebaseConfig = {
+            databaseURL: "https://imperial-divine-vision-default-rtdb.firebaseio.com"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const dbRef = firebase.database().ref('players');
+
         let playerState = {
             email: localStorage.getItem('imperial_user_email') || 'traveler@imperial.vision',
             coins: 500,
@@ -386,16 +398,48 @@
         }
 
         function promptEmailChange() {
-            let inputEmail = prompt("Enter your email address to sync your worldwide progress across all devices instantly:", playerState.email);
+            let inputEmail = prompt("Enter your email address to log in and sync your worldwide progress across all devices instantly:", playerState.email);
             if (inputEmail && inputEmail.includes('@')) {
-                playerState.email = inputEmail.trim();
+                playerState.email = inputEmail.trim().toLowerCase().replace(/[.#$\[\]]/g, "_");
                 localStorage.setItem('imperial_user_email', playerState.email);
-                loadUserData();
-                alert(`Worldwide cloud synced successfully for ${playerState.email}! All progress restored.`);
+                loadUserDataFromCloud();
+                alert(`Worldwide cloud synced successfully for ${playerState.email}! All global progress restored.`);
             }
         }
 
-        function loadUserData() {
+        // --- WORLDWIDE CLOUD SYNC FUNCTIONS ---
+        function sanitizeEmailKey(email) {
+            return email.trim().toLowerCase().replace(/[.#$\[\]]/g, "_");
+        }
+
+        function loadUserDataFromCloud() {
+            let userKey = sanitizeEmailKey(playerState.email);
+            dbRef.child(userKey).once('value').then((snapshot) => {
+                let data = snapshot.val();
+                if (data) {
+                    playerState.coins = data.coins !== undefined ? data.coins : 500;
+                    playerState.level = data.level || 1;
+                    playerState.questsCompleted = data.questsCompleted || 0;
+                    playerState.triesRemaining = data.triesRemaining !== undefined ? data.triesRemaining : 2;
+                    playerState.retryTimerExpiry = data.retryTimerExpiry || 0;
+                    playerState.inventory = data.inventory || [];
+                    playerState.collectedApples = data.collectedApples || 0;
+                    playerState.collectedHerbs = data.collectedHerbs || 0;
+                    playerState.collectedCoins = data.collectedCoins || 0;
+                    playerState.collectedWood = data.collectedWood || 0;
+                    playerState.questAccepted = data.questAccepted || false;
+                    playerState.missionStage = data.missionStage || 'plea';
+                } else {
+                    syncStorageToCloud(); // Save initial state if new player
+                }
+                updateHUD();
+            }).catch((error) => {
+                console.log("Cloud load fallback to local storage:", error);
+                loadLocalFallback();
+            });
+        }
+
+        function loadLocalFallback() {
             let storageKey = 'imperial_user_' + playerState.email;
             let saved = localStorage.getItem(storageKey) || localStorage.getItem('imperial_sanctuary_user');
             if (saved) {
@@ -417,7 +461,7 @@
         }
 
         function initTravelerExperience() {
-            loadUserData();
+            loadUserDataFromCloud();
         }
 
         function updateHUD() {
@@ -447,7 +491,7 @@
             document.getElementById('chk-coin').innerText = playerState.collectedCoins;
             document.getElementById('chk-wood').innerText = playerState.collectedWood;
             
-            syncStorage();
+            syncStorageToCloud();
         }
 
         setInterval(() => {
@@ -458,7 +502,7 @@
 
         function acceptTravelerQuest() {
             playerState.questAccepted = true;
-            syncStorage();
+            syncStorageToCloud();
             
             let scrollSound = document.getElementById('scroll-sound');
             if(scrollSound) { scrollSound.currentTime = 0; scrollSound.play().catch(e => {}); }
@@ -501,7 +545,7 @@
                     "Whispering Woods (Part 1): Click the shimmering square zones appearing randomly to gather provisions and surplus!"
                 </p>
             `;
-            syncStorage();
+            syncStorageToCloud();
         }
 
         function gatherItem(itemType, amount, element, popupText) {
@@ -553,7 +597,7 @@
         function transitionToPart2() {
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'none');
             playerState.missionStage = 'gathering-part2';
-            syncStorage();
+            syncStorageToCloud();
 
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'save-collection-part2.mp4';
@@ -596,7 +640,7 @@
             if (playerState.questsCompleted >= 5) {
                 playerState.level = 2;
             }
-            syncStorage();
+            syncStorageToCloud();
 
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'mission-success.mp4';
@@ -629,7 +673,7 @@
             document.getElementById('victoryScrollModal').style.display = 'none';
             let totalReward = 550;
             playerState.coins += totalReward;
-            syncStorage();
+            syncStorageToCloud();
             updateHUD();
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
@@ -642,10 +686,10 @@
         function chooseFight() {
             playerState.triesRemaining--;
             if (playerState.triesRemaining <= 0) {
-                playerState.retryTimerExpiry = Date.now() + 180000;
+                playerState.retryTimerExpiry = Date.now() + 180000; // 3-minute timer
             }
             playerState.missionStage = 'fail';
-            syncStorage();
+            syncStorageToCloud();
 
             const videoElement = document.getElementById('traveler-video');
             videoElement.src = 'mission-fail.mp4';
@@ -682,7 +726,7 @@
             playerState.collectedHerbs = 0;
             playerState.collectedCoins = 0;
             playerState.collectedWood = 0;
-            syncStorage();
+            syncStorageToCloud();
             closeScrollAndStartGathering();
         }
 
@@ -695,7 +739,7 @@
                 playerState.collectedHerbs = 0;
                 playerState.collectedCoins = 0;
                 playerState.collectedWood = 0;
-                syncStorage();
+                syncStorageToCloud();
                 alert("30 Coins paid! Worldwide tries reset to 2 instantly.");
                 closeScrollAndStartGathering();
             } else {
@@ -727,7 +771,7 @@
             }
         }
 
-        function syncStorage() {
+        function syncStorageToCloud() {
             let data = {
                 email: playerState.email,
                 coins: playerState.coins,
@@ -743,8 +787,16 @@
                 questAccepted: playerState.questAccepted,
                 missionStage: playerState.missionStage
             };
+            
+            // Save locally as immediate backup
+            let userKey = sanitizeEmailKey(playerState.email);
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(data));
             localStorage.setItem('imperial_sanctuary_user', JSON.stringify(data));
+
+            // Save globally to Firebase Cloud Database so it's accessible worldwide on any device or link
+            dbRef.child(userKey).set(data).catch((err) => {
+                console.log("Cloud sync note: running offline mode via local storage.");
+            });
         }
     </script>
 </body>
