@@ -208,7 +208,7 @@
     <h1 style="color: var(--theme-color); font-size: 1.7rem; margin: 10px 0 2px 0; text-align: center;">Help a Traveler — Village of Ikmid</h1>
     
     <div class="sync-bar">
-        <input type="email" id="userEmailSync" placeholder="Enter email for worldwide sync..." onchange="updatePlayerEmail()">
+        <input type="email" id="userEmailSync" placeholder="Enter email for sync..." onchange="updatePlayerEmail()">
         <button class="royal-btn" onclick="playClick(); syncToCloud();" style="padding: 6px 12px; font-size: 0.75rem;">☁️ Sync Cloud</button>
         <span id="syncStatus" style="font-size: 0.8rem; color: #ffd700; margin-left: 6px;"></span>
     </div>
@@ -285,7 +285,6 @@
             }
             document.getElementById('userEmailSync').value = playerState.email;
             loadFromCloud();
-            speakText("Help a traveler. Our village traveler pleads for assistance. Do you accept this mission?");
         }
 
         function updatePlayerEmail() {
@@ -297,23 +296,14 @@
             }
         }
 
-        // Automatic background saving on every action
         function syncToCloud() {
             updatePlayerEmail();
-            document.getElementById('syncStatus').innerText = "Syncing...";
-            
-            // Always save to browser memory instantly
+            document.getElementById('syncStatus').innerText = "✅ Saved!";
             localStorage.setItem('imperial_user_' + playerState.email, JSON.stringify(playerState));
 
             if (dbRef) {
                 let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
-                dbRef.child(safeKey).set(playerState).then(() => {
-                    document.getElementById('syncStatus').innerText = "✅ Saved Worldwide!";
-                }).catch(err => {
-                    document.getElementById('syncStatus').innerText = "✅ Saved locally!";
-                });
-            } else {
-                document.getElementById('syncStatus').innerText = "✅ Saved locally!";
+                dbRef.child(safeKey).set(playerState).catch(err => {});
             }
         }
 
@@ -336,20 +326,6 @@
 
             document.getElementById('ui-coins').innerText = playerState.coins;
             document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
-
-            if (dbRef) {
-                let safeKey = playerState.email.replace(/[.#$\/\[\]]/g, "_");
-                dbRef.child(safeKey).once('value').then(snapshot => {
-                    let data = snapshot.val();
-                    if (data) {
-                        playerState.coins = data.coins !== undefined ? data.coins : 550;
-                        playerState.score = data.score !== undefined ? parseFloat(data.score) : 0.0;
-                        playerState.stage = data.stage || 'start';
-                        document.getElementById('ui-coins').innerText = playerState.coins;
-                        document.getElementById('ui-score').innerText = playerState.score.toFixed(1);
-                    }
-                }).catch(err => {});
-            }
         }
 
         function playCinematicVideo(filename, onEndedCallback) {
@@ -422,19 +398,17 @@
             
             document.querySelectorAll('.gathering-hotspot').forEach(spot => spot.style.display = 'block');
 
+            // Play video in loop cleanly or let user progress when ready
             playCinematicVideo('save-collection-part1.mp4', () => {
-                if (playerState.score >= 5.0) {
-                    showStageTwoPrompt();
-                } else {
-                    speakText("Video finished! Replaying Part 1 to finish gathering supplies.");
-                    startPartOne();
-                }
+                // When video ends, show a button to go to next stage instead of forcing a restart
+                showStageTwoPrompt();
             });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
-                    "Part 1 Playing: Watch the video and click shimmering zones to collect supplies (+0.5, +1.0, +2.0)!"
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.9rem;">
+                    "Part 1 Playing: Click shimmering zones to collect supplies (+0.5, +1.0, +2.0)!"
                 </p>
+                <button class="royal-btn" onclick="playClick(); showStageTwoPrompt();">▶ Proceed to Next Stage</button>
             `;
         }
 
@@ -461,15 +435,7 @@
                 document.getElementById('ui-coins').innerText = playerState.coins;
             }
 
-            // Automatically sync score and progress on every single item gathered!
             syncToCloud();
-
-            if (playerState.score >= 5.0) {
-                let vid = document.getElementById('traveler-video');
-                if (vid.ended) {
-                    showStageTwoPrompt();
-                }
-            }
         }
 
         function showStageTwoPrompt() {
@@ -500,9 +466,10 @@
             });
 
             document.getElementById('overlay-dialogue-content').innerHTML = `
-                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0; font-size: 0.9rem;">
-                    "Stage Two Playing: Continue collecting bonus supplies for your journey..."
+                <p style="color: var(--theme-color); font-family: 'Playfair Display', serif; font-style: italic; margin: 0 0 6px 0; font-size: 0.9rem;">
+                    "Stage Two Playing: Continue collecting bonus supplies..."
                 </p>
+                <button class="royal-btn" onclick="playClick(); triggerWolfChoice();">⚔️ Face the Wolf</button>
             `;
         }
 
